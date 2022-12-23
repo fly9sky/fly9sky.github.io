@@ -1,0 +1,32 @@
+# Site settings
+title: 飛上九天攬日
+email: devgis@163.com
+description: > # this means to ignore newlines until "baseurl:"
+  天行健 君子以自强不息 地势坤 君子以厚德载物
+baseurl: / # the subpath of your site, e.g. /blog/
+url:  # the base hostname & protocol for your site
+twitter_username: twitter_username
+github_username:  github_username
+
+# Build settings
+markdown: kramdown
+
+highlighter: rouge
+
+# Pagination
+paginate: 20
+paginate_path: "/page:num/"
+
+
+collections:
+  categorys:
+    output: true
+    permalink: /categorys/:path/
+  pictures:
+    output: true
+    permalink: /pictures/:path/
+  poetrys:
+    output: true
+    permalink: /poetrys/:path/
+
+
