@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 左传札记
-description: 读春秋左传札记
+title: 《左传》札记
+description: 读《春秋》《左传》札记
 img: /img/collections/5.jpg
 ---
 
