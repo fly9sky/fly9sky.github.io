@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 通鉴札记
+title: 《资治通鉴》札记
 description: 读司马光《资治通鉴》札记
 img: /img/collections/6.jpg
 ---
