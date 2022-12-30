@@ -63,20 +63,6 @@ img: /img/collections/4.jpg
         <hr>
     </li>
     <li>
-        <h2><a class="post-title" href="/2021/05/01/%E8%AF%97%E7%BB%8F-%E5%85%AD%E4%B9%89.html">《诗经》六义</a></h2>
-        <p class="post-meta">May 1, 2021 — 05:01</p>
-        <p>《诗经》六义</p>
-        <br>
-        <hr>
-    </li>
-    <li>
-        <h2><a class="post-title" href="/2021/05/01/%E8%AF%97%E7%BB%8F-%E7%A7%A6%E9%A3%8E-%E6%97%A0%E8%A1%A3-%E8%B5%8F%E6%9E%90.html">《诗经》《秦风·无衣》赏析</a></h2>
-        <p class="post-meta">May 1, 2021 — 05:01</p>
-        <p>《诗经》《秦风·无衣》赏析</p>
-        <br>
-        <hr>
-    </li>
-        <li>
         <h2><a class="post-title" href="/2022/12/28/%E4%B8%AD%E5%BA%B8.html">《中庸》札记</a></h2>
         <p class="post-meta">December 28, 2022 — 13:58</p>
         <p>读《中庸》札记</p>
