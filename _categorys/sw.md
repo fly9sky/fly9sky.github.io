@@ -181,4 +181,18 @@ img: /img/collections/1.jpg
         <br>
         <hr>
     </li>
+    <li>
+        <h2><a class="post-title" href="/2022/12/28/%E7%BA%AA%E4%BA%8B.html">纪事</a></h2>
+        <p class="post-meta">December 28, 2022 — 09:39</p>
+        <p>生活中经常遇到一些有趣的事，需要记录下来，比保存在大脑中更加持久。</p>
+        <br>
+        <hr>
+    </li>
+    <li>
+        <h2><a class="post-title" href="/2022/12/26/%E8%8A%B8%E8%8A%B8%E4%BC%97%E7%94%9F.html">芸芸众生</a></h2>
+        <p class="post-meta">December 26, 2022 — 09:52</p>
+        <p>每一个芸芸众生都乃天地万物之精，他们都有其独特于其他人之处。</p>
+        <br>
+        <hr>
+    </li>
 </ul>
