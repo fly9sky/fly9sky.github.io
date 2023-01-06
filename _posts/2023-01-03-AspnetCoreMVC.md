@@ -508,3 +508,203 @@ public class ViewResultDiagnostics : IActionFilter {
         }
     }
 ```
+
+
+## Controllers
+
+> [HttpGet("object/{format?}")]
+>        [FormatFilter]
+
+### WebAPI
+```
+    [Route("api/[controller]")]
+    public class ContentController : Controller {
+
+        [HttpGet("string")]
+        public string GetString() => "This is a string response";
+
+        [HttpGet("object/{format?}")]
+        [FormatFilter]
+        //[Produces("application/json", "application/xml")]
+        public Reservation GetObject() => new Reservation {
+            ReservationId = 100,
+            ClientName = "Joe",
+            Location = "Board Room"
+        };
+
+        [HttpPost]
+        [Consumes("application/json")]
+        public Reservation ReceiveJson([FromBody] Reservation reservation) {
+            reservation.ClientName = "Json";
+            return reservation;
+        }
+
+        [HttpPost]
+        [Consumes("application/xml")]
+        public Reservation ReceiveXml([FromBody] Reservation reservation) {
+            reservation.ClientName = "Xml";
+            return reservation;
+        }
+    }
+```
+
+### Controller
+```
+[Route("api/[controller]")]
+    public class ReservationController : Controller {
+        private IRepository repository;
+
+        public ReservationController(IRepository repo) => repository = repo;
+
+        [HttpGet]
+        public IEnumerable<Reservation> Get() => repository.Reservations;
+
+        [HttpGet("{id}")]
+        public Reservation Get(int id) => repository[id];
+
+        [HttpPost]
+        public Reservation Post([FromBody] Reservation res) =>
+            repository.AddReservation(new Reservation {
+                ClientName = res.ClientName,
+                Location = res.Location
+            });
+
+        [HttpPut]
+        public Reservation Put([FromBody] Reservation res) =>
+            repository.UpdateReservation(res);
+
+        [HttpPatch("{id}")]
+        public StatusCodeResult Patch(int id,
+                [FromBody]JsonPatchDocument<Reservation> patch) {
+            Reservation res = Get(id);
+            if (res != null) {
+                patch.ApplyTo(res);
+                return Ok();
+            }
+            return NotFound();
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id) => repository.DeleteReservation(id);
+    }
+```
+
+### Rezor View
+```
+@model IEnumerable<Reservation>
+@{  Layout = "_Layout"; }
+
+<form id="addform" asp-action="AddReservation" method="post">
+    <div class="form-group">
+        <label for="ClientName">Name:</label>
+        <input class="form-control" name="ClientName" />
+    </div>
+    <div class="form-group">
+        <label for="Location">Location:</label>
+        <input class="form-control" name="Location" />
+    </div>
+    <div class="text-center panel-body">
+        <button type="submit" class="btn btn-sm btn-primary">Add</button>
+    </div>
+</form>
+
+<table class="table table-sm table-striped table-bordered m-2">
+    <thead><tr><th>ID</th><th>Client</th><th>Location</th></tr></thead>
+    <tbody>
+        @foreach (var r in Model) {
+            <tr>
+                <td>@r.ReservationId</td>
+                <td>@r.ClientName</td>
+                <td>@r.Location</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+```
+
+```
+services.AddMvc()
+    .AddXmlDataContractSerializerFormatters()
+    .AddMvcOptions(opts => {
+        opts.EnableEndpointRouting = false;
+        opts.FormatterMappings.SetMediaTypeMappingForFormat("xml",
+            new MediaTypeHeaderValue("application/xml"));
+        opts.RespectBrowserAcceptHeader = true;
+        opts.ReturnHttpNotAcceptable = true;
+    });
+```
+
+
+## ViewComponent
+
+```
+ public class PageSize : ViewComponent {
+
+        public async Task<IViewComponentResult> InvokeAsync() {
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response
+                = await client.GetAsync("http://apress.com");
+            return View(response.Content.Headers.ContentLength);
+        }
+    }
+```
+
+
+## Taghelper 可以扩展一些自定义的标记 其实就是后台生成html代码的一种形式
+
+> 扩展标记，可以从后台进行前端Html的配置
+
+> HtmlTargetElement 属性中配置那些html元素，那些样式起作用
+
+> 定义一个Taghelper  formbutton 设置其属性
+```
+    [HtmlTargetElement("button", Attributes = "bs-button-color", ParentTag = "div")]
+    [HtmlTargetElement("a", Attributes = "bs-button-color", ParentTag = "div")]
+    [HtmlTargetElement("formbutton")]
+    public class LYFButtonTagHelper : TagHelper {
+
+        public string BsButtonColor { get; set; } = "primary";
+
+        public override void Process(TagHelperContext context,
+                                     TagHelperOutput output) {
+
+            output.Attributes.SetAttribute("class", $"btn btn-{BsButtonColor}");
+        }
+    }
+```
+
+> View中用法
+
+```
+<formbutton>hello</formbutton>
+```
+
+> 本质上所有的mvc视图元素都是来自Taghelper 比如form
+
+```
+<form method="post" asp-controller="Home" asp-action="Create"
+      asp-antiforgery="true">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Country"></label>
+        <select class="form-control" asp-for="Country" asp-items="ViewBag.Countries">
+            <option disabled selected value="">Select a Country</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Population"></label>
+        <input class="form-control" asp-for="Population" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Notes"></label>
+        <textarea class="form-control" asp-for="Notes"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Add</button>
+    <a class="btn btn-primary" href="/Home/Index">Cancel</a>
+</form>
+
+```
