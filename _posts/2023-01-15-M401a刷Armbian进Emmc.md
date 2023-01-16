@@ -122,4 +122,59 @@ tar: etc: file changed as we read it
 [ INFO ] Copy the [ usr ] directory.
 ```
 
+> 上面这个是因为使用了不合格优盘 拷贝到 usr之后就异常了，后边又换了个好u盘 执行OK 结果如下：
+
+```
+[ OPTIONS ] Please Input ID: 1
+[ INFO ] Input Type ID: [ 1 ]
+[ INFO ] The type of file system: [ ext4 ]
+[ STEPS ] Start creating eMMC partition...
+[ INFO ] Start backup default bootloader.
+4+0 records in
+4+0 records out
+4194304 bytes (4.2 MB, 4.0 MiB) copied, 0.829114 s, 5.1 MB/s
+1+0 records in
+1+0 records out
+512 bytes copied, 0.00125406 s, 408 kB/s
+[ STEPS ] Use ampart partition successfully.
+[ INFO ] Start create MBR and partittion.
+[ INFO ] Restore the mybox bootloader: [ /usr/lib/u-boot/mybox-bootloader.img ]
+444+0 records in
+444+0 records out
+444 bytes copied, 0.0160725 s, 27.6 kB/s
+8191+0 records in
+8191+0 records out
+4193792 bytes (4.2 MB, 4.0 MiB) copied, 0.535158 s, 7.8 MB/s
+[ STEPS ] Start processing the bootfs partition...
+[ INFO ] Formatting BOOTFS partition.
+mkfs.fat 4.2 (2021-01-31)
+[ INFO ] Start copy BOOTFS partition data.
+[ INFO ] Generate the new [ uEnv.txt ] file.
+[ INFO ] Copy [ u-boot-e900v22c.bin ] to u-boot.emmc
+[ STEPS ] Start processing the rootfs partition...
+[ INFO ] Formatting ROOTFS partition.
+[ INFO ] Start copy ROOTFS partition data.
+[ INFO ] Copy the [ etc ] directory.
+[ INFO ] Copy the [ home ] directory.
+[ INFO ] Copy the [ lib64 ] directory.
+[ INFO ] Copy the [ opt ] directory.
+[ INFO ] Copy the [ root ] directory.
+[ INFO ] Copy the [ selinux ] directory.
+[ INFO ] Copy the [ srv ] directory.
+[ INFO ] Copy the [ usr ] directory.
+[ INFO ] Copy the [ var ] directory.
+[ INFO ] Generate the new fstab file.
+[ INFO ] Update the relevant parameters.
+[ SUCCESS ] Successful installed, please unplug the USB, re-insert the power supply to start the armbian.
+```
+
+> 很明显后边又[ SUCCESS ] 成功的标记，这时候执行poweroff 关机后拔掉U盘，重启机顶盒，在路由器找到机顶盒ip 既可登录了。
+
 > 经过漫长安装后系统在安装完成后会自动重启，可以关注路由器里边的设备列表，重启后IP地址会发生改变，重新登陆既可。进入后线关机，拔出U盘，重新启动既可。
+
+### 安装Docker 
+
+> armbian安装docker非常简单 执行 armbian-docker选择安装源既可，然后就是漫长的等待
+
+```
+```
