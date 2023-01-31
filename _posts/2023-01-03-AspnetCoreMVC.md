@@ -206,6 +206,16 @@ public class AccountController : Controller {
 
 ## Filters
 
+### 子类Controller拦截器要先于父类Controller拦截器执行
+
+> 最先执行的是全局声明的MyActionOneAttribute拦截器
+
+> 然后执行的是声明在子Controller类HomeController上的MyActionThreeAttribute拦截器
+
+> 接着执行的是声明在父Controller类BaseController上的MyActionTwoAttribute拦截器
+
+> 最后执行的是声明在子Controller类HomeController的Index方法上的MyActionFourAttribute拦截器
+
 ```
 public class MyFilterAttribute : ResultFilterAttribute {
     private string message;
@@ -549,6 +559,21 @@ public class ViewResultDiagnostics : IActionFilter {
 ```
 
 ### Controller
+
+#### 所有的动作结果都继承自ActionResult基类 ASP.NET MVC框架支持六种标准类型的动作结果：
+
+> 动作名称 概述 方法名
+
+> ViewResult 视图内容，HTML或标记 View
+
+> EmptyResult 空内容
+
+> RedirectResult 重定向到新的URL
+
+> Redirect RedirectToRouteResult 重定向到新的控制器
+
+> RedirectToAction/RedirectToRoute JsonResult 返回一个JSON（Javascript Object Notation）内容 Json ContentResult 返回文本内容 Content
+
 ```
 [Route("api/[controller]")]
     public class ReservationController : Controller {
