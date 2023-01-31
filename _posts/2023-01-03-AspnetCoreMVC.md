@@ -198,11 +198,11 @@ public class AccountController : Controller {
 
 ## DI
 
-> services.AddSingleton<IRepository, MemoryRepository>();
+> services.AddSingleton<IRepository, MemoryRepository>(); 单实例
 
-> services.AddTransient<IModelStorage, DictionaryStorage>();
+> services.AddTransient<IModelStorage, DictionaryStorage>(); 每一次获取的对象都不是同一个
 
-> services.AddScoped
+> services.AddScoped 请求开始-请求结束 在这次请求中获取的对象都是同一个；不用申明静态类；
 
 ## Filters
 
