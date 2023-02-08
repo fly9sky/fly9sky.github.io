@@ -158,6 +158,15 @@ mount --make-shared /
 CloudDrive failed to register layer: operation not supported
 ```
 
+### 启动重启后启动所有docker 容器
+
+> 在系统启动项中加入以下脚本：
+
+```
+mount --make-shared /
+docker start $(docker ps -a | awk '{ print $1 }' | tail -n +2)
+```
+
 ### 配置 smaba
 
 > /etc/samba/smb.conf
