@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 生僻字札记
-description: 读书遇到的生僻字
+title: 生僻字
+description: 中国汉字有一万多个生僻字也是非常多，读书遇到的生僻字就记录下来方便下次查阅。
 date: 2022-12-28 13:58:01
 ---
 

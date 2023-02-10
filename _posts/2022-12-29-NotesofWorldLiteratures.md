@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 世界文学名著札记
-description: 读世界文学名著札记
+title: 世界文学名著
+description: 读世界文学名著对内容进行简要概括和札记
 date: 2022-12-28 13:58:01
 ---
 

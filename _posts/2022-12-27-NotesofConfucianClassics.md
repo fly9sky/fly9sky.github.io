@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 儒家十三经札记
-description: 读儒家十三经札记
+title: 儒家十三经
+description: 读儒家十三经类如《周易》《尚书》《礼记》等札记
 date: 2022-12-27 11:44:01
 ---
 

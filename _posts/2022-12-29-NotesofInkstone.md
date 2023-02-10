@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 砚谱札记
-description: 读砚谱札记
+title: 砚谱
+description: 读砚谱类书记文章札记
 date: 2022-12-28 13:58:01
 ---
 

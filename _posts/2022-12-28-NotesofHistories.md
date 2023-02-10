@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 史类札记
-description: 读二十四史札记 史类札记
+title: 正史类
+description: 读二十四史等正史类札记
 date: 2022-12-28 09:58:01
 ---
 

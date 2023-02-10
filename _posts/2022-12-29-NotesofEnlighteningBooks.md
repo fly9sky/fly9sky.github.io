@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 蒙学读物札记
-description: 读《三字經》《弟子規》等札记
+title: 蒙学读物
+description: 读《三字經》《弟子規》《千字文》等国学蒙学等札记
 date: 2022-12-28 13:58:01
 ---
 

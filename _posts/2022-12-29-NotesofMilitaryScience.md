@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 兵法类书记札记
-description: 兵法类书记札记
+title: 兵法类古籍
+description: 兵法类古籍书籍中做一些总结札记
 date: 2022-12-28 13:58:01
 ---
 
