@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  ComputerScienceLearn
-description: 计算机科学相关学习内容总结
+title:  计算机科学相关学习内容总结
+description: 计算机科学相关学习内容总结,包括各种操作系统安装配置，各种编程语言学习等
 date: 2022-10-01 09:01:01
 ---
 
