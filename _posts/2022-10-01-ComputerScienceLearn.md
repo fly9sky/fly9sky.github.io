@@ -19,6 +19,8 @@ date: 2022-10-01 09:01:01
     - [Download and Install GithubCli](#download-and-install-githubcli)
     - [Login](#login)
     - [Git helper](#git-helper)
+  - [Docker](#docker)
+  - [cloudnas/clouddrive2-unstable](#cloudnasclouddrive2-unstable)
 - [数据结构](#数据结构)
 - [算法](#算法)
 - [结构化程序设计](#结构化程序设计)
@@ -204,6 +206,55 @@ date: 2022-10-01 09:01:01
 > $ git commit -m ‘修改lol清晰增加口径’ 
 > 推送分支： 
 > $ git push origin main
+
+### Docker 
+
+> Install :sudo apt-get -y install docker.io
+
+> docker image ls # 列出当前环境下的镜像
+
+> docker images   # 列出当前环境下的镜像
+
+> docker image rm ididididid      # 安装id删除镜像
+
+> 操作容器
+
+> docker run -i -t --rm centos /bin/bash   # 启动一个centos容器并进入，此时容器是干干净净，没有一点东西的，do everything
+
+> docker container kill container_id    # 杀掉这个容器，强行终止
+
+> docker container rm container_id      # 删除这个容器
+
+> docker container ls            # 查找当前容器
+
+> docker ps // 查看所有正在运行容器
+
+> docker stop containerId // containerId 是容器的ID
+
+> docker ps -a // 查看所有容器
+
+> docker ps -a -q // 查看所有容器ID
+
+> docker stop $(docker ps -a -q) //  stop停止所有容器
+
+> docker  rm $(docker ps -a -q) //   remove删除所有容器
+
+### cloudnas/clouddrive2-unstable
+
+> docker pull cloudnas/clouddrive2-unstable
+
+```
+docker run -d \
+--name clouddrive2-unstable \
+--restart unless-stopped \
+-v /opt/Clouddrive:/CloudNAS:shared \
+-v /opt/Clouddrive/Config:/Config \
+--network host \
+--pid host \
+--privileged \
+--device /dev/fuse:/dev/fuse \
+cloudnas/clouddrive2-unstable
+```
 
 ## 数据结构
 
