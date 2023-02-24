@@ -256,6 +256,8 @@ docker run -d \
 cloudnas/clouddrive2-unstable
 ```
 
+> Then access 19798 port such as http://localhost:19798/
+
 ## 数据结构
 
 1.集合：数据结构中的元素之间除了“同属一个集合” 的相互关系外，别无其他关系； [1] 
