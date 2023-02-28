@@ -17,6 +17,7 @@ date: 2022-10-01 09:01:01
   - [卷积神经网络](#卷积神经网络)
   - [RNN循环神经网络](#rnn循环神经网络)
   - [LSTM （Long Short-Term Memory）](#lstm-long-short-term-memory)
+- [Tensorflow](#tensorflow)
 - [备注](#备注)
 
 ## 微积分
@@ -1384,6 +1385,109 @@ C.3　离散随机变量
 
 > 一种特殊的递归神经网络
 
+## Tensorflow
+
+> https://github.com/tensorflow/tensorflow
+
+>
+import tensorflow as tf
+sess=tf.compat.v1.Session()
+a=tf.constant(32) #创建常量
+b=tf.constant(10) #创建常量
+
+加法a+b+b
+d=tf.add_n([a,b,b])
+print(d)
+
+输出：
+Tensor("AddN_3:0", shape=(), dtype=int32)
+减法a-b
+e=tf.subtract(a,b)
+print(b)
+
+输出：
+Tensor("Const_17:0", shape=(), dtype=int32)
+乘法a*b
+f=tf.multiply(a,b)
+print(f)
+
+'''
+输出：
+Tensor("Mul_3:0", shape=(), dtype=int32)
+'''
+
+除法a/b
+g=tf.divide(a,b)
+print(g)
+
+输出：
+Tensor("truediv_6:0", shape=(), dtype=float64)
+求余
+h=tf.truncatemod(a,b)
+print(h)
+
+输出：
+Tensor("TruncateMod_3:0", shape=(), dtype=int32)
+数值类型转换
+a_float=tf.cast(a,dtype=tf.float32)
+b_float=tf.cast(b,dtype=tf.float32)
+
+sin(a)
+i=tf.sin(a_float)
+print(i)
+
+输出：
+Tensor("Sin_3:0", shape=(), dtype=float32)
+exp(1/a)
+j=tf.exp(tf.divide(1.0,a_float))
+print(j)
+
+输出：
+Tensor("Exp_3:0", shape=(), dtype=float32)
+i+log(i)
+k=tf.add(i,tf.math.log(i))
+print(k)
+
+输出：
+Tensor("Add_3:0", shape=(), dtype=float32)
+tensorflow矩阵及运算
+从4维向量生成（2,2）的矩阵
+mat_a=tf.constant([1,2,3,4])
+mat_a=tf.reshape(mat_a,(2,2))
+
+生成2*3的矩阵
+mat_b=tf.constant([1,3,5,7,9,11])
+mat_b=tf.reshape(mat_b,(2,3))
+
+矩阵乘法
+mat_c=tf.matmul(mat_a,mat_b)
+
+从4维向量生成（2,2）的矩阵
+mat_a=tf.constant([1,2,3,4])
+mat_a=tf.reshape(mat_a,(2,2))
+print('mat_a:\n',sess.run(mat_a))
+
+输出：
+mat_a：
+ [[1 2]
+ [3 4]]
+生成2*3的矩阵
+mat_b=tf.constant([1,3,5,7,9,11])
+mat_b=tf.reshape(mat_b,(2,3))
+print('mat_b：\n',sess.run(mat_b))
+
+输出：
+mat_b：
+ [[ 1  3  5]
+ [ 7  9 11]]
+矩阵乘法
+mat_c=tf.matmul(mat_a,mat_b)
+print('mat_c：\n',sess.run(mat_c))
+
+输出：
+mat_c：
+ [[15 21 27]
+ [31 45 59]]
 ## 备注
 
 > 最后修改时间：2023-02-16 11:17
