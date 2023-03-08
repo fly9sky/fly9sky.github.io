@@ -100,6 +100,7 @@ date: 2022-10-01 09:01:01
   - [Taghelper 可以扩展一些自定义的标记 其实就是后台生成html代码的一种形式](#taghelper-可以扩展一些自定义的标记-其实就是后台生成html代码的一种形式)
 - [C# 调用 Tensorflow](#c-调用-tensorflow)
 - [Php](#php)
+  - [Pyplot，画出各种你想要的图](#pyplot画出各种你想要的图)
 - [Python](#python)
 - [Java](#java)
 - [低代码平台](#低代码平台)
@@ -2567,6 +2568,10 @@ Last API update: Release 1.9
 '''
 
 ## Php
+
+### Pyplot，画出各种你想要的图
+
+> https://blog.csdn.net/qq_42257666/article/details/122439666
 
 ## Python
 
