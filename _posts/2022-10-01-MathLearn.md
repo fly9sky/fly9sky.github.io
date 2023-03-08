@@ -1079,9 +1079,9 @@ C.3　离散随机变量
 
 > 基于二分类扩展 深度神经网络 ,决策树 ,k-nearest neighbors ,Naive Bayes,SVM
 
-> 层次化分类器（Hierarchical Classification）
+> 层次化分类器（Hierarchical Classification）Softmax
 
-> 二分类 多分类目标相同，均为给出该分类的概率值
+> 二分类 多分类目标相同，均为给出该分类的概率值 
 
 ## AI人工智能深度学习
 
