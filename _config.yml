@@ -19,9 +19,9 @@ paginate_path: "/page:num/"
 
 
 collections:
-  categorys:
-    output: true
-    permalink: /categorys/:path/
+#  categorys:
+#    output: true
+#    permalink: /categorys/:path/
   pictures:
     output: true
     permalink: /pictures/:path/
