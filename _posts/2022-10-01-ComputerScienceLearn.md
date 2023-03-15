@@ -20,7 +20,6 @@ date: 2022-10-01 09:01:01
     - [Login](#login)
     - [Git helper](#git-helper)
   - [Docker](#docker)
-  - [cloudnas/clouddrive2-unstable](#cloudnasclouddrive2-unstable)
 - [结构化程序设计](#结构化程序设计)
 - [面向对象程序设计](#面向对象程序设计)
 - [C# .Net Base](#c-net-base)
@@ -239,25 +238,6 @@ date: 2022-10-01 09:01:01
 > docker stop $(docker ps -a -q) //  stop停止所有容器
 
 > docker  rm $(docker ps -a -q) //   remove删除所有容器
-
-### cloudnas/clouddrive2-unstable
-
-> docker pull cloudnas/clouddrive2-unstable
-
-```
-docker run -d \
---name clouddrive2-unstable \
---restart unless-stopped \
--v /opt/Clouddrive:/CloudNAS:shared \
--v /opt/Clouddrive/Config:/Config \
---network host \
---pid host \
---privileged \
---device /dev/fuse:/dev/fuse \
-cloudnas/clouddrive2-unstable
-```
-
-> Then access 19798 port such as http://localhost:19798/
 
 ## 结构化程序设计
 
@@ -2663,4 +2643,4 @@ PlantSight
 
 ## 备注
 
-> 最后修改时间：2023-02-16 11:17
+> 最后修改时间：2023-03-15 14:46
