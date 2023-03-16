@@ -70,6 +70,38 @@ date: 2022-10-01 09:01:01
   - [Dimensionality reduction 降维](#dimensionality-reduction-降维)
   - [Model selection](#model-selection)
   - [Preprocessing](#preprocessing)
+  - [Demos](#demos)
+    - [Release Highlights(发布热点)](#release-highlights发布热点)
+    - [Biclustering(双聚类分析)](#biclustering双聚类分析)
+    - [Calibration(校准)](#calibration校准)
+    - [Classification(分类)](#classification分类)
+    - [Clustering(聚类分析)](#clustering聚类分析)
+    - [Covariance estimation(协方差估计)](#covariance-estimation协方差估计)
+    - [Cross decomposition(交叉分解)](#cross-decomposition交叉分解)
+    - [Dataset examples(数据集示例)](#dataset-examples数据集示例)
+    - [Decision Trees(决策树)](#decision-trees决策树)
+    - [Decomposition(分解)](#decomposition分解)
+    - [Ensemble methods(集成方法)](#ensemble-methods集成方法)
+    - [Two-class AdaBoost(二分法)](#two-class-adaboost二分法)
+    - [Feature Selection(功能选择)](#feature-selection功能选择)
+    - [Gaussian Mixture Models(高斯混合模型)](#gaussian-mixture-models高斯混合模型)
+    - [Gaussian Process for Machine Learning(机器学习的高斯过程)](#gaussian-process-for-machine-learning机器学习的高斯过程)
+    - [Generalized Linear Models(广义线性模型)](#generalized-linear-models广义线性模型)
+    - [Inspection(检查)](#inspection检查)
+    - [Kernel Approximation（核近似，核逼近）](#kernel-approximation核近似核逼近)
+    - [Manifold learning(流形学习)](#manifold-learning流形学习)
+    - [Miscellaneous(杂项)](#miscellaneous杂项)
+    - [Missing Value Imputation(缺失值插补)](#missing-value-imputation缺失值插补)
+    - [Model Selection(模型选择)](#model-selection模型选择)
+    - [Multioutput methods(多输出方法)](#multioutput-methods多输出方法)
+    - [Nearest Neighbors(最近邻学习)](#nearest-neighbors最近邻学习)
+    - [Neural Networks(神经网络)](#neural-networks神经网络)
+    - [Pipelines and composite estimators(管道和复合估计器)](#pipelines-and-composite-estimators管道和复合估计器)
+    - [Preprocessing(预处理)](#preprocessing预处理)
+    - [Semi Supervised Classification(半监督分类)](#semi-supervised-classification半监督分类)
+    - [Support Vector Machines(支持向量机)](#support-vector-machines支持向量机)
+    - [Tutorial exercises(教程练习)](#tutorial-exercises教程练习)
+    - [Working with text documents(使用文本文档)](#working-with-text-documents使用文本文档)
 - [PyTorch 库](#pytorch-库)
 - [SynapseML（Microsoft）](#synapsemlmicrosoft)
 - [主流机器学习类库介绍](#主流机器学习类库介绍)
@@ -4134,8 +4166,8 @@ It is possible to specify this explicitly using the parameter categories. There 
 >>> locations = ['from Africa', 'from Asia', 'from Europe', 'from US']
 >>> browsers = ['uses Chrome', 'uses Firefox', 'uses IE', 'uses Safari']
 >>> enc = preprocessing.OneHotEncoder(categories=[genders, locations, browsers])
->>> # Note that for there are missing categorical values for the 2nd and 3rd
->>> # feature
+>>> Note that for there are missing categorical values for the 2nd and 3rd
+>>> feature
 >>> X = [['male', 'from US', 'uses Safari'], ['female', 'from Europe', 'uses Firefox']]
 >>> enc.fit(X)
 OneHotEncoder(categories=[['female', 'male'],
@@ -4367,12 +4399,12 @@ As for the Normalizer, the utility class Binarizer is meant to be used in the ea
 >>> binarizer
 Binarizer()
 
->>> binarizer.transform(X)
+>>> binarizer.transform(X)Classification
 array([[1., 0., 1.],
        [1., 0., 0.],
        [0., 1., 0.]])
 It is possible to adjust the threshold of the binarizer:
-
+Classification
 >>>
 >>> binarizer = preprocessing.Binarizer(threshold=1.1)
 >>> binarizer.transform(X)
@@ -4493,7 +4525,7 @@ Often, you will want to convert an existing Python function into a transformer t
 >>> from sklearn.preprocessing import FunctionTransformer
 >>> transformer = FunctionTransformer(np.log1p, validate=True)
 >>> X = np.array([[0, 1], [2, 3]])
->>> # Since FunctionTransformer is no-op during fit, we can call transform directly
+>>> Since FunctionTransformer is no-op during fit, we can call transform directly
 >>> transformer.transform(X)
 array([[0.        , 0.69314718],
        [1.09861229, 1.38629436]])
@@ -4504,6 +4536,737 @@ You can ensure that func and inverse_func are the inverse of each other by setti
 >>> warnings.filterwarnings("error", message=".*check_inverse*.",
 ...                         category=UserWarning, append=False)
 For a full code example that demonstrates using a FunctionTransformer to extract features from text data see Column Transformer with Heterogeneous Data Sources and Time-related feature engineering.
+
+### Demos
+
+#### Release Highlights(发布热点)
+
+> These examples illustrate the main features of the releases of scikit-learn.
+
+Release Highlights for scikit-learn 1.2
+Release Highlights for scikit-learn 1.2
+Release Highlights for scikit-learn 1.1
+Release Highlights for scikit-learn 1.1
+Release Highlights for scikit-learn 1.0
+Release Highlights for scikit-learn 1.0
+Release Highlights for scikit-learn 0.24
+Release Highlights for scikit-learn 0.24
+Release Highlights for scikit-learn 0.23
+Release Highlights for scikit-learn 0.23
+Release Highlights for scikit-learn 0.22
+Release Highlights for scikit-learn 0.22
+
+#### Biclustering(双聚类分析)
+
+> Examples concerning the sklearn.cluster.bicluster module.
+
+A demo of the Spectral Biclustering algorithm
+A demo of the Spectral Biclustering algorithm
+A demo of the Spectral Co-Clustering algorithm
+A demo of the Spectral Co-Clustering algorithm
+Biclustering documents with the Spectral Co-clustering algorithm
+Biclustering documents with the Spectral Co-clustering algorithm
+
+#### Calibration(校准)
+
+> Examples illustrating the calibration of predicted probabilities of classifiers.
+
+Comparison of Calibration of Classifiers
+Comparison of Calibration of Classifiers
+Probability Calibration curves
+Probability Calibration curves
+Probability Calibration for 3-class classification
+Probability Calibration for 3-class classification
+Probability calibration of classifiers
+Probability calibration of classifiers
+
+
+#### Classification(分类)
+
+> General examples about classification algorithms.
+
+Classifier comparison
+Classifier comparison
+Linear and Quadratic Discriminant Analysis with covariance ellipsoid
+Linear and Quadratic Discriminant Analysis with covariance ellipsoid
+Normal, Ledoit-Wolf and OAS Linear Discriminant Analysis for classification
+Normal, Ledoit-Wolf and OAS Linear Discriminant Analysis for classification
+Plot classification probability
+Plot classification probability
+Recognizing hand-written digits
+Recognizing hand-written digits
+
+#### Clustering(聚类分析)
+
+> Examples concerning the sklearn.cluster module.
+
+A demo of K-Means clustering on the handwritten digits data
+A demo of K-Means clustering on the handwritten digits data
+A demo of structured Ward hierarchical clustering on an image of coins
+A demo of structured Ward hierarchical clustering on an image of coins
+A demo of the mean-shift clustering algorithm
+A demo of the mean-shift clustering algorithm
+Adjustment for chance in clustering performance evaluation
+Adjustment for chance in clustering performance evaluation
+Agglomerative clustering with and without structure
+Agglomerative clustering with and without structure
+Agglomerative clustering with different metrics
+Agglomerative clustering with different metrics
+An example of K-Means++ initialization
+An example of K-Means++ initialization
+Bisecting K-Means and Regular K-Means Performance Comparison
+Bisecting K-Means and Regular K-Means Performance Comparison
+Color Quantization using K-Means
+Color Quantization using K-Means
+Compare BIRCH and MiniBatchKMeans
+Compare BIRCH and MiniBatchKMeans
+Comparing different clustering algorithms on toy datasets
+Comparing different clustering algorithms on toy datasets
+Comparing different hierarchical linkage methods on toy datasets
+Comparing different hierarchical linkage methods on toy datasets
+Comparison of the K-Means and MiniBatchKMeans clustering algorithms
+Comparison of the K-Means and MiniBatchKMeans clustering algorithms
+Demo of DBSCAN clustering algorithm
+Demo of DBSCAN clustering algorithm
+Demo of OPTICS clustering algorithm
+Demo of OPTICS clustering algorithm
+Demo of affinity propagation clustering algorithm
+Demo of affinity propagation clustering algorithm
+Demonstration of k-means assumptions
+Demonstration of k-means assumptions
+Empirical evaluation of the impact of k-means initialization
+Empirical evaluation of the impact of k-means initialization
+Feature agglomeration
+Feature agglomeration
+Feature agglomeration vs. univariate selection
+Feature agglomeration vs. univariate selection
+Hierarchical clustering: structured vs unstructured ward
+Hierarchical clustering: structured vs unstructured ward
+Inductive Clustering
+Inductive Clustering
+K-means Clustering
+K-means Clustering
+Online learning of a dictionary of parts of faces
+Online learning of a dictionary of parts of faces
+Plot Hierarchical Clustering Dendrogram
+Plot Hierarchical Clustering Dendrogram
+Segmenting the picture of greek coins in regions
+Segmenting the picture of greek coins in regions
+Selecting the number of clusters with silhouette analysis on KMeans clustering
+Selecting the number of clusters with silhouette analysis on KMeans clustering
+Spectral clustering for image segmentation
+Spectral clustering for image segmentation
+Various Agglomerative Clustering on a 2D embedding of digits
+Various Agglomerative Clustering on a 2D embedding of digits
+Vector Quantization Example
+Vector Quantization Example
+
+#### Covariance estimation(协方差估计)
+
+> Examples concerning the sklearn.covariance module.
+
+Ledoit-Wolf vs OAS estimation
+Ledoit-Wolf vs OAS estimation
+Robust covariance estimation and Mahalanobis distances relevance
+Robust covariance estimation and Mahalanobis distances relevance
+Robust vs Empirical covariance estimate
+Robust vs Empirical covariance estimate
+Shrinkage covariance estimation: LedoitWolf vs OAS and max-likelihood
+Shrinkage covariance estimation: LedoitWolf vs OAS and max-likelihood
+Sparse inverse covariance estimation
+Sparse inverse covariance estimation
+
+#### Cross decomposition(交叉分解)
+
+> Examples concerning the sklearn.cross_decomposition module.
+
+Compare cross decomposition methods
+Compare cross decomposition methods
+Principal Component Regression vs Partial Least Squares Regression
+Principal Component Regression vs Partial Least Squares Regression
+
+
+#### Dataset examples(数据集示例)
+
+> Examples concerning the sklearn.datasets module.
+
+Plot randomly generated classification dataset
+Plot randomly generated classification dataset
+Plot randomly generated multilabel dataset
+Plot randomly generated multilabel dataset
+The Digit Dataset
+The Digit Dataset
+The Iris Dataset
+The Iris Dataset
+
+
+#### Decision Trees(决策树)
+
+> Examples concerning the sklearn.tree module.
+
+Decision Tree Regression
+Decision Tree Regression
+Multi-output Decision Tree Regression
+Multi-output Decision Tree Regression
+Plot the decision surface of decision trees trained on the iris dataset
+Plot the decision surface of decision trees trained on the iris dataset
+Post pruning decision trees with cost complexity pruning
+Post pruning decision trees with cost complexity pruning
+Understanding the decision tree structure
+Understanding the decision tree structure
+
+#### Decomposition(分解)
+
+> Examples concerning the sklearn.decomposition module.
+
+Beta-divergence loss functions
+Beta-divergence loss functions
+Blind source separation using FastICA
+Blind source separation using FastICA
+Comparison of LDA and PCA 2D projection of Iris dataset
+Comparison of LDA and PCA 2D projection of Iris dataset
+Faces dataset decompositions
+Faces dataset decompositions
+Factor Analysis (with rotation) to visualize patterns
+Factor Analysis (with rotation) to visualize patterns
+FastICA on 2D point clouds
+FastICA on 2D point clouds
+Image denoising using dictionary learning
+Image denoising using dictionary learning
+Incremental PCA
+Incremental PCA
+Kernel PCA
+Kernel PCA
+Model selection with Probabilistic PCA and Factor Analysis (FA)
+Model selection with Probabilistic PCA and Factor Analysis (FA)
+PCA example with Iris Data-set
+PCA example with Iris Data-set
+Principal components analysis (PCA)
+Principal components analysis (PCA)
+Sparse coding with a precomputed dictionary
+Sparse coding with a precomputed dictionary
+
+#### Ensemble methods(集成方法)
+
+> Examples concerning the sklearn.ensemble module.
+
+Categorical Feature Support in Gradient Boosting
+Categorical Feature Support in Gradient Boosting
+Combine predictors using stacking
+Combine predictors using stacking
+Comparing random forests and the multi-output meta estimator
+Comparing random forests and the multi-output meta estimator
+Decision Tree Regression with AdaBoost
+Decision Tree Regression with AdaBoost
+Discrete versus Real AdaBoost
+Discrete versus Real AdaBoost
+Early stopping of Gradient Boosting
+Early stopping of Gradient Boosting
+Feature importances with a forest of trees
+Feature importances with a forest of trees
+Feature transformations with ensembles of trees
+Feature transformations with ensembles of trees
+Gradient Boosting Out-of-Bag estimates
+Gradient Boosting Out-of-Bag estimates
+Gradient Boosting regression
+Gradient Boosting regression
+Gradient Boosting regularization
+Gradient Boosting regularization
+Hashing feature transformation using Totally Random Trees
+Hashing feature transformation using Totally Random Trees
+IsolationForest example
+IsolationForest example
+Monotonic Constraints
+Monotonic Constraints
+Multi-class AdaBoosted Decision Trees
+Multi-class AdaBoosted Decision Trees
+OOB Errors for Random Forests
+OOB Errors for Random Forests
+Pixel importances with a parallel forest of trees
+Pixel importances with a parallel forest of trees
+Plot class probabilities calculated by the VotingClassifier
+Plot class probabilities calculated by the VotingClassifier
+Plot individual and voting regression predictions
+Plot individual and voting regression predictions
+Plot the decision boundaries of a VotingClassifier
+Plot the decision boundaries of a VotingClassifier
+Plot the decision surfaces of ensembles of trees on the iris dataset
+Plot the decision surfaces of ensembles of trees on the iris dataset
+Prediction Intervals for Gradient Boosting Regression
+Prediction Intervals for Gradient Boosting Regression
+Single estimator versus bagging: bias-variance decomposition
+Single estimator versus bagging: bias-variance decomposition
+Two-class AdaBoost
+
+#### Two-class AdaBoost(二分法)
+
+> Examples based on real world datasets
+Applications to real world problems with some medium sized datasets or interactive user interface.
+
+Compressive sensing: tomography reconstruction with L1 prior (Lasso)
+Compressive sensing: tomography reconstruction with L1 prior (Lasso)
+Faces recognition example using eigenfaces and SVMs
+Faces recognition example using eigenfaces and SVMs
+Image denoising using kernel PCA
+Image denoising using kernel PCA
+Libsvm GUI
+Libsvm GUI
+Model Complexity Influence
+Model Complexity Influence
+Out-of-core classification of text documents
+Out-of-core classification of text documents
+Outlier detection on a real data set
+Outlier detection on a real data set
+Prediction Latency
+Prediction Latency
+Species distribution modeling
+Species distribution modeling
+Time-related feature engineering
+Time-related feature engineering
+Topic extraction with Non-negative Matrix Factorization and Latent Dirichlet Allocation
+Topic extraction with Non-negative Matrix Factorization and Latent Dirichlet Allocation
+Visualizing the stock market structure
+Visualizing the stock market structure
+Wikipedia principal eigenvector
+Wikipedia principal eigenvector
+
+#### Feature Selection(功能选择)
+
+> Examples concerning the sklearn.feature_selection module.
+
+Comparison of F-test and mutual information
+Comparison of F-test and mutual information
+Model-based and sequential feature selection
+Model-based and sequential feature selection
+Pipeline ANOVA SVM
+Pipeline ANOVA SVM
+Recursive feature elimination
+Recursive feature elimination
+Recursive feature elimination with cross-validation
+Recursive feature elimination with cross-validation
+Univariate Feature Selection
+Univariate Feature Selection
+
+#### Gaussian Mixture Models(高斯混合模型)
+
+> Examples concerning the sklearn.mixture module.
+
+Concentration Prior Type Analysis of Variation Bayesian Gaussian Mixture
+Concentration Prior Type Analysis of Variation Bayesian Gaussian Mixture
+Density Estimation for a Gaussian mixture
+Density Estimation for a Gaussian mixture
+GMM Initialization Methods
+GMM Initialization Methods
+GMM covariances
+GMM covariances
+Gaussian Mixture Model Ellipsoids
+Gaussian Mixture Model Ellipsoids
+Gaussian Mixture Model Selection
+Gaussian Mixture Model Selection
+Gaussian Mixture Model Sine Curve
+Gaussian Mixture Model Sine Curve
+
+#### Gaussian Process for Machine Learning(机器学习的高斯过程)
+
+> Examples concerning the sklearn.gaussian_process module.
+
+Comparison of kernel ridge and Gaussian process regression
+Comparison of kernel ridge and Gaussian process regression
+Gaussian Processes regression: basic introductory example
+Gaussian Processes regression: basic introductory example
+Gaussian process classification (GPC) on iris dataset
+Gaussian process classification (GPC) on iris dataset
+Gaussian process regression (GPR) on Mauna Loa CO2 data
+Gaussian process regression (GPR) on Mauna Loa CO2 data
+Gaussian process regression (GPR) with noise-level estimation
+Gaussian process regression (GPR) with noise-level estimation
+Gaussian processes on discrete data structures
+Gaussian processes on discrete data structures
+Illustration of Gaussian process classification (GPC) on the XOR dataset
+Illustration of Gaussian process classification (GPC) on the XOR dataset
+Illustration of prior and posterior Gaussian process for different kernels
+Illustration of prior and posterior Gaussian process for different kernels
+Iso-probability lines for Gaussian Processes classification (GPC)
+Iso-probability lines for Gaussian Processes classification (GPC)
+Probabilistic predictions with Gaussian process classification (GPC)
+Probabilistic predictions with Gaussian process classification (GPC)
+
+#### Generalized Linear Models(广义线性模型)
+
+> Examples concerning the sklearn.linear_model module.
+
+Comparing Linear Bayesian Regressors
+Comparing Linear Bayesian Regressors
+Comparing various online solvers
+Comparing various online solvers
+Curve Fitting with Bayesian Ridge Regression
+Curve Fitting with Bayesian Ridge Regression
+Early stopping of Stochastic Gradient Descent
+Early stopping of Stochastic Gradient Descent
+Fitting an Elastic Net with a precomputed Gram Matrix and Weighted Samples
+Fitting an Elastic Net with a precomputed Gram Matrix and Weighted Samples
+HuberRegressor vs Ridge on dataset with strong outliers
+HuberRegressor vs Ridge on dataset with strong outliers
+Joint feature selection with multi-task Lasso
+Joint feature selection with multi-task Lasso
+L1 Penalty and Sparsity in Logistic Regression
+L1 Penalty and Sparsity in Logistic Regression
+Lasso and Elastic Net
+Lasso and Elastic Net
+Lasso and Elastic Net for Sparse Signals
+Lasso and Elastic Net for Sparse Signals
+Lasso model selection via information criteria
+Lasso model selection via information criteria
+Lasso model selection: AIC-BIC / cross-validation
+Lasso model selection: AIC-BIC / cross-validation
+Lasso on dense and sparse data
+Lasso on dense and sparse data
+Lasso path using LARS
+Lasso path using LARS
+Linear Regression Example
+Linear Regression Example
+Logistic Regression 3-class Classifier
+Logistic Regression 3-class Classifier
+Logistic function
+Logistic function
+MNIST classification using multinomial logistic + L1
+MNIST classification using multinomial logistic + L1
+Multiclass sparse logistic regression on 20newgroups
+Multiclass sparse logistic regression on 20newgroups
+Non-negative least squares
+Non-negative least squares
+One-Class SVM versus One-Class SVM using Stochastic Gradient Descent
+One-Class SVM versus One-Class SVM using Stochastic Gradient Descent
+Ordinary Least Squares and Ridge Regression Variance
+Ordinary Least Squares and Ridge Regression Variance
+Orthogonal Matching Pursuit
+Orthogonal Matching Pursuit
+Plot Ridge coefficients as a function of the L2 regularization
+Plot Ridge coefficients as a function of the L2 regularization
+Plot Ridge coefficients as a function of the regularization
+Plot Ridge coefficients as a function of the regularization
+Plot multi-class SGD on the iris dataset
+Plot multi-class SGD on the iris dataset
+Plot multinomial and One-vs-Rest Logistic Regression
+Plot multinomial and One-vs-Rest Logistic Regression
+Poisson regression and non-normal loss
+Poisson regression and non-normal loss
+Polynomial and Spline interpolation
+Polynomial and Spline interpolation
+Quantile regression
+Quantile regression
+Regularization path of L1- Logistic Regression
+Regularization path of L1- Logistic Regression
+Robust linear estimator fitting
+Robust linear estimator fitting
+Robust linear model estimation using RANSAC
+Robust linear model estimation using RANSAC
+SGD: Maximum margin separating hyperplane
+SGD: Maximum margin separating hyperplane
+SGD: Penalties
+SGD: Penalties
+SGD: Weighted samples
+SGD: Weighted samples
+SGD: convex loss functions
+SGD: convex loss functions
+Sparsity Example: Fitting only features 1  and 2
+Sparsity Example: Fitting only features 1 and 2
+Theil-Sen Regression
+Theil-Sen Regression
+Tweedie regression on insurance claims
+Tweedie regression on insurance claims
+
+#### Inspection(检查)
+
+> Examples related to the sklearn.inspection module.
+
+Common pitfalls in the interpretation of coefficients of linear models
+Common pitfalls in the interpretation of coefficients of linear models
+Failure of Machine Learning to infer causal effects
+Failure of Machine Learning to infer causal effects
+Partial Dependence and Individual Conditional Expectation Plots
+Partial Dependence and Individual Conditional Expectation Plots
+Permutation Importance vs Random Forest Feature Importance (MDI)
+Permutation Importance vs Random Forest Feature Importance (MDI)
+Permutation Importance with Multicollinear or Correlated Features
+Permutation Importance with Multicollinear or Correlated Features
+
+#### Kernel Approximation（核近似，核逼近）
+
+Examples concerning the sklearn.kernel_approximation module.
+
+Scalable learning with polynomial kernel approximation
+Scalable learning with polynomial kernel approximation
+
+#### Manifold learning(流形学习)
+
+> Examples concerning the sklearn.manifold module.
+
+Comparison of Manifold Learning methods
+Comparison of Manifold Learning methods
+Manifold Learning methods on a severed sphere
+Manifold Learning methods on a severed sphere
+Manifold learning on handwritten digits: Locally Linear Embedding, Isomap...
+Manifold learning on handwritten digits: Locally Linear Embedding, Isomap...
+Multi-dimensional scaling
+Multi-dimensional scaling
+Swiss Roll And Swiss-Hole Reduction
+Swiss Roll And Swiss-Hole Reduction
+t-SNE: The effect of various perplexity values on the shape
+t-SNE: The effect of various perplexity values on the shape
+
+#### Miscellaneous(杂项)
+
+> Miscellaneous and introductory examples for scikit-learn.
+
+Advanced Plotting With Partial Dependence
+Advanced Plotting With Partial Dependence
+Comparing anomaly detection algorithms for outlier detection on toy datasets
+Comparing anomaly detection algorithms for outlier detection on toy datasets
+Comparison of kernel ridge regression and SVR
+Comparison of kernel ridge regression and SVR
+Displaying Pipelines
+Displaying Pipelines
+Displaying estimators and complex pipelines
+Displaying estimators and complex pipelines
+Evaluation of outlier detection estimators
+Evaluation of outlier detection estimators
+Explicit feature map approximation for RBF kernels
+Explicit feature map approximation for RBF kernels
+Face completion with a multi-output estimators
+Face completion with a multi-output estimators
+Introducing the `set_output` API
+Introducing the `set_output` API
+Isotonic Regression
+Isotonic Regression
+Multilabel classification
+Multilabel classification
+ROC Curve with Visualization API
+ROC Curve with Visualization API
+The Johnson-Lindenstrauss bound for embedding with random projections
+The Johnson-Lindenstrauss bound for embedding with random projections
+Visualizations with Display Objects
+Visualizations with Display Objects
+
+#### Missing Value Imputation(缺失值插补)
+
+> Examples concerning the sklearn.impute module.
+
+Imputing missing values before building an estimator
+Imputing missing values before building an estimator
+Imputing missing values with variants of IterativeImputer
+Imputing missing values with variants of IterativeImputer
+
+#### Model Selection(模型选择)
+
+> Examples related to the sklearn.model_selection module.
+
+Balance model complexity and cross-validated score
+Balance model complexity and cross-validated score
+Class Likelihood Ratios to measure classification performance
+Class Likelihood Ratios to measure classification performance
+Comparing randomized search and grid search for hyperparameter estimation
+Comparing randomized search and grid search for hyperparameter estimation
+Comparison between grid search and successive halving
+Comparison between grid search and successive halving
+Confusion matrix
+Confusion matrix
+Custom refit strategy of a grid search with cross-validation
+Custom refit strategy of a grid search with cross-validation
+Demonstration of multi-metric evaluation on cross_val_score and GridSearchCV
+Demonstration of multi-metric evaluation on cross_val_score and GridSearchCV
+Detection error tradeoff (DET) curve
+Detection error tradeoff (DET) curve
+Multiclass Receiver Operating Characteristic (ROC)
+Multiclass Receiver Operating Characteristic (ROC)
+Nested versus non-nested cross-validation
+Nested versus non-nested cross-validation
+Plotting Cross-Validated Predictions
+Plotting Cross-Validated Predictions
+Plotting Learning Curves and Checking Models' Scalability
+Plotting Learning Curves and Checking Models' Scalability
+Plotting Validation Curves
+Plotting Validation Curves
+Precision-Recall
+Precision-Recall
+Receiver Operating Characteristic (ROC) with cross validation
+Receiver Operating Characteristic (ROC) with cross validation
+Sample pipeline for text feature extraction and evaluation
+Sample pipeline for text feature extraction and evaluation
+Statistical comparison of models using grid search
+Statistical comparison of models using grid search
+Successive Halving Iterations
+Successive Halving Iterations
+Test with permutations the significance of a classification score
+Test with permutations the significance of a classification score
+Train error vs Test error
+Train error vs Test error
+Underfitting vs. Overfitting
+Underfitting vs. Overfitting
+Visualizing cross-validation behavior in scikit-learn
+Visualizing cross-validation behavior in scikit-learn
+
+#### Multioutput methods(多输出方法)
+
+> Examples concerning the sklearn.multioutput module.
+
+Classifier Chain
+Classifier Chain
+
+#### Nearest Neighbors(最近邻学习)
+
+> Examples concerning the sklearn.neighbors module.
+
+Approximate nearest neighbors in TSNE
+Approximate nearest neighbors in TSNE
+Caching nearest neighbors
+Caching nearest neighbors
+Comparing Nearest Neighbors with and without Neighborhood Components Analysis
+Comparing Nearest Neighbors with and without Neighborhood Components Analysis
+Dimensionality Reduction with Neighborhood Components Analysis
+Dimensionality Reduction with Neighborhood Components Analysis
+Kernel Density Estimate of Species Distributions
+Kernel Density Estimate of Species Distributions
+Kernel Density Estimation
+Kernel Density Estimation
+Nearest Centroid Classification
+Nearest Centroid Classification
+Nearest Neighbors Classification
+Nearest Neighbors Classification
+Nearest Neighbors regression
+Nearest Neighbors regression
+Neighborhood Components Analysis Illustration
+Neighborhood Components Analysis Illustration
+Novelty detection with Local Outlier Factor (LOF)
+Novelty detection with Local Outlier Factor (LOF)
+Outlier detection with Local Outlier Factor (LOF)
+Outlier detection with Local Outlier Factor (LOF)
+Simple 1D Kernel Density Estimation
+Simple 1D Kernel Density Estimation
+
+#### Neural Networks(神经网络)
+
+> Examples concerning the sklearn.neural_network module.
+
+Compare Stochastic learning strategies for MLPClassifier
+Compare Stochastic learning strategies for MLPClassifier
+Restricted Boltzmann Machine features for digit classification
+Restricted Boltzmann Machine features for digit classification
+Varying regularization in Multi-layer Perceptron
+Varying regularization in Multi-layer Perceptron
+Visualization of MLP weights on MNIST
+Visualization of MLP weights on MNIST
+
+#### Pipelines and composite estimators(管道和复合估计器)
+
+> Examples of how to compose transformers and pipelines from other estimators. See the User Guide.
+
+Column Transformer with Heterogeneous Data Sources
+Column Transformer with Heterogeneous Data Sources
+Column Transformer with Mixed Types
+Column Transformer with Mixed Types
+Concatenating multiple feature extraction methods
+Concatenating multiple feature extraction methods
+Effect of transforming the targets in regression model
+Effect of transforming the targets in regression model
+Pipelining: chaining a PCA and a logistic regression
+Pipelining: chaining a PCA and a logistic regression
+Selecting dimensionality reduction with Pipeline and GridSearchCV
+Selecting dimensionality reduction with Pipeline and GridSearchCV
+
+#### Preprocessing(预处理)
+
+> Examples concerning the sklearn.preprocessing module.
+
+Compare the effect of different scalers on data with outliers
+Compare the effect of different scalers on data with outliers
+Demonstrating the different strategies of KBinsDiscretizer
+Demonstrating the different strategies of KBinsDiscretizer
+Feature discretization
+Feature discretization
+Importance of Feature Scaling
+Importance of Feature Scaling
+Map data to a normal distribution
+Map data to a normal distribution
+Using KBinsDiscretizer to discretize continuous features
+Using KBinsDiscretizer to discretize continuous features
+
+#### Semi Supervised Classification(半监督分类)
+
+> Examples concerning the sklearn.semi_supervised module.
+
+Decision boundary of semi-supervised classifiers versus SVM on the Iris dataset
+Decision boundary of semi-supervised classifiers versus SVM on the Iris dataset
+Effect of varying threshold for self-training
+Effect of varying threshold for self-training
+Label Propagation digits active learning
+Label Propagation digits active learning
+Label Propagation digits: Demonstrating performance
+Label Propagation digits: Demonstrating performance
+Label Propagation learning a complex structure
+Label Propagation learning a complex structure
+Semi-supervised Classification on a Text Dataset
+Semi-supervised Classification on a Text Dataset
+
+#### Support Vector Machines(支持向量机)
+
+> Examples concerning the sklearn.svm module.
+
+Non-linear SVM
+Non-linear SVM
+One-class SVM with non-linear kernel (RBF)
+One-class SVM with non-linear kernel (RBF)
+Plot different SVM classifiers in the iris dataset
+Plot different SVM classifiers in the iris dataset
+Plot the support vectors in LinearSVC
+Plot the support vectors in LinearSVC
+RBF SVM parameters
+RBF SVM parameters
+SVM Margins Example
+SVM Margins Example
+SVM Tie Breaking Example
+SVM Tie Breaking Example
+SVM with custom kernel
+SVM with custom kernel
+SVM-Anova: SVM with univariate feature selection
+SVM-Anova: SVM with univariate feature selection
+SVM-Kernels
+SVM-Kernels
+SVM: Maximum margin separating hyperplane
+SVM: Maximum margin separating hyperplane
+SVM: Separating hyperplane for unbalanced classes
+SVM: Separating hyperplane for unbalanced classes
+SVM: Weighted samples
+SVM: Weighted samples
+Scaling the regularization parameter for SVCs
+Scaling the regularization parameter for SVCs
+Support Vector Regression (SVR) using linear and non-linear kernels
+Support Vector Regression (SVR) using linear and non-linear kernels
+
+#### Tutorial exercises(教程练习)
+
+> Exercises for the tutorials
+
+Cross-validation on Digits Dataset Exercise
+Cross-validation on Digits Dataset Exercise
+Cross-validation on diabetes Dataset Exercise
+Cross-validation on diabetes Dataset Exercise
+Digits Classification Exercise
+Digits Classification Exercise
+SVM Exercise
+SVM Exercise
+
+#### Working with text documents(使用文本文档)
+
+> Examples concerning the sklearn.feature_extraction.text module.
+
+Classification of text documents using sparse features
+Classification of text documents using sparse features
+Clustering text documents using k-means
+Clustering text documents using k-means
+FeatureHasher and DictVectorizer Comparison
+FeatureHasher and DictVectorizer Comparison
+
 
 ## PyTorch 库
 
