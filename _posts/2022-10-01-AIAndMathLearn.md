@@ -5193,6 +5193,21 @@ Using KBinsDiscretizer to discretize continuous features
 
 #### Semi Supervised Classification(半监督分类)
 
+> 半监督学习(Semi-Supervised Learning，SSL)是模式识别和机器学习领域研究的重点问题，是监督学习与无监督学习相结合的一种学习方法。半监督学习使用大量的未标记数据，以及同时使用标记数据，来进行模式识别工作。当使用半监督学习时，将会要求尽量少的人员来从事工作，同时，又能够带来比较高的准确性，因此，半监督学习正越来越受到人们的重视。
+
+> 半监督学习的基本设置是给定一个来自某未知分布的有标记示例集L={(x1, y1), (x2, y2), ..., (x |L|,y|L|)}以及一个未标记示例集U = {x1’, x2’, ... , x |U|’},期望学得函数f: X→Y可以准确地对示例x 预测其标记y。这里xi, xj’ ∈X 均为d维向量,yi∈Y为示例xi的标记,|L|和|U|分别为L和U的大小,即它们所包含的示例数。 
+
+> 半监督学习的基本思想是利用数据分布上的模型假设建立学习器对未标签样例进行标签。它的形式化描述是给定一个来自某未知分布的样例集S=LU,其中L是已标签样例集L={(x1,y1),(x2,y2),,,(x|L|,y|L|)},U是一个未标签样例集U={xc1,xc2,,,xc|U|},希望得到函数f:XyY可以准确地对样例x预测其标签y。其中xi,xc1均为d维向量，ytIY为样例xi的标签，|L|和|U|分别为L和U的大小，即所包含的样例数，半监督学习就是在样例集S上寻找最优的学习器。如果S=L，那么问题就转化为传统的有监督学习；反之,如果S=U,那么问题是转化为传统的无监督学习。如何综合利用已标签样例和未标签样例,是半监督学习需要解决的问题。
+
+> 在半监督学习中有三个常用的基本假设来建立预测样例和学习目标之间的关系，有以下三个：
+
+> > （1）平滑假设(Smoothness Assumption)：位于稠密数据区域的两个距离很近的样例的类标签相似，也就是说，当两个样例被稠密数据区域中的边连接时，它们在很大的概率下有相同的类标签；相反地，当两个样例被稀疏数据区域分开时，它们的类标签趋于不同。
+
+> > （2）聚类假设(Cluster Assumption)：当两个样例位于同一聚类簇时，它们在很大的概率下有相同的类标签。这个假设的等价定义为低密度分离假设(Low Sensity Separation Assumption)，即分类决策边界应该穿过稀疏数据区域，而避免将稠密数据区域的样例分到决策边界两侧。
+聚类假设是指样本数据间的距离相互比较近时，则他们拥有相同的类别。根据该假设，分类边界就必须尽可能地通过数据较为稀疏的地方，以能够避免把密集的样本数据点分到分类边界的两侧。在这一假设的前提下，学习算法就可以利用大量未标记的样本数据来分析样本空间中样本数据分布情况，从而指导学习算法对分类边界进行调整，使其尽量通过样本数据布局比较稀疏的区域。例如，Joachims提出的转导支持向量机算法，在训练过程中，算法不断修改分类超平面并交换超平面两侧某些未标记的样本数据的标记，使得分类边界在所有训练数据上最大化间隔，从而能够获得一个通过数据相对稀疏的区域，又尽可能正确划分所有有标记的样本数据的分类超平面。
+
+> > （3）流形假设(Manifold Assumption)：将高维数据嵌入到低维流形中，当两个样例位于低维流形中的一个小局部邻域内时，它们具有相似的类标签。
+
 > Examples concerning the sklearn.semi_supervised module.
 
 Decision boundary of semi-supervised classifiers versus SVM on the Iris dataset
@@ -5212,49 +5227,47 @@ Semi-supervised Classification on a Text Dataset
 
 > Examples concerning the sklearn.svm module.
 
-Non-linear SVM
-Non-linear SVM
-One-class SVM with non-linear kernel (RBF)
-One-class SVM with non-linear kernel (RBF)
-Plot different SVM classifiers in the iris dataset
-Plot different SVM classifiers in the iris dataset
-Plot the support vectors in LinearSVC
-Plot the support vectors in LinearSVC
-RBF SVM parameters
-RBF SVM parameters
-SVM Margins Example
-SVM Margins Example
-SVM Tie Breaking Example
-SVM Tie Breaking Example
-SVM with custom kernel
-SVM with custom kernel
-SVM-Anova: SVM with univariate feature selection
-SVM-Anova: SVM with univariate feature selection
-SVM-Kernels
-SVM-Kernels
-SVM: Maximum margin separating hyperplane
-SVM: Maximum margin separating hyperplane
-SVM: Separating hyperplane for unbalanced classes
-SVM: Separating hyperplane for unbalanced classes
-SVM: Weighted samples
-SVM: Weighted samples
-Scaling the regularization parameter for SVCs
-Scaling the regularization parameter for SVCs
-Support Vector Regression (SVR) using linear and non-linear kernels
-Support Vector Regression (SVR) using linear and non-linear kernels
+> > Non-linear SVM
+
+> > One-class SVM with non-linear kernel (RBF)
+
+> > Plot different SVM classifiers in the iris dataset
+
+> > Plot the support vectors in LinearSVC
+
+> > RBF SVM parameters
+
+> > SVM Margins Example
+
+> > SVM Tie Breaking Example
+
+> > SVM with custom kernel
+
+> > SVM-Anova: SVM with univariate feature selection
+
+> > SVM-Kernels
+
+> > SVM: Maximum margin separating hyperplane
+
+> > SVM: Separating hyperplane for unbalanced classes
+
+> > SVM: Weighted samples
+
+> > Scaling the regularization parameter for SVCs
+
+> > Support Vector Regression (SVR) using linear and non-linear kernels
 
 #### Tutorial exercises(教程练习)
 
 > Exercises for the tutorials
 
-Cross-validation on Digits Dataset Exercise
-Cross-validation on Digits Dataset Exercise
-Cross-validation on diabetes Dataset Exercise
-Cross-validation on diabetes Dataset Exercise
-Digits Classification Exercise
-Digits Classification Exercise
-SVM Exercise
-SVM Exercise
+> > Cross-validation on Digits Dataset Exercise
+
+> > Cross-validation on diabetes Dataset Exercise
+
+> > Digits Classification Exercise
+
+> > SVM Exercise
 
 #### Working with text documents(使用文本文档)
 
