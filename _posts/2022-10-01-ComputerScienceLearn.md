@@ -8,6 +8,25 @@ date: 2022-10-01 09:01:01
 - [计算机史话](#计算机史话)
 - [Windows](#windows)
 - [LinuxAndOpenSource](#linuxandopensource)
+  - [Linux 命令大全](#linux-命令大全)
+    - [系统信息](#系统信息)
+    - [文件搜索](#文件搜索)
+    - [挂载一个文件系统](#挂载一个文件系统)
+    - [磁盘空间](#磁盘空间)
+    - [用户和群组](#用户和群组)
+    - [打包和压缩文件](#打包和压缩文件)
+    - [RPM 包 - （Fedora, Redhat及类似系统）](#rpm-包---fedora-redhat及类似系统)
+    - [YUM 软件包升级器 - （Fedora, RedHat及类似系统）](#yum-软件包升级器---fedora-redhat及类似系统)
+    - [DEB 包 (Debian, Ubuntu 以及类似系统)](#deb-包-debian-ubuntu-以及类似系统)
+    - [查看文件内容](#查看文件内容)
+    - [文本处理](#文本处理)
+    - [字符设置和文件格式转换](#字符设置和文件格式转换)
+    - [文件系统分析](#文件系统分析)
+    - [初始化一个文件系统](#初始化一个文件系统)
+    - [SWAP文件系统](#swap文件系统)
+    - [备份](#备份)
+    - [光盘](#光盘)
+    - [网络 - （以太网和WIFI无线）](#网络---以太网和wifi无线)
   - [OpenSource主流开源协议](#opensource主流开源协议)
     - [GPL](#gpl)
     - [LGPL](#lgpl)
@@ -20,6 +39,13 @@ date: 2022-10-01 09:01:01
     - [Login](#login)
     - [Git helper](#git-helper)
   - [Docker](#docker)
+  - [Kubernetes](#kubernetes)
+    - [kubernetes 概述](#kubernetes-概述)
+    - [核心概念](#核心概念)
+    - [kubernetes 集群搭建(kubeadm 方式)](#kubernetes-集群搭建kubeadm-方式)
+    - [安装方法二](#安装方法二)
+    - [kubernetes 集群搭建（二进制）](#kubernetes-集群搭建二进制)
+    - [kubernetes 集群 YAML 文件详解](#kubernetes-集群-yaml-文件详解)
 - [结构化程序设计](#结构化程序设计)
 - [面向对象程序设计](#面向对象程序设计)
 - [C# .Net Base](#c-net-base)
@@ -97,7 +123,14 @@ date: 2022-10-01 09:01:01
     - [Rezor View](#rezor-view)
   - [ViewComponent](#viewcomponent)
   - [Taghelper 可以扩展一些自定义的标记 其实就是后台生成html代码的一种形式](#taghelper-可以扩展一些自定义的标记-其实就是后台生成html代码的一种形式)
+  - [SignalR](#signalr)
+- [Tensorflow](#tensorflow)
 - [C# 调用 Tensorflow](#c-调用-tensorflow)
+- [gRPC](#grpc)
+  - [gRPC 概述](#grpc-概述)
+  - [gRPC 服务项目模板](#grpc-服务项目模板)
+  - [ASP.NET Core gRPC 服务项目模板提供了一个入门版服务：](#aspnet-core-grpc-服务项目模板提供了一个入门版服务)
+  - [使用 .NET 客户端调用 gRPC 服务](#使用-net-客户端调用-grpc-服务)
 - [Php](#php)
   - [Pyplot，画出各种你想要的图](#pyplot画出各种你想要的图)
 - [Python](#python)
@@ -146,6 +179,696 @@ date: 2022-10-01 09:01:01
 ## Windows
 
 ## LinuxAndOpenSource
+
+### Linux 命令大全
+
+#### 系统信息 
+
+> cat /etc/redhat-release 显示安装的系统版本
+
+> getconf LONG_BIT 显示系统是多少位的（32/64bit）
+
+> centos7的防火墙相关：
+
+> firewall-cmd --state （防火墙状态）
+
+> systemctl list-unit-files|grep firewalld.service（防火墙状态）
+
+> systemctl restart firewalld.service(重启防火墙)
+
+> systemctl disable firewalld.service（禁止开机自动启动）
+
+> centos7以下的防火墙相关：
+
+> service iptables stop(关闭防火墙centos7以下)
+
+> chkconfig iptables off（禁止开机自动启动）
+
+> arch 显示机器的处理器架构(1) 
+
+> uname -m 显示机器的处理器架构(2) 
+
+> uname -r 显示正在使用的内核版本 
+
+> dmidecode -q 显示硬件系统部件 - (SMBIOS / DMI) 
+
+> hdparm -i /dev/hda 罗列一个磁盘的架构特性 
+
+> hdparm -tT /dev/sda 在磁盘上执行测试性读取操作 
+
+> cat /proc/cpuinfo 显示CPU info的信息 
+
+> cat /proc/interrupts 显示中断 
+
+> cat /proc/meminfo 校验内存使用 
+
+> cat /proc/swaps 显示哪些swap被使用 
+
+> cat /proc/version 显示内核的版本 
+
+> cat /proc/net/dev 显示网络适配器及统计 
+
+> cat /proc/mounts 显示已加载的文件系统 
+
+> lspci -tv 罗列 PCI 设备 
+
+> lsusb -tv 显示 USB 设备 
+
+> date 显示系统日期 
+
+> cal 2007 显示2007年的日历表 
+
+> date 041217002007.00 设置日期和时间 - 月日时分年.秒 
+
+> clock -w 将时间修改保存到 BIOS 
+
+> 关机 (系统的关机、重启以及登出 ) 
+
+> shutdown -h now 关闭系统(1) 
+
+> init 0 关闭系统(2) 
+
+> telinit 0 关闭系统(3) 
+
+> shutdown -h hours:minutes & 按预定时间关闭系统 
+
+> shutdown -c 取消按预定时间关闭系统 
+
+> shutdown -r now 重启(1) 
+
+> reboot 重启(2) 
+
+> logout 注销 
+
+> 文件和目录
+
+> cd /home 进入 '/home' 目录' 
+
+> cd .. 返回上一级目录 
+
+> cd ../.. 返回上两级目录 
+
+> cd 进入个人的主目录 
+
+> cd ~user1 进入个人的主目录 
+
+> cd - 返回上次所在的目录 
+
+> pwd 显示工作路径 
+
+> ls 查看目录中的文件 
+
+> ls -F 查看目录中的文件 
+
+> ls -l 显示文件和目录的详细资料 
+
+> ls -a 显示隐藏文件 
+
+> ls *[0-9]* 显示包含数字的文件名和目录名 
+
+> tree 显示文件和目录由根目录开始的树形结构(1) 
+
+> lstree 显示文件和目录由根目录开始的树形结构(2) 
+
+> mkdir dir1 创建一个叫做 'dir1' 的目录' 
+
+> mkdir dir1 dir2 同时创建两个目录 
+
+> mkdir -p /tmp/dir1/dir2 创建一个目录树 
+
+> rm -f file1 删除一个叫做 'file1' 的文件' 
+
+> rmdir dir1 删除一个叫做 'dir1' 的目录' 
+
+> rm -rf dir1 删除一个叫做 'dir1' 的目录并同时删除其内容 
+
+> rm -rf dir1 dir2 同时删除两个目录及它们的内容 
+
+> mv dir1 new_dir 重命名/移动 一个目录 
+
+> cp file1 file2 复制一个文件 
+
+> cp dir/* . 复制一个目录下的所有文件到当前工作目录 
+
+> cp -a /tmp/dir1 . 复制一个目录到当前工作目录 
+
+> cp -a dir1 dir2 复制一个目录 
+
+> ln -s file1 lnk1 创建一个指向文件或目录的软链接 
+
+> ln file1 lnk1 创建一个指向文件或目录的物理链接 
+
+> touch -t 0712250000 file1 修改一个文件或目录的时间戳 - (YYMMDDhhmm) 
+
+> file file1 outputs the mime type of the file as text 
+
+> iconv -l 列出已知的编码 
+
+> iconv -f fromEncoding -t toEncoding inputFile > outputFile creates a new from the given input file by assuming it is encoded in fromEncoding and converting it to toEncoding. 
+
+> find . -maxdepth 1 -name *.jpg -print -exec convert "{}" -resize 80x60 "thumbs/{}" \; batch resize files in the current directory and send them to a thumbnails directory (requires convert from Imagemagick)
+
+#### 文件搜索 
+
+> find / -name file1 从 '/' 开始进入根文件系统搜索文件和目录 
+
+> find / -user user1 搜索属于用户 'user1' 的文件和目录 
+
+> find /home/user1 -name \*.bin 在目录 '/ home/user1' 中搜索带有'.bin' 结尾的文件 
+
+> find /usr/bin -type f -atime +100 搜索在过去100天内未被使用过的执行文件 
+
+> find /usr/bin -type f -mtime -10 搜索在10天内被创建或者修改过的文件 
+
+> find / -name \*.rpm -exec chmod 755 '{}' \; 搜索以 '.rpm' 结尾的文件并定义其权限 
+
+> find / -xdev -name \*.rpm 搜索以 '.rpm' 结尾的文件，忽略光驱、捷盘等可移动设备 
+
+> locate \*.ps 寻找以 '.ps' 结尾的文件 - 先运行 'updatedb' 命令 
+
+> whereis halt 显示一个二进制文件、源码或man的位置 
+
+> which halt 显示一个二进制文件或可执行文件的完整路径
+
+#### 挂载一个文件系统 
+
+> mount /dev/hda2 /mnt/hda2 挂载一个叫做hda2的盘 - 确定目录 '/ mnt/hda2' 已经存在 
+
+> umount /dev/hda2 卸载一个叫做hda2的盘 - 先从挂载点 '/ mnt/hda2' 退出 
+
+> fuser -km /mnt/hda2 当设备繁忙时强制卸载 
+
+> umount -n /mnt/hda2 运行卸载操作而不写入 /etc/mtab 文件- 当文件为只读或当磁盘写满时非常有用 
+
+> mount /dev/fd0 /mnt/floppy 挂载一个软盘 
+
+> mount /dev/cdrom /mnt/cdrom 挂载一个cdrom或dvdrom 
+
+> mount /dev/hdc /mnt/cdrecorder 挂载一个cdrw或dvdrom 
+
+> mount /dev/hdb /mnt/cdrecorder 挂载一个cdrw或dvdrom 
+
+> mount -o loop file.iso /mnt/cdrom 挂载一个文件或ISO镜像文件 
+
+> mount -t vfat /dev/hda5 /mnt/hda5 挂载一个Windows FAT32文件系统 
+
+> mount /dev/sda1 /mnt/usbdisk 挂载一个usb 捷盘或闪存设备 
+
+> mount -t smbfs -o username=user,password=pass //WinClient/share /mnt/share 挂载一个windows网络共享
+
+#### 磁盘空间 
+
+> df -h 显示已经挂载的分区列表 
+
+> ls -lSr |more 以尺寸大小排列文件和目录 
+
+> du -sh dir1 估算目录 'dir1' 已经使用的磁盘空间' 
+
+> du -sk * | sort -rn 以容量大小为依据依次显示文件和目录的大小 
+
+> rpm -q -a --qf '%10{SIZE}t%{NAME}n' | sort -k1,1n 以大小为依据依次显示已安装的rpm包所使用的空间 (fedora, redhat类系统) 
+
+> dpkg-query -W -f='${Installed-Size;10}t${Package}n' | sort -k1,1n 以大小为依据显示已安装的deb包所使用的空间 (ubuntu, debian类系统)
+
+#### 用户和群组 
+
+> groupadd group_name 创建一个新用户组 
+
+> groupdel group_name 删除一个用户组 
+
+> groupmod -n new_group_name old_group_name 重命名一个用户组 
+
+> useradd -c "Name Surname " -g admin -d /home/user1 -s /bin/bash user1 创建一个属于 "admin" 用户组的用户 
+
+> useradd user1 创建一个新用户 
+
+> userdel -r user1 删除一个用户 ( '-r' 排除主目录) 
+
+> usermod -c "User FTP" -g system -d /ftp/user1 -s /bin/nologin user1 修改用户属性 
+
+> passwd 修改口令 
+
+> passwd user1 修改一个用户的口令 (只允许root执行) 
+
+> chage -E 2005-12-31 user1 设置用户口令的失效期限 
+
+> pwck 检查 '/etc/passwd' 的文件格式和语法修正以及存在的用户 
+
+> grpck 检查 '/etc/passwd' 的文件格式和语法修正以及存在的群组 
+
+> newgrp group_name 登陆进一个新的群组以改变新创建文件的预设群组
+
+>  文件的权限 - 使用 "+" 设置权限，使用 "-" 用于取消 
+
+> ls -lh 显示权限 
+
+> ls /tmp | pr -T5 -W$COLUMNS 将终端划分成5栏显示 
+
+> chmod ugo+rwx directory1 设置目录的所有人(u)、群组(g)以及其他人(o)以读（r ）、写(w)和执行(x)的权限 
+
+> chmod go-rwx directory1 删除群组(g)与其他人(o)对目录的读写执行权限 
+
+> chown user1 file1 改变一个文件的所有人属性 
+
+> chown -R user1 directory1 改变一个目录的所有人属性并同时改变改目录下所有文件的属性 
+
+> chgrp group1 file1 改变文件的群组 
+
+> chown user1:group1 file1 改变一个文件的所有人和群组属性 
+
+> find / -perm -u+s 罗列一个系统中所有使用了SUID控制的文件 
+
+> chmod u+s /bin/file1 设置一个二进制文件的 SUID 位 - 运行该文件的用户也被赋予和所有者同样的权限 
+
+> chmod u-s /bin/file1 禁用一个二进制文件的 SUID位 
+
+> chmod g+s /home/public 设置一个目录的SGID 位 - 类似SUID ，不过这是针对目录的 
+
+> chmod g-s /home/public 禁用一个目录的 SGID 位 
+
+> chmod o+t /home/public 设置一个文件的 STIKY 位 - 只允许合法所有人删除文件 
+
+> chmod o-t /home/public 禁用一个目录的 STIKY 位
+
+>  文件的特殊属性 - 使用 "+" 设置权限，使用 "-" 用于取消 
+
+> chattr +a file1 只允许以追加方式读写文件 
+
+> chattr +c file1 允许这个文件能被内核自动压缩/解压 
+
+> chattr +d file1 在进行文件系统备份时，dump程序将忽略这个文件 
+
+> chattr +i file1 设置成不可变的文件，不能被删除、修改、重命名或者链接 
+
+> chattr +s file1 允许一个文件被安全地删除 
+
+> chattr +S file1 一旦应用程序对这个文件执行了写操作，使系统立刻把修改的结果写到磁盘 
+
+> chattr +u file1 若文件被删除，系统会允许你在以后恢复这个被删除的文件 
+
+> lsattr 显示特殊的属性
+
+#### 打包和压缩文件 
+
+> bunzip2 file1.bz2 解压一个叫做 'file1.bz2'的文件 
+
+> bzip2 file1 压缩一个叫做 'file1' 的文件 
+
+> gunzip file1.gz 解压一个叫做 'file1.gz'的文件 
+
+> gzip file1 压缩一个叫做 'file1'的文件 
+
+> gzip -9 file1 最大程度压缩 
+
+> rar a file1.rar test_file 创建一个叫做 'file1.rar' 的包 
+
+> rar a file1.rar file1 file2 dir1 同时压缩 'file1', 'file2' 以及目录 'dir1' 
+
+> rar x file1.rar 解压rar包 
+
+> unrar x file1.rar 解压rar包 
+
+> tar -cvf archive.tar file1 创建一个非压缩的 tarball 
+
+> tar -cvf archive.tar file1 file2 dir1 创建一个包含了 'file1', 'file2' 以及 'dir1'的档案文件 
+
+> tar -tf archive.tar 显示一个包中的内容 
+
+> tar -xvf archive.tar 释放一个包 
+
+> tar -xvf archive.tar -C /tmp 将压缩包释放到 /tmp目录下 
+
+> tar -cvfj archive.tar.bz2 dir1 创建一个bzip2格式的压缩包 
+
+> tar -xvfj archive.tar.bz2 解压一个bzip2格式的压缩包 
+
+> tar -cvfz archive.tar.gz dir1 创建一个gzip格式的压缩包 
+
+> tar -xvfz archive.tar.gz 解压一个gzip格式的压缩包 
+
+> zip file1.zip file1 创建一个zip格式的压缩包 
+
+> zip -r file1.zip file1 file2 dir1 将几个文件和目录同时压缩成一个zip格式的压缩包 
+
+> unzip file1.zip 解压一个zip格式压缩包
+
+#### RPM 包 - （Fedora, Redhat及类似系统） 
+
+> rpm -ivh package.rpm 安装一个rpm包 
+
+> rpm -ivh --nodeeps package.rpm 安装一个rpm包而忽略依赖关系警告 
+
+> rpm -U package.rpm 更新一个rpm包但不改变其配置文件 
+
+> rpm -F package.rpm 更新一个确定已经安装的rpm包 
+
+> rpm -e package_name.rpm 删除一个rpm包 
+
+> rpm -qa 显示系统中所有已经安装的rpm包 
+
+> rpm -qa | grep httpd 显示所有名称中包含 "httpd" 字样的rpm包 
+
+> rpm -qi package_name 获取一个已安装包的特殊信息 
+
+> rpm -qg "System Environment/Daemons" 显示一个组件的rpm包 
+
+> rpm -ql package_name 显示一个已经安装的rpm包提供的文件列表 
+
+> rpm -qc package_name 显示一个已经安装的rpm包提供的配置文件列表 
+
+> rpm -q package_name --whatrequires 显示与一个rpm包存在依赖关系的列表 
+
+> rpm -q package_name --whatprovides 显示一个rpm包所占的体积 
+
+> rpm -q package_name --scripts 显示在安装/删除期间所执行的脚本l 
+
+> rpm -q package_name --changelog 显示一个rpm包的修改历史 
+
+> rpm -qf /etc/httpd/conf/httpd.conf 确认所给的文件由哪个rpm包所提供 
+
+> rpm -qp package.rpm -l 显示由一个尚未安装的rpm包提供的文件列表 
+
+> rpm --import /media/cdrom/RPM-GPG-KEY 导入公钥数字证书 
+
+> rpm --checksig package.rpm 确认一个rpm包的完整性 
+
+> rpm -qa gpg-pubkey 确认已安装的所有rpm包的完整性 
+
+> rpm -V package_name 检查文件尺寸、 许可、类型、所有者、群组、MD5检查以及最后修改时间 
+
+> rpm -Va 检查系统中所有已安装的rpm包- 小心使用 
+
+> rpm -Vp package.rpm 确认一个rpm包还未安装 
+
+> rpm2cpio package.rpm | cpio --extract --make-directories *bin* 从一个rpm包运行可执行文件 
+
+> rpm -ivh /usr/src/redhat/RPMS/`arch`/package.rpm 从一个rpm源码安装一个构建好的包 
+
+> rpmbuild --rebuild package_name.src.rpm 从一个rpm源码构建一个 rpm 包
+
+#### YUM 软件包升级器 - （Fedora, RedHat及类似系统） 
+
+> yum install package_name 下载并安装一个rpm包 
+
+> yum localinstall package_name.rpm 将安装一个rpm包，使用你自己的软件仓库为你解决所有依赖关系 
+
+> yum update package_name.rpm 更新当前系统中所有安装的rpm包 
+
+> yum update package_name 更新一个rpm包 
+
+> yum remove package_name 删除一个rpm包 
+
+> yum list 列出当前系统中安装的所有包 
+
+> yum search package_name 在rpm仓库中搜寻软件包 
+
+> yum clean packages 清理rpm缓存删除下载的包 
+
+> yum clean headers 删除所有头文件 
+
+> yum clean all 删除所有缓存的包和头文件
+
+#### DEB 包 (Debian, Ubuntu 以及类似系统) 
+
+> dpkg -i package.deb 安装/更新一个 deb 包 
+
+> dpkg -r package_name 从系统删除一个 deb 包 
+
+> dpkg -l 显示系统中所有已经安装的 deb 包 
+
+> dpkg -l | grep httpd 显示所有名称中包含 "httpd" 字样的deb包 
+
+> dpkg -s package_name 获得已经安装在系统中一个特殊包的信息 
+
+> dpkg -L package_name 显示系统中已经安装的一个deb包所提供的文件列表 
+
+> dpkg --contents package.deb 显示尚未安装的一个包所提供的文件列表 
+
+> dpkg -S /bin/ping 确认所给的文件由哪个deb包提供 
+
+> APT 软件工具 (Debian, Ubuntu 以及类似系统) 
+
+> apt-get install package_name 安装/更新一个 deb 包 
+
+> apt-cdrom install package_name 从光盘安装/更新一个 deb 包 
+
+> apt-get update 升级列表中的软件包 
+
+> apt-get upgrade 升级所有已安装的软件 
+
+> apt-get remove package_name 从系统删除一个deb包 
+
+> apt-get check 确认依赖的软件仓库正确 
+
+> apt-get clean 从下载的软件包中清理缓存 
+
+> apt-cache search searched-package 返回包含所要搜索字符串的软件包名称
+
+#### 查看文件内容 
+
+> cat file1 从第一个字节开始正向查看文件的内容 
+
+> tac file1 从最后一行开始反向查看一个文件的内容 
+
+> more file1 查看一个长文件的内容 
+
+> less file1 类似于 'more' 命令，但是它允许在文件中和正向操作一样的反向操作 
+
+> head -2 file1 查看一个文件的前两行 
+
+> tail -2 file1 查看一个文件的最后两行 
+
+> tail -f /var/log/messages 实时查看被添加到一个文件中的内容 
+
+#### 文本处理 
+
+> cat file1 file2 ... | command <> file1_in.txt_or_file1_out.txt general syntax for text manipulation using PIPE, STDIN and STDOUT 
+
+> cat file1 | command( sed, grep, awk, grep, etc...) > result.txt 合并一个文件的详细说明文本，并将简介写入一个新文件中 
+
+> cat file1 | command( sed, grep, awk, grep, etc...) >> result.txt 合并一个文件的详细说明文本，并将简介写入一个已有的文件中 
+
+> grep Aug /var/log/messages 在文件 '/var/log/messages'中查找关键词"Aug" 
+
+> grep ^Aug /var/log/messages 在文件 '/var/log/messages'中查找以"Aug"开始的词汇 
+
+> grep [0-9] /var/log/messages 选择 '/var/log/messages' 文件中所有包含数字的行 
+
+> grep Aug -R /var/log/* 在目录 '/var/log' 及随后的目录中搜索字符串"Aug" 
+
+> sed 's/stringa1/stringa2/g' example.txt 将example.txt文件中的 "string1" 替换成 "string2" 
+
+> sed '/^$/d' example.txt 从example.txt文件中删除所有空白行 
+
+> sed '/ *#/d; /^$/d' example.txt 从example.txt文件中删除所有注释和空白行 
+
+> echo 'esempio' | tr '[:lower:]' '[:upper:]' 合并上下单元格内容 
+
+> sed -e '1d' result.txt 从文件example.txt 中排除第一行 
+
+> sed -n '/stringa1/p' 查看只包含词汇 "string1"的行 
+
+> sed -e 's/ *$//' example.txt 删除每一行最后的空白字符 
+
+> sed -e 's/stringa1//g' example.txt 从文档中只删除词汇 "string1" 并保留剩余全部 
+
+> sed -n '1,5p;5q' example.txt 查看从第一行到第5行内容 
+
+> sed -n '5p;5q' example.txt 查看第5行 
+
+> sed -e 's/00*/0/g' example.txt 用单个零替换多个零 
+
+> cat -n file1 标示文件的行数 
+
+> cat example.txt | awk 'NR%2==1' 删除example.txt文件中的所有偶数行 
+
+> echo a b c | awk '{print $1}' 查看一行第一栏 
+
+> echo a b c | awk '{print $1,$3}' 查看一行的第一和第三栏 
+
+> paste file1 file2 合并两个文件或两栏的内容 
+
+> paste -d '+' file1 file2 合并两个文件或两栏的内容，中间用"+"区分 
+
+> sort file1 file2 排序两个文件的内容 
+
+> sort file1 file2 | uniq 取出两个文件的并集(重复的行只保留一份) 
+
+> sort file1 file2 | uniq -u 删除交集，留下其他的行 
+
+> sort file1 file2 | uniq -d 取出两个文件的交集(只留下同时存在于两个文件中的文件) 
+
+> comm -1 file1 file2 比较两个文件的内容只删除 'file1' 所包含的内容 
+
+> comm -2 file1 file2 比较两个文件的内容只删除 'file2' 所包含的内容 
+
+> comm -3 file1 file2 比较两个文件的内容只删除两个文件共有的部分 
+
+#### 字符设置和文件格式转换 
+
+> dos2unix filedos.txt fileunix.txt 将一个文本文件的格式从MSDOS转换成UNIX 
+
+> unix2dos fileunix.txt filedos.txt 将一个文本文件的格式从UNIX转换成MSDOS 
+
+> recode ..HTML < page.txt > page.html 将一个文本文件转换成html 
+
+> recode -l | more 显示所有允许的转换格式 
+
+#### 文件系统分析 
+
+> badblocks -v /dev/hda1 检查磁盘hda1上的坏磁块 
+
+> fsck /dev/hda1 修复/检查hda1磁盘上linux文件系统的完整性 
+
+> fsck.ext2 /dev/hda1 修复/检查hda1磁盘上ext2文件系统的完整性 
+
+> e2fsck /dev/hda1 修复/检查hda1磁盘上ext2文件系统的完整性 
+
+> e2fsck -j /dev/hda1 修复/检查hda1磁盘上ext3文件系统的完整性 
+
+> fsck.ext3 /dev/hda1 修复/检查hda1磁盘上ext3文件系统的完整性 
+
+> fsck.vfat /dev/hda1 修复/检查hda1磁盘上fat文件系统的完整性 
+
+> fsck.msdos /dev/hda1 修复/检查hda1磁盘上dos文件系统的完整性 
+
+> dosfsck /dev/hda1 修复/检查hda1磁盘上dos文件系统的完整性 
+
+#### 初始化一个文件系统 
+
+> mkfs /dev/hda1 在hda1分区创建一个文件系统 
+
+> mke2fs /dev/hda1 在hda1分区创建一个linux ext2的文件系统 
+
+> mke2fs -j /dev/hda1 在hda1分区创建一个linux ext3(日志型)的文件系统 
+
+> mkfs -t vfat 32 -F /dev/hda1 创建一个 FAT32 文件系统 
+
+> fdformat -n /dev/fd0 格式化一个软盘 
+
+> mkswap /dev/hda3 创建一个swap文件系统 
+
+#### SWAP文件系统 
+
+> mkswap /dev/hda3 创建一个swap文件系统 
+
+> swapon /dev/hda3 启用一个新的swap文件系统 
+
+> swapon /dev/hda2 /dev/hdb3 启用两个swap分区 
+
+#### 备份 
+
+> dump -0aj -f /tmp/home0.bak /home 制作一个 '/home' 目录的完整备份 
+
+> dump -1aj -f /tmp/home0.bak /home 制作一个 '/home' 目录的交互式备份 
+
+> restore -if /tmp/home0.bak 还原一个交互式备份 
+
+> rsync -rogpav --delete /home /tmp 同步两边的目录 
+
+> rsync -rogpav -e ssh --delete /home ip_address:/tmp 通过SSH通道rsync 
+
+> rsync -az -e ssh --delete ip_addr:/home/public /home/local 通过ssh和压缩将一个远程目录同步到本地目录 
+
+> rsync -az -e ssh --delete /home/local ip_addr:/home/public 通过ssh和压缩将本地目录同步到远程目录 
+
+> dd bs=1M if=/dev/hda | gzip | ssh user@ip_addr 'dd of=hda.gz' 通过ssh在远程主机上执行一次备份本地磁盘的操作 
+
+> dd if=/dev/sda of=/tmp/file1 备份磁盘内容到一个文件 
+
+> tar -Puf backup.tar /home/user 执行一次对 '/home/user' 目录的交互式备份操作 
+
+> ( cd /tmp/local/ && tar c . ) | ssh -C user@ip_addr 'cd /home/share/ && tar x -p' 通过ssh在远程目录中复制一个目录内容 
+
+> ( tar c /home ) | ssh -C user@ip_addr 'cd /home/backup-home && tar x -p' 通过ssh在远程目录中复制一个本地目录 
+
+> tar cf - . | (cd /tmp/backup ; tar xf - ) 本地将一个目录复制到另一个地方，保留原有权限及链接 
+
+> find /home/user1 -name '*.txt' | xargs cp -av --target-directory=/home/backup/ --parents 从一个目录查找并复制所有以 '.txt' 结尾的文件到另一个目录 
+
+> find /var/log -name '*.log' | tar cv --files-from=- | bzip2 > log.tar.bz2 查找所有以 '.log' 结尾的文件并做成一个bzip包 
+
+> dd if=/dev/hda of=/dev/fd0 bs=512 count=1 做一个将 MBR (Master Boot Record)内容复制到软盘的动作 
+
+> dd if=/dev/fd0 of=/dev/hda bs=512 count=1 从已经保存到软盘的备份中恢复MBR内容 
+
+#### 光盘 
+
+> cdrecord -v gracetime=2 dev=/dev/cdrom -eject blank=fast -force 清空一个可复写的光盘内容 
+
+> mkisofs /dev/cdrom > cd.iso 在磁盘上创建一个光盘的iso镜像文件 
+
+> mkisofs /dev/cdrom | gzip > cd_iso.gz 在磁盘上创建一个压缩了的光盘iso镜像文件 
+
+> mkisofs -J -allow-leading-dots -R -V "Label CD" -iso-level 4 -o ./cd.iso data_cd 创建一个目录的iso镜像文件 
+
+> cdrecord -v dev=/dev/cdrom cd.iso 刻录一个ISO镜像文件 
+
+> gzip -dc cd_iso.gz | cdrecord dev=/dev/cdrom - 刻录一个压缩了的ISO镜像文件 
+
+> mount -o loop cd.iso /mnt/iso 挂载一个ISO镜像文件 
+
+> cd-paranoia -B 从一个CD光盘转录音轨到 wav 文件中 
+
+> cd-paranoia -- "-3" 从一个CD光盘转录音轨到 wav 文件中（参数-3） 
+
+> cdrecord --scanbus 扫描总线以识别scsi通道 
+
+> dd if=/dev/hdc | md5sum 校验一个设备的md5sum编码，例如一张 CD 
+
+#### 网络 - （以太网和WIFI无线）
+
+> ifconfig eth0 显示一个以太网卡的配置 
+
+> ifup eth0 启用一个 'eth0' 网络设备 
+
+> ifdown eth0 禁用一个 'eth0' 网络设备 
+
+> ifconfig eth0 192.168.1.1 netmask 255.255.255.0 控制IP地址 
+
+> ifconfig eth0 promisc 设置 'eth0' 成混杂模式以嗅探数据包 (sniffing) 
+
+> dhclient eth0 以dhcp模式启用 'eth0' 
+
+> route -n show routing table 
+
+> route add -net 0/0 gw IP_Gateway configura default gateway 
+
+> route add -net 192.168.0.0 netmask 255.255.0.0 gw 192.168.1.1 configure static route to reach network '192.168.0.0/16' 
+
+> route del 0/0 gw IP_gateway remove static route 
+
+> echo "1" > /proc/sys/net/ipv4/ip_forward activate ip routing 
+
+> hostname show hostname of system 
+
+> host www.example.com lookup hostname to resolve name to ip address and viceversa(1) 
+
+> nslookup www.example.com lookup hostname to resolve name to ip address and viceversa(2) 
+
+> ip link show show link status of all interfaces 
+
+> mii-tool eth0 show link status of 'eth0' 
+
+> ethtool eth0 show statistics of network card 'eth0' 
+
+> netstat -tup show all active network connections and their PID 
+
+> netstat -tupl show all network services listening on the system and their PID 
+
+> tcpdump tcp port 80 show all HTTP traffic 
+
+> iwlist scan show wireless networks 
+
+> iwconfig eth1 show configuration of a wireless network card 
+
+> hostname show hostname 
+
+> host www.example.com lookup hostname to resolve name to ip address and viceversa 
+
+> nslookup www.example.com lookup hostname to resolve name to ip address and viceversa 
+
+> whois www.example.com lookup on Whois database 
 
 ### OpenSource主流开源协议
 
@@ -238,6 +961,1316 @@ date: 2022-10-01 09:01:01
 > docker stop $(docker ps -a -q) //  stop停止所有容器
 
 > docker  rm $(docker ps -a -q) //   remove删除所有容器
+
+### Kubernetes
+
+> Kubernetes 也称为 K8s，是用于自动部署、扩缩和管理容器化应用程序的开源系统。
+
+#### kubernetes 概述
+
+> kubernetes 基本介绍
+
+> > kubernetes，简称 K8s，是用 8 代替 8 个字符“ubernete”而成的缩写。是一个开源的，用于管理云平台中多个主机上的容器化的应用，Kubernetes 的目标是让部署容器化的应用简单并且高效（powerful）,Kubernetes 提供了应用部署，规划，更新，维护的一种机制。说白了，K8S，就是基于容器(Docker单机版)的集群管理平台,用于管理多个Docker的。Docker 非常适合在一台主机上运行容器，并为此提供所有必需的功能。但在当今的分布式服务环境中，真正的挑战是管理跨服务器和复杂基础架构的资源和工作负载。
+
+> > Kubernetes 是 Google 开源的一个容器编排引擎，它支持自动化部署、大规模可伸缩、应用容器化管理。在生产环境中部署一个应用程序时，通常要部署该应用的多个实例以便对应用请求进行负载均衡。在 Kubernetes 中，我们可以创建多个容器，每个容器里面运行一个应用实例，然后通过内置的负载均衡策略，实现对这一组应用实例的管理、发现、访问，而这些细节都不需要运维人员去进行复杂的手工配置和处理。
+
+> kubernetes 功能和架构
+
+> > Kubernetes 是一个轻便的和可扩展的开源平台，用于管理容器化应用和服务。通过Kubernetes 能够进行应用的自动化部署和扩缩容。在 Kubernetes 中，会将组成应用的容器组合成一个逻辑单元以更易管理和发现。Kubernetes 积累了作为 Google 生产环境运行工作负载 15 年的经验，并吸收了来自于社区的最佳想法和实践。
+
+> > K8s 功能(Kubernetes 适用场景):
+
+> > > （1）自动装箱:基于容器对应用运行环境的资源配置要求自动部署应用容器
+
+> > > （2）自我修复(自愈能力):当容器失败时，会对容器进行重启,当所部署的 Node 节点有问题时，会对容器进行重新部署和重新调度,当容器未通过监控检查时，会关闭此容器直到容器正常运行时，才会对外提供服务
+
+> > > （3）水平扩展:通过简单的命令、用户 UI 界面或基于 CPU 等资源使用情况，对应用容器进行规模扩大或规模剪裁
+
+> > > （3）服务发现:用户不需使用额外的服务发现机制，就能够基于 Kubernetes 自身能力实现服务发现和负载均衡
+
+> > > （4）滚动更新:可以根据应用的变化，对应用容器运行的应用，进行一次性或批量式更新
+
+> > > （5）版本回退:可以根据应用部署情况，对应用容器运行的应用，进行历史版本即时回退
+
+> > > （6）密钥和配置管理:在不需要重新构建镜像的情况下，可以部署和更新密钥和应用配置，类似热部署。
+
+> > > （7）存储编排:自动实现存储系统挂载及应用，特别对有状态应用实现数据持久化非常重要存储系统可以来自于本地目录、网络存储(NFS、Gluster、Ceph 等)、公共云存储服务
+
+> > > （8）批处理:提供一次性任务，定时任务；满足批量数据处理和分析的场景
+
+> > 应用部署架构分类
+
+> > > (1) 无中心节点架构： GlusterFS
+
+> > > (2) 有中心节点架构： HDFS、K8S
+
+> > k8s 集群架构
+
+
+> > > Pod
+
+> > > > 一个服务，是k8s管理的`最小单元`，k8s从 Pod中启动和管理容器；
+
+> > > > 由Pod来管理一组相同功能的容器；
+
+> > > > 一个Pod可以管理一个容器,也可以管理多个容器；
+
+> > k8s 集群架构节点角色功能
+
+
+
+Master Node:集群主控制节点，对集群进行调度管理，接受集群外用户去集群操作请求；Master Node 由
+
+API server (管理接口):是整个系统的对外接口，供客户端和其他组件调用，相当于“营业厅”
+scheduler（调度器）:负责对集群内部的资源进行调度，相当于“调度室”
+controller (控制器):负责管理控制器，相当于“大总管”。
+etcd (键值对数据库):是一个键值存储仓库，存储集群的状态
+Worker Node:集群工作节点，运行用户业务应用容器；Worker Node 包含 `
+docker：容器管理
+kubelet：主要负责监视指派到它所在的 Pod，包括创建、修改、监控、删除等。
+kube-proxy：主要负责为Pod对象提供代理
+其他附加服务
+
+分布式键值存储服务
+Etcd 服务
+etcd是什么：
+
+etcd 是 CoreOS 团队于 2013 年 6 月发起的开源项目，它的目标是构建一个高可用的分布式键值（key-value）数据库，基于 Go 语言实现。在分布式系统中，各种服务的配置信息的管理分享，服务的发现是一个很基本同时也是很重要的问题。CoreOS 项目就希望基于 etcd 来解决这一问题。
+我们使用 etcd 来存储网络配置，解决容器互联互通的问题。
+
+
+> > K8S核心概念：
+通过Service统一入口进行访问，Controller用于创建Pot，Pot是一组容器的集合。
+
+Pod:最小部署单元,一组容器的集合,共享网络,生命周期是短暂的
+controller：确保预期的pod副本数量、无状态应用部署（无约定）、有状态应用部署(有特定条件)、确保所有的node运行同一个pod、一次性任务和定时任务
+Service：定义一组pod的访问规则
+搭建k8环境平台规划
+
+
+
+服务器硬件配置要求搭建
+测试环境：
+
+master：2核+4G+20G
+node：4核+8G+40G
+生产环境：
+Kubernetes 架构
+
+
+核心角色
+master (管理节点)
+node（计算节点）
+image (镜像仓库)
+master 节点
+
+
+master 节点服务
+API server (管理接口)
+scheduler（调度器）
+controller (控制器)
+etcd (键值对数据库)
+Node 节点
+node节点服务
+docer
+kubelet
+kube-proxy
+
+#### 核心概念
+
+> 基础架构
+
+> > Master
+
+> > > Master节点上面主要由四个模块组成：APIServer、scheduler、controller manager、etcd。
+
+> > > APIServer。APIServer负责对外提供RESTful的Kubernetes API服务，它是系统管理指令的统一入口，任何对资源进行增删改查的操作都要交给APIServer处理后再提交给etcd。如架构图中所示，kubectl（Kubernetes提供的客户端工具，该工具内部就是对Kubernetes API的调用）是直接和APIServer交互的。
+
+> > > schedule。scheduler的职责很明确，就是负责调度pod到合适的Node上。如果把scheduler看成一个黑匣子，那么它的输入是pod和由多个Node组成的列表，输出是Pod和一个Node的绑定，即将这个pod部署到这个Node上。Kubernetes目前提供了调度算法，但是同样也保留了接口，用户可以根据自己的需求定义自己的调度算法。
+
+> > > controller manager。如果说APIServer做的是“前台”的工作的话，那controller manager就是负责“后台”的。每个资源一般都对应有一个控制器，而controller manager就是负责管理这些控制器的。比如我们通过APIServer创建一个pod，当这个pod创建成功后，APIServer的任务就算完成了。而后面保证Pod的状态始终和我们预期的一样的重任就由controller manager去保证了。
+
+> > > etcd。etcd是一个高可用的键值存储系统，Kubernetes使用它来存储各个资源的状态，从而实现了Restful的API。
+
+> > Node
+
+> > > 每个Node节点主要由三个模块组成：kubelet、kube-proxy、runtime。
+
+> > > runtime。runtime指的是容器运行环境，目前Kubernetes支持docker和rkt两种容器。
+
+> > > kube-proxy。该模块实现了Kubernetes中的服务发现和反向代理功能。反向代理方面：kube-proxy支持TCP和UDP连接转发，默认基于Round Robin算法将客户端流量转发到与service对应的一组后端pod。服务发现方面，kube-proxy使用etcd的watch机制，监控集群中service和endpoint对象数据的动态变化，并且维护一个service到endpoint的映射关系，从而保证了后端pod的IP变化不会对访问者造成影响。另外kube-proxy还支持session affinity。
+
+> > > kubelet。Kubelet是Master在每个Node节点上面的agent，是Node节点上面最重要的模块，它负责维护和管理该Node上面的所有容器，但是如果容器不是通过Kubernetes创建的，它并不会管理。本质上，它负责使Pod得运行状态与期望的状态一致。
+
+> > > 至此，Kubernetes的Master和Node就简单介绍完了。下面我们来看Kubernetes中的各种资源/对象。
+
+> Pod
+
+> > > Pod 是Kubernetes的基本操作单元，也是应用运行的载体。整个Kubernetes系统都是围绕着Pod展开的，比如如何部署运行Pod、如何保证Pod的数量、如何访问Pod等。另外，Pod是一个或多个机关容器的集合，这可以说是一大创新点，提供了一种容器的组合的模型。
+
+> > 基本操作
+ 
+> > > 创建
+
+> > > > kubectl create -f xxx.yaml
+
+> > > 查询
+
+> > > > kubectl get pod yourPodName
+
+> > > > kubectl describe pod yourPodName
+
+> > > 删除
+
+> > > > kubectl delete pod yourPodName
+
+> > > 更新
+
+> > > > kubectl replace /path/to/yourNewYaml.yaml
+
+> > Pod与容器
+
+> > > 在Docker中，容器是最小的处理单元，增删改查的对象是容器，容器是一种虚拟化技术，容器之间是隔离的，隔离是基于Linux Namespace实现的。而在Kubernetes中，Pod包含一个或者多个相关的容器，Pod可以认为是容器的一种延伸扩展，一个Pod也是一个隔离体，而Pod内部包含的一组容器又是共享的（包括PID、Network、IPC、UTS）。除此之外，Pod中的容器可以访问共同的数据卷来实现文件系统的共享。
+
+> > 镜像
+
+> > > 在kubernetes中，镜像的下载策略为：
+
+> > > Always：每次都下载最新的镜像
+
+> > > Never：只使用本地镜像，从不下载
+
+> > > IfNotPresent：只有当本地没有的时候才下载镜像
+
+
+> > > Pod被分配到Node之后会根据镜像下载策略进行镜像下载，可以根据自身集群的特点来决定采用何种下载策略。无论何种策略，都要确保Node上有正确的镜像可用。
+
+> > 其他设置
+
+> > > 通过yaml文件，可以在Pod中设置：
+
+> > > 启动命令，如：spec-->containers-->command；
+
+> > > 环境变量，如：spec-->containers-->env-->name/value；
+
+> > > 端口桥接，如：spec-->containers-->ports-->containerPort/protocol/hostIP/hostPort（使用hostPort时需要注意端口冲突的问题，不过Kubernetes在调度Pod的时候会检查宿主机端口是否冲突，比如当两个Pod均要求绑定宿主机的80端口，Kubernetes将会将这两个Pod分别调度到不同的机器上）;
+
+> > > Host网络，一些特殊场景下，容器必须要以host方式进行网络设置（如接收物理机网络才能够接收到的组播流），在Pod中也支持host网络的设置，如：spec-->hostNetwork=true；
+
+> > > 数据持久化，如：spec-->containers-->volumeMounts-->mountPath;
+
+> > > 重启策略，当Pod中的容器终止退出后，重启容器的策略。这里的所谓Pod的重启，实际上的做法是容器的重建，之前容器中的数据将会丢失，如果需要持久化数据，那么需要使用数据卷进行持久化设置。Pod支持三种重启策略：Always（默认策略，当容器终止退出后，总是重启容器）、OnFailure（当容器终止且异常退出时，重启）、Never（从不重启）；
+
+> > Pod生命周期
+
+> > > Pod被分配到一个Node上之后，就不会离开这个Node，直到被删除。当某个Pod失败，首先会被Kubernetes清理掉，之后ReplicationController将会在其它机器上（或本机）重建Pod，重建之后Pod的ID发生了变化，那将会是一个新的Pod。所以，Kubernetes中Pod的迁移，实际指的是在新Node上重建Pod。以下给出Pod的生命周期图。
+
+> > > 生命周期回调函数：PostStart（容器创建成功后调研该回调函数）、PreStop（在容器被终止前调用该回调函数）。以下示例中，定义了一个Pod，包含一个JAVA的web应用容器，其中设置了PostStart和PreStop回调函数。即在容器创建成功后，复制/sample.war到/app文件夹中。而在容器终止之前，发送HTTP请求到http://monitor.com:8080/waring，即向监控系统发送警告。具体示例如下：
+
+```
+………..
+containers:
+- image: sample:v2  
+     name: war
+     lifecycle：
+      posrStart:
+       exec:
+         command:
+          - “cp”
+          - “/sample.war”
+          - “/app”
+      prestop:
+       httpGet:
+        host: monitor.com
+        psth: /waring
+        port: 8080
+        scheme: HTTP
+```
+ 
+> Replication Controller
+
+> > > Replication Controller（RC）是Kubernetes中的另一个核心概念，应用托管在Kubernetes之后，Kubernetes需要保证应用能够持续运行，这是RC的工作内容，它会确保任何时间Kubernetes中都有指定数量的Pod在运行。在此基础上，RC还提供了一些更高级的特性，比如滚动升级、升级回滚等。
+
+> > RC与Pod的关联——Label
+
+> > > RC与Pod的关联是通过Label来实现的。Label机制是Kubernetes中的一个重要设计，通过Label进行对象的弱关联，可以灵活地进行分类和选择。对于Pod，需要设置其自身的Label来进行标识，Label是一系列的Key/value对，在Pod-->metadata-->labeks中进行设置。
+
+
+> > > Label的定义是任一的，但是Label必须具有可标识性，比如设置Pod的应用名称和版本号等。另外Lable是不具有唯一性的，为了更准确的标识一个Pod，应该为Pod设置多个维度的label。如下：
+
+> > > "release" : "stable", "release" : "canary"
+
+> > > "environment" : "dev", "environment" : "qa", "environment" : "production"
+
+> > > "tier" : "frontend", "tier" : "backend", "tier" : "cache"
+
+> > > "partition" : "customerA", "partition" : "customerB"
+
+> > > "track" : "daily", "track" : "weekly"
+
+
+> > > 举例，当你在RC的yaml文件中定义了该RC的selector中的label为app:my-web，那么这个RC就会去关注Pod-->metadata-->labeks中label为app:my-web的Pod。修改了对应Pod的Label，就会使Pod脱离RC的控制。同样，在RC运行正常的时候，若试图继续创建同样Label的Pod，是创建不出来的。因为RC认为副本数已经正常了，再多起的话会被RC删掉的。
+
+> > 弹性伸缩
+
+> > > 弹性伸缩是指适应负载变化，以弹性可伸缩的方式提供资源。反映到Kubernetes中，指的是可根据负载的高低动态调整Pod的副本数量。调整Pod的副本数是通过修改RC中Pod的副本是来实现的，示例命令如下：
+
+
+> > > 扩容Pod的副本数目到10
+
+> > > > $ kubectl scale relicationcontroller yourRcName --replicas=10
+
+> > > 缩容Pod的副本数目到1
+
+> > > > $ kubectl scale relicationcontroller yourRcName --replicas=1
+ 
+> > 滚动升级
+
+> > > 滚动升级是一种平滑过渡的升级方式，通过逐步替换的策略，保证整体系统的稳定，在初始升级的时候就可以及时发现、调整问题，以保证问题影响度不会扩大。Kubernetes中滚动升级的命令如下：
+
+$ kubectl rolling-update my-rcName-v1 -f my-rcName-v2-rc.yaml --update-period=10s
+
+> > > 升级开始后，首先依据提供的定义文件创建V2版本的RC，然后每隔10s（--update-period=10s）逐步的增加V2版本的Pod副本数，逐步减少V1版本Pod的副本数。升级完成之后，删除V1版本的RC，保留V2版本的RC，及实现滚动升级。
+
+
+> > > 升级过程中，发生了错误中途退出时，可以选择继续升级。Kubernetes能够智能的判断升级中断之前的状态，然后紧接着继续执行升级。当然，也可以进行回退，命令如下：
+
+$ kubectl rolling-update my-rcName-v1 -f my-rcName-v2-rc.yaml --update-period=10s --rollback
+回退的方式实际就是升级的逆操作，逐步增加V1.0版本Pod的副本数，逐步减少V2版本Pod的副本数。
+
+> > 新一代副本控制器replica set
+
+> > > 这里所说的replica set，可以被认为 是“升级版”的Replication Controller。也就是说。replica set也是用于保证与label selector匹配的pod数量维持在期望状态。区别在于，replica set引入了对基于子集的selector查询条件，而Replication Controller仅支持基于值相等的selecto条件查询。这是目前从用户角度肴，两者唯一的显著差异。 社区引入这一API的初衷是用于取代vl中的Replication Controller，也就是说．当v1版本被废弃时，Replication Controller就完成了它的历史使命，而由replica set来接管其工作。虽然replica set可以被单独使用，但是目前它多被Deployment用于进行pod的创建、更新与删除。Deployment在滚动更新等方面提供了很多非常有用的功能，关于DeplOymCn的更多信息，读者们可以在后续小节中获得。
+
+ 
+> Job
+
+> > > 从程序的运行形态上来区分，我们可以将Pod分为两类：长时运行服务（jboss、mysql等）和一次性任务（数据计算、测试）。RC创建的Pod都是长时运行的服务，而Job创建的Pod都是一次性任务。
+
+
+> > > 在Job的定义中，restartPolicy（重启策略）只能是Never和OnFailure。Job可以控制一次性任务的Pod的完成次数（Job-->spec-->completions）和并发执行数（Job-->spec-->parallelism），当Pod成功执行指定次数后，即认为Job执行完毕。
+
+ 
+> Service
+
+> > > 为了适应快速的业务需求，微服务架构已经逐渐成为主流，微服务架构的应用需要有非常好的服务编排支持。Kubernetes中的核心要素Service便提供了一套简化的服务代理和发现机制，天然适应微服务架构。
+
+> > 原理
+
+> > > 在Kubernetes中，在受到RC调控的时候，Pod副本是变化的，对于的虚拟IP也是变化的，比如发生迁移或者伸缩的时候。这对于Pod的访问者来说是不可接受的。Kubernetes中的Service是一种抽象概念，它定义了一个Pod逻辑集合以及访问它们的策略，Service同Pod的关联同样是居于Label来完成的。Service的目标是提供一种桥梁， 它会为访问者提供一个固定访问地址，用于在访问时重定向到相应的后端，这使得非 Kubernetes原生应用程序，在无须为Kubemces编写特定代码的前提下，轻松访问后端。
+
+
+> > > Service同RC一样，都是通过Label来关联Pod的。当你在Service的yaml文件中定义了该Service的selector中的label为app:my-web，那么这个Service会将Pod-->metadata-->labeks中label为app:my-web的Pod作为分发请求的后端。当Pod发生变化时（增加、减少、重建等），Service会及时更新。这样一来，Service就可以作为Pod的访问入口，起到代理服务器的作用，而对于访问者来说，通过Service进行访问，无需直接感知Pod。
+
+
+> > > 需要注意的是，Kubernetes分配给Service的固定IP是一个虚拟IP，并不是一个真实的IP，在外部是无法寻址的。真实的系统实现上，Kubernetes是通过Kube-proxy组件来实现的虚拟IP路由及转发。所以在之前集群部署的环节上，我们在每个Node上均部署了Proxy这个组件，从而实现了Kubernetes层级的虚拟转发网络。
+
+> > Service代理外部服务
+
+> > > Service不仅可以代理Pod，还可以代理任意其他后端，比如运行在Kubernetes外部Mysql、Oracle等。这是通过定义两个同名的service和endPoints来实现的。示例如下：
+
+> > > redis-service.yaml
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+spec:
+  ports:
+  - port: 6379
+    targetPort: 6379
+    protocol: TCP
+```
+> > > redis-endpoints.yaml
+
+```
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: redis-service
+subsets:
+  - addresses:
+    - ip: 10.0.251.145
+    ports:
+    - port: 6379
+      protocol: TCP
+```
+
+> > > 基于文件创建完Service和Endpoints之后，在Kubernetes的Service中即可查询到自定义的Endpoints。
+
+```
+[root@k8s-master demon]# kubectl describe service redis-service
+Name:            redis-service
+Namespace:        default
+Labels:            <none>
+Selector:        <none>
+Type:            ClusterIP
+IP:            10.254.52.88
+Port:            <unset>    6379/TCP
+Endpoints:        10.0.251.145:6379
+Session Affinity:    None
+No events.
+[root@k8s-master demon]# etcdctl get /skydns/sky/default/redis-service
+{"host":"10.254.52.88","priority":10,"weight":10,"ttl":30,"targetstrip":0}
+```
+
+> > Service内部负载均衡
+
+> > > 当Service的Endpoints包含多个IP的时候，及服务代理存在多个后端，将进行请求的负载均衡。默认的负载均衡策略是轮训或者随机（有kube-proxy的模式决定）。同时，Service上通过设置Service-->spec-->sessionAffinity=ClientIP，来实现基于源IP地址的会话保持。
+
+> > 发布Service
+
+> > > Service的虚拟IP是由Kubernetes虚拟出来的内部网络，外部是无法寻址到的。但是有些服务又需要被外部访问到，例如web前段。这时候就需要加一层网络转发，即外网到内网的转发。Kubernetes提供了NodePort、LoadBalancer、Ingress三种方式。
+
+> > > NodePort，在之前的Guestbook示例中，已经延时了NodePort的用法。NodePort的原理是，Kubernetes会在每一个Node上暴露出一个端口：nodePort，外部网络可以通过（任一Node）[NodeIP]:[NodePort]访问到后端的Service。
+
+> > > LoadBalancer，在NodePort基础上，Kubernetes可以请求底层云平台创建一个负载均衡器，将每个Node作为后端，进行服务分发。该模式需要底层云平台（例如GCE）支持。
+
+> > > Ingress，是一种HTTP方式的路由转发机制，由Ingress Controller和HTTP代理服务器组合而成。Ingress Controller实时监控Kubernetes API，实时更新HTTP代理服务器的转发规则。HTTP代理服务器有GCE Load-Balancer、HaProxy、Nginx等开源方案。
+
+> > servicede 自发性机制
+
+> > > Kubernetes中有一个很重要的服务自发现特性。一旦一个service被创建，该service的service IP和service port等信息都可以被注入到pod中供它们使用。Kubernetes主要支持两种service发现 机制：环境变量和DNS。
+
+> > 环境变量方式
+
+> > > Kubernetes创建Pod时会自动添加所有可用的service环境变量到该Pod中，如有需要．这些环境变量就被注入Pod内的容器里。需要注意的是，环境变量的注入只发送在Pod创建时，且不会被自动更新。这个特点暗含了service和访问该service的Pod的创建时间的先后顺序，即任何想要访问service的pod都需要在service已经存在后创建，否则与service相关的环境变量就无法注入该Pod的容器中，这样先创建的容器就无法发现后创建的service。
+
+> > DNS方式
+
+> > > Kubernetes集群现在支持增加一个可选的组件——DNS服务器。这个DNS服务器使用Kubernetes的watchAPI，不间断的监测新的service的创建并为每个service新建一个DNS记录。如果DNS在整个集群范围内都可用，那么所有的Pod都能够自动解析service的域名。Kube-DNS搭建及更详细的介绍请见：基于Kubernetes集群部署skyDNS服务
+
+> > 多个service如何避免地址和端口冲突
+
+> > > 此处设计思想是，Kubernetes通过为每个service分配一个唯一的ClusterIP，所以当使用ClusterIP：port的组合访问一个service的时候，不管port是什么，这个组合是一定不会发生重复的。另一方面，kube-proxy为每个service真正打开的是一个绝对不会重复的随机端口，用户在service描述文件中指定的访问端口会被映射到这个随机端口上。这就是为什么用户可以在创建service时随意指定访问端口。
+
+> > service目前存在的不足
+
+> > > Kubernetes使用iptables和kube-proxy解析service的人口地址，在中小规模的集群中运行良好，但是当service的数量超过一定规模时，仍然有一些小问题。首当其冲的便是service环境变量泛滥，以及service与使用service的pod两者创建时间先后的制约关系。目前来看，很多使用者在使用Kubernetes时往往会开发一套自己的Router组件来替代service，以便更好地掌控和定制这部分功能。
+
+ 
+> Deployment
+
+> > > Kubernetes提供了一种更加简单的更新RC和Pod的机制，叫做Deployment。通过在Deployment中描述你所期望的集群状态，Deployment Controller会将现在的集群状态在一个可控的速度下逐步更新成你所期望的集群状态。Deployment主要职责同样是为了保证pod的数量和健康，90%的功能与Replication Controller完全一样，可以看做新一代的Replication Controller。但是，它又具备了Replication Controller之外的新特性：
+
+> > > Replication Controller全部功能：Deployment继承了上面描述的Replication Controller全部功能。
+
+> > > 事件和状态查看：可以查看Deployment的升级详细进度和状态。
+
+> > > 回滚：当升级pod镜像或者相关参数的时候发现问题，可以使用回滚操作回滚到上一个稳定的版本或者指定的版本。
+
+> > > 版本记录: 每一次对Deployment的操作，都能保存下来，给予后续可能的回滚使用。
+
+> > > 暂停和启动：对于每一次升级，都能够随时暂停和启动。
+
+> > > 多种升级方案：Recreate----删除所有已存在的pod,重新创建新的; RollingUpdate----滚动升级，逐步替换的策略，同时滚动升级时，支持更多的附加参数，例如设置最大不可用pod数量，最小升级间隔时间等等。
+
+> > 滚动升级
+
+> > > 相比于RC，Deployment直接使用kubectl edit deployment/deploymentName 或者kubectl set方法就可以直接升级（原理是Pod的template发生变化，例如更新label、更新镜像版本等操作会触发Deployment的滚动升级）。操作示例——首先 我们同样定义一个nginx-deploy-v1.yaml的文件，副本数量为2：
+
+```
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+```
+
+> > > 创建deployment：
+
+```
+$ kubectl create -f nginx-deploy-v1.yaml --record
+deployment "nginx-deployment" created
+$ kubectl get deployments
+NAME       DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   3         0         0            0           1s
+$ kubectl get deployments
+NAME       DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+nginx-deployment   3         3         3            3           18s
+```
+
+> > > 正常之后，将nginx的版本进行升级，从1.7升级到1.9。第一种方法，直接set镜像：
+
+$ kubectl set image deployment/nginx-deployment2 nginx=nginx:1.9
+deployment "nginx-deployment2" image updated
+
+> > > 第二种方法，直接edit：
+
+> > > > $ kubectl edit deployment/nginx-deployment
+
+> > > > deployment "nginx-deployment2" edited
+
+> > > 查看Deployment的变更信息（以下信息得以保存，是创建时候加的“--record”这个选项起的作用）：
+
+```
+$ kubectl rollout history deployment/nginx-deployment
+deployments "nginx-deployment":
+REVISION    CHANGE-CAUSE
+1           kubectl create -f docs/user-guide/nginx-deployment.yaml --record
+2           kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1
+3           kubectl set image deployment/nginx-deployment nginx=nginx:1.91
+
+$ kubectl rollout history deployment/nginx-deployment --revision=2
+deployments "nginx-deployment" revision 2
+  Labels:       app=nginx
+          pod-template-hash=1159050644
+  Annotations:  kubernetes.io/change-cause=kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1
+  Containers:
+   nginx:
+    Image:      nginx:1.9.1
+    Port:       80/TCP
+     QoS Tier:
+        cpu:      BestEffort
+        memory:   BestEffort
+    Environment Variables:      <none>
+  No volumes.
+```
+
+> > > 最后介绍下Deployment的一些基础命令。
+
+> > > > $ kubectl describe deployments  #查询详细信息，获取升级进度
+
+> > > > $ kubectl rollout pause deployment/nginx-deployment2  #暂停升级
+
+> > > > $ kubectl rollout resume deployment/nginx-deployment2  #继续升级
+
+> > > > $ kubectl rollout undo deployment/nginx-deployment2  #升级回滚
+
+> > > > $ kubectl scale deployment nginx-deployment --replicas 10  #弹性伸缩Pod数量
+
+> > > 关于多重升级，举例，当你创建了一个nginx1.7的Deployment，要求副本数量为5之后，Deployment Controller会逐步的将5个1.7的Pod启动起来；当启动到3个的时候，你又发出更新Deployment中Nginx到1.9的命令；这时Deployment Controller会立即将已启动的3个1.7Pod杀掉，然后逐步启动1.9的Pod。Deployment Controller不会等到1.7的Pod都启动完成之后，再依次杀掉1.7，启动1.9。
+
+ 
+
+> Volume
+
+> > 在Docker的设计实现中，容器中的数据是临时的，即当容器被销毁时，其中的数据将会丢失。如果需要持久化数据，需要使用Docker数据卷挂载宿主机上的文件或者目录到容器中。在Kubernetes中，当Pod重建的时候，数据是会丢失的，Kubernetes也是通过数据卷挂载来提供Pod数据的持久化的。Kubernetes数据卷是对Docker数据卷的扩展，Kubernetes数据卷是Pod级别的，可以用来实现Pod中容器的文件共享。目前，Kubernetes支持的数据卷类型如下：
+
+> > > 1)        EmptyDir
+
+> > > 2)        HostPath
+
+> > > 3)        GCE Persistent Disk
+
+> > > 4)        AWS Elastic Block Store
+
+> > > 5)        NFS
+
+> > > 6)        iSCSI
+
+> > > 7)        Flocker
+
+> > > 8)        GlusterFS
+
+> > > 9)        RBD
+
+> > > 10)    Git Repo
+
+> > > 11)    Secret
+
+> > > 12)    Persistent Volume Claim
+
+> > > 13)    Downward API
+
+> > 本地数据卷
+
+> > > EmptyDir、HostPath这两种类型的数据卷，只能最用于本地文件系统。本地数据卷中的数据只会存在于一台机器上，所以当Pod发生迁移的时候，数据便会丢失。该类型Volume的用途是：Pod中容器间的文件共享、共享宿主机的文件系统。
+
+> > > EmptyDir
+
+> > > 如果Pod配置了EmpyDir数据卷，在Pod的生命周期内都会存在，当Pod被分配到 Node上的时候，会在Node上创建EmptyDir数据卷，并挂载到Pod的容器中。只要Pod 存在，EmpyDir数据卷都会存在（容器删除不会导致EmpyDir数据卷丟失数据），但是如果Pod的生命周期终结（Pod被删除），EmpyDir数据卷也会被删除，并且永久丢失。
+
+
+> > > EmpyDir数据卷非常适合实现Pod中容器的文件共享。Pod的设计提供了一个很好的容器组合的模型，容器之间各司其职，通过共享文件目录来完成交互，比如可以通过一个专职日志收集容器，在每个Pod中和业务容器中进行组合，来完成日志的收集和汇总。
+
+> > > HostPath
+
+> > > HostPath数据卷允许将容器宿主机上的文件系统挂载到Pod中。如果Pod需要使用宿主机上的某些文件，可以使用HostPath。
+
+> > 网络数据卷
+
+> > > Kubernetes提供了很多类型的数据卷以集成第三方的存储系统，包括一些非常流行的分布式文件系统，也有在IaaS平台上提供的存储支持，这些存储系统都是分布式的，通过网络共享文件系统，因此我们称这一类数据卷为网络数据卷。
+
+
+> > > 网络数据卷能够满足数据的持久化需求，Pod通过配置使用网络数据卷，每次Pod创建的时候都会将存储系统的远端文件目录挂载到容器中，数据卷中的数据将被水久保存，即使Pod被删除，只是除去挂载数据卷，数据卷中的数据仍然保存在存储系统中，且当新的Pod被创建的时候，仍是挂载同样的数据卷。网络数据卷包含以下几种：NFS、iSCISI、GlusterFS、RBD（Ceph Block Device）、Flocker、AWS Elastic Block Store、GCE Persistent Disk
+
+> > Persistent Volume和Persistent Volume Claim
+
+> > > 理解每个存储系统是一件复杂的事情，特别是对于普通用户来说，有时候并不需要关心各种存储实现，只希望能够安全可靠地存储数据。Kubernetes中提供了Persistent Volume和Persistent Volume Claim机制，这是存储消费模式。Persistent Volume是由系统管理员配置创建的一个数据卷（目前支持HostPath、GCE Persistent Disk、AWS Elastic Block Store、NFS、iSCSI、GlusterFS、RBD），它代表了某一类存储插件实现；而对于普通用户来说，通过Persistent Volume Claim可请求并获得合适的Persistent Volume，而无须感知后端的存储实现。Persistent Volume和Persistent Volume Claim的关系其实类似于Pod和Node，Pod消费Node资源，Persistent Volume Claim则消费Persistent Volume资源。Persistent Volume和Persistent Volume Claim相互关联，有着完整的生命周期管理：
+
+> > > 1)        准备：系统管理员规划或创建一批Persistent Volume；
+
+> > > 2)        绑定：用户通过创建Persistent Volume Claim来声明存储请求，Kubernetes发现有存储请求的时候，就去查找符合条件的Persistent Volume（最小满足策略）。找到合适的就绑定上，找不到就一直处于等待状态；
+
+> > > 3)        使用：创建Pod的时候使用Persistent Volume Claim；
+
+> > > 4)        释放：当用户删除绑定在Persistent Volume上的Persistent Volume Claim时，Persistent Volume进入释放状态，此时Persistent Volume中还残留着上一个Persistent Volume Claim的数据，状态还不可用；
+
+> > > 5)        回收：是否的Persistent Volume需要回收才能再次使用。回收策略可以是人工的也可以是Kubernetes自动进行清理（仅支持NFS和HostPath）
+
+> > 信息数据卷
+　　
+> > >Kubernetes中有一些数据卷，主要用来给容器传递配置信息，我们称之为信息数据卷，比如Secret（处理敏感配置信息，密码、Token等）、Downward API（通过环境变量的方式告诉容器Pod的信息）、Git Repo（将Git仓库下载到Pod中），都是将Pod的信息以文件形式保存，然后以数据卷方式挂载到容器中，容器通过读取文件获取相应的信息。
+
+> Pet Sets/StatefulSet
+
+> > K8s在1.3版本里发布了Alpha版的PetSet功能。在云原生应用的体系里，有下面两组近义词；第一组是无状态（stateless）、牲畜（cattle）、无名（nameless）、可丢弃（disposable）；第二组是有状态（stateful）、宠物（pet）、有名（having name）、不可丢弃（non-disposable）。RC和RS主要是控制提供无状态服务的，其所控制的Pod的名字是随机设置的，一个Pod出故障了就被丢弃掉，在另一个地方重启一个新的Pod，名字变了、名字和启动在哪儿都不重要，重要的只是Pod总数；而PetSet是用来控制有状态服务，PetSet中的每个Pod的名字都是事先确定的，不能更改。PetSet中Pod的名字的作用，是用来关联与该Pod对应的状态。
+
+> > 对于RC和RS中的Pod，一般不挂载存储或者挂载共享存储，保存的是所有Pod共享的状态，Pod像牲畜一样没有分别；对于PetSet中的Pod，每个Pod挂载自己独立的存储，如果一个Pod出现故障，从其他节点启动一个同样名字的Pod，要挂在上原来Pod的存储继续以它的状态提供服务。
+
+> > 适合于PetSet的业务包括数据库服务MySQL和PostgreSQL，集群化管理服务Zookeeper、etcd等有状态服务。PetSet的另一种典型应用场景是作为一种比普通容器更稳定可靠的模拟虚拟机的机制。传统的虚拟机正是一种有状态的宠物，运维人员需要不断地维护它，容器刚开始流行时，我们用容器来模拟虚拟机使用，所有状态都保存在容器里，而这已被证明是非常不安全、不可靠的。使用PetSet，Pod仍然可以通过漂移到不同节点提供高可用，而存储也可以通过外挂的存储来提供高可靠性，PetSet做的只是将确定的Pod与确定的存储关联起来保证状态的连续性。
+
+> ConfigMap
+
+> > 很多生产环境中的应用程序配置较为复杂，可能需要多个config文件、命令行参数和环境变量的组合。并且，这些配置信息应该从应用程序镜像中解耦出来，以保证镜像的可移植性以及配置信息不被泄露。社区引入ConfigMap这个API资源来满足这一需求。
+
+> > ConfigMap包含了一系列的键值对，用于存储被Pod或者系统组件（如controller）访问的信息。这与secret的设计理念有异曲同工之妙，它们的主要区别在于ConfigMap通常不用于存储敏感信息，而只存储简单的文本信息。
+
+> Horizontal Pod Autoscaler
+
+> > 自动扩展作为一个长久的议题，一直为人们津津乐道。系统能够根据负载的变化对计算资源的分配进行自动的扩增或者收缩，无疑是一个非常吸引人的特征，它能够最大可能地减少费用或者其他代价（如电力损耗）。自动扩展主要分为两种，其一为水平扩展，针对于实例数目的增减；其二为垂直扩展，即单个实例可以使用的资源的增减。Horizontal Pod Autoscaler（HPA）属于前者。
+
+> > Horizontal Pod Autoscaler如何工作
+
+> > > Horizontal Pod Autoscaler的操作对象是Replication Controller、ReplicaSet或Deployment对应的Pod，根据观察到的CPU实际使用量与用户的期望值进行比对，做出是否需要增减实例数量的决策。controller目前使用heapSter来检测CPU使用量，检测周期默认是30秒。
+
+> > Horizontal Pod Autoscaler的决策策略
+
+> > > 在HPA Controller检测到CPU的实际使用量之后，会求出当前的CPU使用率（实际使用量与pod 请求量的比率)。然后，HPA Controller会通过调整副本数量使得CPU使用率尽量向期望值靠近．另外，考虑到自动扩展的决策可能需要一段时间才会生效，甚至在短时间内会引入一些噪声． 例如当pod所需要的CPU负荷过大，从而运行一个新的pod进行分流，在创建的过程中，系统的CPU使用量可能会有一个攀升的过程。所以，在每一次作出决策后的一段时间内，将不再进行扩展决策。对于ScaleUp而言，这个时间段为3分钟，Scaledown为5分钟。再者HPA Controller允许一定范围内的CPU使用量的不稳定，也就是说，只有当aVg（CurrentPodConsumption／Target低于0.9或者高于1.1时才进行实例调整，这也是出于维护系统稳定性的考虑。
+
+#### kubernetes 集群搭建(kubeadm 方式)
+
+2.搭建K8s集群--->kubeadm
+2.1环境准备
+2.1.1关闭防火墙
+2.1.2关闭seliux
+2.1.3关闭swap分区
+2.1.4设置主机名称
+2.1.5将桥接的IPv4流量传递到iptables的链
+2.1.6时间同步
+2.2三台虚拟机都安装Docker
+2.3添加阿里云YUM软件源
+2.4安装/kubeadm/kubelet
+2.5部署Kubernetes Master
+2.6加入Kubernetes Node
+2.7 部署CNI网络插件
+2.8 测试kubernetes集群
+
+
+> 目前生产部署 Kubernetes 集群主要有两种方式：
+
+（1）kubeadm
+Kubeadm 是一个K8s 部署工具，提供kubeadm init和 kubeadm join，用于快速部署 Kubernetes 集群。官方地址
+（2）二进制包
+从 github 下载发行版的二进制包，手动部署每个组件，组成 Kubernetes 集群。
+Kubeadm 降低部署门槛，但屏蔽了很多细节，遇到问题很难排查。如果想更容易可
+控，推荐使用二进制包部署 Kubernetes 集群，虽然手动部署麻烦点，期间可以学习很
+多工作原理，也利于后期维护。
+kubeadm 部署方式介绍
+kubeadm 是官方社区推出的一个用于快速部署 kubernetes 集群的工具，这个工具能通过两条指令完成一个 kubernetes 集群的部署：
+
+第一、创建一个 Master 节点 kubeadm init
+第二， 将 Node节点加入到当前集群中 $ kubeadm join <Master 节点的 IP 和端口 >
+安装要求
+在开始之前，部署 Kubernetes 集群机器需要满足以下几个条件：
+
+一台或多台机器，操作系统 CentOS7.x-86_x64
+硬件配置：2GB 或更多 RAM，2 个 CPU 或更多 CPU，硬盘 30GB 或更多
+集群中所有机器之间网络互通
+可以访问外网，需要拉取镜像
+禁止 swap 分区
+最终目标
+角色	IP
+k8s-master	192.168.31.61
+k8s-node1	192.168.31.62
+k8s-node2	192.168.31.63
+
+
+> 系统初始化
+
+> > 关闭防火墙：
+
+```
+$ systemctl stop firewalld
+$ systemctl disable firewalld
+```
+
+> > 关闭 selinux：
+
+```
+$ sed -i 's/enforcing/disabled/' /etc/selinux/config # 永久
+$ setenforce 0 # 临时
+```
+
+> > swap：
+
+```
+$ swapoff -a # 临时
+$ vim /etc/fstab # 永久
+```
+
+> > 主机名：
+
+```
+$ hostnamectl set-hostname <hostname>
+```
+
+> > 在 master 添加 hosts：
+
+```
+$ cat >> /etc/hosts << EOF
+192.168.31.61 k8s-master
+192.168.31.62 k8s-node1
+192.168.31.63 k8s-node2
+EOF
+```
+
+> > 将桥接的 IPv4 流量传递到 iptables 的链：
+
+```
+$ cat > /etc/sysctl.d/k8s.conf << EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+$ sysctl --system # 生效
+```
+
+> > 时间同步：
+
+```
+$ yum install ntpdate -y
+$ ntpdate time.windows.com
+```
+
+> 所有节点安装 Docker/kubeadm/kubelet
+
+> > Kubernetes 默认 CRI（容器运行时）为 Docker，因此先安装 Docker。
+
+> > （1）安装 Docker
+
+```
+$ wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo
+$ yum -y install docker-ce-18.06.1.ce-3.el7
+$ systemctl enable docker && systemctl start docker
+$ docker --version
+```
+
+> > 添加阿里云 YUM 软件源
+> > 设置仓库地址
+
+```
+$ cat > /etc/docker/daemon.json << EOF
+{
+"registry-mirrors": ["https://b9pmyelo.mirror.aliyuncs.com"]
+}
+EOF
+```
+
+> > 添加 yum 源
+
+```
+$ cat > /etc/yum.repos.d/kubernetes.repo << EOF
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=0
+repo_gpgcheck=0
+gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg
+https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF
+```
+
+> > 安装 kubeadm，kubelet 和 kubectl
+
+```
+$ yum install -y kubelet kubeadm kubectl
+$ systemctl enable kubelet
+```
+
+> 部署 Kubernetes Master
+
+> > 在 192.168.31.61（Master）执行
+
+```
+$ kubeadm init \
+--apiserver-advertise-address=192.168.31.61 \
+--image-repository registry.aliyuncs.com/google_containers \
+--kubernetes-version v1.17.0 \
+--service-cidr=10.96.0.0/12 \
+--pod-network-cidr=10.244.0.0/16
+```
+> > 由于默认拉取镜像地址 k8s.gcr.io 国内无法访问，这里指定阿里云镜像仓库地址。
+
+> > 使用 kubectl 工具：
+
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+$ kubectl get nodes
+```
+
+> 安装 Pod 网络插件（CNI）
+
+```
+$ kubectl apply –f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kubeflannel.yml
+```
+
+> > 检查一下
+
+```
+kubect1 get pods -n kube-system
+```
+
+> > 确保能够访问到 quay.io 这个 registery。如果 Pod 镜像下载失败，可以改这个镜像地址
+
+> 加入 Kubernetes Node
+
+> > 在 192.168.31.62/63（Node）执行
+
+> > 向集群添加新节点，执行在 kubeadm init 输出的 kubeadm join 命令：
+
+```
+$ kubeadm join 192.168.31.61:6443 --token esce21.q6hetwm8si29qxwn \
+--discovery-token-ca-cert-hash
+sha256:00603a05805807501d7181c3d60b478788408cfe6cedefedb1f97569708be9c5
+```
+
+> 测试 kubernetes 集群
+
+> > 在 Kubernetes 集群中创建一个 pod，验证是否正常运行：
+
+```
+$ kubectl create deployment nginx --image=nginx
+$ kubectl expose deployment nginx --port=80 --type=NodePort
+$ kubectl get pod,svc
+```
+
+> > 访问地址：http://NodeIP:Port
+
+#### 安装方法二
+
+> 安装三台虚拟机，centos7
+
+> 对三台操作系统进行初始化
+
+> > 关闭防火墙
+
+```
+systemctl status firewalld //查看防火墙状态
+systemctl stop firewalld //关闭防火墙
+systemctl disable firewalld //开机不启动防火墙
+```
+
+> > 关闭seliux
+
+```
+ getenforce
+ sed -ri 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
+```
+
+> > 关闭swap分区
+
+```
+swapoff -a # 临时关闭
+sed -ri 's/.*swap.*/#&/' /etc/fstab    # 永久
+```
+
+> > 设置主机名称
+
+> > > 根据规划设置主机名
+
+```
+hostnamectl set-hostname <hostname>
+```
+
+> > > 在master添加hosts
+
+```
+cat >> /etc/hosts << EOF
+192.168.26.128 k8smaster
+192.168.26.129 k8snode1
+192.168.26.130 k8snode2
+EOF
+```
+
+> > 将桥接的IPv4流量传递到iptables的链
+
+```
+cat > /etc/sysctl.d/k8s.conf << EOF
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sysctl --system  # 生效
+```
+
+> > 时间同步
+
+```
+yum install ntpdate -y
+ntpdate time.windows.com
+```
+
+> 三台虚拟机都安装Docker
+
+```
+yum -y install wget
+
+
+$ wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo
+$ yum -y install docker-ce-18.06.1.ce-3.el7
+$ systemctl enable docker && systemctl start docker
+$ docker --version
+Docker version 18.06.1-ce, build e68fc7a
+
+
+$ cat > /etc/docker/daemon.json << EOF
+{
+  "registry-mirrors": ["https://b9pmyelo.mirror.aliyuncs.com"]
+}
+EOF
+
+systemctl restart docker
+```
+
+> 添加阿里云YUM软件源
+
+```
+$ cat > /etc/yum.repos.d/kubernetes.repo << EOF
+[kubernetes]
+name=Kubernetes
+baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=0
+repo_gpgcheck=0
+gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+EOF
+```
+
+> 安装/kubeadm/kubelet
+
+> > 由于版本更新频繁，这里指定版本号部署：
+
+```
+$ yum install -y kubelet-1.18.0 kubeadm-1.18.0 kubectl-1.18.0
+$ systemctl enable kubelet
+```
+
+> 部署Kubernetes Master
+
+> > 在192.168.26.128（Master）执行。
+
+```
+$ kubeadm init \
+  --apiserver-advertise-address=192.168.26.128 \
+  --image-repository registry.aliyuncs.com/google_containers \
+  --kubernetes-version v1.18.0 \
+  --service-cidr=10.96.0.0/12 \
+  --pod-network-cidr=10.244.0.0/16
+```
+
+> > 执行慢，稍作等待
+
+
+> > 由于默认拉取镜像地址k8s.gcr.io国内无法访问，这里指定阿里云镜像仓库地址。
+
+> > 使用kubectl工具：
+
+```
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+$ kubectl get nodes
+```
+
+> 加入Kubernetes Node
+
+> > 在（Node）服务器执行。
+
+> > 向集群添加新节点，执行在kubeadm init输出的kubeadm join命令：
+
+```
+$ kubeadm join 192.168.1.11:6443 --token esce21.q6hetwm8si29qxwn \
+    --discovery-token-ca-cert-hash sha256:00603a05805807501d7181c3d60b478788408cfe6cedefedb1f97569708be9c5
+```
+
+> > 默认token有效期为24小时，当过期之后，该token就不可用了。这时就需要重新创建token，操作如下：
+
+> > kubeadm token create --print-join-command
+
+
+> 部署CNI网络插件
+
+> > wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+> > 默认镜像地址无法访问，sed命令修改为docker hub镜像仓库。可以换源下载
+
+```
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+kubectl get pods -n kube-system
+
+NAME                          READY   STATUS    RESTARTS   AGE
+kube-flannel-ds-amd64-2pc95   1/1     Running   0          72s
+```
+
+> 测试kubernetes集群
+
+> > 在Kubernetes集群中创建一个pod，验证是否正常运行：
+
+```
+$ kubectl create deployment nginx --image=nginx
+$ kubectl expose deployment nginx --port=80 --type=NodePort
+$ kubectl get pod,svc
+```
+
+> > 访问地址：http://NodeIP:Port
+
+```
+http://192.168.26.128:30340/
+```
+
+#### kubernetes 集群搭建（二进制）
+
+> 安装要求
+
+> 准备环境、操作系统初始化
+
+> 为etcd和apiserver准备自签证书（△）
+
+> > 准备 cfssl 证书生成工具
+
+> > > cfssl 是一个开源的证书管理工具， 使用 json 文件生成证书， 相比 openssl 更方便使用。找任意一台服务器操作， 这里用 Master 节点。
+
+```
+wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
+wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
+wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64
+chmod +x cfssl_linux-amd64 cfssljson_linux-amd64 cfssl-certinfo_linux-amd64
+mv cfssl_linux-amd64 /usr/local/bin/cfssl
+mv cfssljson_linux-amd64 /usr/local/bin/cfssljson
+mv cfssl-certinfo_linux-amd64 /usr/bin/cfssl-certinfo
+```
+
+> > 生成 Etcd 证书
+
+> > > 自签证书颁发机构（ CA）
+
+> > > 创建工作目录：
+
+```
+mkdir -p ~/TLS/{etcd,k8s}
+cd TLS/etcd
+```
+
+> > > 自签 CA：
+
+```
+cat > ca-config.json<< EOF
+	{
+	"signing": {
+	"default": {
+		"expiry": "87600h"
+	},
+	"profiles": {
+	"www": {
+		"expiry": "87600h",
+		"usages": [
+			"signing",
+			"key encipherment",
+			"server auth",
+			"client auth"
+		]
+	}
+	}
+}
+} EOF
+
+cat > ca-csr.json<< EOF
+{
+	"CN": "etcd CA",
+	"key": {
+	"algo": "rsa",
+	"size": 2048
+	},
+	"names": [
+		{
+		"C": "CN",
+		"L": "Beijing",
+		"ST": "Beijing"
+		}
+	]
+} EOF
+```
+
+> > > 生成证书：
+
+```
+cfssl gencert -initca ca-csr.json | cfssljson -bare ca -
+ls *pem
+ca-key.pem ca.pem
+```
+
+> > > 使用自签 CA 签发 Etcd HTTPS 证书
+
+> > > 创建证书申请文件：
+
+```
+cat > server-csr.json<< EOF
+{
+	"CN": "etcd",
+	"hosts": [
+		"192.168.31.71",
+		"192.168.31.72",
+		"192.168.31.73"
+	],
+	"key": {
+		"algo": "rsa",
+		"size": 2048
+	},
+	"names": [
+		{
+			"C": "CN",
+			"L": "BeiJing",
+			"ST": "BeiJing"
+		}
+	]
+} EOF
+```
+
+> > > 注： 上述文件 hosts 字段中 IP 为所有 etcd 节点的集群内部通信 IP， 一个都不能少！ 为了方便后期扩容可以多写几个预留的 IP。
+
+> > > 生成证书：
+
+```
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -
+profile=www server-csr.json | cfssljson -bare server
+ls server*pem
+server-key.pem server.pem
+```
+
+> > 从 Github 下载二进制文件
+
+> > > 下载地址： https://github.com/etcd-io/etcd/releases/download/v3.4.9/etcd-v3.4.9-linux-amd64.tar.gz
+
+
+> 部署Etcd集群（△）
+
+> > Etcd 是一个分布式键值存储系统， Kubernetes 使用 Etcd 进行数据存储， 所以先准备一个 Etcd 数据库， 为解决 Etcd 单点故障， 应采用集群方式部署， 这里使用 3 台组建集群， 可容忍 1 台机器故障， 当然， 你也可以使用 5 台组建集群， 可容忍 2 台机器故障。
+
+
+> > > 创建工作目录并解压二进制包
+
+```
+mkdir /opt/etcd/{bin,cfg,ssl} – p
+tar zxvf etcd-v3.4.9-linux-amd64.tar.gz
+mv etcd-v3.4.9-linux-amd64/{etcd,etcdctl} /opt/etcd/bin/
+```
+
+> > > 创建 etcd 配置文件
+
+```
+cat > /opt/etcd/cfg/etcd.conf << EOF
+#[Member]
+	ETCD_NAME="etcd-1"
+	ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
+	ETCD_LISTEN_PEER_URLS="https://192.168.31.71:2380"
+	ETCD_LISTEN_CLIENT_URLS="https://192.168.31.71:2379"
+	#[Clustering]
+	ETCD_INITIAL_ADVERTISE_PEER_URLS="https://192.168.31.71:2380"
+	ETCD_ADVERTISE_CLIENT_URLS="https://192.168.31.71:2379"
+	ETCD_INITIAL_CLUSTER="etcd-1=https://192.168.31.71:2380,etcd-
+	2=https://192.168.31.72:2380,etcd-3=https://192.168.31.73:2380"
+	ETCD_INITIAL_CLUSTER_TOKEN="etcd-cluster"
+	ETCD_INITIAL_CLUSTER_STATE="new"
+EOF
+
+ETCD_NAME： 节点名称， 集群中唯一
+ETCD_DATA_DIR： 数据目录
+ETCD_LISTEN_PEER_URLS： 集群通信监听地址
+ETCD_LISTEN_CLIENT_URLS： 客户端访问监听地址
+ETCD_INITIAL_ADVERTISE_PEER_URLS： 集群通告地址
+ETCD_ADVERTISE_CLIENT_URLS： 客户端通告地址
+ETCD_INITIAL_CLUSTER： 集群节点地址
+ETCD_INITIAL_CLUSTER_TOKEN： 集群 Token
+ETCD_INITIAL_CLUSTER_STATE： 加入集群的当前状态， new 是新集群， existing 表示加入已有集群
+```
+
+> > > systemd 管理 etcd
+
+```
+cat > /usr/lib/systemd/system/etcd.service << EOF
+[Unit]
+	Description=Etcd Server
+	After=network.target
+	After=network-online.target
+	Wants=network-online.target
+	[Service]
+	Type=notify
+	EnvironmentFile=/opt/etcd/cfg/etcd.conf
+	ExecStart=/opt/etcd/bin/etcd \
+	--cert-file=/opt/etcd/ssl/server.pem \
+	--key-file=/opt/etcd/ssl/server-key.pem \
+	--peer-cert-file=/opt/etcd/ssl/server.pem \
+	--peer-key-file=/opt/etcd/ssl/server-key.pem \
+	--trusted-ca-file=/opt/etcd/ssl/ca.pem \
+	--peer-trusted-ca-file=/opt/etcd/ssl/ca.pem \
+	--logger=zap
+	Restart=on-failure
+	LimitNOFILE=65536
+	[Install]
+	WantedBy=multi-user.target
+EOF
+```
+
+> > > 拷贝刚才生成的证书把刚才生成的证书拷贝到配置文件中的路径：
+
+```
+cp ~/TLS/etcd/ca*pem ~/TLS/etcd/server*pem /opt/etcd/ssl/
+```
+
+> > > 启动并设置开机启动
+
+```
+systemctl daemon-reload
+systemctl start etcd
+systemctl enable etcd
+```
+
+> > > 将上面节点 1 所有生成的文件拷贝到节点 2 和节点 3
+
+```
+scp -r /opt/etcd/ root@192.168.31.72:/opt/
+scp /usr/lib/systemd/system/etcd.service
+root@192.168.31.72:/usr/lib/systemd/system/
+scp -r /opt/etcd/ root@192.168.31.73:/opt/
+scp /usr/lib/systemd/system/etcd.service
+root@192.168.31.73:/usr/lib/systemd/system/
+```
+
+> > > 然后在节点 2 和节点 3 分别修改 etcd.conf 配置文件中的节点名称和当前服务器 IP：
+
+```
+vi /opt/etcd/cfg/etcd.conf
+#[Member]
+ETCD_NAME="etcd-1" # 修改此处， 节点 2 改为 etcd-2， 节点 3 改为 etcd-3
+ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
+ETCD_LISTEN_PEER_URLS="https://192.168.31.71:2380" # 修改此处为当前服务器 IP
+ETCD_LISTEN_CLIENT_URLS="https://192.168.31.71:2379" # 修改此处为当前服务器 IP
+#[Clustering]
+ETCD_INITIAL_ADVERTISE_PEER_URLS="https://192.168.31.71:2380" # 修改此处为当前
+服务器 IP
+ETCD_ADVERTISE_CLIENT_URLS="https://192.168.31.71:2379" # 修改此处为当前服务器
+IP
+ETCD_INITIAL_CLUSTER="etcd-1=https://192.168.31.71:2380,etcd-
+2=https://192.168.31.72:2380,etcd-3=https://192.168.31.73:2380"
+ETCD_INITIAL_CLUSTER_TOKEN="etcd-cluster"
+ETCD_INITIAL_CLUSTER_STATE="new"
+```
+
+> > > 最后启动 etcd 并设置开机启动， 同上。
+
+> > > 查看集群状态
+
+```
+ETCDCTL_API=3 /opt/etcd/bin/etcdctl --cacert=/opt/etcd/ssl/ca.pem --
+cert=/opt/etcd/ssl/server.pem --key=/opt/etcd/ssl/server-key.pem --
+endpoints="https://192.168.31.71:2379,https://192.168.31.72:2379,https://192.16
+8.31.73:2379" endpoint health
+https://192.168.31.71:2379 is healthy: successfully committed proposal: took =
+8.154404ms
+https://192.168.31.73:2379 is healthy: successfully committed proposal: took =
+9.044117ms
+https://192.168.31.72:2379 is healthy: successfully committed proposal: took =
+10.000825ms
+```
+
+> > > 如果输出上面信息， 就说明集群部署成功。 如果有问题第一步先看日志：
+
+```
+/var/log/message 或 journalctl -u etcd
+```
+
+> 安装Docker
+
+> > systemd 管理 docker
+
+```
+cat > /usr/lib/systemd/system/docker.service << EOF
+[Unit]
+Description=Docker Application Container Engine
+Documentation=https://docs.docker.com
+After=network-online.target firewalld.service
+Wants=network-online.target
+[Service]
+Type=notify
+ExecStart=/usr/bin/dockerd
+ExecReload=/bin/kill -s HUP $MAINPID
+LimitNOFILE=infinity
+LimitNPROC=infinity
+LimitCORE=infinity
+TimeoutStartSec=0
+Delegate=yes
+KillMode=process
+Restart=on-failure
+StartLimitBurst=3
+StartLimitInterval=60s
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+> > 创建配置文件
+
+```
+mkdir /etc/docker
+cat > /etc/docker/daemon.json << EOF
+{"registry-mirrors": ["https://b9pmyelo.mirror.aliyuncs.com"]
+} EOF
+```
+
+> > > registry-mirrors 阿里云镜像加速器
+
+> 部署Master Node
+
+> 部署Worker Node
+
+> 部署集群网络
+
+#### kubernetes 集群 YAML 文件详解
+
+1、YAML 文件概述
+k8s 集群中对资源管理和资源对象编排部署都可以通过声明样式（YAML）文件来解决，也就是可以把需要对资源对象操作编辑到 YAML 格式文件中，我们把这种文件叫做资源清单文件，通过 kubectl 命令直接使用资源清单文件就可以实现对大量的资源对象进行编排部署了。
+
+3、资源清单描述方法
+（1）在 k8s 中，一般使用 YAML 格式的文件来创建符合我们预期期望的 pod,这样的 YAML文件称为资源清单。
+
+必须存在的属性（必须写）
+参数名	字段类型	说明	默认值
+apiVersion	String	这里是指的是K8S API的版本，目前基本上是v1，可以用 kubectl api-versions 或者 kubectl explain pod 命令查询	
+kind	String	这里指的是yaml文件定义的资源类型和角色，比如: Pod	
+metadata	Object	元数据对象，固定值就写metadata	
+metadata.name	String	元数据对象的名字，这里由我们编写，比如命名Pod的名字	
+metadata.namespace	String	元数据对象的命名空间，由我们自身定义	default
+metadata.labels	map[string]string	键值数据，常被用作挑选条件	
+spec	Object 详细定义对象，固定值就写Spec		
+spec.containers[]		List	这里是Spec对象的容器列表定义，是个列表
+spec.containers[].name	String	这里定义容器的名字	
+spec.containers[].image	String	这里定义要用到的镜像名称，如果镜像的标签是 latest，每次使用该镜像都会从远程下载	
 
 ## 结构化程序设计
 
@@ -2362,6 +4395,233 @@ services.AddMvc()
 
 ```
 
+### SignalR
+
+> 什么是 SignalR？
+
+> > ASP.NET Core SignalR 是一个开放源代码库，可用于简化向应用添加实时 Web 功能。 实时 Web 功能使服务器端代码能够将内容推送到客户端。
+
+> 适合 SignalR 的候选项：
+
+> > 需要从服务器进行高频率更新的应用。 示例包括游戏、社交网络、投票、拍卖、地图和 GPS 应用。
+
+> > 仪表板和监视应用。 示例包括公司仪表板、即时销售更新或旅行警报。
+
+> > 协作应用。 协作应用的示例包括白板应用和团队会议软件。
+
+> > 需要通知的应用。 社交网络、电子邮件、聊天、游戏、旅行警报和很多其他应用都需使用通知。
+
+> > SignalR 提供用于创建服务器到客户端远程过程调用 (RPC) 的 API。 RPC 从服务器端 .NET Core 代码调用客户端上的函数。 提供多个受支持的平台，其中每个平台都有各自的客户端 SDK。 因此，RPC 调用所调用的编程语言有所不同。
+
+> 以下是 ASP.NET Core SignalR 的一些功能：
+
+> > 自动处理连接管理。
+
+> > 同时向所有连接的客户端发送消息。 例如聊天室。
+
+> > 向特定客户端或客户端组发送消息。
+
+> > 对其进行缩放，以处理不断增加的流量。
+
+> > SignalR 中心协议
+
+> > 源托管在 GitHub 上的存储库中SignalR。
+
+> 传输
+
+> > SignalR 支持以下用于处理实时通信的技术（按正常回退的顺序）：
+
+> > WebSockets
+> > Server-Sent Events
+> > 长轮询
+
+> > SignalR 自动选择服务器和客户端能力范围内的最佳传输方法。
+
+> 中心
+
+> > SignalR 使用 中心 在客户端和服务器之间进行通信。
+
+> > Hub 是一种高级管道，允许客户端和服务器相互调用方法。 SignalR 自动处理跨计算机边界的调度，并允许客户端调用服务器上的方法，反之亦然。 可以将强类型参数传递给方法，从而支持模型绑定。 SignalR 提供两个内置中心协议：基于 JSON 的文本协议和基于 MessagePack 的二进制协议。 与 ON 相比 JS，MessagePack 通常会创建较小的消息。 旧版浏览器必须支持 XHR 级别 2 才能提供 MessagePack 协议支持。
+
+> > 中心通过发送包含客户端方法的名称和参数的消息来调用客户端代码。 作为方法参数发送的对象使用配置的协议进行反序列化。 客户端尝试将名称与客户端代码中的方法匹配。 当客户端找到匹配项时，它会调用该方法并将反序列化的参数数据传递给它。
+
+
+> 不支持 ECMAScript 6 的浏览器 (ES6)
+
+> > SignalR 面向 ES6。 对于不支持 ES6 的浏览器，请将库转译为 ES5。 有关详细信息，请参阅使用 ES6 入门 – 使用 Traceur 和 Babel 将 ES6 转为 ES5。
+
+> SignalR 简单示例
+
+> > 创建 Web 应用项目
+
+> > > 创建 ASP.NET Core Web 应用
+
+> > > 在“配置新项目”对话框中，为“项目名称”输入 SignalRChat。 请务必将项目命名为 SignalRChat（包括匹配大写），以便命名空间与教程中的代码匹配。
+
+> > 添加 SignalR 客户端库
+
+> > > ASP.NET Core 共享框架中包含 SignalR 服务器库。 JavaScript 客户端库不会自动包含在项目中。 对于此教程，使用库管理器 (LibMan) 从 unpkg 获取客户端库。 unpkg 是一个快速的全局内容分发网络，适用于 npm 上的所有内容。
+
+> > > 在“解决方案资源管理器”>中，右键单击项目，然后选择“添加”“客户端库”。
+
+> > > 在“添加客户端库”对话框中：
+
+> > > 为“提供程序”选择“unpkg”
+
+> > > 对于“库”，请输入 @microsoft/signalr@latest。
+
+> > > 选择“选择特定文件”，展开“dist/browser”文件夹，然后选择 signalr.js 和 signalr.min.js。
+
+> > > 将“目标位置”设置为 wwwroot/js/signalr/。
+
+> > > 选择“安装” 。
+
+> > > “添加客户端库”对话框 - 选择库
+
+> > > LibMan 创建 wwwroot/js/signalr 文件夹并将所选文件复制到该文件夹。
+
+> > 创建 SignalR 中心
+
+> > > 中心是一个类，用作处理客户端 - 服务器通信的高级管道。
+
+> > > 在 SignalRChat 项目文件夹中，创建 Hubs 文件夹。
+
+> > > 在 Hubs 文件夹中，使用以下代码创建 ChatHub 类：
+
+> > > C#
+
+```
+using Microsoft.AspNetCore.SignalR;
+
+namespace SignalRChat.Hubs
+{
+    public class ChatHub : Hub
+    {
+        public async Task SendMessage(string user, string message)
+        {
+            await Clients.All.SendAsync("ReceiveMessage", user, message);
+        }
+    }
+}
+
+```
+
+> > > ChatHub 类继承自 SignalRHub。 Hub 类管理连接、组和消息。
+
+> > > 可通过已连接客户端调用 SendMessage，以向所有客户端发送消息。 本教程后面部分将显示调用该方法的 JavaScript 客户端代码。 SignalR 代码是异步模式，可提供最大的可伸缩性。
+
+> > 配置 SignalR
+
+> > > 必须将 SignalR 服务器配置为将 SignalR 请求传递给 SignalR。 将以下突出显示的代码添加到 Program.cs 文件。
+
+C#
+
+```
+using SignalRChat.Hubs;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container.
+builder.Services.AddRazorPages();
+builder.Services.AddSignalR();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapRazorPages();
+app.MapHub<ChatHub>("/chatHub");
+
+app.Run();
+```
+
+> > > 以上突出显示的代码将 SignalR 添加到 ASP.NET Core 依赖关系注入和路由系统。
+
+> > 添加 SignalR 客户端代码
+
+> > > CSHTML
+
+```
+@page
+<div class="container">
+    <div class="row p-1">
+        <div class="col-1">User</div>
+        <div class="col-5"><input type="text" id="userInput" /></div>
+    </div>
+    <div class="row p-1">
+        <div class="col-1">Message</div>
+        <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
+    </div>
+    <div class="row p-1">
+        <div class="col-6 text-end">
+            <input type="button" id="sendButton" value="Send Message" />
+        </div>
+    </div>
+    <div class="row p-1">
+        <div class="col-6">
+            <hr />
+        </div>
+    </div>
+    <div class="row p-1">
+        <div class="col-6">
+            <ul id="messagesList"></ul>
+        </div>
+    </div>
+</div>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>
+```
+
+> > > JavaScript
+
+```
+"use strict";
+
+var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+//Disable the send button until connection is established.
+document.getElementById("sendButton").disabled = true;
+
+connection.on("ReceiveMessage", function (user, message) {
+    var li = document.createElement("li");
+    document.getElementById("messagesList").appendChild(li);
+    // We can assign user-supplied strings to an element's textContent because it
+    // is not interpreted as markup. If you're assigning in any other way, you 
+    // should be aware of possible script injection concerns.
+    li.textContent = `${user} says ${message}`;
+});
+
+connection.start().then(function () {
+    document.getElementById("sendButton").disabled = false;
+}).catch(function (err) {
+    return console.error(err.toString());
+});
+
+document.getElementById("sendButton").addEventListener("click", function (event) {
+    var user = document.getElementById("userInput").value;
+    var message = document.getElementById("messageInput").value;
+    connection.invoke("SendMessage", user, message).catch(function (err) {
+        return console.error(err.toString());
+    });
+    event.preventDefault();
+});
+```
+
+## Tensorflow
+
 ## C# 调用 Tensorflow
 
 > https://github.com/migueldeicaza/TensorFlowSharp
@@ -2547,6 +4807,127 @@ Much of the online documentation comes from TensorFlow and is licensed under the
 Last API update: Release 1.9
 '''
 
+## gRPC 
+
+### gRPC 概述
+
+```
+gRPC 是一种与语言无关的高性能远程过程调用 (RPC) 框架。
+
+gRPC 的主要优点是：
+
+现代高性能轻量级 RPC 框架。
+协定优先 API 开发，默认使用协议缓冲区，允许与语言无关的实现。
+可用于多种语言的工具，以生成强类型服务器和客户端。
+支持客户端、服务器和双向流式处理调用。
+使用 Protobuf 二进制序列化减少对网络的使用。
+这些优点使 gRPC 适用于：
+
+效率至关重要的轻量级微服务。
+需要多种语言用于开发的 Polyglot 系统。
+需要处理流式处理请求或响应的点对点实时服务。
+
+
+ GRPC是google开源的一个高性能、跨语言的RPC框架，基于HTTP2协议，基于protobuf 3.x，基于Netty 4.x +。GRPC与thrift、avro-rpc等其实在总体原理上并没有太大的区别，简而言之GRPC并没有太多突破性的创新。（如下描述，均基于JAVA语言的实现）
+
+    对于开发者而言：
+
+    1）需要使用protobuf定义接口，即.proto文件
+
+    2）然后使用compile工具生成特定语言的执行代码，比如JAVA、C/C++、Python等。类似于thrift，为了解决跨语言问题。
+
+    3）启动一个Server端，server端通过侦听指定的port，来等待Client链接请求，通常使用Netty来构建，GRPC内置了Netty的支持。
+
+    4）启动一个或者多个Client端，Client也是基于Netty，Client通过与Server建立TCP长链接，并发送请求；Request与Response均被封装成HTTP2的stream Frame，通过Netty Channel进行交互。
+```
+
+### gRPC 服务项目模板
+
+```
+对 .proto 文件的 C# 工具支持
+gRPC 使用协定优先方法进行 API 开发。 在 .proto 文件中定义服务和消息：
+
+ProtoBuf
+
+复制
+syntax = "proto3";
+
+service Greeter {
+  rpc SayHello (HelloRequest) returns (HelloReply);
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloReply {
+  string message = 1;
+}
+
+通过在项目中包含 .proto 文件，可自动生成用于服务、客户端和消息的 .NET 类型：
+
+将包引用添加到 Grpc.Tools 包。
+将 .proto 文件添加到 <Protobuf> 项目组。
+
+XML
+<ItemGroup>
+  <Protobuf Include="Protos\greet.proto" />
+</ItemGroup>
+有关 gRPC 工具支持的详细信息，请参阅使用 C# 的 gRPC 服务。
+
+ASP.NET Core 上的 gRPC 服务
+gRPC 服务可以托管在 ASP.NET Core 上。 这些服务与日志记录、依赖关系注入 (DI)、身份验证和授权等 ASP.NET Core 功能完全集成。
+
+将 gRPC 服务添加到 ASP.NET Core 应用
+gRPC 需要 Grpc.AspNetCore 包。 若要了解如何在 .NET 应用中配置 gRPC，请查看配置 gRPC。
+```
+
+### ASP.NET Core gRPC 服务项目模板提供了一个入门版服务：
+
+```
+public class GreeterService : Greeter.GreeterBase
+{
+    private readonly ILogger<GreeterService> _logger;
+
+    public GreeterService(ILogger<GreeterService> logger)
+    {
+        _logger = logger;
+    }
+
+    public override Task<HelloReply> SayHello(HelloRequest request,
+        ServerCallContext context)
+    {
+        _logger.LogInformation("Saying hello to {Name}", request.Name);
+        return Task.FromResult(new HelloReply 
+        {
+            Message = "Hello " + request.Name
+        });
+    }
+}
+GreeterService 继承自 GreeterBase 类型，后者是从 .proto 文件的 Greeter 服务生成的。 Startup.csProgram.cs 中的客户端可以访问该服务：
+
+app.MapGrpcService<GreeterService>();
+若要详细了解 ASP.NET Core 上的 gRPC 服务，请参阅使用 ASP.NET Core 的 gRPC 服务。
+
+```
+
+### 使用 .NET 客户端调用 gRPC 服务
+
+```
+gRPC 客户端是从 .proto 文件生成的具体客户端类型。 具体 gRPC 客户端具有转换为 .proto 文件中 gRPC 服务的方法。
+
+var channel = GrpcChannel.ForAddress("https://localhost:5001");
+var client = new Greeter.GreeterClient(channel);
+
+var response = await client.SayHelloAsync(
+    new HelloRequest { Name = "World" });
+
+Console.WriteLine(response.Message);
+gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期连接。 可以使用 GrpcChannel.ForAddress 创建通道。
+
+有关创建客户端、调用不同服务方法的详细信息，请参阅使用 .NET 客户端调用 gRPC 服务。
+```
+
 ## Php
 
 ### Pyplot，画出各种你想要的图
@@ -2643,4 +5024,4 @@ PlantSight
 
 ## 备注
 
-> 最后修改时间：2023-03-15 14:46
+> 最后修改时间：2023-04-13 16:22
