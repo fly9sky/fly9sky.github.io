@@ -39,6 +39,9 @@ date: 2022-10-01 09:01:01
     - [Login](#login)
     - [Git helper](#git-helper)
   - [Docker](#docker)
+    - [Docker 安装 \& 配置镜像加速器](#docker-安装--配置镜像加速器)
+    - [Dockerfile 详解](#dockerfile-详解)
+    - [Docker 命令详解](#docker-命令详解)
   - [Kubernetes](#kubernetes)
     - [kubernetes 概述](#kubernetes-概述)
     - [核心概念](#核心概念)
@@ -932,35 +935,244 @@ date: 2022-10-01 09:01:01
 
 ### Docker 
 
-> Install :sudo apt-get -y install docker.io
+#### Docker 安装 & 配置镜像加速器
 
-> docker image ls # 列出当前环境下的镜像
+> step 1：安装必要的一些系统工具
 
-> docker images   # 列出当前环境下的镜像
+> > apt update
 
-> docker image rm ididididid      # 安装id删除镜像
+> > apt -y install apt-transport-https ca-certificates curl software-properties-common
 
-> 操作容器
+> step 2：安装 GPG 证书
 
-> docker run -i -t --rm centos /bin/bash   # 启动一个centos容器并进入，此时容器是干干净净，没有一点东西的，do everything
+> > curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | apt-key add -
 
-> docker container kill container_id    # 杀掉这个容器，强行终止
+> Step 3：写入软件源信息
 
-> docker container rm container_id      # 删除这个容器
+> > add-apt-repository "deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 
-> docker container ls            # 查找当前容器
+> Step 4：更新并安装 Docker-CE
 
-> docker ps // 查看所有正在运行容器
+> > apt -y update
 
-> docker stop containerId // containerId 是容器的ID
+> > apt -y install docker-ce
 
-> docker ps -a // 查看所有容器
+> > mkdir -p /etc/docker
 
-> docker ps -a -q // 查看所有容器ID
+> > tee /etc/docker/daemon.json <<-'EOF'
 
-> docker stop $(docker ps -a -q) //  stop停止所有容器
+> > {
 
-> docker  rm $(docker ps -a -q) //   remove删除所有容器
+> >   "registry-mirrors": ["https://jrzzvzok.mirror.aliyuncs.com"]
+
+> > }
+
+> > EOF
+
+> > systemctl daemon-reload
+
+> > systemctl restart docker
+
+
+#### Dockerfile 详解
+
+> Docker 的架构很有魅力，他拥有类似于虚拟机性质的隔离机制，但并不是严格意义上的虚拟机。我还是喜欢拿货轮举例，以前我们是一条小船运一个集装箱的货物，现在可以把 N 个集装箱扔到一条大货轮上。每个容器（集装箱）共用宿主机（货轮）的内核（运载力），Dockerfile 就像是每个集装箱中的货物清单和说明书，一般由以下五部分构成：
+
+> 2.1 基础指令
+
+> > FROM： 指定基础镜像，且必须位于第一行，使用格式如下：
+
+> > FROM <image>
+
+> > FROM <image>:<tag>
+
+> > FROM <image>@<digest>
+
+> > Docker 的原理基于 Linux 内核的隔离技术，且 Linux From Scratch，因此 FROM scratch 是 docker 中最基础的镜像，debian、ubuntu 和 centos 等都基于 scratch 之上。在实际的运用中，如果必须从零开始搭建镜像的一般都选择 FROM debian 作为基础镜像，不过大多数情况下一般都会以如下：FROM python、FROM nginx、FROM java 等为基础镜像。
+
+> > MAINTAINER：指定维护者信息，例：MAINTAINER user user@mail.com。
+
+> 2.2 控制指令
+
+> > RUN： 在构建的过程中指定需要被执行的命令，使用格式如下：
+
+> > RUN command param1 param2 # 更推荐
+
+> > RUN ["executable","param1","param2"]
+
+> > WORKDIR： 用于切换构建过程中的工作目录，例：WORKDIR project。可配合环境变量使用，例：
+
+> > ENV BASEDIR /project
+
+> > WORKDIR $BASEDIR/test
+
+> > ONBUILD: 在当前镜像被当做基础镜像时，执行其携带指令，例：ONBUILD RUN echo "hello world" “hello world”会在子镜像被构建的过程中输出。
+
+> 2.3 引入指令
+
+> > COPY： 拷贝文件或目录，格式：
+
+> > COPY <src> <dest>
+
+> > COPY ["<src>","<dest>"]
+
+> > ADD： 在COPY的基础之上，ADD可识别压缩文件，例：ADD rootfs.tar.xz /。理论上也可添加网络地址，但还是建议在 RUN 指令中执行 wget 或 curl 命令，感觉这样更加可控。实际应用中我喜欢将 COPY 用于文件，ADD 用于目录（仅我个人的使用习惯）。
+
+> 2.4 执行指令
+
+> > CMD： 容器启动时需要执行的命令，格式：
+
+> > CMD ["executable","param1","param2"] # 更推荐
+
+> > CMD ["param1","param2"]
+
+> > CMD command param1 param2 
+
+> > 若在 docker run 中指定启动命令，则 CMD 将被覆盖。
+
+> > ENTRYPOINT：主程序启动前的准备指令，用于启动主程序所依赖的服务，格式同CMD（基本上没用过就不介绍了，而且容易出错，不推荐使用）。
+
+> 2.5 配置指令
+
+> > EXPOSE： 暴露容器端口，格式：EXPOSE <port> [<port>...]，注意此处的暴露端口和docker run 中-p指定的映射端口是两个概念。
+
+> > ENV： 声明环境变量，格式：ENV <key>=<value> ...。
+
+> > LABEL： 标记，格式：LABEL <key>=<value>...。
+
+> > USER： 设置启动容器的用户，格式：USER daemo。
+
+> > ARG： 设置变量，格式同ENV。
+
+> > STOPSIGNAL： 容器停止时给应用程序发出的信号，例：STOPSIGNAL SIGKELL。
+
+> > SHELL： 指定shell，例：SHELL ["bash","-c"]。
+
+#### Docker 命令详解
+
+> 为了避免喧宾夺主，此处仅摘录我个人操作中较为常用的命令。
+
+> 3.1 生命周期管理
+
+> > run： 创建并运行容器，格式：docker run [OPTIONS] IMAGE [COMMAND] [ARG...]，参数说明：
+
+> > -d , --detach            # 后台运行
+
+> > -it, --interactive tty   # 交互终端形式运行
+
+> > -p , --publish list      # 指定端口
+
+> > -v , --volume list       # 挂载存储卷
+
+> > 		 --name string       # 定义名字
+
+> > 		 --rm                # 容器终止后自动删除（不支持在后台运行的容器）
+
+> > 		 --restart string    # no、on-failure（非正常退出时重启，on-failure:3 最多重启三次）、always、unless-stopped
+
+> > docker run 的参数甚多，可通过 --help 查询，后续这些复杂的配置都会移交给 Docker Compose，以上几个足以应用70%~80%的场景，例：
+
+> 类似 ubuntu 这类容器必须以 -it 交互终端形式运行，否则无法在后台保留
+
+> > docker run -it -d --name my-ubuntu ubuntu
+
+> 端口映射和挂载数据卷
+
+> > docker run -d \
+
+> > -p 8080:80 \
+
+> > -v /data/www:/usr/share/nginx/html\
+
+> > --name my-nginx nginx
+
+> > start/stop/restart：docker start/stop/restart my-container。
+
+> > rm：移除容器，格式：docker rm [OPTIONS] CONTAINER [CONTAINER...]，参数说明：
+
+> > -f, --force     Force the removal of a running container
+
+> > -l, --link      Remove the specified link
+
+> > -v, --volumes   Remove the volumes associated with the container
+
+> > exec：在运行的容器中执行命令，不过更常用的还是先进入容器再执行命令，例子:docker exec -it my-nginx bash。
+
+> 3.2 容器操作
+
+> > ps： 列出容器，常用：docker ps -anq，参数说明：all、n last（最新 n 个容器）、quiet（只显示容器编号）。
+
+> > top： 查看容器中的进程信息，例：docker top my-container。
+
+> > logs： 查看容器日志，常用：docker logs -f --tail，参数说明：follow、--tail n（最新条日志）。
+
+> > port：查看端口映射情况，例：docker port my-container。
+
+> 3.3 镜像仓库
+
+> > login/logout： 镜像仓库的登录和退出，格式：
+
+> > docker login [OPTIONS] [SERVER]
+
+> > docker logout  [SERVER]
+
+> > 如果是Docker Hub，则示例如下：
+
+> > docker login -u username -p passward
+
+> > docker logout
+
+> > 在生产环境中，我们一般会选择使用云厂商的镜像仓库，例：
+
+> > docker login -u yo****@qq.com -p ****** registry-vpc.cn-hangzhou.aliyuncs.com
+
+> > docker logout registry-vpc.cn-hangzhou.aliyuncs.com 
+
+> > pull： 拉取镜像，最常用的命令之一，格式：docker pull [OPTIONS] NAME[:TAG|@DIGEST]。
+
+> > push： 上传镜像，格式：docker push [OPTIONS] NAME[:TAG]。
+
+> 3.4 本地镜像管理
+
+> > images： 列出本地镜像，常用 docker images -q，参数说明：quiet（只显示image Id）。
+
+> > rmi： 删除本地镜像，常用 docker rmi -f，参数说明：force。
+
+> > tag： 标记镜像，归入仓库，格式：docker tag [OPTIONS] IMAGE[:TAG] [REGISTRYHOST/][USERNAME/]NAME[:TAG]，例：docker tag ubuntu youclk/my-ubuntu:v1。
+
+> > build： 使用Dockerfile创建镜像，格式：docker build [OPTIONS] PATH | URL | -，参数说明：-t tag 例：docker build -t youclk/my-ubuntu:v1 .。
+
+> > Install :sudo apt-get -y install docker.io
+
+> Other
+
+> > docker image ls # 列出当前环境下的镜像
+
+> > docker images   # 列出当前环境下的镜像
+
+> > docker image rm ididididid      # 安装id删除镜像
+
+> > 操作容器
+
+> > docker run -i -t --rm centos /bin/bash   # 启动一个centos容器并进入，此时容器是干干净净，没有一点东西的，do everything
+
+> > docker container kill container_id    # 杀掉这个容器，强行终止
+
+> > docker container rm container_id      # 删除这个容器
+
+> > docker container ls            # 查找当前容器
+
+> > docker ps // 查看所有正在运行容器
+
+> > docker stop containerId // containerId 是容器的ID
+
+> > docker ps -a // 查看所有容器
+
+> > docker ps -a -q // 查看所有容器ID
+
+> > docker stop $(docker ps -a -q) //  stop停止所有容器
+
+> > docker  rm $(docker ps -a -q) //   remove删除所有容器
 
 ### Kubernetes
 
@@ -5024,4 +5236,4 @@ PlantSight
 
 ## 备注
 
-> 最后修改时间：2023-04-13 16:22
+> 最后修改时间：2023-04-18 16:48
