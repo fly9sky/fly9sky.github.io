@@ -59,6 +59,221 @@ date: 2022-10-01 09:01:01
 - [C# .Net Base](#c-net-base)
   - [ML.NET](#mlnet)
 - [WPF](#wpf)
+  - [WPF控件继承](#wpf控件继承)
+    - [UIElement](#uielement)
+      - [其中定义很多与输入和焦点有关的特性，例如键盘事件，鼠标，还包括一些与WPF事件模型有关的API。](#其中定义很多与输入和焦点有关的特性例如键盘事件鼠标还包括一些与wpf事件模型有关的api)
+      - [方法:](#方法)
+      - [属性:](#属性)
+      - [FiFileds:FIELDS:](#fifiledsfields)
+      - [EXPLICIT INTERFACE IMPLEMENTATIONS](#explicit-interface-implementations)
+    - [Visual](#visual)
+      - [方法:](#方法-1)
+      - [属性:](#属性-1)
+      - [\[System.Windows.Markup.UidProperty("Uid")\]](#systemwindowsmarkupuidpropertyuid)
+      - [](#)
+      - [方法:](#方法-2)
+    - [DependencyObject](#dependencyobject)
+      - [构建WPF/Silverlight的一个主要思想是属性优先于方法和事件。WPF/Silverlight 提供了丰富的属性系统，其核心是DependencyObject。](#构建wpfsilverlight的一个主要思想是属性优先于方法和事件wpfsilverlight-提供了丰富的属性系统其核心是dependencyobject)
+      - [方法:](#方法-3)
+      - [属性:](#属性-2)
+      - [主要作用是为WPF/Silverlight 提供２D呈现支持，主要包括输出显示，坐标转换，区域剪切等。](#主要作用是为wpfsilverlight-提供２d呈现支持主要包括输出显示坐标转换区域剪切等)
+    - [DispatcherObject](#dispatcherobject)
+      - [WPF/Silverlight 中有许多类继承自DispatcherObject，DispatcherObject提供了处理同步和并发的基本构造。](#wpfsilverlight-中有许多类继承自dispatcherobjectdispatcherobject提供了处理同步和并发的基本构造)
+      - [属性:](#属性-3)
+      - [方法:](#方法-4)
+        - [METHODS](#methods)
+        - [CheckAccess()](#checkaccess)
+        - [Determines whether the calling thread has access to this DispatcherObject.](#determines-whether-the-calling-thread-has-access-to-this-dispatcherobject)
+        - [Equals(Object)](#equalsobject)
+        - [Determines whether the specified object is equal to the current object.](#determines-whether-the-specified-object-is-equal-to-the-current-object)
+        - [(Inherited from Object)](#inherited-from-object)
+        - [GetHashCode()](#gethashcode)
+        - [Serves as the default hash function.](#serves-as-the-default-hash-function)
+        - [(Inherited from Object)](#inherited-from-object-1)
+        - [GetType()](#gettype)
+        - [Gets the Type of the current instance.](#gets-the-type-of-the-current-instance)
+        - [(Inherited from Object)](#inherited-from-object-2)
+        - [MemberwiseClone()](#memberwiseclone)
+        - [Creates a shallow copy of the current Object.](#creates-a-shallow-copy-of-the-current-object)
+        - [(Inherited from Object)](#inherited-from-object-3)
+        - [ToString()](#tostring)
+        - [Returns a string that represents the current object.](#returns-a-string-that-represents-the-current-object)
+        - [(Inherited from Object)](#inherited-from-object-4)
+        - [VerifyAccess()](#verifyaccess)
+        - [Enforces that the calling thread has access to this DispatcherObject.](#enforces-that-the-calling-thread-has-access-to-this-dispatcherobject)
+    - [System.Object](#systemobject)
+    - [FrameworkElement](#frameworkelement)
+      - [Page](#page)
+      - [Control](#control)
+      - [Image](#image)
+      - [Panel](#panel)
+      - [而且还添加了一些功能，例如，布局定义、逻辑树、对象生命周期事件、支持数据绑定和动态资源引用、支持样式和动画。](#而且还添加了一些功能例如布局定义逻辑树对象生命周期事件支持数据绑定和动态资源引用支持样式和动画)
+      - [属性:](#属性-4)
+      - [Fielsds:](#fielsds)
+  - [属性](#属性-5)
+    - [普通属性](#普通属性)
+    - [附加属性](#附加属性)
+    - [依赖项属性dependency property](#依赖项属性dependency-property)
+    - [WPF 设计器集成](#wpf-设计器集成)
+  - [事件](#事件)
+    - [普通事件](#普通事件)
+      - [生命周期事件：在元素被初始化，加载或卸载时发生。](#生命周期事件在元素被初始化加载或卸载时发生)
+      - [鼠标事件： 鼠标动作的结果。](#鼠标事件-鼠标动作的结果)
+      - [键盘事件： 键盘动作的结果。](#键盘事件-键盘动作的结果)
+      - [手写笔事件： 类似铅笔的手写笔的结果](#手写笔事件-类似铅笔的手写笔的结果)
+      - [多点触控事件](#多点触控事件)
+    - [路由事件（向上冒泡或者向下隧道传播（Preview开始的事件））](#路由事件向上冒泡或者向下隧道传播preview开始的事件)
+    - [附加事件](#附加事件)
+    - [VisualStateManager](#visualstatemanager)
+  - [资源](#资源)
+    - [样式](#样式)
+    - [触发器](#触发器)
+    - [模板](#模板)
+    - [使用资源的优势：](#使用资源的优势)
+    - [资源的范围（层级）：](#资源的范围层级)
+  - [WPF 体系结构](#wpf-体系结构)
+    - [milcore](#milcore)
+    - [WindowsCodes.dll](#windowscodesdll)
+    - [Direct3D是图形渲染](#direct3d是图形渲染)
+    - [User32](#user32)
+  - [CopyPaste(WPF)](#copypastewpf)
+    - [ICopyAble](#icopyable)
+    - [IPasteAble](#ipasteable)
+    - [CopyPasteProxy](#copypasteproxy)
+    - [CopyPasteData](#copypastedata)
+  - [Behavior](#behavior)
+  - [Command](#command)
+    - [命令(Command)](#命令command)
+    - [命令源(Command Source)](#命令源command-source)
+    - [命令目标(Command Target)](#命令目标command-target)
+    - [命令关联(Command Binding)](#命令关联command-binding)
+  - [MVVM](#mvvm)
+    - [Model](#model)
+    - [View](#view)
+    - [ViewModel](#viewmodel)
+  - [Application類](#application類)
+    - [应用程序事件](#应用程序事件)
+  - [Prism](#prism)
+    - [Prism框架 如何在主程序中合理的弹出子窗体](#prism框架-如何在主程序中合理的弹出子窗体)
+    - [Prism框架中一些非常重要的概念](#prism框架中一些非常重要的概念)
+      - [Modules：Modules是能够独立开发、测试、部署的功能单元，](#modulesmodules是能够独立开发测试部署的功能单元)
+      - [　　  Module Catalog：](#--module-catalog)
+      - [　　  Shell：Shell是宿主应用程序（host application），modules将会被load到Shell中。](#--shellshell是宿主应用程序host-applicationmodules将会被load到shell中)
+      - [　　  Views：](#--views)
+        - [Views是应用中展现特定功能的视图，它展现UI、定义交互行为，](#views是应用中展现特定功能的视图它展现ui定义交互行为)
+      - [　　  View Model和Presenters：View Model用来封装应用程序的UI逻辑及其状态。](#--view-model和presentersview-model用来封装应用程序的ui逻辑及其状态)
+        - [Model](#model-1)
+        - [Commands](#commands)
+        - [Regions：](#regions)
+      - [Navigation](#navigation)
+        - [Prism支持两种导航：state-based导航和view-switching导航。](#prism支持两种导航state-based导航和view-switching导航)
+      - [　　EventAggregator](#eventaggregator)
+        - [组件通常要和其它的组件或者服务进行通信。](#组件通常要和其它的组件或者服务进行通信)
+      - [　　Dependency Injection container](#dependency-injection-container)
+        - [Prism使用依赖注入模式来管理组件之间的依赖，](#prism使用依赖注入模式来管理组件之间的依赖)
+      - [　　Services：](#services)
+        - [Services是用来实现非UI相关功能的逻辑，](#services是用来实现非ui相关功能的逻辑)
+      - [　　Controllers：Controller被用来控制在Region中哪个View将会被呈现，同时控制这个View的创建和初始化。](#controllerscontroller被用来控制在region中哪个view将会被呈现同时控制这个view的创建和初始化)
+      - [　　Bootstrapper：](#bootstrapper)
+        - [Bootstrapper用来初始化应用程序级别的组件和服务，](#bootstrapper用来初始化应用程序级别的组件和服务)
+        - [它也被用来配置和初始化module catalog和Shell 的View和View Model。](#它也被用来配置和初始化module-catalog和shell-的view和view-model)
+    - [Prism 简介#](#prism-简介)
+    - [Prism.Core、Prism.Wpf 和 Prism.Unity#](#prismcoreprismwpf-和-prismunity)
+    - [Prism.Core#](#prismcore)
+    - [BindableBase 和 ErrorsContainer#](#bindablebase-和-errorscontainer)
+    - [Commanding](#commanding)
+    - [Event Aggregator](#event-aggregator)
+    - [Productivity Tools](#productivity-tools)
+    - [Prism.Wpf 和 Prism.Unity](#prismwpf-和-prismunity)
+    - [PrismApplication#](#prismapplication)
+    - [RegisterTypes](#registertypes)
+    - [XAML ContainerProvider#](#xaml-containerprovider)
+    - [ViewModelLocator](#viewmodellocator)
+    - [Dialog Service](#dialog-service)
+  - [拖拽](#拖拽)
+    - [https://github.com/punker76/gong-wpf-dragdrop](#httpsgithubcompunker76gong-wpf-dragdrop)
+  - [WPF的类层次结构](#wpf的类层次结构)
+    - [System.Threading.DispatcherObject类——继承DispatcherObject类，用户界面的元素检查是否在正确的线程，访问调度程序为用户界面线程封送代码。](#systemthreadingdispatcherobject类继承dispatcherobject类用户界面的元素检查是否在正确的线程访问调度程序为用户界面线程封送代码)
+    - [System.Windows.DependencyObject类——和屏幕上的元素进行交互主要通过属性进行。 继承DependencyObject类，获得对依赖项属性的支持。](#systemwindowsdependencyobject类和屏幕上的元素进行交互主要通过属性进行-继承dependencyobject类获得对依赖项属性的支持)
+    - [System.Windows.Media.Visual类——看做绘图对象，Visual类在托管的WPF库和渲染桌面的milcore.dll提供了链接](#systemwindowsmediavisual类看做绘图对象visual类在托管的wpf库和渲染桌面的milcoredll提供了链接)
+    - [System.Windows.UIElement类——UIElement类为WPF本质特征提供支持，如布局、输入、焦点以及事件。实现了成为路由事件的路由系统(第5章)，添加对命令的支持(第9章)](#systemwindowsuielement类uielement类为wpf本质特征提供支持如布局输入焦点以及事件实现了成为路由事件的路由系统第5章添加对命令的支持第9章)
+    - [System.Windows.FrameworkElement类——实现了全部由UIElement类定义的成员。引入数据绑定和样式。](#systemwindowsframeworkelement类实现了全部由uielement类定义的成员引入数据绑定和样式)
+    - [System.Windows.Shapes.Shape类——基本的形状类都继承自该类](#systemwindowsshapesshape类基本的形状类都继承自该类)
+    - [System.Windows.Controls.Control类——控件是可以和用户进行交互的元素。Control类为设置字体和前景色与背景色提供了附加功能，还有模板支持(第17章)。](#systemwindowscontrolscontrol类控件是可以和用户进行交互的元素control类为设置字体和前景色与背景色提供了附加功能还有模板支持第17章)
+    - [System.Windows.Controls.ContentControl类——所有具有单一内容的控件的基类。控件中的单一内容可以是从普通的字符串乃至具有其他形状和控件组合的布局面板(第6章)。](#systemwindowscontrolscontentcontrol类所有具有单一内容的控件的基类控件中的单一内容可以是从普通的字符串乃至具有其他形状和控件组合的布局面板第6章)
+    - [System.Windows.Controls.ItemsControl类——是所有显示选项集合的控件的基类，如ListBox控件和TreeView控件](#systemwindowscontrolsitemscontrol类是所有显示选项集合的控件的基类如listbox控件和treeview控件)
+    - [System.Windows.Controls.Panel类——是所有布局器的基类，布局容器是可以包含一个或多个子元素，并根据特定的规则对子元素进行排列的元素。](#systemwindowscontrolspanel类是所有布局器的基类布局容器是可以包含一个或多个子元素并根据特定的规则对子元素进行排列的元素)
+  - [XAML](#xaml)
+    - [x: 前缀：用于映射 XAML xmlns http://schemas.microsoft.com/winfx/2006/xaml。](#x-前缀用于映射-xaml-xmlns-httpschemasmicrosoftcomwinfx2006xaml)
+    - [x:Class属性（Attribute）：编译成C#代码后对应的类名，如果手动把该属性改成其他后台代码中不包含的类名称，编译后会自动生成该类。如果与后台代码的类名称相同则进行合并（后台代码中的类要用partial修饰）。](#xclass属性attribute编译成c代码后对应的类名如果手动把该属性改成其他后台代码中不包含的类名称编译后会自动生成该类如果与后台代码的类名称相同则进行合并后台代码中的类要用partial修饰)
+    - [x:Key：为 ResourceDictionary 中的每个资源设置一个唯一的键。](#xkey为-resourcedictionary-中的每个资源设置一个唯一的键)
+    - [x:Name：为运行时代码中存在的实例指定运行时对象名称。](#xname为运行时代码中存在的实例指定运行时对象名称)
+    - [x:Static：启用一个获取静态值的值引用，该静态值只能是一个 XAML 可设置属性。](#xstatic启用一个获取静态值的值引用该静态值只能是一个-xaml-可设置属性)
+    - [x:Type：根据类型名称构造Type 引用。指定采用 Type 的属性](#xtype根据类型名称构造type-引用指定采用-type-的属性)
+    - [XAML的树形结构：](#xaml的树形结构)
+      - [VisualTreeHelper](#visualtreehelper)
+        - [1、FindElementsInHostCoordinates 检索一组对象，这些对象位于某一对象的坐标空间的指定点或 Rect 内。](#1findelementsinhostcoordinates-检索一组对象这些对象位于某一对象的坐标空间的指定点或-rect-内)
+        - [2、GetChild 使用提供的索引，通过检查可视化树获取所提供对象的特定子对象。](#2getchild-使用提供的索引通过检查可视化树获取所提供对象的特定子对象)
+        - [3、GetChildrenCount 返回在可视化树中在某一对象的子集合中存在的子级的数目。](#3getchildrencount-返回在可视化树中在某一对象的子集合中存在的子级的数目)
+        - [4、GetParent 返回可视化树中某一对象的父对象。](#4getparent-返回可视化树中某一对象的父对象)
+      - [LogicalTreeHelper](#logicaltreehelper)
+        - [BringIntoView(DependencyObject)](#bringintoviewdependencyobject)
+        - [FindLogicalNode(DependencyObject, String)](#findlogicalnodedependencyobject-string)
+        - [GetChildren(DependencyObject)](#getchildrendependencyobject)
+        - [GetChildren(FrameworkContentElement)](#getchildrenframeworkcontentelement)
+        - [GetChildren(FrameworkElement)](#getchildrenframeworkelement)
+        - [GetParent(DependencyObject)](#getparentdependencyobject)
+    - [合并XAMLS命名空间](#合并xamls命名空间)
+      - [注意看程序集的信息，里面有一堆这样的代码：](#注意看程序集的信息里面有一堆这样的代码)
+  - [资源](#资源-1)
+    - [样式](#样式-1)
+    - [模板](#模板-1)
+  - [布局](#布局)
+      - [控制位置](#控制位置)
+        - [1. Alignment](#1-alignment)
+        - [2. Content Alignment](#2-content-alignment)
+        - [3. FlowDirection](#3-flowdirection)
+      - [Panel（面板）](#panel面板)
+        - [1. 常用面板](#1-常用面板)
+        - [2. TabPanel](#2-tabpanel)
+        - [3. ToolBarOverflowPanel](#3-toolbaroverflowpanel)
+        - [4. ToolBarTray](#4-toolbartray)
+        - [5. UniformGrid](#5-uniformgrid)
+        - [6. VirtualizingStackPanel](#6-virtualizingstackpanel)
+  - [元素绑定](#元素绑定)
+    - [绑定表达式](#绑定表达式)
+    - [绑定错误](#绑定错误)
+    - [绑定模式](#绑定模式)
+    - [代码创建绑定](#代码创建绑定)
+  - [第三方控件库](#第三方控件库)
+    - [工具](#工具)
+        - [自动化测试的协助工具](#自动化测试的协助工具)
+  - [VisualStateManager](#visualstatemanager-1)
+    - [要使用 VisualStateManager，需要定义 VisualState；在 VisualState 中定义控件的不同的状态以及每种状态下的样式，然后，在代码中合适的地方，我们可以使用 VisusalStateManager 类的 GoToState 来切换到对应的状态，从而实现样式的切换。](#要使用-visualstatemanager需要定义-visualstate在-visualstate-中定义控件的不同的状态以及每种状态下的样式然后在代码中合适的地方我们可以使用-visusalstatemanager-类的-gotostate-来切换到对应的状态从而实现样式的切换)
+    - [所以，总括地说，这里涉及了以下四个方面：](#所以总括地说这里涉及了以下四个方面)
+    - [VisualState: 视图状态(Visual States)表示控件在一个特殊的逻辑状态下的样式、外观；](#visualstate-视图状态visual-states表示控件在一个特殊的逻辑状态下的样式外观)
+    - [VisualStateGroup: 状态组由相互排斥的状态组成，状态组与状态组并不互斥；](#visualstategroup-状态组由相互排斥的状态组成状态组与状态组并不互斥)
+    - [VisualTransition: 视图转变 (Visual Transitions) 代表控件从一个视图状态向另一个状态转换时的过渡；](#visualtransition-视图转变-visual-transitions-代表控件从一个视图状态向另一个状态转换时的过渡)
+    - [VisualStateManager: 由它负责在代码中来切换到不同的状态；](#visualstatemanager-由它负责在代码中来切换到不同的状态)
+    - [每个 VisualState 都属于一个状态组 (VisualStateGroup)，也即一个 VisualStateGroup 中可以定义多个 VisualState；并且，我们也可以定义多个 VisualStateGroup；需要再次强调的是：同一个 VisualStateGroup 中 VisualState 是互斥的，而不同的 VisualStateGroup 中的 VisualState 是在同一时刻是可以共存的。以 Button 为例：](#每个-visualstate-都属于一个状态组-visualstategroup也即一个-visualstategroup-中可以定义多个-visualstate并且我们也可以定义多个-visualstategroup需要再次强调的是同一个-visualstategroup-中-visualstate-是互斥的而不同的-visualstategroup-中的-visualstate-是在同一时刻是可以共存的以-button-为例)
+    - [我们看到，在它里面，定义了三个 VisualStateGroup，分别是 CommonStates（正常状态）、FocusStates（焦点状态）、ValidationStates（验证状态），而每个 VisualStateGroup 下又有若干个 VisualState。在 CommonStates 中，按钮可以是 Normal 、MouseOver 或 Pressed（只能是三者之一），但它却可以结合其它 VisualStateGroup 中的 VisualState 来显示，如按钮具有焦点时且鼠标移动到其上，这就结合了 MouseOver 与 Focused 两种状态。以下它的部分代码：](#我们看到在它里面定义了三个-visualstategroup分别是-commonstates正常状态focusstates焦点状态validationstates验证状态而每个-visualstategroup-下又有若干个-visualstate在-commonstates-中按钮可以是-normal-mouseover-或-pressed只能是三者之一但它却可以结合其它-visualstategroup-中的-visualstate-来显示如按钮具有焦点时且鼠标移动到其上这就结合了-mouseover-与-focused-两种状态以下它的部分代码)
+  - [图形](#图形)
+    - [基本图形](#基本图形)
+    - [笔刷 Brush](#笔刷-brush)
+    - [图形的效果与滤镜](#图形的效果与滤镜)
+  - [变换](#变换)
+    - [图形的变形](#图形的变形)
+    - [Transform 抽象类](#transform-抽象类)
+    - [变换（Transform）](#变换transform)
+  - [动画](#动画)
+    - [动画基类](#动画基类)
+    - [关键帧动画 ：](#关键帧动画-)
+      - [LinearDoubleKeyFrame，线性帧，目标属性值的变化是直线型的，匀速的。](#lineardoublekeyframe线性帧目标属性值的变化是直线型的匀速的)
+      - [DiscreteDoubleKeyFrame，不连续变化的帧，目标属性值是跳跃的。](#discretedoublekeyframe不连续变化的帧目标属性值是跳跃的)
+      - [SplineDoubleKeyFrame， 样条函数变化帧，目标属性值的速率是一条贝赛尔曲线。](#splinedoublekeyframe-样条函数变化帧目标属性值的速率是一条贝赛尔曲线)
+      - [EasingDoubleKeyFrame，缓冲式帧，目标属性值以某种缓冲形式变化。](#easingdoublekeyframe缓冲式帧目标属性值以某种缓冲形式变化)
+    - [前面已经介绍了路径绘图时的强大，那么我们能不能让我的动画按照我们制定的路径去表演呢，答案是可以的。](#前面已经介绍了路径绘图时的强大那么我们能不能让我的动画按照我们制定的路径去表演呢答案是可以的)
+    - [场景（Storyborad）](#场景storyborad)
 - [HTML 5](#html-5)
 - [JQuery](#jquery)
 - [Angular](#angular)
@@ -143,30 +358,6 @@ date: 2022-10-01 09:01:01
   - [Pyplot，画出各种你想要的图](#pyplot画出各种你想要的图)
 - [Python](#python)
 - [Java](#java)
-- [低代码平台](#低代码平台)
-  - [Microsoft Platform](#microsoft-platform)
-- [工业自动化](#工业自动化)
-  - [变频器](#变频器)
-  - [伺服](#伺服)
-  - [可编程逻辑控制器](#可编程逻辑控制器)
-  - [人机交互 HMI](#人机交互-hmi)
-  - [传感器](#传感器)
-  - [电机](#电机)
-  - [PAC智能控制器](#pac智能控制器)
-  - [CNC控制器](#cnc控制器)
-  - [仪表](#仪表)
-  - [基于PC的控制器](#基于pc的控制器)
-  - [识别](#识别)
-  - [工业机器人机械臂系统](#工业机器人机械臂系统)
-- [工业软件](#工业软件)
-  - [自动化软件](#自动化软件)
-    - [TIA Portal](#tia-portal)
-    - [控制器软件](#控制器软件)
-    - [人机界面软件](#人机界面软件)
-    - [SCADA软件](#scada软件)
-    - [用于能源管理的软件](#用于能源管理的软件)
-- [系统架构](#系统架构)
-  - [微服务](#微服务)
   - [consul](#consul)
 - [备注](#备注)
 
@@ -3302,6 +3493,6071 @@ spec.containers[].image	String	这里定义要用到的镜像名称，如果镜�
 
 ## WPF
 
+### WPF控件继承
+
+
+#### UIElement
+
+
+##### 其中定义很多与输入和焦点有关的特性，例如键盘事件，鼠标，还包括一些与WPF事件模型有关的API。
+
+
+##### 方法:
+METHODS
+AddHandler(RoutedEvent, Delegate)	
+Adds a routed event handler for a specified routed event, adding the handler to the handler collection on the current element.
+
+AddHandler(RoutedEvent, Delegate, Boolean)	
+Adds a routed event handler for a specified routed event, adding the handler to the handler collection on the current element. Specify handledEventsToo as true to have the provided handler be invoked for routed event that had already been marked as handled by another element along the event route.
+
+AddToEventRoute(EventRoute, RoutedEventArgs)	
+Adds handlers to the specified EventRoute for the current UIElement event handler collection.
+
+AddVisualChild(Visual)	
+Defines the parent-child relationship between two visuals.
+
+(Inherited from Visual)
+ApplyAnimationClock(DependencyProperty, AnimationClock)	
+Applies an animation to a specified dependency property on this element. Any existing animations are stopped and replaced with the new animation.
+
+ApplyAnimationClock(DependencyProperty, AnimationClock, HandoffBehavior)	
+Applies an animation to a specified dependency property on this element, with the ability to specify what happens if the property already has a running animation.
+
+Arrange(Rect)	
+Positions child elements and determines a size for a UIElement. Parent elements call this method from their ArrangeCore(Rect) implementation (or a WPF framework-level equivalent) to form a recursive layout update. This method constitutes the second pass of a layout update.
+
+ArrangeCore(Rect)	
+Defines the template for WPF core-level arrange layout definition.
+
+BeginAnimation(DependencyProperty, AnimationTimeline)	
+Starts an animation for a specified animated property on this element.
+
+BeginAnimation(DependencyProperty, AnimationTimeline, HandoffBehavior)	
+Starts a specific animation for a specified animated property on this element, with the option of specifying what happens if the property already has a running animation.
+
+CaptureMouse()	
+Attempts to force capture of the mouse to this element.
+
+CaptureStylus()	
+Attempts to force capture of the stylus to this element.
+
+CaptureTouch(TouchDevice)	
+Attempts to force capture of a touch to this element.
+
+CheckAccess()	
+Determines whether the calling thread has access to this DispatcherObject.
+
+(Inherited from DispatcherObject)
+ClearValue(DependencyProperty)	
+Clears the local value of a property. The property to be cleared is specified by a DependencyProperty identifier.
+
+(Inherited from DependencyObject)
+ClearValue(DependencyPropertyKey)	
+Clears the local value of a read-only property. The property to be cleared is specified by a DependencyPropertyKey.
+
+(Inherited from DependencyObject)
+CoerceValue(DependencyProperty)	
+Coerces the value of the specified dependency property. This is accomplished by invoking any CoerceValueCallback function specified in property metadata for the dependency property as it exists on the calling DependencyObject.
+
+(Inherited from DependencyObject)
+Equals(Object)	
+Determines whether a provided DependencyObject is equivalent to the current DependencyObject.
+
+(Inherited from DependencyObject)
+FindCommonVisualAncestor(DependencyObject)	
+Returns the common ancestor of two visual objects.
+
+(Inherited from Visual)
+Focus()	
+Attempts to set focus to this element.
+
+GetAnimationBaseValue(DependencyProperty)	
+Returns the base property value for the specified property on this element, disregarding any possible animated value from a running or stopped animation.
+
+GetHashCode()	
+Gets a hash code for this DependencyObject.
+
+(Inherited from DependencyObject)
+GetLayoutClip(Size)	
+Returns an alternative clipping geometry that represents the region that would be clipped if ClipToBounds were set to true.
+
+GetLocalValueEnumerator()	
+Creates a specialized enumerator for determining which dependency properties have locally set values on this DependencyObject.
+
+(Inherited from DependencyObject)
+GetType()	
+Gets the Type of the current instance.
+
+(Inherited from Object)
+GetUIParentCore()	
+When overridden in a derived class, returns an alternative user interface (UI) parent for this element if no visual parent exists.
+
+GetValue(DependencyProperty)	
+Returns the current effective value of a dependency property on this instance of a DependencyObject.
+
+(Inherited from DependencyObject)
+GetVisualChild(Int32)	
+Returns the specified Visual in the parent VisualCollection.
+
+(Inherited from Visual)
+HitTestCore(GeometryHitTestParameters)	
+Implements HitTestCore(GeometryHitTestParameters) to supply base element hit testing behavior (returning GeometryHitTestResult).
+
+HitTestCore(PointHitTestParameters)	
+Implements HitTestCore(PointHitTestParameters) to supply base element hit testing behavior (returning HitTestResult).
+
+InputHitTest(Point)	
+Returns the input element within the current element that is at the specified coordinates, relative to the current element's origin.
+
+InvalidateArrange()	
+Invalidates the arrange state (layout) for the element. After the invalidation, the element will have its layout updated, which will occur asynchronously unless subsequently forced by UpdateLayout().
+
+InvalidateMeasure()	
+Invalidates the measurement state (layout) for the element.
+
+InvalidateProperty(DependencyProperty)	
+Re-evaluates the effective value for the specified dependency property.
+
+(Inherited from DependencyObject)
+InvalidateVisual()	
+Invalidates the rendering of the element, and forces a complete new layout pass. OnRender(DrawingContext) is called after the layout cycle is completed.
+
+IsAncestorOf(DependencyObject)	
+Determines whether the visual object is an ancestor of the descendant visual object.
+
+(Inherited from Visual)
+IsDescendantOf(DependencyObject)	
+Determines whether the visual object is a descendant of the ancestor visual object.
+
+(Inherited from Visual)
+Measure(Size)	
+Updates the DesiredSize of a UIElement. Parent elements call this method from their own MeasureCore(Size) implementations to form a recursive layout update. Calling this method constitutes the first pass (the "Measure" pass) of a layout update.
+
+MeasureCore(Size)	
+When overridden in a derived class, provides measurement logic for sizing this element properly, with consideration of the size of any child element content.
+
+MemberwiseClone()	
+Creates a shallow copy of the current Object.
+
+(Inherited from Object)
+MoveFocus(TraversalRequest)	
+Attempts to move focus from this element to another element. The direction to move focus is specified by a guidance direction, which is interpreted within the organization of the visual parent for this element.
+
+OnAccessKey(AccessKeyEventArgs)	
+Provides class handling for when an access key that is meaningful for this element is invoked.
+
+OnChildDesiredSizeChanged(UIElement)	
+Supports layout behavior when a child element is resized.
+
+OnCreateAutomationPeer()	
+Returns class-specific AutomationPeer implementations for the Windows Presentation Foundation (WPF) infrastructure.
+
+OnDpiChanged(DpiScale, DpiScale)	
+Called when the DPI at which this View is rendered changes.
+
+(Inherited from Visual)
+OnDragEnter(DragEventArgs)	
+Invoked when an unhandled DragEnter attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnDragLeave(DragEventArgs)	
+Invoked when an unhandled DragLeave attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnDragOver(DragEventArgs)	
+Invoked when an unhandled DragOver attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnDrop(DragEventArgs)	
+Invoked when an unhandled DragEnter attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnGiveFeedback(GiveFeedbackEventArgs)	
+Invoked when an unhandled GiveFeedback attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnGotFocus(RoutedEventArgs)	
+Raises the GotFocus routed event by using the event data provided.
+
+OnGotKeyboardFocus(KeyboardFocusChangedEventArgs)	
+Invoked when an unhandled GotKeyboardFocus attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnGotMouseCapture(MouseEventArgs)	
+Invoked when an unhandled GotMouseCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnGotStylusCapture(StylusEventArgs)	
+Invoked when an unhandled GotStylusCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnGotTouchCapture(TouchEventArgs)	
+Provides class handling for the GotTouchCapture routed event that occurs when a touch is captured to this element.
+
+OnIsKeyboardFocusedChanged(DependencyPropertyChangedEventArgs)	
+Invoked when an unhandled IsKeyboardFocusedChanged event is raised on this element. Implement this method to add class handling for this event.
+
+OnIsKeyboardFocusWithinChanged(DependencyPropertyChangedEventArgs)	
+Invoked just before the IsKeyboardFocusWithinChanged event is raised by this element. Implement this method to add class handling for this event.
+
+OnIsMouseCapturedChanged(DependencyPropertyChangedEventArgs)	
+Invoked when an unhandled IsMouseCapturedChanged event is raised on this element. Implement this method to add class handling for this event.
+
+OnIsMouseCaptureWithinChanged(DependencyPropertyChangedEventArgs)	
+Invoked when an unhandled IsMouseCaptureWithinChanged event is raised on this element. Implement this method to add class handling for this event.
+
+OnIsMouseDirectlyOverChanged(DependencyPropertyChangedEventArgs)	
+Invoked when an unhandled IsMouseDirectlyOverChanged event is raised on this element. Implement this method to add class handling for this event.
+
+OnIsStylusCapturedChanged(DependencyPropertyChangedEventArgs)	
+Invoked when an unhandled IsStylusCapturedChanged event is raised on this element. Implement this method to add class handling for this event.
+
+OnIsStylusCaptureWithinChanged(DependencyPropertyChangedEventArgs)	
+Invoked when an unhandled IsStylusCaptureWithinChanged event is raised on this element. Implement this method to add class handling for this event.
+
+OnIsStylusDirectlyOverChanged(DependencyPropertyChangedEventArgs)	
+Invoked when an unhandled IsStylusDirectlyOverChanged event is raised on this element. Implement this method to add class handling for this event.
+
+OnKeyDown(KeyEventArgs)	
+Invoked when an unhandled KeyDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnKeyUp(KeyEventArgs)	
+Invoked when an unhandled KeyUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnLostFocus(RoutedEventArgs)	
+Raises the LostFocus routed event by using the event data that is provided.
+
+OnLostKeyboardFocus(KeyboardFocusChangedEventArgs)	
+Invoked when an unhandled LostKeyboardFocus attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnLostMouseCapture(MouseEventArgs)	
+Invoked when an unhandled LostMouseCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnLostStylusCapture(StylusEventArgs)	
+Invoked when an unhandled LostStylusCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnLostTouchCapture(TouchEventArgs)	
+Provides class handling for the LostTouchCapture routed event that occurs when this element loses a touch capture.
+
+OnManipulationBoundaryFeedback(ManipulationBoundaryFeedbackEventArgs)	
+Called when the ManipulationBoundaryFeedback event occurs.
+
+OnManipulationCompleted(ManipulationCompletedEventArgs)	
+Called when the ManipulationCompleted event occurs.
+
+OnManipulationDelta(ManipulationDeltaEventArgs)	
+Called when the ManipulationDelta event occurs.
+
+OnManipulationInertiaStarting(ManipulationInertiaStartingEventArgs)	
+Called when the ManipulationInertiaStarting event occurs.
+
+OnManipulationStarted(ManipulationStartedEventArgs)	
+Called when the ManipulationStarted event occurs.
+
+OnManipulationStarting(ManipulationStartingEventArgs)	
+Provides class handling for the ManipulationStarting routed event that occurs when the manipulation processor is first created.
+
+OnMouseDown(MouseButtonEventArgs)	
+Invoked when an unhandled MouseDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnMouseEnter(MouseEventArgs)	
+Invoked when an unhandled MouseEnter attached event is raised on this element. Implement this method to add class handling for this event.
+
+OnMouseLeave(MouseEventArgs)	
+Invoked when an unhandled MouseLeave attached event is raised on this element. Implement this method to add class handling for this event.
+
+OnMouseLeftButtonDown(MouseButtonEventArgs)	
+Invoked when an unhandled MouseLeftButtonDown routed event is raised on this element. Implement this method to add class handling for this event.
+
+OnMouseLeftButtonUp(MouseButtonEventArgs)	
+Invoked when an unhandled MouseLeftButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnMouseMove(MouseEventArgs)	
+Invoked when an unhandled MouseMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnMouseRightButtonDown(MouseButtonEventArgs)	
+Invoked when an unhandled MouseRightButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnMouseRightButtonUp(MouseButtonEventArgs)	
+Invoked when an unhandled MouseRightButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnMouseUp(MouseButtonEventArgs)	
+Invoked when an unhandled MouseUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnMouseWheel(MouseWheelEventArgs)	
+Invoked when an unhandled MouseWheel attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewDragEnter(DragEventArgs)	
+Invoked when an unhandled PreviewDragEnter attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewDragLeave(DragEventArgs)	
+Invoked when an unhandled PreviewDragLeave attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewDragOver(DragEventArgs)	
+Invoked when an unhandled PreviewDragOver attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewDrop(DragEventArgs)	
+Invoked when an unhandled PreviewDrop attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewGiveFeedback(GiveFeedbackEventArgs)	
+Invoked when an unhandled PreviewGiveFeedback attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewGotKeyboardFocus(KeyboardFocusChangedEventArgs)	
+Invoked when an unhandled PreviewGotKeyboardFocus attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewKeyDown(KeyEventArgs)	
+Invoked when an unhandled PreviewKeyDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewKeyUp(KeyEventArgs)	
+Invoked when an unhandled PreviewKeyUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs)	
+Invoked when an unhandled PreviewKeyDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewMouseDown(MouseButtonEventArgs)	
+Invoked when an unhandled PreviewMouseDown attached routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewMouseLeftButtonDown(MouseButtonEventArgs)	
+Invoked when an unhandled PreviewMouseLeftButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewMouseLeftButtonUp(MouseButtonEventArgs)	
+Invoked when an unhandled PreviewMouseLeftButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewMouseMove(MouseEventArgs)	
+Invoked when an unhandled PreviewMouseMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewMouseRightButtonDown(MouseButtonEventArgs)	
+Invoked when an unhandled PreviewMouseRightButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewMouseRightButtonUp(MouseButtonEventArgs)	
+Invoked when an unhandled PreviewMouseRightButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewMouseUp(MouseButtonEventArgs)	
+Invoked when an unhandled PreviewMouseUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewMouseWheel(MouseWheelEventArgs)	
+Invoked when an unhandled PreviewMouseWheel attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewQueryContinueDrag(QueryContinueDragEventArgs)	
+Invoked when an unhandled PreviewQueryContinueDrag attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewStylusButtonDown(StylusButtonEventArgs)	
+Invoked when an unhandled PreviewStylusButtonDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewStylusButtonUp(StylusButtonEventArgs)	
+Invoked when an unhandled PreviewStylusButtonUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewStylusDown(StylusDownEventArgs)	
+Invoked when an unhandled PreviewStylusDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewStylusInAirMove(StylusEventArgs)	
+Invoked when an unhandled PreviewStylusInAirMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewStylusInRange(StylusEventArgs)	
+Invoked when an unhandled PreviewStylusInRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewStylusMove(StylusEventArgs)	
+Invoked when an unhandled PreviewStylusMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewStylusOutOfRange(StylusEventArgs)	
+Invoked when an unhandled PreviewStylusOutOfRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewStylusSystemGesture(StylusSystemGestureEventArgs)	
+Invoked when an unhandled PreviewStylusSystemGesture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewStylusUp(StylusEventArgs)	
+Invoked when an unhandled PreviewStylusUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewTextInput(TextCompositionEventArgs)	
+Invoked when an unhandled PreviewTextInput attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnPreviewTouchDown(TouchEventArgs)	
+Provides class handling for the PreviewTouchDown routed event that occurs when a touch presses this element.
+
+OnPreviewTouchMove(TouchEventArgs)	
+Provides class handling for the PreviewTouchMove routed event that occurs when a touch moves while inside this element.
+
+OnPreviewTouchUp(TouchEventArgs)	
+Provides class handling for the PreviewTouchUp routed event that occurs when a touch is released inside this element.
+
+OnPropertyChanged(DependencyPropertyChangedEventArgs)	
+Invoked whenever the effective value of any dependency property on this DependencyObject has been updated. The specific dependency property that changed is reported in the event data.
+
+(Inherited from DependencyObject)
+OnQueryContinueDrag(QueryContinueDragEventArgs)	
+Invoked when an unhandled QueryContinueDrag attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnQueryCursor(QueryCursorEventArgs)	
+Invoked when an unhandled QueryCursor attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnRender(DrawingContext)	
+When overridden in a derived class, participates in rendering operations that are directed by the layout system. The rendering instructions for this element are not used directly when this method is invoked, and are instead preserved for later asynchronous use by layout and drawing.
+
+OnRenderSizeChanged(SizeChangedInfo)	
+When overridden in a derived class, participates in rendering operations that are directed by the layout system. This method is invoked after layout update, and before rendering, if the element's RenderSize has changed as a result of layout update.
+
+OnStylusButtonDown(StylusButtonEventArgs)	
+Invoked when an unhandled StylusButtonDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnStylusButtonUp(StylusButtonEventArgs)	
+Invoked when an unhandled StylusButtonUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnStylusDown(StylusDownEventArgs)	
+Invoked when an unhandled StylusDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnStylusEnter(StylusEventArgs)	
+Invoked when an unhandled StylusEnter attached event is raised by this element. Implement this method to add class handling for this event.
+
+OnStylusInAirMove(StylusEventArgs)	
+Invoked when an unhandled StylusInAirMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnStylusInRange(StylusEventArgs)	
+Invoked when an unhandled StylusInRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnStylusLeave(StylusEventArgs)	
+Invoked when an unhandled StylusLeave attached event is raised by this element. Implement this method to add class handling for this event.
+
+OnStylusMove(StylusEventArgs)	
+Invoked when an unhandled StylusMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnStylusOutOfRange(StylusEventArgs)	
+Invoked when an unhandled StylusOutOfRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnStylusSystemGesture(StylusSystemGestureEventArgs)	
+Invoked when an unhandled StylusSystemGesture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnStylusUp(StylusEventArgs)	
+Invoked when an unhandled StylusUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnTextInput(TextCompositionEventArgs)	
+Invoked when an unhandled TextInput attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+OnTouchDown(TouchEventArgs)	
+Provides class handling for the TouchDown routed event that occurs when a touch presses inside this element.
+
+OnTouchEnter(TouchEventArgs)	
+Provides class handling for the TouchEnter routed event that occurs when a touch moves from outside to inside the bounds of this element.
+
+OnTouchLeave(TouchEventArgs)	
+Provides class handling for the TouchLeave routed event that occurs when a touch moves from inside to outside the bounds of this UIElement.
+
+OnTouchMove(TouchEventArgs)	
+Provides class handling for the TouchMove routed event that occurs when a touch moves while inside this element.
+
+OnTouchUp(TouchEventArgs)	
+Provides class handling for the TouchUp routed event that occurs when a touch is released inside this element.
+
+OnVisualChildrenChanged(DependencyObject, DependencyObject)	
+Called when the VisualCollection of the visual object is modified.
+
+(Inherited from Visual)
+OnVisualParentChanged(DependencyObject)	
+Invoked when the parent element of this UIElement reports a change to its underlying visual parent.
+
+PointFromScreen(Point)	
+Converts a Point in screen coordinates into a Point that represents the current coordinate system of the Visual.
+
+(Inherited from Visual)
+PointToScreen(Point)	
+Converts a Point that represents the current coordinate system of the Visual into a Point in screen coordinates.
+
+(Inherited from Visual)
+PredictFocus(FocusNavigationDirection)	
+When overridden in a derived class, returns the element that would receive focus for a specified focus traversal direction, without actually moving focus to that element.
+
+RaiseEvent(RoutedEventArgs)	
+Raises a specific routed event. The RoutedEvent to be raised is identified within the RoutedEventArgs instance that is provided (as the RoutedEvent property of that event data).
+
+ReadLocalValue(DependencyProperty)	
+Returns the local value of a dependency property, if it exists.
+
+(Inherited from DependencyObject)
+ReleaseAllTouchCaptures()	
+Releases all captured touch devices from this element.
+
+ReleaseMouseCapture()	
+Releases the mouse capture, if this element held the capture.
+
+ReleaseStylusCapture()	
+Releases the stylus device capture, if this element held the capture.
+
+ReleaseTouchCapture(TouchDevice)	
+Attempts to release the specified touch device from this element.
+
+RemoveHandler(RoutedEvent, Delegate)	
+Removes the specified routed event handler from this element.
+
+RemoveVisualChild(Visual)	
+Removes the parent-child relationship between two visuals.
+
+(Inherited from Visual)
+SetCurrentValue(DependencyProperty, Object)	
+Sets the value of a dependency property without changing its value source.
+
+(Inherited from DependencyObject)
+SetValue(DependencyProperty, Object)	
+Sets the local value of a dependency property, specified by its dependency property identifier.
+
+(Inherited from DependencyObject)
+SetValue(DependencyPropertyKey, Object)	
+Sets the local value of a read-only dependency property, specified by the DependencyPropertyKey identifier of the dependency property.
+
+(Inherited from DependencyObject)
+ShouldSerializeCommandBindings()	
+Returns whether serialization processes should serialize the contents of the CommandBindings property on instances of this class.
+
+ShouldSerializeInputBindings()	
+Returns whether serialization processes should serialize the contents of the InputBindings property on instances of this class.
+
+ShouldSerializeProperty(DependencyProperty)	
+Returns a value that indicates whether serialization processes should serialize the value for the provided dependency property.
+
+(Inherited from DependencyObject)
+ToString()	
+Returns a string that represents the current object.
+
+(Inherited from Object)
+TransformToAncestor(Visual)	
+Returns a transform that can be used to transform coordinates from the Visual to the specified Visual ancestor of the visual object.
+
+(Inherited from Visual)
+TransformToAncestor(Visual3D)	
+Returns a transform that can be used to transform coordinates from the Visual to the specified Visual3D ancestor of the visual object.
+
+(Inherited from Visual)
+TransformToDescendant(Visual)	
+Returns a transform that can be used to transform coordinates from the Visual to the specified visual object descendant.
+
+(Inherited from Visual)
+TransformToVisual(Visual)	
+Returns a transform that can be used to transform coordinates from the Visual to the specified visual object.
+
+(Inherited from Visual)
+TranslatePoint(Point, UIElement)	
+Translates a point relative to this element to coordinates that are relative to the specified element.
+
+UpdateLayout()	
+Ensures that all visual child elements of this element are properly updated for layout.
+
+VerifyAccess()	
+Enforces that the calling thread has access to this DispatcherObject.
+
+(Inherited from DispatcherObject)
+Events
+EVENTS
+DragEnter	
+Occurs when the input system reports an underlying drag event with this element as the drag target.
+
+DragLeave	
+Occurs when the input system reports an underlying drag event with this element as the drag origin.
+
+DragOver	
+Occurs when the input system reports an underlying drag event with this element as the potential drop target.
+
+Drop	
+Occurs when the input system reports an underlying drop event with this element as the drop target.
+
+FocusableChanged	
+Occurs when the value of the Focusable property changes.
+
+GiveFeedback	
+Occurs when the input system reports an underlying drag-and-drop event that involves this element.
+
+GotFocus	
+Occurs when this element gets logical focus.
+
+GotKeyboardFocus	
+Occurs when the keyboard is focused on this element.
+
+GotMouseCapture	
+Occurs when this element captures the mouse.
+
+GotStylusCapture	
+Occurs when this element captures the stylus.
+
+GotTouchCapture	
+Occurs when a touch is captured to this element.
+
+IsEnabledChanged	
+Occurs when the value of the IsEnabled property on this element changes.
+
+IsHitTestVisibleChanged	
+Occurs when the value of the IsHitTestVisible dependency property changes on this element.
+
+IsKeyboardFocusedChanged	
+Occurs when the value of the IsKeyboardFocused property changes on this element.
+
+IsKeyboardFocusWithinChanged	
+Occurs when the value of the IsKeyboardFocusWithin property changes on this element.
+
+IsMouseCapturedChanged	
+Occurs when the value of the IsMouseCaptured property changes on this element.
+
+IsMouseCaptureWithinChanged	
+Occurs when the value of the IsMouseCaptureWithinProperty changes on this element.
+
+IsMouseDirectlyOverChanged	
+Occurs when the value of the IsMouseDirectlyOver property changes on this element.
+
+IsStylusCapturedChanged	
+Occurs when the value of the IsStylusCaptured property changes on this element.
+
+IsStylusCaptureWithinChanged	
+Occurs when the value of the IsStylusCaptureWithin property changes on this element.
+
+IsStylusDirectlyOverChanged	
+Occurs when the value of the IsStylusDirectlyOver property changes on this element.
+
+IsVisibleChanged	
+Occurs when the value of the IsVisible property changes on this element.
+
+KeyDown	
+Occurs when a key is pressed while focus is on this element.
+
+KeyUp	
+Occurs when a key is released while focus is on this element.
+
+LayoutUpdated	
+Occurs when the layout of the various visual elements associated with the current Dispatcher changes.
+
+LostFocus	
+Occurs when this element loses logical focus.
+
+LostKeyboardFocus	
+Occurs when the keyboard is no longer focused on this element.
+
+LostMouseCapture	
+Occurs when this element loses mouse capture.
+
+LostStylusCapture	
+Occurs when this element loses stylus capture.
+
+LostTouchCapture	
+Occurs when this element loses a touch capture.
+
+ManipulationBoundaryFeedback	
+Occurs when the manipulation encounters a boundary.
+
+ManipulationCompleted	
+Occurs when a manipulation and inertia on the UIElement object is complete.
+
+ManipulationDelta	
+Occurs when the input device changes position during a manipulation.
+
+ManipulationInertiaStarting	
+Occurs when the input device loses contact with the UIElement object during a manipulation and inertia begins.
+
+ManipulationStarted	
+Occurs when an input device begins a manipulation on the UIElement object.
+
+ManipulationStarting	
+Occurs when the manipulation processor is first created.
+
+MouseDown	
+Occurs when any mouse button is pressed while the pointer is over this element.
+
+MouseEnter	
+Occurs when the mouse pointer enters the bounds of this element.
+
+MouseLeave	
+Occurs when the mouse pointer leaves the bounds of this element.
+
+MouseLeftButtonDown	
+Occurs when the left mouse button is pressed while the mouse pointer is over this element.
+
+MouseLeftButtonUp	
+Occurs when the left mouse button is released while the mouse pointer is over this element.
+
+MouseMove	
+Occurs when the mouse pointer moves while over this element.
+
+MouseRightButtonDown	
+Occurs when the right mouse button is pressed while the mouse pointer is over this element.
+
+MouseRightButtonUp	
+Occurs when the right mouse button is released while the mouse pointer is over this element.
+
+MouseUp	
+Occurs when any mouse button is released over this element.
+
+MouseWheel	
+Occurs when the user rotates the mouse wheel while the mouse pointer is over this element.
+
+PreviewDragEnter	
+Occurs when the input system reports an underlying drag event with this element as the drag target.
+
+PreviewDragLeave	
+Occurs when the input system reports an underlying drag event with this element as the drag origin.
+
+PreviewDragOver	
+Occurs when the input system reports an underlying drag event with this element as the potential drop target.
+
+PreviewDrop	
+Occurs when the input system reports an underlying drop event with this element as the drop target.
+
+PreviewGiveFeedback	
+Occurs when a drag-and-drop operation is started.
+
+PreviewGotKeyboardFocus	
+Occurs when the keyboard is focused on this element.
+
+PreviewKeyDown	
+Occurs when a key is pressed while focus is on this element.
+
+PreviewKeyUp	
+Occurs when a key is released while focus is on this element.
+
+PreviewLostKeyboardFocus	
+Occurs when the keyboard is no longer focused on this element.
+
+PreviewMouseDown	
+Occurs when any mouse button is pressed while the pointer is over this element.
+
+PreviewMouseLeftButtonDown	
+Occurs when the left mouse button is pressed while the mouse pointer is over this element.
+
+PreviewMouseLeftButtonUp	
+Occurs when the left mouse button is released while the mouse pointer is over this element.
+
+PreviewMouseMove	
+Occurs when the mouse pointer moves while the mouse pointer is over this element.
+
+PreviewMouseRightButtonDown	
+Occurs when the right mouse button is pressed while the mouse pointer is over this element.
+
+PreviewMouseRightButtonUp	
+Occurs when the right mouse button is released while the mouse pointer is over this element.
+
+PreviewMouseUp	
+Occurs when any mouse button is released while the mouse pointer is over this element.
+
+PreviewMouseWheel	
+Occurs when the user rotates the mouse wheel while the mouse pointer is over this element.
+
+PreviewQueryContinueDrag	
+Occurs when there is a change in the keyboard or mouse button state during a drag-and-drop operation.
+
+PreviewStylusButtonDown	
+Occurs when the stylus button is pressed while the pointer is over this element.
+
+PreviewStylusButtonUp	
+Occurs when the stylus button is released while the pointer is over this element.
+
+PreviewStylusDown	
+Occurs when the stylus touches the digitizer while it is over this element.
+
+PreviewStylusInAirMove	
+Occurs when the stylus moves over an element without actually touching the digitizer.
+
+PreviewStylusInRange	
+Occurs when the stylus is close enough to the digitizer to be detected, while over this element.
+
+PreviewStylusMove	
+Occurs when the stylus moves while over the element. The stylus must move while being detected by the digitizer to raise this event, otherwise, PreviewStylusInAirMove is raised instead.
+
+PreviewStylusOutOfRange	
+Occurs when the stylus is too far from the digitizer to be detected.
+
+PreviewStylusSystemGesture	
+Occurs when a user performs one of several stylus gestures.
+
+PreviewStylusUp	
+Occurs when the user raises the stylus off the digitizer while the stylus is over this element.
+
+PreviewTextInput	
+Occurs when this element gets text in a device-independent manner.
+
+PreviewTouchDown	
+Occurs when a finger touches the screen while the finger is over this element.
+
+PreviewTouchMove	
+Occurs when a finger moves on the screen while the finger is over this element.
+
+PreviewTouchUp	
+Occurs when a finger is raised off of the screen while the finger is over this element.
+
+QueryContinueDrag	
+Occurs when there is a change in the keyboard or mouse button state during a drag-and-drop operation.
+
+QueryCursor	
+Occurs when the cursor is requested to display. This event is raised on an element each time that the mouse pointer moves to a new location, which means the cursor object might need to be changed based on its new position.
+
+StylusButtonDown	
+Occurs when the stylus button is pressed while the pointer is over this element.
+
+StylusButtonUp	
+Occurs when the stylus button is released while the pointer is over this element.
+
+StylusDown	
+Occurs when the stylus touches the digitizer while the stylus is over this element.
+
+StylusEnter	
+Occurs when the stylus enters the bounds of this element.
+
+StylusInAirMove	
+Occurs when the stylus moves over an element without actually touching the digitizer.
+
+StylusInRange	
+Occurs when the stylus is close enough to the digitizer to be detected, while over this element.
+
+StylusLeave	
+Occurs when the stylus leaves the bounds of the element.
+
+StylusMove	
+Occurs when the stylus moves over this element. The stylus must move while on the digitizer to raise this event. Otherwise, StylusInAirMove is raised instead.
+
+StylusOutOfRange	
+Occurs when the stylus is too far from the digitizer to be detected, while over this element.
+
+StylusSystemGesture	
+Occurs when a user performs one of several stylus gestures.
+
+StylusUp	
+Occurs when the user raises the stylus off the digitizer while it is over this element.
+
+TextInput	
+Occurs when this element gets text in a device-independent manner.
+
+TouchDown	
+Occurs when a finger touches the screen while the finger is over this element.
+
+TouchEnter	
+Occurs when a touch moves from outside to inside the bounds of this element.
+
+TouchLeave	
+Occurs when a touch moves from inside to outside the bounds of this element.
+
+TouchMove	
+Occurs when a finger moves on the screen while the finger is over this element.
+
+TouchUp	
+Occurs when a finger is raised off of the screen while the finger is over this element.
+
+
+##### 属性:
+PROPERTIES
+AllowDrop	
+Gets or sets a value indicating whether this element can be used as the target of a drag-and-drop operation. This is a dependency property.
+
+AreAnyTouchesCaptured	
+Gets a value that indicates whether at least one touch is captured to this element.
+
+AreAnyTouchesCapturedWithin	
+Gets a value that indicates whether at least one touch is captured to this element or to any child elements in its visual tree.
+
+AreAnyTouchesDirectlyOver	
+Gets a value that indicates whether at least one touch is pressed over this element.
+
+AreAnyTouchesOver	
+Gets a value that indicates whether at least one touch is pressed over this element or any child elements in its visual tree.
+
+BitmapEffect	
+Obsolete.
+Gets or sets a bitmap effect that applies directly to the rendered content for this element. This is a dependency property.
+
+BitmapEffectInput	
+Obsolete.
+Gets or sets an input source for the bitmap effect that applies directly to the rendered content for this element. This is a dependency property.
+
+CacheMode	
+Gets or sets a cached representation of the UIElement.
+
+Clip	
+Gets or sets the geometry used to define the outline of the contents of an element. This is a dependency property.
+
+ClipToBounds	
+Gets or sets a value indicating whether to clip the content of this element (or content coming from the child elements of this element) to fit into the size of the containing element. This is a dependency property.
+
+CommandBindings	
+Gets a collection of CommandBinding objects associated with this element. A CommandBinding enables command handling for this element, and declares the linkage between a command, its events, and the handlers attached by this element.
+
+DependencyObjectType	
+Gets the DependencyObjectType that wraps the CLR type of this instance.
+
+(Inherited from DependencyObject)
+DesiredSize	
+Gets the size that this element computed during the measure pass of the layout process.
+
+Dispatcher	
+Gets the Dispatcher this DispatcherObject is associated with.
+
+(Inherited from DispatcherObject)
+Effect	
+Gets or sets the bitmap effect to apply to the UIElement. This is a dependency property.
+
+Focusable	
+Gets or sets a value that indicates whether the element can receive focus. This is a dependency property.
+
+HasAnimatedProperties	
+Gets a value indicating whether this element has any animated properties.
+
+HasEffectiveKeyboardFocus	
+Gets a value that indicates whether the UIElement has focus.
+
+InputBindings	
+Gets the collection of input bindings associated with this element.
+
+IsArrangeValid	
+Gets a value indicating whether the computed size and position of child elements in this element's layout are valid.
+
+IsEnabled	
+Gets or sets a value indicating whether this element is enabled in the user interface (UI). This is a dependency property.
+
+IsEnabledCore	
+Gets a value that becomes the return value of IsEnabled in derived classes.
+
+IsFocused	
+Gets a value that determines whether this element has logical focus. This is a dependency property.
+
+IsHitTestVisible	
+Gets or sets a value that declares whether this element can possibly be returned as a hit test result from some portion of its rendered content. This is a dependency property.
+
+IsInputMethodEnabled	
+Gets a value indicating whether an input method system, such as an Input Method Editor (IME), is enabled for processing the input to this element.
+
+IsKeyboardFocused	
+Gets a value indicating whether this element has keyboard focus. This is a dependency property.
+
+IsKeyboardFocusWithin	
+Gets a value indicating whether keyboard focus is anywhere within the element or its visual tree child elements. This is a dependency property.
+
+IsManipulationEnabled	
+Gets or sets a value that indicates whether manipulation events are enabled on this UIElement.
+
+IsMeasureValid	
+Gets a value indicating whether the current size returned by layout measure is valid.
+
+IsMouseCaptured	
+Gets a value indicating whether the mouse is captured to this element. This is a dependency property.
+
+IsMouseCaptureWithin	
+Gets a value that determines whether mouse capture is held by this element or by child elements in its visual tree. This is a dependency property.
+
+IsMouseDirectlyOver	
+Gets a value that indicates whether the position of the mouse pointer corresponds to hit test results, which take element compositing into account. This is a dependency property.
+
+IsMouseOver	
+Gets a value indicating whether the mouse pointer is located over this element (including child elements in the visual tree). This is a dependency property.
+
+IsSealed	
+Gets a value that indicates whether this instance is currently sealed (read-only).
+
+(Inherited from DependencyObject)
+IsStylusCaptured	
+Gets a value indicating whether the stylus is captured by this element. This is a dependency property.
+
+IsStylusCaptureWithin	
+Gets a value that determines whether stylus capture is held by this element, or an element within the element bounds and its visual tree. This is a dependency property.
+
+IsStylusDirectlyOver	
+Gets a value that indicates whether the stylus position corresponds to hit test results, which take element compositing into account. This is a dependency property.
+
+IsStylusOver	
+Gets a value indicating whether the stylus cursor is located over this element (including visual child elements). This is a dependency property.
+
+IsVisible	
+Gets a value indicating whether this element is visible in the user interface (UI). This is a dependency property.
+
+Opacity	
+Gets or sets the opacity factor applied to the entire UIElement when it is rendered in the user interface (UI). This is a dependency property.
+
+OpacityMask	
+Gets or sets an opacity mask, as a Brush implementation that is applied to any alpha-channel masking for the rendered content of this element. This is a dependency property.
+
+PersistId	
+Obsolete.
+Gets a value that uniquely identifies this element.
+
+RenderSize	
+Gets (or sets) the final render size of this element.
+
+RenderTransform	
+Gets or sets transform information that affects the rendering position of this element. This is a dependency property.
+
+RenderTransformOrigin	
+Gets or sets the center point of any possible render transform declared by RenderTransform, relative to the bounds of the element. This is a dependency property.
+
+SnapsToDevicePixels	
+Gets or sets a value that determines whether rendering for this element should use device-specific pixel settings during rendering. This is a dependency property.
+
+StylusPlugIns	
+Gets a collection of all stylus plug-in (customization) objects associated with this element.
+
+TouchesCaptured	
+Gets all touch devices that are captured to this element.
+
+TouchesCapturedWithin	
+Gets all touch devices that are captured to this element or any child elements in its visual tree.
+
+TouchesDirectlyOver	
+Gets all touch devices that are over this element.
+
+TouchesOver	
+Gets all touch devices that are over this element or any child elements in its visual tree.
+
+Uid	
+Gets or sets the unique identifier (for localization) for this element. This is a dependency property.
+
+Visibility	
+Gets or sets the user interface (UI) visibility of this element. This is a dependency property.
+
+VisualBitmapEffect	
+Obsolete.
+Gets or sets the BitmapEffect value for the Visual.
+
+(Inherited from Visual)
+VisualBitmapEffectInput	
+Obsolete.
+Gets or sets the BitmapEffectInput value for the Visual.
+
+(Inherited from Visual)
+VisualBitmapScalingMode	
+Gets or sets the BitmapScalingMode for the Visual.
+
+(Inherited from Visual)
+VisualCacheMode	
+Gets or sets a cached representation of the Visual.
+
+(Inherited from Visual)
+VisualChildrenCount	
+Gets the number of child elements for the Visual.
+
+(Inherited from Visual)
+VisualClearTypeHint	
+Gets or sets the ClearTypeHint that determines how ClearType is rendered in the Visual.
+
+(Inherited from Visual)
+VisualClip	
+Gets or sets the clip region of the Visual as a Geometry value.
+
+(Inherited from Visual)
+VisualEdgeMode	
+Gets or sets the edge mode of the Visual as an EdgeMode value.
+
+(Inherited from Visual)
+VisualEffect	
+Gets or sets the bitmap effect to apply to the Visual.
+
+(Inherited from Visual)
+VisualOffset	
+Gets or sets the offset value of the visual object.
+
+(Inherited from Visual)
+VisualOpacity	
+Gets or sets the opacity of the Visual.
+
+(Inherited from Visual)
+VisualOpacityMask	
+Gets or sets the Brush value that represents the opacity mask of the Visual.
+
+(Inherited from Visual)
+VisualParent	
+Gets the visual tree parent of the visual object.
+
+(Inherited from Visual)
+VisualScrollableAreaClip	
+Gets or sets a clipped scrollable area for the Visual.
+
+(Inherited from Visual)
+VisualTextHintingMode	
+Gets or sets the TextHintingMode of the Visual.
+
+(Inherited from Visual)
+VisualTextRenderingMode	
+Gets or sets the TextRenderingMode of the Visual.
+
+(Inherited from Visual)
+VisualTransform	
+Gets or sets the Transform value for the Visual.
+
+(Inherited from Visual)
+VisualXSnappingGuidelines	
+Gets or sets the x-coordinate (vertical) guideline collection.
+
+(Inherited from Visual)
+VisualYSnappingGuidelines	
+Gets or sets the y-coordinate (horizontal) guideline collection.
+
+(Inherited from Visual)
+
+
+##### FiFileds:FIELDS:
+AllowDropProperty	
+Identifies the AllowDrop dependency property.
+
+AreAnyTouchesCapturedProperty	
+Identifies the AreAnyTouchesCaptured dependency property.
+
+AreAnyTouchesCapturedWithinProperty	
+Identifies the AreAnyTouchesCapturedWithin dependency property.
+
+AreAnyTouchesDirectlyOverProperty	
+Identifies the AreAnyTouchesDirectlyOver dependency property.
+
+AreAnyTouchesOverProperty	
+Identifies the AreAnyTouchesOver dependency property.
+
+BitmapEffectInputProperty	
+Identifies the BitmapEffectInput dependency property.
+
+BitmapEffectProperty	
+Identifies the BitmapEffect dependency property.
+
+CacheModeProperty	
+Identifies the CacheMode dependency property.
+
+ClipProperty	
+Identifies the Clip dependency property.
+
+ClipToBoundsProperty	
+Identifies the ClipToBounds dependency property.
+
+DragEnterEvent	
+Identifies the DragEnter routed event.
+
+DragLeaveEvent	
+Identifies the DragLeave routed event.
+
+DragOverEvent	
+Identifies the DragOver routed event.
+
+DropEvent	
+Identifies the Drop routed event.
+
+EffectProperty	
+Identifies the Effect dependency property.
+
+FocusableProperty	
+Identifies the Focusable dependency property.
+
+GiveFeedbackEvent	
+Identifies the GiveFeedback routed event.
+
+GotFocusEvent	
+Identifies the GotFocus routed event.
+
+GotKeyboardFocusEvent	
+Identifies the GotKeyboardFocus routed event.
+
+GotMouseCaptureEvent	
+Identifies the GotMouseCapture routed event.
+
+GotStylusCaptureEvent	
+Identifies the GotStylusCapture routed event.
+
+GotTouchCaptureEvent	
+Identifies the GotTouchCapture routed event.
+
+IsEnabledProperty	
+Identifies the IsEnabled dependency property.
+
+IsFocusedProperty	
+Identifies the IsFocused dependency property.
+
+IsHitTestVisibleProperty	
+Identifies the IsHitTestVisible dependency property.
+
+IsKeyboardFocusedProperty	
+Identifies the IsKeyboardFocused dependency property.
+
+IsKeyboardFocusWithinProperty	
+Identifies the IsKeyboardFocusWithin dependency property.
+
+IsManipulationEnabledProperty	
+Identifies the IsManipulationEnabled dependency property.
+
+IsMouseCapturedProperty	
+Identifies the IsMouseCaptured dependency property.
+
+IsMouseCaptureWithinProperty	
+Identifies the IsMouseCaptureWithin dependency property.
+
+IsMouseDirectlyOverProperty	
+Identifies the IsMouseDirectlyOver dependency property.
+
+IsMouseOverProperty	
+Identifies the IsMouseOver dependency property.
+
+IsStylusCapturedProperty	
+Identifies the IsStylusCaptured dependency property.
+
+IsStylusCaptureWithinProperty	
+Identifies the IsStylusCaptureWithin dependency property.
+
+IsStylusDirectlyOverProperty	
+Identifies the IsStylusDirectlyOver dependency property.
+
+IsStylusOverProperty	
+Identifies the IsStylusOver dependency property.
+
+IsVisibleProperty	
+Identifies the IsVisible dependency property.
+
+KeyDownEvent	
+Identifies the KeyDown routed event.
+
+KeyUpEvent	
+Identifies the KeyUp routed event.
+
+LostFocusEvent	
+Identifies the LostFocus routed event.
+
+LostKeyboardFocusEvent	
+Identifies the LostKeyboardFocus routed event.
+
+LostMouseCaptureEvent	
+Identifies the LostMouseCapture routed event.
+
+LostStylusCaptureEvent	
+Identifies the LostStylusCapture routed event.
+
+LostTouchCaptureEvent	
+Identifies the LostTouchCapture routed event.
+
+ManipulationBoundaryFeedbackEvent	
+Identifies the ManipulationBoundaryFeedback event.
+
+ManipulationCompletedEvent	
+Identifies the ManipulationCompleted routed event.
+
+ManipulationDeltaEvent	
+Identifies the ManipulationDelta routed event.
+
+ManipulationInertiaStartingEvent	
+Identifies the ManipulationInertiaStarting routed event.
+
+ManipulationStartedEvent	
+Identifies the ManipulationStarted routed event.
+
+ManipulationStartingEvent	
+Identifies the ManipulationStarting routed event.
+
+MouseDownEvent	
+Identifies the MouseDown routed event.
+
+MouseEnterEvent	
+Identifies the MouseEnter routed event.
+
+MouseLeaveEvent	
+Identifies the MouseLeave routed event.
+
+MouseLeftButtonDownEvent	
+Identifies the MouseLeftButtonDown routed event.
+
+MouseLeftButtonUpEvent	
+Identifies the MouseLeftButtonUp routed event.
+
+MouseMoveEvent	
+Identifies the MouseMove routed event.
+
+MouseRightButtonDownEvent	
+Identifies the MouseRightButtonDown routed event.
+
+MouseRightButtonUpEvent	
+Identifies the MouseRightButtonUp routed event.
+
+MouseUpEvent	
+Identifies the MouseUp routed event.
+
+MouseWheelEvent	
+Identifies the MouseWheel routed event.
+
+OpacityMaskProperty	
+Identifies the OpacityMask dependency property.
+
+OpacityProperty	
+Identifies the Opacity dependency property.
+
+PreviewDragEnterEvent	
+Identifies the PreviewDragEnter routed event.
+
+PreviewDragLeaveEvent	
+Identifies the PreviewDragLeave routed event.
+
+PreviewDragOverEvent	
+Identifies the PreviewDragOver routed event.
+
+PreviewDropEvent	
+Identifies the PreviewDrop routed event.
+
+PreviewGiveFeedbackEvent	
+Identifies the PreviewGiveFeedback routed event.
+
+PreviewGotKeyboardFocusEvent	
+Identifies the PreviewGotKeyboardFocus routed event.
+
+PreviewKeyDownEvent	
+Identifies the PreviewKeyDown routed event.
+
+PreviewKeyUpEvent	
+Identifies the PreviewKeyUp routed event.
+
+PreviewLostKeyboardFocusEvent	
+Identifies the PreviewLostKeyboardFocus routed event.
+
+PreviewMouseDownEvent	
+Identifies the PreviewMouseDown routed event.
+
+PreviewMouseLeftButtonDownEvent	
+Identifies the PreviewMouseLeftButtonDown routed event.
+
+PreviewMouseLeftButtonUpEvent	
+Identifies the PreviewMouseLeftButtonUp routed event.
+
+PreviewMouseMoveEvent	
+Identifies the PreviewMouseMove routed event.
+
+PreviewMouseRightButtonDownEvent	
+Identifies the PreviewMouseRightButtonDown routed event.
+
+PreviewMouseRightButtonUpEvent	
+Identifies the PreviewMouseRightButtonUp routed event.
+
+PreviewMouseUpEvent	
+Identifies the PreviewMouseUp routed event.
+
+PreviewMouseWheelEvent	
+Identifies the PreviewMouseWheel routed event.
+
+PreviewQueryContinueDragEvent	
+Identifies the PreviewQueryContinueDrag routed event.
+
+PreviewStylusButtonDownEvent	
+Identifies the PreviewStylusButtonDown routed event.
+
+PreviewStylusButtonUpEvent	
+Identifies the PreviewStylusButtonUp routed event.
+
+PreviewStylusDownEvent	
+Identifies the PreviewStylusDown routed event.
+
+PreviewStylusInAirMoveEvent	
+Identifies the PreviewStylusInAirMove routed event.
+
+PreviewStylusInRangeEvent	
+Identifies the PreviewStylusInRange routed event.
+
+PreviewStylusMoveEvent	
+Identifies the PreviewStylusMove routed event.
+
+PreviewStylusOutOfRangeEvent	
+Identifies the PreviewStylusOutOfRange routed event.
+
+PreviewStylusSystemGestureEvent	
+Identifies the PreviewStylusSystemGesture routed event.
+
+PreviewStylusUpEvent	
+Identifies the PreviewStylusUp routed event.
+
+PreviewTextInputEvent	
+Identifies the PreviewTextInput routed event.
+
+PreviewTouchDownEvent	
+Identifies the PreviewTouchDown routed event.
+
+PreviewTouchMoveEvent	
+Identifies the PreviewTouchMove routed event.
+
+PreviewTouchUpEvent	
+Identifies the PreviewTouchUp routed event.
+
+QueryContinueDragEvent	
+Identifies the QueryContinueDrag routed event.
+
+QueryCursorEvent	
+Identifies the QueryCursor routed event.
+
+RenderTransformOriginProperty	
+Identifies the RenderTransformOrigin dependency property.
+
+RenderTransformProperty	
+Identifies the RenderTransform dependency property.
+
+SnapsToDevicePixelsProperty	
+Identifies the SnapsToDevicePixels dependency property.
+
+StylusButtonDownEvent	
+Identifies the StylusButtonDown routed event.
+
+StylusButtonUpEvent	
+Identifies the StylusButtonUp routed event.
+
+StylusDownEvent	
+Identifies the StylusDown routed event.
+
+StylusEnterEvent	
+Identifies the StylusEnter routed event.
+
+StylusInAirMoveEvent	
+Identifies the StylusInAirMove routed event.
+
+StylusInRangeEvent	
+Identifies the StylusInRange routed event.
+
+StylusLeaveEvent	
+Identifies the StylusLeave routed event.
+
+StylusMoveEvent	
+Identifies the StylusMove routed event.
+
+StylusOutOfRangeEvent	
+Identifies the StylusOutOfRange routed event.
+
+StylusSystemGestureEvent	
+Identifies the StylusSystemGesture routed event.
+
+StylusUpEvent	
+Identifies the StylusUp routed event.
+
+TextInputEvent	
+Identifies the TextInput routed event.
+
+TouchDownEvent	
+Identifies the TouchDown routed event.
+
+TouchEnterEvent	
+Identifies the TouchEnter routed event.
+
+TouchLeaveEvent	
+Identifies the TouchLeave routed event.
+
+TouchMoveEvent	
+Identifies the TouchMove routed event.
+
+TouchUpEvent	
+Identifies the TouchUp routed event.
+
+UidProperty	
+Identifies the Uid dependency property.
+
+VisibilityProperty	
+Identifies the Visibility dependency property.
+
+
+##### EXPLICIT INTERFACE IMPLEMENTATIONS
+IQueryAmbient.IsAmbientPropertyAvailable(String)	
+For a description of this member, see the IsAmbientPropertyAvailable(String) method.
+
+
+#### Visual
+
+
+##### 方法:
+METHODS
+AddVisualChild(Visual)	
+Defines the parent-child relationship between two visuals.
+
+CheckAccess()	
+Determines whether the calling thread has access to this DispatcherObject.
+
+(Inherited from DispatcherObject)
+ClearValue(DependencyProperty)	
+Clears the local value of a property. The property to be cleared is specified by a DependencyProperty identifier.
+
+(Inherited from DependencyObject)
+ClearValue(DependencyPropertyKey)	
+Clears the local value of a read-only property. The property to be cleared is specified by a DependencyPropertyKey.
+
+(Inherited from DependencyObject)
+CoerceValue(DependencyProperty)	
+Coerces the value of the specified dependency property. This is accomplished by invoking any CoerceValueCallback function specified in property metadata for the dependency property as it exists on the calling DependencyObject.
+
+(Inherited from DependencyObject)
+Equals(Object)	
+Determines whether a provided DependencyObject is equivalent to the current DependencyObject.
+
+(Inherited from DependencyObject)
+FindCommonVisualAncestor(DependencyObject)	
+Returns the common ancestor of two visual objects.
+
+GetHashCode()	
+Gets a hash code for this DependencyObject.
+
+(Inherited from DependencyObject)
+GetLocalValueEnumerator()	
+Creates a specialized enumerator for determining which dependency properties have locally set values on this DependencyObject.
+
+(Inherited from DependencyObject)
+GetType()	
+Gets the Type of the current instance.
+
+(Inherited from Object)
+GetValue(DependencyProperty)	
+Returns the current effective value of a dependency property on this instance of a DependencyObject.
+
+(Inherited from DependencyObject)
+GetVisualChild(Int32)	
+Returns the specified Visual in the parent VisualCollection.
+
+HitTestCore(GeometryHitTestParameters)	
+Determines whether a geometry value is within the bounds of the visual object.
+
+HitTestCore(PointHitTestParameters)	
+Determines whether a point coordinate value is within the bounds of the visual object.
+
+InvalidateProperty(DependencyProperty)	
+Re-evaluates the effective value for the specified dependency property.
+
+(Inherited from DependencyObject)
+IsAncestorOf(DependencyObject)	
+Determines whether the visual object is an ancestor of the descendant visual object.
+
+IsDescendantOf(DependencyObject)	
+Determines whether the visual object is a descendant of the ancestor visual object.
+
+MemberwiseClone()	
+Creates a shallow copy of the current Object.
+
+(Inherited from Object)
+OnDpiChanged(DpiScale, DpiScale)	
+Called when the DPI at which this View is rendered changes.
+
+OnPropertyChanged(DependencyPropertyChangedEventArgs)	
+Invoked whenever the effective value of any dependency property on this DependencyObject has been updated. The specific dependency property that changed is reported in the event data.
+
+(Inherited from DependencyObject)
+OnVisualChildrenChanged(DependencyObject, DependencyObject)	
+Called when the VisualCollection of the visual object is modified.
+
+OnVisualParentChanged(DependencyObject)	
+Called when the parent of the visual object is changed.
+
+PointFromScreen(Point)	
+Converts a Point in screen coordinates into a Point that represents the current coordinate system of the Visual.
+
+PointToScreen(Point)	
+Converts a Point that represents the current coordinate system of the Visual into a Point in screen coordinates.
+
+ReadLocalValue(DependencyProperty)	
+Returns the local value of a dependency property, if it exists.
+
+(Inherited from DependencyObject)
+RemoveVisualChild(Visual)	
+Removes the parent-child relationship between two visuals.
+
+SetCurrentValue(DependencyProperty, Object)	
+Sets the value of a dependency property without changing its value source.
+
+(Inherited from DependencyObject)
+SetValue(DependencyProperty, Object)	
+Sets the local value of a dependency property, specified by its dependency property identifier.
+
+(Inherited from DependencyObject)
+SetValue(DependencyPropertyKey, Object)	
+Sets the local value of a read-only dependency property, specified by the DependencyPropertyKey identifier of the dependency property.
+
+(Inherited from DependencyObject)
+ShouldSerializeProperty(DependencyProperty)	
+Returns a value that indicates whether serialization processes should serialize the value for the provided dependency property.
+
+(Inherited from DependencyObject)
+ToString()	
+Returns a string that represents the current object.
+
+(Inherited from Object)
+TransformToAncestor(Visual)	
+Returns a transform that can be used to transform coordinates from the Visual to the specified Visual ancestor of the visual object.
+
+TransformToAncestor(Visual3D)	
+Returns a transform that can be used to transform coordinates from the Visual to the specified Visual3D ancestor of the visual object.
+
+TransformToDescendant(Visual)	
+Returns a transform that can be used to transform coordinates from the Visual to the specified visual object descendant.
+
+TransformToVisual(Visual)	
+Returns a transform that can be used to transform coordinates from the Visual to the specified visual object.
+
+VerifyAccess()	
+Enforces that the calling thread has access to this DispatcherObject.
+
+(Inherited from DispatcherObject)
+
+
+##### 属性:
+PROPERTIES
+DependencyObjectType	
+Gets the DependencyObjectType that wraps the CLR type of this instance.
+
+(Inherited from DependencyObject)
+Dispatcher	
+Gets the Dispatcher this DispatcherObject is associated with.
+
+(Inherited from DispatcherObject)
+IsSealed	
+Gets a value that indicates whether this instance is currently sealed (read-only).
+
+(Inherited from DependencyObject)
+VisualBitmapEffect	
+Obsolete.
+Gets or sets the BitmapEffect value for the Visual.
+
+VisualBitmapEffectInput	
+Obsolete.
+Gets or sets the BitmapEffectInput value for the Visual.
+
+VisualBitmapScalingMode	
+Gets or sets the BitmapScalingMode for the Visual.
+
+VisualCacheMode	
+Gets or sets a cached representation of the Visual.
+
+VisualChildrenCount	
+Gets the number of child elements for the Visual.
+
+VisualClearTypeHint	
+Gets or sets the ClearTypeHint that determines how ClearType is rendered in the Visual.
+
+VisualClip	
+Gets or sets the clip region of the Visual as a Geometry value.
+
+VisualEdgeMode	
+Gets or sets the edge mode of the Visual as an EdgeMode value.
+
+VisualEffect	
+Gets or sets the bitmap effect to apply to the Visual.
+
+VisualOffset	
+Gets or sets the offset value of the visual object.
+
+VisualOpacity	
+Gets or sets the opacity of the Visual.
+
+VisualOpacityMask	
+Gets or sets the Brush value that represents the opacity mask of the Visual.
+
+VisualParent	
+Gets the visual tree parent of the visual object.
+
+VisualScrollableAreaClip	
+Gets or sets a clipped scrollable area for the Visual.
+
+VisualTextHintingMode	
+Gets or sets the TextHintingMode of the Visual.
+
+VisualTextRenderingMode	
+Gets or sets the TextRenderingMode of the Visual.
+
+VisualTransform	
+Gets or sets the Transform value for the Visual.
+
+VisualXSnappingGuidelines	
+Gets or sets the x-coordinate (vertical) guideline collection.
+
+VisualYSnappingGuidelines	
+Gets or sets the y-coordinate (horizontal) guideline collection.
+
+
+##### [System.Windows.Markup.UidProperty("Uid")]
+
+##### 
+
+
+##### 方法:
+METHODS
+AddHandler(RoutedEvent, Delegate)	
+Adds a routed event handler for a specified routed event, adding the handler to the handler collection on the current element.
+
+(Inherited from UIElement)
+AddHandler(RoutedEvent, Delegate, Boolean)	
+Adds a routed event handler for a specified routed event, adding the handler to the handler collection on the current element. Specify handledEventsToo as true to have the provided handler be invoked for routed event that had already been marked as handled by another element along the event route.
+
+(Inherited from UIElement)
+AddLogicalChild(Object)	
+Adds the provided object to the logical tree of this element.
+
+AddToEventRoute(EventRoute, RoutedEventArgs)	
+Adds handlers to the specified EventRoute for the current UIElement event handler collection.
+
+(Inherited from UIElement)
+AddVisualChild(Visual)	
+Defines the parent-child relationship between two visuals.
+
+(Inherited from Visual)
+ApplyAnimationClock(DependencyProperty, AnimationClock)	
+Applies an animation to a specified dependency property on this element. Any existing animations are stopped and replaced with the new animation.
+
+(Inherited from UIElement)
+ApplyAnimationClock(DependencyProperty, AnimationClock, HandoffBehavior)	
+Applies an animation to a specified dependency property on this element, with the ability to specify what happens if the property already has a running animation.
+
+(Inherited from UIElement)
+ApplyTemplate()	
+Builds the current template's visual tree if necessary, and returns a value that indicates whether the visual tree was rebuilt by this call.
+
+Arrange(Rect)	
+Positions child elements and determines a size for a UIElement. Parent elements call this method from their ArrangeCore(Rect) implementation (or a WPF framework-level equivalent) to form a recursive layout update. This method constitutes the second pass of a layout update.
+
+(Inherited from UIElement)
+ArrangeCore(Rect)	
+Implements ArrangeCore(Rect) (defined as virtual in UIElement) and seals the implementation.
+
+ArrangeOverride(Size)	
+When overridden in a derived class, positions child elements and determines a size for a FrameworkElement derived class.
+
+BeginAnimation(DependencyProperty, AnimationTimeline)	
+Starts an animation for a specified animated property on this element.
+
+(Inherited from UIElement)
+BeginAnimation(DependencyProperty, AnimationTimeline, HandoffBehavior)	
+Starts a specific animation for a specified animated property on this element, with the option of specifying what happens if the property already has a running animation.
+
+(Inherited from UIElement)
+BeginInit()	
+Starts the initialization process for this element.
+
+BeginStoryboard(Storyboard)	
+Begins the sequence of actions that are contained in the provided storyboard.
+
+BeginStoryboard(Storyboard, HandoffBehavior)	
+Begins the sequence of actions contained in the provided storyboard, with options specified for what should happen if the property is already animated.
+
+BeginStoryboard(Storyboard, HandoffBehavior, Boolean)	
+Begins the sequence of actions contained in the provided storyboard, with specified state for control of the animation after it is started.
+
+BringIntoView()	
+Attempts to bring this element into view, within any scrollable regions it is contained within.
+
+BringIntoView(Rect)	
+Attempts to bring the provided region size of this element into view, within any scrollable regions it is contained within.
+
+CaptureMouse()	
+Attempts to force capture of the mouse to this element.
+
+(Inherited from UIElement)
+CaptureStylus()	
+Attempts to force capture of the stylus to this element.
+
+(Inherited from UIElement)
+CaptureTouch(TouchDevice)	
+Attempts to force capture of a touch to this element.
+
+(Inherited from UIElement)
+CheckAccess()	
+Determines whether the calling thread has access to this DispatcherObject.
+
+(Inherited from DispatcherObject)
+ClearValue(DependencyProperty)	
+Clears the local value of a property. The property to be cleared is specified by a DependencyProperty identifier.
+
+(Inherited from DependencyObject)
+ClearValue(DependencyPropertyKey)	
+Clears the local value of a read-only property. The property to be cleared is specified by a DependencyPropertyKey.
+
+(Inherited from DependencyObject)
+CoerceValue(DependencyProperty)	
+Coerces the value of the specified dependency property. This is accomplished by invoking any CoerceValueCallback function specified in property metadata for the dependency property as it exists on the calling DependencyObject.
+
+(Inherited from DependencyObject)
+EndInit()	
+Indicates that the initialization process for the element is complete.
+
+Equals(Object)	
+Determines whether a provided DependencyObject is equivalent to the current DependencyObject.
+
+(Inherited from DependencyObject)
+FindCommonVisualAncestor(DependencyObject)	
+Returns the common ancestor of two visual objects.
+
+(Inherited from Visual)
+FindName(String)	
+Finds an element that has the provided identifier name.
+
+FindResource(Object)	
+Searches for a resource with the specified key, and throws an exception if the requested resource is not found.
+
+Focus()	
+Attempts to set focus to this element.
+
+(Inherited from UIElement)
+GetAnimationBaseValue(DependencyProperty)	
+Returns the base property value for the specified property on this element, disregarding any possible animated value from a running or stopped animation.
+
+(Inherited from UIElement)
+GetBindingExpression(DependencyProperty)	
+Returns the BindingExpression that represents the binding on the specified property.
+
+GetFlowDirection(DependencyObject)	
+Gets the value of the FlowDirection attached property for the specified DependencyObject.
+
+GetHashCode()	
+Gets a hash code for this DependencyObject.
+
+(Inherited from DependencyObject)
+GetLayoutClip(Size)	
+Returns a geometry for a clipping mask. The mask applies if the layout system attempts to arrange an element that is larger than the available display space.
+
+GetLocalValueEnumerator()	
+Creates a specialized enumerator for determining which dependency properties have locally set values on this DependencyObject.
+
+(Inherited from DependencyObject)
+GetTemplateChild(String)	
+Returns the named element in the visual tree of an instantiated ControlTemplate.
+
+GetType()	
+Gets the Type of the current instance.
+
+(Inherited from Object)
+GetUIParentCore()	
+Returns an alternative logical parent for this element if there is no visual parent.
+
+GetValue(DependencyProperty)	
+Returns the current effective value of a dependency property on this instance of a DependencyObject.
+
+(Inherited from DependencyObject)
+GetVisualChild(Int32)	
+Overrides GetVisualChild(Int32), and returns a child at the specified index from a collection of child elements.
+
+HitTestCore(GeometryHitTestParameters)	
+Implements HitTestCore(GeometryHitTestParameters) to supply base element hit testing behavior (returning GeometryHitTestResult).
+
+(Inherited from UIElement)
+HitTestCore(PointHitTestParameters)	
+Implements HitTestCore(PointHitTestParameters) to supply base element hit testing behavior (returning HitTestResult).
+
+(Inherited from UIElement)
+InputHitTest(Point)	
+Returns the input element within the current element that is at the specified coordinates, relative to the current element's origin.
+
+(Inherited from UIElement)
+InvalidateArrange()	
+Invalidates the arrange state (layout) for the element. After the invalidation, the element will have its layout updated, which will occur asynchronously unless subsequently forced by UpdateLayout().
+
+(Inherited from UIElement)
+InvalidateMeasure()	
+Invalidates the measurement state (layout) for the element.
+
+(Inherited from UIElement)
+InvalidateProperty(DependencyProperty)	
+Re-evaluates the effective value for the specified dependency property.
+
+(Inherited from DependencyObject)
+InvalidateVisual()	
+Invalidates the rendering of the element, and forces a complete new layout pass. OnRender(DrawingContext) is called after the layout cycle is completed.
+
+(Inherited from UIElement)
+IsAncestorOf(DependencyObject)	
+Determines whether the visual object is an ancestor of the descendant visual object.
+
+(Inherited from Visual)
+IsDescendantOf(DependencyObject)	
+Determines whether the visual object is a descendant of the ancestor visual object.
+
+(Inherited from Visual)
+Measure(Size)	
+Updates the DesiredSize of a UIElement. Parent elements call this method from their own MeasureCore(Size) implementations to form a recursive layout update. Calling this method constitutes the first pass (the "Measure" pass) of a layout update.
+
+(Inherited from UIElement)
+MeasureCore(Size)	
+Implements basic measure-pass layout system behavior for FrameworkElement.
+
+MeasureOverride(Size)	
+When overridden in a derived class, measures the size in layout required for child elements and determines a size for the FrameworkElement-derived class.
+
+MemberwiseClone()	
+Creates a shallow copy of the current Object.
+
+(Inherited from Object)
+MoveFocus(TraversalRequest)	
+Moves the keyboard focus away from this element and to another element in a provided traversal direction.
+
+OnAccessKey(AccessKeyEventArgs)	
+Provides class handling for when an access key that is meaningful for this element is invoked.
+
+(Inherited from UIElement)
+OnApplyTemplate()	
+When overridden in a derived class, is invoked whenever application code or internal processes call ApplyTemplate().
+
+OnChildDesiredSizeChanged(UIElement)	
+Supports layout behavior when a child element is resized.
+
+(Inherited from UIElement)
+OnContextMenuClosing(ContextMenuEventArgs)	
+Invoked whenever an unhandled ContextMenuClosing routed event reaches this class in its route. Implement this method to add class handling for this event.
+
+OnContextMenuOpening(ContextMenuEventArgs)	
+Invoked whenever an unhandled ContextMenuOpening routed event reaches this class in its route. Implement this method to add class handling for this event.
+
+OnCreateAutomationPeer()	
+Returns class-specific AutomationPeer implementations for the Windows Presentation Foundation (WPF) infrastructure.
+
+(Inherited from UIElement)
+OnDpiChanged(DpiScale, DpiScale)	
+Called when the DPI at which this View is rendered changes.
+
+(Inherited from Visual)
+OnDragEnter(DragEventArgs)	
+Invoked when an unhandled DragEnter attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnDragLeave(DragEventArgs)	
+Invoked when an unhandled DragLeave attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnDragOver(DragEventArgs)	
+Invoked when an unhandled DragOver attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnDrop(DragEventArgs)	
+Invoked when an unhandled DragEnter attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnGiveFeedback(GiveFeedbackEventArgs)	
+Invoked when an unhandled GiveFeedback attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnGotFocus(RoutedEventArgs)	
+Invoked whenever an unhandled GotFocus event reaches this element in its route.
+
+OnGotKeyboardFocus(KeyboardFocusChangedEventArgs)	
+Invoked when an unhandled GotKeyboardFocus attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnGotMouseCapture(MouseEventArgs)	
+Invoked when an unhandled GotMouseCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnGotStylusCapture(StylusEventArgs)	
+Invoked when an unhandled GotStylusCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnGotTouchCapture(TouchEventArgs)	
+Provides class handling for the GotTouchCapture routed event that occurs when a touch is captured to this element.
+
+(Inherited from UIElement)
+OnInitialized(EventArgs)	
+Raises the Initialized event. This method is invoked whenever IsInitialized is set to true internally.
+
+OnIsKeyboardFocusedChanged(DependencyPropertyChangedEventArgs)	
+Invoked when an unhandled IsKeyboardFocusedChanged event is raised on this element. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnIsKeyboardFocusWithinChanged(DependencyPropertyChangedEventArgs)	
+Invoked just before the IsKeyboardFocusWithinChanged event is raised by this element. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnIsMouseCapturedChanged(DependencyPropertyChangedEventArgs)	
+Invoked when an unhandled IsMouseCapturedChanged event is raised on this element. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnIsMouseCaptureWithinChanged(DependencyPropertyChangedEventArgs)	
+Invoked when an unhandled IsMouseCaptureWithinChanged event is raised on this element. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnIsMouseDirectlyOverChanged(DependencyPropertyChangedEventArgs)	
+Invoked when an unhandled IsMouseDirectlyOverChanged event is raised on this element. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnIsStylusCapturedChanged(DependencyPropertyChangedEventArgs)	
+Invoked when an unhandled IsStylusCapturedChanged event is raised on this element. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnIsStylusCaptureWithinChanged(DependencyPropertyChangedEventArgs)	
+Invoked when an unhandled IsStylusCaptureWithinChanged event is raised on this element. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnIsStylusDirectlyOverChanged(DependencyPropertyChangedEventArgs)	
+Invoked when an unhandled IsStylusDirectlyOverChanged event is raised on this element. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnKeyDown(KeyEventArgs)	
+Invoked when an unhandled KeyDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnKeyUp(KeyEventArgs)	
+Invoked when an unhandled KeyUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnLostFocus(RoutedEventArgs)	
+Raises the LostFocus routed event by using the event data that is provided.
+
+(Inherited from UIElement)
+OnLostKeyboardFocus(KeyboardFocusChangedEventArgs)	
+Invoked when an unhandled LostKeyboardFocus attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnLostMouseCapture(MouseEventArgs)	
+Invoked when an unhandled LostMouseCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnLostStylusCapture(StylusEventArgs)	
+Invoked when an unhandled LostStylusCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnLostTouchCapture(TouchEventArgs)	
+Provides class handling for the LostTouchCapture routed event that occurs when this element loses a touch capture.
+
+(Inherited from UIElement)
+OnManipulationBoundaryFeedback(ManipulationBoundaryFeedbackEventArgs)	
+Called when the ManipulationBoundaryFeedback event occurs.
+
+(Inherited from UIElement)
+OnManipulationCompleted(ManipulationCompletedEventArgs)	
+Called when the ManipulationCompleted event occurs.
+
+(Inherited from UIElement)
+OnManipulationDelta(ManipulationDeltaEventArgs)	
+Called when the ManipulationDelta event occurs.
+
+(Inherited from UIElement)
+OnManipulationInertiaStarting(ManipulationInertiaStartingEventArgs)	
+Called when the ManipulationInertiaStarting event occurs.
+
+(Inherited from UIElement)
+OnManipulationStarted(ManipulationStartedEventArgs)	
+Called when the ManipulationStarted event occurs.
+
+(Inherited from UIElement)
+OnManipulationStarting(ManipulationStartingEventArgs)	
+Provides class handling for the ManipulationStarting routed event that occurs when the manipulation processor is first created.
+
+(Inherited from UIElement)
+OnMouseDown(MouseButtonEventArgs)	
+Invoked when an unhandled MouseDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnMouseEnter(MouseEventArgs)	
+Invoked when an unhandled MouseEnter attached event is raised on this element. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnMouseLeave(MouseEventArgs)	
+Invoked when an unhandled MouseLeave attached event is raised on this element. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnMouseLeftButtonDown(MouseButtonEventArgs)	
+Invoked when an unhandled MouseLeftButtonDown routed event is raised on this element. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnMouseLeftButtonUp(MouseButtonEventArgs)	
+Invoked when an unhandled MouseLeftButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnMouseMove(MouseEventArgs)	
+Invoked when an unhandled MouseMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnMouseRightButtonDown(MouseButtonEventArgs)	
+Invoked when an unhandled MouseRightButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnMouseRightButtonUp(MouseButtonEventArgs)	
+Invoked when an unhandled MouseRightButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnMouseUp(MouseButtonEventArgs)	
+Invoked when an unhandled MouseUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnMouseWheel(MouseWheelEventArgs)	
+Invoked when an unhandled MouseWheel attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewDragEnter(DragEventArgs)	
+Invoked when an unhandled PreviewDragEnter attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewDragLeave(DragEventArgs)	
+Invoked when an unhandled PreviewDragLeave attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewDragOver(DragEventArgs)	
+Invoked when an unhandled PreviewDragOver attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewDrop(DragEventArgs)	
+Invoked when an unhandled PreviewDrop attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewGiveFeedback(GiveFeedbackEventArgs)	
+Invoked when an unhandled PreviewGiveFeedback attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewGotKeyboardFocus(KeyboardFocusChangedEventArgs)	
+Invoked when an unhandled PreviewGotKeyboardFocus attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewKeyDown(KeyEventArgs)	
+Invoked when an unhandled PreviewKeyDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewKeyUp(KeyEventArgs)	
+Invoked when an unhandled PreviewKeyUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs)	
+Invoked when an unhandled PreviewKeyDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewMouseDown(MouseButtonEventArgs)	
+Invoked when an unhandled PreviewMouseDown attached routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewMouseLeftButtonDown(MouseButtonEventArgs)	
+Invoked when an unhandled PreviewMouseLeftButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewMouseLeftButtonUp(MouseButtonEventArgs)	
+Invoked when an unhandled PreviewMouseLeftButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewMouseMove(MouseEventArgs)	
+Invoked when an unhandled PreviewMouseMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewMouseRightButtonDown(MouseButtonEventArgs)	
+Invoked when an unhandled PreviewMouseRightButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewMouseRightButtonUp(MouseButtonEventArgs)	
+Invoked when an unhandled PreviewMouseRightButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewMouseUp(MouseButtonEventArgs)	
+Invoked when an unhandled PreviewMouseUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewMouseWheel(MouseWheelEventArgs)	
+Invoked when an unhandled PreviewMouseWheel attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewQueryContinueDrag(QueryContinueDragEventArgs)	
+Invoked when an unhandled PreviewQueryContinueDrag attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewStylusButtonDown(StylusButtonEventArgs)	
+Invoked when an unhandled PreviewStylusButtonDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewStylusButtonUp(StylusButtonEventArgs)	
+Invoked when an unhandled PreviewStylusButtonUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewStylusDown(StylusDownEventArgs)	
+Invoked when an unhandled PreviewStylusDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewStylusInAirMove(StylusEventArgs)	
+Invoked when an unhandled PreviewStylusInAirMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewStylusInRange(StylusEventArgs)	
+Invoked when an unhandled PreviewStylusInRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewStylusMove(StylusEventArgs)	
+Invoked when an unhandled PreviewStylusMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewStylusOutOfRange(StylusEventArgs)	
+Invoked when an unhandled PreviewStylusOutOfRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewStylusSystemGesture(StylusSystemGestureEventArgs)	
+Invoked when an unhandled PreviewStylusSystemGesture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewStylusUp(StylusEventArgs)	
+Invoked when an unhandled PreviewStylusUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewTextInput(TextCompositionEventArgs)	
+Invoked when an unhandled PreviewTextInput attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnPreviewTouchDown(TouchEventArgs)	
+Provides class handling for the PreviewTouchDown routed event that occurs when a touch presses this element.
+
+(Inherited from UIElement)
+OnPreviewTouchMove(TouchEventArgs)	
+Provides class handling for the PreviewTouchMove routed event that occurs when a touch moves while inside this element.
+
+(Inherited from UIElement)
+OnPreviewTouchUp(TouchEventArgs)	
+Provides class handling for the PreviewTouchUp routed event that occurs when a touch is released inside this element.
+
+(Inherited from UIElement)
+OnPropertyChanged(DependencyPropertyChangedEventArgs)	
+Invoked whenever the effective value of any dependency property on this FrameworkElement has been updated. The specific dependency property that changed is reported in the arguments parameter. Overrides OnPropertyChanged(DependencyPropertyChangedEventArgs).
+
+OnQueryContinueDrag(QueryContinueDragEventArgs)	
+Invoked when an unhandled QueryContinueDrag attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnQueryCursor(QueryCursorEventArgs)	
+Invoked when an unhandled QueryCursor attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnRender(DrawingContext)	
+When overridden in a derived class, participates in rendering operations that are directed by the layout system. The rendering instructions for this element are not used directly when this method is invoked, and are instead preserved for later asynchronous use by layout and drawing.
+
+(Inherited from UIElement)
+OnRenderSizeChanged(SizeChangedInfo)	
+Raises the SizeChanged event, using the specified information as part of the eventual event data.
+
+OnStyleChanged(Style, Style)	
+Invoked when the style in use on this element changes, which will invalidate the layout.
+
+OnStylusButtonDown(StylusButtonEventArgs)	
+Invoked when an unhandled StylusButtonDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnStylusButtonUp(StylusButtonEventArgs)	
+Invoked when an unhandled StylusButtonUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnStylusDown(StylusDownEventArgs)	
+Invoked when an unhandled StylusDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnStylusEnter(StylusEventArgs)	
+Invoked when an unhandled StylusEnter attached event is raised by this element. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnStylusInAirMove(StylusEventArgs)	
+Invoked when an unhandled StylusInAirMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnStylusInRange(StylusEventArgs)	
+Invoked when an unhandled StylusInRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnStylusLeave(StylusEventArgs)	
+Invoked when an unhandled StylusLeave attached event is raised by this element. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnStylusMove(StylusEventArgs)	
+Invoked when an unhandled StylusMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnStylusOutOfRange(StylusEventArgs)	
+Invoked when an unhandled StylusOutOfRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnStylusSystemGesture(StylusSystemGestureEventArgs)	
+Invoked when an unhandled StylusSystemGesture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnStylusUp(StylusEventArgs)	
+Invoked when an unhandled StylusUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnTextInput(TextCompositionEventArgs)	
+Invoked when an unhandled TextInput attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+
+(Inherited from UIElement)
+OnToolTipClosing(ToolTipEventArgs)	
+Invoked whenever an unhandled ToolTipClosing routed event reaches this class in its route. Implement this method to add class handling for this event.
+
+OnToolTipOpening(ToolTipEventArgs)	
+Invoked whenever the ToolTipOpening routed event reaches this class in its route. Implement this method to add class handling for this event.
+
+OnTouchDown(TouchEventArgs)	
+Provides class handling for the TouchDown routed event that occurs when a touch presses inside this element.
+
+(Inherited from UIElement)
+OnTouchEnter(TouchEventArgs)	
+Provides class handling for the TouchEnter routed event that occurs when a touch moves from outside to inside the bounds of this element.
+
+(Inherited from UIElement)
+OnTouchLeave(TouchEventArgs)	
+Provides class handling for the TouchLeave routed event that occurs when a touch moves from inside to outside the bounds of this UIElement.
+
+(Inherited from UIElement)
+OnTouchMove(TouchEventArgs)	
+Provides class handling for the TouchMove routed event that occurs when a touch moves while inside this element.
+
+(Inherited from UIElement)
+OnTouchUp(TouchEventArgs)	
+Provides class handling for the TouchUp routed event that occurs when a touch is released inside this element.
+
+(Inherited from UIElement)
+OnVisualChildrenChanged(DependencyObject, DependencyObject)	
+Called when the VisualCollection of the visual object is modified.
+
+(Inherited from Visual)
+OnVisualParentChanged(DependencyObject)	
+Invoked when the parent of this element in the visual tree is changed. Overrides OnVisualParentChanged(DependencyObject).
+
+ParentLayoutInvalidated(UIElement)	
+Supports incremental layout implementations in specialized subclasses of FrameworkElement. ParentLayoutInvalidated(UIElement) is invoked when a child element has invalidated a property that is marked in metadata as affecting the parent's measure or arrange passes during layout.
+
+PointFromScreen(Point)	
+Converts a Point in screen coordinates into a Point that represents the current coordinate system of the Visual.
+
+(Inherited from Visual)
+PointToScreen(Point)	
+Converts a Point that represents the current coordinate system of the Visual into a Point in screen coordinates.
+
+(Inherited from Visual)
+PredictFocus(FocusNavigationDirection)	
+Determines the next element that would receive focus relative to this element for a provided focus movement direction, but does not actually move the focus.
+
+RaiseEvent(RoutedEventArgs)	
+Raises a specific routed event. The RoutedEvent to be raised is identified within the RoutedEventArgs instance that is provided (as the RoutedEvent property of that event data).
+
+(Inherited from UIElement)
+ReadLocalValue(DependencyProperty)	
+Returns the local value of a dependency property, if it exists.
+
+(Inherited from DependencyObject)
+RegisterName(String, Object)	
+Provides an accessor that simplifies access to the NameScope registration method.
+
+ReleaseAllTouchCaptures()	
+Releases all captured touch devices from this element.
+
+(Inherited from UIElement)
+ReleaseMouseCapture()	
+Releases the mouse capture, if this element held the capture.
+
+(Inherited from UIElement)
+ReleaseStylusCapture()	
+Releases the stylus device capture, if this element held the capture.
+
+(Inherited from UIElement)
+ReleaseTouchCapture(TouchDevice)	
+Attempts to release the specified touch device from this element.
+
+(Inherited from UIElement)
+RemoveHandler(RoutedEvent, Delegate)	
+Removes the specified routed event handler from this element.
+
+(Inherited from UIElement)
+RemoveLogicalChild(Object)	
+Removes the provided object from this element's logical tree. FrameworkElement updates the affected logical tree parent pointers to keep in sync with this deletion.
+
+RemoveVisualChild(Visual)	
+Removes the parent-child relationship between two visuals.
+
+(Inherited from Visual)
+SetBinding(DependencyProperty, BindingBase)	
+Attaches a binding to this element, based on the provided binding object.
+
+SetBinding(DependencyProperty, String)	
+Attaches a binding to this element, based on the provided source property name as a path qualification to the data source.
+
+SetCurrentValue(DependencyProperty, Object)	
+Sets the value of a dependency property without changing its value source.
+
+(Inherited from DependencyObject)
+SetFlowDirection(DependencyObject, FlowDirection)	
+Sets the value of the FlowDirection attached property for the provided element.
+
+SetResourceReference(DependencyProperty, Object)	
+Searches for a resource with the specified name and sets up a resource reference to it for the specified property.
+
+SetValue(DependencyProperty, Object)	
+Sets the local value of a dependency property, specified by its dependency property identifier.
+
+(Inherited from DependencyObject)
+SetValue(DependencyPropertyKey, Object)	
+Sets the local value of a read-only dependency property, specified by the DependencyPropertyKey identifier of the dependency property.
+
+(Inherited from DependencyObject)
+ShouldSerializeCommandBindings()	
+Returns whether serialization processes should serialize the contents of the CommandBindings property on instances of this class.
+
+(Inherited from UIElement)
+ShouldSerializeInputBindings()	
+Returns whether serialization processes should serialize the contents of the InputBindings property on instances of this class.
+
+(Inherited from UIElement)
+ShouldSerializeProperty(DependencyProperty)	
+Returns a value that indicates whether serialization processes should serialize the value for the provided dependency property.
+
+(Inherited from DependencyObject)
+ShouldSerializeResources()	
+Returns whether serialization processes should serialize the contents of the Resources property.
+
+ShouldSerializeStyle()	
+Returns whether serialization processes should serialize the contents of the Style property.
+
+ShouldSerializeTriggers()	
+Returns whether serialization processes should serialize the contents of the Triggers property.
+
+ToString()	
+Returns a string that represents the current object.
+
+(Inherited from Object)
+TransformToAncestor(Visual)	
+Returns a transform that can be used to transform coordinates from the Visual to the specified Visual ancestor of the visual object.
+
+(Inherited from Visual)
+TransformToAncestor(Visual3D)	
+Returns a transform that can be used to transform coordinates from the Visual to the specified Visual3D ancestor of the visual object.
+
+(Inherited from Visual)
+TransformToDescendant(Visual)	
+Returns a transform that can be used to transform coordinates from the Visual to the specified visual object descendant.
+
+(Inherited from Visual)
+TransformToVisual(Visual)	
+Returns a transform that can be used to transform coordinates from the Visual to the specified visual object.
+
+(Inherited from Visual)
+TranslatePoint(Point, UIElement)	
+Translates a point relative to this element to coordinates that are relative to the specified element.
+
+(Inherited from UIElement)
+TryFindResource(Object)	
+Searches for a resource with the specified key, and returns that resource if found.
+
+UnregisterName(String)	
+Simplifies access to the NameScope de-registration method.
+
+UpdateDefaultStyle()	
+Reapplies the default style to the current FrameworkElement.
+
+UpdateLayout()	
+Ensures that all visual child elements of this element are properly updated for layout.
+
+(Inherited from UIElement)
+VerifyAccess()	
+Enforces that the calling thread has access to this DispatcherObject.
+
+(Inherited from DispatcherObject)
+Events
+EVENTS
+ContextMenuClosing	
+Occurs just before any context menu on the element is closed.
+
+ContextMenuOpening	
+Occurs when any context menu on the element is opened.
+
+DataContextChanged	
+Occurs when the data context for this element changes.
+
+DragEnter	
+Occurs when the input system reports an underlying drag event with this element as the drag target.
+
+(Inherited from UIElement)
+DragLeave	
+Occurs when the input system reports an underlying drag event with this element as the drag origin.
+
+(Inherited from UIElement)
+DragOver	
+Occurs when the input system reports an underlying drag event with this element as the potential drop target.
+
+(Inherited from UIElement)
+Drop	
+Occurs when the input system reports an underlying drop event with this element as the drop target.
+
+(Inherited from UIElement)
+FocusableChanged	
+Occurs when the value of the Focusable property changes.
+
+(Inherited from UIElement)
+GiveFeedback	
+Occurs when the input system reports an underlying drag-and-drop event that involves this element.
+
+(Inherited from UIElement)
+GotFocus	
+Occurs when this element gets logical focus.
+
+(Inherited from UIElement)
+GotKeyboardFocus	
+Occurs when the keyboard is focused on this element.
+
+(Inherited from UIElement)
+GotMouseCapture	
+Occurs when this element captures the mouse.
+
+(Inherited from UIElement)
+GotStylusCapture	
+Occurs when this element captures the stylus.
+
+(Inherited from UIElement)
+GotTouchCapture	
+Occurs when a touch is captured to this element.
+
+(Inherited from UIElement)
+Initialized	
+Occurs when this FrameworkElement is initialized. This event coincides with cases where the value of the IsInitialized property changes from false (or undefined) to true.
+
+IsEnabledChanged	
+Occurs when the value of the IsEnabled property on this element changes.
+
+(Inherited from UIElement)
+IsHitTestVisibleChanged	
+Occurs when the value of the IsHitTestVisible dependency property changes on this element.
+
+(Inherited from UIElement)
+IsKeyboardFocusedChanged	
+Occurs when the value of the IsKeyboardFocused property changes on this element.
+
+(Inherited from UIElement)
+IsKeyboardFocusWithinChanged	
+Occurs when the value of the IsKeyboardFocusWithin property changes on this element.
+
+(Inherited from UIElement)
+IsMouseCapturedChanged	
+Occurs when the value of the IsMouseCaptured property changes on this element.
+
+(Inherited from UIElement)
+IsMouseCaptureWithinChanged	
+Occurs when the value of the IsMouseCaptureWithinProperty changes on this element.
+
+(Inherited from UIElement)
+IsMouseDirectlyOverChanged	
+Occurs when the value of the IsMouseDirectlyOver property changes on this element.
+
+(Inherited from UIElement)
+IsStylusCapturedChanged	
+Occurs when the value of the IsStylusCaptured property changes on this element.
+
+(Inherited from UIElement)
+IsStylusCaptureWithinChanged	
+Occurs when the value of the IsStylusCaptureWithin property changes on this element.
+
+(Inherited from UIElement)
+IsStylusDirectlyOverChanged	
+Occurs when the value of the IsStylusDirectlyOver property changes on this element.
+
+(Inherited from UIElement)
+IsVisibleChanged	
+Occurs when the value of the IsVisible property changes on this element.
+
+(Inherited from UIElement)
+KeyDown	
+Occurs when a key is pressed while focus is on this element.
+
+(Inherited from UIElement)
+KeyUp	
+Occurs when a key is released while focus is on this element.
+
+(Inherited from UIElement)
+LayoutUpdated	
+Occurs when the layout of the various visual elements associated with the current Dispatcher changes.
+
+(Inherited from UIElement)
+Loaded	
+Occurs when the element is laid out, rendered, and ready for interaction.
+
+LostFocus	
+Occurs when this element loses logical focus.
+
+(Inherited from UIElement)
+LostKeyboardFocus	
+Occurs when the keyboard is no longer focused on this element.
+
+(Inherited from UIElement)
+LostMouseCapture	
+Occurs when this element loses mouse capture.
+
+(Inherited from UIElement)
+LostStylusCapture	
+Occurs when this element loses stylus capture.
+
+(Inherited from UIElement)
+LostTouchCapture	
+Occurs when this element loses a touch capture.
+
+(Inherited from UIElement)
+ManipulationBoundaryFeedback	
+Occurs when the manipulation encounters a boundary.
+
+(Inherited from UIElement)
+ManipulationCompleted	
+Occurs when a manipulation and inertia on the UIElement object is complete.
+
+(Inherited from UIElement)
+ManipulationDelta	
+Occurs when the input device changes position during a manipulation.
+
+(Inherited from UIElement)
+ManipulationInertiaStarting	
+Occurs when the input device loses contact with the UIElement object during a manipulation and inertia begins.
+
+(Inherited from UIElement)
+ManipulationStarted	
+Occurs when an input device begins a manipulation on the UIElement object.
+
+(Inherited from UIElement)
+ManipulationStarting	
+Occurs when the manipulation processor is first created.
+
+(Inherited from UIElement)
+MouseDown	
+Occurs when any mouse button is pressed while the pointer is over this element.
+
+(Inherited from UIElement)
+MouseEnter	
+Occurs when the mouse pointer enters the bounds of this element.
+
+(Inherited from UIElement)
+MouseLeave	
+Occurs when the mouse pointer leaves the bounds of this element.
+
+(Inherited from UIElement)
+MouseLeftButtonDown	
+Occurs when the left mouse button is pressed while the mouse pointer is over this element.
+
+(Inherited from UIElement)
+MouseLeftButtonUp	
+Occurs when the left mouse button is released while the mouse pointer is over this element.
+
+(Inherited from UIElement)
+MouseMove	
+Occurs when the mouse pointer moves while over this element.
+
+(Inherited from UIElement)
+MouseRightButtonDown	
+Occurs when the right mouse button is pressed while the mouse pointer is over this element.
+
+(Inherited from UIElement)
+MouseRightButtonUp	
+Occurs when the right mouse button is released while the mouse pointer is over this element.
+
+(Inherited from UIElement)
+MouseUp	
+Occurs when any mouse button is released over this element.
+
+(Inherited from UIElement)
+MouseWheel	
+Occurs when the user rotates the mouse wheel while the mouse pointer is over this element.
+
+(Inherited from UIElement)
+PreviewDragEnter	
+Occurs when the input system reports an underlying drag event with this element as the drag target.
+
+(Inherited from UIElement)
+PreviewDragLeave	
+Occurs when the input system reports an underlying drag event with this element as the drag origin.
+
+(Inherited from UIElement)
+PreviewDragOver	
+Occurs when the input system reports an underlying drag event with this element as the potential drop target.
+
+(Inherited from UIElement)
+PreviewDrop	
+Occurs when the input system reports an underlying drop event with this element as the drop target.
+
+(Inherited from UIElement)
+PreviewGiveFeedback	
+Occurs when a drag-and-drop operation is started.
+
+(Inherited from UIElement)
+PreviewGotKeyboardFocus	
+Occurs when the keyboard is focused on this element.
+
+(Inherited from UIElement)
+PreviewKeyDown	
+Occurs when a key is pressed while focus is on this element.
+
+(Inherited from UIElement)
+PreviewKeyUp	
+Occurs when a key is released while focus is on this element.
+
+(Inherited from UIElement)
+PreviewLostKeyboardFocus	
+Occurs when the keyboard is no longer focused on this element.
+
+(Inherited from UIElement)
+PreviewMouseDown	
+Occurs when any mouse button is pressed while the pointer is over this element.
+
+(Inherited from UIElement)
+PreviewMouseLeftButtonDown	
+Occurs when the left mouse button is pressed while the mouse pointer is over this element.
+
+(Inherited from UIElement)
+PreviewMouseLeftButtonUp	
+Occurs when the left mouse button is released while the mouse pointer is over this element.
+
+(Inherited from UIElement)
+PreviewMouseMove	
+Occurs when the mouse pointer moves while the mouse pointer is over this element.
+
+(Inherited from UIElement)
+PreviewMouseRightButtonDown	
+Occurs when the right mouse button is pressed while the mouse pointer is over this element.
+
+(Inherited from UIElement)
+PreviewMouseRightButtonUp	
+Occurs when the right mouse button is released while the mouse pointer is over this element.
+
+(Inherited from UIElement)
+PreviewMouseUp	
+Occurs when any mouse button is released while the mouse pointer is over this element.
+
+(Inherited from UIElement)
+PreviewMouseWheel	
+Occurs when the user rotates the mouse wheel while the mouse pointer is over this element.
+
+(Inherited from UIElement)
+PreviewQueryContinueDrag	
+Occurs when there is a change in the keyboard or mouse button state during a drag-and-drop operation.
+
+(Inherited from UIElement)
+PreviewStylusButtonDown	
+Occurs when the stylus button is pressed while the pointer is over this element.
+
+(Inherited from UIElement)
+PreviewStylusButtonUp	
+Occurs when the stylus button is released while the pointer is over this element.
+
+(Inherited from UIElement)
+PreviewStylusDown	
+Occurs when the stylus touches the digitizer while it is over this element.
+
+(Inherited from UIElement)
+PreviewStylusInAirMove	
+Occurs when the stylus moves over an element without actually touching the digitizer.
+
+(Inherited from UIElement)
+PreviewStylusInRange	
+Occurs when the stylus is close enough to the digitizer to be detected, while over this element.
+
+(Inherited from UIElement)
+PreviewStylusMove	
+Occurs when the stylus moves while over the element. The stylus must move while being detected by the digitizer to raise this event, otherwise, PreviewStylusInAirMove is raised instead.
+
+(Inherited from UIElement)
+PreviewStylusOutOfRange	
+Occurs when the stylus is too far from the digitizer to be detected.
+
+(Inherited from UIElement)
+PreviewStylusSystemGesture	
+Occurs when a user performs one of several stylus gestures.
+
+(Inherited from UIElement)
+PreviewStylusUp	
+Occurs when the user raises the stylus off the digitizer while the stylus is over this element.
+
+(Inherited from UIElement)
+PreviewTextInput	
+Occurs when this element gets text in a device-independent manner.
+
+(Inherited from UIElement)
+PreviewTouchDown	
+Occurs when a finger touches the screen while the finger is over this element.
+
+(Inherited from UIElement)
+PreviewTouchMove	
+Occurs when a finger moves on the screen while the finger is over this element.
+
+(Inherited from UIElement)
+PreviewTouchUp	
+Occurs when a finger is raised off of the screen while the finger is over this element.
+
+(Inherited from UIElement)
+QueryContinueDrag	
+Occurs when there is a change in the keyboard or mouse button state during a drag-and-drop operation.
+
+(Inherited from UIElement)
+QueryCursor	
+Occurs when the cursor is requested to display. This event is raised on an element each time that the mouse pointer moves to a new location, which means the cursor object might need to be changed based on its new position.
+
+(Inherited from UIElement)
+RequestBringIntoView	
+Occurs when BringIntoView(Rect) is called on this element.
+
+SizeChanged	
+Occurs when either the ActualHeight or the ActualWidth properties change value on this element.
+
+SourceUpdated	
+Occurs when the source value changes for any existing property binding on this element.
+
+StylusButtonDown	
+Occurs when the stylus button is pressed while the pointer is over this element.
+
+(Inherited from UIElement)
+StylusButtonUp	
+Occurs when the stylus button is released while the pointer is over this element.
+
+(Inherited from UIElement)
+StylusDown	
+Occurs when the stylus touches the digitizer while the stylus is over this element.
+
+(Inherited from UIElement)
+StylusEnter	
+Occurs when the stylus enters the bounds of this element.
+
+(Inherited from UIElement)
+StylusInAirMove	
+Occurs when the stylus moves over an element without actually touching the digitizer.
+
+(Inherited from UIElement)
+StylusInRange	
+Occurs when the stylus is close enough to the digitizer to be detected, while over this element.
+
+(Inherited from UIElement)
+StylusLeave	
+Occurs when the stylus leaves the bounds of the element.
+
+(Inherited from UIElement)
+StylusMove	
+Occurs when the stylus moves over this element. The stylus must move while on the digitizer to raise this event. Otherwise, StylusInAirMove is raised instead.
+
+(Inherited from UIElement)
+StylusOutOfRange	
+Occurs when the stylus is too far from the digitizer to be detected, while over this element.
+
+(Inherited from UIElement)
+StylusSystemGesture	
+Occurs when a user performs one of several stylus gestures.
+
+(Inherited from UIElement)
+StylusUp	
+Occurs when the user raises the stylus off the digitizer while it is over this element.
+
+(Inherited from UIElement)
+TargetUpdated	
+Occurs when the target value changes for any property binding on this element.
+
+TextInput	
+Occurs when this element gets text in a device-independent manner.
+
+(Inherited from UIElement)
+ToolTipClosing	
+Occurs just before any tooltip on the element is closed.
+
+ToolTipOpening	
+Occurs when any tooltip on the element is opened.
+
+TouchDown	
+Occurs when a finger touches the screen while the finger is over this element.
+
+(Inherited from UIElement)
+TouchEnter	
+Occurs when a touch moves from outside to inside the bounds of this element.
+
+(Inherited from UIElement)
+TouchLeave	
+Occurs when a touch moves from inside to outside the bounds of this element.
+
+(Inherited from UIElement)
+TouchMove	
+Occurs when a finger moves on the screen while the finger is over this element.
+
+(Inherited from UIElement)
+TouchUp	
+Occurs when a finger is raised off of the screen while the finger is over this element.
+
+(Inherited from UIElement)
+Unloaded	
+Occurs when the element is removed from within an element tree of loaded elements.
+
+
+#### DependencyObject 
+
+
+##### 构建WPF/Silverlight的一个主要思想是属性优先于方法和事件。WPF/Silverlight 提供了丰富的属性系统，其核心是DependencyObject。
+
+
+##### 方法:
+METHODS
+CheckAccess()	
+Determines whether the calling thread has access to this DispatcherObject.
+
+(Inherited from DispatcherObject)
+ClearValue(DependencyProperty)	
+Clears the local value of a property. The property to be cleared is specified by a DependencyProperty identifier.
+
+ClearValue(DependencyPropertyKey)	
+Clears the local value of a read-only property. The property to be cleared is specified by a DependencyPropertyKey.
+
+CoerceValue(DependencyProperty)	
+Coerces the value of the specified dependency property. This is accomplished by invoking any CoerceValueCallback function specified in property metadata for the dependency property as it exists on the calling DependencyObject.
+
+Equals(Object)	
+Determines whether a provided DependencyObject is equivalent to the current DependencyObject.
+
+GetHashCode()	
+Gets a hash code for this DependencyObject.
+
+GetLocalValueEnumerator()	
+Creates a specialized enumerator for determining which dependency properties have locally set values on this DependencyObject.
+
+GetType()	
+Gets the Type of the current instance.
+
+(Inherited from Object)
+GetValue(DependencyProperty)	
+Returns the current effective value of a dependency property on this instance of a DependencyObject.
+
+InvalidateProperty(DependencyProperty)	
+Re-evaluates the effective value for the specified dependency property.
+
+MemberwiseClone()	
+Creates a shallow copy of the current Object.
+
+(Inherited from Object)
+OnPropertyChanged(DependencyPropertyChangedEventArgs)	
+Invoked whenever the effective value of any dependency property on this DependencyObject has been updated. The specific dependency property that changed is reported in the event data.
+
+ReadLocalValue(DependencyProperty)	
+Returns the local value of a dependency property, if it exists.
+
+SetCurrentValue(DependencyProperty, Object)	
+Sets the value of a dependency property without changing its value source.
+
+SetValue(DependencyProperty, Object)	
+Sets the local value of a dependency property, specified by its dependency property identifier.
+
+SetValue(DependencyPropertyKey, Object)	
+Sets the local value of a read-only dependency property, specified by the DependencyPropertyKey identifier of the dependency property.
+
+ShouldSerializeProperty(DependencyProperty)	
+Returns a value that indicates whether serialization processes should serialize the value for the provided dependency property.
+
+ToString()	
+Returns a string that represents the current object.
+
+(Inherited from Object)
+VerifyAccess()	
+Enforces that the calling thread has access to this DispatcherObject.
+
+(Inherited from DispatcherObject)
+
+
+##### 属性:
+PROPERTIES
+DependencyObjectType	
+Gets the DependencyObjectType that wraps the CLR type of this instance.
+
+Dispatcher	
+Gets the Dispatcher this DispatcherObject is associated with.
+
+(Inherited from DispatcherObject)
+IsSealed	
+Gets a value that indicates whether this instance is currently sealed (read-only).
+
+
+##### 主要作用是为WPF/Silverlight 提供２D呈现支持，主要包括输出显示，坐标转换，区域剪切等。
+
+#### DispatcherObject
+
+
+##### WPF/Silverlight 中有许多类继承自DispatcherObject，DispatcherObject提供了处理同步和并发的基本构造。
+
+
+##### 属性:
+PROPERTIES
+Dispatcher	
+Gets the Dispatcher this DispatcherObject is associated with.
+
+
+##### 方法:
+METHODS
+CheckAccess()	
+Determines whether the calling thread has access to this DispatcherObject.
+Equals(Object)	
+Determines whether the specified object is equal to the current object.
+(Inherited from Object)
+GetHashCode()	
+Serves as the default hash function.
+(Inherited from Object)
+GetType()	
+Gets the Type of the current instance.
+(Inherited from Object)
+MemberwiseClone()	
+Creates a shallow copy of the current Object.
+(Inherited from Object)
+ToString()	
+Returns a string that represents the current object.
+(Inherited from Object)
+VerifyAccess()	
+Enforces that the calling thread has access to this DispatcherObject.
+
+
+
+
+###### METHODS
+
+###### CheckAccess()	
+
+###### Determines whether the calling thread has access to this DispatcherObject.
+
+###### Equals(Object)	
+
+###### Determines whether the specified object is equal to the current object.
+
+###### (Inherited from Object)
+
+###### GetHashCode()	
+
+###### Serves as the default hash function.
+
+###### (Inherited from Object)
+
+###### GetType()	
+
+###### Gets the Type of the current instance.
+
+###### (Inherited from Object)
+
+###### MemberwiseClone()	
+
+###### Creates a shallow copy of the current Object.
+
+###### (Inherited from Object)
+
+###### ToString()	
+
+###### Returns a string that represents the current object.
+
+###### (Inherited from Object)
+
+###### VerifyAccess()	
+
+###### Enforces that the calling thread has access to this DispatcherObject.
+
+#### System.Object
+
+
+#### FrameworkElement
+
+
+##### Page
+
+
+##### Control
+
+
+##### Image
+
+
+##### Panel
+
+
+##### 而且还添加了一些功能，例如，布局定义、逻辑树、对象生命周期事件、支持数据绑定和动态资源引用、支持样式和动画。
+
+##### 属性:
+PROPERTIES
+ActualHeight	
+Gets the rendered height of this element.
+
+ActualWidth	
+Gets the rendered width of this element.
+
+AllowDrop	
+Gets or sets a value indicating whether this element can be used as the target of a drag-and-drop operation. This is a dependency property.
+
+(Inherited from UIElement)
+AreAnyTouchesCaptured	
+Gets a value that indicates whether at least one touch is captured to this element.
+
+(Inherited from UIElement)
+AreAnyTouchesCapturedWithin	
+Gets a value that indicates whether at least one touch is captured to this element or to any child elements in its visual tree.
+
+(Inherited from UIElement)
+AreAnyTouchesDirectlyOver	
+Gets a value that indicates whether at least one touch is pressed over this element.
+
+(Inherited from UIElement)
+AreAnyTouchesOver	
+Gets a value that indicates whether at least one touch is pressed over this element or any child elements in its visual tree.
+
+(Inherited from UIElement)
+BindingGroup	
+Gets or sets the BindingGroup that is used for the element.
+
+BitmapEffect	
+Obsolete.
+Gets or sets a bitmap effect that applies directly to the rendered content for this element. This is a dependency property.
+
+(Inherited from UIElement)
+BitmapEffectInput	
+Obsolete.
+Gets or sets an input source for the bitmap effect that applies directly to the rendered content for this element. This is a dependency property.
+
+(Inherited from UIElement)
+CacheMode	
+Gets or sets a cached representation of the UIElement.
+
+(Inherited from UIElement)
+Clip	
+Gets or sets the geometry used to define the outline of the contents of an element. This is a dependency property.
+
+(Inherited from UIElement)
+ClipToBounds	
+Gets or sets a value indicating whether to clip the content of this element (or content coming from the child elements of this element) to fit into the size of the containing element. This is a dependency property.
+
+(Inherited from UIElement)
+CommandBindings	
+Gets a collection of CommandBinding objects associated with this element. A CommandBinding enables command handling for this element, and declares the linkage between a command, its events, and the handlers attached by this element.
+
+(Inherited from UIElement)
+ContextMenu	
+Gets or sets the context menu element that should appear whenever the context menu is requested through user interface (UI) from within this element.
+
+Cursor	
+Gets or sets the cursor that displays when the mouse pointer is over this element.
+
+DataContext	
+Gets or sets the data context for an element when it participates in data binding.
+
+DefaultStyleKey	
+Gets or sets the key to use to reference the style for this control, when theme styles are used or defined.
+
+DependencyObjectType	
+Gets the DependencyObjectType that wraps the CLR type of this instance.
+
+(Inherited from DependencyObject)
+DesiredSize	
+Gets the size that this element computed during the measure pass of the layout process.
+
+(Inherited from UIElement)
+Dispatcher	
+Gets the Dispatcher this DispatcherObject is associated with.
+
+(Inherited from DispatcherObject)
+Effect	
+Gets or sets the bitmap effect to apply to the UIElement. This is a dependency property.
+
+(Inherited from UIElement)
+FlowDirection	
+Gets or sets the direction that text and other user interface (UI) elements flow within any parent element that controls their layout.
+
+Focusable	
+Gets or sets a value that indicates whether the element can receive focus. This is a dependency property.
+
+(Inherited from UIElement)
+FocusVisualStyle	
+Gets or sets a property that enables customization of appearance, effects, or other style characteristics that will apply to this element when it captures keyboard focus.
+
+ForceCursor	
+Gets or sets a value that indicates whether this FrameworkElement should force the user interface (UI) to render the cursor as declared by the Cursor property.
+
+HasAnimatedProperties	
+Gets a value indicating whether this element has any animated properties.
+
+(Inherited from UIElement)
+HasEffectiveKeyboardFocus	
+Gets a value that indicates whether the UIElement has focus.
+
+(Inherited from UIElement)
+Height	
+Gets or sets the suggested height of the element.
+
+HorizontalAlignment	
+Gets or sets the horizontal alignment characteristics applied to this element when it is composed within a parent element, such as a panel or items control.
+
+InheritanceBehavior	
+Gets or sets the scope limits for property value inheritance, resource key lookup, and RelativeSource FindAncestor lookup.
+
+InputBindings	
+Gets the collection of input bindings associated with this element.
+
+(Inherited from UIElement)
+InputScope	
+Gets or sets the context for input used by this FrameworkElement.
+
+IsArrangeValid	
+Gets a value indicating whether the computed size and position of child elements in this element's layout are valid.
+
+(Inherited from UIElement)
+IsEnabled	
+Gets or sets a value indicating whether this element is enabled in the user interface (UI). This is a dependency property.
+
+(Inherited from UIElement)
+IsEnabledCore	
+Gets a value that becomes the return value of IsEnabled in derived classes.
+
+(Inherited from UIElement)
+IsFocused	
+Gets a value that determines whether this element has logical focus. This is a dependency property.
+
+(Inherited from UIElement)
+IsHitTestVisible	
+Gets or sets a value that declares whether this element can possibly be returned as a hit test result from some portion of its rendered content. This is a dependency property.
+
+(Inherited from UIElement)
+IsInitialized	
+Gets a value that indicates whether this element has been initialized, either during processing by a XAML processor, or by explicitly having its EndInit() method called.
+
+IsInputMethodEnabled	
+Gets a value indicating whether an input method system, such as an Input Method Editor (IME), is enabled for processing the input to this element.
+
+(Inherited from UIElement)
+IsKeyboardFocused	
+Gets a value indicating whether this element has keyboard focus. This is a dependency property.
+
+(Inherited from UIElement)
+IsKeyboardFocusWithin	
+Gets a value indicating whether keyboard focus is anywhere within the element or its visual tree child elements. This is a dependency property.
+
+(Inherited from UIElement)
+IsLoaded	
+Gets a value that indicates whether this element has been loaded for presentation.
+
+IsManipulationEnabled	
+Gets or sets a value that indicates whether manipulation events are enabled on this UIElement.
+
+(Inherited from UIElement)
+IsMeasureValid	
+Gets a value indicating whether the current size returned by layout measure is valid.
+
+(Inherited from UIElement)
+IsMouseCaptured	
+Gets a value indicating whether the mouse is captured to this element. This is a dependency property.
+
+(Inherited from UIElement)
+IsMouseCaptureWithin	
+Gets a value that determines whether mouse capture is held by this element or by child elements in its visual tree. This is a dependency property.
+
+(Inherited from UIElement)
+IsMouseDirectlyOver	
+Gets a value that indicates whether the position of the mouse pointer corresponds to hit test results, which take element compositing into account. This is a dependency property.
+
+(Inherited from UIElement)
+IsMouseOver	
+Gets a value indicating whether the mouse pointer is located over this element (including child elements in the visual tree). This is a dependency property.
+
+(Inherited from UIElement)
+IsSealed	
+Gets a value that indicates whether this instance is currently sealed (read-only).
+
+(Inherited from DependencyObject)
+IsStylusCaptured	
+Gets a value indicating whether the stylus is captured by this element. This is a dependency property.
+
+(Inherited from UIElement)
+IsStylusCaptureWithin	
+Gets a value that determines whether stylus capture is held by this element, or an element within the element bounds and its visual tree. This is a dependency property.
+
+(Inherited from UIElement)
+IsStylusDirectlyOver	
+Gets a value that indicates whether the stylus position corresponds to hit test results, which take element compositing into account. This is a dependency property.
+
+(Inherited from UIElement)
+IsStylusOver	
+Gets a value indicating whether the stylus cursor is located over this element (including visual child elements). This is a dependency property.
+
+(Inherited from UIElement)
+IsVisible	
+Gets a value indicating whether this element is visible in the user interface (UI). This is a dependency property.
+
+(Inherited from UIElement)
+Language	
+Gets or sets localization/globalization language information that applies to an element.
+
+LayoutTransform	
+Gets or sets a graphics transformation that should apply to this element when layout is performed.
+
+LogicalChildren	
+Gets an enumerator for logical child elements of this element.
+
+Margin	
+Gets or sets the outer margin of an element.
+
+MaxHeight	
+Gets or sets the maximum height constraint of the element.
+
+MaxWidth	
+Gets or sets the maximum width constraint of the element.
+
+MinHeight	
+Gets or sets the minimum height constraint of the element.
+
+MinWidth	
+Gets or sets the minimum width constraint of the element.
+
+Name	
+Gets or sets the identifying name of the element. The name provides a reference so that code-behind, such as event handler code, can refer to a markup element after it is constructed during processing by a XAML processor.
+
+Opacity	
+Gets or sets the opacity factor applied to the entire UIElement when it is rendered in the user interface (UI). This is a dependency property.
+
+(Inherited from UIElement)
+OpacityMask	
+Gets or sets an opacity mask, as a Brush implementation that is applied to any alpha-channel masking for the rendered content of this element. This is a dependency property.
+
+(Inherited from UIElement)
+OverridesDefaultStyle	
+Gets or sets a value that indicates whether this element incorporates style properties from theme styles.
+
+Parent	
+Gets the logical parent element of this element.
+
+PersistId	
+Obsolete.
+Gets a value that uniquely identifies this element.
+
+(Inherited from UIElement)
+RenderSize	
+Gets (or sets) the final render size of this element.
+
+(Inherited from UIElement)
+RenderTransform	
+Gets or sets transform information that affects the rendering position of this element. This is a dependency property.
+
+(Inherited from UIElement)
+RenderTransformOrigin	
+Gets or sets the center point of any possible render transform declared by RenderTransform, relative to the bounds of the element. This is a dependency property.
+
+(Inherited from UIElement)
+Resources	
+Gets or sets the locally-defined resource dictionary.
+
+SnapsToDevicePixels	
+Gets or sets a value that determines whether rendering for this element should use device-specific pixel settings during rendering. This is a dependency property.
+
+(Inherited from UIElement)
+Style	
+Gets or sets the style used by this element when it is rendered.
+
+StylusPlugIns	
+Gets a collection of all stylus plug-in (customization) objects associated with this element.
+
+(Inherited from UIElement)
+Tag	
+Gets or sets an arbitrary object value that can be used to store custom information about this element.
+
+TemplatedParent	
+Gets a reference to the template parent of this element. This property is not relevant if the element was not created through a template.
+
+ToolTip	
+Gets or sets the tool-tip object that is displayed for this element in the user interface (UI).
+
+TouchesCaptured	
+Gets all touch devices that are captured to this element.
+
+(Inherited from UIElement)
+TouchesCapturedWithin	
+Gets all touch devices that are captured to this element or any child elements in its visual tree.
+
+(Inherited from UIElement)
+TouchesDirectlyOver	
+Gets all touch devices that are over this element.
+
+(Inherited from UIElement)
+TouchesOver	
+Gets all touch devices that are over this element or any child elements in its visual tree.
+
+(Inherited from UIElement)
+Triggers	
+Gets the collection of triggers established directly on this element, or in child elements.
+
+Uid	
+Gets or sets the unique identifier (for localization) for this element. This is a dependency property.
+
+(Inherited from UIElement)
+UseLayoutRounding	
+Gets or sets a value that indicates whether layout rounding should be applied to this element's size and position during layout.
+
+VerticalAlignment	
+Gets or sets the vertical alignment characteristics applied to this element when it is composed within a parent element such as a panel or items control.
+
+Visibility	
+Gets or sets the user interface (UI) visibility of this element. This is a dependency property.
+
+(Inherited from UIElement)
+VisualBitmapEffect	
+Obsolete.
+Gets or sets the BitmapEffect value for the Visual.
+
+(Inherited from Visual)
+VisualBitmapEffectInput	
+Obsolete.
+Gets or sets the BitmapEffectInput value for the Visual.
+
+(Inherited from Visual)
+VisualBitmapScalingMode	
+Gets or sets the BitmapScalingMode for the Visual.
+
+(Inherited from Visual)
+VisualCacheMode	
+Gets or sets a cached representation of the Visual.
+
+(Inherited from Visual)
+VisualChildrenCount	
+Gets the number of visual child elements within this element.
+
+VisualClearTypeHint	
+Gets or sets the ClearTypeHint that determines how ClearType is rendered in the Visual.
+
+(Inherited from Visual)
+VisualClip	
+Gets or sets the clip region of the Visual as a Geometry value.
+
+(Inherited from Visual)
+VisualEdgeMode	
+Gets or sets the edge mode of the Visual as an EdgeMode value.
+
+(Inherited from Visual)
+VisualEffect	
+Gets or sets the bitmap effect to apply to the Visual.
+
+(Inherited from Visual)
+VisualOffset	
+Gets or sets the offset value of the visual object.
+
+(Inherited from Visual)
+VisualOpacity	
+Gets or sets the opacity of the Visual.
+
+(Inherited from Visual)
+VisualOpacityMask	
+Gets or sets the Brush value that represents the opacity mask of the Visual.
+
+(Inherited from Visual)
+VisualParent	
+Gets the visual tree parent of the visual object.
+
+(Inherited from Visual)
+VisualScrollableAreaClip	
+Gets or sets a clipped scrollable area for the Visual.
+
+(Inherited from Visual)
+VisualTextHintingMode	
+Gets or sets the TextHintingMode of the Visual.
+
+(Inherited from Visual)
+VisualTextRenderingMode	
+Gets or sets the TextRenderingMode of the Visual.
+
+(Inherited from Visual)
+VisualTransform	
+Gets or sets the Transform value for the Visual.
+
+(Inherited from Visual)
+VisualXSnappingGuidelines	
+Gets or sets the x-coordinate (vertical) guideline collection.
+
+(Inherited from Visual)
+VisualYSnappingGuidelines	
+Gets or sets the y-coordinate (horizontal) guideline collection.
+
+(Inherited from Visual)
+Width	
+Gets or sets the width of the element.
+
+
+##### Fielsds:
+FIELDS
+ActualHeightProperty	
+Identifies the ActualHeight dependency property.
+
+ActualWidthProperty	
+Identifies the ActualWidth dependency property.
+
+BindingGroupProperty	
+Identifies the BindingGroup dependency property.
+
+ContextMenuClosingEvent	
+Identifies the ContextMenuClosing routed event.
+
+ContextMenuOpeningEvent	
+Identifies the ContextMenuOpening routed event.
+
+ContextMenuProperty	
+Identifies the ContextMenu dependency property.
+
+CursorProperty	
+Identifies the Cursor dependency property.
+
+DataContextProperty	
+Identifies the DataContext dependency property.
+
+DefaultStyleKeyProperty	
+Identifies the DefaultStyleKey dependency property.
+
+FlowDirectionProperty	
+Identifies the FlowDirection dependency property.
+
+FocusVisualStyleProperty	
+Identifies the FocusVisualStyle dependency property.
+
+ForceCursorProperty	
+Identifies the ForceCursor dependency property.
+
+HeightProperty	
+Identifies the Height dependency property.
+
+HorizontalAlignmentProperty	
+Identifies the HorizontalAlignment dependency property.
+
+InputScopeProperty	
+Identifies the InputScope dependency property.
+
+LanguageProperty	
+Identifies the Language dependency property.
+
+LayoutTransformProperty	
+Identifies the LayoutTransform dependency property.
+
+LoadedEvent	
+Identifies the Loaded routed event.
+
+MarginProperty	
+Identifies the Margin dependency property.
+
+MaxHeightProperty	
+Identifies the MaxHeight dependency property.
+
+MaxWidthProperty	
+Identifies the MaxWidth dependency property.
+
+MinHeightProperty	
+Identifies the MinHeight dependency property.
+
+MinWidthProperty	
+Identifies the MinWidth dependency property.
+
+NameProperty	
+Identifies the Name dependency property.
+
+OverridesDefaultStyleProperty	
+Identifies the OverridesDefaultStyle dependency property.
+
+RequestBringIntoViewEvent	
+Identifies the RequestBringIntoView routed event.
+
+SizeChangedEvent	
+Identifies the SizeChanged routed event.
+
+StyleProperty	
+Identifies the Style dependency property.
+
+TagProperty	
+Identifies the Tag dependency property.
+
+ToolTipClosingEvent	
+Identifies the ToolTipClosing routed event.
+
+ToolTipOpeningEvent	
+Identifies the ToolTipOpening routed event.
+
+ToolTipProperty	
+Identifies the ToolTip dependency property.
+
+UnloadedEvent	
+Identifies the Unloaded routed event.
+
+UseLayoutRoundingProperty	
+Identifies the UseLayoutRounding dependency property.
+
+VerticalAlignmentProperty	
+Identifies the VerticalAlignment dependency property.
+
+WidthProperty	
+Identifies the Width dependency property.
+
+
+### 属性
+
+
+#### 普通属性
+
+
+#### 附加属性
+
+
+>  与依赖项属性区别
+
+> > 一。附加属性使用的RegisterAttached方法，而依赖属性使用的是Register方法
+
+> > 二。附加属性使用两个方法进行包装，依赖属性使用CLR属性对GetValue和SetValue两个方法进行包装
+
+> 主要用途，附加项属性值修改时可以获取到被修改对象，
+
+> > 然后去修改该对象的属性，
+
+> > 例如可以绑定附加项属性去修改被附加对象的非依赖项属性等
+
+```
+        public static readonly DependencyProperty AngleProperty =
+            DependencyProperty.RegisterAttached("Angle", typeof(double), typeof(RotationManager), new PropertyMetadata(0.0,OnAngleChanged));
+
+        private static void OnAngleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            var element = obj as UIElement;
+            if (element != null)
+            {
+                element.RenderTransformOrigin = new Point(0.5, 0.5);
+                element.RenderTransform = new RotateTransform((double)e.NewValue);
+            }
+        }
+
+```
+
+#### 依赖项属性dependency property
+
+> 使用效率更高的保存机制
+
+> 附加功能
+
+> 更改通知
+
+> 属性值继承
+
+> 使用
+
+> > 注册依赖项属性
+
+> > 添加属性包装器
+
+> 特征
+
+> > 依赖属性提供用来扩展属性功能的功能，这与字段支持的属性相反。 通常，此类功能代表或支持以下特定功能之一：
+
+> > 资源
+
+> > 数据绑定
+
+> > 样式
+
+> > 动画
+
+> > 元数据重写
+
+> > 在从最初注册依赖属性的类派生时，可以通过重写依赖属性的元数据来更改该属性的某些行为。 重写元数据依赖于 DependencyProperty 标识符。 重写元数据不需要重新实现 属性。 元数据的更改由属性系统在本机处理；对于所有从基类继承的属性，每个类都有可能基于每个类型保留元数据。
+
+以下示例重写依赖属性 DefaultStyleKey 的元数据。 重写此特定依赖属性的元数据是某个实现模式的一部分，该模式创建可以使用主题中的默认样式的控件。
+
+
+```
+public class SpinnerControl : ItemsControl
+{
+    static SpinnerControl()
+    {
+        DefaultStyleKeyProperty.OverrideMetadata(
+            typeof(SpinnerControl),
+            new FrameworkPropertyMetadata(typeof(SpinnerControl))
+        );
+    }
+}
+
+```
+
+> > 属性值继承
+
+> > 下面的示例演示一个绑定，并设置指定绑定（在前面的绑定示例中未显示出来）的源的 DataContext 属性。 子对象中的任何后续绑定都无需指定源，它们可以使用父对象 StackPanel 中 DataContext 的继承值。 （或者，子对象可以选择直接在 Binding 中指定自己的 DataContext 或 Source，并且有意不将继承值用于其绑定的数据上下文。）
+
+```
+<StackPanel Canvas.Top="50" DataContext="{Binding Source={StaticResource XmlTeamsSource}}">
+  <Button Content="{Binding XPath=Team/@TeamName}"/>
+</StackPanel>
+```
+
+####  WPF 设计器集成
+
+> 如何自定义依赖属性
+
+
+> > 1、声明依赖属性变量。依赖属性的声明都是通过public static来公开一个静态变量，变量的类型必须是DependencyProperty
+
+> > 2、在属性系统中进行注册。使用DependencyProperty.Register方法来注册依赖属性，或者是使用DependencyProperty.RegisterReadOnly方法来注册
+
+> > 3、使用.NET属性包装依赖属性
+
+```
+ public static DependencyProperty TextProperty;
+       TextProperty =
+       DependencyProperty.Register("Text", //属性名称
+       typeof(string), //属性类型
+       typeof(TestDependencyPropertyWindow), //该属性所有者，即将该属性注册到那个类上
+       new PropertyMetadata("")); //属性默认值
+
+public string Text
+{
+   get { return (string)GetValue(TextProperty); }
+   set { SetValue(TextProperty, value); }
+}
+
+```
+
+> 依赖属性的特点
+
+> > 1、属性变更通知
+
+> > 无论什么时候，只要依赖属性的值发生改变，wpf就会自动根据属性的元数据触发一系列的动作，这些动作可以重新呈现UI元素，也可以更新当前的布局，刷新数据绑定等等，这种变更的通知最有趣的特点之一就是属性触发器，它可以在属性值改变的时候，执行一系列自定义的动作，而不需要更改任何其他的代码来实现。通过下面的示例来演示属性变更通知
+
+> > 2、属性值继承
+
+> > 是指属性值自顶向下沿着元素树进行传递。
+
+> > 3、节省内存空间
+
+> > 依赖属性和CLR属性在内存的使用上是截然不同的，每个CLR属性都包含一个非static的字段，因此当我们实例化一个类型的时候，就会创建该类型所拥有的所有CLR属性，也就是说一个对象所占用的内存在调用new操作进行实例化的时候就已经决定了、而wpf允许对象在创建的时候并不包含用于存储数据的空间，只保留在需要用到数据的时候能够获得该默认值，即用其他对象数据或者实时分配空间的能力。
+
+> 共享依赖项属性
+
+
+### 事件
+
+
+#### 普通事件
+
+
+##### 生命周期事件：在元素被初始化，加载或卸载时发生。
+
+> a.Initialized 元素被实例化，但是窗口的其他部分可能还没有初始化。还没有应用样式和数据绑定。
+
+> b.Loaded 事件 ，应用了样式和数据绑定时，
+
+> c.Unloaded 当元素被释放时，窗口被关闭或特定的元素被从窗口中删除
+
+> FrameworkElement类实现了ISuppertInitialize接口，调用BeginInit()方法，XAML解析器设置所有元素的属性。调用EndInit（），引发Initalized事件。
+
+> 包含其他所有元素的窗口首先引发Loaded事件，都引发了Loaded事件之后，窗口就变的可见了。
+
+##### 鼠标事件： 鼠标动作的结果。
+
+##### 键盘事件： 键盘动作的结果。
+
+> PreviewKeyDown事件：隧道事件，按键触发
+
+> KeyDown事件：冒泡事件，按键触发
+
+> PreviewTextInput事件：隧道事件，按键完成接受文本输入触发。
+
+> TextInput事件：冒泡事件，按键完成接受文本输入触发。
+
+> PreviewKeyUp事件：隧道事件，释放键触发
+
+> KeyUp事件：冒泡事件，释放键触发
+
+##### 手写笔事件： 类似铅笔的手写笔的结果
+
+##### 多点触控事件
+
+#### 路由事件（向上冒泡或者向下隧道传播（Preview开始的事件））
+
+> 定义 注册 封装路由事件（RoutedEvent）
+
+> 共享  引发 处理路由事件
+
+> 分类
+
+> > 冒泡：由事件源向上传递一直到根元素
+
+> > 直接：只有事件源才有机会响应事件
+
+> > 隧道：从元素树的根部调用事件处理程序并依次向下深入直到事件源
+
+#### 附加事件
+
+#### VisualStateManager
+
+### 资源
+
+
+#### 样式
+
+
+> 样式基础
+
+> > 样式(Style)是组织和重用格式化选项的重要工具。不是使用重复的标记填充XAML,以便设置外边距、内边距、颜色以及字体等细节，而是创建一系列封装所有这些细节的样式，然后再需要之处通过属性来应用样式。样式是可应用于元素的属性值集合。使用资源的最常见原因之一就是保存样式。使按钮具有统一格式的实现方式一：资源
+
+
+> 设置属性
+
+```
+<Setter Property="FontFamily" Value="Times New Roman"/>
+```
+
+> 创建只应用按钮的样式  
+
+```
+        <Style x:Key="BigFontButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Times New Roman"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+```
+
+> 关联事件处理程序
+
+```
+ <Window.Resources>
+        <Style x:Key="MouseOverHighlightStyle">
+            <EventSetter Event="TextBlock.MouseEnter" Handler="element_MouseEnter"></EventSetter>
+            <EventSetter Event="TextBlock.MouseLeave" Handler="element_MouseLeave"></EventSetter>
+        </Style>
+    </Window.Resources>
+    <Grid Name="gird1" ShowGridLines="True">
+        <TextBlock Style="{StaticResource MouseOverHighlightStyle}"></TextBlock>
+    </Grid>
+```
+
+>  多层样式
+
+```
+ <Window.Resources>
+        <Style x:Key="BigFontButtonStyle">
+            <Setter Property="Control.FontFamily" Value="Times New Roman"/>
+            <Setter Property="Control.FontSize" Value="18"/>
+            <Setter Property="Control.FontWeight" Value="Bold"/>
+        </Style>
+        <Style x:Key="NewBigButtonBigFontStyle" BasedOn="{StaticResource BigFontButtonStyle}">
+            <Setter Property="Control.Foreground" Value="Red"/>
+            <Setter Property="Control.Background" Value="DarkBlue"/>
+        </Style>
+    </Window.Resources>
+    <Grid Name="gird1" ShowGridLines="True">
+        <TextBlock Style="{StaticResource NewBigButtonBigFontStyle}">test</TextBlock>
+    </Grid>
+
+```
+
+> 通过类型自动应用样式
+
+```
+ <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Control.FontFamily" Value="Times New Roman"/>
+            <Setter Property="Control.FontSize" Value="18"/>
+            <Setter Property="Control.FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+    <Grid Name="gird1" ShowGridLines="True">
+        <Button>one</Button>
+        <Button Style="{x:Null}">two</Button>
+        <Button>three</Button>
+    </Grid>
+```
+
+#### 触发器
+
+
+> Trigger	这是一种最简单的触发器。可以监测依赖项属性的变化，然后设置器改变样式。
+
+```
+   <Window.Resources>
+        <Style x:Key="BigFontButton">
+            <Style.Setters>
+                <Setter Property="Control.FontFamily" Value="Times New Roman"/>
+                <Setter Property="Control.FontSize" Value="18"/>
+                <Setter Property="Control.FontWeight" Value="Bold"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="Control.IsFocused" Value="True">
+                    <Setter Property="Control.Foreground" Value="DarkRed"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+```
+
+> MultiTrigger	与Trigger类似，但这种触发器联合了多个条件。只有满足了所有这些条件，才会启动触发器。
+
+   * <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Property="Control.IsFocused" Value="true"/>
+                        <Condition Property="Control.IsMouseOver" Value="true"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="Control.Foreground" Value="DarkRed"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+            </Style.Triggers>
+
+
+> DataTrigger	这种触发器使用数据绑定，与Trigger类似，只不过监视的是任意绑定数据的变化。
+
+```
+ <Window.Resources>
+        <Style x:Key="BigFontButton">
+            <Style.Setters>
+                <Setter Property="Control.FontFamily" Value="Times New Roman"/>
+                <Setter Property="Control.FontSize" Value="18"/>
+                <Setter Property="Control.FontWeight" Value="Bold"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:3" Storyboard.TargetProperty="FontSize"
+                                                 To="50"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+                    <EventTrigger.Actions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Duration="0:0:3" Storyboard.TargetProperty="FontSize"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger.Actions>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Name="gird1" ShowGridLines="True">
+        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource BigFontButton}">onesfsfsfsfsdfsdf</Button>
+    </Grid>
+
+```
+
+> MultiDataTrigger	联合多个数据触发器。
+
+> EventTrigger	这是最复杂的触发器。当事件发生时，这种触发器应用动画。
+
+#### 模板
+
+
+> 资源是保存在可执行文件中的一种不可执行数据。在WPF的资源中，几乎可以包含图像、字符串等所有的任意CLR对象，只要对象有一个默认的构造函数和独立的属性。也就是说，应用程序中非程序代码的内容，比如点阵图、颜色、字型、动画/影片档以及字符串常量值，可将它们从程序中独立出来，单独包装成"资源(Resource)"。
+
+
+#### 使用资源的优势：
+
+> 1. 由于不用写在程序代码中，方便管理：便于更新。
+
+> 2. 优化资源，节省空间。资源一旦定义，便可重复利用。还记得FLASH中的将物体转换为元件吗？一旦将物体转换为元件，就可以重复利用了。在WPF中，似乎与之有共通之处。所不同的是，WPF将资源保存在XAML中，对我们而言是“可见的”。
+
+#### 资源的范围（层级）：
+
+> WPF提供一个封装和存取资源(resource)的机制，我们可将资源建立在应用程序的不同范围上。WPF中，资源定义的位置决定了该资源的可用范围。资源可以定义在如下范围中：
+
+> (1)物件级：此时，资源只能套用在这个Object物件，或套用至该物件的子物件。
+
+> (2)文件级：如果将资源定义在Window或Page层级的XAML档中，那么可以套用到这个文件中的所有物件。
+
+> (3)应用程序级：如果我们将资源定义在App.xaml 中，那么，就可以将资源套用到应用程序内的任何地方。
+
+> (4)字典级：当我们把资源封装成一个资源字典, 定义到一个ResourceDictionary的XAML文件时,就可以在另一个应用程序中重复使用。
+
+### WPF 体系结构
+
+#### milcore 
+
+> 是以非托管代码编写的，实现与 DirectX 的紧密集成。性能敏感
+
+>  milcore.dll是WPF渲染系统的核心，也是媒体集成层的基础。
+
+#### WindowsCodes.dll
+
+> 提供图像支持的低级API(处理、显示以及缩放位图与JPEG图像)
+
+#### Direct3D是图形渲染
+
+#### User32
+
+> 决定实际占有桌面部分。
+
+>  注意：不管拖动，缩放，milcore负责绘制程序恰当部分。
+
+### CopyPaste(WPF)
+
+> 需要拦截WIndows消息处理 IPasteAble，ICopyAble由相应控件实现,如果不实现则使用默认机制处理。
+
+#### ICopyAble
+
+```
+ public interface ICopyAble
+    {
+
+        /// <summary>
+        /// 复制操作
+        /// </summary>
+        /// <param name="IsDeleteSource">是否删除源</param>
+        /// <returns></returns>
+        CopyPasteData Copy(bool IsDeleteSource);
+
+        /// <summary>
+        /// 剪贴版的清空操作
+        /// </summary>
+        /// <param name="Data"></param>
+        void Remove(CopyPasteData Data);
+    }
+
+```
+
+####  IPasteAble
+
+```
+    /// <summary>
+    /// 复制粘贴服务接口
+    /// 可以根据用户自己实现具体支持的数据类型所以定义为泛型类
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IPasteAble
+    {
+        /// <summary>
+        /// 粘贴操作
+        /// </summary>
+        void Paste(CopyPasteData Data);
+    }
+
+```
+
+#### CopyPasteProxy
+
+```
+    public class CopyPasteProxy
+    {
+        public CopyPasteData Data { get; set; }
+
+        public ICopyAble Source { get; set; }
+
+        public void Copy(ICopyAble Source,bool IsDeleteSource)
+        {
+            this.Source = Source;
+            if (Source != null)
+            {
+                Data = Source.Copy(IsDeleteSource);
+            }
+            else
+            {
+                Data = new CopyPasteData();
+            }
+        }
+
+        public void Paste(IPasteAble Destination, bool IsDeleteSource)
+        {
+            if (Destination != null)
+            {
+                Destination.Paste(Data);
+                if (IsDeleteSource)
+                {
+                    Source.Remove(Data);
+                }
+            }
+        }
+
+        public void OnCopy(bool IsDeleteSource)
+        {
+            if (Keyboard.FocusedElement is DependencyObject)
+            {
+                var c = GetParent<ICopyAble>(Keyboard.FocusedElement as DependencyObject);
+                if (c != null && c is ICopyAble)
+                {
+                    Copy(c as ICopyAble, IsDeleteSource);
+                }
+            }
+        }
+
+        public void OnPaste(bool IsDeleteSource)
+        {
+            if (Keyboard.FocusedElement is DependencyObject)
+            {
+                var p = GetParent<IPasteAble>(Keyboard.FocusedElement as DependencyObject);
+                if (p != null && p is IPasteAble)
+                {
+                    Paste(p as IPasteAble, IsDeleteSource);
+                }
+            }
+        }
+
+        private DependencyObject GetParent<T>(DependencyObject o)
+        {
+            if (o != null && o is DependencyObject)
+            {
+                var p = VisualTreeHelper.GetParent(o as UIElement);
+                if (p != null && p is T)
+                {
+                    return p;
+                }
+                else if(p != null)
+                {
+                    return GetParent<T>(p);
+                }
+                {
+                    return null;
+                }
+            }
+            return null;
+        }
+
+    }
+
+```
+
+#### CopyPasteData
+
+```
+  public class CopyPasteData
+    {
+        /// <summary>
+        /// 数据类型
+        /// </summary>
+        public string DataType { get; set; } = "ClipboardDataFromMemo";
+
+        /// <summary>
+        /// 数据是否从系统剪贴版获取
+        /// </summary>
+        public bool IsFromClipboard { get; set; } = true;
+
+        /// <summary>
+        /// 数据对象 IsFromClipboard为true则此值无效需要直接获取剪贴板数据
+        /// </summary>
+        public object Data { get; set; } = null;
+
+        /// <summary>
+        /// 获取剪贴板数据
+        /// 数据对象 IsFromClipboard为true则此值有效 当然客户可以直接从系统剪贴板直接获取数据
+        /// </summary>
+        public IDataObject ClipboardData
+        {   get
+            {
+                return Clipboard.GetDataObject();
+            } 
+        }
+    }
+
+```
+
+### Behavior
+
+> 其实就是对通用的事件作一些封装成为行为Behavior 使之通用减少代码量，大多是业务无关的，比如触发一些鼠标移动的动态效果等。
+
+> 老版引用System.Windows.Interactivity.dll
+
+> 新版.net 引用 Microsoft.Xaml.Behaviors;
+
+> 重写Behavior里面的两个函数OnAttached（附加后）与OnDetaching（分离时）
+
+```
+using Microsoft.Xaml.Behaviors;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Effects;
+
+namespace Inovance.FA.FAOutTest.Behaviors
+{
+    public class EffectBehavior : Behavior<FrameworkElement>
+    {
+        //使用 Behavior 必须重写以下两个虚方法
+        protected override void OnAttached()
+        {
+            base.OnAttached();
+
+            //AssociatedObject为关联对象， 是Behavior<T>中的T
+            AssociatedObject.MouseMove += AssociatedObject_MouseMove;
+            AssociatedObject.MouseLeave += AssociatedObject_MouseLeave;
+        }
+
+        private void AssociatedObject_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            var element = sender as FrameworkElement;
+            element.Effect = (Effect)new DropShadowEffect() { Color = Colors.Transparent, ShadowDepth = 0 };
+        }
+
+        private void AssociatedObject_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            var element = sender as FrameworkElement;
+            element.Effect = (Effect)new DropShadowEffect() { Color = Colors.Red, ShadowDepth = 0 };
+        }
+
+        protected override void OnDetaching()
+        {
+            base.OnDetaching();
+            AssociatedObject.MouseMove -= AssociatedObject_MouseMove;
+            AssociatedObject.MouseLeave -= AssociatedObject_MouseLeave;
+        }
+    }
+}
+```
+
+### Command
+
+> WPF的命令系统由几个基本要素构成，它们是：
+
+#### 命令(Command)
+
+> WPF的命令实际上就是实现了ICommand接口的类，平时使用最多的就是RoutedCommand类。我们还会学习使用自定义命令。
+
+> ICommand接口与RoutedCommand
+
+> WPF中的命令是实现了ICommand接口的类。ICommand接口非常简单，只包含两个方法和一个事件：
+
+> Execute方法：命令执行，或者说命令执行于命令目标之上。需要注意的是，现实世界中的命令是不会自己执行的，而这里，执行变成了命令的方法，有点拟人化的味道。
+
+> CanExecute方法：在执行之前探知命令是否可以执行。
+
+> CanExecuteChanged事件：当命令的可执行状态改变的时候，可激发此事件通知其它对象。
+
+> RoutedCommand就是一个实现了ICommand接口的类。RoutedCommand在实现ICommand接口时，并未向Execute和CanExecute方法中添加任何逻辑，也就是说，它是通用的、与具体的业务逻辑无关的。怎么理解“与具体的业务逻辑无关这句话呢”？我们从外部和内部两部分来理解。
+
+#### 命令源(Command Source)
+
+> 即命令的发送者，是实现了ICommandSource接口的类。很多界面元素都实现了这个接口，其中包括Button,ListBoxItem,MenuItem等。
+
+#### 命令目标(Command Target)
+
+> 即命令发送给谁，或者说命令作用在谁的身上。命令目标必须是实现了IInputElement接口的类。
+
+#### 命令关联(Command Binding)
+
+> 负责把一些外围逻辑和命令关联起来，比如执行之前对命令是否可以执行进行判断、命令执行之后还有哪些后续工作等。
+
+### MVVM
+
+#### Model
+
+
+#### View
+
+
+#### ViewModel
+
+
+> INotifyPropertyChanged ViwModel
+
+```
+public abstract class ViewModel : INotifyPropertyChanged
+    {
+
+        public ILogger Logger { get; set; }
+
+        public IMessageBox MessageBox { get; set; }
+
+        public ViewModel()
+        {
+            Logger = StaticData.Container.GetExportedValue<ILogger>();
+            MessageBox = StaticData.Container.GetExportedValue<IMessageBox>();
+        }
+
+        public string Name
+        {
+            get
+            {
+                return this.GetType().Name;
+            }
+        }
+
+        public bool? dialogResult;
+        public bool? DialogResult
+        {
+            get
+            {
+                return dialogResult;
+            }
+            set
+            {
+                dialogResult = value;
+                RaisePropertyChanged("DialogResult");
+            }
+        }
+
+        protected virtual void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public bool SetProperty<T>(ref T Source, T NewValue, [CallerMemberName] string? propertyName = null) where T : IComparable
+        {
+            if (EqualityComparer<T>.Default.Equals(Source, NewValue))
+            {
+                return false;
+            }
+            else
+            {
+                Source = NewValue;
+                RaisePropertyChanged(propertyName);
+            }
+            return true;
+        }
+    }
+```
+
+> 屬性就可以簡寫成為一下方法：
+
+```
+public List<DataNode> projectNodes;
+               public List<DataNode> ProjectNodes{
+            get => projectNodes;
+            set => SetProperty(ref projectNodes, value);
+        }
+
+```
+
+### Application類
+
+#### 应用程序事件
+
+
+> Startup：该事件在调用Application.Run()方法之后，并且在主窗口显示之前执行。
+
+> > （1）、处理命令行参数。
+
+> > （2）、打开主窗口。
+
+> > （3）、初始化应用程序范围的资源。
+
+> > （4）、初始化应用程序范围的属性。
+
+> Exit：该事件在应用程序关闭时(不管什么原因)
+
+> SessionEnding：该事件在Windows对话结束时发生
+
+> Activated：当激活应用程序中的窗口时发生该事件，当切换到另外一个window程序时也会触发。
+
+> > 1、  应用程序打开第一个窗口。
+
+> > 2、  用户使用Alt+Tab组合件或者使用任务管理器切换到该应用程序。
+
+> > 3、  用户单击应用程序中一个窗口的任务栏按钮。
+
+> Deactivated：当取消激活应用程序中的窗口时发生该事件，当切换到另外一个window程序时也会触发。
+
+> DispatcherUnhandledException：应用程序只要发生未处理的异常，都会进入该事件。还可将Handled属性设置为true，继续运行应用程序。
+
+### Prism
+
+
+Prism框架 如何在主程序中合理的弹出子窗体
+说起子窗体，大家都会想到ChildWindow，多熟悉的一个控件。不错，Sliverlight中已经提供了子窗体的具体实现，而在WPF中却没有这么好的事情（有的第三方控件商已经提供此控件）。最常见的实现方法就是在ViewModel中，直接New ChildWindow，然后直接Show。这样的方法也达到的要求。但是它不符合MVVM分层思想，再就是代码不美观，难以维护，今天我就给大家介绍一种美观又实用的方法。
+
+通过Prism中提供的InteractionRequestTrigger事件触发器，实现点击按钮或者用户的某种操作弹出对话框的效果。另外，不要忘了引用此命名空间：
+
+```
+using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+
+<Window x:Class="ChildWindowDemo.ChildWindow.ChildWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"  
+        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        Width="300" Height="150" 
+        Title="{Binding Title}"
+        x:Name="confirmationWindow" Topmost="True" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+    <Grid x:Name="LayoutRoot" Margin="2">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Content="{Binding Content}"/>
+
+        <Button Content="Cancel" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0" Grid.Row="1">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+        <Button Content="OK" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,79,0" Grid.Row="1">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <ei:ChangePropertyAction PropertyName="Confirmed" TargetObject="{Binding}" Value="True"/>
+                    <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+    </Grid>
+</Window>
+```
+
+创建ChildWindow的基类
+新建类：ChildWindowActionBase 并从TriggerAction<T>派生，代码如下：
+
+ 
+
+```
+public class ChildWindowActionBase : TriggerAction<FrameworkElement>
+    {
+        protected override void Invoke(object parameter)
+        {
+            var arg = parameter as InteractionRequestedEventArgs;
+            if (arg == null)
+                return;
+
+            var windows = this.GetChildWindow(arg.Context);
+
+            var callback = arg.Callback;
+            EventHandler handler = null;
+            handler =
+                (o, e) =>
+                {
+                    windows.Closed -= handler;
+                    callback();
+                };
+            windows.Closed += handler;
+
+            windows.ShowDialog();
+
+        }
+
+        Window GetChildWindow(Notification notification)
+        {
+            var childWindow = this.CreateDefaultWindow(notification);
+            childWindow.DataContext = notification;
+
+            return childWindow;
+        }
+
+        Window CreateDefaultWindow(Notification notification)
+        {
+            return (Window)new ChildWindow.ChildWindow();
+        }
+    }
+```
+到此子窗体已经完成
+
+```
+<Window x:Class="ChildWindowDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:prism="http://www.codeplex.com/prism"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:ChildWindowDemo"
+        Title="MainWindow" Height="200" Width="300">
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest, Mode=OneWay}">
+            <local:ChildWindowActionBase/>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Button Command="{Binding RaiseConfirmation}" Content="Click Me !" HorizontalAlignment="Left" Margin="29,31,0,0" VerticalAlignment="Top" Width="217" Height="55"/>
+        <TextBlock HorizontalAlignment="Left" Margin="29,106,0,0" TextWrapping="Wrap" Text="{Binding ConfirmationResult}" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
+```
+对之对应的ViewModel：
+
+```
+public class MainWindowViewModel : NotificationObject
+    {
+        public MainWindowViewModel()
+        {
+            this.RaiseConfirmation = new DelegateCommand(this.OnRaiseConfirmation);
+            this.ConfirmationRequest = new InteractionRequest<Confirmation>();
+        }
+
+        public InteractionRequest<Confirmation> ConfirmationRequest { get; private set; }
+
+        public DelegateCommand RaiseConfirmation { get; private set; }
+
+        private string result;
+        public string ConfirmationResult
+        {
+            get { return result; }
+            set
+            {
+                result = value;
+                this.RaisePropertyChanged(() => this.ConfirmationResult);
+            }
+        }
+
+        private void OnRaiseConfirmation()
+        {
+            this.ConfirmationRequest.Raise(
+                new Confirmation { Content = "是否确认", Title = "子窗体" },
+                (cb) => { ConfirmationResult = cb.Confirmed ? "确认" : "取消"; });
+        }      
+    }
+```
+这样的写法比较符合MVVM的分层思想，子窗体可以随心定制，而不需要去改逻辑层的代码。
+
+http://www.cnblogs.com/sunthx/p/3539900.html
+
+#### Prism框架 如何在主程序中合理的弹出子窗体
+
+￿﻿[{"data":{"id":"cf4vho08ndk0","created":1634797901390,"text":"https://www.cnblogs.com/tianciliangen/p/4961045.html","richText":{"ops":[{"attributes":{},"insert":"https://www.cnblogs.com/tianciliangen/p/4961045.html"},{"insert":"\n","attributes":{}}]},"background":"transparent"},"children":[]}]
+
+#### Prism框架中一些非常重要的概念
+
+
+#####  Modules：Modules是能够独立开发、测试、部署的功能单元，
+Modules可以被设计成实现特定业务逻辑的模块（如Profile Management），
+也可以被设计成实现通用基础设施或服务的模块  　
+　（如Logging、Exception Management）。
+
+
+##### 　　  Module Catalog：
+在Prism中，Module Catalog指明了要Load哪些Module，
+和用什么样的顺序去Load这些Module。
+
+
+##### 　　  Shell：Shell是宿主应用程序（host application），modules将会被load到Shell中。
+Shell定义了应用程序的整体布局和结构，而不关心寄宿其中的Module，
+Shell通常实现通用的application service和infrastructure，
+而应用的逻辑则实现在具体的Module中，同时，Shell也提供了应用程序的顶层窗口。
+
+
+##### 　　  Views：
+
+
+###### Views是应用中展现特定功能的视图，它展现UI、定义交互行为，
+并且通过数据绑定的方式与ViewModel进行交互。
+
+
+##### 　　  View Model和Presenters：View Model用来封装应用程序的UI逻辑及其状态。
+
+######    Model
+
+
+####### Model被用来封装数据和相应的验证，以及相关的业务规则来保证数据的一致性和正确性。
+
+######    Commands
+
+
+####### Command被用来封装应用程序功能，Prism提供了Delegate Command和CompositeCommand两个类。
+
+
+######    Regions：
+
+
+####### Regions是应用程序UI的逻辑区域，
+它很像一个PlaceHolder，Views在Regions中展现，
+很多种控件可以被用作Region：ContentControl、ItemsControl、ListBox、TabControl。
+Views能在Regions编程或者自动呈现，Prism也提供了Region导航的支持。
+
+
+##### Navigation
+
+
+###### Prism支持两种导航：state-based导航和view-switching导航。
+
+
+##### 　　EventAggregator
+
+
+###### 组件通常要和其它的组件或者服务进行通信。
+为此，Prism提供了EventAggregator组件，
+这个组件实现pub-sub事件机制，允许一些组件发布事件，
+另一些组件去订阅事件而无需两个组件之间的引用。
+
+
+##### 　　Dependency Injection container
+
+
+###### Prism使用依赖注入模式来管理组件之间的依赖，
+Prism被设计使用Unity、Mef等依赖注入容器。
+
+
+##### 　　Services：
+
+
+###### Services是用来实现非UI相关功能的逻辑，
+例如logging、exception management、data access。
+Services可以被定义在应用程序中或者是Module中，
+Services通常被注册在依赖注入容器中，使得其它的组件可以很容易的定位这个服务。
+
+
+##### 　　Controllers：Controller被用来控制在Region中哪个View将会被呈现，同时控制这个View的创建和初始化。
+
+##### 　　Bootstrapper：
+
+
+
+###### Bootstrapper用来初始化应用程序级别的组件和服务，
+
+###### 它也被用来配置和初始化module catalog和Shell 的View和View Model。
+
+
+#### Prism 简介#
+
+
+Prism 是一个用于构建松耦合、可维护和可测试的 XAML 应用的框架，它支持所有还活着的基于 XAML 的平台，包括 WPF、Xamarin Forms、WinUI 和 Uwp Uno。Prism 提供了一组设计模式的实现，这些模式有助于编写结构良好且可维护的 XAML 应用程序，包括 MVVM、依赖项注入、命令、事件聚合器等。
+
+Prism 是一个有10年以上历史的框架，而上个月才刚发布了它的 8.0 版本，这意味着现在网上能找到的大部分 Prism 的资料都已经有点过时，连 官方文档 也不例外。如果你需要详细的文档，除了官方文档，我会推荐 RyzenAdorer 的 Prism 系列文章：
+
+NET Core 3 WPF MVVM框架 Prism系列文章索引 - RyzenAdorer -
+
+如果你不需要那么详细的文档，只需要一个入门的教程，那么我希望我写的这两篇文章可以帮到你。
+
+#### Prism.Core、Prism.Wpf 和 Prism.Unity#
+
+
+从很久以前开始，臃肿 就是 Prism 被提起最多的标签。毕竟比起 MVVMLight，Prism 实现的功能更多；对于初学者来说，刚打开 Prism 的文档很可能会马上选择放弃。Prism 的文档详细到让人望而却步，例如多年前的旧版官方文档的 其中一篇：
+
+
+
+不是 6 分钟，不是 16 分账，是整整 60 分钟，Prism 的旧文档随便打开一篇都吓死人。而 Prism 的各种包更是多到离谱。例如几年前的 Prism 6.3，其中 WPF 平台的项目有这么多个：
+
+Prism.Wpf
+Prism.Autofac
+Prism.DryIoc
+Prism.Mef
+Prism.Ninject
+Prism.StructureMap
+Prism.Unity
+所以臃肿是很多人对 Prism 的印象。
+
+减肥是一个永恒的受欢迎的话题，对 Prism 也是一样。相比 Prism 6.3，刚刚发布的 8.0 已经好很多了（虽然还是有很多个项目），例如 WPF 平台的项目已经大幅删减，只保留了 Prism.Wpf、Prism.DryIoc 和 Prism.Unity，也就是说现在 Prism 只支持 DryIoc 和 Unity 两种 IOC 容器。这样一来 Prism 项目的结构就很清晰了。
+
+以 WPF 为例，核心的项目是 Prism.Core，它提供实现 MVVM 模式的核心功能以及部分各平台公用的类。然后是 Prism.Wpf，它提供针对 Wpf 平台的功能，包括导航、弹框等。最后由 Prism.Unity 指定 Unity 作为 IOC 容器。
+
+
+
+即使已精简了这么多，Prism 还是有很多功能，两篇文章也不足以讲解全部内容，所以我只会介绍最常用到的入门知识。这篇文章首先介绍 Prism.Core 的主要功能。
+
+#### Prism.Core#
+
+Prism.Core 可以单独安装，目前最新的版本是 8.0.0.1909：
+
+Install-Package Prism.Core -Version 8.0.0.1909
+
+除了一些各个平台都用到的零零碎碎的公用类，作为一个 MVVM 库 Prism.Core 主要提供了下面三方面的功能：
+
+BindableBase 和 ErrorsContainer
+Commanding
+Event Aggregator
+这些功能已经覆盖了 MVVM 的核心功能，如果只需要与具体平台无关的 MVVM 功能，可以只安装 Prism.Core。
+
+#### BindableBase 和 ErrorsContainer#
+
+数据绑定是 MVVM 的核心元素之一，为了使绑定的数据可以和 UI 交互，数据类型必须继承 INotifyPropertyChanged。 BindableBase 实现了 INotifyPropertyChanged 最简单的封装，它的使用如下：
+
+Copy
+public class MockViewModel : BindableBase
+{
+    private string _myProperty;
+    public string MyProperty
+    {
+        get { return _myProperty; }
+        set { SetProperty(ref _myProperty, value); }
+    }
+}
+其中 SetProperty 判断 _myProperty 和 value 是否相等，如果不相等就为 _myProperty 赋值并触发 OnPropertyChanged 事件。
+
+除了 INotifyPropertyChanged，绑定机制中另一个十分有用的接口是 INotifyDataErrorInfo，它用于公开数据验证的结果。Prism 提供了 ErrorsContainer 以便管理及通知数据验证的错误信息。要使用 ErrorsContainer，可以先写一个类似这样的基类：
+
+Copy
+public class DomainObject : BindableBase, INotifyDataErrorInfo
+{
+    public ErrorsContainer<string> _errorsContainer;
+
+    protected ErrorsContainer<string> ErrorsContainer
+    {
+        get
+        {
+            if (_errorsContainer == null)
+                _errorsContainer = new ErrorsContainer<string>(s => OnErrorsChanged(s));
+
+            return _errorsContainer;
+        }
+    }
+
+    public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+    public void OnErrorsChanged(string propertyName)
+    {
+        ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+    }
+
+    public IEnumerable GetErrors(string propertyName)
+    {
+        return ErrorsContainer.GetErrors(propertyName);
+    }
+
+    public bool HasErrors
+    {
+        get { return ErrorsContainer.HasErrors; }
+    }
+}
+然后就可以在派生类中通过 ErrorsContainer.SetErrors 和 ErrorsContainer.ClearErrors 管理数据验证的错误信息：
+
+Copy
+public class MockValidatingViewModel : DomainObject
+{
+    private int mockProperty;
+
+    public int MockProperty
+    {
+        get
+        {
+            return mockProperty;
+        }
+
+        set
+        {
+            SetProperty(ref mockProperty, value);
+
+            if (mockProperty < 0)
+                ErrorsContainer.SetErrors(() => MockProperty, new string[] { "value cannot be less than 0" });
+            else
+                ErrorsContainer.ClearErrors(() => MockProperty);
+        }
+    }
+}
+
+#### Commanding
+
+ICommand 同样是 MVVM 模式的核心元素，DelegateCommand 实现了 ICommand 接口，它最基本的使用形式如下，其中 DelegateCommand 构造函数中的第二个参数 canExecuteMethod 是可选的：
+
+Copy
+public DelegateCommand SubmitCommand { get; private set; }
+
+public CheckUserViewModel()
+{
+    SubmitCommand = new DelegateCommand(Submit, CanSubmit);
+}
+
+private void Submit()
+{
+    //implement logic
+}
+
+private bool CanSubmit()
+{
+    return true;
+}
+另外它还有泛型的版本：
+
+Copy
+public DelegateCommand<string> SubmitCommand { get; private set; }
+
+public CheckUserViewModel()
+{
+    SubmitCommand = new DelegateCommand<string>(Submit, CanSubmit);
+}
+
+private void Submit(string parameter)
+{
+    //implement logic
+}
+
+private bool CanSubmit(string parameter)
+{
+    return true;
+}
+通常 UI 会根据 ICommand 的 CanExecute 函数的返回值来判断触发此 Command 的 UI 元素是否可用。CanExecute 返回 DelegateCommand 构造函数中的第二个参数 canExecuteMethod 的返回值。如果不传入这个参数，则 CanExecute 一直返回 True。
+
+如果 CanExecute 的返回值有变化，可以调用 RaiseCanExecuteChanged 函数，它会触发 CanExecuteChanged 事件并通知 UI 元素重新判断绑定的 ICommand 是否可用。除了主动调用 RaiseCanExecuteChanged，DelegateCommand 还可以用 ObservesProperty 和 ObservesCanExecute 两种形式监视属性，定于属性的 PropertyChanged 事件并改变 CanExecute：
+
+Copy
+private bool _isEnabled;
+public bool IsEnabled
+{
+    get { return _isEnabled; }
+    set { SetProperty(ref _isEnabled, value); }
+}
+
+private bool _canSave;
+public bool CanSave
+{
+    get { return _canSave; }
+    set { SetProperty(ref _canSave, value); }
+}
+
+
+public CheckUserViewModel()
+{
+    SubmitCommand = new DelegateCommand(Submit, CanSubmit).ObservesProperty(() => IsEnabled);
+    //也可以写成串联方式
+    SubmitCommand = new DelegateCommand(Submit, CanSubmit).ObservesProperty(() => IsEnabled).ObservesProperty<bool>(() => CanSave);
+
+    SubmitCommand = new DelegateCommand(Submit).ObservesCanExecute(() => IsEnabled);
+}
+
+#### Event Aggregator
+
+本来Event Aggregator（事件聚合器）或 Messenger 之类的组件本来并不是 MVVM 的一部分，不过现在也成了 MVVM 框架的一个重要元素。解耦是 MVVM 的一个重要目标，'EventAggregator' 则是实现解耦的重要工具。在 MVVM 中，对于 View 和与他匹配的 ViewModel 之间的交互，可以使用 INotifyProperty 和 Icommand；而对于必须通信的不同 ViewModel 或模块，为了使它们之间实现低耦合，可以使用 Prism 中的 EventAggregator。如下图所示，Publisher 和 Scbscriber 之间没有直接关联，它们通过 Event Aggregator 获取 PubSubEvent 并发送及接收消息：
+
+
+
+要使用 EventAggregator，首先需要定义 PubSubEvent：
+
+Copy
+public class TickerSymbolSelectedEvent : PubSubEvent<string>{}
+发布方和订阅方都通过 EventAggregator 索取 PubSubEvent，在 ViewModel中通常都是通过依赖注入获取一个 IEventAggregator：
+
+Copy
+public class MainPageViewModel
+{
+    IEventAggregator _eventAggregator;
+    public MainPageViewModel(IEventAggregator ea)
+    {
+        _eventAggregator = ea;
+    }
+}
+发送方的操作很简单，只需要 通过 GetEvent 拿到 PubSubEvent，把消息发布出去，然后拍拍屁股走人，其它的责任都不用管：
+
+Copy
+_eventAggregator.GetEvent<TickerSymbolSelectedEvent>().Publish("STOCK0");
+订阅方是真正使用这些消息并负责任的人，下面是最简单的通过 Subscribe 订阅事件的代码：
+
+Copy
+public class MainPageViewModel
+{
+    public MainPageViewModel(IEventAggregator ea)
+    {
+        ea.GetEvent<TickerSymbolSelectedEvent>().Subscribe(ShowNews);
+    }
+
+    void ShowNews(string companySymbol)
+    {
+        //implement logic
+    }
+}
+除了基本的调用方式，Subscribe 函数还有其它可选的参数：
+
+Copy
+public virtual SubscriptionToken Subscribe(Action action, ThreadOption threadOption, bool keepSubscriberReferenceAlive)
+其中 threadOption 指示收到消息后在哪个线程上执行第一个参数定义的 action，它有三个选项：
+
+PublisherThread，和发布者保持在同一个线程上执行。
+UIThread，在 UI 线程上执行。
+BackgroundThread，在后台线程上执行。
+第三个参数 keepSubscriberReferenceAlive 默认为 false，它指示该订阅是否为强引用。
+
+设置为 false 时，引用为弱引用，用完可以不用管。
+设置为 true 时，引用为强引用，用完需要使用 Unsubscribe 取消订阅。
+下面代码是一段订阅及取消订阅的示例：
+
+Copy
+public class MainPageViewModel
+{
+    TickerSymbolSelectedEvent _event;
+
+    public MainPageViewModel(IEventAggregator ea)
+    {
+        _event = ea.GetEvent<TickerSymbolSelectedEvent>();
+        _event.Subscribe(ShowNews);
+    }
+
+    void Unsubscribe()
+    {
+        _event.Unsubscribe(ShowNews);
+    }
+
+    void ShowNews(string companySymbol)
+    {
+        //implement logic
+    }
+}
+
+#### Productivity Tools
+
+####  Prism.Wpf 和 Prism.Unity
+
+这篇是 Prism 8.0 入门的第二篇文章，上一篇介绍了 Prism.Core，这篇文章主要介绍 Prism.Wpf 和 Prism.Unity。
+
+以前做 WPF 和 Silverlight/Xamarin 项目的时候，我有时会把 ViewModel 和 View 放在不同的项目，ViewModel 使用 可移植类库项目，这样 ViewModel 就与 UI 平台无关，实现了代码复用。这样做还可以强制 View 和 ViewModel 解耦。
+
+现在，即使在只写 WPF 项目的情况下，但为了强制 ViewModel 和 View 假装是陌生人，做到不留后路，我也倾向于把 View 和 ViewModel 放到不同项目，并且 ViewModel 使用 .Net Standard 作为目标框架。我还会假装下个月 UWP 就要崛起了，我手头的 WPF 项目中的 ViewModel 要做到平台无关，方便我下个月把项目移植到 UWP 项目中。
+
+但如果要使用 Prism 构建 MVVM 程序的话，上面这些根本不现实。首先，Prism 做不到平台无关，它针对不同的平台提供了不同的包，分别是：
+
+针对 WPF 的 Prism.Wpf
+针对 Xamarin Forms 的 Prism.Forms
+针对 Uno 平台的 Prism.Uno
+其次，根本就没有针对 UWP 的 Prism.Windows（UWP 还有未来，忍住别哭）。
+
+所以，除非只使用 Prism.Core，否则要将 ViewModel 项目共享给多个平台有点困难，毕竟用在 WPF 项目的 Prism.Wpf 本身就是个 Wpf 类库。
+
+现在“编写平台无关的 ViewModel 项目”这个话题就与 Prism 无关了，再把 Prism.Unity 和 Prism.Wpf 选为代表（毕竟这个组合比其它组合下载量多些），这篇文章就只用它们作为 Prism 入门的学习对象。
+
+
+
+Prism.Core、Prism.Wpf 和 Prism.Unity 的依赖关系如上所示。其中 Prism.Core 实现了 MVVM 的核心功能，它是一个与平台无关的项目。Prism.Wpf 里包含了 Dialog Service、Region、Module 和导航等几个模块，都是些用在 WPF 的功能。Prism.Unity 本身没几行代码，它表示为 Prism.Wpf 选择了 UnityContainer 作为 IOC 容器。（另外还有 Prism.DryIoc 可以选择，但从下载量看 Prism.Unity 是主流。）
+
+就算只学习 Prism.Wpf，可它的模块很多，一篇文章实在塞不下。我选择了 Dialog Service 作为代表，因为它的实现思想和其它的差不多，而且弹窗还是 WPF 最常见的操作。这篇文章将通过以下内容讲解如何使用 Prism.Wpf 构建一个 WPF 程序：
+
+PrismApplication
+RegisterTypes
+XAML ContainerProvider
+ViewModelLocator
+Dialog Service
+Prism 的最新版本是 8.0.0.1909。由于 Prism.Unity 依赖 Prism.Wpf，所以只需安装 Prism.Unity：
+
+Install-Package Prism.Unity -Version 8.0.0.1909
+
+#### PrismApplication#
+
+安装好 Prism.Wpf 和 Prism.Unity 后，下一步要做的是将 App.xaml 的类型替换为 PrismApplication。
+
+Copy
+<prism:PrismApplication x:Class="PrismTest.App"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:prism="http://prismlibrary.com/">
+    <Application.Resources>
+    </Application.Resources>
+</prism:PrismApplication>
+上面是修改过的 App.xaml，将 Application 改为 prism:PrismApplication，并且移除了 StartupUri="MainWindow.xaml"。
+
+接下来不要忘记修改 App.xaml.cs：
+
+Copy
+public partial class App : PrismApplication
+{
+    public App()
+    {
+    }
+
+    protected override Window CreateShell()
+        => Container.Resolve<ShellWindow>();
+}
+PrismApplication 不使用 StartupUri ，而是使用 CreateShell 方法创建主窗口。CreateShell 是必须实现的抽象函数。PrismApplication 提供了 Container 属性，CreateShell 函数里通常使用 Container 创建主窗口。
+
+#### RegisterTypes
+
+其实在使用 CreateShell 函数前，首先必须实现另一个抽象函数 RegisterTypes。由于 Prism.Wpf 相当依赖于 IOC，所以要现在 PrismApplication 里注册必须的类型或依赖。PrismApplication 里已经预先注册了 DialogService、EventAggregator、RegionManager 等必须的类型（在 RegisterRequiredTypes 函数里），其它类型可以在 RegisterTypes 里注册。它看起来像这样：
+
+Copy
+protected override void RegisterTypes(IContainerRegistry containerRegistry)
+{
+    // Core Services
+
+    // App Services
+
+    // Views
+    containerRegistry.RegisterForNavigation<BlankPage, BlankViewModel>(PageKeys.Blank);
+    containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(PageKeys.Main);
+    containerRegistry.RegisterForNavigation<ShellWindow, ShellViewModel>();
+
+    // Configuration
+    var configuration = BuildConfiguration();
+
+    // Register configurations to IoC
+    containerRegistry.RegisterInstance<IConfiguration>(configuration);
+}
+
+#### XAML ContainerProvider#
+
+在 XAML 中直接实例化 ViewModel 并设置 DataContext 是 View 和 ViewModel 之间建立关联的最基本的方法：
+
+Copy
+<UserControl.DataContext>
+    <viewmodels:MainViewModel/>
+</UserControl.DataContext>
+但现实中很难这样做，因为相当一部分 ViewModel 都会在构造函数中注入依赖，而 XAML 只能实例化具有无参数构造函数的类型。为了解决这个问题，Prism 提供了 ContainerProvider 这个工具，通过设置 Type 或 Name 从 Container 中解析请求的类型，它的用法如下：
+
+Copy
+<TextBlock
+  Text="{Binding
+    Path=Foo,
+    Converter={prism:ContainerProvider {x:Type local:MyConverter}}}" />
+
+<Window>
+  <Window.DataContext>
+    <prism:ContainerProvider Type="{x:Type local:MyViewModel}" />
+  </Window.DataContext>
+</Window>
+
+#### ViewModelLocator
+
+Prism 还提供了 ViewModelLocator，用于将 View 的 DataContext 设置为对应的 ViewModel：
+
+Copy
+<Window x:Class="Demo.Views.MainWindow"
+    ...
+    xmlns:prism="http://prismlibrary.com/"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+在将 View 的 ViewModelLocator.AutoWireViewModel 附加属性设置为 True 的同时，Prism 会为查找这个 View 对应的 ViewModel 类型，然后从 Container 中解析这个类型并设置为 View 的 DataContext。它首先查找 ViewModelLocationProvider 中已经使用 Register 注册的类型，Register 函数的使用方式如下：
+
+Copy
+ViewModelLocationProvider.Register<MainWindow, CustomViewModel>();
+如果类型未在 ViewModelLocationProvider 中注册，则根据约定好的命名方式找到 ViewModel 的类型，这是默认的查找逻辑的源码：
+
+Copy
+var viewName = viewType.FullName;
+viewName = viewName.Replace(".Views.", ".ViewModels.");
+var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+var suffix = viewName.EndsWith("View") ? "Model" : "ViewModel";
+var viewModelName = String.Format(CultureInfo.InvariantCulture, "{0}{1}, {2}", viewName, suffix, viewAssemblyName);
+return Type.GetType(viewModelName);
+例如 PrismTest.Views.MainView 这个类，对应的 ViewModel 类型就是 PrismTest.ViewModels.MainViewModel。
+
+当然很多项目都不符合这个命名规则，那么可以在 App.xaml.cs 中重写 ConfigureViewModelLocator 并调用 ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver 改变这个查找规则：
+
+Copy
+protected override void ConfigureViewModelLocator()
+{
+    base.ConfigureViewModelLocator();
+
+    ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
+    {
+        var viewName = viewType.FullName.Replace(".ViewModels.", ".CustomNamespace.");
+        var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+        var viewModelName = $"{viewName}ViewModel, {viewAssemblyName}";
+        return Type.GetType(viewModelName);
+    });
+}
+
+#### Dialog Service
+
+Prism 7 和 8 相对于以往的版本最大的改变在于 View 和 ViewModel 的交互，现在的处理方式变得更加易于使用，这篇文章以其中的 DialogService 作为代表讲解 Prism 如何实现 View 和 ViewModel 之间的交互。
+
+DialogService 内部会调用 ViewModelLocator.AutoWireViewModel，所以使用 DialogService 调用的 View 无需添加这个附加属性。
+
+以往在 WPF 中需要弹出一个窗口，首先新建一个 Window，然后调用 ShowDialog，ShowDialog 阻塞当前线程，直到弹出的 Window 关闭，这时候还可以拿到一个返回值，具体代码差不多是这样：
+
+Copy
+var window = new CreateUserWindow { Owner = this };
+var dialogResult = window.ShowDialog();
+if (dialogResult == true)
+{
+    var user = window.User;
+    //other code;
+}
+简单直接有用。但在 MVVM 模式中，开发者要假装自己不知道要调用的 View，甚至不知道要调用的 ViewModel。开发者只知道要执行的这个操作的名字，要传什么参数，拿到什么结果，至于具体由谁去执行，开发者要假装不知道（虽然很可能都是自己写的）。为了做到这种效果，Prism 提供了 IDialogService 接口。这个接口的具体实现已经在 PrismApplication 里注册了，用户通常只需要从构造函数里注入这个服务：
+
+Copy
+public MainWindowViewModel(IDialogService dialogService)
+{
+    _dialogService = dialogService;
+}
+IDialogService 提供两组函数，分别是 Show 和 ShowDialog，对应非模态和模态窗口。它们的参数都一样：弹出的对话框的名称、传入的参数、对话框关闭时调用的回调函数：
+
+Copy
+void ShowDialog(string name, IDialogParameters parameters, Action<IDialogResult> callback);
+其中 IDialogResult 类型包含 ButtonResult 类型的 Result 属性和 IDialogParameters 类型的 Parameters 属性，前者用于标识关闭对话框的动作（Yes、No、Cancel等），后者可以传入任何类型的参数作为具体的返回结果。下面代码展示了一个基本的 ShowDialog 函数调用方式：
+
+Copy
+var parameters = new DialogParameters
+{
+    { "UserName", "Admin" }
+};
+
+_dialogService.ShowDialog("CreateUser", parameters, dialogResult =>
+{
+    if (dialogResult.Result == ButtonResult.OK)
+    {
+        var user = dialogResult.Parameters.GetValue<User>("User");
+        //other code
+    }
+});
+为了让 IDialogService 知道上面代码中 “CreateUser” 对应的 View，需要在 'App,xaml.cs' 中的 RegisterTypes 函数中注册它对应的 Dialog：
+
+Copy
+containerRegistry.RegisterDialog<CreateUserView>("CreateUser");
+上面这种注册方式需要依赖 ViewModelLocator 找到对应的 ViewModel，也可以直接注册 View 和对应的 ViewModel：
+
+Copy
+containerRegistry.RegisterDialog<CreateUserView, CreateUserViewModel>("CreateUser");
+有没有发现上面的 CreateUserWindow 变成了 CreateUserView？因为使用 DialogService 的时候，View 必须是一个 UserControl，DialogService 自己创建一个 Window 将 View 放进去。这样做的好处是 View 可以不清楚自己是一个弹框或者导航的页面，或者要用在拥有不同 Window 样式的其它项目中，反正只要实现逻辑就好了。由于 View 是一个 UserControl，它不能直接控制拥有它的 Window，只能通过在 View 中添加附加属性定义 Window 的样式：
+
+Copy
+<prism:Dialog.WindowStyle>
+    <Style TargetType="Window">
+        <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
+        <Setter Property="ResizeMode" Value="NoResize"/>
+        <Setter Property="ShowInTaskbar" Value="False"/>
+        <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+    </Style>
+</prism:Dialog.WindowStyle>
+最后一步是实现 ViewModel。对话框的 ViewModel 必须实现 IDialogAware 接口，它的定义如下：
+
+Copy
+public interface IDialogAware
+{
+    /// <summary>
+    /// 确定是否可以关闭对话框。
+    /// </summary>
+    bool CanCloseDialog();
+
+    /// <summary>
+    /// 关闭对话框时调用。
+    /// </summary>
+    void OnDialogClosed();
+
+    /// <summary>
+    /// 在对话框打开时调用。
+    /// </summary>
+    void OnDialogOpened(IDialogParameters parameters);
+
+    /// <summary>
+    /// 将显示在窗口标题栏中的对话框的标题。
+    /// </summary>
+    string Title { get; }
+
+    /// <summary>
+    /// 指示 IDialogWindow 关闭对话框。
+    /// </summary>
+    event Action<IDialogResult> RequestClose;
+}
+一个简单的实现如下：
+
+Copy
+public class CreateUserViewModel : BindableBase, IDialogAware
+{
+    public string Title => "Create User";
+
+    public event Action<IDialogResult> RequestClose;
+
+    private DelegateCommand _createCommand;
+    public DelegateCommand CreateCommand => _createCommand ??= new DelegateCommand(Create);
+
+    private string _userName;
+    public string UserName
+    {
+        get { return _userName; }
+        set { SetProperty(ref _userName, value); }
+    }
+   
+    public virtual void RaiseRequestClose(IDialogResult dialogResult)
+    {
+        RequestClose?.Invoke(dialogResult);
+    }
+
+    public virtual bool CanCloseDialog()
+    {
+        return true;
+    }
+
+    public virtual void OnDialogClosed()
+    {
+
+    }
+
+    public virtual void OnDialogOpened(IDialogParameters parameters)
+    {
+        UserName = parameters.GetValue<string>("UserName");
+    }
+
+    protected virtual void Create()
+    {
+        var parameters = new DialogParameters
+        {
+            { "User", new User{Name=UserName} }
+        };
+
+        RaiseRequestClose(new DialogResult(ButtonResult.OK, parameters));
+    }
+}
+上面的代码在 OnDialogOpened 中读取传入的参数，在 RaiseRequestClose 关闭对话框并传递结果。至此就完成了弹出对话框并获取结果的整个流程。
+
+自定义 Window 样式在 WPF 程序中很流行，DialogService 也支持自定义 Window 样式。假设 MyWindow 是一个自定义样式的 Window，自定义一个继承它的 MyPrismWindow 类型，并实现接口 IDialogWindow：
+
+Copy
+public partial class MyPrismWindow: MyWindow, IDialogWindow
+{
+    public IDialogResult Result { get; set; }
+}
+然后调用 RegisterDialogWindow 注册这个 Window 类型。
+
+Copy
+protected override void RegisterTypes(IContainerRegistry containerRegistry)
+{
+    containerRegistry.RegisterDialogWindow<MyPrismWindow>();
+}
+这样 DialogService 将会使用这个自定义的 Window 类型作为 View 的窗口。
+
+### 拖拽
+
+
+#### https://github.com/punker76/gong-wpf-dragdrop
+
+### WPF的类层次结构
+
+
+#### System.Threading.DispatcherObject类——继承DispatcherObject类，用户界面的元素检查是否在正确的线程，访问调度程序为用户界面线程封送代码。
+
+#### System.Windows.DependencyObject类——和屏幕上的元素进行交互主要通过属性进行。 继承DependencyObject类，获得对依赖项属性的支持。
+
+#### System.Windows.Media.Visual类——看做绘图对象，Visual类在托管的WPF库和渲染桌面的milcore.dll提供了链接
+
+#### System.Windows.UIElement类——UIElement类为WPF本质特征提供支持，如布局、输入、焦点以及事件。实现了成为路由事件的路由系统(第5章)，添加对命令的支持(第9章)
+
+#### System.Windows.FrameworkElement类——实现了全部由UIElement类定义的成员。引入数据绑定和样式。
+
+#### System.Windows.Shapes.Shape类——基本的形状类都继承自该类
+
+#### System.Windows.Controls.Control类——控件是可以和用户进行交互的元素。Control类为设置字体和前景色与背景色提供了附加功能，还有模板支持(第17章)。
+
+#### System.Windows.Controls.ContentControl类——所有具有单一内容的控件的基类。控件中的单一内容可以是从普通的字符串乃至具有其他形状和控件组合的布局面板(第6章)。
+
+#### System.Windows.Controls.ItemsControl类——是所有显示选项集合的控件的基类，如ListBox控件和TreeView控件
+
+#### System.Windows.Controls.Panel类——是所有布局器的基类，布局容器是可以包含一个或多个子元素，并根据特定的规则对子元素进行排列的元素。
+
+### XAML
+
+
+#### x: 前缀：用于映射 XAML xmlns http://schemas.microsoft.com/winfx/2006/xaml。
+
+#### x:Class属性（Attribute）：编译成C#代码后对应的类名，如果手动把该属性改成其他后台代码中不包含的类名称，编译后会自动生成该类。如果与后台代码的类名称相同则进行合并（后台代码中的类要用partial修饰）。
+
+#### x:Key：为 ResourceDictionary 中的每个资源设置一个唯一的键。
+
+#### x:Name：为运行时代码中存在的实例指定运行时对象名称。
+
+#### x:Static：启用一个获取静态值的值引用，该静态值只能是一个 XAML 可设置属性。
+
+#### x:Type：根据类型名称构造Type 引用。指定采用 Type 的属性 
+
+#### XAML的树形结构：
+XAML都是一个树，有唯一根节点，通常为Window或Page。
+提供VisualTreeHelper和LogicTreeHelper两个帮助类用来查找或操作树。
+
+
+##### VisualTreeHelper
+
+###### 1、FindElementsInHostCoordinates 检索一组对象，这些对象位于某一对象的坐标空间的指定点或 Rect 内。
+
+###### 2、GetChild 使用提供的索引，通过检查可视化树获取所提供对象的特定子对象。
+
+###### 3、GetChildrenCount 返回在可视化树中在某一对象的子集合中存在的子级的数目。
+
+###### 4、GetParent 返回可视化树中某一对象的父对象。
+
+##### LogicalTreeHelper 
+借助逻辑树，内容模型可以方便地循环访问其可能的子对象，
+从而实现扩展。 此外，逻辑树还为某些通知提供框架，
+例如在加载逻辑树中的所有对象时。
+ 基本上，逻辑树是框架级别的近似运行时对象图（排除了视觉对象），
+但其足以用于对你自己的运行时应用程序组合执行多种查询操作。
+
+
+###### BringIntoView(DependencyObject)	
+
+####### 尝试使所请求的 UI 元素可见，并在目标上引发 RequestBringIntoView 事件以报告结果。
+
+###### FindLogicalNode(DependencyObject, String)	
+
+####### 尝试查找并返回具有指定名称的对象。 搜索从指定对象开始，并持续到逻辑树的子节点中。
+
+###### GetChildren(DependencyObject)	
+
+####### 通过处理逻辑树返回指定的对象的即时子对象集合。
+
+###### GetChildren(FrameworkContentElement)	
+
+####### 通过处理逻辑树，返回指定 FrameworkContentElement 的直接子对象的集合。
+
+###### GetChildren(FrameworkElement)	
+
+####### 通过处理逻辑树，返回指定 FrameworkElement 的直接子对象的集合。
+
+###### GetParent(DependencyObject)	
+
+####### 通过处理逻辑树，返回指定对象的父对象。
+
+#### 合并XAMLS命名空间
+
+
+##### 注意看程序集的信息，里面有一堆这样的代码：
+
+
+```
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Controls")]
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Documents")]
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Shapes")]
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Shell")]
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Navigation")]
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Data")]
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows")]
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Controls.Primitives")]
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Media.Animation")]
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Input")]
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Media")]
+```
+
+> 这些代码的作用就是把那些命名空间合并到一个统一的命名空间里，方便调用。我们在自己的程序集里也可以这样用，只要修改AssemblyInfo.cs就可以了。然后我们在XAML里添加命名空间，就会看到自己定义的命名空间了。
+
+
+### 资源
+
+
+#### 样式
+
+
+#### 模板
+
+
+### 布局
+
+
+> StackPanel 在纵向上或横向上排列元素，注意默认会自动充满横向空间和纵向空间，不会自动换行，通过Orientation控制排列方向。
+
+>  WrapPanel 采用流式布局，通过Orientation控制流的方向，当到达行尾或列尾时可以实现自动换行。
+
+>  DockPanel 可以设置内部元素的停靠方向，通过设置DockPanel.Dock设置子控件的停靠方向。
+
+>  Canvas 可以进行绝对定位布局，通过设置Canvas.Left和Canvas.Top等定位元素，除非确定布局不会改变，否则尽量少使用Canvas布局。
+
+>  Grid 以网格的形式对元素进行布局
+
+>  通用设置
+
+
+> >  控制尺寸
+
+> >  1. 高度和宽度
+
+> >  FrameworkElement元素会根据内容大小调整尺寸（这里有一个例外，如果Window不设置SizeToContent的话，会根据屏幕分辨率设置自己的大小），它同时有Width（默认值Double.NaN，XAML里可以指定为Auto，意思就是和内容一样大）、Height（默认值同Width）、MinWidth（默认值0）、MinHeight（默认值0）、MaxWidth（默认值Double.PositiveInfinity，XAML里面可以写Infinity）、MaxHeight（默认值同MaxWidth）控制宽高，显然如果Width和Height在Min*和Max*范围内的时候，它们的优先级要比Min*以及Max*高
+
+> >  FrameworkElement还有一些与尺寸有关的只读属性：DesiredSize、ActualWidth和ActualHeight、RenderSize；DesiredSize是基于以上属性计算出来的，由父元素（Panel）在布局过程中使用的；RenderSize则是布局结束后元素的尺寸，ActualWidth和ActualHeight与之相同。由于布局操作是异步的，RenderSize的值会晚于Height、Width等基本属性的值，所以依赖RenderSize是不可靠的；UIElement中有一个强制完成布局的方法UpdateLayout()，但由于它会影响性能，而且不能保证正在使用的元素会被正常渲染，所以一般不用
+
+> >  2. Margin和Padding
+
+> >  FrameworkElement.Margin：控制元素边界外的空间
+
+> >  Control.Padding：控制元素边界内的空间
+
+> >  3. Visibility
+
+> >  Collapsed：元素不可见并且不参与布局
+
+> >  Visible：元素可见，并参与布局
+
+> >  Hidden：元素不可见但是参与布局
+
+##### 控制位置
+
+> 不同父元素（Panel）有不同的方法确定子元素的位置，但是有一些方法是子元素共有的
+
+###### 1. Alignment
+
+####### 比如Canvas就没有给它的子元素分配多余的空间，所以设置HorizontalAlignment和VerticalAlignment不起作用
+
+####### 子元素（FrameworkElement）可以通过设置Alignment（默认值Stretch）控制怎样使用父元素分配给它的多余的空间；“多余的空间”很重要，因为如果父元素按照子元素的大小给它分配空间的话，这两个属性就不起作用了
+
+####### 再比如StackPanel（Orientation属性值这里默认是Vertical，表示子元素垂直排列）只为子元素在水平方向上分配了多余空间，垂直方向上根据尺寸分配，所以设置HorizontalAlignment可以起作用，而设置VerticalAlignment不起作用
+
+###### 2. Content Alignment
+
+####### Control元素还可以通过设置HorizontalContentAlignment和VerticalContentAlignment控制自己的内容元素怎样对齐
+
+###### 3. FlowDirection
+
+####### FrameworkElement可以通过设置此属性改变此元素的内容流动的方向（LeftToRight和RightToLeft），可以作用在面板（Panel）或者拥有子元素的控件上
+
+##### Panel（面板）
+
+> Panel有一个ZIndex附加属性，ZIndex值大的元素会呈现在ZIndex值小的元素上方
+
+> WPF内置的常用面板有：Canvas、StackPanel、WrapPanel、DockPanel、Grid，还有一些大多数时候在控件内部使用的轻量级面板
+
+###### 1. 常用面板
+
+>  常用面板里只记录一下GridSplitter（实际不是Panel类），Grid中可以通过GridSplitter交互改变行列尺寸，哪个单元格尺寸会被影响取决于GridSplitter的对齐值HorizontalAlignment（默认是Right）和VerticalAlignment（默认是Stretch），《WPF揭秘》里有张图，贴在这里，另外ResizeDirection和ResizeBehavior属性也会影响GridSplitter改变单元格尺寸的行为
+
+###### 2. TabPanel
+
+>  TabControl的默认样式用它来处理TabItem的布局；TabPanel仅支持从左往右的排列，从上往下的换行，当换行发生时它会平均拉伸元素，使所有的行占据面板的全部宽度
+
+###### 3. ToolBarOverflowPanel
+
+>  仅支持从左往右的排列、从上往下的换行，默认样式的ToolBar就是用它来显示无法在主区域显示的元素，有一个WrapWidth属性
+
+###### 4. ToolBarTray
+
+>  仅支持ToolBar子元素，它会以水平的方式排列ToolBar，并且可以拖动ToolBar生成其他行，或者压缩或扩展相邻的ToolBar
+
+###### 5. UniformGrid
+
+>  子元素按先行后列的顺序添加，并且行列的大小都是*（平均大小）
+
+###### 6. VirtualizingStackPanel
+
+> >  不同于以上的轻量级面板，当绑定大量数据的时候，VirtualizingStackPanel是首选，因为它会临时抛弃显示范围之外的元素以提高性能，ListBox的默认样式使用的就是这个面板
+
+> >  处理内容溢出
+
+> >  当父元素不能满足子元素尺寸需求的时候，子元素可能会拒绝在过小的空间呈现，这种情况下就会发生内容溢出
+
+> >  父元素（Panel）在处理内容溢出的时候，有以下几种策略：
+
+> 1. Clipping（剪辑）
+
+> >  UIElement用ClipToBounds属性控制自己是否剪辑超出边界的内容，但是WPF内置面板中只有Canvas支持这个属性，其他诸如Grid等面板设置这个属性也没有用
+
+> >  另外Grid等面板中的子元素通过变换（Transform）超出边界的部分也会被剪辑
+
+> 2. Scrolling（滚屏）
+
+> >  把需要滚屏的元素作为ScrollViewer的子元素即可实现滚屏，但是不要为该元素设置宽度或高度，因为ScollViewer需要根据子元素的内容大小设置合适的水平和垂直滚动范围
+
+> 3. Scaling（缩放）
+
+> >  为了在给定空间中缩放任意元素（ScaleTransform搞不定），可以使用Viewbox，有两个重要属性：Stretch（控制子元素怎样在Viewbox的边界内缩放）、StretchDirection（控制是需要缩小还是放大子元素）。需要注意的是，Viewbox的缩放是在布局之后发生的
+
+> 4. 其他
+
+> >  还有两种策略是换行（Wrapping）和截断（Trimming），换行是WrapPanel用的策略，截断则是TextBlock和AccessText中内联文本使用的策略
+
+
+### 元素绑定
+
+> 数据绑定是种关系，告诉WPF从源对象提取信息设置目标对象的属性
+
+> 源对象是WPF元素并且源属性是依赖项属性的数据绑定，这是最简单的数据绑定。 
+
+#### 绑定表达式 
+
+> 数据绑定表达式使用XAML扩展标记，以Binding开头，实际上是创建了System.Windows.Data.Binding类实例，且设置两个属性：ElementName属性（源元素）和Path属性（源元素中的属性）。  
+
+#### 绑定错误
+
+> WPF不会引发异常带来通知与数据绑定相关的问题。指定的元素或属性不存在，只是在目标属性中不能显示数据。WPF输出了绑定失败细节的跟踪信息。当调试应用程序时，该信息显示在Visual Studio的输出窗口中。
+
+#### 绑定模式
+
+> 数据绑定的特性是目标会被自动更新，而不管源是被如何修改的。Binding.Mode的所有枚举值：
+
+>  OneWay：当源属性变化时更新目标属性
+
+>  TwoWay：当源属性变化时更新目标属性，并且当目标属性变化时更新源属性
+
+>  OneTime：最初根据源属性设置目标属性。然而，在此之后的所有改变都会被忽略
+
+>  OneWayToSource：当目标属性变化时更新源属性
+
+>  Default：此类绑定依赖于目标属性，他既可以是双向的，也可以是单向的。
+
+#### 代码创建绑定
+
+> 实例化Binding对象，指定Source，Path，Mode
+
+>  移除：BindingOperation类的ClearBinding()，ClearAllBindings(),都使用DependencyObject的ClearValue()
+
+>  创建动态绑定——根据其他运行时信息修改绑定，或者根据环境创建不同的绑定
+
+>  删除绑定——借助ClearBinding()或ClearAllBindings()方法。
+
+>  创建自定义控件——更容易的修改控件的外观，将特定的细节从标记移到代码中。
+
+>  检索绑定：1 BindingOperations.GetBinding() 2 BindingOperations.GetBingingExpression()
+
+>  多绑定:Mode允许改变绑定方向，（双向绑定），创建多个设置同一属性的绑定表达式。例如TextBox.Text属性创建表达式以链接到TextBlock.FontSize属性，而TextBlock.FontSize又链接到Slider.Value属性的绑定表达式。
+
+>  绑定更新:源的变化会立即影响目标，然而反向的传递从目标到源未必会立即发生。他们的行为由Binding.UpdateSourceTrigger属性控制。
+
+>  PropertyChanged:当目标属性变化时立即更新源。
+
+>  LostFocus:当目标属性变化并且目标属性失去焦点时跟新源。
+
+>  Explicit:除非调用BindingExpression.UpdateSource()方法，否则无法更新源。
+
+>  Default:根据目标属性的元素确定更新行为。大多数属性的默认行为是PropertyChanged,但TextBox.Text属性的默认行为是LostFocus
+
+>  绑定延迟: Binding的Delay,毫秒
+
+>  绑定到非元素对象：
+
+>  Source:指向源对象的引用，提供数据的对象。
+
+>  RelativeSource：这是引用，使用RelativeSource对象指向源对象。有了这个附加层，在在当前元素的基础上构建引用。这似乎增加了复杂程度，当编写控件模板以及数据模板时很方便。
+
+>  DataContext：如果没有使用Source或RelativeSource属性指定源，WPF就从当前元素开始在元素树中向上查找。检查每个属性的DataContext属性，并使用第一个非空的DataContext属性。
+
+>  Source：静态资源x:Static
+
+>  RelativeSource：还要创建嵌套的RelativeSource对象，更常用是使用Binding和RelativeSource标记扩展，将其合并到一个字符串中。{RelativeSource FindAncestor, AncestorType ={x:Type Window}}
+
+>  Self：表达式绑定到同一元素的另一个属性上
+
+>  FindAncestor：表达式绑定到父元素
+
+>  PreviousData：表达式绑定到数据绑定列表中的前一个数据项。在
+
+>  TemplateParent：表达式绑定到应用模板的元素
+
+>  DataContext属性：将大量元素绑定到同一对象。设置Binding.Source属性相同的方法设置元素的DataContext属性。
+
+>  省略源信息时，为null，继续向上在元素树中查找第一个不为null的数据。Binding Path=Source
+
+### 第三方控件库
+
+> Telerik RadControrls WPF
+
+
+> DEVExpress
+
+
+> GrapCity ComponentOne
+
+
+#### 工具
+
+
+> Visual Studio 
+
+
+> Blend
+
+
+> ILSpy
+
+
+> Snoop#
+
+
+
+> > Snoop是一个开源的WPF UI探索工具，它可以浏览正在运行的WPF程序的可视树、改变它的属性、查看Triggers、设置断点等。虽然现在Visual Studio也可以做到差不多的功能，但Snoop依然是我最喜欢使用的WPF工具之一。
+
+> DebugView
+
+> > DebugView是一个很古老但依然实用的工具，它可以查看应用程序或驱动程序输出的调试信息，而且不仅能查看本地机器，还可以查看远程机器的调试信息。总而言之有了它可以方便查看程序的调试信息，对调试应用很有帮助。
+
+> ReSharper
+
+> > XAML的错误提示
+
+> > 增强的XAML智能感知
+
+> > 导航和查找XAML元素
+
+> > XAML代码重构
+
+> Visual UI Automation Verify
+
+###### 自动化测试的协助工具
+
+>  1、ResXManager
+
+> > ResXManager是用于管理resx资源文件的Visual Studio扩展，它提供了在Visual Studio中统一管理所有资源文件的用户界面。小规模的程序用不上，但一旦资源和资源文件达到一定数量管理这些资源将十分痛苦，这时候ResXManager就必不可少。
+
+>  2、dnSpy
+
+> > dnSpy 是用于 .NET 调试的最有用的工具之一。它是一个很好的反编译器。但是它的主要用途是作为调试器。dnSpy允许你调试任何 .NET程序你，而无需考虑符号或者源代码。
+
+> > 该工具的外观和感觉类似于Visual Studio。当你开始调试没有符号或者源代码的.NET进程时，dnSpy将向你显示反编译的代码。现在，这里有个魔术：你可以在反编译的代码本上中放置断点。遇到这些断点时，你将看到局部变量，线程，调用堆栈，并具有完整的调试经验。这使dnSpy成为调试第三方代码和调试生产环境的首选工具。
+
+> > 它轻巧，无需安装。只需将文件夹复制到任何生产机器上，然后开始调试。
+
+> > 这个工具有个小窍门。如果你使用dnSpy启动进程，那么一切将正常运行。但是，如果你附加到正在运行的进程时，则已加载的模块将保持优化状态。也就是说它们是在Release模式下构建的。优化代码后，将不会遇到某些断点，也不会显示某些局部变量。这几乎破坏了调试体验。解决方案是使用dsSpy启动进程，而不是附加到进程中。
+
+>  3、dotPeek
+
+> > dotPeek是JetBrains的免费.NET反编译器。它们的许多工具实际上进入了该列表。与两个反编译器（如ILSpy或JustDecompile）相比，我更喜欢dotPeek，这有两个原因：
+
+> > dotPeek提供了更好的用户体验。或至少我感到自在。它看起来和感觉都像Resharper。所以这可能是原因。
+
+> > dotPeek可以从任何程序集中创建符号服务区，即使没有符号或源代码也是如此。它像dnSpy一样，它或反编译代码并从中创建符号。借助dotPeek，Visual Studio就像dnSpy一样调试任何第三方代码。要查看准确程度，请参阅我的文章：在Visual Studio中调试没有符号的第三方.NET代码，后续会进行翻译。
+
+>  4、dotTrace
+
+> > dotTrace是JetBrains的另一个出色工具。这是我最喜欢的性能分析工具。dotTrance允许你“记录”应用程序的运行，然后分析记录的性能。你将能够看到每种调用方法花费了多长时间，数据库条用，HTTP请求以及垃圾回收期间花费的时间等等。
+
+> > 上图显示了对Visual Studio的简短记录分析。你可以看到ShowWindow花费了155毫秒，其中包括HwndSourceHook（42ms），Convert（16ms）等方法用时。此方法的执行包括42%的WPF调用，20%的用户代码，12%的GC等待，10%的Collections代码，10%的反射和5%的系统代码。太好了吧？
+
+> > 首先，这是一个学习曲线，但是一旦习惯了，它会变得非常直观。
+
+>  5、SciTech's .NET Memory Profiler
+
+> > 内存分析器是解决内存问题必不可少的另一类工具。这些可能是由于GC（GC压力）引起的内存泄露或性能影响。如果你有足够大的应用程序，那么迟早会遇到内存问题。我希望为你以后着想，因为这些类型的问题可能是毁灭性的。
+
+> > 内存探查器可以拍摄“内存快照”，并让你对器进行调查。你将看到哪些对象占用最多的内存，谁引用了它们，以及为什么未进行垃圾回收。通过比较两个快照，可以发现内存泄露。
+
+> > 有几种可用的内存分析器，但是SciTech's .NET Memory Profiler是我的最爱。我发现它是功能最强大的产品，问题最少。
+
+>  6、OzCode
+
+> > OzCode是独特的Visual Studio扩展。其唯一目的是帮助你在Visual Studio中进行交互式调试。OzCode具有很多功能，可以分为4部分：
+
+> > 1.上方显示 - OzCode在调试期间添加了一些有用的可视化功能。这包括红色/绿色突出显示并显示对象的选定属性：
+
+> > 还有其他内容，例如将表达式分解成各个部分:
+
+> > 2.LINQ调试 - LINQ在编写代码时很棒，但是很难调试。OzCode允许在调试过程中以几乎完美的方式研究LINQ表达式。
+
+> > 要了解有关使用或不使用OzCode调试LINQ的更多信息，请查看我的文章：如何在C#中调试LINQ查询。
+
+> > 3.数据提示 - 数据提示是将鼠标悬停在Visual Studio中的变量上时看到的弹出窗口。OzCode用自己的更好的数据提示替换了该窗口。它允许“收藏夹”属性，搜索，导出为JSON和其他功能。
+
+> > 4.时间穿梭 - OzCode 4 添加了新的革命性调试功能。它可以预测未来而无需移动断点。也就是说，你将能够看到当前调试位置之后发生的代码行中发生的情况。不过，此功能并非在所有情况下都有效。例如，OzCode无法预测HTTP请求结果或SQL请求之类的事情，因为它必须为此执行它们。
+
+>  7、SysInternals Suite
+
+> > SysInternals是一套用于对Windows软件进行故障排除和监视的实用程序。它包括一些我们调试所需的最重要的工具。我建议下载整个套件并将其保存在易于命令行键入的位置，例如：C:\Sysinternals。有很多工具，其中一些比其他工具更有用。让我们列出一些.NET最重要的。
+
+> > Process Explorer
+
+> > Process Explorer就像类固醇上的Windows Task Manager。它具有许多对调试有用的功能，这里是其中的一些：
+
+> > 查看加载的模块
+
+> > 查看句柄
+
+> > 创建Dump
+
+> > 查看进程树
+
+> > 查看性能计数器
+
+> > Process Monitor
+
+> > Process Monitor 也称为ProcMon，允许你监视流程活动事件。具体的说，你可以弹道注册表事件，文件事件，网络事件，线程活动和性能分析事件。如果你想找出你的过程涉及哪些文件或注册表，那么ProcMon可以为你提供帮助。
+
+> > ProcDump
+
+> > ProcDump是用于保存转储文件的命令行工具。它可以立即或在触发器上生成转储。例如，在崩溃或挂起时创建转储。这是我推荐的用于捕获转储的工具。以下是它的一些功能：
+
+> > 立即创建转储
+
+> > 创建具有特定间隔的多个转储（例如3个转储，相隔5秒）
+
+> > 一旦超过CPU阈值，就创建转储
+
+> > 如果进程挂起，则创建转储
+
+> > 崩溃时创建转储
+
+> > 若要查找有关ProcDump和Dump的更多信息，请参阅我的文章：2019年如果创建、使用和调试.NET 应用程序崩溃转储。
+
+>  8、Performance Monitor (PerfMon)
+
+> > Windows中有一种称为“性能计数器”的内置机制。这些计数器可让你根据计算机上发生的事情跟踪大量有用的指标。这些可能是系统范围内的指标，也可能是针对特定过程的指标。以下是一些可以使用性能计数器衡量的事情的示例：
+
+> > CPU使用率
+
+> > 内存使用率
+
+> > 进程中引发的异常数
+
+> > I/O字节的读写
+
+> > 对你的asp.net应用程序的请求数
+
+> > 在asp.net应用程序中请求响应时间
+
+> > 你可能会监视成千上万种不同的计数器，它们会尽可能的具体。例如，如果你想了解进程的内存使用情况，则有以下计数器：私有字节，虚拟字节，工作集，私有工作集，Gen X 集合，GC时间百分比，大对象堆大小 等等。
+
+> > 性能监视器是使你可以直观地看到这些计数器的工具（尽管也有其他工具）。它以在Windows设备预安装上了。要运行它，只需要在开始菜单中键入“Performance Monitor”，或在命令提示符下键入perfmon。
+
+>  9、PerfView
+
+> > PerfView是一个开源通用分析工具。它可以做很多事情，以下是其中一些：
+
+> > 性能分析
+
+> > 内存分析
+
+> > 分析ETW事件
+
+> > 从Linux导入性能快照
+
+> > 有关应用程序行为的各种报告，包括JIT编译时间，垃圾回收时间等
+
+> > 它的分析是基于Windows事件跟踪（ETW）事件。这是一个内置的日志记录系统，运行速度非常快，Windows的每个部分都可以使用它。一切都将事件记录到ETW，包括内核，Windows操作系统，CLR运行时，IIS，ASP.NEt框架，WPF等。
+
+> > PerfView很容易成为此列表中最复杂的工具。但是它也非常强大。要开始使用PerfView，我建议在第九频道观看Vance Morrison的视频课程系统。
+
+>  10、Fiddler
+
+> > Fiddler是Progress Telerik的免费工具。这是我最喜欢的网络请求调试工具之一。它被称为HTTP代理服务器，仅此而已。它捕获所有HTTP请求，记录数据，并按其方式发送请求。
+
+> > 对于每一个请求，你都可以查看流程，Headers，payload，response，status等所有的内容。
+
+> > 对于调试，Fiddler具有两个有用功能：
+
+> > 重新请求 - 你可以右键单击任何请求，然后单击“Replay”，这将再次发送完全相同的请求。在调试服务器端问题时非常有用。如果你要重现有问题的请求，Fiddler可以避免在客户端上重新运行方案以再次发送相同请求的麻烦。它还有助于处理难以重现的请求。
+
+> > 编辑并重新请求 - 除了重新请求外，Fiddler允许我们修改请求。你可以更改标题，正文，甚至URL本身。你可以使用它来查看服务器端如何处理极端情况。或重现特定请求上发生的问题。
+
+### VisualStateManager
+
+
+#### 要使用 VisualStateManager，需要定义 VisualState；在 VisualState 中定义控件的不同的状态以及每种状态下的样式，然后，在代码中合适的地方，我们可以使用 VisusalStateManager 类的 GoToState 来切换到对应的状态，从而实现样式的切换。
+
+#### 所以，总括地说，这里涉及了以下四个方面：
+
+#### VisualState: 视图状态(Visual States)表示控件在一个特殊的逻辑状态下的样式、外观；
+
+#### VisualStateGroup: 状态组由相互排斥的状态组成，状态组与状态组并不互斥；
+
+#### VisualTransition: 视图转变 (Visual Transitions) 代表控件从一个视图状态向另一个状态转换时的过渡；
+
+#### VisualStateManager: 由它负责在代码中来切换到不同的状态；
+
+#### 每个 VisualState 都属于一个状态组 (VisualStateGroup)，也即一个 VisualStateGroup 中可以定义多个 VisualState；并且，我们也可以定义多个 VisualStateGroup；需要再次强调的是：同一个 VisualStateGroup 中 VisualState 是互斥的，而不同的 VisualStateGroup 中的 VisualState 是在同一时刻是可以共存的。以 Button 为例：
+
+#### 我们看到，在它里面，定义了三个 VisualStateGroup，分别是 CommonStates（正常状态）、FocusStates（焦点状态）、ValidationStates（验证状态），而每个 VisualStateGroup 下又有若干个 VisualState。在 CommonStates 中，按钮可以是 Normal 、MouseOver 或 Pressed（只能是三者之一），但它却可以结合其它 VisualStateGroup 中的 VisualState 来显示，如按钮具有焦点时且鼠标移动到其上，这就结合了 MouseOver 与 Focused 两种状态。以下它的部分代码：
+
+### 图形
+
+
+#### 基本图形
+
+
+> Line 直线段
+
+> Rectangle 矩形
+
+> Ellipse 椭圆
+
+> Polygon 多边形
+
+> Polyline 折线，不闭合
+
+> Path 路径
+
+#### 笔刷 Brush
+
+
+> · SolidColorBrush：使用纯 Color 绘制区域。 
+
+> · LinearGradientBrush：使用线性渐变绘制区域。 其中有个GradientStop属性，径向渐变也有可以查看msdn，我觉得上面说的还是比较清楚的。
+
+> · RadialGradientBrush：使用径向渐变绘制区域。 
+
+> · ImageBrush：使用图像（由 ImageSource 对象表示）绘制区域。
+
+> · DrawingBrush：使用 Drawing 绘制区域。 绘图可能包含向量和位图对象。
+
+> · VisualBrush：使用 Visual 对象绘制区域。 使用 VisualBrush 可以将内容从应用程序的一个部分复制到另一个区域，这在创建反射效果和放大局部屏幕时会非常有用。
+
+#### 图形的效果与滤镜
+
+
+> BevelBitmapEffect：斜角效果。
+
+> BitmapEffectGroup：符合效果。
+
+> BlurBitmapEffect:模糊效果。
+
+> DropShadowBitmapEffect：投影效果。
+
+> EmbossBitmapEffect：浮雕效果。
+
+> OuterGlowBitmapEffect: 外发光效果。
+
+### 变换
+
+
+#### 图形的变形
+
+
+> RenderTransform：呈现变形，定义在UIElement类中。
+
+> LayoutTransform：布局变形，定义在FrameworkElement类中。
+
+#### Transform 抽象类
+
+> MatrixTransform：矩阵变形
+
+> RotateTransform：旋转变形
+
+> ScaleTransform：坐标变形
+
+> SkewTransform：拉伸变形
+
+> TranslateTransform：偏移变形
+
+> TransformGroup：变形组
+
+```
+ <TextBlock.RenderTransform> 
+    <RotateTransform Angle="0" x:Name="rt1"></RotateTransform> 
+</TextBlock.RenderTransform> 
+```
+
+#### 变换（Transform）
+
+> WPF元素还可以通过变换来改变尺寸和位置，有两种变换，RenderTransform和LayoutTransform
+
+> RenderTransform（继承自UIElement）：在布局结束之后应用
+
+> LayoutTransform：在布局前应用
+
+> UIElement还有一个属性RenderTransformOrigin表示变换的原点，使用相对定位，（0,0）表示左上角，（1,1）表示右下角，显然RenderTransformOrigin只用于RenderTransform；LayoutTransform没有原点的概念是因为它要参与布局，被变换元素的位置由父元素的布局规则控制
+
+> 1. RotateTransform
+
+> > 控制变换的属性：Angle（旋转角度）、CenterX和CenterY（旋转中心点）；CenterX和CenterY使用的是绝对定位（像素无关单位），可以与RenderTransformOrigin组合起来使用，在缩放变换（ScaleTransform）和倾斜变换（SkewTransform）中都是这样
+
+> 2. ScaleTransform
+
+> > 控制变换的属性：ScaleX（水平方向的缩放因子）、ScaleY（垂直方向的缩放因子）、CenterX和CenterY（缩放的中心点）
+
+> 3. SkewTransform
+
+> > 控制变换的属性：AngleX（水平倾斜的角度）、AngleY（垂直倾斜的角度）、CenterX和CenterY（倾斜的中心点）
+
+> 4. TranslateTransform
+
+> > 控制变换的属性：X（水平偏移量）、Y（垂直偏移量）；与上面三种变换不同的是，TranslateTransform作为LayoutTransform应用时不起作用
+
+> 5. MatrixTransform
+
+> > 控制变换的属性：Matrix（3×3仿射变换矩阵），上面的4种变换都可以通过定义Matrix实现，并且可以直接在XAML里用一个字符串设置，比如下图的变换实现的是水平和垂直方向上放大两倍的效果
+
+> 6. TransformGroup
+
+> > 可以组合多个变换
+
+### 动画
+
+
+#### 动画基类
+
+```
+System.Windows.Media.Animation.BooleanAnimationBase
+System.Windows.Media.Animation.ByteAnimationBase
+System.Windows.Media.Animation.CharAnimationBase
+System.Windows.Media.Animation.ColorAnimationBase
+System.Windows.Media.Animation.DecimalAnimationBase
+System.Windows.Media.Animation.DoubleAnimationBase
+System.Windows.Media.Animation.Int16AnimationBase
+System.Windows.Media.Animation.Int32AnimationBase
+System.Windows.Media.Animation.Int64AnimationBase
+System.Windows.Media.Animation.MatrixAnimationBase
+System.Windows.Media.Animation.ObjectAnimationBase
+System.Windows.Media.Animation.Point3DAnimationBase
+System.Windows.Media.Animation.PointAnimationBase
+System.Windows.Media.Animation.QuaternionAnimationBase
+System.Windows.Media.Animation.RectAnimationBase
+System.Windows.Media.Animation.Rotation3DAnimationBase
+System.Windows.Media.Animation.SingleAnimationBase
+System.Windows.Media.Animation.SizeAnimationBase
+System.Windows.Media.Animation.StringAnimationBase
+System.Windows.Media.Animation.ThicknessAnimationBase
+System.Windows.Media.Animation.Vector3DAnimationBase
+System.Windows.Media.Animation.VectorAnimationBase
+```
+
+> 以DoubleAnimationBase为基类展开，其他的再慢慢去了解和摸索。
+
+> > 一种就是点到点的的动画DoubleAnimation，一种是可以分为帧的动画DoubleAnimationUsingKeyFrames，还有一种是按照路径来执行的DoubleAnimationUsingPath的动画。
+简单动作由以下几个部分构成：变化起点（From属性），变化终点（To属性），变化幅度（By属性），变化时间（Duration属性）。
+如果指定的有终点那么幅度就被忽略了，如果没有起点，就以当前元素所在位置为起点。
+还是看个例子来的更易理解。下面演示一个按钮如果被点击了，在0.3s里，按钮朝着x，y轴上300个单位随机移动。下面给出代码
+
+```
+System.Windows.Media.Animation.BooleanAnimationBase
+System.Windows.Media.Animation.ByteAnimationBase
+System.Windows.Media.Animation.CharAnimationBase
+System.Windows.Media.Animation.ColorAnimationBase
+System.Windows.Media.Animation.DecimalAnimationBase
+System.Windows.Media.Animation.DoubleAnimationBase
+System.Windows.Media.Animation.Int16AnimationBase
+System.Windows.Media.Animation.Int32AnimationBase
+System.Windows.Media.Animation.Int64AnimationBase
+System.Windows.Media.Animation.MatrixAnimationBase
+System.Windows.Media.Animation.ObjectAnimationBase
+System.Windows.Media.Animation.Point3DAnimationBase
+System.Windows.Media.Animation.PointAnimationBase
+System.Windows.Media.Animation.QuaternionAnimationBase
+System.Windows.Media.Animation.RectAnimationBase
+System.Windows.Media.Animation.Rotation3DAnimationBase
+System.Windows.Media.Animation.SingleAnimationBase
+System.Windows.Media.Animation.SizeAnimationBase
+System.Windows.Media.Animation.StringAnimationBase
+System.Windows.Media.Animation.ThicknessAnimationBase
+System.Windows.Media.Animation.Vector3DAnimationBase
+System.Windows.Media.Animation.VectorAnimationBase
+```
+
+```
+<Grid>
+<Button x:Name="btn" Content="Move!" HorizontalAlignment="Left" VerticalAlignment="top" Width="60" Height="60" Click="Button_Click">
+        <Button.RenderTransform>
+            <TranslateTransform x:Name="tt" X="0" Y="0"/>
+        </Button.RenderTransform>
+    </Button>
+</Grid>
+```
+
+
+```
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //定义简单动画的实例
+              DoubleAnimation daX = new DoubleAnimation();
+            DoubleAnimation daY = new DoubleAnimation();
+
+            //指定起点
+             daX.From = 0D;
+            daY.From = 0D;
+
+            //指定终点
+            Random r = new Random();
+            daX.To = r.NextDouble() * 300;
+            daY.To = r.NextDouble() * 300;
+
+            //daX.By = 100D;
+            //daY.By = 100D;
+            //指定时长300ms
+            Duration duration=new Duration(TimeSpan.FromMilliseconds(300));
+            daY.Duration = duration;
+            daX.Duration = duration;
+
+            //将动画添加到偏移变形的实例上面 和Binding的格式有点像
+            //this.textBox.SetBinding（TextBox.TextProperty,binding）
+            
+            //让按钮发生改变作为动画
+            //btn.BeginAnimation(Button.WidthProperty, daX);
+            //btn.BeginAnimation(Button.HeightProperty, daY);
+            
+            //让 位置发生改变作为动画
+            this.tt.BeginAnimation(TranslateTransform.XProperty, daX);
+            this.tt.BeginAnimation(TranslateTransform.YProperty, daY);
+        }
+```
+
+#### 关键帧动画 ：
+先理解一下帧的概念，帧也就每次属性改变都会产生一个新画面，
+新画面就是一个帧。帧的连续播放产生了动画。
+DoubleAnimationUsingKeyFrames的实例中通常是含有多个DoubleKeyFrame类的帧，具体的有下面四种：　
+
+
+##### LinearDoubleKeyFrame，线性帧，目标属性值的变化是直线型的，匀速的。
+
+##### DiscreteDoubleKeyFrame，不连续变化的帧，目标属性值是跳跃的。
+
+##### SplineDoubleKeyFrame， 样条函数变化帧，目标属性值的速率是一条贝赛尔曲线。
+
+##### EasingDoubleKeyFrame，缓冲式帧，目标属性值以某种缓冲形式变化。
+
+```
+            //定义两个DoubleAnimationUsingKeyFrames类型的实例，来控制呈现变形的横纵坐标
+            DoubleAnimationUsingKeyFrames dakX = new DoubleAnimationUsingKeyFrames();
+            DoubleAnimationUsingKeyFrames dakY = new DoubleAnimationUsingKeyFrames();
+
+            //指定时长
+            dakX.Duration = new Duration(TimeSpan.FromMilliseconds(900));
+            dakY.Duration = new Duration(TimeSpan.FromMilliseconds(900));
+
+            //纵坐标====================================================
+            //动画分成三段，所以有三个线性关键帧
+            LinearDoubleKeyFrame x_kf_1 = new LinearDoubleKeyFrame();
+            LinearDoubleKeyFrame x_kf_2 = new LinearDoubleKeyFrame();
+            LinearDoubleKeyFrame x_kf_3 = new LinearDoubleKeyFrame();
+
+            //为三段关键帧赋值（时间和属性的值），并添加到动画中
+            x_kf_1.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(300));
+            x_kf_1.Value = 200;
+            x_kf_2.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(600));
+            x_kf_2.Value = 0;
+            x_kf_3.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(900));
+            x_kf_3.Value = 200;
+
+            dakX.KeyFrames.Add(x_kf_1);
+            dakX.KeyFrames.Add(x_kf_2);
+            dakX.KeyFrames.Add(x_kf_3);
+            //纵坐标====================================================
+            LinearDoubleKeyFrame y_kf_1 = new LinearDoubleKeyFrame();
+            LinearDoubleKeyFrame y_kf_2 = new LinearDoubleKeyFrame();
+            LinearDoubleKeyFrame y_kf_3 = new LinearDoubleKeyFrame();
+
+            y_kf_1.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(300));
+            y_kf_1.Value = 0;
+            y_kf_2.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(600));
+            y_kf_2.Value = 180;
+            y_kf_3.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(900));
+            y_kf_3.Value = 180;
+
+            dakY.KeyFrames.Add(y_kf_1);
+            dakY.KeyFrames.Add(y_kf_2);
+            dakY.KeyFrames.Add(y_kf_3);
+
+            //把动画寄托在呈现变形中
+            this.tt.BeginAnimation(TranslateTransform.XProperty, dakX);
+            this.tt.BeginAnimation(TranslateTransform.YProperty, dakY);
+
+```
+
+#### 前面已经介绍了路径绘图时的强大，那么我们能不能让我的动画按照我们制定的路径去表演呢，答案是可以的。
+这就是我们要记录的DoubleAnimationUsingPath类。
+注意它有三个属性很关键，其中Duration是每个动画必须有的，另外两个是Source属性和PathGeometry分别用来指定向那个方向移动和路径。
+下面给出一个按钮沿路径移动的动画，构思如下：
+
+
+
+```
+<Window.Resources>
+
+<PathGeometry x:Key="movingPath" Figures="M 40,110 A 50,50 0 1 1 100,60 A110,95 0 0 1 200,60 A 50,50 0 1 1 250 100 A 110,95 0 1 1 55,100 Z"/>
+
+</Window.Resources>
+
+<Grid x:Name="grid" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+<Path x:Name="movingPath" Data="M 40,110 A 50,50 0 1 1 100,60 A110,95 0 0 1 200,60 A 50,50 0 1 1 250 100 A 110,95 0 1 1 55,100 Z" Stroke="Red"
+
+　　　　　　　　　　 StrokeThickness="2" Visibility="Visible"/>
+
+<Button x:Name="btn" Height="30" Width="80" Content="路径动画" Click="btn_Click" Margin="0,0,219,210">
+
+<Button.RenderTransform>
+
+<TranslateTransform x:Name="tt" X="0" Y="0"/>
+
+</Button.RenderTransform>
+
+<Button.Effect>
+
+<DropShadowEffect BlurRadius="45" Color="Red" />
+
+</Button.Effect>
+
+</Button>
+
+</Grid>
+
+```
+
+```
+
+PathGeometry pg =this.FindResource("movingPath") as PathGeometry;
+
+Duration duration = new Duration(TimeSpan.FromMilliseconds(600));
+
+
+
+DoubleAnimationUsingPath dakX = new DoubleAnimationUsingPath();
+
+dakX.PathGeometry = pg;
+
+dakX.Source = PathAnimationSource.X;
+
+dakX.Duration = duration;
+
+
+
+
+
+DoubleAnimationUsingPath dakY = new DoubleAnimationUsingPath();
+
+dakY.PathGeometry = pg;
+
+dakY.Source = PathAnimationSource.Y;
+
+dakY.Duration = duration;
+
+
+
+this.tt.BeginAnimation(TranslateTransform.XProperty, dakX);
+
+this.tt.BeginAnimation(TranslateTransform.YProperty, dakY);
+
+```
+
+
+#### 场景（Storyborad）
+
+```
+#####   <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1">
+            <Ellipse x:Name="ballG" Height="80" Width="80" Fill="Green" HorizontalAlignment="Left">
+                <Ellipse.RenderTransform>
+                    <TranslateTransform x:Name="ttG"/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+        </Border>
+```
+对应的cs代码，注释已经给出：
+
+```
+            //定义动画要执行的时长
+            Duration duation = new Duration(TimeSpan.FromMilliseconds(600));
+            
+            //定义一个简单的移动——匀速直线运动
+            DoubleAnimation daRx = new DoubleAnimation();
+            daRx.Duration = duation;
+            daRx.To = 400;
+
+            //定义一个关键帧的移动，目标属性值的速率是一条贝赛尔曲线函数
+            DoubleAnimationUsingKeyFrames dakGx = new DoubleAnimationUsingKeyFrames();
+            dakGx.Duration = duation;
+            SplineDoubleKeyFrame kfG = new SplineDoubleKeyFrame(400, KeyTime.FromPercent(1));
+            kfG.KeySpline = new KeySpline(1, 0, 0, 1);
+            dakGx.KeyFrames.Add(kfG);
+            
+            //定义一个关键帧的移动，目标属性值的速率是一条贝赛尔曲线函数
+            DoubleAnimationUsingKeyFrames dakBx = new DoubleAnimationUsingKeyFrames();
+            dakBx.Duration = duation;
+            SplineDoubleKeyFrame kfB = new SplineDoubleKeyFrame(400, KeyTime.FromPercent(1));
+            kfB.KeySpline = new KeySpline(0, 1, 1, 0);
+            dakBx.KeyFrames.Add(kfB);
+
+            Storyboard storyboard = new Storyboard();
+
+            //使指定的动画的UI载体
+            Storyboard.SetTargetName(daRx, "ttR");
+            Storyboard.SetTargetName(dakGx, "ttG");
+            Storyboard.SetTargetName(dakBx, "ttB");
+            
+            //使动画与UI载体的属性相关联
+            Storyboard.SetTargetProperty(daRx,new PropertyPath(TranslateTransform.XProperty));
+            Storyboard.SetTargetProperty(dakGx, new PropertyPath(TranslateTransform.XProperty));
+            Storyboard.SetTargetProperty(dakBx, new PropertyPath(TranslateTransform.XProperty));
+
+            //指定场景的时间,并把各个对像的动画添加到场景里面
+            storyboard.Duration = duation;
+            storyboard.Children.Add(daRx);
+            storyboard.Children.Add(dakGx);
+            storyboard.Children.Add(dakBx);
+
+            storyboard.Begin(this);
+
+```
 第Ⅰ部分 基础知识
 第1章 WPF概述 3
 1.1 Windows图形演化 3
@@ -5831,7 +12087,7 @@ gRPC 使用协定优先方法进行 API 开发。 在 .proto 文件中定义服�
 
 ProtoBuf
 
-复制
+```
 syntax = "proto3";
 
 service Greeter {
@@ -5850,11 +12106,13 @@ message HelloReply {
 
 将包引用添加到 Grpc.Tools 包。
 将 .proto 文件添加到 <Protobuf> 项目组。
-
+```
 XML
+```
 <ItemGroup>
   <Protobuf Include="Protos\greet.proto" />
 </ItemGroup>
+```
 有关 gRPC 工具支持的详细信息，请参阅使用 C# 的 gRPC 服务。
 
 ASP.NET Core 上的 gRPC 服务
@@ -5920,96 +12178,8 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 
 ## Java
 
-## 低代码平台
-
-> 低代码开发平台（LCDP）是无需编码（0代码）或通过少量代码就可以快速生成应用程序的开发平台。通过可视化进行应用程序开发的方法，使具有不同经验水平的开发人员可以通过图形化的用户界面，使用拖拽组件和模型驱动的逻辑来创建网页和移动应用程序。低代码开发平台（LCDP）的正式名称直到2014年6月才正式确定，整个低代码开发领域却可以追溯到更早前第四代编程语言和快速应用开发工具。
-
-### Microsoft Platform 
-
-> 其包括 Power Apps, Power Apps Sutdio ,Power Apps Mobile, Power Platform Admin Center。
-
-> Power BI 商业表格 Power Apps 创建app Power Pages 网页 Power Automate 自动化流程 Power Virtual Agents。 聊天机器人
-
-> PCF（Power Apps Component Framework） 为程序员提供利用代码开发自定义组件。
-
-> Microsoft Dataverse 存储和管理业务应用程序使用的数据
-
-> 流程自动化。
-
-## 工业自动化
-
-### 变频器
-
-### 伺服
-
-### 可编程逻辑控制器
-
-### 人机交互 HMI
-
-### 传感器
-
-### 电机
-
-### PAC智能控制器
-
-### CNC控制器
-
-### 仪表
-
-### 基于PC的控制器
-
-### 识别
-
-### 工业机器人机械臂系统
-
-## 工业软件
-
-### 自动化软件
-
-#### TIA Portal
-
-> 用于集成自动化项目的主要组件和功能的工程组态系统。
-
-#### 控制器软件
-
-> STEP 7产品系列用于SIMATIC S7控制器系统的组态、编程、测试和诊断。
-
-#### 人机界面软件
-
-> HMI 软件包括面板组态软件、基于 PC 的可视化软件以及 SCADA 系统。
-
-#### SCADA软件
-
-> 从过程可视化到工厂智能或基础设施项目的开放式系统的软件解决方案。
-
-#### 用于能源管理的软件
-
-> 能源管理软件包括现场层的能量数据记录到管理层的公司范围能量分析。
-
-
-COMOS 工厂工程软件
-COMOS 工厂工程软件
-
-制造运营管理软件
-
-产品生命周期管理软件
-
-SIMIT 仿真软件
-适用于 SIRIUS 开关装置的软件
-适用于 SIRIUS 开关装置的软件
-XHQ 运营智能软件
-XHQ 运营智能软件
-
-面向过程工业的西门子工业套件
-PlantSight 
-PlantSight 
-
-## 系统架构
-
-### 微服务
-
 ### consul
 
 ## 备注
 
-> 最后修改时间：2023-04-20 14:01
+> 最后修改时间：2023-04-23 10:01
