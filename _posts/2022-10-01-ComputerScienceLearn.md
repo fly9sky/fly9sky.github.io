@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  计算机科学相关学习内容总结
+title:  计算机科学技术编程等相关学习内容总结
 description: 计算机科学相关学习内容总结,包括各种操作系统安装配置，各种编程语言学习等
 date: 2022-10-01 09:01:01
 ---
@@ -35,7 +35,7 @@ date: 2022-10-01 09:01:01
     - [MIT(MITL)](#mitmitl)
     - [Mozilla(MPL)](#mozillampl)
   - [Git in linux](#git-in-linux)
-    - [Download and Install GithubCli](#download-and-install-githubcli)
+    - [GithubCli](#githubcli)
     - [Login](#login)
     - [Git helper](#git-helper)
 - [Docker](#docker)
@@ -45,7 +45,8 @@ date: 2022-10-01 09:01:01
       - [DataVolume](#datavolume)
   - [镜像](#镜像)
   - [DockFile](#dockfile)
-  - [daemon Docker Daemon是Docker架构中运行在后台的守护进程](#daemondocker-daemon是docker架构中运行在后台的守护进程)
+  - [daemon D](#daemond)
+  - [Docker Server ](#docker-server)
     - [Job](#job)
   - [client](#client)
   - [Swarm](#swarm)
@@ -75,47 +76,115 @@ date: 2022-10-01 09:01:01
     - [kubernetes 集群 YAML 文件详解](#kubernetes-集群-yaml-文件详解)
 - [结构化程序设计](#结构化程序设计)
 - [面向对象程序设计](#面向对象程序设计)
-  - [设计模式](#设计模式)
+  - [面向对象设计原则](#面向对象设计原则)
+    - [1、单一职责原则 SRP](#1单一职责原则-srp)
+    - [2、开闭原则 OCP](#2开闭原则-ocp)
+    - [3、里氏代换原则 LSP](#3里氏代换原则-lsp)
+    - [4、依赖倒转原则 DIP](#4依赖倒转原则-dip)
+    - [5、接口隔离原则 ISP](#5接口隔离原则-isp)
+    - [6、合成复用原则 CRP](#6合成复用原则-crp)
+    - [7、迪米特法则（最少知道原则）DP](#7迪米特法则最少知道原则dp)
+- [Gof设计模式](#gof设计模式)
+  - [行为型](#行为型)
+    - [Iterator（迭代器模式）](#iterator迭代器模式)
+    - [Interpreter（解析器模式）](#interpreter解析器模式)
+    - [Observer（观察者模式）](#observer观察者模式)
+    - [Mediator（中介者模式）](#mediator中介者模式)
+    - [Visitor（访问者模式）](#visitor访问者模式)
+    - [Memento（备忘录模式）](#memento备忘录模式)
+    - [State（状态模式）](#state状态模式)
+    - [Strategy（策略模式）](#strategy策略模式)
+    - [Template Method（模板方法模式）](#template-method模板方法模式)
+    - [Command（命令模式）](#command命令模式)
+    - [Chain of Responsibility（职责链模式）](#chain-of-responsibility职责链模式)
+  - [创建型](#创建型)
+    - [Singleton（单例模式）](#singleton单例模式)
+    - [Prototype（原型模式）](#prototype原型模式)
+    - [Builder（建造者模式）](#builder建造者模式)
+    - [Factory Method(工厂模式)](#factory-method工厂模式)
+    - [ Abstract Factory（抽象工厂模式）](#abstract-factory抽象工厂模式)
+  - [结构型](#结构型)
+    - [Bridge（桥接模式）](#bridge桥接模式)
+    - [Facade（外观模式）](#facade外观模式)
+    - [Composite(组合模式)](#composite组合模式)
+    - [Decorator(装饰模式)：](#decorator装饰模式)
+    - [Adapter（适配器模式）](#adapter适配器模式)
+    - [Proxy（代理模式）](#proxy代理模式)
+    - [Flyweight（享元模式）](#flyweight享元模式)
+  - [模式之间关系](#模式之间关系)
+  - [其他](#其他)
+  - [参考资料](#参考资料)
+    - [23种设计模式UML图](#23种设计模式uml图)
 - [C# .Net Base](#c-net-base)
+  - [CLR基础 CLR的执行模型](#clr基础-clr的执行模型)
+  - [生成、打包、部署和管理应用程序及类型](#生成打包部署和管理应用程序及类型)
+  - [共享程序集和强命名程序集](#共享程序集和强命名程序集)
+  - [类型基础](#类型基础)
+  - [基元类型、引用类型和值类型](#基元类型引用类型和值类型)
+  - [常量和字段](#常量和字段)
+  - [方法](#方法)
+  - [参数](#参数)
+  - [属性](#属性)
+  - [事件](#事件)
+  - [泛型](#泛型)
+  - [接口](#接口)
+  - [基本类型](#基本类型)
+  - [字符、字符串和文本处理](#字符字符串和文本处理)
+  - [枚举类型和位标志](#枚举类型和位标志)
+  - [数组](#数组)
+  - [委托](#委托)
+  - [定制特性](#定制特性)
+  - [可空值类型](#可空值类型)
+  - [异常和状态管理](#异常和状态管理)
+  - [托管堆和垃圾回收](#托管堆和垃圾回收)
+  - [CLR寄宿和AppDomain](#clr寄宿和appdomain)
+  - [程序集加载和反射](#程序集加载和反射)
+  - [运行时序列化](#运行时序列化)
+  - [与WinRT组件互操作](#与winrt组件互操作)
+  - [线程基础](#线程基础)
+  - [计算的异步操作 Task](#计算的异步操作-task)
+  - [I/O的异步操作](#io的异步操作)
+  - [基元线程同步构造](#基元线程同步构造)
+  - [混合线程同步构造](#混合线程同步构造)
   - [ML.NET](#mlnet)
 - [WPF](#wpf)
   - [WPF控件继承](#wpf控件继承)
     - [UIElement](#uielement)
       - [方法: METHODS](#方法-methods)
       - [Events](#events)
-      - [属性:](#属性)
+      - [属性:](#属性-1)
       - [FiFileds:FIELDS:](#fifiledsfields)
     - [Visual](#visual)
       - [方法:METHODS](#方法methods)
-      - [属性:](#属性-1)
+      - [属性:](#属性-2)
       - [方法: METHODS](#方法-methods-1)
     - [DependencyObject](#dependencyobject)
       - [方法:METHODS](#方法methods-1)
       - [属性:PROPERTIES](#属性properties)
     - [DispatcherObject](#dispatcherobject)
-      - [属性:](#属性-2)
-      - [方法:](#方法)
+      - [属性:](#属性-3)
+      - [方法:](#方法-1)
     - [System.Object](#systemobject)
     - [FrameworkElement](#frameworkelement)
       - [Page](#page)
       - [Control](#control)
       - [Image](#image)
       - [Panel](#panel)
-      - [属性:](#属性-3)
+      - [属性:](#属性-4)
       - [Fielsds:](#fielsds)
-  - [属性](#属性-4)
+  - [属性](#属性-5)
     - [普通属性](#普通属性)
     - [附加属性](#附加属性)
     - [依赖项属性dependency property](#依赖项属性dependency-property)
     - [WPF 设计器集成](#wpf-设计器集成)
-  - [事件](#事件)
+  - [事件](#事件-1)
     - [普通事件](#普通事件)
-      - [生命周期事件：在元素被初始化，加载或卸载时发生。](#生命周期事件在元素被初始化加载或卸载时发生)
-      - [鼠标事件： 鼠标动作的结果。](#鼠标事件-鼠标动作的结果)
-      - [键盘事件： 键盘动作的结果。](#键盘事件-键盘动作的结果)
-      - [手写笔事件： 类似铅笔的手写笔的结果](#手写笔事件-类似铅笔的手写笔的结果)
+      - [生命周期事件](#生命周期事件)
+      - [鼠标事件](#鼠标事件)
+      - [键盘事件](#键盘事件)
+      - [手写笔事件](#手写笔事件)
       - [多点触控事件](#多点触控事件)
-    - [路由事件（向上冒泡或者向下隧道传播（Preview开始的事件））](#路由事件向上冒泡或者向下隧道传播preview开始的事件)
+    - [路由事件](#路由事件)
     - [附加事件](#附加事件)
     - [VisualStateManager](#visualstatemanager)
   - [资源](#资源)
@@ -213,10 +282,10 @@ date: 2022-10-01 09:01:01
     - [工具](#工具)
         - [自动化测试的协助工具](#自动化测试的协助工具)
   - [VisualStateManager](#visualstatemanager-1)
-    - [VisualState: 视图状态(Visual States)表示控件在一个特殊的逻辑状态下的样式、外观；](#visualstate-视图状态visual-states表示控件在一个特殊的逻辑状态下的样式外观)
-    - [VisualStateGroup: 状态组由相互排斥的状态组成，状态组与状态组并不互斥；](#visualstategroup-状态组由相互排斥的状态组成状态组与状态组并不互斥)
-    - [VisualTransition: 视图转变 (Visual Transitions) 代表控件从一个视图状态向另一个状态转换时的过渡；](#visualtransition-视图转变-visual-transitions-代表控件从一个视图状态向另一个状态转换时的过渡)
-    - [VisualStateManager: 由它负责在代码中来切换到不同的状态；](#visualstatemanager-由它负责在代码中来切换到不同的状态)
+    - [VisualState](#visualstate)
+    - [VisualStateGroup](#visualstategroup)
+    - [VisualTransition](#visualtransition)
+    - [VisualStateManager](#visualstatemanager-2)
   - [图形](#图形)
     - [基本图形](#基本图形)
     - [笔刷 Brush](#笔刷-brush)
@@ -228,11 +297,10 @@ date: 2022-10-01 09:01:01
   - [动画](#动画)
     - [动画基类](#动画基类)
     - [关键帧动画 ：](#关键帧动画-)
-      - [LinearDoubleKeyFrame，线性帧，目标属性值的变化是直线型的，匀速的。](#lineardoublekeyframe线性帧目标属性值的变化是直线型的匀速的)
-      - [DiscreteDoubleKeyFrame，不连续变化的帧，目标属性值是跳跃的。](#discretedoublekeyframe不连续变化的帧目标属性值是跳跃的)
-      - [SplineDoubleKeyFrame， 样条函数变化帧，目标属性值的速率是一条贝赛尔曲线。](#splinedoublekeyframe-样条函数变化帧目标属性值的速率是一条贝赛尔曲线)
-      - [EasingDoubleKeyFrame，缓冲式帧，目标属性值以某种缓冲形式变化。](#easingdoublekeyframe缓冲式帧目标属性值以某种缓冲形式变化)
-    - [前面已经介绍了路径绘图时的强大，那么我们能不能让我的动画按照我们制定的路径去表演呢，答案是可以的。](#前面已经介绍了路径绘图时的强大那么我们能不能让我的动画按照我们制定的路径去表演呢答案是可以的)
+      - [LinearDoubleKeyFrame](#lineardoublekeyframe)
+      - [DiscreteDoubleKeyFrame](#discretedoublekeyframe)
+      - [SplineDoubleKeyFrame](#splinedoublekeyframe)
+      - [EasingDoubleKeyFrame](#easingdoublekeyframe)
     - [场景（Storyborad）](#场景storyborad)
 - [HTML 5](#html-5)
 - [JQuery](#jquery)
@@ -291,7 +359,6 @@ date: 2022-10-01 09:01:01
     - [认证](#认证)
   - [DI](#di)
   - [Filters](#filters)
-    - [子类Controller拦截器要先于父类Controller拦截器执行](#子类controller拦截器要先于父类controller拦截器执行)
     - [授权过滤器 AuthorizeAttribute](#授权过滤器-authorizeattribute)
     - [资源过滤器 IResourceFilter](#资源过滤器-iresourcefilter)
     - [异常过滤器 IExceptionFilter](#异常过滤器-iexceptionfilter)
@@ -302,10 +369,9 @@ date: 2022-10-01 09:01:01
   - [Controllers](#controllers-1)
     - [WebAPI](#webapi)
     - [Controller](#controller)
-      - [所有的动作结果都继承自ActionResult基类 ASP.NET MVC框架支持六种标准类型的动作结果：](#所有的动作结果都继承自actionresult基类-aspnet-mvc框架支持六种标准类型的动作结果)
     - [Rezor View](#rezor-view)
   - [ViewComponent](#viewcomponent)
-  - [Taghelper 可以扩展一些自定义的标记 其实就是后台生成html代码的一种形式](#taghelper-可以扩展一些自定义的标记-其实就是后台生成html代码的一种形式)
+  - [Taghelper](#taghelper)
   - [SignalR](#signalr)
 - [Tensorflow](#tensorflow)
 - [C# 调用 Tensorflow](#c-调用-tensorflow)
@@ -409,28 +475,17 @@ date: 2022-10-01 09:01:01
   - [锁](#锁)
     - [数据库角度](#数据库角度)
       - [\* 独占锁（Exclusive Lock）](#-独占锁exclusive-lock)
-        - [独占锁锁定的资源只允许进行锁定操作的程序使用，](#独占锁锁定的资源只允许进行锁定操作的程序使用)
-      - [\* 共享锁（Shared Lock）](#-共享锁shared-lock)
-        - [共享锁锁定的资源可以被其它用户读取，但其它用户不能修改它。](#共享锁锁定的资源可以被其它用户读取但其它用户不能修改它)
-      - [\* 更新锁（Update Lock）](#-更新锁update-lock)
-        - [更新锁是为了防止死锁而设立的。当SQL Server 准备更新数据时，](#更新锁是为了防止死锁而设立的当sql-server-准备更新数据时)
+      - [共享锁（Shared Lock）](#共享锁shared-lock)
+      - [更新锁（Update Lock）](#更新锁update-lock)
     - [程序员角度](#程序员角度)
-      - [\* 乐观锁（Optimistic Lock）](#-乐观锁optimistic-lock)
-        - [乐观锁假定在处理数据时，不需要在应用程序的代码中做任何事情就可以直接在记录上加锁、](#乐观锁假定在处理数据时不需要在应用程序的代码中做任何事情就可以直接在记录上加锁)
-      - [\* 悲观锁（Pessimistic Lock）](#-悲观锁pessimistic-lock)
-        - [悲观锁对数据库系统的自动管理不感冒，](#悲观锁对数据库系统的自动管理不感冒)
+      - [乐观锁（Optimistic Lock）](#乐观锁optimistic-lock)
+      - [悲观锁（Pessimistic Lock）](#悲观锁pessimistic-lock)
   - [数据库中事务的 ](#数据库中事务的)
     - [ACID 原则](#acid-原则)
       - [原子性 (Atomicity)：](#原子性-atomicity)
-        - [事务的原子性是指一个事务中包含的一条语句或者多条语句构成了一个完整的逻辑单元，](#事务的原子性是指一个事务中包含的一条语句或者多条语句构成了一个完整的逻辑单元)
       - [一致性 (Consistency)：](#一致性-consistency)
-        - [可以理解为数据的完整性，事务的提交要确保在数据库上的操作没有破坏数据的完整性，](#可以理解为数据的完整性事务的提交要确保在数据库上的操作没有破坏数据的完整性)
       - [隔离性(Isolation)：](#隔离性isolation)
-        - [与数据库中的事务隔离级别以及锁相关，多个用户可以对同一数据并发访问而又不破坏数据的正确性和完整性。](#与数据库中的事务隔离级别以及锁相关多个用户可以对同一数据并发访问而又不破坏数据的正确性和完整性)
       - [持久性(Durability)：](#持久性durability)
-        - [数据持久化，事务一旦对数据的操作完成并提交后，数据修改就已经完成，](#数据持久化事务一旦对数据的操作完成并提交后数据修改就已经完成)
-  - [分支主题3](#分支主题3)
-  - [分支主题4](#分支主题4)
 - [NoSQL：选择合适的数据库](#nosql选择合适的数据库)
   - [力什么使用NoSCL数据库？](#力什么使用noscl数据库)
     - [阻抗失衡](#阻抗失衡)
@@ -507,31 +562,11 @@ date: 2022-10-01 09:01:01
 - [Oracle](#oracle)
   - [概述](#概述)
     - [发展史](#发展史)
-      - [1970——IBM的Codd博士发表A Relational Modeiof Data for Large Shared Data Banks](#1970ibm的codd博士发表a-relational-modeiof-data-for-large-shared-data-banks)
-      - [1978年——Oracle在PDP-11上诞生](#1978年oracle在pdp-11上诞生)
-      - [1983年——用C语言编写的Oracle 3](#1983年用c语言编写的oracle-3)
-      - [1993年——基于Unix的Oracle 7](#1993年基于unix的oracle-7)
-      - [1997年~1999年——基于Java的Oracle 8和基于lnternet平台的Oracle 8i](#1997年1999年基于java的oracle-8和基于lnternet平台的oracle-8i)
-      - [2001年——支持RAC的Oracle 9i](#2001年支持rac的oracle-9i)
-      - [2003年——支持网格计算的Oracle 10g](#2003年支持网格计算的oracle-10g)
-      - [2007年——Oracle终极版本Oracle 11g](#2007年oracle终极版本oracle-11g)
     - [网格计算](#网格计算)
-      - [虚拟化](#虚拟化)
-      - [动态供应](#动态供应)
-      - [资源集中](#资源集中)
-      - [自适应软件](#自适应软件)
-      - [统一管理](#统一管理)
     - [Oracle 11g新特性](#oracle-11g新特性)
-      - [企业网格管理的高可用性](#企业网格管理的高可用性)
-      - [更加优化的性能](#更加优化的性能)
-      - [简化的信息管理](#简化的信息管理)
-      - [集成的信息](#集成的信息)
-      - [内置的商业智能](#内置的商业智能)
-      - [丰富的开发平台](#丰富的开发平台)
   - [数据库结构](#数据库结构)
     - [体系结构](#体系结构)
       - [实例](#实例)
-        - [一般情况下Oracle数据库都是一个数据库包含一个实例](#一般情况下oracle数据库都是一个数据库包含一个实例)
       - [数据库](#数据库)
         - [数据文件](#数据文件)
         - [控制文件](#控制文件)
@@ -551,7 +586,6 @@ date: 2022-10-01 09:01:01
         - [......](#-5)
       - [程序全局区](#程序全局区)
     - [数据字典](#数据字典)
-      - [存放整个数据库实例重要信息的一组表，多数表归sys用户所有](#存放整个数据库实例重要信息的一组表多数表归sys用户所有)
       - [数据字典构成](#数据字典构成)
         - [USER\_](#user_)
         - [ALL\_](#all_)
@@ -559,19 +593,6 @@ date: 2022-10-01 09:01:01
         - [V$\_](#v_)
         - [GV\_](#gv_)
       - [常用数据字典](#常用数据字典)
-        - [DBA\_TABLES(=TABS)](#dba_tablestabs)
-        - [DBA\_TAB\_COLUMNS(=COLS)](#dba_tab_columnscols)
-        - [DBA\_VIEWS](#dba_views)
-        - [DBA\_SYNONYMS(=SYN)](#dba_synonymssyn)
-        - [DBA\_SEQUENCES(=SEQ)](#dba_sequencesseq)
-        - [DBA\_CONSTRAINTS](#dba_constraints)
-        - [DBA\_INDEXES(=IND)](#dba_indexesind)
-        - [DBA\_IND\_COLUMNS](#dba_ind_columns)
-        - [DBA\_TRIGGERS](#dba_triggers)
-        - [DBA\_SOUCE](#dba_souce)
-        - [DBA\_SEGMENTS](#dba_segments)
-        - [DBA\_EXTENTS](#dba_extents)
-        - [DBA\_OBJECTS](#dba_objects)
   - [SQL语言](#sql语言)
     - [DDL](#ddl)
       - [create](#create)
@@ -599,24 +620,11 @@ date: 2022-10-01 09:01:01
         - [from子句](#from子句)
         - [投影](#投影)
         - [where子句](#where子句)
-        - [order by子句](#order-by子句)
-        - [distinct](#distinct)
-        - [算数运算](#算数运算)
         - [基本函数](#基本函数)
-        - [group by](#group-by)
-        - [having子句](#having子句)
         - [集合操作](#集合操作)
         - [子查询](#子查询)
-        - [表连接](#表连接)
-        - [case语句](#case语句)
-        - [decode函数](#decode函数)
     - [DCL](#dcl)
-      - [grant](#grant)
-      - [revoke](#revoke)
     - [TCL](#tcl)
-      - [commit](#commit)
-      - [rollback](#rollback)
-      - [savepoint](#savepoint)
   - [PL/SQL](#plsql)
     - [概述](#概述-1)
     - [PL/SQL编程](#plsql编程)
@@ -719,13 +727,9 @@ date: 2022-10-01 09:01:01
     - [多维数据库](#多维数据库)
     - [数据挖掘](#数据挖掘)
   - [数据库事务隔离级别](#数据库事务隔离级别)
-    - [已提交读模式：SET TRANSACTION ISOLATION LEVEL＝READ COMMITTED;](#已提交读模式set-transaction-isolation-levelread-committed)
-      - [Oracle 默认使用的事务隔离级别。事务内执行的查询只能看到查询执行前（而非事务开始前）就已经提交的数据。Oracle 的查询永远不会读取脏数据（未提交的数据）。](#oracle-默认使用的事务隔离级别事务内执行的查询只能看到查询执行前而非事务开始前就已经提交的数据oracle-的查询永远不会读取脏数据未提交的数据)
-      - [Oracle 不会阻止一个事务修改另一事务中的查询正在访问的数据，因此在一个事务内的两个查询的执行间歇期间，数据有可能被其他事务修改。举例来说，如果一个事务内同一查询执行两次，可能会遇到不可重复读取或不存在读取的现象。](#oracle-不会阻止一个事务修改另一事务中的查询正在访问的数据因此在一个事务内的两个查询的执行间歇期间数据有可能被其他事务修改举例来说如果一个事务内同一查询执行两次可能会遇到不可重复读取或不存在读取的现象)
-    - [串行模式：SET TRANSACTION ISOLATION LEVEL＝ SERIALIZABLE;](#串行模式set-transaction-isolation-level-serializable)
-      - [串行化隔离的事务只能看到事务执行前就已经提交的数据，以及事务内 INSERT ， UPDATE ，及 DELETE 语句对数据的修改。串行化隔离的事务不会出现不可重复读取或不存在读取的现象。](#串行化隔离的事务只能看到事务执行前就已经提交的数据以及事务内-insert--update-及-delete-语句对数据的修改串行化隔离的事务不会出现不可重复读取或不存在读取的现象)
-    - [只读模式：SET TRANSACTION＝ READ ONLY;](#只读模式set-transaction-read-only)
-      - [只读事务只能看到事务执行前就已经提交的数据，且事务中不能执行 INSERT ， UPDATE ，及 DELETE 语句。](#只读事务只能看到事务执行前就已经提交的数据且事务中不能执行-insert--update-及-delete-语句)
+    - [已提交读模式](#已提交读模式)
+    - [串行模式](#串行模式)
+    - [只读模式](#只读模式)
   - [](#-6)
 - [SQL Server](#sql-server)
   - [DDL](#ddl-1)
@@ -743,60 +747,20 @@ date: 2022-10-01 09:01:01
     - [列转行UNPIVOT](#列转行unpivot)
   - [SQL 事务隔离级别:](#sql-事务隔离级别)
     - [read uncommited（读取未提交数据），](#read-uncommited读取未提交数据)
-      - [read uncommitted：最低的隔离级别：查询的时候不会请求共享锁，](#read-uncommitted最低的隔离级别查询的时候不会请求共享锁)
     - [read commited（读取已提交数据）读取的默认方式，](#read-commited读取已提交数据读取的默认方式)
-      - [读取的默认隔离级别就是read committed 和上面正好相反。](#读取的默认隔离级别就是read-committed-和上面正好相反)
     - [repeatable read（可重复读），](#repeatable-read可重复读)
-      - [查询的时候会加上共享锁，但是查询完成之后，共享锁就会被撤销。](#查询的时候会加上共享锁但是查询完成之后共享锁就会被撤销)
     - [serializable（可序列化），](#serializable可序列化)
-      - [更高级的 隔离。用户解决“幻读”（上面提到的）。](#更高级的-隔离用户解决幻读上面提到的)
     - [snapshot（快照），](#snapshot快照)
-      - [为数据产生一个临时数据库，当sql server 数据更新之前将当前数据库复制到 tempdb数据库里面，](#为数据产生一个临时数据库当sql-server-数据更新之前将当前数据库复制到-tempdb数据库里面)
-        - [带来两个问题：](#带来两个问题)
     - [read commited snapshot（已经提交读隔离）](#read-commitedsnapshot已经提交读隔离)
-      - [读取的默认隔离级别就是read committed 和上面正好相反。](#读取的默认隔离级别就是read-committed-和上面正好相反-1)
     - [Sql Server 事务隔离级别的查看及更改](#sql-server-事务隔离级别的查看及更改)
 - [LiteDB：本地化NOSQL](#litedb本地化nosql)
   - [特点](#特点)
-    - [1.NoSQL文件存储。这是和传统关系型数据库的主要区别；支持实体类的字段更新；](#1nosql文件存储这是和传统关系型数据库的主要区别支持实体类的字段更新)
-    - [2.类似MongoDB的简单API；](#2类似mongodb的简单api)
-    - [3.完全使用C#代码,在.NET 4.0环境下编写，核心dll小巧,只有168K;](#3完全使用c代码在net-40环境下编写核心dll小巧只有168k)
-    - [4.支持ACID事务处理；](#4支持acid事务处理)
-    - [5.可以进行写入失败的恢复；](#5可以进行写入失败的恢复)
-    - [6.存储到文件或者数据流中（类似MongoDB的GridFS）;](#6存储到文件或者数据流中类似mongodb的gridfs)
-    - [7.类似Sqlite的单一文件存储；](#7类似sqlite的单一文件存储)
-    - [8.支持文件索引，可以进行快速搜索；可以直接存储文件；](#8支持文件索引可以进行快速搜索可以直接存储文件)
-    - [9.支持Linq查询；【这也许是C#编写最直接的好处】;](#9支持linq查询这也许是c编写最直接的好处)
-    - [10.支持命令行操作数据库，官方提供了一个Shell command line;](#10支持命令行操作数据库官方提供了一个shell-command-line)
-    - [11.完全开源和免费，包括商业使用；](#11完全开源和免费包括商业使用)
-    - [Serverless NoSQL 文档存储](#serverless-nosql-文档存储)
-    - [类似于 MongoDB 的简单 API](#类似于-mongodb-的简单-api)
-    - [100% C## 代码，支持.NET 3.5 / .NET 4.0 / NETStandard 1.3 / NETStandard 2.0，单 DLL (小于 300kb)](#100-c-代码支持net-35--net-40--netstandard-13--netstandard-20单-dll-小于-300kb)
-    - [支持线程和进程安全](#支持线程和进程安全)
-    - [支持文档/操作级别的 ACID](#支持文档操作级别的-acid)
-    - [支持写失败后的数据还原 (日志模式)](#支持写失败后的数据还原-日志模式)
-    - [可使用 DES (AES) 加密算法进行数据文件加密](#可使用-des-aes-加密算法进行数据文件加密)
-    - [可使用特性或 fluent 映射 API 将你的 POCO类映射为 BsonDocument](#可使用特性或-fluent-映射-api-将你的-poco类映射为-bsondocument)
-    - [可存储文件与流数据 (类似 MongoDB 的 GridFS)](#可存储文件与流数据-类似-mongodb-的-gridfs)
-    - [单数据文件存储 (类似 SQLite)](#单数据文件存储-类似-sqlite)
-    - [支持基于文档字段索引的快速搜索 (每个集合支持多达16个索引)](#支持基于文档字段索引的快速搜索-每个集合支持多达16个索引)
-    - [支持 LINQ 查询](#支持-linq-查询)
-    - [Shell 命令行 - 试试这个在线版本](#shell-命令行---试试这个在线版本)
-    - [相当快 - 这里是与 SQLite 的对比结果](#相当快---这里是与-sqlite-的对比结果)
-    - [开源，对所有人免费 - 包括商业应用](#开源对所有人免费---包括商业应用)
   - [LiteDB使用基本案例](#litedb使用基本案例)
     - [创建实体类](#创建实体类)
-      - [public class Customer](#public-class-customer)
     - [使用Demo](#使用demo)
-      - [使用过程首先要添加dll应用，以及引入命名空间：](#使用过程首先要添加dll应用以及引入命名空间)
   - [使用场景](#使用场景)
-    - [1.桌面或者本地小型的应用程序](#1桌面或者本地小型的应用程序)
-    - [2.小型web应用程序](#2小型web应用程序)
-    - [3.单个数据库账户或者单个用户数据的存储](#3单个数据库账户或者单个用户数据的存储)
-    - [4.少量用户的并发写操作的应用程序](#4少量用户的并发写操作的应用程序)
   - [LiteDB的技术细节](#litedb的技术细节)
     - [LiteDB的工作原理](#litedb的工作原理)
-      - [LiteDB是虽然单个文件类型的数据库，但是数据库有很多信息，](#litedb是虽然单个文件类型的数据库但是数据库有很多信息)
     - [LiteDB的查询](#litedb的查询)
       - [Query.All 返回所有的数据，可以使用指定的索引字段进行排序](#queryall-返回所有的数据可以使用指定的索引字段进行排序)
       - [Query.EQ 查找返回和指定字段值相等的数据](#queryeq-查找返回和指定字段值相等的数据)
@@ -2345,7 +2309,9 @@ date: 2022-10-01 09:01:01
 
 ### Git in linux 
 
-#### Download and Install GithubCli
+#### GithubCli
+
+> Download and Install :
 
 > https://github.com/cli/cli/releases
 
@@ -2356,11 +2322,17 @@ date: 2022-10-01 09:01:01
 #### Git helper 
 
 > $ git clone git@github.com:devgis/MyWriting.git  //need your private key
+
 > 提交修改 上传修改的代码后执行增加修改： 
+
 > $ git add . 
+
 > 增加修改信息： 
+
 > $ git commit -m ‘修改lol清晰增加口径’ 
+
 > 推送分支： 
+
 > $ git push origin main
 
 ## Docker 
@@ -2421,9 +2393,13 @@ date: 2022-10-01 09:01:01
 
 ### DockFile
 
-### daemon Docker Daemon是Docker架构中运行在后台的守护进程
+### daemon D
 
-> Docker Server  Server模块接受Docker Client的请求
+> ocker Daemon是Docker架构中运行在后台的守护进程
+
+### Docker Server  
+
+> Server模块接受Docker Client的请求
 
 > Engine Engine中处理请求，然后根据请求类型，创建出指定的Job并运行
 
@@ -3009,55 +2985,55 @@ date: 2022-10-01 09:01:01
 
 > > web:
 
-> >   image: dockercloud/hello-world
+> > image: dockercloud/hello-world
 
-> >   ports:
+> > ports:
 
-> >     - 8080
+> >   - 8080
 
-> >   networks:
+> > networks:
 
-> >     - front-tier
+> >   - front-tier
 
-> >     - back-tier
+> >   - back-tier
 
 > > 
 
 > > redis:
 
-> >   image: redis
+> > image: redis
 
-> >   links:
+> > links:
 
-> >     - web
+> >   - web
 
-> >   networks:
+> > networks:
 
-> >     - back-tier
+> >   - back-tier
 
 > > 
 
 > > lb:
 
-> >   image: dockercloud/haproxy
+> > image: dockercloud/haproxy
 
-> >   ports:
+> > ports:
 
-> >     - 80:80
+> >   - 80:80
 
-> >   links:
+> > links:
 
-> >     - web
+> >   - web
 
-> >   networks:
+> > networks:
 
-> >     - front-tier
+> >   - front-tier
 
-> >     - back-tier
+> >   - back-tier
 
-> >   volumes:
+> > volumes:
 
-> >     - /var/run/docker.sock:/var/run/docker.sock 
+> >   - /var/run/docker.sock:/var/run/docker.sock 
 
 > > 
 
@@ -3065,11 +3041,11 @@ date: 2022-10-01 09:01:01
 
 > > front-tier:
 
-> >   driver: bridge
+> > driver: bridge
 
 > > back-tier:
 
-> >   driver: bridge
+> > driver: bridge
 
 > > Compose目前有三个版本分别为Version 1，Version 2，Version 3，Compose区分Version 1和Version 2（Compose 1.6.0+，Docker Engine 1.10.0+）。Version 2支持更多的指令。Version 1将来会被弃用。
 
@@ -3083,9 +3059,9 @@ date: 2022-10-01 09:01:01
 
 > > services: 
 
-> >   web: 
+> > web: 
 
-> >       image: hello-world
+> >     image: hello-world
 
 > 3，build
 
@@ -3163,21 +3139,21 @@ date: 2022-10-01 09:01:01
 
 > > web:
 
-> >   build: .
+> > build: .
 
-> >   depends_on:
+> > depends_on:
 
-> >     - db
+> >   - db
 
-> >     - redis
+> >   - redis
 
 > > redis:
 
-> >   image: redis
+> > image: redis
 
 > > db:
 
-> >   image: postgres
+> > image: postgres
 
 > > 上述YAML文件定义的容器会先启动redis和db两个服务，最后才启动web 服务。
 
@@ -3273,9 +3249,9 @@ date: 2022-10-01 09:01:01
 
 > > volumes_from:
 
-> >  - service_name    
+> > - service_name    
 
-> >    - container_name
+> >  - container_name
 
 > 14,dns
 
@@ -3287,9 +3263,9 @@ date: 2022-10-01 09:01:01
 
 > > dns：
 
-> >   - 8.8.8.8    
+> > - 8.8.8.8    
 
-> >     - 9.9.9.9
+> >   - 9.9.9.9
 
 > 15,expose
 
@@ -3299,9 +3275,9 @@ date: 2022-10-01 09:01:01
 
 > > expose:
 
-> >   - "3000"
+> > - "3000"
 
-> >   - "8000"
+> > - "8000"
 
 > 16,links
 
@@ -3311,11 +3287,11 @@ date: 2022-10-01 09:01:01
 
 > > links:
 
-> >   - db
+> > - db
 
-> >   - db:database
+> > - db:database
 
-> >   - redis
+> > - redis
 
 > 17,net
 
@@ -3343,57 +3319,57 @@ date: 2022-10-01 09:01:01
 
 > > web1:
 
-> >   image: nginx
+> > image: nginx
 
-> >   ports: 
+> > ports: 
 
-> >     - "6061:80"
+> >   - "6061:80"
 
-> >   container_name: "web1"
+> > container_name: "web1"
 
-> >   networks:
+> > networks:
 
-> >     - dev
+> >   - dev
 
 > > web2:
 
-> >   image: nginx
+> > image: nginx
 
-> >   ports: 
+> > ports: 
 
-> >     - "6062:80"
+> >   - "6062:80"
 
-> >   container_name: "web2"
+> > container_name: "web2"
 
-> >   networks:
+> > networks:
 
-> >     - dev
+> >   - dev
 
-> >     - pro
+> >   - pro
 
 > > web3:
 
-> >   image: nginx
+> > image: nginx
 
-> >   ports: 
+> > ports: 
 
-> >     - "6063:80"
+> >   - "6063:80"
 
-> >   container_name: "web3"
+> > container_name: "web3"
 
-> >   networks:
+> > networks:
 
-> >     - pro
+> >   - pro
 
 > > networks:
 
 > > dev:
 
-> >   driver: bridge
+> > driver: bridge
 
 > > pro:
 
-> >   driver: bridge
+> > driver: bridge
 
 > > docker-compose.yml文件指定了3个web服务
 
@@ -3476,53 +3452,85 @@ date: 2022-10-01 09:01:01
 Master Node:集群主控制节点，对集群进行调度管理，接受集群外用户去集群操作请求；Master Node 由
 
 API server (管理接口):是整个系统的对外接口，供客户端和其他组件调用，相当于“营业厅”
+
 scheduler（调度器）:负责对集群内部的资源进行调度，相当于“调度室”
+
 controller (控制器):负责管理控制器，相当于“大总管”。
+
 etcd (键值对数据库):是一个键值存储仓库，存储集群的状态
+
 Worker Node:集群工作节点，运行用户业务应用容器；Worker Node 包含 `
+
 docker：容器管理
+
 kubelet：主要负责监视指派到它所在的 Pod，包括创建、修改、监控、删除等。
+
 kube-proxy：主要负责为Pod对象提供代理
+
 其他附加服务
 
 分布式键值存储服务
+
 Etcd 服务
+
 etcd是什么：
 
 etcd 是 CoreOS 团队于 2013 年 6 月发起的开源项目，它的目标是构建一个高可用的分布式键值（key-value）数据库，基于 Go 语言实现。在分布式系统中，各种服务的配置信息的管理分享，服务的发现是一个很基本同时也是很重要的问题。CoreOS 项目就希望基于 etcd 来解决这一问题。
+
 我们使用 etcd 来存储网络配置，解决容器互联互通的问题。
 
 > > K8S核心概念：
+
 通过Service统一入口进行访问，Controller用于创建Pot，Pot是一组容器的集合。
 
 Pod:最小部署单元,一组容器的集合,共享网络,生命周期是短暂的
+
 controller：确保预期的pod副本数量、无状态应用部署（无约定）、有状态应用部署(有特定条件)、确保所有的node运行同一个pod、一次性任务和定时任务
+
 Service：定义一组pod的访问规则
+
 搭建k8环境平台规划
 
 服务器硬件配置要求搭建
+
 测试环境：
 
 master：2核+4G+20G
+
 node：4核+8G+40G
+
 生产环境：
+
 Kubernetes 架构
 
 核心角色
+
 master (管理节点)
+
 node（计算节点）
+
 image (镜像仓库)
+
 master 节点
 
 master 节点服务
+
 API server (管理接口)
+
 scheduler（调度器）
+
 controller (控制器)
+
 etcd (键值对数据库)
+
 Node 节点
+
 node节点服务
+
 docer
+
 kubelet
+
 kube-proxy
 
 #### 核心概念
@@ -3558,7 +3566,9 @@ kube-proxy
 > > > Pod 是Kubernetes的基本操作单元，也是应用运行的载体。整个Kubernetes系统都是围绕着Pod展开的，比如如何部署运行Pod、如何保证Pod的数量、如何访问Pod等。另外，Pod是一个或多个机关容器的集合，这可以说是一大创新点，提供了一种容器的组合的模型。
 
 > > 基本操作
+
  
+
 > > > 创建
 
 > > > > kubectl create -f xxx.yaml
@@ -3616,25 +3626,45 @@ kube-proxy
 > > > 生命周期回调函数：PostStart（容器创建成功后调研该回调函数）、PreStop（在容器被终止前调用该回调函数）。以下示例中，定义了一个Pod，包含一个JAVA的web应用容器，其中设置了PostStart和PreStop回调函数。即在容器创建成功后，复制/sample.war到/app文件夹中。而在容器终止之前，发送HTTP请求到http://monitor.com:8080/waring，即向监控系统发送警告。具体示例如下：
 
 ```
+
 ………..
+
 containers:
+
 - image: sample:v2  
+
      name: war
+
      lifecycle：
+
       posrStart:
+
        exec:
+
          command:
+
           - “cp”
+
           - “/sample.war”
+
           - “/app”
+
       prestop:
+
        httpGet:
+
         host: monitor.com
+
         psth: /waring
+
         port: 8080
+
         scheme: HTTP
+
 ```
+
  
+
 > Replication Controller
 
 > > > Replication Controller（RC）是Kubernetes中的另一个核心概念，应用托管在Kubernetes之后，Kubernetes需要保证应用能够持续运行，这是RC的工作内容，它会确保任何时间Kubernetes中都有指定数量的Pod在运行。在此基础上，RC还提供了一些更高级的特性，比如滚动升级、升级回滚等。
@@ -3668,7 +3698,9 @@ containers:
 > > > 缩容Pod的副本数目到1
 
 > > > > $ kubectl scale relicationcontroller yourRcName --replicas=1
+
  
+
 > > 滚动升级
 
 > > > 滚动升级是一种平滑过渡的升级方式，通过逐步替换的策略，保证整体系统的稳定，在初始升级的时候就可以及时发现、调整问题，以保证问题影响度不会扩大。Kubernetes中滚动升级的命令如下：
@@ -3680,6 +3712,7 @@ $ kubectl rolling-update my-rcName-v1 -f my-rcName-v2-rc.yaml --update-period=10
 > > > 升级过程中，发生了错误中途退出时，可以选择继续升级。Kubernetes能够智能的判断升级中断之前的状态，然后紧接着继续执行升级。当然，也可以进行回退，命令如下：
 
 $ kubectl rolling-update my-rcName-v1 -f my-rcName-v2-rc.yaml --update-period=10s --rollback
+
 回退的方式实际就是升级的逆操作，逐步增加V1.0版本Pod的副本数，逐步减少V2版本Pod的副本数。
 
 > > 新一代副本控制器replica set
@@ -3687,6 +3720,7 @@ $ kubectl rolling-update my-rcName-v1 -f my-rcName-v2-rc.yaml --update-period=10
 > > > 这里所说的replica set，可以被认为 是“升级版”的Replication Controller。也就是说。replica set也是用于保证与label selector匹配的pod数量维持在期望状态。区别在于，replica set引入了对基于子集的selector查询条件，而Replication Controller仅支持基于值相等的selecto条件查询。这是目前从用户角度肴，两者唯一的显著差异。 社区引入这一API的初衷是用于取代vl中的Replication Controller，也就是说．当v1版本被废弃时，Replication Controller就完成了它的历史使命，而由replica set来接管其工作。虽然replica set可以被单独使用，但是目前它多被Deployment用于进行pod的创建、更新与删除。Deployment在滚动更新等方面提供了很多非常有用的功能，关于DeplOymCn的更多信息，读者们可以在后续小节中获得。
 
  
+
 > Job
 
 > > > 从程序的运行形态上来区分，我们可以将Pod分为两类：长时运行服务（jboss、mysql等）和一次性任务（数据计算、测试）。RC创建的Pod都是长时运行的服务，而Job创建的Pod都是一次性任务。
@@ -3694,6 +3728,7 @@ $ kubectl rolling-update my-rcName-v1 -f my-rcName-v2-rc.yaml --update-period=10
 > > > 在Job的定义中，restartPolicy（重启策略）只能是Never和OnFailure。Job可以控制一次性任务的Pod的完成次数（Job-->spec-->completions）和并发执行数（Job-->spec-->parallelism），当Pod成功执行指定次数后，即认为Job执行完毕。
 
  
+
 > Service
 
 > > > 为了适应快速的业务需求，微服务架构已经逐渐成为主流，微服务架构的应用需要有非常好的服务编排支持。Kubernetes中的核心要素Service便提供了一套简化的服务代理和发现机制，天然适应微服务架构。
@@ -3713,47 +3748,83 @@ $ kubectl rolling-update my-rcName-v1 -f my-rcName-v2-rc.yaml --update-period=10
 > > > redis-service.yaml
 
 ```
+
 apiVersion: v1
+
 kind: Service
+
 metadata:
+
   name: redis-service
+
 spec:
+
   ports:
+
   - port: 6379
+
     targetPort: 6379
+
     protocol: TCP
+
 ```
+
 > > > redis-endpoints.yaml
 
 ```
+
 apiVersion: v1
+
 kind: Endpoints
+
 metadata:
+
   name: redis-service
+
 subsets:
+
   - addresses:
+
     - ip: 10.0.251.145
+
     ports:
+
     - port: 6379
+
       protocol: TCP
+
 ```
 
 > > > 基于文件创建完Service和Endpoints之后，在Kubernetes的Service中即可查询到自定义的Endpoints。
 
 ```
+
 [root@k8s-master demon]# kubectl describe service redis-service
+
 Name:            redis-service
+
 Namespace:        default
+
 Labels:            <none>
+
 Selector:        <none>
+
 Type:            ClusterIP
+
 IP:            10.254.52.88
-Port:            <unset>  6379/TCP
+
+Port:            <unset> 6379/TCP
+
 Endpoints:        10.0.251.145:6379
+
 Session Affinity:    None
+
 No events.
+
 [root@k8s-master demon]# etcdctl get /skydns/sky/default/redis-service
+
 {"host":"10.254.52.88","priority":10,"weight":10,"ttl":30,"targetstrip":0}
+
 ```
 
 > > Service内部负载均衡
@@ -3791,6 +3862,7 @@ No events.
 > > > Kubernetes使用iptables和kube-proxy解析service的人口地址，在中小规模的集群中运行良好，但是当service的数量超过一定规模时，仍然有一些小问题。首当其冲的便是service环境变量泛滥，以及service与使用service的pod两者创建时间先后的制约关系。目前来看，很多使用者在使用Kubernetes时往往会开发一套自己的Router组件来替代service，以便更好地掌控和定制这部分功能。
 
  
+
 > Deployment
 
 > > > Kubernetes提供了一种更加简单的更新RC和Pod的机制，叫做Deployment。通过在Deployment中描述你所期望的集群状态，Deployment Controller会将现在的集群状态在一个可控的速度下逐步更新成你所期望的集群状态。Deployment主要职责同样是为了保证pod的数量和健康，90%的功能与Replication Controller完全一样，可以看做新一代的Replication Controller。但是，它又具备了Replication Controller之外的新特性：
@@ -3812,40 +3884,67 @@ No events.
 > > > 相比于RC，Deployment直接使用kubectl edit deployment/deploymentName 或者kubectl set方法就可以直接升级（原理是Pod的template发生变化，例如更新label、更新镜像版本等操作会触发Deployment的滚动升级）。操作示例——首先 我们同样定义一个nginx-deploy-v1.yaml的文件，副本数量为2：
 
 ```
+
 apiVersion: extensions/v1beta1
+
 kind: Deployment
+
 metadata:
+
   name: nginx-deployment
+
 spec:
+
   replicas: 3
+
   template:
+
     metadata:
+
       labels:
+
         app: nginx
+
     spec:
+
       containers:
+
       - name: nginx
+
         image: nginx:1.7.9
+
         ports:
+
         - containerPort: 80
+
 ```
 
 > > > 创建deployment：
 
 ```
+
 $ kubectl create -f nginx-deploy-v1.yaml --record
+
 deployment "nginx-deployment" created
+
 $ kubectl get deployments
+
 NAME       DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+
 nginx-deployment   3         0         0            0           1s
+
 $ kubectl get deployments
+
 NAME       DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+
 nginx-deployment   3         3         3            3           18s
+
 ```
 
 > > > 正常之后，将nginx的版本进行升级，从1.7升级到1.9。第一种方法，直接set镜像：
 
 $ kubectl set image deployment/nginx-deployment2 nginx=nginx:1.9
+
 deployment "nginx-deployment2" image updated
 
 > > > 第二种方法，直接edit：
@@ -3857,27 +3956,47 @@ deployment "nginx-deployment2" image updated
 > > > 查看Deployment的变更信息（以下信息得以保存，是创建时候加的“--record”这个选项起的作用）：
 
 ```
+
 $ kubectl rollout history deployment/nginx-deployment
+
 deployments "nginx-deployment":
+
 REVISION    CHANGE-CAUSE
+
 1           kubectl create -f docs/user-guide/nginx-deployment.yaml --record
+
 2           kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1
+
 3           kubectl set image deployment/nginx-deployment nginx=nginx:1.91
 
 $ kubectl rollout history deployment/nginx-deployment --revision=2
+
 deployments "nginx-deployment" revision 2
+
   Labels:       app=nginx
+
           pod-template-hash=1159050644
+
   Annotations:  kubernetes.io/change-cause=kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1
+
   Containers:
+
    nginx:
+
     Image:      nginx:1.9.1
+
     Port:       80/TCP
+
      QoS Tier:
+
         cpu:      BestEffort
+
         memory:   BestEffort
+
     Environment Variables:      <none>
+
   No volumes.
+
 ```
 
 > > > 最后介绍下Deployment的一些基础命令。
@@ -3961,7 +4080,9 @@ deployments "nginx-deployment" revision 2
 > > > 5)        回收：是否的Persistent Volume需要回收才能再次使用。回收策略可以是人工的也可以是Kubernetes自动进行清理（仅支持NFS和HostPath）
 
 > > 信息数据卷
+
 　　
+
 > > >Kubernetes中有一些数据卷，主要用来给容器传递配置信息，我们称之为信息数据卷，比如Secret（处理敏感配置信息，密码、Token等）、Downward API（通过环境变量的方式告诉容器Pod的信息）、Git Repo（将Git仓库下载到Pod中），都是将Pod的信息以文件形式保存，然后以数据卷方式挂载到容器中，容器通过读取文件获取相应的信息。
 
 > Pet Sets/StatefulSet
@@ -3993,47 +4114,81 @@ deployments "nginx-deployment" revision 2
 #### kubernetes 集群搭建(kubeadm 方式)
 
 2.搭建K8s集群--->kubeadm
+
 2.1环境准备
+
 2.1.1关闭防火墙
+
 2.1.2关闭seliux
+
 2.1.3关闭swap分区
+
 2.1.4设置主机名称
+
 2.1.5将桥接的IPv4流量传递到iptables的链
+
 2.1.6时间同步
+
 2.2三台虚拟机都安装Docker
+
 2.3添加阿里云YUM软件源
+
 2.4安装/kubeadm/kubelet
+
 2.5部署Kubernetes Master
+
 2.6加入Kubernetes Node
+
 2.7 部署CNI网络插件
+
 2.8 测试kubernetes集群
 
 > 目前生产部署 Kubernetes 集群主要有两种方式：
 
 （1）kubeadm
+
 Kubeadm 是一个K8s 部署工具，提供kubeadm init和 kubeadm join，用于快速部署 Kubernetes 集群。官方地址
+
 （2）二进制包
+
 从 github 下载发行版的二进制包，手动部署每个组件，组成 Kubernetes 集群。
+
 Kubeadm 降低部署门槛，但屏蔽了很多细节，遇到问题很难排查。如果想更容易可
+
 控，推荐使用二进制包部署 Kubernetes 集群，虽然手动部署麻烦点，期间可以学习很
+
 多工作原理，也利于后期维护。
+
 kubeadm 部署方式介绍
+
 kubeadm 是官方社区推出的一个用于快速部署 kubernetes 集群的工具，这个工具能通过两条指令完成一个 kubernetes 集群的部署：
 
 第一、创建一个 Master 节点 kubeadm init
+
 第二， 将 Node节点加入到当前集群中 $ kubeadm join <Master 节点的 IP 和端口 >
+
 安装要求
+
 在开始之前，部署 Kubernetes 集群机器需要满足以下几个条件：
 
 一台或多台机器，操作系统 CentOS7.x-86_x64
+
 硬件配置：2GB 或更多 RAM，2 个 CPU 或更多 CPU，硬盘 30GB 或更多
+
 集群中所有机器之间网络互通
+
 可以访问外网，需要拉取镜像
+
 禁止 swap 分区
+
 最终目标
+
 角色	IP
+
 k8s-master	192.168.31.61
+
 k8s-node1	192.168.31.62
+
 k8s-node2	192.168.31.63
 
 > 系统初始化
@@ -4041,55 +4196,81 @@ k8s-node2	192.168.31.63
 > > 关闭防火墙：
 
 ```
+
 $ systemctl stop firewalld
+
 $ systemctl disable firewalld
+
 ```
 
 > > 关闭 selinux：
 
 ```
+
 $ sed -i 's/enforcing/disabled/' /etc/selinux/config # 永久
+
 $ setenforce 0 # 临时
+
 ```
 
 > > swap：
 
 ```
+
 $ swapoff -a # 临时
+
 $ vim /etc/fstab # 永久
+
 ```
 
 > > 主机名：
 
 ```
+
 $ hostnamectl set-hostname <hostname>
+
 ```
 
 > > 在 master 添加 hosts：
 
 ```
+
 $ cat >> /etc/hosts << EOF
+
 192.168.31.61 k8s-master
+
 192.168.31.62 k8s-node1
+
 192.168.31.63 k8s-node2
+
 EOF
+
 ```
 
 > > 将桥接的 IPv4 流量传递到 iptables 的链：
 
 ```
+
 $ cat > /etc/sysctl.d/k8s.conf << EOF
+
 net.bridge.bridge-nf-call-ip6tables = 1
+
 net.bridge.bridge-nf-call-iptables = 1
+
 EOF
+
 $ sysctl --system # 生效
+
 ```
 
 > > 时间同步：
 
 ```
+
 $ yum install ntpdate -y
+
 $ ntpdate time.windows.com
+
 ```
 
 > 所有节点安装 Docker/kubeadm/kubelet
@@ -4099,43 +4280,69 @@ $ ntpdate time.windows.com
 > > （1）安装 Docker
 
 ```
+
 $ wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo
+
 $ yum -y install docker-ce-18.06.1.ce-3.el7
+
 $ systemctl enable docker && systemctl start docker
+
 $ docker --version
+
 ```
 
 > > 添加阿里云 YUM 软件源
+
 > > 设置仓库地址
 
 ```
+
 $ cat > /etc/docker/daemon.json << EOF
+
 {
+
 "registry-mirrors": ["https://b9pmyelo.mirror.aliyuncs.com"]
+
 }
+
 EOF
+
 ```
 
 > > 添加 yum 源
 
 ```
+
 $ cat > /etc/yum.repos.d/kubernetes.repo << EOF
+
 [kubernetes]
+
 name=Kubernetes
+
 baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+
 enabled=1
+
 gpgcheck=0
+
 repo_gpgcheck=0
+
 gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg
+
 https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+
 EOF
+
 ```
 
 > > 安装 kubeadm，kubelet 和 kubectl
 
 ```
+
 $ yum install -y kubelet kubeadm kubectl
+
 $ systemctl enable kubelet
+
 ```
 
 > 部署 Kubernetes Master
@@ -4143,34 +4350,51 @@ $ systemctl enable kubelet
 > > 在 192.168.31.61（Master）执行
 
 ```
+
 $ kubeadm init \
+
 --apiserver-advertise-address=192.168.31.61 \
+
 --image-repository registry.aliyuncs.com/google_containers \
+
 --kubernetes-version v1.17.0 \
+
 --service-cidr=10.96.0.0/12 \
+
 --pod-network-cidr=10.244.0.0/16
+
 ```
+
 > > 由于默认拉取镜像地址 k8s.gcr.io 国内无法访问，这里指定阿里云镜像仓库地址。
 
 > > 使用 kubectl 工具：
 
 ```
+
 mkdir -p $HOME/.kube
+
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
 $ kubectl get nodes
+
 ```
 
 > 安装 Pod 网络插件（CNI）
 
 ```
+
 $ kubectl apply –f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kubeflannel.yml
+
 ```
 
 > > 检查一下
 
 ```
+
 kubect1 get pods -n kube-system
+
 ```
 
 > > 确保能够访问到 quay.io 这个 registery。如果 Pod 镜像下载失败，可以改这个镜像地址
@@ -4182,9 +4406,13 @@ kubect1 get pods -n kube-system
 > > 向集群添加新节点，执行在 kubeadm init 输出的 kubeadm join 命令：
 
 ```
+
 $ kubeadm join 192.168.31.61:6443 --token esce21.q6hetwm8si29qxwn \
+
 --discovery-token-ca-cert-hash
+
 sha256:00603a05805807501d7181c3d60b478788408cfe6cedefedb1f97569708be9c5
+
 ```
 
 > 测试 kubernetes 集群
@@ -4192,9 +4420,13 @@ sha256:00603a05805807501d7181c3d60b478788408cfe6cedefedb1f97569708be9c5
 > > 在 Kubernetes 集群中创建一个 pod，验证是否正常运行：
 
 ```
+
 $ kubectl create deployment nginx --image=nginx
+
 $ kubectl expose deployment nginx --port=80 --type=NodePort
+
 $ kubectl get pod,svc
+
 ```
 
 > > 访问地址：http://NodeIP:Port
@@ -4208,23 +4440,33 @@ $ kubectl get pod,svc
 > > 关闭防火墙
 
 ```
+
 systemctl status firewalld //查看防火墙状态
+
 systemctl stop firewalld //关闭防火墙
+
 systemctl disable firewalld //开机不启动防火墙
+
 ```
 
 > > 关闭seliux
 
 ```
+
  getenforce
+
  sed -ri 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
+
 ```
 
 > > 关闭swap分区
 
 ```
+
 swapoff -a # 临时关闭
+
 sed -ri 's/.*swap.*/#&/' /etc/fstab    # 永久
+
 ```
 
 > > 设置主机名称
@@ -4232,68 +4474,105 @@ sed -ri 's/.*swap.*/#&/' /etc/fstab    # 永久
 > > > 根据规划设置主机名
 
 ```
+
 hostnamectl set-hostname <hostname>
+
 ```
 
 > > > 在master添加hosts
 
 ```
+
 cat >> /etc/hosts << EOF
+
 192.168.26.128 k8smaster
+
 192.168.26.129 k8snode1
+
 192.168.26.130 k8snode2
+
 EOF
+
 ```
 
 > > 将桥接的IPv4流量传递到iptables的链
 
 ```
+
 cat > /etc/sysctl.d/k8s.conf << EOF
+
 net.bridge.bridge-nf-call-ip6tables = 1
+
 net.bridge.bridge-nf-call-iptables = 1
+
 EOF
+
 sysctl --system  # 生效
+
 ```
 
 > > 时间同步
 
 ```
+
 yum install ntpdate -y
+
 ntpdate time.windows.com
+
 ```
 
 > 三台虚拟机都安装Docker
 
 ```
+
 yum -y install wget
 
 $ wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo
+
 $ yum -y install docker-ce-18.06.1.ce-3.el7
+
 $ systemctl enable docker && systemctl start docker
+
 $ docker --version
+
 Docker version 18.06.1-ce, build e68fc7a
 
 $ cat > /etc/docker/daemon.json << EOF
+
 {
+
   "registry-mirrors": ["https://b9pmyelo.mirror.aliyuncs.com"]
+
 }
+
 EOF
 
 systemctl restart docker
+
 ```
 
 > 添加阿里云YUM软件源
 
 ```
+
 $ cat > /etc/yum.repos.d/kubernetes.repo << EOF
+
 [kubernetes]
+
 name=Kubernetes
+
 baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+
 enabled=1
+
 gpgcheck=0
+
 repo_gpgcheck=0
+
 gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+
 EOF
+
 ```
 
 > 安装/kubeadm/kubelet
@@ -4301,8 +4580,11 @@ EOF
 > > 由于版本更新频繁，这里指定版本号部署：
 
 ```
+
 $ yum install -y kubelet-1.18.0 kubeadm-1.18.0 kubectl-1.18.0
+
 $ systemctl enable kubelet
+
 ```
 
 > 部署Kubernetes Master
@@ -4310,12 +4592,19 @@ $ systemctl enable kubelet
 > > 在192.168.26.128（Master）执行。
 
 ```
+
 $ kubeadm init \
+
   --apiserver-advertise-address=192.168.26.128 \
+
   --image-repository registry.aliyuncs.com/google_containers \
+
   --kubernetes-version v1.18.0 \
+
   --service-cidr=10.96.0.0/12 \
+
   --pod-network-cidr=10.244.0.0/16
+
 ```
 
 > > 执行慢，稍作等待
@@ -4325,10 +4614,15 @@ $ kubeadm init \
 > > 使用kubectl工具：
 
 ```
+
 mkdir -p $HOME/.kube
+
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
 $ kubectl get nodes
+
 ```
 
 > 加入Kubernetes Node
@@ -4338,8 +4632,11 @@ $ kubectl get nodes
 > > 向集群添加新节点，执行在kubeadm init输出的kubeadm join命令：
 
 ```
+
 $ kubeadm join 192.168.1.11:6443 --token esce21.q6hetwm8si29qxwn \
+
     --discovery-token-ca-cert-hash sha256:00603a05805807501d7181c3d60b478788408cfe6cedefedb1f97569708be9c5
+
 ```
 
 > > 默认token有效期为24小时，当过期之后，该token就不可用了。这时就需要重新创建token，操作如下：
@@ -4353,12 +4650,15 @@ $ kubeadm join 192.168.1.11:6443 --token esce21.q6hetwm8si29qxwn \
 > > 默认镜像地址无法访问，sed命令修改为docker hub镜像仓库。可以换源下载
 
 ```
+
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
 kubectl get pods -n kube-system
 
 NAME                          READY   STATUS    RESTARTS   AGE
+
 kube-flannel-ds-amd64-2pc95   1/1     Running   0          72s
+
 ```
 
 > 测试kubernetes集群
@@ -4366,15 +4666,21 @@ kube-flannel-ds-amd64-2pc95   1/1     Running   0          72s
 > > 在Kubernetes集群中创建一个pod，验证是否正常运行：
 
 ```
+
 $ kubectl create deployment nginx --image=nginx
+
 $ kubectl expose deployment nginx --port=80 --type=NodePort
+
 $ kubectl get pod,svc
+
 ```
 
 > > 访问地址：http://NodeIP:Port
 
 ```
+
 http://192.168.26.128:30340/
+
 ```
 
 #### kubernetes 集群搭建（二进制）
@@ -4390,13 +4696,21 @@ http://192.168.26.128:30340/
 > > > cfssl 是一个开源的证书管理工具， 使用 json 文件生成证书， 相比 openssl 更方便使用。找任意一台服务器操作， 这里用 Master 节点。
 
 ```
+
 wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
+
 wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
+
 wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64
+
 chmod +x cfssl_linux-amd64 cfssljson_linux-amd64 cfssl-certinfo_linux-amd64
+
 mv cfssl_linux-amd64 /usr/local/bin/cfssl
+
 mv cfssljson_linux-amd64 /usr/local/bin/cfssljson
+
 mv cfssl-certinfo_linux-amd64 /usr/bin/cfssl-certinfo
+
 ```
 
 > > 生成 Etcd 证书
@@ -4406,56 +4720,97 @@ mv cfssl-certinfo_linux-amd64 /usr/bin/cfssl-certinfo
 > > > 创建工作目录：
 
 ```
+
 mkdir -p ~/TLS/{etcd,k8s}
+
 cd TLS/etcd
+
 ```
 
 > > > 自签 CA：
 
 ```
+
 cat > ca-config.json<< EOF
+
 	{
+
 	"signing": {
+
 	"default": {
+
 		"expiry": "87600h"
+
 	},
+
 	"profiles": {
+
 	"www": {
+
 		"expiry": "87600h",
+
 		"usages": [
+
 			"signing",
+
 			"key encipherment",
+
 			"server auth",
+
 			"client auth"
+
 		]
+
 	}
+
 	}
+
 }
+
 } EOF
 
 cat > ca-csr.json<< EOF
+
 {
+
 	"CN": "etcd CA",
+
 	"key": {
+
 	"algo": "rsa",
+
 	"size": 2048
+
 	},
+
 	"names": [
+
 		{
+
 		"C": "CN",
+
 		"L": "Beijing",
+
 		"ST": "Beijing"
+
 		}
+
 	]
+
 } EOF
+
 ```
 
 > > > 生成证书：
 
 ```
+
 cfssl gencert -initca ca-csr.json | cfssljson -bare ca -
+
 ls *pem
+
 ca-key.pem ca.pem
+
 ```
 
 > > > 使用自签 CA 签发 Etcd HTTPS 证书
@@ -4463,26 +4818,47 @@ ca-key.pem ca.pem
 > > > 创建证书申请文件：
 
 ```
+
 cat > server-csr.json<< EOF
+
 {
+
 	"CN": "etcd",
+
 	"hosts": [
+
 		"192.168.31.71",
+
 		"192.168.31.72",
+
 		"192.168.31.73"
+
 	],
+
 	"key": {
+
 		"algo": "rsa",
+
 		"size": 2048
+
 	},
+
 	"names": [
+
 		{
+
 			"C": "CN",
+
 			"L": "BeiJing",
+
 			"ST": "BeiJing"
+
 		}
+
 	]
+
 } EOF
+
 ```
 
 > > > 注： 上述文件 hosts 字段中 IP 为所有 etcd 节点的集群内部通信 IP， 一个都不能少！ 为了方便后期扩容可以多写几个预留的 IP。
@@ -4490,10 +4866,15 @@ cat > server-csr.json<< EOF
 > > > 生成证书：
 
 ```
+
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -
+
 profile=www server-csr.json | cfssljson -bare server
+
 ls server*pem
+
 server-key.pem server.pem
+
 ```
 
 > > 从 Github 下载二进制文件
@@ -4507,110 +4888,189 @@ server-key.pem server.pem
 > > > 创建工作目录并解压二进制包
 
 ```
+
 mkdir /opt/etcd/{bin,cfg,ssl} – p
+
 tar zxvf etcd-v3.4.9-linux-amd64.tar.gz
+
 mv etcd-v3.4.9-linux-amd64/{etcd,etcdctl} /opt/etcd/bin/
+
 ```
 
 > > > 创建 etcd 配置文件
 
 ```
+
 cat > /opt/etcd/cfg/etcd.conf << EOF
+
 #[Member]
+
 	ETCD_NAME="etcd-1"
+
 	ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
+
 	ETCD_LISTEN_PEER_URLS="https://192.168.31.71:2380"
+
 	ETCD_LISTEN_CLIENT_URLS="https://192.168.31.71:2379"
+
 	#[Clustering]
+
 	ETCD_INITIAL_ADVERTISE_PEER_URLS="https://192.168.31.71:2380"
+
 	ETCD_ADVERTISE_CLIENT_URLS="https://192.168.31.71:2379"
+
 	ETCD_INITIAL_CLUSTER="etcd-1=https://192.168.31.71:2380,etcd-
+
 	2=https://192.168.31.72:2380,etcd-3=https://192.168.31.73:2380"
+
 	ETCD_INITIAL_CLUSTER_TOKEN="etcd-cluster"
+
 	ETCD_INITIAL_CLUSTER_STATE="new"
+
 EOF
 
 ETCD_NAME： 节点名称， 集群中唯一
+
 ETCD_DATA_DIR： 数据目录
+
 ETCD_LISTEN_PEER_URLS： 集群通信监听地址
+
 ETCD_LISTEN_CLIENT_URLS： 客户端访问监听地址
+
 ETCD_INITIAL_ADVERTISE_PEER_URLS： 集群通告地址
+
 ETCD_ADVERTISE_CLIENT_URLS： 客户端通告地址
+
 ETCD_INITIAL_CLUSTER： 集群节点地址
+
 ETCD_INITIAL_CLUSTER_TOKEN： 集群 Token
+
 ETCD_INITIAL_CLUSTER_STATE： 加入集群的当前状态， new 是新集群， existing 表示加入已有集群
+
 ```
 
 > > > systemd 管理 etcd
 
 ```
+
 cat > /usr/lib/systemd/system/etcd.service << EOF
+
 [Unit]
+
 	Description=Etcd Server
+
 	After=network.target
+
 	After=network-online.target
+
 	Wants=network-online.target
+
 	[Service]
+
 	Type=notify
+
 	EnvironmentFile=/opt/etcd/cfg/etcd.conf
+
 	ExecStart=/opt/etcd/bin/etcd \
+
 	--cert-file=/opt/etcd/ssl/server.pem \
+
 	--key-file=/opt/etcd/ssl/server-key.pem \
+
 	--peer-cert-file=/opt/etcd/ssl/server.pem \
+
 	--peer-key-file=/opt/etcd/ssl/server-key.pem \
+
 	--trusted-ca-file=/opt/etcd/ssl/ca.pem \
+
 	--peer-trusted-ca-file=/opt/etcd/ssl/ca.pem \
+
 	--logger=zap
+
 	Restart=on-failure
+
 	LimitNOFILE=65536
+
 	[Install]
+
 	WantedBy=multi-user.target
+
 EOF
+
 ```
 
 > > > 拷贝刚才生成的证书把刚才生成的证书拷贝到配置文件中的路径：
 
 ```
+
 cp ~/TLS/etcd/ca*pem ~/TLS/etcd/server*pem /opt/etcd/ssl/
+
 ```
 
 > > > 启动并设置开机启动
 
 ```
+
 systemctl daemon-reload
+
 systemctl start etcd
+
 systemctl enable etcd
+
 ```
 
 > > > 将上面节点 1 所有生成的文件拷贝到节点 2 和节点 3
 
 ```
+
 scp -r /opt/etcd/ root@192.168.31.72:/opt/
+
 scp /usr/lib/systemd/system/etcd.service
+
 root@192.168.31.72:/usr/lib/systemd/system/
+
 scp -r /opt/etcd/ root@192.168.31.73:/opt/
+
 scp /usr/lib/systemd/system/etcd.service
+
 root@192.168.31.73:/usr/lib/systemd/system/
+
 ```
 
 > > > 然后在节点 2 和节点 3 分别修改 etcd.conf 配置文件中的节点名称和当前服务器 IP：
 
 ```
+
 vi /opt/etcd/cfg/etcd.conf
+
 #[Member]
+
 ETCD_NAME="etcd-1" # 修改此处， 节点 2 改为 etcd-2， 节点 3 改为 etcd-3
+
 ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
+
 ETCD_LISTEN_PEER_URLS="https://192.168.31.71:2380" # 修改此处为当前服务器 IP
+
 ETCD_LISTEN_CLIENT_URLS="https://192.168.31.71:2379" # 修改此处为当前服务器 IP
+
 #[Clustering]
+
 ETCD_INITIAL_ADVERTISE_PEER_URLS="https://192.168.31.71:2380" # 修改此处为当前
+
 服务器 IP
+
 ETCD_ADVERTISE_CLIENT_URLS="https://192.168.31.71:2379" # 修改此处为当前服务器
+
 IP
+
 ETCD_INITIAL_CLUSTER="etcd-1=https://192.168.31.71:2380,etcd-
+
 2=https://192.168.31.72:2380,etcd-3=https://192.168.31.73:2380"
+
 ETCD_INITIAL_CLUSTER_TOKEN="etcd-cluster"
+
 ETCD_INITIAL_CLUSTER_STATE="new"
+
 ```
 
 > > > 最后启动 etcd 并设置开机启动， 同上。
@@ -4618,22 +5078,35 @@ ETCD_INITIAL_CLUSTER_STATE="new"
 > > > 查看集群状态
 
 ```
+
 ETCDCTL_API=3 /opt/etcd/bin/etcdctl --cacert=/opt/etcd/ssl/ca.pem --
+
 cert=/opt/etcd/ssl/server.pem --key=/opt/etcd/ssl/server-key.pem --
+
 endpoints="https://192.168.31.71:2379,https://192.168.31.72:2379,https://192.16
+
 8.31.73:2379" endpoint health
+
 https://192.168.31.71:2379 is healthy: successfully committed proposal: took =
+
 8.154404ms
+
 https://192.168.31.73:2379 is healthy: successfully committed proposal: took =
+
 9.044117ms
+
 https://192.168.31.72:2379 is healthy: successfully committed proposal: took =
+
 10.000825ms
+
 ```
 
 > > > 如果输出上面信息， 就说明集群部署成功。 如果有问题第一步先看日志：
 
 ```
+
 /var/log/message 或 journalctl -u etcd
+
 ```
 
 > 安装Docker
@@ -4641,37 +5114,65 @@ https://192.168.31.72:2379 is healthy: successfully committed proposal: took =
 > > systemd 管理 docker
 
 ```
+
 cat > /usr/lib/systemd/system/docker.service << EOF
+
 [Unit]
+
 Description=Docker Application Container Engine
+
 Documentation=https://docs.docker.com
+
 After=network-online.target firewalld.service
+
 Wants=network-online.target
+
 [Service]
+
 Type=notify
+
 ExecStart=/usr/bin/dockerd
+
 ExecReload=/bin/kill -s HUP $MAINPID
+
 LimitNOFILE=infinity
+
 LimitNPROC=infinity
+
 LimitCORE=infinity
+
 TimeoutStartSec=0
+
 Delegate=yes
+
 KillMode=process
+
 Restart=on-failure
+
 StartLimitBurst=3
+
 StartLimitInterval=60s
+
 [Install]
+
 WantedBy=multi-user.target
+
 EOF
+
 ```
 
 > > 创建配置文件
 
 ```
+
 mkdir /etc/docker
+
 cat > /etc/docker/daemon.json << EOF
+
 {"registry-mirrors": ["https://b9pmyelo.mirror.aliyuncs.com"]
+
 } EOF
+
 ```
 
 > > > registry-mirrors 阿里云镜像加速器
@@ -4685,67 +5186,302 @@ cat > /etc/docker/daemon.json << EOF
 #### kubernetes 集群 YAML 文件详解
 
 1、YAML 文件概述
+
 k8s 集群中对资源管理和资源对象编排部署都可以通过声明样式（YAML）文件来解决，也就是可以把需要对资源对象操作编辑到 YAML 格式文件中，我们把这种文件叫做资源清单文件，通过 kubectl 命令直接使用资源清单文件就可以实现对大量的资源对象进行编排部署了。
 
 3、资源清单描述方法
+
 （1）在 k8s 中，一般使用 YAML 格式的文件来创建符合我们预期期望的 pod,这样的 YAML文件称为资源清单。
 
 必须存在的属性（必须写）
+
 参数名	字段类型	说明	默认值
+
 apiVersion	String	这里是指的是K8S API的版本，目前基本上是v1，可以用 kubectl api-versions 或者 kubectl explain pod 命令查询	
+
 kind	String	这里指的是yaml文件定义的资源类型和角色，比如: Pod	
+
 metadata	Object	元数据对象，固定值就写metadata	
+
 metadata.name	String	元数据对象的名字，这里由我们编写，比如命名Pod的名字	
+
 metadata.namespace	String	元数据对象的命名空间，由我们自身定义	default
+
 metadata.labels	map[string]string	键值数据，常被用作挑选条件	
+
 spec	Object 详细定义对象，固定值就写Spec		
+
 spec.containers[]		List	这里是Spec对象的容器列表定义，是个列表
+
 spec.containers[].name	String	这里定义容器的名字	
+
 spec.containers[].image	String	这里定义要用到的镜像名称，如果镜像的标签是 latest，每次使用该镜像都会从远程下载	
 
 ## 结构化程序设计
 
 ## 面向对象程序设计
 
-### 设计模式
+### 面向对象设计原则
+
+#### 1、单一职责原则 SRP
+
+> （Single Responsibility Principle）
+
+> 一个类，只有一个引起它变化的原因。
+
+> 应该只有一个职责。
+
+> 每一个职责都是变化的一个轴线，如果一个类有一个以上的职责，这些职责就耦合在了一起。
+
+> 这会导致脆弱的设计。
+
+> 当一个职责发生变化时，可能会影响其它的职责。另外，多个职责耦合在一起，会影响复用性。例如：要实现逻辑和界面的分离。
+
+#### 2、开闭原则 OCP
+
+> （Open Close Principle）
+
+> 开闭原则就是说对扩展开放，对修改关闭。
+
+> 在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。
+
+> 所以一句话概括就是：为了使程序的扩展性好，易于维护和升级。
+
+> 想要达到这样的效果，我们需要使用接口和抽象类，后面的具体设计中我们会提到这点。
+
+#### 3、里氏代换原则 LSP
+
+> （Liskov Substitution Principle）
+
+> 里氏代换原则(Liskov Substitution Principle LSP)面向对象设计的基本原则之一。
+
+> 里氏代换原则中说，任何基类可以出现的地方，子类一定可以出现。
+
+> LSP是继承复用的基石，只有当衍生类可以替换掉基类，软件单位的功能不受到影响时，基类才能真正被复用，
+
+> 而衍生类也能够在基类的基础上增加新的行为。
+
+> 里氏代换原则是对“开-闭”原则的补充。实现“开-闭”原则的关键步骤就是抽象化。
+
+> 而基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范。
+
+#### 4、依赖倒转原则 DIP
+
+> （Dependence Inversion Principle）
+
+> 所谓依赖倒置原则（Dependence Inversion Principle）就是要依赖于抽象，不要依赖于具体。
+
+> 实现开闭原则的关键是抽象化，并且从抽象化导出具体化实现，
+
+> 如果说开闭原则是面向对象设计的目标的话，那么依赖倒转原则就是面向对象设计的主要手段。
+
+#### 5、接口隔离原则 ISP
+
+> （Interface Segregation Principle）
+
+> 这个原则的意思是：使用多个隔离的接口，比使用单个接口要好。
+
+> 还是一个降低类之间的耦合度的意思，从这儿我们看出，其实设计模式就是一个软件的设计思想，
+
+> 从大型软件架构出发，为了升级和维护方便。所以上文中多次出现：降低依赖，降低耦合。
+
+#### 6、合成复用原则 CRP
+
+> （Composite Reuse Principle）
+
+> 合成复用原则就是指在一个新的对象里通过关联关系（包括组合关系和聚合关系）来使用一些已有的对象，使之成为新对象的一部分；
+
+> 新对象通过委派调用已有对象的方法达到复用其已有功能的目的。简言之：要尽量使用组合/聚合关系，少用继承。
+
+#### 7、迪米特法则（最少知道原则）DP
+
+> （Demeter Principle）
+
+> 为什么叫最少知道原则，就是说：一个实体应当尽量少的与其他实体之间发生相互作用，使得系统功能模块相对独立。
+
+> 也就是说一个软件实体应当尽可能少的与其他实体发生相互作用。
+
+> 这样，当一个模块修改时，就会尽量少的影响其他的模块，扩展会相对容易，这是对软件实体之间通信的限制，它要求限制软件实体之间通信的宽度和深度。
+
+## Gof设计模式
+
+> GoF:（Gang of Four，GOF设计模式）---四人组
+
+> Design Patterns: Elements of Reusable Object-Oriented Software（即后述《设计模式》一书），由 Erich Gamma、Richard Helm、Ralph Johnson 和 John 
+
+> Vlissides 合著（Addison-Wesley，1995）。这几位作者常被称为“四人组（Gang of Four）”，而这本书也就被称为“四人组（或 GoF）”书。
+
+### 行为型
+
+#### Iterator（迭代器模式）
+
+> Iterator（迭代器模式）：提供一种方法顺序访问一个聚合对象中各个元素, 而又不需暴露该对象的内部表示。
+
+#### Interpreter（解析器模式）
+
+> Interpreter（解析器模式）：给定一个语言, 定义它的文法的一种表示，并定义一个解释器, 该解释器使用该表示来解释语言中的句子。
+
+#### Observer（观察者模式）
+
+> Observer（观察者模式）：定义对象间的一种一对多的依赖关系,以便当一个对象的状态发生改变时,所有依赖于它的对象都得到通知并自动刷新。
+
+#### Mediator（中介者模式）
+
+> Mediator（中介者模式）：用一个中介对象来封装一系列的对象交互。
+
+> 中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。
+
+#### Visitor（访问者模式）
+
+> Visitor（访问者模式）：表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。
+
+#### Memento（备忘录模式）
+
+> Memento（备忘录模式）：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到保存的状态。
+
+#### State（状态模式）
+
+> State（状态模式）：允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它所属的类。
+
+#### Strategy（策略模式）
+
+> Strategy（策略模式）：定义一系列的算法,把它们一个个封装起来, 并且使它们可相互替换。本模式使得算法的变化可独立于使用它的客户。
+
+#### Template Method（模板方法模式）
+
+> Template Method（模板方法模式）：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。
+
+> Template Method 使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
+
+#### Command（命令模式）
+
+> Command（命令模式）：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可取消的操作。
+
+#### Chain of Responsibility（职责链模式）
+
+> Chain of Responsibility（职责链模式）：为解除请求的发送者和接收者之间耦合，而使多个对象都有机会处理这个请求。将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它。
+
+### 创建型
+
+#### Singleton（单例模式）
+
+> Singleton（单例模式）：保证一个类仅有一个实例，并提供一个访问它的全局访问点。
+
+#### Prototype（原型模式）
+
+> Prototype（原型模式）：用原型实例指定创建对象的种类，并且通过拷贝这个原型来创建新的对象。 
+
+#### Builder（建造者模式）
+
+> Builder（建造者模式）：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示
+
+#### Factory Method(工厂模式)
+
+> Factory Method(工厂模式)：定义一个用于创建对象的接口，让子类决定将哪一个类实例化。 Factory Method使一个类的实例化延迟到其子类
+
+####  Abstract Factory（抽象工厂模式）
+
+> Abstract Factory（抽象工厂模式）：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。
+
+### 结构型
+
+#### Bridge（桥接模式）
+
+> Bridge（桥接模式）：将抽象部分与它的实现部分分离，使它们都可以独立地变化。
+
+#### Facade（外观模式）
+
+> Facade（外观模式）：为子系统中的一组接口提供一个一致的界面， Facade模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。
+
+#### Composite(组合模式)
+
+> Composite(组合模式)：将对象组合成树形结构以表示“部分-整体”的层次结构。它使得客户对单个对象和复合对象的使用具有一致性。
+
+#### Decorator(装饰模式)：
+
+> Decorator(装饰模式)：动态地给一个对象添加一些额外的职责。就扩展功能而言， 它比生成子类方式更为灵活。
+
+#### Adapter（适配器模式）
+
+> Adapter（适配器模式）：将一个类的接口转换成客户希望的另外一个接口。Adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。
+
+#### Proxy（代理模式）
+
+> Proxy（代理模式）：为其他对象提供一个代理以控制对这个对象的访问。
+
+#### Flyweight（享元模式）
+
+> Flyweight（享元模式）：运用共享技术有效地支持大量细粒度的对象。
+
+### 模式之间关系
+
+### 其他
+
+### 参考资料
+
+#### 23种设计模式UML图
 
 ## C# .Net Base 
 
-第1部分CLR基础
-第1章CLR的执行模型
-第2章生成、打包、部署和管理应用程序及类型
-第3章共享程序集和强命名程序集
-第2部分设计类型
-第4章类型基础
-第5章基元类型、引用类型和值类型
-第6章类型和成员基础
-第7章常量和字段
-第8章方法
-第9章参数
-第10章属性
-第11章事件
-第12章泛型
-第13章接口
-第3部分基本类型
-第14章字符、字符串和文本处理
-第15章枚举类型和位标志
-第16章数组
-第17章委托
-第18章定制特性
-第19章可空值类型
-第4部分核心机制
-第20章异常和状态管理
-第21章托管堆和垃圾回收
-第22章CLR寄宿和AppDomain
-第23章程序集加载和反射
-第24章运行时序列化
-第25章与WinRT组件互操作
-第5部分线程处理
-第26章线程基础
-第27章计算的异步操作
-第28章I/O的异步操作
-第29章基元线程同步构造
-第30章混合线程同步构造
+### CLR基础 CLR的执行模型
+
+### 生成、打包、部署和管理应用程序及类型
+
+### 共享程序集和强命名程序集
+
+### 类型基础
+
+### 基元类型、引用类型和值类型
+
+### 常量和字段
+
+### 方法
+
+### 参数
+
+### 属性
+
+### 事件
+
+### 泛型
+
+### 接口
+
+### 基本类型
+
+### 字符、字符串和文本处理
+
+### 枚举类型和位标志
+
+### 数组
+
+### 委托
+
+### 定制特性
+
+### 可空值类型
+
+### 异常和状态管理
+
+### 托管堆和垃圾回收
+
+### CLR寄宿和AppDomain
+
+### 程序集加载和反射
+
+### 运行时序列化
+
+### 与WinRT组件互操作
+
+### 线程基础
+
+### 计算的异步操作 Task
+
+### I/O的异步操作
+
+### 基元线程同步构造
+
+### 混合线程同步构造
 
 ### ML.NET
 
@@ -4762,1372 +5498,1829 @@ spec.containers[].image	String	这里定义要用到的镜像名称，如果镜�
 ##### 方法: METHODS
 
 > AddHandler(RoutedEvent, Delegate)	
+
 Adds a routed event handler for a specified routed event, adding the handler to the handler collection on the current element.
 
 > AddHandler(RoutedEvent, Delegate, Boolean)	
+
 Adds a routed event handler for a specified routed event, adding the handler to the handler collection on the current element. Specify handledEventsToo as true to have the provided handler be invoked for routed event that had already been marked as handled by another element along the event route.
 
 > AddToEventRoute(EventRoute, RoutedEventArgs)	
+
 Adds handlers to the specified EventRoute for the current UIElement event handler collection.
 
 > AddVisualChild(Visual)	
+
 Defines the parent-child relationship between two visuals.
 
 > ApplyAnimationClock(DependencyProperty, AnimationClock)	(Inherited from Visual)
+
 Applies an animation to a specified dependency property on this element. Any existing animations are stopped and replaced with the new animation.
 
 > ApplyAnimationClock(DependencyProperty, AnimationClock, HandoffBehavior)	
+
 Applies an animation to a specified dependency property on this element, with the ability to specify what happens if the property already has a running animation.
 
 > Arrange(Rect)	
+
 Positions child elements and determines a size for a UIElement. Parent elements call this method from their ArrangeCore(Rect) implementation (or a WPF framework-level equivalent) to form a recursive layout update. This method constitutes the second pass of a layout update.
 
 > ArrangeCore(Rect)	
+
 Defines the template for WPF core-level arrange layout definition.
 
 > BeginAnimation(DependencyProperty, AnimationTimeline)	
+
 Starts an animation for a specified animated property on this element.
 
 > BeginAnimation(DependencyProperty, AnimationTimeline, HandoffBehavior)	
+
 Starts a specific animation for a specified animated property on this element, with the option of specifying what happens if the property already has a running animation.
 
 > CaptureMouse()	
+
 Attempts to force capture of the mouse to this element.
 
 > CaptureStylus()	
+
 Attempts to force capture of the stylus to this element.
 
 > CaptureTouch(TouchDevice)	
+
 Attempts to force capture of a touch to this element.
 
 > CheckAccess()	
+
 Determines whether the calling thread has access to this DispatcherObject.(Inherited from DispatcherObject)
 
 > ClearValue(DependencyProperty)	
+
 Clears the local value of a property. The prope
 
 rty to be cleared is specified by a DependencyProperty identifier.
 
 > ClearValue(DependencyPropertyKey)		(Inherited from DependencyObject)
+
 Clears the local value of a read-only property. The property to be cleared is specified by a DependencyPropertyKey.
 
 > CoerceValue(DependencyProperty)		(Inherited from DependencyObject)
+
 Coerces the value of the specified dependency property. This is accomplished by invoking any CoerceValueCallback function specified in property metadata for the dependency property as it exists on the calling DependencyObject.
 
 > Equals(Object)		(Inherited from DependencyObject)
+
 Determines whether a provided DependencyObject is equivalent to the current DependencyObject.
 
 > FindCommonVisualAncestor(DependencyObject)		(Inherited from DependencyObject)
+
 Returns the common ancestor of two visual objects.
 
 > Focus()	(Inherited from Visual)
+
 Attempts to set focus to this element.
 
 > GetAnimationBaseValue(DependencyProperty)	
+
 Returns the base property value for the specified property on this element, disregarding any possible animated value from a running or stopped animation.
 
 > GetHashCode()	
+
 Gets a hash code for this DependencyObject.
 
 > GetLayoutClip(Size)		(Inherited from DependencyObject)
+
 Returns an alternative clipping geometry that represents the region that would be clipped if ClipToBounds were set to true.
 
 > GetLocalValueEnumerator()	
+
 Creates a specialized enumerator for determining which dependency properties have locally set values on this DependencyObject.
 
 > GetType()		(Inherited from DependencyObject)
+
 Gets the Type of the current instance.(Inherited from Object)
 
 > GetUIParentCore()	
+
 When overridden in a derived class, returns an alternative user interface (UI) parent for this element if no visual parent exists.
 
 > GetValue(DependencyProperty)	
+
 Returns the current effective value of a dependency property on this instance of a DependencyObject.
 
 > GetVisualChild(Int32)		(Inherited from DependencyObject)
+
 Returns the specified Visual in the parent VisualCollection.
 
 > HitTestCore(GeometryHitTestParameters)	(Inherited from Visual)
+
 Implements HitTestCore(GeometryHitTestParameters) to supply base element hit testing behavior (returning GeometryHitTestResult).
 
 > HitTestCore(PointHitTestParameters)	
+
 Implements HitTestCore(PointHitTestParameters) to supply base element hit testing behavior (returning HitTestResult).
 
 > InputHitTest(Point)	
+
 Returns the input element within the current element that is at the specified coordinates, relative to the current element's origin.
 
 > InvalidateArrange()	
+
 Invalidates the arrange state (layout) for the element. After the invalidation, the element will have its layout updated, which will occur asynchronously unless subsequently forced by UpdateLayout().
 
 > InvalidateMeasure()	
+
 Invalidates the measurement state (layout) for the element.
 
 > InvalidateProperty(DependencyProperty)	
+
 Re-evaluates the effective value for the specified dependency property.
 
 > InvalidateVisual()		(Inherited from DependencyObject)
+
 Invalidates the rendering of the element, and forces a complete new layout pass. OnRender(DrawingContext) is called after the layout cycle is completed.
 
 > IsAncestorOf(DependencyObject)	
+
 Determines whether the visual object is an ancestor of the descendant visual object.
 
 > IsDescendantOf(DependencyObject)	(Inherited from Visual)
+
 Determines whether the visual object is a descendant of the ancestor visual object.
 
 > Measure(Size)	(Inherited from Visual)
+
 Updates the DesiredSize of a UIElement. Parent elements call this method from their own MeasureCore(Size) implementations to form a recursive layout update. Calling this method constitutes the first pass (the "Measure" pass) of a layout update.
 
 > MeasureCore(Size)	
+
 When overridden in a derived class, provides measurement logic for sizing this element properly, with consideration of the size of any child element content.
 
 > MemberwiseClone()	
+
 Creates a shallow copy of the current Object.(Inherited from Object)
 
 > MoveFocus(TraversalRequest)	
+
 Attempts to move focus from this element to another element. The direction to move focus is specified by a guidance direction, which is interpreted within the organization of the visual parent for this element.
 
 > OnAccessKey(AccessKeyEventArgs)	
+
 Provides class handling for when an access key that is meaningful for this element is invoked.
 
 > OnChildDesiredSizeChanged(UIElement)	
+
 Supports layout behavior when a child element is resized.
 
 > OnCreateAutomationPeer()	
+
 Returns class-specific AutomationPeer implementations for the Windows Presentation Foundation (WPF) infrastructure.
 
 > OnDpiChanged(DpiScale, DpiScale)	
+
 Called when the DPI at which this View is rendered changes.
 
 > OnDragEnter(DragEventArgs)	(Inherited from Visual)
+
 Invoked when an unhandled DragEnter attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnDragLeave(DragEventArgs)	
+
 Invoked when an unhandled DragLeave attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 OnDragOver(DragEventArgs)	
+
 Invoked when an unhandled DragOver attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnDrop(DragEventArgs)	
+
 Invoked when an unhandled DragEnter attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnGiveFeedback(GiveFeedbackEventArgs)	
+
 Invoked when an unhandled GiveFeedback attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnGotFocus(RoutedEventArgs)	
+
 Raises the GotFocus routed event by using the event data provided.
 
 > OnGotKeyboardFocus(KeyboardFocusChangedEventArgs)	
+
 Invoked when an unhandled GotKeyboardFocus attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnGotMouseCapture(MouseEventArgs)	
+
 Invoked when an unhandled GotMouseCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnGotStylusCapture(StylusEventArgs)	
+
 Invoked when an unhandled GotStylusCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnGotTouchCapture(TouchEventArgs)	
+
 Provides class handling for the GotTouchCapture routed event that occurs when a touch is captured to this element.
 
 > OnIsKeyboardFocusedChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked when an unhandled IsKeyboardFocusedChanged event is raised on this element. Implement this method to add class handling for this event.
 
 > OnIsKeyboardFocusWithinChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked just before the IsKeyboardFocusWithinChanged event is raised by this element. Implement this method to add class handling for this event.
 
 > OnIsMouseCapturedChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked when an unhandled IsMouseCapturedChanged event is raised on this element. Implement this method to add class handling for this event.
 
 > OnIsMouseCaptureWithinChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked when an unhandled IsMouseCaptureWithinChanged event is raised on this element. Implement this method to add class handling for this event.
 
 > OnIsMouseDirectlyOverChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked when an unhandled IsMouseDirectlyOverChanged event is raised on this element. Implement this method to add class handling for this event.
 
 > OnIsStylusCapturedChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked when an unhandled IsStylusCapturedChanged event is raised on this element. Implement this method to add class handling for this event.
 
 > OnIsStylusCaptureWithinChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked when an unhandled IsStylusCaptureWithinChanged event is raised on this element. Implement this method to add class handling for this event.
 
 > OnIsStylusDirectlyOverChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked when an unhandled IsStylusDirectlyOverChanged event is raised on this element. Implement this method to add class handling for this event.
 
 > OnKeyDown(KeyEventArgs)	
+
 Invoked when an unhandled KeyDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnKeyUp(KeyEventArgs)	
+
 Invoked when an unhandled KeyUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnLostFocus(RoutedEventArgs)	
+
 Raises the LostFocus routed event by using the event data that is provided.
 
 > OnLostKeyboardFocus(KeyboardFocusChangedEventArgs)	
+
 Invoked when an unhandled LostKeyboardFocus attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnLostMouseCapture(MouseEventArgs)	
+
 Invoked when an unhandled LostMouseCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnLostStylusCapture(StylusEventArgs)	
+
 Invoked when an unhandled LostStylusCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnLostTouchCapture(TouchEventArgs)	
+
 Provides class handling for the LostTouchCapture routed event that occurs when this element loses a touch capture.
 
 > OnManipulationBoundaryFeedback(ManipulationBoundaryFeedbackEventArgs)	
+
 Called when the ManipulationBoundaryFeedback event occurs.
 
 > OnManipulationCompleted(ManipulationCompletedEventArgs)	
+
 Called when the ManipulationCompleted event occurs.
 
 > OnManipulationDelta(ManipulationDeltaEventArgs)	
+
 Called when the ManipulationDelta event occurs.
 
 > OnManipulationInertiaStarting(ManipulationInertiaStartingEventArgs)	
+
 Called when the ManipulationInertiaStarting event occurs.
 
 > OnManipulationStarted(ManipulationStartedEventArgs)	
+
 Called when the ManipulationStarted event occurs.
 
 > OnManipulationStarting(ManipulationStartingEventArgs)	
+
 Provides class handling for the ManipulationStarting routed event that occurs when the manipulation processor is first created.
 
 > OnMouseDown(MouseButtonEventArgs)	
+
 Invoked when an unhandled MouseDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnMouseEnter(MouseEventArgs)	
+
 Invoked when an unhandled MouseEnter attached event is raised on this element. Implement this method to add class handling for this event.
 
 > OnMouseLeave(MouseEventArgs)	
+
 Invoked when an unhandled MouseLeave attached event is raised on this element. Implement this method to add class handling for this event.
 
 > OnMouseLeftButtonDown(MouseButtonEventArgs)	
+
 Invoked when an unhandled MouseLeftButtonDown routed event is raised on this element. Implement this method to add class handling for this event.
 
 > OnMouseLeftButtonUp(MouseButtonEventArgs)	
+
 Invoked when an unhandled MouseLeftButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnMouseMove(MouseEventArgs)	
+
 Invoked when an unhandled MouseMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnMouseRightButtonDown(MouseButtonEventArgs)	
+
 Invoked when an unhandled MouseRightButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnMouseRightButtonUp(MouseButtonEventArgs)	
+
 Invoked when an unhandled MouseRightButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnMouseUp(MouseButtonEventArgs)	
+
 Invoked when an unhandled MouseUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnMouseWheel(MouseWheelEventArgs)	
+
 Invoked when an unhandled MouseWheel attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewDragEnter(DragEventArgs)	
+
 Invoked when an unhandled PreviewDragEnter attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewDragLeave(DragEventArgs)	
+
 Invoked when an unhandled PreviewDragLeave attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewDragOver(DragEventArgs)	
+
 Invoked when an unhandled PreviewDragOver attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewDrop(DragEventArgs)	
+
 Invoked when an unhandled PreviewDrop attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewGiveFeedback(GiveFeedbackEventArgs)	
+
 Invoked when an unhandled PreviewGiveFeedback attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewGotKeyboardFocus(KeyboardFocusChangedEventArgs)	
+
 Invoked when an unhandled PreviewGotKeyboardFocus attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewKeyDown(KeyEventArgs)	
+
 Invoked when an unhandled PreviewKeyDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewKeyUp(KeyEventArgs)	
+
 Invoked when an unhandled PreviewKeyUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs)	
+
 Invoked when an unhandled PreviewKeyDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewMouseDown(MouseButtonEventArgs)	
+
 Invoked when an unhandled PreviewMouseDown attached routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewMouseLeftButtonDown(MouseButtonEventArgs)	
+
 Invoked when an unhandled PreviewMouseLeftButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewMouseLeftButtonUp(MouseButtonEventArgs)	
+
 Invoked when an unhandled PreviewMouseLeftButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewMouseMove(MouseEventArgs)	
+
 Invoked when an unhandled PreviewMouseMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewMouseRightButtonDown(MouseButtonEventArgs)	
+
 Invoked when an unhandled PreviewMouseRightButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewMouseRightButtonUp(MouseButtonEventArgs)	
+
 Invoked when an unhandled PreviewMouseRightButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewMouseUp(MouseButtonEventArgs)	
+
 Invoked when an unhandled PreviewMouseUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewMouseWheel(MouseWheelEventArgs)	
+
 Invoked when an unhandled PreviewMouseWheel attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewQueryContinueDrag(QueryContinueDragEventArgs)	
+
 Invoked when an unhandled PreviewQueryContinueDrag attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewStylusButtonDown(StylusButtonEventArgs)	
+
 Invoked when an unhandled PreviewStylusButtonDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewStylusButtonUp(StylusButtonEventArgs)	
+
 Invoked when an unhandled PreviewStylusButtonUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewStylusDown(StylusDownEventArgs)	
+
 Invoked when an unhandled PreviewStylusDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewStylusInAirMove(StylusEventArgs)	
+
 Invoked when an unhandled PreviewStylusInAirMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewStylusInRange(StylusEventArgs)	
+
 Invoked when an unhandled PreviewStylusInRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewStylusMove(StylusEventArgs)	
+
 Invoked when an unhandled PreviewStylusMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewStylusOutOfRange(StylusEventArgs)	
+
 Invoked when an unhandled PreviewStylusOutOfRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewStylusSystemGesture(StylusSystemGestureEventArgs)	
+
 Invoked when an unhandled PreviewStylusSystemGesture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewStylusUp(StylusEventArgs)	
+
 Invoked when an unhandled PreviewStylusUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewTextInput(TextCompositionEventArgs)	
+
 Invoked when an unhandled PreviewTextInput attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnPreviewTouchDown(TouchEventArgs)	
+
 Provides class handling for the PreviewTouchDown routed event that occurs when a touch presses this element.
 
 > OnPreviewTouchMove(TouchEventArgs)	
+
 Provides class handling for the PreviewTouchMove routed event that occurs when a touch moves while inside this element.
 
 > OnPreviewTouchUp(TouchEventArgs)	
+
 Provides class handling for the PreviewTouchUp routed event that occurs when a touch is released inside this element.
 
 > OnPropertyChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked whenever the effective value of any dependency property on this DependencyObject has been updated. The specific dependency property that changed is reported in the event data.
 
 > OnQueryContinueDrag(QueryContinueDragEventArgs)		(Inherited from DependencyObject)
+
 Invoked when an unhandled QueryContinueDrag attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnQueryCursor(QueryCursorEventArgs)	
+
 Invoked when an unhandled QueryCursor attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnRender(DrawingContext)	
+
 When overridden in a derived class, participates in rendering operations that are directed by the layout system. The rendering instructions for this element are not used directly when this method is invoked, and are instead preserved for later asynchronous use by layout and drawing.
 
 > OnRenderSizeChanged(SizeChangedInfo)	
+
 When overridden in a derived class, participates in rendering operations that are directed by the layout system. This method is invoked after layout update, and before rendering, if the element's RenderSize has changed as a result of layout update.
 
 > OnStylusButtonDown(StylusButtonEventArgs)	
+
 Invoked when an unhandled StylusButtonDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnStylusButtonUp(StylusButtonEventArgs)	
+
 Invoked when an unhandled StylusButtonUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnStylusDown(StylusDownEventArgs)	
+
 Invoked when an unhandled StylusDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnStylusEnter(StylusEventArgs)	
+
 Invoked when an unhandled StylusEnter attached event is raised by this element. Implement this method to add class handling for this event.
 
 > OnStylusInAirMove(StylusEventArgs)	
+
 Invoked when an unhandled StylusInAirMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnStylusInRange(StylusEventArgs)	
+
 Invoked when an unhandled StylusInRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnStylusLeave(StylusEventArgs)	
+
 Invoked when an unhandled StylusLeave attached event is raised by this element. Implement this method to add class handling for this event.
 
 > OnStylusMove(StylusEventArgs)	
+
 Invoked when an unhandled StylusMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnStylusOutOfRange(StylusEventArgs)	
+
 Invoked when an unhandled StylusOutOfRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnStylusSystemGesture(StylusSystemGestureEventArgs)	
+
 Invoked when an unhandled StylusSystemGesture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnStylusUp(StylusEventArgs)	
+
 Invoked when an unhandled StylusUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnTextInput(TextCompositionEventArgs)	
+
 Invoked when an unhandled TextInput attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
 > OnTouchDown(TouchEventArgs)	
+
 Provides class handling for the TouchDown routed event that occurs when a touch presses inside this element.
 
 > OnTouchEnter(TouchEventArgs)	
+
 Provides class handling for the TouchEnter routed event that occurs when a touch moves from outside to inside the bounds of this element.
 
 > OnTouchLeave(TouchEventArgs)	
+
 Provides class handling for the TouchLeave routed event that occurs when a touch moves from inside to outside the bounds of this UIElement.
 
 > OnTouchMove(TouchEventArgs)	
+
 Provides class handling for the TouchMove routed event that occurs when a touch moves while inside this element.
 
 > OnTouchUp(TouchEventArgs)	
+
 Provides class handling for the TouchUp routed event that occurs when a touch is released inside this element.
 
 > OnVisualChildrenChanged(DependencyObject, DependencyObject)	
+
 Called when the VisualCollection of the visual object is modified.
 
 > OnVisualParentChanged(DependencyObject)	(Inherited from Visual)
+
 Invoked when the parent element of this UIElement reports a change to its underlying visual parent.
 
 > PointFromScreen(Point)	
+
 Converts a Point in screen coordinates into a Point that represents the current coordinate system of the Visual.
 
 > PointToScreen(Point)	(Inherited from Visual)
+
 Converts a Point that represents the current coordinate system of the Visual into a Point in screen coordinates.
 
 > PredictFocus(FocusNavigationDirection)	(Inherited from Visual)
+
 When overridden in a derived class, returns the element that would receive focus for a specified focus traversal direction, without actually moving focus to that element.
 
 > RaiseEvent(RoutedEventArgs)	
+
 Raises a specific routed event. The RoutedEvent to be raised is identified within the RoutedEventArgs instance that is provided (as the RoutedEvent property of that event data).
 
 > ReadLocalValue(DependencyProperty)	
+
 Returns the local value of a dependency property, if it exists.
 
 > ReleaseAllTouchCaptures()		(Inherited from DependencyObject)
+
 Releases all captured touch devices from this element.
 
 > ReleaseMouseCapture()	
+
 Releases the mouse capture, if this element held the capture.
 
 > ReleaseStylusCapture()	
+
 Releases the stylus device capture, if this element held the capture.
 
 > ReleaseTouchCapture(TouchDevice)	
+
 Attempts to release the specified touch device from this element.
 
 > RemoveHandler(RoutedEvent, Delegate)	
+
 Removes the specified routed event handler from this element.
 
 > RemoveVisualChild(Visual)	
+
 Removes the parent-child relationship between two visuals.
 
 > SetCurrentValue(DependencyProperty, Object)	(Inherited from Visual)
+
 Sets the value of a dependency property without changing its value source.
 
 > SetValue(DependencyProperty, Object)		(Inherited from DependencyObject)
+
 Sets the local value of a dependency property, specified by its dependency property identifier.
 
 > SetValue(DependencyPropertyKey, Object)		(Inherited from DependencyObject)
+
 Sets the local value of a read-only dependency property, specified by the DependencyPropertyKey identifier of the dependency property.
 
 > ShouldSerializeCommandBindings()		(Inherited from DependencyObject)
+
 Returns whether serialization processes should serialize the contents of the CommandBindings property on instances of this class.
 
 > ShouldSerializeInputBindings()	
+
 Returns whether serialization processes should serialize the contents of the InputBindings property on instances of this class.
 
 > ShouldSerializeProperty(DependencyProperty)	
+
 Returns a value that indicates whether serialization processes should serialize the value for the provided dependency property.
 
 > ToString()		(Inherited from DependencyObject)
+
 Returns a string that represents the current object.(Inherited from Object)
 
 > TransformToAncestor(Visual)	
+
 Returns a transform that can be used to transform coordinates from the Visual to the specified Visual ancestor of the visual object.
 
 > TransformToAncestor(Visual3D)	(Inherited from Visual)
+
 Returns a transform that can be used to transform coordinates from the Visual to the specified Visual3D ancestor of the visual object.
 
 > TransformToDescendant(Visual)	(Inherited from Visual)
+
 Returns a transform that can be used to transform coordinates from the Visual to the specified visual object descendant.
 
 > TransformToVisual(Visual)	(Inherited from Visual)
+
 Returns a transform that can be used to transform coordinates from the Visual to the specified visual object.
 
 > TranslatePoint(Point, UIElement)	(Inherited from Visual)
+
 Translates a point relative to this element to coordinates that are relative to the specified element.
 
 > UpdateLayout()	
+
 Ensures that all visual child elements of this element are properly updated for layout.
 
 > VerifyAccess()	
+
 Enforces that the calling thread has access to this DispatcherObject.(Inherited from DispatcherObject)
 
 ##### Events
 
 > DragEnter	
+
 Occurs when the input system reports an underlying drag event with this element as the drag target.
 
 > DragLeave	
+
 Occurs when the input system reports an underlying drag event with this element as the drag origin.
 
 > DragOver	
+
 Occurs when the input system reports an underlying drag event with this element as the potential drop target.
 
 > Drop	
+
 Occurs when the input system reports an underlying drop event with this element as the drop target.
 
 > FocusableChanged	
+
 Occurs when the value of the Focusable property changes.
 
 > GiveFeedback	
+
 Occurs when the input system reports an underlying drag-and-drop event that involves this element.
 
 > GotFocus	
+
 Occurs when this element gets logical focus.
 
 > GotKeyboardFocus	
+
 Occurs when the keyboard is focused on this element.
 
 > GotMouseCapture	
+
 Occurs when this element captures the mouse.
 
 > GotStylusCapture	
+
 Occurs when this element captures the stylus.
 
 > GotTouchCapture	
+
 Occurs when a touch is captured to this element.
 
 > IsEnabledChanged	
+
 Occurs when the value of the IsEnabled property on this element changes.
 
 > IsHitTestVisibleChanged	
+
 Occurs when the value of the IsHitTestVisible dependency property changes on this element.
 
 > IsKeyboardFocusedChanged	
+
 Occurs when the value of the IsKeyboardFocused property changes on this element.
 
 > IsKeyboardFocusWithinChanged	
+
 Occurs when the value of the IsKeyboardFocusWithin property changes on this element.
 
 > IsMouseCapturedChanged	
+
 Occurs when the value of the IsMouseCaptured property changes on this element.
 
 > IsMouseCaptureWithinChanged	
+
 Occurs when the value of the IsMouseCaptureWithinProperty changes on this element.
 
 > IsMouseDirectlyOverChanged	
+
 Occurs when the value of the IsMouseDirectlyOver property changes on this element.
 
 > IsStylusCapturedChanged	
+
 Occurs when the value of the IsStylusCaptured property changes on this element.
 
 > IsStylusCaptureWithinChanged	
+
 Occurs when the value of the IsStylusCaptureWithin property changes on this element.
 
 > IsStylusDirectlyOverChanged	
+
 Occurs when the value of the IsStylusDirectlyOver property changes on this element.
 
 > IsVisibleChanged	
+
 Occurs when the value of the IsVisible property changes on this element.
 
 > KeyDown	
+
 Occurs when a key is pressed while focus is on this element.
 
 > KeyUp	
+
 Occurs when a key is released while focus is on this element.
 
 > LayoutUpdated	
+
 Occurs when the layout of the various visual elements associated with the current Dispatcher changes.
 
 > LostFocus	
+
 Occurs when this element loses logical focus.
 
 > LostKeyboardFocus	
+
 Occurs when the keyboard is no longer focused on this element.
 
 > LostMouseCapture	
+
 Occurs when this element loses mouse capture.
 
 > LostStylusCapture	
+
 Occurs when this element loses stylus capture.
 
 > LostTouchCapture	
+
 Occurs when this element loses a touch capture.
 
 > ManipulationBoundaryFeedback	
+
 Occurs when the manipulation encounters a boundary.
 
 > ManipulationCompleted	
+
 Occurs when a manipulation and inertia on the UIElement object is complete.
 
 > ManipulationDelta	
+
 Occurs when the input device changes position during a manipulation.
 
 > ManipulationInertiaStarting	
+
 Occurs when the input device loses contact with the UIElement object during a manipulation and inertia begins.
 
 > ManipulationStarted	
+
 Occurs when an input device begins a manipulation on the UIElement object.
 
 > ManipulationStarting	
+
 Occurs when the manipulation processor is first created.
 
 > MouseDown	
+
 Occurs when any mouse button is pressed while the pointer is over this element.
 
 > MouseEnter	
+
 Occurs when the mouse pointer enters the bounds of this element.
 
 > MouseLeave	
+
 Occurs when the mouse pointer leaves the bounds of this element.
 
 > MouseLeftButtonDown	
+
 Occurs when the left mouse button is pressed while the mouse pointer is over this element.
 
 > MouseLeftButtonUp	
+
 Occurs when the left mouse button is released while the mouse pointer is over this element.
 
 > MouseMove	
+
 Occurs when the mouse pointer moves while over this element.
 
 > MouseRightButtonDown	
+
 Occurs when the right mouse button is pressed while the mouse pointer is over this element.
 
 > MouseRightButtonUp	
+
 Occurs when the right mouse button is released while the mouse pointer is over this element.
 
 > MouseUp	
+
 Occurs when any mouse button is released over this element.
 
 > MouseWheel	
+
 Occurs when the user rotates the mouse wheel while the mouse pointer is over this element.
 
 > PreviewDragEnter	
+
 Occurs when the input system reports an underlying drag event with this element as the drag target.
 
 > PreviewDragLeave	
+
 Occurs when the input system reports an underlying drag event with this element as the drag origin.
 
 > PreviewDragOver	
+
 Occurs when the input system reports an underlying drag event with this element as the potential drop target.
 
 > PreviewDrop	
+
 Occurs when the input system reports an underlying drop event with this element as the drop target.
 
 > PreviewGiveFeedback	
+
 Occurs when a drag-and-drop operation is started.
 
 > PreviewGotKeyboardFocus	
+
 Occurs when the keyboard is focused on this element.
 
 > PreviewKeyDown	
+
 Occurs when a key is pressed while focus is on this element.
 
 > PreviewKeyUp	
+
 Occurs when a key is released while focus is on this element.
 
 > PreviewLostKeyboardFocus	
+
 Occurs when the keyboard is no longer focused on this element.
 
 > PreviewMouseDown	
+
 Occurs when any mouse button is pressed while the pointer is over this element.
 
 > PreviewMouseLeftButtonDown	
+
 Occurs when the left mouse button is pressed while the mouse pointer is over this element.
 
 > PreviewMouseLeftButtonUp	
+
 Occurs when the left mouse button is released while the mouse pointer is over this element.
 
 > PreviewMouseMove	
+
 Occurs when the mouse pointer moves while the mouse pointer is over this element.
 
 > PreviewMouseRightButtonDown	
+
 Occurs when the right mouse button is pressed while the mouse pointer is over this element.
 
 > PreviewMouseRightButtonUp	
+
 Occurs when the right mouse button is released while the mouse pointer is over this element.
 
 > PreviewMouseUp	
+
 Occurs when any mouse button is released while the mouse pointer is over this element.
 
 > PreviewMouseWheel	
+
 Occurs when the user rotates the mouse wheel while the mouse pointer is over this element.
 
 > PreviewQueryContinueDrag	
+
 Occurs when there is a change in the keyboard or mouse button state during a drag-and-drop operation.
 
 > PreviewStylusButtonDown	
+
 Occurs when the stylus button is pressed while the pointer is over this element.
 
 > PreviewStylusButtonUp	
+
 Occurs when the stylus button is released while the pointer is over this element.
 
 > PreviewStylusDown	
+
 Occurs when the stylus touches the digitizer while it is over this element.
 
 > PreviewStylusInAirMove	
+
 Occurs when the stylus moves over an element without actually touching the digitizer.
 
 > PreviewStylusInRange	
+
 Occurs when the stylus is close enough to the digitizer to be detected, while over this element.
 
 > PreviewStylusMove	
+
 Occurs when the stylus moves while over the element. The stylus must move while being detected by the digitizer to raise this event, otherwise, PreviewStylusInAirMove is raised instead.
 
 > PreviewStylusOutOfRange	
+
 Occurs when the stylus is too far from the digitizer to be detected.
 
 > PreviewStylusSystemGesture	
+
 Occurs when a user performs one of several stylus gestures.
 
 > PreviewStylusUp	
+
 Occurs when the user raises the stylus off the digitizer while the stylus is over this element.
 
 > PreviewTextInput	
+
 Occurs when this element gets text in a device-independent manner.
 
 > PreviewTouchDown	
+
 Occurs when a finger touches the screen while the finger is over this element.
 
 > PreviewTouchMove	
+
 Occurs when a finger moves on the screen while the finger is over this element.
 
 > PreviewTouchUp	
+
 Occurs when a finger is raised off of the screen while the finger is over this element.
 
 > QueryContinueDrag	
+
 Occurs when there is a change in the keyboard or mouse button state during a drag-and-drop operation.
 
 > QueryCursor	
+
 Occurs when the cursor is requested to display. This event is raised on an element each time that the mouse pointer moves to a new location, which means the cursor object might need to be changed based on its new position.
 
 > StylusButtonDown	
+
 Occurs when the stylus button is pressed while the pointer is over this element.
 
 > StylusButtonUp	
+
 Occurs when the stylus button is released while the pointer is over this element.
 
 > StylusDown	
+
 Occurs when the stylus touches the digitizer while the stylus is over this element.
 
 > StylusEnter	
+
 Occurs when the stylus enters the bounds of this element.
 
 > StylusInAirMove	
+
 Occurs when the stylus moves over an element without actually touching the digitizer.
 
 > StylusInRange	
+
 Occurs when the stylus is close enough to the digitizer to be detected, while over this element.
 
 > StylusLeave	
+
 Occurs when the stylus leaves the bounds of the element.
 
 > StylusMove	
+
 Occurs when the stylus moves over this element. The stylus must move while on the digitizer to raise this event. Otherwise, StylusInAirMove is raised instead.
 
 > StylusOutOfRange	
+
 Occurs when the stylus is too far from the digitizer to be detected, while over this element.
 
 > StylusSystemGesture	
+
 Occurs when a user performs one of several stylus gestures.
 
 > StylusUp	
+
 Occurs when the user raises the stylus off the digitizer while it is over this element.
 
 > TextInput	
+
 Occurs when this element gets text in a device-independent manner.
 
 > TouchDown	
+
 Occurs when a finger touches the screen while the finger is over this element.
 
 > TouchEnter	
+
 Occurs when a touch moves from outside to inside the bounds of this element.
 
 > TouchLeave	
+
 Occurs when a touch moves from inside to outside the bounds of this element.
 
 > TouchMove	
+
 Occurs when a finger moves on the screen while the finger is over this element.
 
 > TouchUp	
+
 Occurs when a finger is raised off of the screen while the finger is over this element.
 
 ##### 属性:
 
 > AllowDrop	
+
 Gets or sets a value indicating whether this element can be used as the target of a drag-and-drop operation. This is a dependency property.
 
 > AreAnyTouchesCaptured	
+
 Gets a value that indicates whether at least one touch is captured to this element.
 
 > AreAnyTouchesCapturedWithin	
+
 Gets a value that indicates whether at least one touch is captured to this element or to any child elements in its visual tree.
 
 > AreAnyTouchesDirectlyOver	
+
 Gets a value that indicates whether at least one touch is pressed over this element.
 
 > AreAnyTouchesOver	
+
 Gets a value that indicates whether at least one touch is pressed over this element or any child elements in its visual tree.
 
 > BitmapEffect	
+
 Obsolete.
+
 Gets or sets a bitmap effect that applies directly to the rendered content for this element. This is a dependency property.
 
 > BitmapEffectInput	
+
 Obsolete.
+
 Gets or sets an input source for the bitmap effect that applies directly to the rendered content for this element. This is a dependency property.
 
 > CacheMode	
+
 Gets or sets a cached representation of the UIElement.
 
 > Clip	
+
 Gets or sets the geometry used to define the outline of the contents of an element. This is a dependency property.
 
 > ClipToBounds	
+
 Gets or sets a value indicating whether to clip the content of this element (or content coming from the child elements of this element) to fit into the size of the containing element. This is a dependency property.
 
 > CommandBindings	
+
 Gets a collection of CommandBinding objects associated with this element. A CommandBinding enables command handling for this element, and declares the linkage between a command, its events, and the handlers attached by this element.
 
 > DependencyObjectType	
+
 Gets the DependencyObjectType that wraps the CLR type of this instance.
 
 > DesiredSize		(Inherited from DependencyObject)
+
 Gets the size that this element computed during the measure pass of the layout process.
 
 > Dispatcher	
+
 Gets the Dispatcher this DispatcherObject is associated with.(Inherited from DispatcherObject)
 
 > Effect	
+
 Gets or sets the bitmap effect to apply to the UIElement. This is a dependency property.
 
 > Focusable	
+
 Gets or sets a value that indicates whether the element can receive focus. This is a dependency property.
 
 > HasAnimatedProperties	
+
 Gets a value indicating whether this element has any animated properties.
 
 > HasEffectiveKeyboardFocus	
+
 Gets a value that indicates whether the UIElement has focus.
 
 > InputBindings	
+
 Gets the collection of input bindings associated with this element.
 
 > IsArrangeValid	
+
 Gets a value indicating whether the computed size and position of child elements in this element's layout are valid.
 
 > IsEnabled	
+
 Gets or sets a value indicating whether this element is enabled in the user interface (UI). This is a dependency property.
 
 > IsEnabledCore	
+
 Gets a value that becomes the return value of IsEnabled in derived classes.
 
 > IsFocused	
+
 Gets a value that determines whether this element has logical focus. This is a dependency property.
 
 > IsHitTestVisible	
+
 Gets or sets a value that declares whether this element can possibly be returned as a hit test result from some portion of its rendered content. This is a dependency property.
 
 > IsInputMethodEnabled	
+
 Gets a value indicating whether an input method system, such as an Input Method Editor (IME), is enabled for processing the input to this element.
 
 > IsKeyboardFocused	
+
 Gets a value indicating whether this element has keyboard focus. This is a dependency property.
 
 > IsKeyboardFocusWithin	
+
 Gets a value indicating whether keyboard focus is anywhere within the element or its visual tree child elements. This is a dependency property.
 
 > IsManipulationEnabled	
+
 Gets or sets a value that indicates whether manipulation events are enabled on this UIElement.
 
 > IsMeasureValid	
+
 Gets a value indicating whether the current size returned by layout measure is valid.
 
 > IsMouseCaptured	
+
 Gets a value indicating whether the mouse is captured to this element. This is a dependency property.
 
 > IsMouseCaptureWithin	
+
 Gets a value that determines whether mouse capture is held by this element or by child elements in its visual tree. This is a dependency property.
 
 > IsMouseDirectlyOver	
+
 Gets a value that indicates whether the position of the mouse pointer corresponds to hit test results, which take element compositing into account. This is a dependency property.
 
 > IsMouseOver	
+
 Gets a value indicating whether the mouse pointer is located over this element (including child elements in the visual tree). This is a dependency property.
 
 > IsSealed	
+
 Gets a value that indicates whether this instance is currently sealed (read-only).
 
 > IsStylusCaptured		(Inherited from DependencyObject)
+
 Gets a value indicating whether the stylus is captured by this element. This is a dependency property.
 
 > IsStylusCaptureWithin	
+
 Gets a value that determines whether stylus capture is held by this element, or an element within the element bounds and its visual tree. This is a dependency property.
 
 > IsStylusDirectlyOver	
+
 Gets a value that indicates whether the stylus position corresponds to hit test results, which take element compositing into account. This is a dependency property.
 
 > IsStylusOver	
+
 Gets a value indicating whether the stylus cursor is located over this element (including visual child elements). This is a dependency property.
 
 > IsVisible	
+
 Gets a value indicating whether this element is visible in the user interface (UI). This is a dependency property.
 
 > Opacity	
+
 Gets or sets the opacity factor applied to the entire UIElement when it is rendered in the user interface (UI). This is a dependency property.
 
 > OpacityMask	
+
 Gets or sets an opacity mask, as a Brush implementation that is applied to any alpha-channel masking for the rendered content of this element. This is a dependency property.
 
 > PersistId	
+
 Obsolete.
+
 Gets a value that uniquely identifies this element.
 
 > RenderSize	
+
 Gets (or sets) the final render size of this element.
 
 > RenderTransform	
+
 Gets or sets transform information that affects the rendering position of this element. This is a dependency property.
 
 > RenderTransformOrigin	
+
 Gets or sets the center point of any possible render transform declared by RenderTransform, relative to the bounds of the element. This is a dependency property.
 
 > SnapsToDevicePixels	
+
 Gets or sets a value that determines whether rendering for this element should use device-specific pixel settings during rendering. This is a dependency property.
 
 > StylusPlugIns	
+
 Gets a collection of all stylus plug-in (customization) objects associated with this element.
 
 > TouchesCaptured	
+
 Gets all touch devices that are captured to this element.
 
 > TouchesCapturedWithin	
+
 Gets all touch devices that are captured to this element or any child elements in its visual tree.
 
 > TouchesDirectlyOver	
+
 Gets all touch devices that are over this element.
 
 > TouchesOver	
+
 Gets all touch devices that are over this element or any child elements in its visual tree.
 
 > Uid	
+
 Gets or sets the unique identifier (for localization) for this element. This is a dependency property.
 
 > Visibility	
+
 Gets or sets the user interface (UI) visibility of this element. This is a dependency property.
 
 > VisualBitmapEffect	
+
 Obsolete.
+
 Gets or sets the BitmapEffect value for the Visual.
 
 > VisualBitmapEffectInput	(Inherited from Visual)
+
 Obsolete.
+
 Gets or sets the BitmapEffectInput value for the Visual.
 
 > VisualBitmapScalingMode	(Inherited from Visual)
+
 Gets or sets the BitmapScalingMode for the Visual.
 
 > VisualCacheMode	(Inherited from Visual)
+
 Gets or sets a cached representation of the Visual.
 
 > VisualChildrenCount	(Inherited from Visual)
+
 Gets the number of child elements for the Visual.
 
 > VisualClearTypeHint	(Inherited from Visual)
+
 Gets or sets the ClearTypeHint that determines how ClearType is rendered in the Visual.
 
 > VisualClip	(Inherited from Visual)
+
 Gets or sets the clip region of the Visual as a Geometry value.
 
 > VisualEdgeMode	(Inherited from Visual)
+
 Gets or sets the edge mode of the Visual as an EdgeMode value.
 
 > VisualEffect	(Inherited from Visual)
+
 Gets or sets the bitmap effect to apply to the Visual.
 
 > VisualOffset	(Inherited from Visual)
+
 Gets or sets the offset value of the visual object.
 
 > VisualOpacity	(Inherited from Visual)
+
 Gets or sets the opacity of the Visual.
 
 > VisualOpacityMask	(Inherited from Visual)
+
 Gets or sets the Brush value that represents the opacity mask of the Visual.
 
 > VisualParent	(Inherited from Visual)
+
 Gets the visual tree parent of the visual object.
 
 > VisualScrollableAreaClip	(Inherited from Visual)
+
 Gets or sets a clipped scrollable area for the Visual.
 
 > VisualTextHintingMode	(Inherited from Visual)
+
 Gets or sets the TextHintingMode of the Visual.
 
 > VisualTextRenderingMode	(Inherited from Visual)
+
 Gets or sets the TextRenderingMode of the Visual.
 
 > VisualTransform	(Inherited from Visual)
+
 Gets or sets the Transform value for the Visual.
 
 > VisualXSnappingGuidelines	(Inherited from Visual)
+
 Gets or sets the x-coordinate (vertical) guideline collection.
 
 > VisualYSnappingGuidelines	(Inherited from Visual)
+
 Gets or sets the y-coordinate (horizontal) guideline collection.
 
 ##### FiFileds:FIELDS:
 
 > AllowDropProperty	
+
 Identifies the AllowDrop dependency property.
 
 > AreAnyTouchesCapturedProperty	
+
 Identifies the AreAnyTouchesCaptured dependency property.
 
 > AreAnyTouchesCapturedWithinProperty	
+
 Identifies the AreAnyTouchesCapturedWithin dependency property.
 
 > AreAnyTouchesDirectlyOverProperty	
+
 Identifies the AreAnyTouchesDirectlyOver dependency property.
 
 > AreAnyTouchesOverProperty	
+
 Identifies the AreAnyTouchesOver dependency property.
 
 > BitmapEffectInputProperty	
+
 Identifies the BitmapEffectInput dependency property.
 
 > BitmapEffectProperty	
+
 Identifies the BitmapEffect dependency property.
 
 > CacheModeProperty	
+
 Identifies the CacheMode dependency property.
 
 > ClipProperty	
+
 Identifies the Clip dependency property.
 
 > ClipToBoundsProperty	
+
 Identifies the ClipToBounds dependency property.
 
 > DragEnterEvent	
+
 Identifies the DragEnter routed event.
 
 > DragLeaveEvent	
+
 Identifies the DragLeave routed event.
 
 > DragOverEvent	
+
 Identifies the DragOver routed event.
 
 > DropEvent	
+
 Identifies the Drop routed event.
 
 > EffectProperty	
+
 Identifies the Effect dependency property.
 
 > FocusableProperty	
+
 Identifies the Focusable dependency property.
 
 > GiveFeedbackEvent	
+
 Identifies the GiveFeedback routed event.
 
 > GotFocusEvent	
+
 Identifies the GotFocus routed event.
 
 > GotKeyboardFocusEvent	
+
 Identifies the GotKeyboardFocus routed event.
 
 > GotMouseCaptureEvent	
+
 Identifies the GotMouseCapture routed event.
 
 > GotStylusCaptureEvent	
+
 Identifies the GotStylusCapture routed event.
 
 > GotTouchCaptureEvent	
+
 Identifies the GotTouchCapture routed event.
 
 > IsEnabledProperty	
+
 Identifies the IsEnabled dependency property.
 
 > IsFocusedProperty	
+
 Identifies the IsFocused dependency property.
 
 > IsHitTestVisibleProperty	
+
 Identifies the IsHitTestVisible dependency property.
 
 > IsKeyboardFocusedProperty	
+
 Identifies the IsKeyboardFocused dependency property.
 
 > IsKeyboardFocusWithinProperty	
+
 Identifies the IsKeyboardFocusWithin dependency property.
 
 > IsManipulationEnabledProperty	
+
 Identifies the IsManipulationEnabled dependency property.
 
 > IsMouseCapturedProperty	
+
 Identifies the IsMouseCaptured dependency property.
 
 > IsMouseCaptureWithinProperty	
+
 Identifies the IsMouseCaptureWithin dependency property.
 
 > IsMouseDirectlyOverProperty	
+
 Identifies the IsMouseDirectlyOver dependency property.
 
 > IsMouseOverProperty	
+
 Identifies the IsMouseOver dependency property.
 
 > IsStylusCapturedProperty	
+
 Identifies the IsStylusCaptured dependency property.
 
 > IsStylusCaptureWithinProperty	
+
 Identifies the IsStylusCaptureWithin dependency property.
 
 > IsStylusDirectlyOverProperty	
+
 Identifies the IsStylusDirectlyOver dependency property.
 
 > IsStylusOverProperty	
+
 Identifies the IsStylusOver dependency property.
 
 > IsVisibleProperty	
+
 Identifies the IsVisible dependency property.
 
 > KeyDownEvent	
+
 Identifies the KeyDown routed event.
 
 > KeyUpEvent	
+
 Identifies the KeyUp routed event.
 
 > LostFocusEvent	
+
 Identifies the LostFocus routed event.
 
 > LostKeyboardFocusEvent	
+
 Identifies the LostKeyboardFocus routed event.
 
 > LostMouseCaptureEvent	
+
 Identifies the LostMouseCapture routed event.
 
 > LostStylusCaptureEvent	
+
 Identifies the LostStylusCapture routed event.
 
 > LostTouchCaptureEvent	
+
 Identifies the LostTouchCapture routed event.
 
 > ManipulationBoundaryFeedbackEvent	
+
 Identifies the ManipulationBoundaryFeedback event.
 
 > ManipulationCompletedEvent	
+
 Identifies the ManipulationCompleted routed event.
 
 > ManipulationDeltaEvent	
+
 Identifies the ManipulationDelta routed event.
 
 > ManipulationInertiaStartingEvent	
+
 Identifies the ManipulationInertiaStarting routed event.
 
 > ManipulationStartedEvent	
+
 Identifies the ManipulationStarted routed event.
 
 > ManipulationStartingEvent	
+
 Identifies the ManipulationStarting routed event.
 
 > MouseDownEvent	
+
 Identifies the MouseDown routed event.
 
 > MouseEnterEvent	
+
 Identifies the MouseEnter routed event.
 
 > MouseLeaveEvent	
+
 Identifies the MouseLeave routed event.
 
 > MouseLeftButtonDownEvent	
+
 Identifies the MouseLeftButtonDown routed event.
 
 > MouseLeftButtonUpEvent	
+
 Identifies the MouseLeftButtonUp routed event.
 
 > MouseMoveEvent	
+
 Identifies the MouseMove routed event.
 
 > MouseRightButtonDownEvent	
+
 Identifies the MouseRightButtonDown routed event.
 
 > MouseRightButtonUpEvent	
+
 Identifies the MouseRightButtonUp routed event.
 
 > MouseUpEvent	
+
 Identifies the MouseUp routed event.
 
 > MouseWheelEvent	
+
 Identifies the MouseWheel routed event.
 
 > OpacityMaskProperty	
+
 Identifies the OpacityMask dependency property.
 
 > OpacityProperty	
+
 Identifies the Opacity dependency property.
 
 > PreviewDragEnterEvent	
+
 Identifies the PreviewDragEnter routed event.
 
 > PreviewDragLeaveEvent	
+
 Identifies the PreviewDragLeave routed event.
 
 > PreviewDragOverEvent	
+
 Identifies the PreviewDragOver routed event.
 
 > PreviewDropEvent	
+
 Identifies the PreviewDrop routed event.
 
 > PreviewGiveFeedbackEvent	
+
 Identifies the PreviewGiveFeedback routed event.
 
 > PreviewGotKeyboardFocusEvent	
+
 Identifies the PreviewGotKeyboardFocus routed event.
 
 > PreviewKeyDownEvent	
+
 Identifies the PreviewKeyDown routed event.
 
 > PreviewKeyUpEvent	
+
 Identifies the PreviewKeyUp routed event.
 
 > PreviewLostKeyboardFocusEvent	
+
 Identifies the PreviewLostKeyboardFocus routed event.
 
 > PreviewMouseDownEvent	
+
 Identifies the PreviewMouseDown routed event.
 
 > PreviewMouseLeftButtonDownEvent	
+
 Identifies the PreviewMouseLeftButtonDown routed event.
 
 > PreviewMouseLeftButtonUpEvent	
+
 Identifies the PreviewMouseLeftButtonUp routed event.
 
 > PreviewMouseMoveEvent	
+
 Identifies the PreviewMouseMove routed event.
 
 > PreviewMouseRightButtonDownEvent	
+
 Identifies the PreviewMouseRightButtonDown routed event.
 
 > PreviewMouseRightButtonUpEvent	
+
 Identifies the PreviewMouseRightButtonUp routed event.
 
 > PreviewMouseUpEvent	
+
 Identifies the PreviewMouseUp routed event.
 
 > PreviewMouseWheelEvent	
+
 Identifies the PreviewMouseWheel routed event.
 
 > PreviewQueryContinueDragEvent	
+
 Identifies the PreviewQueryContinueDrag routed event.
 
 > PreviewStylusButtonDownEvent	
+
 Identifies the PreviewStylusButtonDown routed event.
 
 > PreviewStylusButtonUpEvent	
+
 Identifies the PreviewStylusButtonUp routed event.
 
 > PreviewStylusDownEvent	
+
 Identifies the PreviewStylusDown routed event.
 
 > PreviewStylusInAirMoveEvent	
+
 Identifies the PreviewStylusInAirMove routed event.
 
 > PreviewStylusInRangeEvent	
+
 Identifies the PreviewStylusInRange routed event.
 
 > PreviewStylusMoveEvent	
+
 Identifies the PreviewStylusMove routed event.
 
 > PreviewStylusOutOfRangeEvent	
+
 Identifies the PreviewStylusOutOfRange routed event.
 
 > PreviewStylusSystemGestureEvent	
+
 Identifies the PreviewStylusSystemGesture routed event.
 
 > PreviewStylusUpEvent	
+
 Identifies the PreviewStylusUp routed event.
 
 > PreviewTextInputEvent	
+
 Identifies the PreviewTextInput routed event.
 
 > PreviewTouchDownEvent	
+
 Identifies the PreviewTouchDown routed event.
 
 > PreviewTouchMoveEvent	
+
 Identifies the PreviewTouchMove routed event.
 
 > PreviewTouchUpEvent	
+
 Identifies the PreviewTouchUp routed event.
 
 > QueryContinueDragEvent	
+
 Identifies the QueryContinueDrag routed event.
 
 > QueryCursorEvent	
+
 Identifies the QueryCursor routed event.
 
 > RenderTransformOriginProperty	
+
 Identifies the RenderTransformOrigin dependency property.
 
 > RenderTransformProperty	
+
 Identifies the RenderTransform dependency property.
 
 > SnapsToDevicePixelsProperty	
+
 Identifies the SnapsToDevicePixels dependency property.
 
 > StylusButtonDownEvent	
+
 Identifies the StylusButtonDown routed event.
 
 > StylusButtonUpEvent	
+
 Identifies the StylusButtonUp routed event.
 
 > StylusDownEvent	
+
 Identifies the StylusDown routed event.
 
 > StylusEnterEvent	
+
 Identifies the StylusEnter routed event.
 
 > StylusInAirMoveEvent	
+
 Identifies the StylusInAirMove routed event.
 
 > StylusInRangeEvent	
+
 Identifies the StylusInRange routed event.
 
 > StylusLeaveEvent	
+
 Identifies the StylusLeave routed event.
 
 > StylusMoveEvent	
+
 Identifies the StylusMove routed event.
 
 > StylusOutOfRangeEvent	
+
 Identifies the StylusOutOfRange routed event.
 
 > StylusSystemGestureEvent	
+
 Identifies the StylusSystemGesture routed event.
 
 > StylusUpEvent	
+
 Identifies the StylusUp routed event.
 
 > TextInputEvent	
+
 Identifies the TextInput routed event.
 
 > TouchDownEvent	
+
 Identifies the TouchDown routed event.
 
 > TouchEnterEvent	
+
 Identifies the TouchEnter routed event.
 
 > TouchLeaveEvent	
+
 Identifies the TouchLeave routed event.
 
 > TouchMoveEvent	
+
 Identifies the TouchMove routed event.
 
 > TouchUpEvent	
+
 Identifies the TouchUp routed event.
 
 > UidProperty	
+
 Identifies the Uid dependency property.
 
 > VisibilityProperty	
+
 Identifies the Visibility dependency property. EXPLICIT INTERFACE IMPLEMENTATIONS
 
 > IQueryAmbient.IsAmbientPropertyAvailable(String)	
+
 For a description of this member, see the IsAmbientPropertyAvailable(String) method.
 
 #### Visual
@@ -6135,181 +7328,241 @@ For a description of this member, see the IsAmbientPropertyAvailable(String) met
 ##### 方法:METHODS
 
 > AddVisualChild(Visual)	
+
 Defines the parent-child relationship between two visuals.
 
 > CheckAccess()	
+
 Determines whether the calling thread has access to this DispatcherObject.(Inherited from DispatcherObject)
 
 > ClearValue(DependencyProperty)	
+
 Clears the local value of a property. The property to be cleared is specified by a DependencyProperty identifier.
 
 > ClearValue(DependencyPropertyKey)		(Inherited from DependencyObject)
+
 Clears the local value of a read-only property. The property to be cleared is specified by a DependencyPropertyKey.
 
 > CoerceValue(DependencyProperty)		(Inherited from DependencyObject)
+
 Coerces the value of the specified dependency property. This is accomplished by invoking any CoerceValueCallback function specified in property metadata for the dependency property as it exists on the calling DependencyObject.
 
 > Equals(Object)		(Inherited from DependencyObject)
+
 Determines whether a provided DependencyObject is equivalent to the current DependencyObject.
 
 > FindCommonVisualAncestor(DependencyObject)		(Inherited from DependencyObject)
+
 Returns the common ancestor of two visual objects.
 
 > GetHashCode()	
+
 Gets a hash code for this DependencyObject.
 
 > GetLocalValueEnumerator()		(Inherited from DependencyObject)
+
 Creates a specialized enumerator for determining which dependency properties have locally set values on this DependencyObject.
 
 > GetType()		(Inherited from DependencyObject)
+
 Gets the Type of the current instance.(Inherited from Object)
 
 > GetValue(DependencyProperty)	
+
 Returns the current effective value of a dependency property on this instance of a DependencyObject.
 
 > GetVisualChild(Int32)		(Inherited from DependencyObject)
+
 Returns the specified Visual in the parent VisualCollection.
 
 > HitTestCore(GeometryHitTestParameters)	
+
 Determines whether a geometry value is within the bounds of the visual object.
 
 > HitTestCore(PointHitTestParameters)	
+
 Determines whether a point coordinate value is within the bounds of the visual object.
 
 > InvalidateProperty(DependencyProperty)	
+
 Re-evaluates the effective value for the specified dependency property.
 
 > IsAncestorOf(DependencyObject)		(Inherited from DependencyObject)
+
 Determines whether the visual object is an ancestor of the descendant visual object.
 
 > IsDescendantOf(DependencyObject)	
+
 Determines whether the visual object is a descendant of the ancestor visual object.
 
 > MemberwiseClone()	
+
 Creates a shallow copy of the current Object.(Inherited from Object)
 
 > OnDpiChanged(DpiScale, DpiScale)	
+
 Called when the DPI at which this View is rendered changes.
 
 > OnPropertyChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked whenever the effective value of any dependency property on this DependencyObject has been updated. The specific dependency property that changed is reported in the event data.
 
 > OnVisualChildrenChanged(DependencyObject, DependencyObject)		(Inherited from DependencyObject)
+
 Called when the VisualCollection of the visual object is modified.
 
 > OnVisualParentChanged(DependencyObject)	
+
 Called when the parent of the visual object is changed.
 
 > PointFromScreen(Point)	
+
 Converts a Point in screen coordinates into a Point that represents the current coordinate system of the Visual.
 
 PointToScreen(Point)	
+
 Converts a Point that represents the current coordinate system of the Visual into a Point in screen coordinates.
 
 > ReadLocalValue(DependencyProperty)	
+
 Returns the local value of a dependency property, if it exists.
 
 > RemoveVisualChild(Visual)		(Inherited from DependencyObject)
+
 Removes the parent-child relationship between two visuals.
 
 > SetCurrentValue(DependencyProperty, Object)	
+
 Sets the value of a dependency property without changing its value source.
 
 > SetValue(DependencyProperty, Object)		(Inherited from DependencyObject)
+
 Sets the local value of a dependency property, specified by its dependency property identifier.
 
 > SetValue(DependencyPropertyKey, Object)		(Inherited from DependencyObject)
+
 Sets the local value of a read-only dependency property, specified by the DependencyPropertyKey identifier of the dependency property.
 
 > ShouldSerializeProperty(DependencyProperty)		(Inherited from DependencyObject)
+
 Returns a value that indicates whether serialization processes should serialize the value for the provided dependency property.
 
 > ToString()		(Inherited from DependencyObject)
+
 Returns a string that represents the current object.(Inherited from Object)
 
 > TransformToAncestor(Visual)	
+
 Returns a transform that can be used to transform coordinates from the Visual to the specified Visual ancestor of the visual object.
 
 > TransformToAncestor(Visual3D)	
+
 Returns a transform that can be used to transform coordinates from the Visual to the specified Visual3D ancestor of the visual object.
 
 > TransformToDescendant(Visual)	
+
 Returns a transform that can be used to transform coordinates from the Visual to the specified visual object descendant.
 
 > TransformToVisual(Visual)	
+
 Returns a transform that can be used to transform coordinates from the Visual to the specified visual object.
 
 > VerifyAccess()	
+
 Enforces that the calling thread has access to this DispatcherObject.(Inherited from DispatcherObject)
 
 ##### 属性:
 
 > DependencyObjectType	
+
 Gets the DependencyObjectType that wraps the CLR type of this instance.
 
 > Dispatcher		(Inherited from DependencyObject)
+
 Gets the Dispatcher this DispatcherObject is associated with.(Inherited from DispatcherObject)
 
 > IsSealed	
+
 Gets a value that indicates whether this instance is currently sealed (read-only).
 
 > VisualBitmapEffect		(Inherited from DependencyObject)
+
 Obsolete.
+
 Gets or sets the BitmapEffect value for the Visual.
 
 > VisualBitmapEffectInput	
+
 Obsolete.
+
 Gets or sets the BitmapEffectInput value for the Visual.
 
 > VisualBitmapScalingMode	
+
 Gets or sets the BitmapScalingMode for the Visual.
 
 > VisualCacheMode	
+
 Gets or sets a cached representation of the Visual.
 
 > VisualChildrenCount	
+
 Gets the number of child elements for the Visual.
 
 > VisualClearTypeHint	
+
 Gets or sets the ClearTypeHint that determines how ClearType is rendered in the Visual.
 
 > VisualClip	
+
 Gets or sets the clip region of the Visual as a Geometry value.
 
 > VisualEdgeMode	
+
 Gets or sets the edge mode of the Visual as an EdgeMode value.
 
 > VisualEffect	
+
 Gets or sets the bitmap effect to apply to the Visual.
 
 > VisualOffset	
+
 Gets or sets the offset value of the visual object.
 
 > VisualOpacity	
+
 Gets or sets the opacity of the Visual.
 
 > VisualOpacityMask	
+
 Gets or sets the Brush value that represents the opacity mask of the Visual.
 
 > VisualParent	
+
 Gets the visual tree parent of the visual object.
 
 > VisualScrollableAreaClip	
+
 Gets or sets a clipped scrollable area for the Visual.
 
 > VisualTextHintingMode	
+
 Gets or sets the TextHintingMode of the Visual.
 
 > VisualTextRenderingMode	
+
 Gets or sets the TextRenderingMode of the Visual.
 
 > VisualTransform	
+
 Gets or sets the Transform value for the Visual.
 
 > VisualXSnappingGuidelines	
+
 Gets or sets the x-coordinate (vertical) guideline collection.
 
 > VisualYSnappingGuidelines	
+
 Gets or sets the y-coordinate (horizontal) guideline collection.
 
 > [System.Windows.Markup.UidProperty("Uid")]
@@ -6317,489 +7570,651 @@ Gets or sets the y-coordinate (horizontal) guideline collection.
 ##### 方法: METHODS
 
 > AddHandler(RoutedEvent, Delegate)	
+
 Adds a routed event handler for a specified routed event, adding the handler to the handler collection on the current element.(Inherited from UIElement)
 
 > AddHandler(RoutedEvent, Delegate, Boolean)	
+
 Adds a routed event handler for a specified routed event, adding the handler to the handler collection on the current element. Specify handledEventsToo as true to have the provided handler be invoked for routed event that had already been marked as handled by another element along the event route.(Inherited from UIElement)
 
 > AddLogicalChild(Object)	
+
 Adds the provided object to the logical tree of this element.
 
 AddToEventRoute(EventRoute, RoutedEventArgs)	
+
 Adds handlers to the specified EventRoute for the current UIElement event handler collection.(Inherited from UIElement)
 
 > AddVisualChild(Visual)	
+
 Defines the parent-child relationship between two visuals.
 
 > ApplyAnimationClock(DependencyProperty, AnimationClock)	(Inherited from Visual)
+
 Applies an animation to a specified dependency property on this element. Any existing animations are stopped and replaced with the new animation.(Inherited from UIElement)
 
 > ApplyAnimationClock(DependencyProperty, AnimationClock, HandoffBehavior)	
+
 Applies an animation to a specified dependency property on this element, with the ability to specify what happens if the property already has a running animation.(Inherited from UIElement)
 
 > ApplyTemplate()	
+
 Builds the current template's visual tree if necessary, and returns a value that indicates whether the visual tree was rebuilt by this call.
 
 Arrange(Rect)	
+
 Positions child elements and determines a size for a UIElement. Parent elements call this method from their ArrangeCore(Rect) implementation (or a WPF framework-level equivalent) to form a recursive layout update. This method constitutes the second pass of a layout update.(Inherited from UIElement)
 
 > ArrangeCore(Rect)	
+
 Implements ArrangeCore(Rect) (defined as virtual in UIElement) and seals the implementation.
 
 ArrangeOverride(Size)	
+
 When overridden in a derived class, positions child elements and determines a size for a FrameworkElement derived class.
 
 BeginAnimation(DependencyProperty, AnimationTimeline)	
+
 Starts an animation for a specified animated property on this element.(Inherited from UIElement)
 
 > BeginAnimation(DependencyProperty, AnimationTimeline, HandoffBehavior)	
+
 Starts a specific animation for a specified animated property on this element, with the option of specifying what happens if the property already has a running animation.(Inherited from UIElement)
 
 > BeginInit()	
+
 Starts the initialization process for this element.
 
 BeginStoryboard(Storyboard)	
+
 Begins the sequence of actions that are contained in the provided storyboard.
 
 BeginStoryboard(Storyboard, HandoffBehavior)	
+
 Begins the sequence of actions contained in the provided storyboard, with options specified for what should happen if the property is already animated.
 
 BeginStoryboard(Storyboard, HandoffBehavior, Boolean)	
+
 Begins the sequence of actions contained in the provided storyboard, with specified state for control of the animation after it is started.
 
 BringIntoView()	
+
 Attempts to bring this element into view, within any scrollable regions it is contained within.
 
 BringIntoView(Rect)	
+
 Attempts to bring the provided region size of this element into view, within any scrollable regions it is contained within.
 
 CaptureMouse()	
+
 Attempts to force capture of the mouse to this element.(Inherited from UIElement)
 
 > CaptureStylus()	
+
 Attempts to force capture of the stylus to this element.(Inherited from UIElement)
 
 > CaptureTouch(TouchDevice)	
+
 Attempts to force capture of a touch to this element.(Inherited from UIElement)
 
 > CheckAccess()	
+
 Determines whether the calling thread has access to this DispatcherObject.(Inherited from DispatcherObject)
 
 > ClearValue(DependencyProperty)	
+
 Clears the local value of a property. The property to be cleared is specified by a DependencyProperty identifier.
 
 > ClearValue(DependencyPropertyKey)		(Inherited from DependencyObject)
+
 Clears the local value of a read-only property. The property to be cleared is specified by a DependencyPropertyKey.
 
 > CoerceValue(DependencyProperty)		(Inherited from DependencyObject)
+
 Coerces the value of the specified dependency property. This is accomplished by invoking any CoerceValueCallback function specified in property metadata for the dependency property as it exists on the calling DependencyObject.
 
 > EndInit()	(Inherited from DependencyObject)
+
 Indicates that the initialization process for the element is complete.
 
 Equals(Object)	
+
 Determines whether a provided DependencyObject is equivalent to the current DependencyObject.
 
 > FindCommonVisualAncestor(DependencyObject)		(Inherited from DependencyObject)
+
 Returns the common ancestor of two visual objects.
 
 > FindName(String)	(Inherited from Visual)
+
 Finds an element that has the provided identifier name.
 
 FindResource(Object)	
+
 Searches for a resource with the specified key, and throws an exception if the requested resource is not found.
 
 Focus()	
+
 Attempts to set focus to this element.(Inherited from UIElement)
 
 > GetAnimationBaseValue(DependencyProperty)	
+
 Returns the base property value for the specified property on this element, disregarding any possible animated value from a running or stopped animation.(Inherited from UIElement)
 
 > GetBindingExpression(DependencyProperty)	
+
 Returns the BindingExpression that represents the binding on the specified property.
 
 GetFlowDirection(DependencyObject)	
+
 Gets the value of the FlowDirection attached property for the specified DependencyObject.
 
 GetHashCode()	
+
 Gets a hash code for this DependencyObject.
 
 > GetLayoutClip(Size)		(Inherited from DependencyObject)
+
 Returns a geometry for a clipping mask. The mask applies if the layout system attempts to arrange an element that is larger than the available display space.
 
 GetLocalValueEnumerator()	
+
 Creates a specialized enumerator for determining which dependency properties have locally set values on this DependencyObject.
 
 > GetTemplateChild(String)		(Inherited from DependencyObject)
+
 Returns the named element in the visual tree of an instantiated ControlTemplate.
 
 GetType()	
+
 Gets the Type of the current instance.(Inherited from Object)
 
 > GetUIParentCore()	
+
 Returns an alternative logical parent for this element if there is no visual parent.
 
 GetValue(DependencyProperty)	
+
 Returns the current effective value of a dependency property on this instance of a DependencyObject.
 
 > GetVisualChild(Int32)		(Inherited from DependencyObject)
+
 Overrides GetVisualChild(Int32), and returns a child at the specified index from a collection of child elements.
 
 HitTestCore(GeometryHitTestParameters)	
+
 Implements HitTestCore(GeometryHitTestParameters) to supply base element hit testing behavior (returning GeometryHitTestResult).(Inherited from UIElement)
 
 > HitTestCore(PointHitTestParameters)	
+
 Implements HitTestCore(PointHitTestParameters) to supply base element hit testing behavior (returning HitTestResult).(Inherited from UIElement)
 
 > InputHitTest(Point)	
+
 Returns the input element within the current element that is at the specified coordinates, relative to the current element's origin.(Inherited from UIElement)
 
 > InvalidateArrange()	
+
 Invalidates the arrange state (layout) for the element. After the invalidation, the element will have its layout updated, which will occur asynchronously unless subsequently forced by UpdateLayout().(Inherited from UIElement)
 
 > InvalidateMeasure()	
+
 Invalidates the measurement state (layout) for the element.(Inherited from UIElement)
 
 > InvalidateProperty(DependencyProperty)	
+
 Re-evaluates the effective value for the specified dependency property.
 
 > InvalidateVisual()		(Inherited from DependencyObject)
+
 Invalidates the rendering of the element, and forces a complete new layout pass. OnRender(DrawingContext) is called after the layout cycle is completed.(Inherited from UIElement)
 
 > IsAncestorOf(DependencyObject)	
+
 Determines whether the visual object is an ancestor of the descendant visual object.
 
 > IsDescendantOf(DependencyObject)	(Inherited from Visual)
+
 Determines whether the visual object is a descendant of the ancestor visual object.
 
 > Measure(Size)	(Inherited from Visual)
+
 Updates the DesiredSize of a UIElement. Parent elements call this method from their own MeasureCore(Size) implementations to form a recursive layout update. Calling this method constitutes the first pass (the "Measure" pass) of a layout update.(Inherited from UIElement)
 
 > MeasureCore(Size)	
+
 Implements basic measure-pass layout system behavior for FrameworkElement.
 
 MeasureOverride(Size)	
+
 When overridden in a derived class, measures the size in layout required for child elements and determines a size for the FrameworkElement-derived class.
 
 MemberwiseClone()	
+
 Creates a shallow copy of the current Object.(Inherited from Object)
 
 > MoveFocus(TraversalRequest)	
+
 Moves the keyboard focus away from this element and to another element in a provided traversal direction.
 
 OnAccessKey(AccessKeyEventArgs)	
+
 Provides class handling for when an access key that is meaningful for this element is invoked.(Inherited from UIElement)
 
 > OnApplyTemplate()	
+
 When overridden in a derived class, is invoked whenever application code or internal processes call ApplyTemplate().
 
 OnChildDesiredSizeChanged(UIElement)	
+
 Supports layout behavior when a child element is resized.(Inherited from UIElement)
 
 > OnContextMenuClosing(ContextMenuEventArgs)	
+
 Invoked whenever an unhandled ContextMenuClosing routed event reaches this class in its route. Implement this method to add class handling for this event.
 
 OnContextMenuOpening(ContextMenuEventArgs)	
+
 Invoked whenever an unhandled ContextMenuOpening routed event reaches this class in its route. Implement this method to add class handling for this event.
 
 OnCreateAutomationPeer()	
+
 Returns class-specific AutomationPeer implementations for the Windows Presentation Foundation (WPF) infrastructure.(Inherited from UIElement)
 
 > OnDpiChanged(DpiScale, DpiScale)	
+
 Called when the DPI at which this View is rendered changes.
 
 > OnDragEnter(DragEventArgs)	(Inherited from Visual)
+
 Invoked when an unhandled DragEnter attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnDragLeave(DragEventArgs)	
+
 Invoked when an unhandled DragLeave attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnDragOver(DragEventArgs)	
+
 Invoked when an unhandled DragOver attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnDrop(DragEventArgs)	
+
 Invoked when an unhandled DragEnter attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnGiveFeedback(GiveFeedbackEventArgs)	
+
 Invoked when an unhandled GiveFeedback attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnGotFocus(RoutedEventArgs)	
+
 Invoked whenever an unhandled GotFocus event reaches this element in its route.
 
 OnGotKeyboardFocus(KeyboardFocusChangedEventArgs)	
+
 Invoked when an unhandled GotKeyboardFocus attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnGotMouseCapture(MouseEventArgs)	
+
 Invoked when an unhandled GotMouseCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnGotStylusCapture(StylusEventArgs)	
+
 Invoked when an unhandled GotStylusCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnGotTouchCapture(TouchEventArgs)	
+
 Provides class handling for the GotTouchCapture routed event that occurs when a touch is captured to this element.(Inherited from UIElement)
 
 > OnInitialized(EventArgs)	
+
 Raises the Initialized event. This method is invoked whenever IsInitialized is set to true internally.
 
 OnIsKeyboardFocusedChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked when an unhandled IsKeyboardFocusedChanged event is raised on this element. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnIsKeyboardFocusWithinChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked just before the IsKeyboardFocusWithinChanged event is raised by this element. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnIsMouseCapturedChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked when an unhandled IsMouseCapturedChanged event is raised on this element. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnIsMouseCaptureWithinChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked when an unhandled IsMouseCaptureWithinChanged event is raised on this element. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnIsMouseDirectlyOverChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked when an unhandled IsMouseDirectlyOverChanged event is raised on this element. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnIsStylusCapturedChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked when an unhandled IsStylusCapturedChanged event is raised on this element. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnIsStylusCaptureWithinChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked when an unhandled IsStylusCaptureWithinChanged event is raised on this element. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnIsStylusDirectlyOverChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked when an unhandled IsStylusDirectlyOverChanged event is raised on this element. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnKeyDown(KeyEventArgs)	
+
 Invoked when an unhandled KeyDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnKeyUp(KeyEventArgs)	
+
 Invoked when an unhandled KeyUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnLostFocus(RoutedEventArgs)	
+
 Raises the LostFocus routed event by using the event data that is provided.(Inherited from UIElement)
 
 > OnLostKeyboardFocus(KeyboardFocusChangedEventArgs)	
+
 Invoked when an unhandled LostKeyboardFocus attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnLostMouseCapture(MouseEventArgs)	
+
 Invoked when an unhandled LostMouseCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnLostStylusCapture(StylusEventArgs)	
+
 Invoked when an unhandled LostStylusCapture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnLostTouchCapture(TouchEventArgs)	
+
 Provides class handling for the LostTouchCapture routed event that occurs when this element loses a touch capture.(Inherited from UIElement)
 
 > OnManipulationBoundaryFeedback(ManipulationBoundaryFeedbackEventArgs)	
+
 Called when the ManipulationBoundaryFeedback event occurs.(Inherited from UIElement)
 
 > OnManipulationCompleted(ManipulationCompletedEventArgs)	
+
 Called when the ManipulationCompleted event occurs.(Inherited from UIElement)
 
 > OnManipulationDelta(ManipulationDeltaEventArgs)	
+
 Called when the ManipulationDelta event occurs.(Inherited from UIElement)
 
 > OnManipulationInertiaStarting(ManipulationInertiaStartingEventArgs)	
+
 Called when the ManipulationInertiaStarting event occurs.(Inherited from UIElement)
 
 > OnManipulationStarted(ManipulationStartedEventArgs)	
+
 Called when the ManipulationStarted event occurs.(Inherited from UIElement)
 
 > OnManipulationStarting(ManipulationStartingEventArgs)	
+
 Provides class handling for the ManipulationStarting routed event that occurs when the manipulation processor is first created.(Inherited from UIElement)
 
 > OnMouseDown(MouseButtonEventArgs)	
+
 Invoked when an unhandled MouseDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnMouseEnter(MouseEventArgs)	
+
 Invoked when an unhandled MouseEnter attached event is raised on this element. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnMouseLeave(MouseEventArgs)	
+
 Invoked when an unhandled MouseLeave attached event is raised on this element. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnMouseLeftButtonDown(MouseButtonEventArgs)	
+
 Invoked when an unhandled MouseLeftButtonDown routed event is raised on this element. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnMouseLeftButtonUp(MouseButtonEventArgs)	
+
 Invoked when an unhandled MouseLeftButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnMouseMove(MouseEventArgs)	
+
 Invoked when an unhandled MouseMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnMouseRightButtonDown(MouseButtonEventArgs)	
+
 Invoked when an unhandled MouseRightButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnMouseRightButtonUp(MouseButtonEventArgs)	
+
 Invoked when an unhandled MouseRightButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnMouseUp(MouseButtonEventArgs)	
+
 Invoked when an unhandled MouseUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnMouseWheel(MouseWheelEventArgs)	
+
 Invoked when an unhandled MouseWheel attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewDragEnter(DragEventArgs)	
+
 Invoked when an unhandled PreviewDragEnter attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewDragLeave(DragEventArgs)	
+
 Invoked when an unhandled PreviewDragLeave attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewDragOver(DragEventArgs)	
+
 Invoked when an unhandled PreviewDragOver attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewDrop(DragEventArgs)	
+
 Invoked when an unhandled PreviewDrop attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewGiveFeedback(GiveFeedbackEventArgs)	
+
 Invoked when an unhandled PreviewGiveFeedback attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewGotKeyboardFocus(KeyboardFocusChangedEventArgs)	
+
 Invoked when an unhandled PreviewGotKeyboardFocus attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewKeyDown(KeyEventArgs)	
+
 Invoked when an unhandled PreviewKeyDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewKeyUp(KeyEventArgs)	
+
 Invoked when an unhandled PreviewKeyUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs)	
+
 Invoked when an unhandled PreviewKeyDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewMouseDown(MouseButtonEventArgs)	
+
 Invoked when an unhandled PreviewMouseDown attached routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewMouseLeftButtonDown(MouseButtonEventArgs)	
+
 Invoked when an unhandled PreviewMouseLeftButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewMouseLeftButtonUp(MouseButtonEventArgs)	
+
 Invoked when an unhandled PreviewMouseLeftButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewMouseMove(MouseEventArgs)	
+
 Invoked when an unhandled PreviewMouseMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewMouseRightButtonDown(MouseButtonEventArgs)	
+
 Invoked when an unhandled PreviewMouseRightButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewMouseRightButtonUp(MouseButtonEventArgs)	
+
 Invoked when an unhandled PreviewMouseRightButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewMouseUp(MouseButtonEventArgs)	
+
 Invoked when an unhandled PreviewMouseUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewMouseWheel(MouseWheelEventArgs)	
+
 Invoked when an unhandled PreviewMouseWheel attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewQueryContinueDrag(QueryContinueDragEventArgs)	
+
 Invoked when an unhandled PreviewQueryContinueDrag attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewStylusButtonDown(StylusButtonEventArgs)	
+
 Invoked when an unhandled PreviewStylusButtonDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewStylusButtonUp(StylusButtonEventArgs)	
+
 Invoked when an unhandled PreviewStylusButtonUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewStylusDown(StylusDownEventArgs)	
+
 Invoked when an unhandled PreviewStylusDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewStylusInAirMove(StylusEventArgs)	
+
 Invoked when an unhandled PreviewStylusInAirMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewStylusInRange(StylusEventArgs)	
+
 Invoked when an unhandled PreviewStylusInRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewStylusMove(StylusEventArgs)	
+
 Invoked when an unhandled PreviewStylusMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewStylusOutOfRange(StylusEventArgs)	
+
 Invoked when an unhandled PreviewStylusOutOfRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewStylusSystemGesture(StylusSystemGestureEventArgs)	
+
 Invoked when an unhandled PreviewStylusSystemGesture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewStylusUp(StylusEventArgs)	
+
 Invoked when an unhandled PreviewStylusUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewTextInput(TextCompositionEventArgs)	
+
 Invoked when an unhandled PreviewTextInput attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnPreviewTouchDown(TouchEventArgs)	
+
 Provides class handling for the PreviewTouchDown routed event that occurs when a touch presses this element.(Inherited from UIElement)
 
 > OnPreviewTouchMove(TouchEventArgs)	
+
 Provides class handling for the PreviewTouchMove routed event that occurs when a touch moves while inside this element.(Inherited from UIElement)
 
 > OnPreviewTouchUp(TouchEventArgs)	
+
 Provides class handling for the PreviewTouchUp routed event that occurs when a touch is released inside this element.(Inherited from UIElement)
 
 > OnPropertyChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked whenever the effective value of any dependency property on this FrameworkElement has been updated. The specific dependency property that changed is reported in the arguments parameter. Overrides OnPropertyChanged(DependencyPropertyChangedEventArgs).
 
 OnQueryContinueDrag(QueryContinueDragEventArgs)	
+
 Invoked when an unhandled QueryContinueDrag attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnQueryCursor(QueryCursorEventArgs)	
+
 Invoked when an unhandled QueryCursor attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnRender(DrawingContext)	
+
 When overridden in a derived class, participates in rendering operations that are directed by the layout system. The rendering instructions for this element are not used directly when this method is invoked, and are instead preserved for later asynchronous use by layout and drawing.(Inherited from UIElement)
 
 > OnRenderSizeChanged(SizeChangedInfo)	
+
 Raises the SizeChanged event, using the specified information as part of the eventual event data.
 
 OnStyleChanged(Style, Style)	
+
 Invoked when the style in use on this element changes, which will invalidate the layout.
 
 OnStylusButtonDown(StylusButtonEventArgs)	
+
 Invoked when an unhandled StylusButtonDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnStylusButtonUp(StylusButtonEventArgs)	
+
 Invoked when an unhandled StylusButtonUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnStylusDown(StylusDownEventArgs)	
+
 Invoked when an unhandled StylusDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnStylusEnter(StylusEventArgs)	
+
 Invoked when an unhandled StylusEnter attached event is raised by this element. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnStylusInAirMove(StylusEventArgs)	
+
 Invoked when an unhandled StylusInAirMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnStylusInRange(StylusEventArgs)	
+
 Invoked when an unhandled StylusInRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnStylusLeave(StylusEventArgs)	
+
 Invoked when an unhandled StylusLeave attached event is raised by this element. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnStylusMove(StylusEventArgs)	
+
 Invoked when an unhandled StylusMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnStylusOutOfRange(StylusEventArgs)	
+
 Invoked when an unhandled StylusOutOfRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnStylusSystemGesture(StylusSystemGestureEventArgs)	
+
 Invoked when an unhandled StylusSystemGesture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnStylusUp(StylusEventArgs)	
+
 Invoked when an unhandled StylusUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnTextInput(TextCompositionEventArgs)	
+
 Invoked when an unhandled TextInput attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.(Inherited from UIElement)
 
 > OnToolTipClosing(ToolTipEventArgs)	
+
 Invoked whenever an unhandled ToolTipClosing routed event reaches this class in its route. Implement this method to add class handling for this event.
 
 OnToolTipOpening(ToolTipEventArgs)	
+
 Invoked whenever the ToolTipOpening routed event reaches this class in its route. Implement this method to add class handling for this event.
 
 OnTouchDown(TouchEventArgs)	
+
 Provides class handling for the TouchDown routed event that occurs when a touch presses inside this element.(Inherited from UIElement)
 
 > OnTouchEnter(TouchEventArgs)	
+
 Provides class handling for the TouchEnter routed event that occurs when a touch moves from outside to inside the bounds of this element.(Inherited from UIElement)
 
 > OnTouchLeave(TouchEventArgs)	
+
 Provides class handling for the TouchLeave routed event that occurs when a touch moves from inside to outside the bounds of this UIElement.(Inherited from UIElement)
 
 > OnTouchMove(TouchEventArgs)	
+
 Provides class handling for the TouchMove routed event that occurs when a touch moves while inside this element.(Inherited from UIElement)
 
 > OnTouchUp(TouchEventArgs)	
+
 Provides class handling for the TouchUp routed event that occurs when a touch is released inside this element.(Inherited from UIElement)
 
 > OnVisualChildrenChanged(DependencyObject, DependencyObject)	(Inherited from UIElement)
@@ -6807,21 +8222,27 @@ Provides class handling for the TouchUp routed event that occurs when a touch is
 > Called when the VisualCollection of the visual object is modified.
 
 > OnVisualParentChanged(DependencyObject)	(Inherited from Visual)
+
 Invoked when the parent of this element in the visual tree is changed. Overrides OnVisualParentChanged(DependencyObject).
 
 ParentLayoutInvalidated(UIElement)	
+
 Supports incremental layout implementations in specialized subclasses of FrameworkElement. ParentLayoutInvalidated(UIElement) is invoked when a child element has invalidated a property that is marked in metadata as affecting the parent's measure or arrange passes during layout.
 
 PointFromScreen(Point)	
+
 Converts a Point in screen coordinates into a Point that represents the current coordinate system of the Visual.
 
 > PointToScreen(Point)	(Inherited from Visual)
+
 Converts a Point that represents the current coordinate system of the Visual into a Point in screen coordinates.
 
 > PredictFocus(FocusNavigationDirection)	(Inherited from Visual)
+
 Determines the next element that would receive focus relative to this element for a provided focus movement direction, but does not actually move the focus.
 
 RaiseEvent(RoutedEventArgs)	
+
 Raises a specific routed event. The RoutedEvent to be raised is identified within the RoutedEventArgs instance that is provided (as the RoutedEvent property of that event data).
 
 > ReadLocalValue(DependencyProperty)	(Inherited from UIElement)
@@ -6829,9 +8250,11 @@ Raises a specific routed event. The RoutedEvent to be raised is identified withi
 > Returns the local value of a dependency property, if it exists.
 
 > RegisterName(String, Object)		(Inherited from DependencyObject)
+
 Provides an accessor that simplifies access to the NameScope registration method.
 
 ReleaseAllTouchCaptures()	
+
 Releases all captured touch devices from this element.
 
 > ReleaseMouseCapture()	(Inherited from UIElement)
@@ -6855,30 +8278,39 @@ Releases all captured touch devices from this element.
 > Removes the provided object from this element's logical tree. FrameworkElement updates the affected logical tree parent pointers to keep in sync with this deletion.
 
 RemoveVisualChild(Visual)	
+
 Removes the parent-child relationship between two visuals.
 
 > SetBinding(DependencyProperty, BindingBase)	(Inherited from Visual)
+
 Attaches a binding to this element, based on the provided binding object.
 
 SetBinding(DependencyProperty, String)	
+
 Attaches a binding to this element, based on the provided source property name as a path qualification to the data source.
 
 SetCurrentValue(DependencyProperty, Object)	
+
 Sets the value of a dependency property without changing its value source.
 
 > SetFlowDirection(DependencyObject, FlowDirection)		(Inherited from DependencyObject)
+
 Sets the value of the FlowDirection attached property for the provided element.
 
 SetResourceReference(DependencyProperty, Object)	
+
 Searches for a resource with the specified name and sets up a resource reference to it for the specified property.
 
 SetValue(DependencyProperty, Object)	
+
 Sets the local value of a dependency property, specified by its dependency property identifier.
 
 > SetValue(DependencyPropertyKey, Object)		(Inherited from DependencyObject)
+
 Sets the local value of a read-only dependency property, specified by the DependencyPropertyKey identifier of the dependency property.
 
 > ShouldSerializeCommandBindings()		(Inherited from DependencyObject)
+
 Returns whether serialization processes should serialize the contents of the CommandBindings property on instances of this class.
 
 > ShouldSerializeInputBindings()	(Inherited from UIElement)
@@ -6890,30 +8322,39 @@ Returns whether serialization processes should serialize the contents of the Com
 > Returns a value that indicates whether serialization processes should serialize the value for the provided dependency property.
 
 > ShouldSerializeResources()		(Inherited from DependencyObject)
+
 Returns whether serialization processes should serialize the contents of the Resources property.
 
 ShouldSerializeStyle()	
+
 Returns whether serialization processes should serialize the contents of the Style property.
 
 ShouldSerializeTriggers()	
+
 Returns whether serialization processes should serialize the contents of the Triggers property.
 
 ToString()	
+
 Returns a string that represents the current object.(Inherited from Object)
 
 > TransformToAncestor(Visual)	
+
 Returns a transform that can be used to transform coordinates from the Visual to the specified Visual ancestor of the visual object.
 
 > TransformToAncestor(Visual3D)	(Inherited from Visual)
+
 Returns a transform that can be used to transform coordinates from the Visual to the specified Visual3D ancestor of the visual object.
 
 > TransformToDescendant(Visual)	(Inherited from Visual)
+
 Returns a transform that can be used to transform coordinates from the Visual to the specified visual object descendant.
 
 > TransformToVisual(Visual)	(Inherited from Visual)
+
 Returns a transform that can be used to transform coordinates from the Visual to the specified visual object.
 
 > TranslatePoint(Point, UIElement)	(Inherited from Visual)
+
 Translates a point relative to this element to coordinates that are relative to the specified element.(Inherited from UIElement)
 
 > TryFindResource(Object)	(Inherited from UIElement)
@@ -6921,12 +8362,15 @@ Translates a point relative to this element to coordinates that are relative to 
 > Searches for a resource with the specified key, and returns that resource if found.
 
 UnregisterName(String)	
+
 Simplifies access to the NameScope de-registration method.
 
 UpdateDefaultStyle()	
+
 Reapplies the default style to the current FrameworkElement.
 
 UpdateLayout()	
+
 Ensures that all visual child elements of this element are properly updated for layout.(Inherited from UIElement)
 
 > VerifyAccess()	(Inherited from UIElement)
@@ -6934,17 +8378,23 @@ Ensures that all visual child elements of this element are properly updated for 
 > Enforces that the calling thread has access to this DispatcherObject.(Inherited from DispatcherObject)
 
 > Events
+
 EVENTS
+
 ContextMenuClosing	
+
 Occurs just before any context menu on the element is closed.
 
 ContextMenuOpening	
+
 Occurs when any context menu on the element is opened.
 
 DataContextChanged	
+
 Occurs when the data context for this element changes.
 
 DragEnter	
+
 Occurs when the input system reports an underlying drag event with this element as the drag target.(Inherited from UIElement)
 
 > DragLeave	(Inherited from UIElement)
@@ -6984,288 +8434,383 @@ Occurs when the input system reports an underlying drag event with this element 
 > Occurs when this element captures the stylus.(Inherited from UIElement)
 
 > GotTouchCapture	
+
 Occurs when a touch is captured to this element.(Inherited from UIElement)
 
 > Initialized	
+
 Occurs when this FrameworkElement is initialized. This event coincides with cases where the value of the IsInitialized property changes from false (or undefined) to true.
 
 IsEnabledChanged	
+
 Occurs when the value of the IsEnabled property on this element changes.(Inherited from UIElement)
 
 > IsHitTestVisibleChanged	
+
 Occurs when the value of the IsHitTestVisible dependency property changes on this element.(Inherited from UIElement)
 
 > IsKeyboardFocusedChanged	
+
 Occurs when the value of the IsKeyboardFocused property changes on this element.(Inherited from UIElement)
 
 > IsKeyboardFocusWithinChanged	
+
 Occurs when the value of the IsKeyboardFocusWithin property changes on this element.(Inherited from UIElement)
 
 > IsMouseCapturedChanged	
+
 Occurs when the value of the IsMouseCaptured property changes on this element.(Inherited from UIElement)
 
 > IsMouseCaptureWithinChanged	
+
 Occurs when the value of the IsMouseCaptureWithinProperty changes on this element.(Inherited from UIElement)
 
 > IsMouseDirectlyOverChanged	
+
 Occurs when the value of the IsMouseDirectlyOver property changes on this element.(Inherited from UIElement)
 
 > IsStylusCapturedChanged	
+
 Occurs when the value of the IsStylusCaptured property changes on this element.(Inherited from UIElement)
 
 > IsStylusCaptureWithinChanged	
+
 Occurs when the value of the IsStylusCaptureWithin property changes on this element.(Inherited from UIElement)
 
 > IsStylusDirectlyOverChanged	
+
 Occurs when the value of the IsStylusDirectlyOver property changes on this element.(Inherited from UIElement)
 
 > IsVisibleChanged	
+
 Occurs when the value of the IsVisible property changes on this element.(Inherited from UIElement)
 
 > KeyDown	
+
 Occurs when a key is pressed while focus is on this element.(Inherited from UIElement)
 
 > KeyUp	
+
 Occurs when a key is released while focus is on this element.(Inherited from UIElement)
 
 > LayoutUpdated	
+
 Occurs when the layout of the various visual elements associated with the current Dispatcher changes.(Inherited from UIElement)
 
 > Loaded	
+
 Occurs when the element is laid out, rendered, and ready for interaction.
 
 LostFocus	
+
 Occurs when this element loses logical focus.(Inherited from UIElement)
 
 > LostKeyboardFocus	
+
 Occurs when the keyboard is no longer focused on this element.(Inherited from UIElement)
 
 > LostMouseCapture	
+
 Occurs when this element loses mouse capture.(Inherited from UIElement)
 
 > LostStylusCapture	
+
 Occurs when this element loses stylus capture.(Inherited from UIElement)
 
 > LostTouchCapture	
+
 Occurs when this element loses a touch capture.(Inherited from UIElement)
 
 > ManipulationBoundaryFeedback	
+
 Occurs when the manipulation encounters a boundary.(Inherited from UIElement)
 
 > ManipulationCompleted	
+
 Occurs when a manipulation and inertia on the UIElement object is complete.(Inherited from UIElement)
 
 > ManipulationDelta	
+
 Occurs when the input device changes position during a manipulation.(Inherited from UIElement)
 
 > ManipulationInertiaStarting	
+
 Occurs when the input device loses contact with the UIElement object during a manipulation and inertia begins.(Inherited from UIElement)
 
 > ManipulationStarted	
+
 Occurs when an input device begins a manipulation on the UIElement object.(Inherited from UIElement)
 
 > ManipulationStarting	
+
 Occurs when the manipulation processor is first created.(Inherited from UIElement)
 
 > MouseDown	
+
 Occurs when any mouse button is pressed while the pointer is over this element.(Inherited from UIElement)
 
 > MouseEnter	
+
 Occurs when the mouse pointer enters the bounds of this element.(Inherited from UIElement)
 
 > MouseLeave	
+
 Occurs when the mouse pointer leaves the bounds of this element.(Inherited from UIElement)
 
 > MouseLeftButtonDown	
+
 Occurs when the left mouse button is pressed while the mouse pointer is over this element.(Inherited from UIElement)
 
 > MouseLeftButtonUp	
+
 Occurs when the left mouse button is released while the mouse pointer is over this element.(Inherited from UIElement)
 
 > MouseMove	
+
 Occurs when the mouse pointer moves while over this element.(Inherited from UIElement)
 
 > MouseRightButtonDown	
+
 Occurs when the right mouse button is pressed while the mouse pointer is over this element.(Inherited from UIElement)
 
 > MouseRightButtonUp	
+
 Occurs when the right mouse button is released while the mouse pointer is over this element.(Inherited from UIElement)
 
 > MouseUp	
+
 Occurs when any mouse button is released over this element.(Inherited from UIElement)
 
 > MouseWheel	
+
 Occurs when the user rotates the mouse wheel while the mouse pointer is over this element.(Inherited from UIElement)
 
 > PreviewDragEnter	
+
 Occurs when the input system reports an underlying drag event with this element as the drag target.(Inherited from UIElement)
 
 > PreviewDragLeave	
+
 Occurs when the input system reports an underlying drag event with this element as the drag origin.(Inherited from UIElement)
 
 > PreviewDragOver	
+
 Occurs when the input system reports an underlying drag event with this element as the potential drop target.(Inherited from UIElement)
 
 > PreviewDrop	
+
 Occurs when the input system reports an underlying drop event with this element as the drop target.(Inherited from UIElement)
 
 > PreviewGiveFeedback	
+
 Occurs when a drag-and-drop operation is started.(Inherited from UIElement)
 
 > PreviewGotKeyboardFocus	
+
 Occurs when the keyboard is focused on this element.(Inherited from UIElement)
 
 > PreviewKeyDown	
+
 Occurs when a key is pressed while focus is on this element.(Inherited from UIElement)
 
 > PreviewKeyUp	
+
 Occurs when a key is released while focus is on this element.(Inherited from UIElement)
 
 > PreviewLostKeyboardFocus	
+
 Occurs when the keyboard is no longer focused on this element.(Inherited from UIElement)
 
 > PreviewMouseDown	
+
 Occurs when any mouse button is pressed while the pointer is over this element.(Inherited from UIElement)
 
 > PreviewMouseLeftButtonDown	
+
 Occurs when the left mouse button is pressed while the mouse pointer is over this element.(Inherited from UIElement)
 
 > PreviewMouseLeftButtonUp	
+
 Occurs when the left mouse button is released while the mouse pointer is over this element.(Inherited from UIElement)
 
 > PreviewMouseMove	
+
 Occurs when the mouse pointer moves while the mouse pointer is over this element.(Inherited from UIElement)
 
 > PreviewMouseRightButtonDown	
+
 Occurs when the right mouse button is pressed while the mouse pointer is over this element.(Inherited from UIElement)
 
 > PreviewMouseRightButtonUp	
+
 Occurs when the right mouse button is released while the mouse pointer is over this element.(Inherited from UIElement)
 
 > PreviewMouseUp	
+
 Occurs when any mouse button is released while the mouse pointer is over this element.(Inherited from UIElement)
 
 > PreviewMouseWheel	
+
 Occurs when the user rotates the mouse wheel while the mouse pointer is over this element.(Inherited from UIElement)
 
 > PreviewQueryContinueDrag	
+
 Occurs when there is a change in the keyboard or mouse button state during a drag-and-drop operation.(Inherited from UIElement)
 
 > PreviewStylusButtonDown	
+
 Occurs when the stylus button is pressed while the pointer is over this element.(Inherited from UIElement)
 
 > PreviewStylusButtonUp	
+
 Occurs when the stylus button is released while the pointer is over this element.(Inherited from UIElement)
 
 > PreviewStylusDown	
+
 Occurs when the stylus touches the digitizer while it is over this element.(Inherited from UIElement)
 
 > PreviewStylusInAirMove	
+
 Occurs when the stylus moves over an element without actually touching the digitizer.(Inherited from UIElement)
 
 > PreviewStylusInRange	
+
 Occurs when the stylus is close enough to the digitizer to be detected, while over this element.(Inherited from UIElement)
 
 > PreviewStylusMove	
+
 Occurs when the stylus moves while over the element. The stylus must move while being detected by the digitizer to raise this event, otherwise, PreviewStylusInAirMove is raised instead.(Inherited from UIElement)
 
 > PreviewStylusOutOfRange	
+
 Occurs when the stylus is too far from the digitizer to be detected.(Inherited from UIElement)
 
 > PreviewStylusSystemGesture	
+
 Occurs when a user performs one of several stylus gestures.(Inherited from UIElement)
 
 > PreviewStylusUp	
+
 Occurs when the user raises the stylus off the digitizer while the stylus is over this element.(Inherited from UIElement)
 
 > PreviewTextInput	
+
 Occurs when this element gets text in a device-independent manner.(Inherited from UIElement)
 
 > PreviewTouchDown	
+
 Occurs when a finger touches the screen while the finger is over this element.(Inherited from UIElement)
 
 > PreviewTouchMove	
+
 Occurs when a finger moves on the screen while the finger is over this element.(Inherited from UIElement)
 
 > PreviewTouchUp	
+
 Occurs when a finger is raised off of the screen while the finger is over this element.(Inherited from UIElement)
 
 > QueryContinueDrag	
+
 Occurs when there is a change in the keyboard or mouse button state during a drag-and-drop operation.(Inherited from UIElement)
 
 > QueryCursor	
+
 Occurs when the cursor is requested to display. This event is raised on an element each time that the mouse pointer moves to a new location, which means the cursor object might need to be changed based on its new position.(Inherited from UIElement)
 
 > RequestBringIntoView	
+
 Occurs when BringIntoView(Rect) is called on this element.
 
 SizeChanged	
+
 Occurs when either the ActualHeight or the ActualWidth properties change value on this element.
 
 SourceUpdated	
+
 Occurs when the source value changes for any existing property binding on this element.
 
 StylusButtonDown	
+
 Occurs when the stylus button is pressed while the pointer is over this element.(Inherited from UIElement)
 
 > StylusButtonUp	
+
 Occurs when the stylus button is released while the pointer is over this element.(Inherited from UIElement)
 
 > StylusDown	
+
 Occurs when the stylus touches the digitizer while the stylus is over this element.(Inherited from UIElement)
 
 > StylusEnter	
+
 Occurs when the stylus enters the bounds of this element.(Inherited from UIElement)
 
 > StylusInAirMove	
+
 Occurs when the stylus moves over an element without actually touching the digitizer.(Inherited from UIElement)
 
 > StylusInRange	
+
 Occurs when the stylus is close enough to the digitizer to be detected, while over this element.(Inherited from UIElement)
 
 > StylusLeave	
+
 Occurs when the stylus leaves the bounds of the element.(Inherited from UIElement)
 
 > StylusMove	
+
 Occurs when the stylus moves over this element. The stylus must move while on the digitizer to raise this event. Otherwise, StylusInAirMove is raised instead.(Inherited from UIElement)
 
 > StylusOutOfRange	
+
 Occurs when the stylus is too far from the digitizer to be detected, while over this element.(Inherited from UIElement)
 
 > StylusSystemGesture	
+
 Occurs when a user performs one of several stylus gestures.(Inherited from UIElement)
 
 > StylusUp	
+
 Occurs when the user raises the stylus off the digitizer while it is over this element.(Inherited from UIElement)
 
 > TargetUpdated	
+
 Occurs when the target value changes for any property binding on this element.
 
 > TextInput	
+
 Occurs when this element gets text in a device-independent manner.(Inherited from UIElement)
 
 > ToolTipClosing	
+
 Occurs just before any tooltip on the element is closed.
 
 > ToolTipOpening	
+
 Occurs when any tooltip on the element is opened.
 
 > TouchDown	
+
 Occurs when a finger touches the screen while the finger is over this element.(Inherited from UIElement)
 
 > TouchEnter	
+
 Occurs when a touch moves from outside to inside the bounds of this element.(Inherited from UIElement)
 
 > TouchLeave	
+
 Occurs when a touch moves from inside to outside the bounds of this element.(Inherited from UIElement)
 
 > TouchMove	
+
 Occurs when a finger moves on the screen while the finger is over this element.(Inherited from UIElement)
 
 > TouchUp	
+
 Occurs when a finger is raised off of the screen while the finger is over this element.(Inherited from UIElement)
 
 > Unloaded	
+
 Occurs when the element is removed from within an element tree of loaded elements.
 
 #### DependencyObject 
@@ -7275,71 +8820,93 @@ Occurs when the element is removed from within an element tree of loaded element
 ##### 方法:METHODS
 
 > CheckAccess()	
+
 Determines whether the calling thread has access to this DispatcherObject.(Inherited from DispatcherObject)
 
 > ClearValue(DependencyProperty)	
+
 Clears the local value of a property. The property to be cleared is specified by a DependencyProperty identifier.
 
 > ClearValue(DependencyPropertyKey)	
+
 Clears the local value of a read-only property. The property to be cleared is specified by a DependencyPropertyKey.
 
 > CoerceValue(DependencyProperty)	
+
 Coerces the value of the specified dependency property. This is accomplished by invoking any CoerceValueCallback function specified in property metadata for the dependency property as it exists on the calling DependencyObject.
 
 > Equals(Object)	
+
 Determines whether a provided DependencyObject is equivalent to the current DependencyObject.
 
 > GetHashCode()	
+
 Gets a hash code for this DependencyObject.
 
 > GetLocalValueEnumerator()	
+
 Creates a specialized enumerator for determining which dependency properties have locally set values on this DependencyObject.
 
 > GetType()	
+
 Gets the Type of the current instance.(Inherited from Object)
 
 > GetValue(DependencyProperty)	
+
 Returns the current effective value of a dependency property on this instance of a DependencyObject.
 
 > InvalidateProperty(DependencyProperty)	
+
 Re-evaluates the effective value for the specified dependency property.
 
 > MemberwiseClone()	
+
 Creates a shallow copy of the current Object.(Inherited from Object)
 
 > OnPropertyChanged(DependencyPropertyChangedEventArgs)	
+
 Invoked whenever the effective value of any dependency property on this DependencyObject has been updated. The specific dependency property that changed is reported in the event data.
 
 > ReadLocalValue(DependencyProperty)	
+
 Returns the local value of a dependency property, if it exists.
 
 > SetCurrentValue(DependencyProperty, Object)	
+
 Sets the value of a dependency property without changing its value source.
 
 > SetValue(DependencyProperty, Object)	
+
 Sets the local value of a dependency property, specified by its dependency property identifier.
 
 > SetValue(DependencyPropertyKey, Object)	
+
 Sets the local value of a read-only dependency property, specified by the DependencyPropertyKey identifier of the dependency property.
 
 > ShouldSerializeProperty(DependencyProperty)	
+
 Returns a value that indicates whether serialization processes should serialize the value for the provided dependency property.
 
 > ToString()	
+
 Returns a string that represents the current object.(Inherited from Object)
 
 > VerifyAccess()	
+
 Enforces that the calling thread has access to this DispatcherObject.(Inherited from DispatcherObject)
 
 ##### 属性:PROPERTIES
 
 > DependencyObjectType	
+
 Gets the DependencyObjectType that wraps the CLR type of this instance.
 
 > Dispatcher	
+
 Gets the Dispatcher this DispatcherObject is associated with.(Inherited from DispatcherObject)
 
 > IsSealed	
+
 Gets a value that indicates whether this instance is currently sealed (read-only).
 
 > 主要作用是为WPF/Silverlight 提供２D呈现支持，主要包括输出显示，坐标转换，区域剪切等。
@@ -7357,21 +8924,37 @@ Gets a value that indicates whether this instance is currently sealed (read-only
 > CheckAccess()	Determines whether the calling thread has access to this DispatcherObject.
 
 > Equals(Object)	
+
 Determines whether the specified object is equal to the current object.(Inherited from Object)
+
  
+
 > GetHashCode()	
+
 Serves as the default hash function.(Inherited from Object)
+
  
+
 > GetType()	
+
 Gets the Type of the current instance.(Inherited from Object)
+
  
+
 > MemberwiseClone()	
+
 Creates a shallow copy of the current Object.(Inherited from Object)
+
  
+
 > ToString()	
+
 Returns a string that represents the current object.(Inherited from Object)
+
  
+
 > VerifyAccess()	
+
 Enforces that the calling thread has access to this DispatcherObject.
 
 #### System.Object
@@ -7391,12 +8974,15 @@ Enforces that the calling thread has access to this DispatcherObject.
 ##### 属性:
 
 > ActualHeight	
+
 Gets the rendered height of this element.
 
 > ActualWidth	
+
 Gets the rendered width of this element.
 
 > AllowDrop	
+
 Gets or sets a value indicating whether this element can be used as the target of a drag-and-drop operation. This is a dependency property.
 
 > AreAnyTouchesCaptured	(Inherited from UIElement)
@@ -7420,12 +9006,15 @@ Gets or sets a value indicating whether this element can be used as the target o
 > Gets or sets the BindingGroup that is used for the element.
 
 > BitmapEffect	
+
 Obsolete.
+
 Gets or sets a bitmap effect that applies directly to the rendered content for this element. This is a dependency property.
 
 > BitmapEffectInput	(Inherited from UIElement)
 
 > Obsolete.
+
 Gets or sets an input source for the bitmap effect that applies directly to the rendered content for this element. This is a dependency property.
 
 > CacheMode	(Inherited from UIElement)
@@ -7449,18 +9038,23 @@ Gets or sets an input source for the bitmap effect that applies directly to the 
 > Gets or sets the context menu element that should appear whenever the context menu is requested through user interface (UI) from within this element.
 
 > Cursor	
+
 Gets or sets the cursor that displays when the mouse pointer is over this element.
 
 > DataContext	
+
 Gets or sets the data context for an element when it participates in data binding.
 
 > DefaultStyleKey	
+
 Gets or sets the key to use to reference the style for this control, when theme styles are used or defined.
 
 > DependencyObjectType	
+
 Gets the DependencyObjectType that wraps the CLR type of this instance.
 
 DesiredSize	(Inherited from DependencyObject)
+
 Gets the size that this element computed during the measure pass of the layout process.
 
 Dispatcher	(Inherited from UIElement)
@@ -7468,6 +9062,7 @@ Dispatcher	(Inherited from UIElement)
 > Gets the Dispatcher this DispatcherObject is associated with.(Inherited from DispatcherObject)
 
 > Effect	
+
 Gets or sets the bitmap effect to apply to the UIElement. This is a dependency property.
 
 FlowDirection	(Inherited from UIElement)
@@ -7475,6 +9070,7 @@ FlowDirection	(Inherited from UIElement)
 > Gets or sets the direction that text and other user interface (UI) elements flow within any parent element that controls their layout.
 
 Focusable	
+
 Gets or sets a value that indicates whether the element can receive focus. This is a dependency property.(Inherited from UIElement)
 
 > FocusVisualStyle	(Inherited from UIElement)
@@ -7482,9 +9078,11 @@ Gets or sets a value that indicates whether the element can receive focus. This 
 > Gets or sets a property that enables customization of appearance, effects, or other style characteristics that will apply to this element when it captures keyboard focus.
 
 > ForceCursor	
+
 Gets or sets a value that indicates whether this FrameworkElement should force the user interface (UI) to render the cursor as declared by the Cursor property.
 
 HasAnimatedProperties	
+
 Gets a value indicating whether this element has any animated properties.(Inherited from UIElement)
 
 > HasEffectiveKeyboardFocus	(Inherited from UIElement)
@@ -7496,12 +9094,15 @@ Gets a value indicating whether this element has any animated properties.(Inheri
 > Gets or sets the suggested height of the element.
 
 > HorizontalAlignment	
+
 Gets or sets the horizontal alignment characteristics applied to this element when it is composed within a parent element, such as a panel or items control.
 
 > InheritanceBehavior	
+
 Gets or sets the scope limits for property value inheritance, resource key lookup, and RelativeSource FindAncestor lookup.
 
 > InputBindings	
+
 Gets the collection of input bindings associated with this element.(Inherited from UIElement)
 
 > InputScope	(Inherited from UIElement)
@@ -7509,6 +9110,7 @@ Gets the collection of input bindings associated with this element.(Inherited fr
 > Gets or sets the context for input used by this FrameworkElement.
 
 > IsArrangeValid	
+
 Gets a value indicating whether the computed size and position of child elements in this element's layout are valid.(Inherited from UIElement)
 
 > IsEnabled	(Inherited from UIElement)
@@ -7532,6 +9134,7 @@ Gets a value indicating whether the computed size and position of child elements
 > Gets a value that indicates whether this element has been initialized, either during processing by a XAML processor, or by explicitly having its EndInit() method called.
 
 > IsInputMethodEnabled	
+
 Gets a value indicating whether an input method system, such as an Input Method Editor (IME), is enabled for processing the input to this element.(Inherited from UIElement)
 
 > IsKeyboardFocused	(Inherited from UIElement)
@@ -7539,6 +9142,7 @@ Gets a value indicating whether an input method system, such as an Input Method 
 > Gets a value indicating whether this element has keyboard focus. This is a dependency property.(Inherited from UIElement)
 
 > IsKeyboardFocusWithin	
+
 Gets a value indicating whether keyboard focus is anywhere within the element or its visual tree child elements. This is a dependency property.(Inherited from UIElement)
 
 > IsLoaded	(Inherited from UIElement)
@@ -7546,6 +9150,7 @@ Gets a value indicating whether keyboard focus is anywhere within the element or
 > Gets a value that indicates whether this element has been loaded for presentation.
 
 > IsManipulationEnabled	
+
 Gets or sets a value that indicates whether manipulation events are enabled on this UIElement.(Inherited from UIElement)
 
 > IsMeasureValid	(Inherited from UIElement)
@@ -7573,6 +9178,7 @@ Gets or sets a value that indicates whether manipulation events are enabled on t
 > Gets a value that indicates whether this instance is currently sealed (read-only).
 
 > IsStylusCaptured		(Inherited from DependencyObject)
+
 Gets a value indicating whether the stylus is captured by this element. This is a dependency property.(Inherited from UIElement)
 
 > IsStylusCaptureWithin	(Inherited from UIElement)
@@ -7596,30 +9202,39 @@ Gets a value indicating whether the stylus is captured by this element. This is 
 > Gets or sets localization/globalization language information that applies to an element.
 
 > LayoutTransform	
+
 Gets or sets a graphics transformation that should apply to this element when layout is performed.
 
 > LogicalChildren	
+
 Gets an enumerator for logical child elements of this element.
 
 > Margin	
+
 Gets or sets the outer margin of an element.
 
 > MaxHeight	
+
 Gets or sets the maximum height constraint of the element.
 
 > MaxWidth	
+
 Gets or sets the maximum width constraint of the element.
 
 > MinHeight	
+
 Gets or sets the minimum height constraint of the element.
 
 > MinWidth	
+
 Gets or sets the minimum width constraint of the element.
 
 > Name	
+
 Gets or sets the identifying name of the element. The name provides a reference so that code-behind, such as event handler code, can refer to a markup element after it is constructed during processing by a XAML processor.
 
 > Opacity	
+
 Gets or sets the opacity factor applied to the entire UIElement when it is rendered in the user interface (UI). This is a dependency property.(Inherited from UIElement)
 
 > OpacityMask	(Inherited from UIElement)
@@ -7631,10 +9246,13 @@ Gets or sets the opacity factor applied to the entire UIElement when it is rende
 > Gets or sets a value that indicates whether this element incorporates style properties from theme styles.
 
 > Parent	
+
 Gets the logical parent element of this element.
 
 > PersistId	
+
 Obsolete.
+
 Gets a value that uniquely identifies this element.(Inherited from UIElement)
 
 > RenderSize	(Inherited from UIElement)
@@ -7654,6 +9272,7 @@ Gets a value that uniquely identifies this element.(Inherited from UIElement)
 > Gets or sets the locally-defined resource dictionary.
 
 SnapsToDevicePixels	
+
 Gets or sets a value that determines whether rendering for this element should use device-specific pixel settings during rendering. This is a dependency property.(Inherited from UIElement)
 
 > Style	(Inherited from UIElement)
@@ -7661,6 +9280,7 @@ Gets or sets a value that determines whether rendering for this element should u
 > Gets or sets the style used by this element when it is rendered.
 
 StylusPlugIns	
+
 Gets a collection of all stylus plug-in (customization) objects associated with this element.(Inherited from UIElement)
 
 > Tag	(Inherited from UIElement)
@@ -7668,12 +9288,15 @@ Gets a collection of all stylus plug-in (customization) objects associated with 
 > Gets or sets an arbitrary object value that can be used to store custom information about this element.
 
 > TemplatedParent	
+
 Gets a reference to the template parent of this element. This property is not relevant if the element was not created through a template.
 
 > ToolTip	
+
 Gets or sets the tool-tip object that is displayed for this element in the user interface (UI).
 
 > TouchesCaptured	
+
 Gets all touch devices that are captured to this element.(Inherited from UIElement)
 
 > TouchesCapturedWithin	(Inherited from UIElement)
@@ -7693,6 +9316,7 @@ Gets all touch devices that are captured to this element.(Inherited from UIEleme
 > Gets the collection of triggers established directly on this element, or in child elements.
 
 > Uid	
+
 Gets or sets the unique identifier (for localization) for this element. This is a dependency property.(Inherited from UIElement)
 
 > UseLayoutRounding	(Inherited from UIElement)
@@ -7700,182 +9324,241 @@ Gets or sets the unique identifier (for localization) for this element. This is 
 > Gets or sets a value that indicates whether layout rounding should be applied to this element's size and position during layout.
 
 > VerticalAlignment	
+
 Gets or sets the vertical alignment characteristics applied to this element when it is composed within a parent element such as a panel or items control.
 
 > Visibility	
+
 Gets or sets the user interface (UI) visibility of this element. This is a dependency property.(Inherited from UIElement)
 
 > VisualBitmapEffect	(Inherited from UIElement)
 
 > Obsolete.
+
 Gets or sets the BitmapEffect value for the Visual.
 
 > VisualBitmapEffectInput	(Inherited from Visual)
+
 Obsolete.
+
 Gets or sets the BitmapEffectInput value for the Visual.
 
 > VisualBitmapScalingMode	(Inherited from Visual)
+
 Gets or sets the BitmapScalingMode for the Visual.
 
 > VisualCacheMode	(Inherited from Visual)
+
 Gets or sets a cached representation of the Visual.
 
 > VisualChildrenCount	(Inherited from Visual)
+
 Gets the number of visual child elements within this element.
 
 > VisualClearTypeHint	
+
 Gets or sets the ClearTypeHint that determines how ClearType is rendered in the Visual.
 
 > VisualClip	(Inherited from Visual)
+
 Gets or sets the clip region of the Visual as a Geometry value.
 
 > VisualEdgeMode	(Inherited from Visual)
+
 Gets or sets the edge mode of the Visual as an EdgeMode value.
 
 > VisualEffect	(Inherited from Visual)
+
 Gets or sets the bitmap effect to apply to the Visual.
 
 > VisualOffset	(Inherited from Visual)
+
 Gets or sets the offset value of the visual object.
 
 > VisualOpacity	(Inherited from Visual)
+
 Gets or sets the opacity of the Visual.
 
 > VisualOpacityMask	(Inherited from Visual)
+
 Gets or sets the Brush value that represents the opacity mask of the Visual.
 
 > VisualParent	(Inherited from Visual)
+
 Gets the visual tree parent of the visual object.
 
 > VisualScrollableAreaClip	(Inherited from Visual)
+
 Gets or sets a clipped scrollable area for the Visual.
 
 > VisualTextHintingMode	
+
 Gets or sets the TextHintingMode of the Visual.
 
 > VisualTextRenderingMode	(Inherited from Visual)
+
 Gets or sets the TextRenderingMode of the Visual.
 
 > VisualTransform	(Inherited from Visual)
+
 Gets or sets the Transform value for the Visual.
 
 > VisualXSnappingGuidelines	(Inherited from Visual)
+
 Gets or sets the x-coordinate (vertical) guideline collection.
 
 > VisualYSnappingGuidelines	(Inherited from Visual)
+
 Gets or sets the y-coordinate (horizontal) guideline collection.
 
 > Width	(Inherited from Visual)
+
 Gets or sets the width of the element.
 
 ##### Fielsds:
 
 > ActualHeightProperty	
+
 Identifies the ActualHeight dependency property.
 
 > ActualWidthProperty	
+
 Identifies the ActualWidth dependency property.
 
 > BindingGroupProperty	
+
 Identifies the BindingGroup dependency property.
 
 > ContextMenuClosingEvent	
+
 Identifies the ContextMenuClosing routed event.
 
 > ContextMenuOpeningEvent	
+
 Identifies the ContextMenuOpening routed event.
 
 > ContextMenuProperty	
+
 Identifies the ContextMenu dependency property.
 
 > CursorProperty	
+
 Identifies the Cursor dependency property.
 
 > DataContextProperty	
+
 Identifies the DataContext dependency property.
 
 > DefaultStyleKeyProperty	
+
 Identifies the DefaultStyleKey dependency property.
 
 > FlowDirectionProperty	
+
 Identifies the FlowDirection dependency property.
 
 > FocusVisualStyleProperty	
+
 Identifies the FocusVisualStyle dependency property.
 
 > ForceCursorProperty	
+
 Identifies the ForceCursor dependency property.
 
 > HeightProperty	
+
 Identifies the Height dependency property.
 
 > HorizontalAlignmentProperty	
+
 Identifies the HorizontalAlignment dependency property.
 
 > InputScopeProperty	
+
 Identifies the InputScope dependency property.
 
 > LanguageProperty	
+
 Identifies the Language dependency property.
 
 > LayoutTransformProperty	
+
 Identifies the LayoutTransform dependency property.
 
 > LoadedEvent	
+
 Identifies the Loaded routed event.
 
 > MarginProperty	
+
 Identifies the Margin dependency property.
 
 > MaxHeightProperty	
+
 Identifies the MaxHeight dependency property.
 
 > MaxWidthProperty	
+
 Identifies the MaxWidth dependency property.
 
 > MinHeightProperty	
+
 Identifies the MinHeight dependency property.
 
 > MinWidthProperty	
+
 Identifies the MinWidth dependency property.
 
 > NameProperty	
+
 Identifies the Name dependency property.
 
 > OverridesDefaultStyleProperty	
+
 Identifies the OverridesDefaultStyle dependency property.
 
 > RequestBringIntoViewEvent	
+
 Identifies the RequestBringIntoView routed event.
 
 > SizeChangedEvent	
+
 Identifies the SizeChanged routed event.
 
 > StyleProperty	
+
 Identifies the Style dependency property.
 
 > TagProperty	
+
 Identifies the Tag dependency property.
 
 > ToolTipClosingEvent	
+
 Identifies the ToolTipClosing routed event.
 
 > ToolTipOpeningEvent	
+
 Identifies the ToolTipOpening routed event.
 
 > ToolTipProperty	
+
 Identifies the ToolTip dependency property.
 
 > UnloadedEvent	
+
 Identifies the Unloaded routed event.
 
 > UseLayoutRoundingProperty	
+
 Identifies the UseLayoutRounding dependency property.
 
 > VerticalAlignmentProperty	
+
 Identifies the VerticalAlignment dependency property.
 
 > WidthProperty	
+
 Identifies the Width dependency property.
 
 ### 属性
@@ -7897,17 +9580,27 @@ Identifies the Width dependency property.
 > > 例如可以绑定附加项属性去修改被附加对象的非依赖项属性等
 
 ```
+
         public static readonly DependencyProperty AngleProperty =
+
             DependencyProperty.RegisterAttached("Angle", typeof(double), typeof(RotationManager), new PropertyMetadata(0.0,OnAngleChanged));
 
         private static void OnAngleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+
         {
+
             var element = obj as UIElement;
+
             if (element != null)
+
             {
+
                 element.RenderTransformOrigin = new Point(0.5, 0.5);
+
                 element.RenderTransform = new RotateTransform((double)e.NewValue);
+
             }
+
         }
 
 ```
@@ -7947,15 +9640,25 @@ Identifies the Width dependency property.
 以下示例重写依赖属性 DefaultStyleKey 的元数据。 重写此特定依赖属性的元数据是某个实现模式的一部分，该模式创建可以使用主题中的默认样式的控件。
 
 ```
+
 public class SpinnerControl : ItemsControl
+
 {
+
     static SpinnerControl()
+
     {
+
         DefaultStyleKeyProperty.OverrideMetadata(
+
             typeof(SpinnerControl),
+
             new FrameworkPropertyMetadata(typeof(SpinnerControl))
+
         );
+
     }
+
 }
 
 ```
@@ -7965,9 +9668,13 @@ public class SpinnerControl : ItemsControl
 > > 下面的示例演示一个绑定，并设置指定绑定（在前面的绑定示例中未显示出来）的源的 DataContext 属性。 子对象中的任何后续绑定都无需指定源，它们可以使用父对象 StackPanel 中 DataContext 的继承值。 （或者，子对象可以选择直接在 Binding 中指定自己的 DataContext 或 Source，并且有意不将继承值用于其绑定的数据上下文。）
 
 ```
+
 <StackPanel Canvas.Top="50" DataContext="{Binding Source={StaticResource XmlTeamsSource}}">
+
   <Button Content="{Binding XPath=Team/@TeamName}"/>
+
 </StackPanel>
+
 ```
 
 ####  WPF 设计器集成
@@ -7981,17 +9688,27 @@ public class SpinnerControl : ItemsControl
 > > 3、使用.NET属性包装依赖属性
 
 ```
+
  public static DependencyProperty TextProperty;
+
        TextProperty =
+
        DependencyProperty.Register("Text", //属性名称
+
        typeof(string), //属性类型
+
        typeof(TestDependencyPropertyWindow), //该属性所有者，即将该属性注册到那个类上
+
        new PropertyMetadata("")); //属性默认值
 
 public string Text
+
 {
+
    get { return (string)GetValue(TextProperty); }
+
    set { SetValue(TextProperty, value); }
+
 }
 
 ```
@@ -8016,7 +9733,9 @@ public string Text
 
 #### 普通事件
 
-##### 生命周期事件：在元素被初始化，加载或卸载时发生。
+##### 生命周期事件
+
+> > 在元素被初始化，加载或卸载时发生。
 
 > a.Initialized 元素被实例化，但是窗口的其他部分可能还没有初始化。还没有应用样式和数据绑定。
 
@@ -8028,9 +9747,13 @@ public string Text
 
 > 包含其他所有元素的窗口首先引发Loaded事件，都引发了Loaded事件之后，窗口就变的可见了。
 
-##### 鼠标事件： 鼠标动作的结果。
+##### 鼠标事件
 
-##### 键盘事件： 键盘动作的结果。
+> > 鼠标动作的结果。
+
+##### 键盘事件
+
+> > 键盘动作的结果。
 
 > PreviewKeyDown事件：隧道事件，按键触发
 
@@ -8044,11 +9767,15 @@ public string Text
 
 > KeyUp事件：冒泡事件，释放键触发
 
-##### 手写笔事件： 类似铅笔的手写笔的结果
+##### 手写笔事件
+
+> > 类似铅笔的手写笔的结果
 
 ##### 多点触控事件
 
-#### 路由事件（向上冒泡或者向下隧道传播（Preview开始的事件））
+#### 路由事件
+
+> > （向上冒泡或者向下隧道传播（Preview开始的事件））
 
 > 定义 注册 封装路由事件（RoutedEvent）
 
@@ -8077,49 +9804,81 @@ public string Text
 > 设置属性
 
 ```
+
 <Setter Property="FontFamily" Value="Times New Roman"/>
+
 ```
 
 > 创建只应用按钮的样式  
 
 ```
-        <Style x:Key="BigFontButtonStyle" TargetType="Button">
-            <Setter Property="FontFamily" Value="Times New Roman"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-        </Style>
+
+<Style x:Key="BigFontButtonStyle" TargetType="Button">
+
+    <Setter Property="FontFamily" Value="Times New Roman"/>
+
+    <Setter Property="FontSize" Value="18"/>
+
+    <Setter Property="FontWeight" Value="Bold"/>
+
+</Style>
+
 ```
 
 > 关联事件处理程序
 
 ```
+
  <Window.Resources>
+
         <Style x:Key="MouseOverHighlightStyle">
+
             <EventSetter Event="TextBlock.MouseEnter" Handler="element_MouseEnter"></EventSetter>
+
             <EventSetter Event="TextBlock.MouseLeave" Handler="element_MouseLeave"></EventSetter>
+
         </Style>
+
     </Window.Resources>
+
     <Grid Name="gird1" ShowGridLines="True">
+
         <TextBlock Style="{StaticResource MouseOverHighlightStyle}"></TextBlock>
+
     </Grid>
+
 ```
 
 > 多层样式
 
 ```
+
  <Window.Resources>
+
         <Style x:Key="BigFontButtonStyle">
+
             <Setter Property="Control.FontFamily" Value="Times New Roman"/>
+
             <Setter Property="Control.FontSize" Value="18"/>
+
             <Setter Property="Control.FontWeight" Value="Bold"/>
+
         </Style>
+
         <Style x:Key="NewBigButtonBigFontStyle" BasedOn="{StaticResource BigFontButtonStyle}">
+
             <Setter Property="Control.Foreground" Value="Red"/>
+
             <Setter Property="Control.Background" Value="DarkBlue"/>
+
         </Style>
+
     </Window.Resources>
+
     <Grid Name="gird1" ShowGridLines="True">
+
         <TextBlock Style="{StaticResource NewBigButtonBigFontStyle}">test</TextBlock>
+
     </Grid>
 
 ```
@@ -8127,18 +9886,31 @@ public string Text
 > 通过类型自动应用样式
 
 ```
+
  <Window.Resources>
+
         <Style TargetType="Button">
+
             <Setter Property="Control.FontFamily" Value="Times New Roman"/>
+
             <Setter Property="Control.FontSize" Value="18"/>
+
             <Setter Property="Control.FontWeight" Value="Bold"/>
+
         </Style>
+
     </Window.Resources>
+
     <Grid Name="gird1" ShowGridLines="True">
+
         <Button>one</Button>
+
         <Button Style="{x:Null}">two</Button>
+
         <Button>three</Button>
+
     </Grid>
+
 ```
 
 #### 触发器
@@ -8146,71 +9918,129 @@ public string Text
 > Trigger	这是一种最简单的触发器。可以监测依赖项属性的变化，然后设置器改变样式。
 
 ```
+
    <Window.Resources>
+
         <Style x:Key="BigFontButton">
+
             <Style.Setters>
+
                 <Setter Property="Control.FontFamily" Value="Times New Roman"/>
+
                 <Setter Property="Control.FontSize" Value="18"/>
+
                 <Setter Property="Control.FontWeight" Value="Bold"/>
+
             </Style.Setters>
+
             <Style.Triggers>
+
                 <Trigger Property="Control.IsFocused" Value="True">
+
                     <Setter Property="Control.Foreground" Value="DarkRed"/>
+
                 </Trigger>
+
             </Style.Triggers>
+
         </Style>
+
     </Window.Resources>
+
 ```
 
 > MultiTrigger	与Trigger类似，但这种触发器联合了多个条件。只有满足了所有这些条件，才会启动触发器。
 
-   * <Style.Triggers>
+    <Style.Triggers>
+
                 <MultiDataTrigger>
+
                     <MultiDataTrigger.Conditions>
+
                         <Condition Property="Control.IsFocused" Value="true"/>
+
                         <Condition Property="Control.IsMouseOver" Value="true"/>
+
                     </MultiDataTrigger.Conditions>
+
                     <MultiDataTrigger.Setters>
+
                         <Setter Property="Control.Foreground" Value="DarkRed"/>
+
                     </MultiDataTrigger.Setters>
+
                 </MultiDataTrigger>
+
             </Style.Triggers>
 
 > DataTrigger	这种触发器使用数据绑定，与Trigger类似，只不过监视的是任意绑定数据的变化。
 
 ```
+
  <Window.Resources>
+
         <Style x:Key="BigFontButton">
+
             <Style.Setters>
+
                 <Setter Property="Control.FontFamily" Value="Times New Roman"/>
+
                 <Setter Property="Control.FontSize" Value="18"/>
+
                 <Setter Property="Control.FontWeight" Value="Bold"/>
+
             </Style.Setters>
+
             <Style.Triggers>
+
                 <EventTrigger RoutedEvent="Mouse.MouseEnter">
+
                     <EventTrigger.Actions>
+
                         <BeginStoryboard>
+
                             <Storyboard>
+
                                 <DoubleAnimation Duration="0:0:3" Storyboard.TargetProperty="FontSize"
+
                                                  To="50"/>
+
                             </Storyboard>
+
                         </BeginStoryboard>
+
                     </EventTrigger.Actions>
+
                 </EventTrigger>
+
                 <EventTrigger RoutedEvent="Mouse.MouseLeave">
+
                     <EventTrigger.Actions>
+
                         <BeginStoryboard>
+
                             <Storyboard>
+
                                 <DoubleAnimation Duration="0:0:3" Storyboard.TargetProperty="FontSize"/>
+
                             </Storyboard>
+
                         </BeginStoryboard>
+
                     </EventTrigger.Actions>
+
                 </EventTrigger>
+
             </Style.Triggers>
+
         </Style>
+
     </Window.Resources>
+
     <Grid Name="gird1" ShowGridLines="True">
+
         <Button HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource BigFontButton}">onesfsfsfsfsdfsdf</Button>
+
     </Grid>
 
 ```
@@ -8268,21 +10098,33 @@ public string Text
 #### ICopyAble
 
 ```
+
  public interface ICopyAble
+
     {
 
         /// <summary>
+
         /// 复制操作
+
         /// </summary>
+
         /// <param name="IsDeleteSource">是否删除源</param>
+
         /// <returns></returns>
+
         CopyPasteData Copy(bool IsDeleteSource);
 
         /// <summary>
+
         /// 剪贴版的清空操作
+
         /// </summary>
+
         /// <param name="Data"></param>
+
         void Remove(CopyPasteData Data);
+
     }
 
 ```
@@ -8290,17 +10132,29 @@ public string Text
 ####  IPasteAble
 
 ```
+
     /// <summary>
+
     /// 复制粘贴服务接口
+
     /// 可以根据用户自己实现具体支持的数据类型所以定义为泛型类
+
     /// </summary>
+
     /// <typeparam name="T"></typeparam>
+
     public interface IPasteAble
+
     {
+
         /// <summary>
+
         /// 粘贴操作
+
         /// </summary>
+
         void Paste(CopyPasteData Data);
+
     }
 
 ```
@@ -8308,79 +10162,141 @@ public string Text
 #### CopyPasteProxy
 
 ```
+
     public class CopyPasteProxy
+
     {
+
         public CopyPasteData Data { get; set; }
 
         public ICopyAble Source { get; set; }
 
         public void Copy(ICopyAble Source,bool IsDeleteSource)
+
         {
+
             this.Source = Source;
+
             if (Source != null)
+
             {
+
                 Data = Source.Copy(IsDeleteSource);
+
             }
+
             else
+
             {
+
                 Data = new CopyPasteData();
+
             }
+
         }
 
         public void Paste(IPasteAble Destination, bool IsDeleteSource)
+
         {
+
             if (Destination != null)
+
             {
+
                 Destination.Paste(Data);
+
                 if (IsDeleteSource)
+
                 {
+
                     Source.Remove(Data);
+
                 }
+
             }
+
         }
 
         public void OnCopy(bool IsDeleteSource)
+
         {
+
             if (Keyboard.FocusedElement is DependencyObject)
+
             {
+
                 var c = GetParent<ICopyAble>(Keyboard.FocusedElement as DependencyObject);
+
                 if (c != null && c is ICopyAble)
+
                 {
+
                     Copy(c as ICopyAble, IsDeleteSource);
+
                 }
+
             }
+
         }
 
         public void OnPaste(bool IsDeleteSource)
+
         {
+
             if (Keyboard.FocusedElement is DependencyObject)
+
             {
+
                 var p = GetParent<IPasteAble>(Keyboard.FocusedElement as DependencyObject);
+
                 if (p != null && p is IPasteAble)
+
                 {
+
                     Paste(p as IPasteAble, IsDeleteSource);
+
                 }
+
             }
+
         }
 
         private DependencyObject GetParent<T>(DependencyObject o)
+
         {
+
             if (o != null && o is DependencyObject)
+
             {
+
                 var p = VisualTreeHelper.GetParent(o as UIElement);
+
                 if (p != null && p is T)
+
                 {
+
                     return p;
+
                 }
+
                 else if(p != null)
+
                 {
+
                     return GetParent<T>(p);
+
                 }
+
                 {
+
                     return null;
+
                 }
+
             }
+
             return null;
+
         }
 
     }
@@ -8390,33 +10306,55 @@ public string Text
 #### CopyPasteData
 
 ```
+
   public class CopyPasteData
+
     {
+
         /// <summary>
+
         /// 数据类型
+
         /// </summary>
+
         public string DataType { get; set; } = "ClipboardDataFromMemo";
 
         /// <summary>
+
         /// 数据是否从系统剪贴版获取
+
         /// </summary>
+
         public bool IsFromClipboard { get; set; } = true;
 
         /// <summary>
+
         /// 数据对象 IsFromClipboard为true则此值无效需要直接获取剪贴板数据
+
         /// </summary>
+
         public object Data { get; set; } = null;
 
         /// <summary>
+
         /// 获取剪贴板数据
+
         /// 数据对象 IsFromClipboard为true则此值有效 当然客户可以直接从系统剪贴板直接获取数据
+
         /// </summary>
+
         public IDataObject ClipboardData
+
         {   get
+
             {
+
                 return Clipboard.GetDataObject();
+
             } 
+
         }
+
     }
 
 ```
@@ -8432,50 +10370,85 @@ public string Text
 > 重写Behavior里面的两个函数OnAttached（附加后）与OnDetaching（分离时）
 
 ```
+
 using Microsoft.Xaml.Behaviors;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
+
 using System.Windows;
+
 using System.Windows.Media;
+
 using System.Windows.Media.Effects;
 
 namespace Inovance.FA.FAOutTest.Behaviors
+
 {
+
     public class EffectBehavior : Behavior<FrameworkElement>
+
     {
+
         //使用 Behavior 必须重写以下两个虚方法
+
         protected override void OnAttached()
+
         {
+
             base.OnAttached();
 
             //AssociatedObject为关联对象， 是Behavior<T>中的T
+
             AssociatedObject.MouseMove += AssociatedObject_MouseMove;
+
             AssociatedObject.MouseLeave += AssociatedObject_MouseLeave;
+
         }
 
         private void AssociatedObject_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+
         {
+
             var element = sender as FrameworkElement;
+
             element.Effect = (Effect)new DropShadowEffect() { Color = Colors.Transparent, ShadowDepth = 0 };
+
         }
 
         private void AssociatedObject_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+
         {
+
             var element = sender as FrameworkElement;
+
             element.Effect = (Effect)new DropShadowEffect() { Color = Colors.Red, ShadowDepth = 0 };
+
         }
 
         protected override void OnDetaching()
+
         {
+
             base.OnDetaching();
+
             AssociatedObject.MouseMove -= AssociatedObject_MouseMove;
+
             AssociatedObject.MouseLeave -= AssociatedObject_MouseLeave;
+
         }
+
     }
+
 }
+
 ```
 
 ### Command
@@ -8521,7 +10494,9 @@ namespace Inovance.FA.FAOutTest.Behaviors
 > INotifyPropertyChanged ViwModel
 
 ```
+
 public abstract class ViewModel : INotifyPropertyChanged
+
     {
 
         public ILogger Logger { get; set; }
@@ -8529,64 +10504,109 @@ public abstract class ViewModel : INotifyPropertyChanged
         public IMessageBox MessageBox { get; set; }
 
         public ViewModel()
+
         {
+
             Logger = StaticData.Container.GetExportedValue<ILogger>();
+
             MessageBox = StaticData.Container.GetExportedValue<IMessageBox>();
+
         }
 
         public string Name
+
         {
+
             get
+
             {
+
                 return this.GetType().Name;
+
             }
+
         }
 
         public bool? dialogResult;
+
         public bool? DialogResult
+
         {
+
             get
+
             {
+
                 return dialogResult;
+
             }
+
             set
+
             {
+
                 dialogResult = value;
+
                 RaisePropertyChanged("DialogResult");
+
             }
+
         }
 
         protected virtual void RaisePropertyChanged(string propertyName)
+
         {
+
             if (PropertyChanged != null)
+
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public bool SetProperty<T>(ref T Source, T NewValue, [CallerMemberName] string? propertyName = null) where T : IComparable
+
         {
+
             if (EqualityComparer<T>.Default.Equals(Source, NewValue))
+
             {
+
                 return false;
+
             }
+
             else
+
             {
+
                 Source = NewValue;
+
                 RaisePropertyChanged(propertyName);
+
             }
+
             return true;
+
         }
+
     }
+
 ```
 
 > 屬性就可以簡寫成為一下方法：
 
 ```
+
 public List<DataNode> projectNodes;
+
                public List<DataNode> ProjectNodes{
+
             get => projectNodes;
+
             set => SetProperty(ref projectNodes, value);
+
         }
 
 ```
@@ -8624,72 +10644,119 @@ public List<DataNode> projectNodes;
 ### Prism
 
 Prism框架 如何在主程序中合理的弹出子窗体
+
 说起子窗体，大家都会想到ChildWindow，多熟悉的一个控件。不错，Sliverlight中已经提供了子窗体的具体实现，而在WPF中却没有这么好的事情（有的第三方控件商已经提供此控件）。最常见的实现方法就是在ViewModel中，直接New ChildWindow，然后直接Show。这样的方法也达到的要求。但是它不符合MVVM分层思想，再就是代码不美观，难以维护，今天我就给大家介绍一种美观又实用的方法。
 
 通过Prism中提供的InteractionRequestTrigger事件触发器，实现点击按钮或者用户的某种操作弹出对话框的效果。另外，不要忘了引用此命名空间：
 
 ```
+
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 <Window x:Class="ChildWindowDemo.ChildWindow.ChildWindow"
+
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"  
+
         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+
         Width="300" Height="150" 
+
         Title="{Binding Title}"
+
         x:Name="confirmationWindow" Topmost="True" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+
     <Grid x:Name="LayoutRoot" Margin="2">
+
         <Grid.RowDefinitions>
+
             <RowDefinition />
+
             <RowDefinition Height="Auto" />
+
         </Grid.RowDefinitions>
 
         <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Content="{Binding Content}"/>
 
         <Button Content="Cancel" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0" Grid.Row="1">
+
             <i:Interaction.Triggers>
+
                 <i:EventTrigger EventName="Click">
+
                     <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
+
                 </i:EventTrigger>
+
             </i:Interaction.Triggers>
+
         </Button>
+
         <Button Content="OK" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,79,0" Grid.Row="1">
+
             <i:Interaction.Triggers>
+
                 <i:EventTrigger EventName="Click">
+
                     <ei:ChangePropertyAction PropertyName="Confirmed" TargetObject="{Binding}" Value="True"/>
+
                     <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
+
                 </i:EventTrigger>
+
             </i:Interaction.Triggers>
+
         </Button>
+
     </Grid>
+
 </Window>
+
 ```
 
 创建ChildWindow的基类
+
 新建类：ChildWindowActionBase 并从TriggerAction<T>派生，代码如下：
 
  
 
 ```
+
 public class ChildWindowActionBase : TriggerAction<FrameworkElement>
+
     {
+
         protected override void Invoke(object parameter)
+
         {
+
             var arg = parameter as InteractionRequestedEventArgs;
+
             if (arg == null)
+
                 return;
 
             var windows = this.GetChildWindow(arg.Context);
 
             var callback = arg.Callback;
+
             EventHandler handler = null;
+
             handler =
+
                 (o, e) =>
+
                 {
+
                     windows.Closed -= handler;
+
                     callback();
+
                 };
+
             windows.Closed += handler;
 
             windows.ShowDialog();
@@ -8697,51 +10764,89 @@ public class ChildWindowActionBase : TriggerAction<FrameworkElement>
         }
 
         Window GetChildWindow(Notification notification)
+
         {
+
             var childWindow = this.CreateDefaultWindow(notification);
+
             childWindow.DataContext = notification;
 
             return childWindow;
+
         }
 
         Window CreateDefaultWindow(Notification notification)
+
         {
+
             return (Window)new ChildWindow.ChildWindow();
+
         }
+
     }
+
 ```
+
 到此子窗体已经完成
 
 ```
+
 <Window x:Class="ChildWindowDemo.MainWindow"
+
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
         xmlns:prism="http://www.codeplex.com/prism"
+
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+
         xmlns:local="clr-namespace:ChildWindowDemo"
+
         Title="MainWindow" Height="200" Width="300">
+
     <i:Interaction.Triggers>
+
         <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest, Mode=OneWay}">
+
             <local:ChildWindowActionBase/>
+
         </prism:InteractionRequestTrigger>
+
     </i:Interaction.Triggers>
+
     <Grid>
+
         <Button Command="{Binding RaiseConfirmation}" Content="Click Me !" HorizontalAlignment="Left" Margin="29,31,0,0" VerticalAlignment="Top" Width="217" Height="55"/>
+
         <TextBlock HorizontalAlignment="Left" Margin="29,106,0,0" TextWrapping="Wrap" Text="{Binding ConfirmationResult}" VerticalAlignment="Top"/>
+
     </Grid>
+
 </Window>
+
 ```
+
 对之对应的ViewModel：
 
 ```
+
 public class MainWindowViewModel : NotificationObject
+
     {
+
         public MainWindowViewModel()
+
         {
+
             this.RaiseConfirmation = new DelegateCommand(this.OnRaiseConfirmation);
+
             this.ConfirmationRequest = new InteractionRequest<Confirmation>();
+
         }
 
         public InteractionRequest<Confirmation> ConfirmationRequest { get; private set; }
@@ -8749,24 +10854,41 @@ public class MainWindowViewModel : NotificationObject
         public DelegateCommand RaiseConfirmation { get; private set; }
 
         private string result;
+
         public string ConfirmationResult
+
         {
+
             get { return result; }
+
             set
+
             {
+
                 result = value;
+
                 this.RaisePropertyChanged(() => this.ConfirmationResult);
+
             }
+
         }
 
         private void OnRaiseConfirmation()
+
         {
+
             this.ConfirmationRequest.Raise(
+
                 new Confirmation { Content = "是否确认", Title = "子窗体" },
+
                 (cb) => { ConfirmationResult = cb.Confirmed ? "确认" : "取消"; });
+
         }      
+
     }
+
 ```
+
 这样的写法比较符合MVVM的分层思想，子窗体可以随心定制，而不需要去改逻辑层的代码。
 
 http://www.cnblogs.com/sunthx/p/3539900.html
@@ -8854,12 +10976,19 @@ http://www.cnblogs.com/sunthx/p/3539900.html
 > 不是 6 分钟，不是 16 分账，是整整 60 分钟，Prism 的旧文档随便打开一篇都吓死人。而 Prism 的各种包更是多到离谱。例如几年前的 Prism 6.3，其中 WPF 平台的项目有这么多个：
 
 > Prism.Wpf
+
 > Prism.Autofac
+
 > Prism.DryIoc
+
 > Prism.Mef
+
 > Prism.Ninject
+
 > Prism.StructureMap
+
 > Prism.Unity
+
 > 所以臃肿是很多人对 Prism 的印象。
 
 > 减肥是一个永恒的受欢迎的话题，对 Prism 也是一样。相比 Prism 6.3，刚刚发布的 8.0 已经好很多了（虽然还是有很多个项目），例如 WPF 平台的项目已经大幅删减，只保留了 Prism.Wpf、Prism.DryIoc 和 Prism.Unity，也就是说现在 Prism 只支持 DryIoc 和 Unity 两种 IOC 容器。这样一来 Prism 项目的结构就很清晰了。
@@ -8877,8 +11006,11 @@ http://www.cnblogs.com/sunthx/p/3539900.html
 > 除了一些各个平台都用到的零零碎碎的公用类，作为一个 MVVM 库 Prism.Core 主要提供了下面三方面的功能：
 
 > BindableBase 和 ErrorsContainer
+
 > Commanding
+
 > Event Aggregator
+
 > 这些功能已经覆盖了 MVVM 的核心功能，如果只需要与具体平台无关的 MVVM 功能，可以只安装 Prism.Core。
 
 #### BindableBase 和 ErrorsContainer#
@@ -8886,103 +11018,161 @@ http://www.cnblogs.com/sunthx/p/3539900.html
 > 数据绑定是 MVVM 的核心元素之一，为了使绑定的数据可以和 UI 交互，数据类型必须继承 INotifyPropertyChanged。 BindableBase 实现了 INotifyPropertyChanged 最简单的封装，它的使用如下：
 
 ```
+
 public class MockViewModel : BindableBase
+
 {
+
     private string _myProperty;
+
     public string MyProperty
+
     {
+
         get { return _myProperty; }
+
         set { SetProperty(ref _myProperty, value); }
+
     }
+
 }
+
 ```
 
 > 其中 SetProperty 判断 _myProperty 和 value 是否相等，如果不相等就为 _myProperty 赋值并触发 OnPropertyChanged 事件。
 
-
 > 除了 INotifyPropertyChanged，绑定机制中另一个十分有用的接口是 INotifyDataErrorInfo，它用于公开数据验证的结果。Prism 提供了 ErrorsContainer 以便管理及通知数据验证的错误信息。要使用 ErrorsContainer，可以先写一个类似这样的基类：
 
 ```
+
 public class DomainObject : BindableBase, INotifyDataErrorInfo
+
 {
+
     public ErrorsContainer<string> _errorsContainer;
 
     protected ErrorsContainer<string> ErrorsContainer
+
     {
+
         get
+
         {
+
             if (_errorsContainer == null)
+
                 _errorsContainer = new ErrorsContainer<string>(s => OnErrorsChanged(s));
 
             return _errorsContainer;
+
         }
+
     }
 
     public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
     public void OnErrorsChanged(string propertyName)
+
     {
+
         ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+
     }
 
     public IEnumerable GetErrors(string propertyName)
+
     {
+
         return ErrorsContainer.GetErrors(propertyName);
+
     }
 
     public bool HasErrors
+
     {
+
         get { return ErrorsContainer.HasErrors; }
+
     }
+
 }
+
 ```
 
 > 然后就可以在派生类中通过 ErrorsContainer.SetErrors 和 ErrorsContainer.ClearErrors 管理数据验证的错误信息：
 
 ```
+
 public class MockValidatingViewModel : DomainObject
+
 {
+
     private int mockProperty;
 
     public int MockProperty
+
     {
+
         get
+
         {
+
             return mockProperty;
+
         }
 
         set
+
         {
+
             SetProperty(ref mockProperty, value);
 
             if (mockProperty < 0)
+
                 ErrorsContainer.SetErrors(() => MockProperty, new string[] { "value cannot be less than 0" });
+
             else
+
                 ErrorsContainer.ClearErrors(() => MockProperty);
+
         }
+
     }
+
 }
+
 ```
+
 #### Commanding
 
 > ICommand 同样是 MVVM 模式的核心元素，DelegateCommand 实现了 ICommand 接口，它最基本的使用形式如下，其中 DelegateCommand 构造函数中的第二个参数 canExecuteMethod 是可选的：
 
 ```
+
 public DelegateCommand SubmitCommand { get; private set; }
 
 public CheckUserViewModel()
+
 {
+
     SubmitCommand = new DelegateCommand(Submit, CanSubmit);
+
 }
 
 private void Submit()
+
 {
+
     //implement logic
+
 }
 
 private bool CanSubmit()
+
 {
+
     return true;
+
 }
 
 ```
@@ -8990,21 +11180,31 @@ private bool CanSubmit()
 > 另外它还有泛型的版本：
 
 ```
+
 public DelegateCommand<string> SubmitCommand { get; private set; }
 
 public CheckUserViewModel()
+
 {
+
     SubmitCommand = new DelegateCommand<string>(Submit, CanSubmit);
+
 }
 
 private void Submit(string parameter)
+
 {
+
     //implement logic
+
 }
 
 private bool CanSubmit(string parameter)
+
 {
+
     return true;
+
 }
 
 ```
@@ -9014,27 +11214,43 @@ private bool CanSubmit(string parameter)
 > 如果 CanExecute 的返回值有变化，可以调用 RaiseCanExecuteChanged 函数，它会触发 CanExecuteChanged 事件并通知 UI 元素重新判断绑定的 ICommand 是否可用。除了主动调用 RaiseCanExecuteChanged，DelegateCommand 还可以用 ObservesProperty 和 ObservesCanExecute 两种形式监视属性，定于属性的 PropertyChanged 事件并改变 CanExecute：
 
 ```
+
 private bool _isEnabled;
+
 public bool IsEnabled
+
 {
+
     get { return _isEnabled; }
+
     set { SetProperty(ref _isEnabled, value); }
+
 }
 
 private bool _canSave;
+
 public bool CanSave
+
 {
+
     get { return _canSave; }
+
     set { SetProperty(ref _canSave, value); }
+
 }
 
 public CheckUserViewModel()
+
 {
+
     SubmitCommand = new DelegateCommand(Submit, CanSubmit).ObservesProperty(() => IsEnabled);
+
     //也可以写成串联方式
+
     SubmitCommand = new DelegateCommand(Submit, CanSubmit).ObservesProperty(() => IsEnabled).ObservesProperty<bool>(() => CanSave);
 
     SubmitCommand = new DelegateCommand(Submit).ObservesCanExecute(() => IsEnabled);
+
 }
 
 ```
@@ -9050,13 +11266,21 @@ public CheckUserViewModel()
 > 发布方和订阅方都通过 EventAggregator 索取 PubSubEvent，在 ViewModel中通常都是通过依赖注入获取一个 IEventAggregator：
 
 ```
+
 public class MainPageViewModel
+
 {
+
     IEventAggregator _eventAggregator;
+
     public MainPageViewModel(IEventAggregator ea)
+
     {
+
         _eventAggregator = ea;
+
     }
+
 }
 
 ```
@@ -9068,55 +11292,87 @@ public class MainPageViewModel
 > 订阅方是真正使用这些消息并负责任的人，下面是最简单的通过 Subscribe 订阅事件的代码：
 
 ```
+
 public class MainPageViewModel
+
 {
+
     public MainPageViewModel(IEventAggregator ea)
+
     {
+
         ea.GetEvent<TickerSymbolSelectedEvent>().Subscribe(ShowNews);
+
     }
 
     void ShowNews(string companySymbol)
+
     {
+
         //implement logic
+
     }
+
 }
+
 ```
 
 > 除了基本的调用方式，Subscribe 函数还有其它可选的参数：
 
 > public virtual SubscriptionToken Subscribe(Action action, ThreadOption threadOption, bool keepSubscriberReferenceAlive)
-其中 threadOption 指示收到消息后在哪个线程上执行第一个参数定义的 action，它有三个选项：
+
+> 其中 threadOption 指示收到消息后在哪个线程上执行第一个参数定义的 action，它有三个选项：
 
 > PublisherThread，和发布者保持在同一个线程上执行。
+
 > UIThread，在 UI 线程上执行。
+
 > BackgroundThread，在后台线程上执行。
+
 > 第三个参数 keepSubscriberReferenceAlive 默认为 false，它指示该订阅是否为强引用。
 
 > 设置为 false 时，引用为弱引用，用完可以不用管。
+
 > 设置为 true 时，引用为强引用，用完需要使用 Unsubscribe 取消订阅。
+
 > 下面代码是一段订阅及取消订阅的示例：
 
 ```
+
 public class MainPageViewModel
+
 {
+
     TickerSymbolSelectedEvent _event;
 
     public MainPageViewModel(IEventAggregator ea)
+
     {
+
         _event = ea.GetEvent<TickerSymbolSelectedEvent>();
+
         _event.Subscribe(ShowNews);
+
     }
 
     void Unsubscribe()
+
     {
+
         _event.Unsubscribe(ShowNews);
+
     }
 
     void ShowNews(string companySymbol)
+
     {
+
         //implement logic
+
     }
+
 }
+
 ```
 
 #### Productivity Tools
@@ -9132,8 +11388,11 @@ public class MainPageViewModel
 但如果要使用 Prism 构建 MVVM 程序的话，上面这些根本不现实。首先，Prism 做不到平台无关，它针对不同的平台提供了不同的包，分别是：
 
 针对 WPF 的 Prism.Wpf
+
 针对 Xamarin Forms 的 Prism.Forms
+
 针对 Uno 平台的 Prism.Uno
+
 其次，根本就没有针对 UWP 的 Prism.Windows（UWP 还有未来，忍住别哭）。
 
 所以，除非只使用 Prism.Core，否则要将 ViewModel 项目共享给多个平台有点困难，毕竟用在 WPF 项目的 Prism.Wpf 本身就是个 Wpf 类库。
@@ -9145,10 +11404,15 @@ Prism.Core、Prism.Wpf 和 Prism.Unity 的依赖关系如上所示。其中 Pris
 就算只学习 Prism.Wpf，可它的模块很多，一篇文章实在塞不下。我选择了 Dialog Service 作为代表，因为它的实现思想和其它的差不多，而且弹窗还是 WPF 最常见的操作。这篇文章将通过以下内容讲解如何使用 Prism.Wpf 构建一个 WPF 程序：
 
 PrismApplication
+
 RegisterTypes
+
 XAML ContainerProvider
+
 ViewModelLocator
+
 Dialog Service
+
 Prism 的最新版本是 8.0.0.1909。由于 Prism.Unity 依赖 Prism.Wpf，所以只需安装 Prism.Unity：
 
 Install-Package Prism.Unity -Version 8.0.0.1909
@@ -9158,27 +11422,43 @@ Install-Package Prism.Unity -Version 8.0.0.1909
 安装好 Prism.Wpf 和 Prism.Unity 后，下一步要做的是将 App.xaml 的类型替换为 PrismApplication。
 
 Copy
+
 <prism:PrismApplication x:Class="PrismTest.App"
+
                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+
                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
                         xmlns:prism="http://prismlibrary.com/">
+
     <Application.Resources>
+
     </Application.Resources>
+
 </prism:PrismApplication>
+
 上面是修改过的 App.xaml，将 Application 改为 prism:PrismApplication，并且移除了 StartupUri="MainWindow.xaml"。
 
 接下来不要忘记修改 App.xaml.cs：
 
 Copy
+
 public partial class App : PrismApplication
+
 {
+
     public App()
+
     {
+
     }
 
     protected override Window CreateShell()
+
         => Container.Resolve<ShellWindow>();
+
 }
+
 PrismApplication 不使用 StartupUri ，而是使用 CreateShell 方法创建主窗口。CreateShell 是必须实现的抽象函数。PrismApplication 提供了 Container 属性，CreateShell 函数里通常使用 Container 创建主窗口。
 
 #### RegisterTypes
@@ -9186,22 +11466,31 @@ PrismApplication 不使用 StartupUri ，而是使用 CreateShell 方法创建�
 其实在使用 CreateShell 函数前，首先必须实现另一个抽象函数 RegisterTypes。由于 Prism.Wpf 相当依赖于 IOC，所以要现在 PrismApplication 里注册必须的类型或依赖。PrismApplication 里已经预先注册了 DialogService、EventAggregator、RegionManager 等必须的类型（在 RegisterRequiredTypes 函数里），其它类型可以在 RegisterTypes 里注册。它看起来像这样：
 
 Copy
+
 protected override void RegisterTypes(IContainerRegistry containerRegistry)
+
 {
+
     // Core Services
 
     // App Services
 
     // Views
+
     containerRegistry.RegisterForNavigation<BlankPage, BlankViewModel>(PageKeys.Blank);
+
     containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(PageKeys.Main);
+
     containerRegistry.RegisterForNavigation<ShellWindow, ShellViewModel>();
 
     // Configuration
+
     var configuration = BuildConfiguration();
 
     // Register configurations to IoC
+
     containerRegistry.RegisterInstance<IConfiguration>(configuration);
+
 }
 
 #### XAML ContainerProvider#
@@ -9209,21 +11498,33 @@ protected override void RegisterTypes(IContainerRegistry containerRegistry)
 在 XAML 中直接实例化 ViewModel 并设置 DataContext 是 View 和 ViewModel 之间建立关联的最基本的方法：
 
 Copy
+
 <UserControl.DataContext>
+
     <viewmodels:MainViewModel/>
+
 </UserControl.DataContext>
+
 但现实中很难这样做，因为相当一部分 ViewModel 都会在构造函数中注入依赖，而 XAML 只能实例化具有无参数构造函数的类型。为了解决这个问题，Prism 提供了 ContainerProvider 这个工具，通过设置 Type 或 Name 从 Container 中解析请求的类型，它的用法如下：
 
 Copy
+
 <TextBlock
+
   Text="{Binding
+
     Path=Foo,
+
     Converter={prism:ContainerProvider {x:Type local:MyConverter}}}" />
 
 <Window>
+
   <Window.DataContext>
+
     <prism:ContainerProvider Type="{x:Type local:MyViewModel}" />
+
   </Window.DataContext>
+
 </Window>
 
 #### ViewModelLocator
@@ -9231,39 +11532,63 @@ Copy
 Prism 还提供了 ViewModelLocator，用于将 View 的 DataContext 设置为对应的 ViewModel：
 
 Copy
+
 <Window x:Class="Demo.Views.MainWindow"
+
     ...
+
     xmlns:prism="http://prismlibrary.com/"
+
     prism:ViewModelLocator.AutoWireViewModel="True">
+
 在将 View 的 ViewModelLocator.AutoWireViewModel 附加属性设置为 True 的同时，Prism 会为查找这个 View 对应的 ViewModel 类型，然后从 Container 中解析这个类型并设置为 View 的 DataContext。它首先查找 ViewModelLocationProvider 中已经使用 Register 注册的类型，Register 函数的使用方式如下：
 
 Copy
+
 ViewModelLocationProvider.Register<MainWindow, CustomViewModel>();
+
 如果类型未在 ViewModelLocationProvider 中注册，则根据约定好的命名方式找到 ViewModel 的类型，这是默认的查找逻辑的源码：
 
 Copy
+
 var viewName = viewType.FullName;
+
 viewName = viewName.Replace(".Views.", ".ViewModels.");
+
 var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+
 var suffix = viewName.EndsWith("View") ? "Model" : "ViewModel";
+
 var viewModelName = String.Format(CultureInfo.InvariantCulture, "{0}{1}, {2}", viewName, suffix, viewAssemblyName);
+
 return Type.GetType(viewModelName);
+
 例如 PrismTest.Views.MainView 这个类，对应的 ViewModel 类型就是 PrismTest.ViewModels.MainViewModel。
 
 当然很多项目都不符合这个命名规则，那么可以在 App.xaml.cs 中重写 ConfigureViewModelLocator 并调用 ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver 改变这个查找规则：
 
 Copy
+
 protected override void ConfigureViewModelLocator()
+
 {
+
     base.ConfigureViewModelLocator();
 
     ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
+
     {
+
         var viewName = viewType.FullName.Replace(".ViewModels.", ".CustomNamespace.");
+
         var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+
         var viewModelName = $"{viewName}ViewModel, {viewAssemblyName}";
+
         return Type.GetType(viewModelName);
+
     });
+
 }
 
 #### Dialog Service
@@ -9275,197 +11600,296 @@ DialogService 内部会调用 ViewModelLocator.AutoWireViewModel，所以使用 
 以往在 WPF 中需要弹出一个窗口，首先新建一个 Window，然后调用 ShowDialog，ShowDialog 阻塞当前线程，直到弹出的 Window 关闭，这时候还可以拿到一个返回值，具体代码差不多是这样：
 
 Copy
+
 var window = new CreateUserWindow { Owner = this };
+
 var dialogResult = window.ShowDialog();
+
 if (dialogResult == true)
+
 {
+
     var user = window.User;
+
     //other code;
+
 }
+
 简单直接有用。但在 MVVM 模式中，开发者要假装自己不知道要调用的 View，甚至不知道要调用的 ViewModel。开发者只知道要执行的这个操作的名字，要传什么参数，拿到什么结果，至于具体由谁去执行，开发者要假装不知道（虽然很可能都是自己写的）。为了做到这种效果，Prism 提供了 IDialogService 接口。这个接口的具体实现已经在 PrismApplication 里注册了，用户通常只需要从构造函数里注入这个服务：
 
 Copy
+
 public MainWindowViewModel(IDialogService dialogService)
+
 {
+
     _dialogService = dialogService;
+
 }
+
 IDialogService 提供两组函数，分别是 Show 和 ShowDialog，对应非模态和模态窗口。它们的参数都一样：弹出的对话框的名称、传入的参数、对话框关闭时调用的回调函数：
 
 Copy
+
 void ShowDialog(string name, IDialogParameters parameters, Action<IDialogResult> callback);
+
 其中 IDialogResult 类型包含 ButtonResult 类型的 Result 属性和 IDialogParameters 类型的 Parameters 属性，前者用于标识关闭对话框的动作（Yes、No、Cancel等），后者可以传入任何类型的参数作为具体的返回结果。下面代码展示了一个基本的 ShowDialog 函数调用方式：
 
 Copy
+
 var parameters = new DialogParameters
+
 {
+
     { "UserName", "Admin" }
+
 };
 
 _dialogService.ShowDialog("CreateUser", parameters, dialogResult =>
+
 {
+
     if (dialogResult.Result == ButtonResult.OK)
+
     {
+
         var user = dialogResult.Parameters.GetValue<User>("User");
+
         //other code
+
     }
+
 });
+
 为了让 IDialogService 知道上面代码中 “CreateUser” 对应的 View，需要在 'App,xaml.cs' 中的 RegisterTypes 函数中注册它对应的 Dialog：
 
 Copy
+
 containerRegistry.RegisterDialog<CreateUserView>("CreateUser");
+
 上面这种注册方式需要依赖 ViewModelLocator 找到对应的 ViewModel，也可以直接注册 View 和对应的 ViewModel：
 
 Copy
+
 containerRegistry.RegisterDialog<CreateUserView, CreateUserViewModel>("CreateUser");
+
 有没有发现上面的 CreateUserWindow 变成了 CreateUserView？因为使用 DialogService 的时候，View 必须是一个 UserControl，DialogService 自己创建一个 Window 将 View 放进去。这样做的好处是 View 可以不清楚自己是一个弹框或者导航的页面，或者要用在拥有不同 Window 样式的其它项目中，反正只要实现逻辑就好了。由于 View 是一个 UserControl，它不能直接控制拥有它的 Window，只能通过在 View 中添加附加属性定义 Window 的样式：
 
 Copy
+
 <prism:Dialog.WindowStyle>
+
     <Style TargetType="Window">
+
         <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
+
         <Setter Property="ResizeMode" Value="NoResize"/>
+
         <Setter Property="ShowInTaskbar" Value="False"/>
+
         <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+
     </Style>
+
 </prism:Dialog.WindowStyle>
+
 最后一步是实现 ViewModel。对话框的 ViewModel 必须实现 IDialogAware 接口，它的定义如下：
 
 Copy
+
 public interface IDialogAware
+
 {
+
     /// <summary>
+
     /// 确定是否可以关闭对话框。
+
     /// </summary>
+
     bool CanCloseDialog();
 
     /// <summary>
+
     /// 关闭对话框时调用。
+
     /// </summary>
+
     void OnDialogClosed();
 
     /// <summary>
+
     /// 在对话框打开时调用。
+
     /// </summary>
+
     void OnDialogOpened(IDialogParameters parameters);
 
     /// <summary>
+
     /// 将显示在窗口标题栏中的对话框的标题。
+
     /// </summary>
+
     string Title { get; }
 
     /// <summary>
+
     /// 指示 IDialogWindow 关闭对话框。
+
     /// </summary>
+
     event Action<IDialogResult> RequestClose;
+
 }
+
 一个简单的实现如下：
 
 Copy
+
 public class CreateUserViewModel : BindableBase, IDialogAware
+
 {
+
     public string Title => "Create User";
 
     public event Action<IDialogResult> RequestClose;
 
     private DelegateCommand _createCommand;
+
     public DelegateCommand CreateCommand => _createCommand ??= new DelegateCommand(Create);
 
     private string _userName;
+
     public string UserName
+
     {
+
         get { return _userName; }
+
         set { SetProperty(ref _userName, value); }
+
     }
+
    
+
     public virtual void RaiseRequestClose(IDialogResult dialogResult)
+
     {
+
         RequestClose?.Invoke(dialogResult);
+
     }
 
     public virtual bool CanCloseDialog()
+
     {
+
         return true;
+
     }
 
     public virtual void OnDialogClosed()
+
     {
 
     }
 
     public virtual void OnDialogOpened(IDialogParameters parameters)
+
     {
+
         UserName = parameters.GetValue<string>("UserName");
+
     }
 
     protected virtual void Create()
+
     {
+
         var parameters = new DialogParameters
+
         {
+
             { "User", new User{Name=UserName} }
+
         };
 
         RaiseRequestClose(new DialogResult(ButtonResult.OK, parameters));
+
     }
+
 }
+
 上面的代码在 OnDialogOpened 中读取传入的参数，在 RaiseRequestClose 关闭对话框并传递结果。至此就完成了弹出对话框并获取结果的整个流程。
 
 自定义 Window 样式在 WPF 程序中很流行，DialogService 也支持自定义 Window 样式。假设 MyWindow 是一个自定义样式的 Window，自定义一个继承它的 MyPrismWindow 类型，并实现接口 IDialogWindow：
 
 Copy
+
 public partial class MyPrismWindow: MyWindow, IDialogWindow
+
 {
+
     public IDialogResult Result { get; set; }
+
 }
+
 然后调用 RegisterDialogWindow 注册这个 Window 类型。
 
 Copy
+
 protected override void RegisterTypes(IContainerRegistry containerRegistry)
+
 {
+
     containerRegistry.RegisterDialogWindow<MyPrismWindow>();
+
 }
+
 这样 DialogService 将会使用这个自定义的 Window 类型作为 View 的窗口。
 
 ### 拖拽
 
->  https://github.com/punker76/gong-wpf-dragdrop
+> https://github.com/punker76/gong-wpf-dragdrop
 
 ### WPF的类层次结构
 
->  System.Threading.DispatcherObject类——继承DispatcherObject类，用户界面的元素检查是否在正确的线程，访问调度程序为用户界面线程封送代码。
+> System.Threading.DispatcherObject类——继承DispatcherObject类，用户界面的元素检查是否在正确的线程，访问调度程序为用户界面线程封送代码。
 
->  System.Windows.DependencyObject类——和屏幕上的元素进行交互主要通过属性进行。 继承DependencyObject类，获得对依赖项属性的支持。
+> System.Windows.DependencyObject类——和屏幕上的元素进行交互主要通过属性进行。 继承DependencyObject类，获得对依赖项属性的支持。
 
->  System.Windows.Media.Visual类——看做绘图对象，Visual类在托管的WPF库和渲染桌面的milcore.dll提供了链接
+> System.Windows.Media.Visual类——看做绘图对象，Visual类在托管的WPF库和渲染桌面的milcore.dll提供了链接
 
->  System.Windows.UIElement类——UIElement类为WPF本质特征提供支持，如布局、输入、焦点以及事件。实现了成为路由事件的路由系统(第5章)，添加对命令的支持(第9章)
+> System.Windows.UIElement类——UIElement类为WPF本质特征提供支持，如布局、输入、焦点以及事件。实现了成为路由事件的路由系统(第5章)，添加对命令的支持(第9章)
 
->  System.Windows.FrameworkElement类——实现了全部由UIElement类定义的成员。引入数据绑定和样式。
+> System.Windows.FrameworkElement类——实现了全部由UIElement类定义的成员。引入数据绑定和样式。
 
->  System.Windows.Shapes.Shape类——基本的形状类都继承自该类
+> System.Windows.Shapes.Shape类——基本的形状类都继承自该类
 
->  System.Windows.Controls.Control类——控件是可以和用户进行交互的元素。Control类为设置字体和前景色与背景色提供了附加功能，还有模板支持(第17章)。
+> System.Windows.Controls.Control类——控件是可以和用户进行交互的元素。Control类为设置字体和前景色与背景色提供了附加功能，还有模板支持(第17章)。
 
->  System.Windows.Controls.ContentControl类——所有具有单一内容的控件的基类。控件中的单一内容可以是从普通的字符串乃至具有其他形状和控件组合的布局面板(第6章)。
+> System.Windows.Controls.ContentControl类——所有具有单一内容的控件的基类。控件中的单一内容可以是从普通的字符串乃至具有其他形状和控件组合的布局面板(第6章)。
 
->  System.Windows.Controls.ItemsControl类——是所有显示选项集合的控件的基类，如ListBox控件和TreeView控件
+> System.Windows.Controls.ItemsControl类——是所有显示选项集合的控件的基类，如ListBox控件和TreeView控件
 
->  System.Windows.Controls.Panel类——是所有布局器的基类，布局容器是可以包含一个或多个子元素，并根据特定的规则对子元素进行排列的元素。
+> System.Windows.Controls.Panel类——是所有布局器的基类，布局容器是可以包含一个或多个子元素，并根据特定的规则对子元素进行排列的元素。
 
 ### XAML
 
->  x: 前缀：用于映射 XAML xmlns http://schemas.microsoft.com/winfx/2006/xaml。
+> x: 前缀：用于映射 XAML xmlns http://schemas.microsoft.com/winfx/2006/xaml。
 
->  x:Class属性（Attribute）：编译成C#代码后对应的类名，如果手动把该属性改成其他后台代码中不包含的类名称，编译后会自动生成该类。如果与后台代码的类名称相同则进行合并（后台代码中的类要用partial修饰）。
+> x:Class属性（Attribute）：编译成C#代码后对应的类名，如果手动把该属性改成其他后台代码中不包含的类名称，编译后会自动生成该类。如果与后台代码的类名称相同则进行合并（后台代码中的类要用partial修饰）。
 
->  x:Key：为 ResourceDictionary 中的每个资源设置一个唯一的键。
+> x:Key：为 ResourceDictionary 中的每个资源设置一个唯一的键。
 
->  x:Name：为运行时代码中存在的实例指定运行时对象名称。
+> x:Name：为运行时代码中存在的实例指定运行时对象名称。
 
->  x:Static：启用一个获取静态值的值引用，该静态值只能是一个 XAML 可设置属性。
+> x:Static：启用一个获取静态值的值引用，该静态值只能是一个 XAML 可设置属性。
 
->  x:Type：根据类型名称构造Type 引用。指定采用 Type 的属性 
+> x:Type：根据类型名称构造Type 引用。指定采用 Type 的属性 
 
->  XAML的树形结构：
+> XAML的树形结构：
 
 > XAML都是一个树，有唯一根节点，通常为Window或Page。
 
@@ -9473,13 +11897,13 @@ protected override void RegisterTypes(IContainerRegistry containerRegistry)
 
 ##### VisualTreeHelper
 
->  1、FindElementsInHostCoordinates 检索一组对象，这些对象位于某一对象的坐标空间的指定点或 Rect 内。
+> 1、FindElementsInHostCoordinates 检索一组对象，这些对象位于某一对象的坐标空间的指定点或 Rect 内。
 
->  2、GetChild 使用提供的索引，通过检查可视化树获取所提供对象的特定子对象。
+> 2、GetChild 使用提供的索引，通过检查可视化树获取所提供对象的特定子对象。
 
->  3、GetChildrenCount 返回在可视化树中在某一对象的子集合中存在的子级的数目。
+> 3、GetChildrenCount 返回在可视化树中在某一对象的子集合中存在的子级的数目。
 
->  4、GetParent 返回可视化树中某一对象的父对象。
+> 4、GetParent 返回可视化树中某一对象的父对象。
 
 ##### LogicalTreeHelper 
 
@@ -9522,17 +11946,29 @@ protected override void RegisterTypes(IContainerRegistry containerRegistry)
 ##### 注意看程序集的信息，里面有一堆这样的代码：
 
 ```
+
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Controls")]
+
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Documents")]
+
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Shapes")]
+
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Shell")]
+
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Navigation")]
+
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Data")]
+
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows")]
+
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Controls.Primitives")]
+
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Media.Animation")]
+
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Input")]
+
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Media")]
+
 ```
 
 > 这些代码的作用就是把那些命名空间合并到一个统一的命名空间里，方便调用。我们在自己的程序集里也可以这样用，只要修改AssemblyInfo.cs就可以了。然后我们在XAML里添加命名空间，就会看到自己定义的命名空间了。
@@ -9919,13 +12355,21 @@ protected override void RegisterTypes(IContainerRegistry containerRegistry)
 
 > 所以，总括地说，这里涉及了以下四个方面：
 
-#### VisualState: 视图状态(Visual States)表示控件在一个特殊的逻辑状态下的样式、外观；
+#### VisualState
 
-#### VisualStateGroup: 状态组由相互排斥的状态组成，状态组与状态组并不互斥；
+> > 视图状态(Visual States)表示控件在一个特殊的逻辑状态下的样式、外观；
 
-#### VisualTransition: 视图转变 (Visual Transitions) 代表控件从一个视图状态向另一个状态转换时的过渡；
+#### VisualStateGroup
 
-#### VisualStateManager: 由它负责在代码中来切换到不同的状态；
+> > 状态组由相互排斥的状态组成，状态组与状态组并不互斥；
+
+#### VisualTransition
+
+> > 视图转变 (Visual Transitions) 代表控件从一个视图状态向另一个状态转换时的过渡；
+
+#### VisualStateManager
+
+> > 由它负责在代码中来切换到不同的状态；
 
 > 每个 VisualState 都属于一个状态组 (VisualStateGroup)，也即一个 VisualStateGroup 中可以定义多个 VisualState；并且，我们也可以定义多个 VisualStateGroup；需要再次强调的是：同一个 VisualStateGroup 中 VisualState 是互斥的，而不同的 VisualStateGroup 中的 VisualState 是在同一时刻是可以共存的。以 Button 为例：
 
@@ -9998,9 +12442,13 @@ protected override void RegisterTypes(IContainerRegistry containerRegistry)
 > TransformGroup：变形组
 
 ```
+
  <TextBlock.RenderTransform> 
+
     <RotateTransform Angle="0" x:Name="rt1"></RotateTransform> 
+
 </TextBlock.RenderTransform> 
+
 ```
 
 #### 变换（Transform）
@@ -10042,106 +12490,189 @@ protected override void RegisterTypes(IContainerRegistry containerRegistry)
 #### 动画基类
 
 ```
+
 System.Windows.Media.Animation.BooleanAnimationBase
+
 System.Windows.Media.Animation.ByteAnimationBase
+
 System.Windows.Media.Animation.CharAnimationBase
+
 System.Windows.Media.Animation.ColorAnimationBase
+
 System.Windows.Media.Animation.DecimalAnimationBase
+
 System.Windows.Media.Animation.DoubleAnimationBase
+
 System.Windows.Media.Animation.Int16AnimationBase
+
 System.Windows.Media.Animation.Int32AnimationBase
+
 System.Windows.Media.Animation.Int64AnimationBase
+
 System.Windows.Media.Animation.MatrixAnimationBase
+
 System.Windows.Media.Animation.ObjectAnimationBase
+
 System.Windows.Media.Animation.Point3DAnimationBase
+
 System.Windows.Media.Animation.PointAnimationBase
+
 System.Windows.Media.Animation.QuaternionAnimationBase
+
 System.Windows.Media.Animation.RectAnimationBase
+
 System.Windows.Media.Animation.Rotation3DAnimationBase
+
 System.Windows.Media.Animation.SingleAnimationBase
+
 System.Windows.Media.Animation.SizeAnimationBase
+
 System.Windows.Media.Animation.StringAnimationBase
+
 System.Windows.Media.Animation.ThicknessAnimationBase
+
 System.Windows.Media.Animation.Vector3DAnimationBase
+
 System.Windows.Media.Animation.VectorAnimationBase
+
 ```
 
 > 以DoubleAnimationBase为基类展开，其他的再慢慢去了解和摸索。
 
 > > 一种就是点到点的的动画DoubleAnimation，一种是可以分为帧的动画DoubleAnimationUsingKeyFrames，还有一种是按照路径来执行的DoubleAnimationUsingPath的动画。
+
 简单动作由以下几个部分构成：变化起点（From属性），变化终点（To属性），变化幅度（By属性），变化时间（Duration属性）。
+
 如果指定的有终点那么幅度就被忽略了，如果没有起点，就以当前元素所在位置为起点。
+
 还是看个例子来的更易理解。下面演示一个按钮如果被点击了，在0.3s里，按钮朝着x，y轴上300个单位随机移动。下面给出代码
 
 ```
+
 System.Windows.Media.Animation.BooleanAnimationBase
+
 System.Windows.Media.Animation.ByteAnimationBase
+
 System.Windows.Media.Animation.CharAnimationBase
+
 System.Windows.Media.Animation.ColorAnimationBase
+
 System.Windows.Media.Animation.DecimalAnimationBase
+
 System.Windows.Media.Animation.DoubleAnimationBase
+
 System.Windows.Media.Animation.Int16AnimationBase
+
 System.Windows.Media.Animation.Int32AnimationBase
+
 System.Windows.Media.Animation.Int64AnimationBase
+
 System.Windows.Media.Animation.MatrixAnimationBase
+
 System.Windows.Media.Animation.ObjectAnimationBase
+
 System.Windows.Media.Animation.Point3DAnimationBase
+
 System.Windows.Media.Animation.PointAnimationBase
+
 System.Windows.Media.Animation.QuaternionAnimationBase
+
 System.Windows.Media.Animation.RectAnimationBase
+
 System.Windows.Media.Animation.Rotation3DAnimationBase
+
 System.Windows.Media.Animation.SingleAnimationBase
+
 System.Windows.Media.Animation.SizeAnimationBase
+
 System.Windows.Media.Animation.StringAnimationBase
+
 System.Windows.Media.Animation.ThicknessAnimationBase
+
 System.Windows.Media.Animation.Vector3DAnimationBase
+
 System.Windows.Media.Animation.VectorAnimationBase
+
 ```
 
 ```
+
 <Grid>
+
 <Button x:Name="btn" Content="Move!" HorizontalAlignment="Left" VerticalAlignment="top" Width="60" Height="60" Click="Button_Click">
+
         <Button.RenderTransform>
+
             <TranslateTransform x:Name="tt" X="0" Y="0"/>
+
         </Button.RenderTransform>
+
     </Button>
+
 </Grid>
+
 ```
 
 ```
+
         private void Button_Click(object sender, RoutedEventArgs e)
+
         {
+
             //定义简单动画的实例
+
               DoubleAnimation daX = new DoubleAnimation();
+
             DoubleAnimation daY = new DoubleAnimation();
 
             //指定起点
+
              daX.From = 0D;
+
             daY.From = 0D;
 
             //指定终点
+
             Random r = new Random();
+
             daX.To = r.NextDouble() * 300;
+
             daY.To = r.NextDouble() * 300;
 
             //daX.By = 100D;
+
             //daY.By = 100D;
+
             //指定时长300ms
+
             Duration duration=new Duration(TimeSpan.FromMilliseconds(300));
+
             daY.Duration = duration;
+
             daX.Duration = duration;
 
             //将动画添加到偏移变形的实例上面 和Binding的格式有点像
+
             //this.textBox.SetBinding（TextBox.TextProperty,binding）
+
             
+
             //让按钮发生改变作为动画
+
             //btn.BeginAnimation(Button.WidthProperty, daX);
+
             //btn.BeginAnimation(Button.HeightProperty, daY);
+
             
+
             //让 位置发生改变作为动画
+
             this.tt.BeginAnimation(TranslateTransform.XProperty, daX);
+
             this.tt.BeginAnimation(TranslateTransform.YProperty, daY);
+
         }
+
 ```
 
 #### 关键帧动画 ：
@@ -10150,68 +12681,110 @@ System.Windows.Media.Animation.VectorAnimationBase
 
 > DoubleAnimationUsingKeyFrames的实例中通常是含有多个DoubleKeyFrame类的帧，具体的有下面四种：　
 
-##### LinearDoubleKeyFrame，线性帧，目标属性值的变化是直线型的，匀速的。
+##### LinearDoubleKeyFrame
 
-##### DiscreteDoubleKeyFrame，不连续变化的帧，目标属性值是跳跃的。
+> 线性帧，目标属性值的变化是直线型的，匀速的。
 
-##### SplineDoubleKeyFrame， 样条函数变化帧，目标属性值的速率是一条贝赛尔曲线。
+##### DiscreteDoubleKeyFrame
 
-##### EasingDoubleKeyFrame，缓冲式帧，目标属性值以某种缓冲形式变化。
+> 不连续变化的帧，目标属性值是跳跃的。
+
+##### SplineDoubleKeyFrame
+
+> 样条函数变化帧，目标属性值的速率是一条贝赛尔曲线。
+
+##### EasingDoubleKeyFrame
+
+> 缓冲式帧，目标属性值以某种缓冲形式变化。
 
 ```
+
 //定义两个DoubleAnimationUsingKeyFrames类型的实例，来控制呈现变形的横纵坐标
+
 DoubleAnimationUsingKeyFrames dakX = new DoubleAnimationUsingKeyFrames();
+
 DoubleAnimationUsingKeyFrames dakY = new DoubleAnimationUsingKeyFrames();
 
 //指定时长
+
 dakX.Duration = new Duration(TimeSpan.FromMilliseconds(900));
+
 dakY.Duration = new Duration(TimeSpan.FromMilliseconds(900));
 
 //纵坐标====================================================
+
 //动画分成三段，所以有三个线性关键帧
+
 LinearDoubleKeyFrame x_kf_1 = new LinearDoubleKeyFrame();
+
 LinearDoubleKeyFrame x_kf_2 = new LinearDoubleKeyFrame();
+
 LinearDoubleKeyFrame x_kf_3 = new LinearDoubleKeyFrame();
 
 //为三段关键帧赋值（时间和属性的值），并添加到动画中
+
 x_kf_1.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(300));
+
 x_kf_1.Value = 200;
+
 x_kf_2.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(600));
+
 x_kf_2.Value = 0;
+
 x_kf_3.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(900));
+
 x_kf_3.Value = 200;
 
 dakX.KeyFrames.Add(x_kf_1);
+
 dakX.KeyFrames.Add(x_kf_2);
+
 dakX.KeyFrames.Add(x_kf_3);
+
 //纵坐标====================================================
+
 LinearDoubleKeyFrame y_kf_1 = new LinearDoubleKeyFrame();
+
 LinearDoubleKeyFrame y_kf_2 = new LinearDoubleKeyFrame();
+
 LinearDoubleKeyFrame y_kf_3 = new LinearDoubleKeyFrame();
 
 y_kf_1.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(300));
+
 y_kf_1.Value = 0;
+
 y_kf_2.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(600));
+
 y_kf_2.Value = 180;
+
 y_kf_3.KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromMilliseconds(900));
+
 y_kf_3.Value = 180;
 
 dakY.KeyFrames.Add(y_kf_1);
+
 dakY.KeyFrames.Add(y_kf_2);
+
 dakY.KeyFrames.Add(y_kf_3);
 
 //把动画寄托在呈现变形中
+
 this.tt.BeginAnimation(TranslateTransform.XProperty, dakX);
+
 this.tt.BeginAnimation(TranslateTransform.YProperty, dakY);
 
 ```
 
-#### 前面已经介绍了路径绘图时的强大，那么我们能不能让我的动画按照我们制定的路径去表演呢，答案是可以的。
-这就是我们要记录的DoubleAnimationUsingPath类。
-注意它有三个属性很关键，其中Duration是每个动画必须有的，另外两个是Source属性和PathGeometry分别用来指定向那个方向移动和路径。
-下面给出一个按钮沿路径移动的动画，构思如下：
+> 前面已经介绍了路径绘图时的强大，那么我们能不能让我的动画按照我们制定的路径去表演呢，答案是可以的。
+
+> 这就是我们要记录的DoubleAnimationUsingPath类。
+
+> 注意它有三个属性很关键，其中Duration是每个动画必须有的，另外两个是Source属性和PathGeometry分别用来指定向那个方向移动和路径。
+
+> 下面给出一个按钮沿路径移动的动画，构思如下：
 
 ```
+
 <Window.Resources>
 
 <PathGeometry x:Key="movingPath" Figures="M 40,110 A 50,50 0 1 1 100,60 A110,95 0 0 1 200,60 A 50,50 0 1 1 250 100 A 110,95 0 1 1 55,100 Z"/>
@@ -10275,776 +12848,1525 @@ this.tt.BeginAnimation(TranslateTransform.YProperty, dakY);
 #### 场景（Storyborad）
 
 ```
+
 #####   <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1">
+
 <Ellipse x:Name="ballG" Height="80" Width="80" Fill="Green" HorizontalAlignment="Left">
+
     <Ellipse.RenderTransform>
+
         <TranslateTransform x:Name="ttG"/>
+
     </Ellipse.RenderTransform>
+
 </Ellipse>
+
         </Border>
+
 ```
+
 对应的cs代码，注释已经给出：
 
 ```
+
 //定义动画要执行的时长
+
 Duration duation = new Duration(TimeSpan.FromMilliseconds(600));
 
 //定义一个简单的移动——匀速直线运动
+
 DoubleAnimation daRx = new DoubleAnimation();
+
 daRx.Duration = duation;
+
 daRx.To = 400;
 
 //定义一个关键帧的移动，目标属性值的速率是一条贝赛尔曲线函数
+
 DoubleAnimationUsingKeyFrames dakGx = new DoubleAnimationUsingKeyFrames();
+
 dakGx.Duration = duation;
+
 SplineDoubleKeyFrame kfG = new SplineDoubleKeyFrame(400, KeyTime.FromPercent(1));
+
 kfG.KeySpline = new KeySpline(1, 0, 0, 1);
+
 dakGx.KeyFrames.Add(kfG);
 
 //定义一个关键帧的移动，目标属性值的速率是一条贝赛尔曲线函数
+
 DoubleAnimationUsingKeyFrames dakBx = new DoubleAnimationUsingKeyFrames();
+
 dakBx.Duration = duation;
+
 SplineDoubleKeyFrame kfB = new SplineDoubleKeyFrame(400, KeyTime.FromPercent(1));
+
 kfB.KeySpline = new KeySpline(0, 1, 1, 0);
+
 dakBx.KeyFrames.Add(kfB);
 
 Storyboard storyboard = new Storyboard();
 
 //使指定的动画的UI载体
+
 Storyboard.SetTargetName(daRx, "ttR");
+
 Storyboard.SetTargetName(dakGx, "ttG");
+
 Storyboard.SetTargetName(dakBx, "ttB");
 
 //使动画与UI载体的属性相关联
+
 Storyboard.SetTargetProperty(daRx,new PropertyPath(TranslateTransform.XProperty));
+
 Storyboard.SetTargetProperty(dakGx, new PropertyPath(TranslateTransform.XProperty));
+
 Storyboard.SetTargetProperty(dakBx, new PropertyPath(TranslateTransform.XProperty));
 
 //指定场景的时间,并把各个对像的动画添加到场景里面
+
 storyboard.Duration = duation;
+
 storyboard.Children.Add(daRx);
+
 storyboard.Children.Add(dakGx);
+
 storyboard.Children.Add(dakBx);
 
 storyboard.Begin(this);
 
 ```
+
 第Ⅰ部分 基础知识
+
 第1章 WPF概述 3
+
 1.1 Windows图形演化 3
+
 1.1.1 DirectX：新的图形引擎 4
+
 1.1.2 硬件加速与WPF 4
+
 1.2 WPF：高级API 4
+
 1.3 分辨率无关性 5
+
 1.3.1 WPF单位 6
+
 1.3.2 系统DPI 7
+
 1.3.3 位图和矢量图形 9
+
 1.4 WPF体系结构 10
+
 1.5 WPF 4.5 13
+
 1.5.1 WPF工具包 14
+
 1.5.2 Visual Studio 2012 14
+
 1.6 小结 16
+
 第2章 XAML 17
+
 2.1 理解XAML 17
+
 2.1.1 WPF之前的图形用户界面 17
+
 2.1.2 XAML变体 19
+
 2.1.3 XAML编译 19
+
 2.2 XAML基础 20
+
 2.2.1 XAML名称空间 21
+
 2.2.2 代码隐藏类 22
+
 2.3 XAML中的属性和事件 24
+
 2.3.1 简单属性与类型转换器 25
+
 2.3.2 复杂属性 26
+
 2.3.3 标记扩展 28
+
 2.3.4 附加属性 29
+
 2.3.5 嵌套元素 30
+
 2.3.6 特殊字符与空白 32
+
 2.3.7 事件 34
+
 2.3.8 完整的Eight Ball Answer示例 35
+
 2.4 使用其他名称空间中的类型 36
+
 2.5 加载和编译XAML 38
+
 2.5.1 只使用代码 38
+
 2.5.2 使用代码和未经编译的XAML 40
+
 2.5.3 使用代码和编译过的XAML 42
+
 2.5.4 只使用XAML 44
+
 2.6 小结 45
+
 第3章 布局 47
+
 3.1 理解WPF中的布局 47
+
 3.1.1 WPF布局原则 47
+
 3.1.2 布局过程 48
+
 3.1.3 布局容器 48
+
 3.2 使用StackPanel面板进行简单
+
 布局 50
+
 3.2.1 布局属性 52
+
 3.2.2 对齐方式 52
+
 3.2.3 边距 53
+
 3.2.4 小尺寸、尺寸以及显式地
+
 设置尺寸 54
+
 3.2.5 Border控件 56
+
 3.3 WrapPanel和DockPanel面板 57
+
 3.3.1 WrapPanel面板 57
+
 3.3.2 DockPanel面板 58
+
 3.3.3 嵌套布局容器 59
+
 3.4 Grid面板 60
+
 3.4.1 调整行和列 63
+
 3.4.2 布局舍入 64
+
 3.4.3 跨越行和列 65
+
 3.4.4 分割窗口 66
+
 3.4.5 共享尺寸组 69
+
 3.4.6 UniformGrid面板 72
+
 3.5 使用Canvas面板进行基于
+
 坐标的布局 72
+
 3.5.1 Z顺序 73
+
 3.5.2 lnkCanvas元素 74
+
 3.6 布局示例 76
+
 3.6.1 列设置 76
+
 3.6.2 动态内容 77
+
 3.6.3 组合式用户界面 79
+
 3.7 小结 80
+
 第4章 依赖项属性 83
+
 4.1 理解依赖项属性 83
+
 4.1.1 定义依赖项属性 84
+
 4.1.2 注册依赖项属性 84
+
 4.1.3 添加属性包装器 86
+
 4.1.4 WPF使用依赖项属性的方式 87
+
 4.1.5 共享的依赖项属性 88
+
 4.1.6 附加的依赖项属性 88
+
 4.2 属性验证 90
+
 4.2.1 验证回调 90
+
 4.2.2 强制回调 91
+
 4.3 小结 93
+
 第5章 路由事件 95
+
 5.1 理解路由事件 95
+
 5.1.1 定义、注册和封装路由事件 95
+
 5.1.2 共享路由事件 96
+
 5.1.3 引发路由事件 96
+
 5.1.4 处理路由事件 97
+
 5.2 事件路由 99
+
 5.2.1 RoutedEventArgs类 100
+
 5.2.2 冒泡路由事件 100
+
 5.2.3 处理挂起的事件 103
+
 5.2.4 附加事件 103
+
 5.2.5 隧道路由事件 105
+
 5.3 WPF事件 106
+
 5.3.1 生命周期事件 106
+
 5.3.2 输入事件 108
+
 5.4 键盘输入 108
+
 5.4.1 处理按键事件 109
+
 5.4.2 焦点 111
+
 5.4.3 获取键盘状态 112
+
 5.5 鼠标输入 113
+
 5.5.1 鼠标单击 115
+
 5.5.2 捕获鼠标 115
+
 5.5.3 鼠标拖放 116
+
 5.6 多点触控输入 118
+
 5.6.1 多点触控的输入层次 119
+
 5.6.2 原始触控 119
+
 5.6.3 操作 122
+
 5.6.4 惯性 124
+
 5.7 小结 125
+
 第Ⅱ部分 进一步研究WPF
+
 第6章 控件 129
+
 6.1 控件类 129
+
 6.1.1 背景画刷和前景画刷 130
+
 6.1.2 字体 132
+
 6.1.3 鼠标光标 136
+
 6.2 内容控件 137
+
 6.2.1 Content属性 138
+
 6.2.2 对齐内容 140
+
 6.2.3 WPF内容原则 141
+
 6.2.4 标签 142
+
 6.2.5 按钮 142
+
 6.2.6 工具提示 145
+
 6.3 特殊容器 151
+
 6.3.1 ScrollViewer 152
+
 6.3.2 GroupBox 154
+
 6.3.3 TabItem 154
+
 6.3.4 Expander 155
+
 6.4 文本控件 158
+
 6.4.1 多行文本 158
+
 6.4.2 选择文本 159
+
 6.4.3 拼写检查 160
+
 6.4.4 PasswordBox 162
+
 6.5 列表控件 162
+
 6.5.1 ListBox 163
+
 6.5.2 ComboBox 166
+
 6.6 基于范围的控件 166
+
 6.6.1 Slider 167
+
 6.6.2 ProgressBar 168
+
 6.7 日期控件 169
+
 6.8 小结 171
+
 第7章 Application类 173
+
 7.1 应用程序的生命周期 173
+
 7.1.1 创建Application对象 173
+
 7.1.2 派生自定义的Application类 174
+
 7.1.3 应用程序的关闭方式 176
+
 7.1.4 应用程序事件 177
+
 7.2 Application类的任务 179
+
 7.2.1 显示初始界面 179
+
 7.2.2 处理命令行参数 180
+
 7.2.3 访问当前Application对象 181
+
 7.2.4 在窗口之间进行交互 182
+
 7.2.5 单实例应用程序 184
+
 7.3 程序集资源 189
+
 7.3.1 添加资源 189
+
 7.3.2 检索资源 190
+
 7.3.3 pack URI 192
+
 7.3.4 内容文件 193
+
 7.4 本地化 193
+
 7.4.1 构建能够本地化的用户界面 194
+
 7.4.2 使应用程序为本地化做好准备 194
+
 7.4.3 管理翻译过程 195
+
 7.5 小结 200
+
 第8章 元素绑定 201
+
 8.1 将元素绑定到一起 201
+
 8.1.1 绑定表达式 202
+
 8.1.2 绑定错误 203
+
 8.1.3 绑定模式 203
+
 8.1.4 使用代码创建绑定 205
+
 8.1.5 使用代码检索绑定 206
+
 8.1.6 多绑定 207
+
 8.1.7 绑定更新 210
+
 8.1.8 绑定延迟 211
+
 8.2 绑定到非元素对象 211
+
 8.2.1 Source属性 212
+
 8.2.2 RelativeSource属性 212
+
 8.2.3 DataContext属性 213
+
 8.3 小结 214
+
 第9章 命令 215
+
 9.1 理解命令 215
+
 9.2 WPF命令模型 216
+
 9.2.1 ICommand接口 217
+
 9.2.2 RoutedCommand类 217
+
 9.2.3 RoutedUICommand类 218
+
 9.2.4 命令库 219
+
 9.3 执行命令 220
+
 9.3.1 命令源 220
+
 9.3.2 命令绑定 221
+
 9.3.3 使用多命令源 223
+
 9.3.4 微调命令文本 224
+
 9.3.5 直接调用命令 224
+
 9.3.6 禁用命令 225
+
 9.3.7 具有内置命令的控件 227
+
 9.4 高级命令 229
+
 9.4.1 自定义命令 229
+
 9.4.2 在不同位置使用相同的命令 230
+
 9.4.3 使用命令参数 232
+
 9.4.4 跟踪和翻转命令 233
+
 9.5 小结 237
+
 第10章 资源 239
+
 10.1 资源基础 239
+
 10.1.1 资源集合 239
+
 10.1.2 资源的层次 241
+
 10.1.3 静态资源和动态资源 242
+
 10.1.4 非共享资源 243
+
 10.1.5 通过代码访问资源 244
+
 10.1.6 应用程序资源 244
+
 10.1.7 系统资源 245
+
 10.2 资源字典 246
+
 10.2.1 创建资源字典 246
+
 10.2.2 使用资源字典 247
+
 10.2.3 在程序集之间共享资源 248
+
 10.3 小结 251
+
 第11章 样式和行为 253
+
 11.1 样式基础 253
+
 11.1.1 创建样式对象 256
+
 11.1.2 设置属性 257
+
 11.1.3 关联事件处理程序 258
+
 11.1.4 多层样式 259
+
 11.1.5 通过类型自动应用样式 261
+
 11.2 触发器 262
+
 11.2.1 简单触发器 262
+
 11.2.2 事件触发器 264
+
 11.3 行为 266
+
 11.3.1 获取行为支持 266
+
 11.3.2 理解行为模型 267
+
 11.3.3 创建行为 268
+
 11.3.4 使用行为 270
+
 11.3.5 Blend中的设计时行为支持 271
+
 11.4 小结 271
+
 第Ⅲ部分 图画和动画
+
 第12章 形状、画刷和变换 275
+
 12.1 理解形状 275
+
 12.1.1 Shape类 276
+
 12.1.2 矩形和椭圆 277
+
 12.1.3 改变形状的尺寸和放置形状 278
+
 12.1.4 使用Viewbox控件缩放形状 280
+
 12.1.5 直线 282
+
 12.1.6 折线 283
+
 12.1.7 多边形 284
+
 12.1.8 直线线帽和直线交点 286
+
 12.1.9 点划线 287
+
 12.1.10 像素对齐 288
+
 12.2 画刷 289
+
 12.2.1 SolidColorBrush画刷 290
+
 12.2.2 LinearGradientBrush画刷 290
+
 12.2.3 RadialGradientBrush画刷 292
+
 12.2.4 ImageBrush画刷 294
+
 12.2.5 平铺的ImageBrush画刷 295
+
 12.2.6 VisualBrush画刷 297
+
 12.2.7 BitmapCacheBrush画刷 298
+
 12.3 变换 299
+
 12.3.1 变换形状 300
+
 12.3.2 变换元素 302
+
 12.4 透明 303
+
 12.4.1 使元素半透明 303
+
 12.4.2 透明掩码 304
+
 12.5 小结 306
+
 第13章 几何图形和图画 307
+
 13.1 路径和几何图形 307
+
 13.1.1 直线、矩形和椭圆图形 308
+
 13.1.2 使用GeometryGroup
+
 组合形状 309
+
 13.1.3 使用CombinedGeometry融合
+
 几何图形 311
+
 13.1.4 使用PathGeometry绘制曲线和
+
 直线 313
+
 13.1.5 微语言几何图形 318
+
 13.1.6 使用几何图形进行剪裁 319
+
 13.2 图画 320
+
 13.2.1 显示图画 322
+
 13.2.2 导出插图 324
+
 13.3 小结 326
+
 第14章 效果和可视化对象 327
+
 14.1 可视化对象 327
+
 14.1.1 绘制可视化对象 328
+
 14.1.2 在元素中封装可视化对象 329
+
 14.1.3 命中测试 332
+
 14.1.4 复杂的命中测试 334
+
 14.2 效果 338
+
 14.2.1 BlurEffect类 338
+
 14.2.2 DropShadowEffect类 339
+
 14.2.3 ShaderEffect类 340
+
 14.3 WriteableBitmap类 342
+
 14.3.1 生成位图 342
+
 14.3.2 写入WriteableBitmap对象 343
+
 14.3.3 更高效的像素写入 345
+
 14.4 小结 347
+
 第15章 动画基础 349
+
 15.1 理解WPF动画 349
+
 15.1.1 基于时间的动画 349
+
 15.1.2 基于属性的动画 350
+
 15.2 基本动画 351
+
 15.2.1 Animation类 351
+
 15.2.2 使用代码创建动画 353
+
 15.2.3 同时发生的动画 358
+
 15.2.4 动画的生命周期 358
+
 15.2.5 Timeline类 359
+
 15.3 故事板 362
+
 15.3.1 故事板 363
+
 15.3.2 事件触发器 363
+
 15.3.3 重叠动画 366
+
 15.3.4 同步的动画 367
+
 15.3.5 控制播放 367
+
 15.3.6 监视动画进度 371
+
 15.4 动画缓动 373
+
 15.4.1 使用缓动函数 373
+
 15.4.2 在动画开始时应用缓动与在动画
+
 结束时应用缓动 374
+
 15.4.3 缓动函数类 375
+
 15.4.4 创建自定义缓动函数 377
+
 15.5 动画性能 379
+
 15.5.1 期望的帧率 380
+
 15.5.2 位图缓存 382
+
 15.6 小结 384
+
 第16章 高级动画 385
+
 16.1 动画类型回顾 385
+
 16.1.1 动态变换 386
+
 16.1.2 动态改变画刷 390
+
 16.1.3 动态改变像素着色器 392
+
 16.2 关键帧动画 393
+
 16.2.1 离散的关键帧动画 395
+
 16.2.2 缓动关键帧 395
+
 16.2.3 样条关键帧动画 396
+
 16.3 基于路径的动画 397
+
 16.4 基于帧的动画 399
+
 16.5 使用代码创建故事板 402
+
 16.5.1 创建主窗口 403
+
 16.5.2 创建Bomb用户控件 405
+
 16.5.3 投弹 406
+
 16.5.4 拦截炸弹 409
+
 16.5.5 统计炸弹和清理工作 410
+
 16.6 小结 412
+
 第Ⅳ部分 模板和自定义元素
+
 第17章 控件模板 417
+
 17.1 理解逻辑树和可视化树 417
+
 17.2 理解模板 422
+
 17.2.1 修饰类 424
+
 17.2.2 剖析控件 426
+
 17.3 创建控件模板 428
+
 17.3.1 简单按钮 429
+
 17.3.2 模板绑定 430
+
 17.3.3 改变属性的触发器 431
+
 17.3.4 使用动画的触发器 434
+
 17.4 组织模板资源 435
+
 17.4.1 分解按钮控件模板 436
+
 17.4.2 通过样式应用模板 438
+
 17.4.3 自动应用模板 439
+
 17.4.4 由用户选择的皮肤 440
+
 17.5 构建更复杂的模板 442
+
 17.5.1 嵌套的模板 443
+
 17.5.2 修改滚动条 445
+
 17.5.3 控件模板示例 450
+
 17.6 可视化状态 451
+
 17.7 小结 452
+
 第18章 自定义元素 453
+
 18.1 理解WPF中的自定义元素 454
+
 18.2 构建基本的用户控件 456
+
 18.2.1 定义依赖项属性 456
+
 18.2.2 定义路由事件 459
+
 18.2.3 添加标记 460
+
 18.2.4 使用控件 462
+
 18.2.5 命令支持 462
+
 18.2.6 深入分析用户控件 465
+
 18.3 创建无外观控件 466
+
 18.3.1 修改颜色拾取器的代码 466
+
 18.3.2 修改颜色拾取器的标记 467
+
 18.3.3 精简控件模板 469
+
 18.4 支持可视化状态 472
+
 18.4.1 开始编写FlipPanel类 473
+
 18.4.2 选择部件和状态 475
+
 18.4.3 默认控件模板 476
+
 18.4.4 使用FlipPanel控件 482
+
 18.4.5 使用不同的控件模板 483
+
 18.5 创建自定义面板 485
+
 18.5.1 两步布局过程 485
+
 18.5.2 Canvas面板的副本 488
+
 18.5.3 更好的WrapPanel面板 489
+
 18.6 自定义绘图元素 492
+
 18.6.1 OnRender( )方法 493
+
 18.6.2 评估自定义绘图 494
+
 18.6.3 自定义绘图元素 495
+
 18.6.4 创建自定义装饰元素 497
+
 18.7 小结 498
+
 第Ⅴ部分 数据
+
 第19章 数据绑定 501
+
 19.1 使用自定义对象绑定到
+
 数据库 501
+
 19.1.1 构建数据访问组件 502
+
 19.1.2 构建数据对象 504
+
 19.1.3 显示绑定对象 505
+
 19.1.4 更新数据库 508
+
 19.1.5 更改通知 508
+
 19.2 绑定到对象集合 510
+
 19.2.1 显示和编辑集合项 510
+
 19.2.2 插入和移除集合项 513
+
 19.2.3 绑定到ADO.NET对象 514
+
 19.2.4 绑定到LINQ表达式 515
+
 19.3 提高大列表的性能 518
+
 19.3.1 虚拟化 518
+
 19.3.2 项容器再循环 519
+
 19.3.3 缓存长度 519
+
 19.3.4 延迟滚动 520
+
 19.4 验证 521
+
 19.4.1 在数据对象中进行验证 521
+
 19.4.2 自定义验证规则 526
+
 19.4.3 响应验证错误 528
+
 19.4.4 获取错误列表 529
+
 19.4.5 显示不同的错误指示符号 530
+
 19.4.6 验证多个值 533
+
 19.5 数据提供者 535
+
 19.5.1 ObjectDataProvider 536
+
 19.5.2 XmlDataProvider 539
+
 19.6 小结 541
+
 第20章 格式化绑定的数据 543
+
 20.1 数据绑定回顾 543
+
 20.2 数据转换 544
+
 20.2.1 使用StringFormat属性 545
+
 20.2.2 值转换器简介 546
+
 20.2.3 使用值转换器设置字符串
+
 的格式 547
+
 20.2.4 使用值转换器创建对象 549
+
 20.2.5 应用条件格式化 551
+
 20.2.6 评估多个属性 552
+
 20.3 列表控件 554
+
 20.4 列表样式 555
+
 20.4.1 ItemContainerStyle 556
+
 20.4.2 包含复选框或单选按钮的ListBox
+
 控件 557
+
 20.4.3 交替条目样式 559
+
 20.4.4 样式选择器 561
+
 20.5 数据模板 564
+
 20.5.1 分离和重用模板 566
+
 20.5.2 使用更高级的模板 567
+
 20.5.3 改变模板 569
+
 20.5.4 模板选择器 570
+
 20.5.5 模板与选择 573
+
 20.5.6 改变项的布局 577
+
 20.6 ComboBox控件 578
+
 20.7 小结 581
+
 第21章 数据视图 583
+
 21.1 View对象 583
+
 21.1.1 检索视图对象 584
+
 21.1.2 视图导航 584
+
 21.1.3 以声明方式创建视图 587
+
 21.2 过滤、排序与分组 588
+
 21.2.1 过滤集合 588
+
 21.2.2 过滤DataTable对象 591
+
 21.2.3 排序 592
+
 21.2.4 分组 593
+
 21.2.5 实时成型 598
+
 21.3 小结 599
+
 第22章 列表、树和网格 601
+
 22.1 ListView控件 601
+
 22.1.1 使用GirdView创建列 602
+
 22.1.2 创建自定义视图 606
+
 22.2 TreeView控件 613
+
 22.2.1 创建数据绑定的TreeView
+
 控件 614
+
 22.2.2 将DataSet对象绑定到TreeView
+
 控件 617
+
 22.2.3 即时创建节点 618
+
 22.3 DataGrid控件 621
+
 22.3.1 改变列的尺寸与重新安排列 622
+
 22.3.2 定义列 623
+
 22.3.3 设置列的格式和样式 628
+
 22.3.4 设置行的格式 629
+
 22.3.5 显示行细节 630
+
 22.3.6 冻结列 631
+
 22.3.7 选择 632
+
 22.3.8 排序 632
+
 22.3.9 编辑 633
+
 22.4 小结 635
 
 第Ⅵ 窗口、页面和富控件
+
 第23章 窗口 639
+
 23.1 Window类 639
+
 23.1.1 显示窗口 641
+
 23.1.2 定位窗口 642
+
 23.1.3 保存和还原窗口位置 642
+
 23.2 窗口交互 644
+
 23.2.1 窗口所有权 646
+
 23.2.2 对话框模型 647
+
 23.2.3 通用对话框 648
+
 23.3 非矩形窗口 649
+
 23.3.1 简单形状窗口 649
+
 23.3.2 具有形状内容的透明窗口 651
+
 23.3.3 移动形状窗口 653
+
 23.3.4 改变形状窗口的尺寸 653
+
 23.3.5 组合到一起：窗口的自定义控件
+
 模板 655
+
 23.4 Windows 7任务栏编程 658
+
 23.4.1 使用跳转列表 659
+
 23.4.2 改变任务栏图标和预览 663
+
 23.5 小结 667
+
 第24章 页面和导航 669
+
 24.1 基于页面的导航 669
+
 24.2 基于页面的界面 670
+
 24.2.1 创建一个具有导航窗口的基于
+
 页面的简单应用程序 670
+
 24.2.2 Page类 672
+
 24.2.3 超链接 673
+
 24.2.4 在框架中驻留页面 675
+
 24.2.5 在另一个页面中驻留页面 677
+
 24.2.6 在Web浏览器中驻留页面 678
+
 24.3 页面历史 678
+
 24.3.1 深入分析WPF中的URI 678
+
 24.3.2 导航历史 679
+
 24.3.3 维护自定义的属性 681
+
 24.4 导航服务 682
+
 24.4.1 通过编程进行导航 682
+
 24.4.2 导航事件 683
+
 24.4.3 管理日志 684
+
 24.4.4 向日志添加自定义项 685
+
 24.4.5 使用页函数 689
+
 24.5 XAML浏览器应用程序 692
+
 24.5.1 创建XBAP应用程序 692
+
 24.5.2 部署XBAP应用程序 693
+
 24.5.3 更新XBAP应用程序 695
+
 24.5.4 XBAP应用程序的安全性 695
+
 24.5.5 完全信任的XBAP应用程序 696
+
 24.5.6 组合XBAP/独立应用程序 697
+
 24.5.7 为不同的安全级别编写代码 697
+
 24.5.8 在网页中嵌入XBAP
+
 应用程序 702
+
 24.6 WebBrowser控件 702
+
 24.6.1 导航到页面 703
+
 24.6.2 构建DOM树 704
+
 24.6.3 使用.NET代码为网页添加
+
 脚本 706
+
 24.7 小结 708
+
 第25章 菜单、工具栏和功能区 709
+
 25.1 菜单 709
+
 25.1.1 Menu类 710
+
 25.1.2 菜单项 710
+
 25.1.3 ContextMenu类 712
+
 25.1.4 菜单分隔条 713
+
 25.2 工具栏和状态栏 714
+
 25.2.1 ToolBar控件 714
+
 25.2.2 StatusBar控件 717
+
 25.3 功能区 718
+
 25.3.1 添加功能区 719
+
 25.3.2 应用程序菜单 720
+
 25.3.3 选项卡、组与按钮 722
+
 25.3.4 富工具提示 724
+
 25.3.5 带有快捷键提示的键盘访问 725
+
 25.3.6 改变功能区的大小 726
+
 25.3.7 快速访问工具栏 729
+
 25.4 小结 730
+
 第26章 声音和视频 731
+
 26.1 播放WAV音频 731
+
 26.1.1 SoundPlayer类 731
+
 26.1.2 SoundPlayerAction类 733
+
 26.1.3 系统声音 733
+
 26.2 MediaPlayer类 734
+
 26.3 MediaElement类 735
+
 26.3.1 使用代码播放音频 736
+
 26.3.2 处理错误 737
+
 26.3.3 使用触发器播放音频 737
+
 26.3.4 播放多个声音 739
+
 26.3.5 改变音量、平衡、速度以及
+
 位置 740
+
 26.3.6 将动画同步到音频 742
+
 26.3.7 播放视频 744
+
 26.3.8 视频效果 744
+
 26.4 语音 747
+
 26.4.1 语音合成 747
+
 26.4.2 语音识别 749
+
 26.5 小结 751
+
 第27章 3D绘图 753
+
 27.1 3D绘图基础 753
+
 27.1.1 视口 754
+
 27.1.2 3D对象 754
+
 27.1.3 摄像机 761
+
 27.2 深入研究3D绘图 765
+
 27.2.1 着色和法线 766
+
 27.2.2 更复杂的形状 769
+
 27.2.3 Model3DGroup集合 769
+
 27.2.4 使用材质 771
+
 27.2.5 纹理映射 773
+
 27.3 交互和动画 777
+
 27.3.1 变换 777
+
 27.3.2 旋转 778
+
 27.3.3 飞过 779
+
 27.3.4 跟踪球 781
+
 27.3.5 命中测试 782
+
 27.3.6 3D表面上的2D元素 786
+
 27.4 小结 789
+
 第Ⅶ部分 文档和打印
+
 第28章 文档 793
+
 28.1 理解文档 793
+
 28.2 流文档 794
+
 28.2.1 流内容元素 795
+
 28.2.2 设置内容元素的格式 796
+
 28.2.3 创建简单的流文档 797
+
 28.2.4 块元素 799
+
 28.2.5 内联元素 804
+
 28.2.6 通过代码与元素进行交互 809
+
 28.2.7 文本对齐 812
+
 28.3 只读流文档容器 813
+
 28.3.1 缩放 814
+
 28.3.2 创建页面和列 815
+
 28.3.3 从文件加载文档 817
+
 28.3.4 打印 818
+
 28.4 编辑流文档 818
+
 28.4.1 加载文件 819
+
 28.4.2 保存文件 821
+
 28.4.3 设置所选文本的格式 822
+
 28.4.4 获取单个单词 824
+
 28.5 固定文档 825
+
 28.6 批注 826
+
 28.6.1 批注类 827
+
 28.6.2 启用批注服务 828
+
 28.6.3 创建批注 829
+
 28.6.4 检查批注 832
+
 28.6.5 响应批注更改 835
+
 28.6.6 在固定文档中保存批注 835
+
 28.6.7 自定义便签的外观 836
+
 28.7 小结 837
+
 第29章 打印 839
+
 29.1 基本打印 839
+
 29.1.1 打印元素 840
+
 29.1.2 变换打印输出 842
+
 29.1.3 打印不显示的元素 844
+
 29.1.4 打印文档 845
+
 29.1.5 在文档打印输出中控制页面 848
+
 29.2 自定义打印 851
+
 29.2.1 使用可视化层中的类
+
 进行打印 851
+
 29.2.2 自定义多页打印 854
+
 29.3 打印设置和管理 859
+
 29.3.1 保存打印设置 859
+
 29.3.2 打印页面范围 859
+
 29.3.3 管理打印队列 860
+
 29.4 通过XPS进行打印 863
+
 29.4.1 为打印预览创建XPS文档 863
+
 29.4.2 写入内存的XPS文档 864
+
 29.4.3 通过XPS直接打印到
+
 打印机 865
+
 29.4.4 异步打印 866
+
 29.5 小结 866
+
 第Ⅷ部分 其他主题
+
 第30章 与Windows窗体进行交互 869
+
 30.1 访问互操作性 869
+
 30.2 混合窗口和窗体 870
+
 30.2.1 为WPF应用程序添加窗体 870
+
 30.2.2 为Windows窗体应用程序
+
 添加WPF窗口 870
+
 30.2.3 显示模态窗口和窗体 871
+
 30.2.4 显示非模态窗口和窗体 871
+
 30.2.5 启用Windows窗体控件的
+
 可视化风格 872
+
 30.3 创建具有混合内容的窗口 872
+
 30.3.1 WPF和Windows窗体
+
 “空域” 873
+
 30.3.2 在WPF中驻留Windows
+
 窗体控件 874
+
 30.3.3 使用WPF和Windows窗体
+
 用户控件 876
+
 30.3.4 在Windows窗体中驻留WPF
+
 控件 877
+
 30.3.5 访问键、助记码和焦点 879
+
 30.3.6 属性映射 880
+
 30.4 小结 882
+
 第31章 多线程 883
+
 31.1 了解多线程模型 883
+
 31.1.1 Dispatcher类 884
+
 31.1.2 DispatcherObject类 884
+
 31.2 BackgroundWorker类 887
+
 31.2.1 简单的异步操作 887
+
 31.2.2 创建BackgroundWorker
+
 对象 888
+
 31.2.3 运行BackgroundWorker
+
 对象 889
+
 31.2.4 跟踪进度 891
+
 31.2.5 支持取消 893
+
 31.3 小结 894
+
 第32章 插件模型 895
+
 32.1 在MAF和MEF两者间
+
 进行选择 895
+
 32.2 了解插件管道 896
+
 32.2.1 管道的工作原理 897
+
 32.2.2 插件文件夹结构 898
+
 32.2.3 为使用插件模型准备
+
 解决方案 899
+
 32.3 创建使用插件模型的
+
 应用程序 900
+
 32.3.1 协定 901
+
 32.3.2 插件视图 901
+
 32.3.3 插件 902
+
 32.3.4 插件适配器 902
+
 32.3.5 宿主视图 903
+
 32.3.6 宿主适配器 904
+
 32.3.7 宿主 904
+
 32.3.8 更多插件 907
+
 32.4 与宿主进行交互 908
+
 32.5 可视化插件 912
+
 32.6 小结 915
+
 第33章 ClickOnce部署 917
+
 33.1 理解应用程序部署 917
+
 33.1.1 ClickOnce安装模型 918
+
 33.1.2 ClickOnce部署的局限性 919
+
 33.2 简单的ClickOnce发布 920
+
 33.2.1 设置发布者和产品 920
+
 33.2.2 启动发布向导 922
+
 33.2.3 理解部署文件的结构 926
+
 33.2.4 安装ClickOnce应用程序 926
+
 33.2.5 更新ClickOnce应用程序 928
+
 33.3 ClickOnce附加选项 928
+
 33.3.1 发布版本 928
+
 33.3.2 更新 929
+
 33.3.3 文件关联 930
+
 33.3.4 发布选项 931
+
 33.4 小结 932
 
 ## HTML 5
@@ -11072,44 +14394,79 @@ storyboard.Begin(this);
 ##### 媒体类型
 
 > all	用于所有多媒体类型设备
+
 > print	用于打印机
+
 > screen	用于电脑屏幕，平板，智能手机等。
+
 > speech	用于屏幕阅读器
 
 ##### 媒体特性
 
 > aspect-ratio	定义输出设备中的页面可见区域宽度与高度的比率
+
 > color	定义输出设备每一组彩色原件的个数。如果不是彩色设备，则值等于0
+
 > color-index	定义在输出设备的彩色查询表中的条目数。如果没有使用彩色查询表，则值等于0
+
 > device-aspect-ratio	定义输出设备的屏幕可见宽度与高度的比率。
+
 > device-height	定义输出设备的屏幕可见高度。
+
 > device-width	定义输出设备的屏幕可见宽度。
+
 > grid	用来查询输出设备是否使用栅格或点阵。
+
 > height	定义输出设备中的页面可见区域高度。
+
 > max-aspect-ratio	定义输出设备的屏幕可见宽度与高度的最大比率。
+
 > max-color	定义输出设备每一组彩色原件的最大个数。
+
 > max-color-index	定义在输出设备的彩色查询表中的最大条目数。
+
 > max-device-aspect-ratio	定义输出设备的屏幕可见宽度与高度的最大比率。
+
 > max-device-height	定义输出设备的屏幕可见的最大高度。
+
 > max-device-width	定义输出设备的屏幕最大可见宽度。
+
 > max-height	定义输出设备中的页面最大可见区域高度。
+
 > max-monochrome	定义在一个单色框架缓冲区中每像素包含的最大单色原件个数。
+
 > max-resolution	定义设备的最大分辨率。
+
 > max-width	定义输出设备中的页面最大可见区域宽度。
+
 > min-aspect-ratio	定义输出设备中的页面可见区域宽度与高度的最小比率。
+
 > min-color	定义输出设备每一组彩色原件的最小个数。
+
 > min-color-index	定义在输出设备的彩色查询表中的最小条目数。
+
 > min-device-aspect-ratio	定义输出设备的屏幕可见宽度与高度的最小比率。
+
 > min-device-width	定义输出设备的屏幕最小可见宽度。
+
 > min-device-height	定义输出设备的屏幕的最小可见高度。
+
 > min-height	定义输出设备中的页面最小可见区域高度。
+
 > min-monochrome	定义在一个单色框架缓冲区中每像素包含的最小单色原件个数
+
 > min-resolution	定义设备的最小分辨率。
+
 > min-width	定义输出设备中的页面最小可见区域宽度。
+
 > monochrome	定义在一个单色框架缓冲区中每像素包含的单色原件个数。如果不是单色设备，则值等于0
+
 > orientation	定义输出设备中的页面可见区域高度是否大于或等于宽度。
+
 > resolution	定义设备的分辨率。如：96dpi, 300dpi, 118dpcm
+
 > scan	定义电视类设备的扫描工序。
+
 > width	定义输出设备中的页面可见区域宽度。
 
 ### Bootstrap 布局
@@ -11123,201 +14480,385 @@ storyboard.Begin(this);
 > 当你须要搞定响应式布局时，一堆堆的媒体查询、大量的属性、属性值往往能够把你搞颠，SASS（或者诸如此类的预处理器）被觉得是处理响应式断点的最佳利器。
 
 > 1.使用变量(With variables)
+
 Bootstrap和Foundation採用这样的方式，首先定义变量，然后在媒体查询中使用变量。换句话说，你能够在配置文件或者其它地方定义变量以备使用。我们来看看Bootstrap怎么干的。
+
 // Defining values
+
 $screen-sm-min: 768px;
+
 $screen-xs-max: ($screen-sm-min - 1);
+
 $screen-md-min: 992px;
+
 $screen-sm-max: ($screen-md-min - 1);
+
 $screen-lg-min: 1200px;
+
 $screen-md-max: ($screen-lg-min - 1);
+
  
+
 // Usage
+
 @media (max-width: $screen-xs-max) { ... }
+
 @media (min-width: $screen-sm-min) { ... }
+
 @media (max-width: $screen-sm-max) { ... }
+
 @media (min-width: $screen-md-min) { ... }
+
 @media (max-width: $screen-md-max) { ... }
+
 @media (min-width: $screen-lg-min) { ... }
+
 Foudation更进一步，使用跨范围的媒体查询，避免使用过多的max-width和min-width。
+
 // Defining values
+
 $small-range:   (0em, 40em);       /* 0, 640px */
+
 $medium-range:  (40.063em, 64em);  /* 641px, 1024px */
+
 $large-range:   (64.063em, 90em);  /* 1025px, 1440px */
+
 $xlarge-range:  (90.063em, 120em); /* 1441px, 1920px */
+
 $xxlarge-range: (120.063em);       /* 1921px */
+
  
+
 // Defining media queries
+
 $screen:       "only screen" !default;
+
 $landscape:    "#{$screen} and (orientation: landscape)" !default;
+
 $portrait:     "#{$screen} and (orientation: portrait)" !default;
+
 $small-up:     $screen !default;
+
 $small-only:   "#{$screen} and (max-width: #{upper-bound($small-range)})" !default;
+
 $medium-up:    "#{$screen} and (min-width:#{lower-bound($medium-range)})" !default;
+
 $medium-only:  "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max-width:#{upper-bound($medium-range)})" !default;
+
 $large-up:     "#{$screen} and (min-width:#{lower-bound($large-range)})" !default;
+
 $large-only:   "#{$screen} and (min-width:#{lower-bound($large-range)}) and (max-width:#{upper-bound($large-range)})" !default;
+
 $xlarge-up:    "#{$screen} and (min-width:#{lower-bound($xlarge-range)})" !default;
+
 $xlarge-only:  "#{$screen} and (min-width:#{lower-bound($xlarge-range)}) and (max-width:#{upper-bound($xlarge-range)})" !default;
+
 $xxlarge-up:   "#{$screen} and (min-width:#{lower-bound($xxlarge-range)})" !default;
+
 $xxlarge-only: "#{$screen} and (min-width:#{lower-bound($xxlarge-range)}) and (max-width:#{upper-bound($xxlarge-range)})" !default;
+
  
+
 // Usage
+
 @media #{$small-up}     { ... }
+
 @media #{$small-only}   { ... }
+
 @media #{$medium-up}    { ... }
+
 @media #{$medium-only}  { ... }
+
 @media #{$large-up}     { ... }
+
 @media #{$large-only}   { ... }
+
 @media #{$xlarge-up}    { ... }
+
 @media #{$xlarge-only}  { ... }
+
 @media #{$xxlarge-up}   { ... }
+
 @media #{$xxlarge-only} { ... }
+
 两种方法各有一个不爽的地方，在Bootstrap里每次都要使用max-width，在Foundation里我们须要使用插值变量这样的又丑又烦的方式。显示我们须要想办法解决这些问题。
 
 > 2.使用独立Mixin(With a standalone mixin)《media queries in Sass 3.2》是CSS-Tricks里最火的文章之中的一个，在这篇文章里Chris Coyier在借鉴a former idea by Mason Wendell和a former idea by Jeff Croft两文的基础上，怎样使用sass实现响应式布局的断点管理。
 
 命名断点是非常重要的，由于能够为抽象的数字赋予意义（你知道767px是什么意思吗，我不知道，直到我去使用小屏幕的时候才知道）。为什么Bootstrap和Foundation要使用变量呢，不也是为了给抽象的数字起个名字吗？
+
 所以我们定义个mixin，接收断点名作唯一的參数，返回媒体查询的内容。准备好了吗？走起。
+
 @mixin respond-to($breakpoint) {
+
   @if $breakpoint == "small" {
+
     @media (min-width: 767px) {
+
       @content;
+
     }
+
   }
+
  
+
   @else if $breakpoint == "medium" {
+
     @media (min-width: 992px) {
+
       @content;
+
     }
+
   }
+
  
+
   @else if $breakpoint == "large" {
+
     @media (min-width: 1200px) {
+
       @content;
+
     }
+
   }
+
 }
+
 然后，我们这样使用mixin。
+
 @include respond-to(small) { ... }
+
 @include respond-to(medium) { ... }
+
 @include respond-to(large) { ... }
+
 这种方法是极好的（甄嬛体，老外也看？），原因有二：抽象数据有意义，大量断点集中管理。假设你想把“992px”改成“970px”，你不须要爬过每个css文件，而仅仅需更新mixin，然后所有更新。
+
 可是也还有两个问题：
+
 a.断点不easy从mixin里拿出来，放到配置文件中去。
+
 b.冗余太多。
 
 > 3. 可配置的mixin(With a configurable mixin  )
 
 <为了解决上面的两个问题，我们须要从断点mixin中抽出一个列表，仅仅剩下mixin核心，然后这个列表就能够随便移动，或者扔到配置文件中。
+
 然后，使用sass 3.3+中的maps，我们能够方便的使用关联的属性和属性值。
+
 $breakpoints: (
+
   'small'  : 767px,
+
   'medium' : 992px,
+
   'large'  : 1200px
+
 );
+
 然后原来的mixin进行相应的改动
+
 @mixin respond-to($breakpoint) {
+
   // Retrieves the value from the key
+
   $value: map-get($breakpoints, $breakpoint);
+
  
+
   // If the key exists in the map
+
   @if $value != null {
+
     // Prints a media query based on the value
+
     @media (min-width: $value) {
+
       @content;
+
     }
+
   }
+
  
+
   // If the key doesn't exist in the map
+
   @else {
+
     @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+
         + "Please make sure it is defined in `$breakpoints` map.";
+
   }
+
 }
+
 我们在改动mixin的同一时候也进行了一些提高，不要小看这些提高，我们加上了错误处理，假设在maps中没有找到断点值，将会弹出一个错误提示，这将便于我们开发过程中的调试。
+
 我们让mixin变得更加精简，能非常好的处理错误，同一时候我们去掉了一个功能——推断属性是否是你想要的（min-width,max-width,min-height等），这在移动优先的网页中没问题，由于我们仅仅须要min-width。可是，假设须要查询其它属性，我们须要把这个功能加回来。为了达到这个目的，我想到了一个非常优雅的解决方式，同一时候并不添加复杂性。
+
 $breakpoints: (
+
   'small'  : ( min-width:  767px ),
+
   'medium' : ( min-width:  992px ),
+
   'large'  : ( min-width: 1200px )
+
 );
+
   
+
 @mixin respond-to($name) {
+
   // If the key exists in the map
+
   @if map-has-key($breakpoints, $name) {
+
     // Prints a media query based on the value
+
     @media #{inspect(map-get($breakpoints, $name))} {
+
       @content;
+
     }
+
   }
+
  
+
   // If the key doesn't exist in the map
+
   @else {
+
     @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+
         + "Please make sure it is defined in `$breakpoints` map.";
+
   }
+
 }
+
 在这里，我们主要做了三个事情
+
 a. 检查查询的断点在map中存在不存在
+
 b.假设存在，打印相应的媒体查询。
+
 c.假设不在，进行错误提示。
+
 简单吧，假设我们回想前面的两个缺陷，已经不再有WET(Write Everything Twice))问题，也不再有不灵活的媒体查询。可是另一个问题，不支持复杂的媒体查询。复杂指的是涉及多个组件的查询（e.g. screen and (min-width: 767px)）。我们上面这些方案除了第一种变量之外都不能非常好的解决问题。
 
 > 4. 使用外部工具(With an external tool)
 
 ```
+
 最后一个相同重要的是，假设不想创建自己的mixin，你能够使用外部的工具处理响应式布局的断点，有非常多sass的扩展在这个方面做得非常好。
+
 SassMQ by Kaelig
+
 Breakpoint by Mason Wendell and Sam Richard
+
 Breakup by Ben Scott
+
  	SassMQ	Breakpoint	Breakup
+
 MQ type	*-width	any	any
+
 No Query fallback	yep	yep	yep
+
 API complexity	simple	very simple	medium
+
 Code complexity	very simple	complexe	simple
+
 Extra	Debug mode	Singularity.gs	—
+
 基本上是这样，假设发现有没有涉及的，记得一定告诉我。
+
 SassMQ
+
 // Configuration
+
 $mq-responsive: true;
+
 $mq-static-breakpoint: desktop;
+
 $mq-breakpoints: (
+
   mobile:  320px,
+
   tablet:  740px,
+
   desktop: 980px,
+
   wide:    1300px
+
 );
+
  
+
 // Example
+
 selector {
+
   @include mq($from: mobile) {
+
     property: value;
+
   }
+
 }
+
 BreakPoints
+
 $high-tide: 500px;
+
 $ex-presidents: 600px 800px;
+
 $surfboard-width: max-width 1000px;
+
 $surfboard-height: (min-height 1000px) (orientation portrait);
+
  
+
 selector {
+
   @include breakpoint($high-tide) {
+
     property: value;
+
   }
+
 }
+
 Breakup
+
 $breakup-breakpoints: (
+
   'thin' '(max-width: 35.999em)',
+
   'wide' '(min-width: 36em)',
+
   'full' '(min-width: 61em)'
+
 );
+
  
+
 selector {
+
   @include breakup-block('thin') {
+
     property: value;
+
   }
+
 }
+
 ```
 
 #### 堆叠顺序 z-index
@@ -11395,70 +14936,121 @@ selector {
 > 调用混合器  @include minName 如
 
 @mixin border-round{
+
     -moz-border:1px solid red;
+
     -webkit-border:1px solid red;
+
     border:1px solid red
+
 }
+
 #top{
+
     @include border-round;
+
 }
 
 //编译后
+
 #top {
+
   -moz-border: 1px solid red;
+
   -webkit-border: 1px solid red;
+
   border: 1px solid red; }
 
 > 混合器css规则 混合器中也可以包含css规则
 
 @mixin testmix{
+
     list-style:none;
+
     li{
+
         color:red;
+
         padding:30px;
+
     }
+
     >.top{
+
         background:red
+
     }
+
 }
 
 ul.parent{
+
     border:1px solid red;
+
     @include testmix;
+
 }
+
 //编译后
+
 ul.parent {
+
   border: 1px solid red;
+
   list-style: none; 
+
 }
+
   ul.parent li {
+
     color: red;
+
     padding: 30px; 
+
 }
+
   ul.parent > .top {
+
     background: red;
+
  }
 
 > 混合器传参 混合器可以像函数一样传递参数 混合器传参数
 
 @mixin test($color,$size,$hoverColor){
+
     color:$color;
+
     border:$size solid red;
+
     &:hover{
+
         color:$hoverColor
+
     }
+
 }
 
 #top{
+
     @include test(red,1px,blue);
+
 }
+
 //编译后
+
 #top {
+
   color: red;
+
   border: 1px solid red; 
+
 }
+
   #top:hover {
+
     color: blue; 
+
 }
 
 /*# 
@@ -11466,144 +15058,253 @@ ul.parent {
 当然这里有个问题，混合器里面的参数不允许颠倒位置，如果你记不清他们什么位置可以使用键值的方式明确指定
 
 @mixin test($color,$size,$hoverColor){
+
     color:$color;
+
     border:$size solid red;
+
     &:hover{
+
         color:$hoverColor
+
     }
+
 }
 
 #top{
+
     @include test($size:1px,$hoverColor:blue,$color:red);
+
 }
+
 //编译后
+
 #top {
+
   color: red;
+
   border: 1px solid red;
+
   }
+
 #top:hover {
+
     color: blue;
+
   }
 
 > 参数默认值 混合器允许你定义参数默认值 如下
 
 @mixin test($normal,$hover:red){
+
     color:$normal;
+
     background-color:$hover
+
 }
+
 #top{
+
     @include test(skyblue,orange);
+
 }
+
 //编译后
+
 #top {
+
   color: skyblue;
+
   background-color: orange;
+
   }
+
   //不指定color
+
 @mixin test($normal,$hover:red){
+
     color:$normal;
+
     background-color:$hover
+
 }
+
 #top{
+
     @include test(skyblue);
+
 }
+
 //编译后
+
   
+
 #top {
+
   color: skyblue;
+
   background-color: red; }
 
 > Sass继承 Sass中也可实现继承类似面向对象思想子类继承父类，sass可以继承多个父类 这个”父类“可以是类，id 标签 状态等。 继承语法 @extend name 如
 
 .error{
+
     color:red;
+
     font-size:15px;
+
 }
+
 .danger-error{
+
     @extend .error;
+
     font-size:20px;
+
 }
+
 //编译后
+
 .error, .danger-error {
+
   color: red;
+
   font-size: 15px;
+
 }
 
 .danger-error {
+
   font-size: 20px; 
+
 }
 
 当然父类也可包含css规则
 
 .error{
+
     color:red;
+
     font-size:15px;
+
     >.te{
+
         padding:10px
+
     }
+
 }
+
 .danger-error{
+
     @extend .error;
+
     font-size:20px;
+
 }
+
 //编译后
+
 .error, .danger-error {
+
   color: red;
+
   font-size: 15px; 
+
 }
+
 .error > .te, .danger-error > .te {
+
     padding: 10px;
+
   }
 
 .danger-error {
+
   font-size: 20px; 
+
  }
 
 > 组合继承
 
 .error a{
+
     color:red;
+
     font-size:10px;
+
 }
+
 .danger{
+
     @extend .error;
+
     color:orange;
+
 }
+
 //编译后
+
 .error a, .danger a {
+
   color: red;
+
   font-size: 10px; 
+
 }
 
 .danger {
+
   color: orange; 
+
 }
 
 > 继承多个
 
 .one{
+
     color:red;
+
 }
+
 .two{
 
     border:1px solid red;
+
 }
+
 .three{
+
     @extend .one;
+
     @extend .two;
+
     //或者这样写@extend .one,.two
+
     //
+
     background:blue;
+
 }
+
 //编译后
+
 .one, .three {
+
   color: red; 
+
 }
+
 .two, .three {
+
   border: 1px solid red;
+
 }
+
 .three {
+
   background: blue;
+
 }
 
 > 继承局限性 继承不支持组合 很多选择器不支持继承如包选择器 .one tow 相邻选择器 .one+.two
@@ -11611,52 +15312,85 @@ ul.parent {
 %继承 有些时候我们希望被用来继承的代码不要渲染到页面上只作为继承使用。 定义方法 父类名前+%
 
 %test{
+
     border:1px solid red;
+
 }
+
 #main{
+
     @extend %test;
+
 }
+
 //编译后
+
 #main {
+
   border: 1px solid red; 
+
 }
 
 #meng a%long{
+
     color:blue;
+
     border:1px solid red;
+
 }
 
 .notice{
+
     @extend %long;
+
 }
+
 //编译后
+
 #meng a.notice {
+
   color: blue;
+
   border: 1px solid red; 
+
 }
 
 继承在指令的作用域如（@media） 在指令内部无法继承到指令外部的类，指令外部继承指令内部的类无法达到预期效果
 
 .one{
+
     height:400px;
+
 }
 
 @media print{
+
     .two{
+
         @extend .one
+
     }
+
     width:300px;
+
 }
 
 > 编译时报错 继承注意事项
 
 > 不能过量使用继承，因为所有类继承了父类，父类改变就会影响子类
+
  
+
 继承只会在生成css时复制选择器，而不会复制大段的css属性  如果不小心会让生成css中包含大量的选择器复制  避免这种情况的最好办法：  不要在继承css规则中使用后代选择器如
+
  
+
  .dsf{}
+
  .foo .bar {
+
  @extend dsf //不推荐
+
  }
 
 ##  Font Awesome
@@ -11670,13 +15404,21 @@ ul.parent {
 > [Route("app/[controller]/actions/[action]/{id:weekday?}")]
 
 #### 设置路由中间件
+
 ```
+
 app.UseMvc(routes =>
+
 {
+
     routes.MapRoute(
+
         name: "default",
+
         template: "{controller=Home}/{action=Index}/{id?}");
+
 });
+
 ```
 
 > 常规路由：routes.MapRoute(name: "default",template: "{controller=Home}/{action=Index}/{id?}");  这是一个常规路由
@@ -11684,85 +15426,137 @@ app.UseMvc(routes =>
 #### 多路由 
 
 ```
+
 app.UseMvc(routes =>
+
 {
+
     routes.MapRoute("blog", "blog/{*article}",
+
         defaults: new { Controller = "Blog", Action = "Index" });
+
     routes.MapRoute(
+
         name: "default",
+
         template: "{controller=Home}/{action=Index}/{id?}");
+
 });
+
 ```
 
 #### 高级路由
 
 ```
+
 app.UseMvc(routes => {
+
     routes.MapRoute(
+
         name: "areas",
+
         template: "{area:exists}/{controller=Home}/{action=Index}");
 
     routes.Routes.Add(new LegacyRoute(
+
         routes.DefaultHandler,
+
         "/articles/Windows_3.1_Overview.html",
+
         "/old/.NET_1.0_Class_Library"));
 
     routes.MapRoute(
+
         name: "default",
+
         template: "{controller=Home}/{action=Index}/{id?}");
 
     routes.MapRoute(
+
         name: "out",
+
         template: "outbound/{controller=Home}/{action=Index}");
+
 });
+
 ```
 
 ### Session
 
 ```
+
 using System;
+
 using Microsoft.AspNetCore.Http;
+
 using Microsoft.Extensions.DependencyInjection;
+
 using Newtonsoft.Json;
+
 using SportsStore.Infrastructure;
 
 namespace SportsStore.Models
+
 {
 
     public class SessionCart : Cart
+
     {
 
         public static Cart GetCart(IServiceProvider services)
+
         {
+
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?
+
                 .HttpContext.Session;
+
             SessionCart cart = session?.GetJson<SessionCart>("Cart")
+
                 ?? new SessionCart();
+
             cart.Session = session;
+
             return cart;
+
         }
 
         [JsonIgnore]
+
         public ISession Session { get; set; }
 
         public override void AddItem(Product product, int quantity)
+
         {
+
             base.AddItem(product, quantity);
+
             Session.SetJson("Cart", this);
+
         }
 
         public override void RemoveLine(Product product)
+
         {
+
             base.RemoveLine(product);
+
             Session.SetJson("Cart", this);
+
         }
 
         public override void Clear()
+
         {
+
             base.Clear();
+
             Session.Remove("Cart");
+
         }
+
     }
+
 }
 
 ```
@@ -11770,83 +15564,143 @@ namespace SportsStore.Models
 ### 授权认证管理
 
 #### 认证
+
 ```
+
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Identity;
+
 using Microsoft.AspNetCore.Mvc;
+
 using SportsStore.Models.ViewModels;
+
 using SportsStore.Models;
 
 [Authorize]
+
 public class AccountController : Controller {
+
     private UserManager<IdentityUser> userManager;
+
     private SignInManager<IdentityUser> signInManager;
 
     public AccountController(UserManager<IdentityUser> userMgr,
+
             SignInManager<IdentityUser> signInMgr) {
+
         userManager = userMgr;
+
         signInManager = signInMgr;
+
         IdentitySeedData.EnsurePopulated(userMgr).Wait();
+
     }
 
     [AllowAnonymous]
+
     public ViewResult Login(string returnUrl) {
+
         return View(new LoginModel {
+
             ReturnUrl = returnUrl
+
         });
+
     }
 
     [HttpPost]
+
     [AllowAnonymous]
+
     [ValidateAntiForgeryToken]
+
     public async Task<IActionResult> Login(LoginModel loginModel) {
+
         if (ModelState.IsValid) {
+
             IdentityUser user =
+
                 await userManager.FindByNameAsync(loginModel.Name);
+
             if (user != null) {
+
                 await signInManager.SignOutAsync();
+
                 if ((await signInManager.PasswordSignInAsync(user,
+
                         loginModel.Password, false, false)).Succeeded) {
+
                     return Redirect(loginModel?.ReturnUrl ?? "/Admin/Index");
+
                 }
+
             }
+
         }
+
         ModelState.AddModelError("", "Invalid name or password");
+
         return View(loginModel);
+
     }
 
     public async Task<RedirectResult> Logout(string returnUrl = "/") {
+
         await signInManager.SignOutAsync();
+
         return Redirect(returnUrl);
+
     }
+
 }
+
 ```
 
 > rezor
 
 ```
+
 @model LoginModel
+
 @{
+
     ViewBag.Title = "Log In";
+
     Layout = "_AdminLayout";
+
 }
 
 <div class="text-danger" asp-validation-summary="All"></div>
 
 <form asp-action="Login" asp-controller="Account" method="post">
+
     <input type="hidden" asp-for="ReturnUrl" />
+
     <div class="form-group">
+
         <label asp-for="Name"></label>
+
         <div><span asp-validation-for="Name" class="text-danger"></span></div>
+
         <input asp-for="Name" class="form-control" />
+
     </div>
+
     <div class="form-group">
+
         <label asp-for="Password"></label>
+
         <div><span asp-validation-for="Password" class="text-danger"></span></div>
+
         <input asp-for="Password" class="form-control" />
+
     </div>
+
     <button class="btn btn-primary" type="submit">Log In</button>
+
 </form>
 
 ```
@@ -11861,7 +15715,7 @@ public class AccountController : Controller {
 
 ### Filters
 
-#### 子类Controller拦截器要先于父类Controller拦截器执行
+> > 子类Controller拦截器要先于父类Controller拦截器执行
 
 > 最先执行的是全局声明的MyActionOneAttribute拦截器
 
@@ -11872,115 +15726,187 @@ public class AccountController : Controller {
 > 最后执行的是声明在子Controller类HomeController的Index方法上的MyActionFourAttribute拦截器
 
 ```
+
 public class MyFilterAttribute : ResultFilterAttribute {
+
     private string message;
 
     public MyFilterAttribute(string msg) {
+
         message = msg;
+
     }
 
     public override void OnResultExecuting(ResultExecutingContext context) {
+
         WriteMessage(context, $"<div>Before Result:{message}</div>");
+
     }
 
     public override void OnResultExecuted(ResultExecutedContext context) {
+
         WriteMessage(context, $"<div>After Result:{message}</div>");
+
     }
 
     private void WriteMessage(FilterContext context, string msg) {
+
         byte[] bytes = Encoding.ASCII
+
             .GetBytes($"<div>{msg}</div>");
 
         // Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true instead.
+
         context.HttpContext.Response
+
             .Body.WriteAsync(bytes, 0, bytes.Length);
+
     }
+
 }
+
 ```
 
 > Usage:
 
 ```
+
     [MyFilter("This is the Controller-Scoped Filter", Order = 10)]
+
     public class HomeController : Controller {
 
         [MyFilter("This is the First Action-Scoped Filter", Order = 1)]
+
         [MyFilter("This is the Second Action-Scoped Filter", Order = -1)]
+
         public ViewResult Index() => View("Message",
+
             "This is the Index action on the Home controller");
+
     }
+
 ```
 
 #### 授权过滤器 AuthorizeAttribute
 
 ```
+
  public class HttpsOnlyAttribute : Attribute, IAuthorizationFilter {
 
         public void OnAuthorization(AuthorizationFilterContext context) {
+
             if (!context.HttpContext.Request.IsHttps) {
+
                 context.Result =
+
                     new StatusCodeResult(StatusCodes.Status403Forbidden);
+
             }
+
         }
+
     }
+
 ```
 
 #### 资源过滤器 IResourceFilter
 
 ```
+
 public class CustomerResourceFilterAttribute : Attribute, IResourceFilter
+
     {
+
         private static Dictionary<string,object> cacheDic=new Dictionary<string, object>();
+
         public void OnResourceExecuting(ResourceExecutingContext context)
+
         {
+
             var path=context.HttpContext.Request.Path; 
+
             if (cacheDic.ContainsKey(path))
+
             {
+
                 context.Result = (IActionResult)cacheDic[path];
+
             }
+
             Console.WriteLine("CustomerResourceFilterAttribute.OnResourceExecuting");
+
         }
+
         public void OnResourceExecuted(ResourceExecutedContext context)
+
         {
+
             var path = context.HttpContext.Request.Path;
+
             cacheDic[path] = context.Result;
+
             Console.WriteLine("CustomerResourceFilterAttribute.OnResourceExecuted");
+
         }
+
  
+
          
+
     }
+
 ```
 
 #### 异常过滤器 IExceptionFilter
 
 ```
+
 public class RangeExceptionAttribute : ExceptionFilterAttribute {
 
         public override void OnException(ExceptionContext context) {
+
             if (context.Exception is ArgumentOutOfRangeException) {
+
                 context.Result = new ViewResult() {
+
                     ViewName = "Message",
+
                     ViewData = new ViewDataDictionary(
+
                         new EmptyModelMetadataProvider(),
+
                         new ModelStateDictionary()) {
+
                         Model = @"The data received by the
+
                                 application cannot be processed"
+
                     }
+
                 };
+
             }
+
         }
+
     }
+
 ```
 
 #### 操作过滤器 ActionFilterAttribute
 
 ```
+
 public class ProfileAttribute : ActionFilterAttribute {
+
         private Stopwatch timer;
+
         private double actionTime;
 
         public override async Task OnActionExecutionAsync(
+
                 ActionExecutingContext context,
+
                 ActionExecutionDelegate next) {
 
             timer = Stopwatch.StartNew();
@@ -11988,231 +15914,362 @@ public class ProfileAttribute : ActionFilterAttribute {
             await next();
 
             actionTime = timer.Elapsed.TotalMilliseconds;
+
         }
 
         public override async Task OnResultExecutionAsync(
+
                 ResultExecutingContext context,
+
                 ResultExecutionDelegate next) {
 
             await next();
 
             timer.Stop();
+
             string result = "<div>Action time: "
+
                 + $"{actionTime} ms</div><div>Total time: "
+
                 + $"{timer.Elapsed.TotalMilliseconds} ms</div>";
+
             byte[] bytes = Encoding.ASCII.GetBytes(result);
 
             await context.HttpContext.Response.Body.WriteAsync(bytes,
+
                 0, bytes.Length);
+
         }
+
     }
+
 ```
 
 ```
+
 public class ViewResultDiagnostics : IActionFilter {
+
         private IFilterDiagnostics diagnostics;
 
         public ViewResultDiagnostics(IFilterDiagnostics diags) {
+
             diagnostics = diags;
+
         }
 
         public void OnActionExecuting(ActionExecutingContext context) {
+
             // do nothing - not used in this filter
+
         }
 
         public void OnActionExecuted(ActionExecutedContext context) {
+
             ViewResult vr;
+
             if ((vr = context.Result as ViewResult) != null) {
+
                 diagnostics.AddMessage($"View name: {vr.ViewName}");
+
                 diagnostics.AddMessage($@"Model type: 
+
                     {vr.ViewData.Model.GetType().Name}");
+
             }
+
         }
+
     }
+
 ```
 
 #### 结果过滤器 ResultFilterAttribute
 
 ```
+
      public class MessageAttribute : ResultFilterAttribute {
+
         private string message;
 
         public MessageAttribute(string msg) {
+
             message = msg;
+
         }
 
         public override void OnResultExecuting(ResultExecutingContext context) {
+
             WriteMessage(context, $"<div>Before Result:{message}</div>");
+
         }
 
         public override void OnResultExecuted(ResultExecutedContext context) {
+
             WriteMessage(context, $"<div>After Result:{message}</div>");
+
         }
 
         private void WriteMessage(FilterContext context, string msg) {
+
             byte[] bytes = Encoding.ASCII
+
                 .GetBytes($"<div>{msg}</div>");
 
             // Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true instead.
+
             context.HttpContext.Response
+
                 .Body.WriteAsync(bytes, 0, bytes.Length);
+
         }
+
     }
+
 ```
 
 ```
+
  public class ViewResultDetailsAttribute : ResultFilterAttribute {
 
         public override async Task OnResultExecutionAsync(
+
                 ResultExecutingContext context,
+
                 ResultExecutionDelegate next) {
 
             Dictionary<string, string> dict = new Dictionary<string, string> {
+
                 ["Result Type"] = context.Result.GetType().Name,
+
             };
 
             ViewResult vr;
+
             if ((vr = context.Result as ViewResult) != null) {
+
                 dict["View Name"] = vr.ViewName;
+
                 dict["Model Type"] = vr.ViewData.Model.GetType().Name;
+
                 dict["Model Data"] = vr.ViewData.Model.ToString();
+
             }
 
             context.Result = new ViewResult {
+
                 ViewName = "Message",
+
                 ViewData = new ViewDataDictionary(
+
                         new EmptyModelMetadataProvider(),
+
                         new ModelStateDictionary()) {
+
                     Model = dict
+
                 }
+
             };
 
             await next();
+
         }
+
     }
+
 ```
 
 #### 结果过滤器 IFilterDiagnostics
 
 ```
+
      public interface IFilterDiagnostics {
+
         IEnumerable<string> Messages { get; }
+
         void AddMessage(string message);
+
     }
 
     public class DefaultFilterDiagnostics : IFilterDiagnostics {
+
         private List<string> messages = new List<string>();
 
         public IEnumerable<string> Messages => messages;
 
         public void AddMessage(string message) =>
+
             messages.Add(message);
+
     }
+
 ```
 
 #### IAsyncResultFilter
 
 ```
+
     public class DiagnosticsFilter : IAsyncResultFilter {
+
         private IFilterDiagnostics diagnostics;
 
         public DiagnosticsFilter(IFilterDiagnostics diags) {
+
             diagnostics = diags;
+
         }
 
         public async Task OnResultExecutionAsync(
+
                 ResultExecutingContext context,
+
                 ResultExecutionDelegate next) {
 
             await next();
 
             foreach (string message in diagnostics?.Messages) {
+
                 byte[] bytes = Encoding.ASCII
+
                     .GetBytes($"<div>{message}</div>");
+
                 await context.HttpContext.Response.Body
+
                     .WriteAsync(bytes, 0, bytes.Length);
+
             }
+
         }
+
     }
+
 ```
 
 ```
+
  public class TimeFilter : IAsyncActionFilter, IAsyncResultFilter {
+
         private ConcurrentQueue<double> actionTimes = new ConcurrentQueue<double>();
+
         private ConcurrentQueue<double> resultTimes = new ConcurrentQueue<double>();
+
         private IFilterDiagnostics diagnostics;
 
         public TimeFilter(IFilterDiagnostics diags) {
+
             diagnostics = diags;
+
         }
 
         public async Task OnActionExecutionAsync(
+
                 ActionExecutingContext context, ActionExecutionDelegate next) {
 
             Stopwatch timer = Stopwatch.StartNew();
+
             await next();
+
             timer.Stop();
+
             actionTimes.Enqueue(timer.Elapsed.TotalMilliseconds);
+
             diagnostics.AddMessage($@"Action time: 
+
                 {timer.Elapsed.TotalMilliseconds} 
+
                 Average: {actionTimes.Average():F2}");
+
         }
 
         public async Task OnResultExecutionAsync(
+
                 ResultExecutingContext context, ResultExecutionDelegate next) {
 
             Stopwatch timer = Stopwatch.StartNew();
+
             await next();
+
             timer.Stop();
+
             resultTimes.Enqueue(timer.Elapsed.TotalMilliseconds);
+
             diagnostics.AddMessage($@"Result time: 
+
                 {timer.Elapsed.TotalMilliseconds}
+
                 Average: {resultTimes.Average():F2}");
+
         }
+
     }
+
 ```
 
 ### Controllers
 
 > [HttpGet("object/{format?}")]
->      [FormatFilter]
+
+>    [FormatFilter]
 
 #### WebAPI
+
 ```
+
     [Route("api/[controller]")]
+
     public class ContentController : Controller {
 
         [HttpGet("string")]
+
         public string GetString() => "This is a string response";
 
         [HttpGet("object/{format?}")]
+
         [FormatFilter]
+
         //[Produces("application/json", "application/xml")]
+
         public Reservation GetObject() => new Reservation {
+
             ReservationId = 100,
+
             ClientName = "Joe",
+
             Location = "Board Room"
+
         };
 
         [HttpPost]
+
         [Consumes("application/json")]
+
         public Reservation ReceiveJson([FromBody] Reservation reservation) {
+
             reservation.ClientName = "Json";
+
             return reservation;
+
         }
 
         [HttpPost]
+
         [Consumes("application/xml")]
+
         public Reservation ReceiveXml([FromBody] Reservation reservation) {
+
             reservation.ClientName = "Xml";
+
             return reservation;
+
         }
+
     }
+
 ```
 
 #### Controller
 
-##### 所有的动作结果都继承自ActionResult基类 ASP.NET MVC框架支持六种标准类型的动作结果：
+> 所有的动作结果都继承自ActionResult基类 ASP.NET MVC框架支持六种标准类型的动作结果：
 
 > 动作名称 概述 方法名
 
@@ -12227,159 +16284,263 @@ public class ViewResultDiagnostics : IActionFilter {
 > RedirectToAction/RedirectToRoute JsonResult 返回一个JSON（Javascript Object Notation）内容 Json ContentResult 返回文本内容 Content
 
 ```
+
 [Route("api/[controller]")]
+
     public class ReservationController : Controller {
+
         private IRepository repository;
 
         public ReservationController(IRepository repo) => repository = repo;
 
         [HttpGet]
+
         public IEnumerable<Reservation> Get() => repository.Reservations;
 
         [HttpGet("{id}")]
+
         public Reservation Get(int id) => repository[id];
 
         [HttpPost]
+
         public Reservation Post([FromBody] Reservation res) =>
+
             repository.AddReservation(new Reservation {
+
                 ClientName = res.ClientName,
+
                 Location = res.Location
+
             });
 
         [HttpPut]
+
         public Reservation Put([FromBody] Reservation res) =>
+
             repository.UpdateReservation(res);
 
         [HttpPatch("{id}")]
+
         public StatusCodeResult Patch(int id,
+
                 [FromBody]JsonPatchDocument<Reservation> patch) {
+
             Reservation res = Get(id);
+
             if (res != null) {
+
                 patch.ApplyTo(res);
+
                 return Ok();
+
             }
+
             return NotFound();
+
         }
 
         [HttpDelete("{id}")]
+
         public void Delete(int id) => repository.DeleteReservation(id);
+
     }
+
 ```
 
 #### Rezor View
+
 ```
+
 @model IEnumerable<Reservation>
+
 @{  Layout = "_Layout"; }
 
 <form id="addform" asp-action="AddReservation" method="post">
+
     <div class="form-group">
+
         <label for="ClientName">Name:</label>
+
         <input class="form-control" name="ClientName" />
+
     </div>
+
     <div class="form-group">
+
         <label for="Location">Location:</label>
+
         <input class="form-control" name="Location" />
+
     </div>
+
     <div class="text-center panel-body">
+
         <button type="submit" class="btn btn-sm btn-primary">Add</button>
+
     </div>
+
 </form>
 
 <table class="table table-sm table-striped table-bordered m-2">
+
     <thead><tr><th>ID</th><th>Client</th><th>Location</th></tr></thead>
+
     <tbody>
+
         @foreach (var r in Model) {
+
             <tr>
+
                 <td>@r.ReservationId</td>
+
                 <td>@r.ClientName</td>
+
                 <td>@r.Location</td>
+
             </tr>
+
         }
+
     </tbody>
+
 </table>
 
 ```
 
 ```
+
 services.AddMvc()
+
     .AddXmlDataContractSerializerFormatters()
+
     .AddMvcOptions(opts => {
+
         opts.EnableEndpointRouting = false;
+
         opts.FormatterMappings.SetMediaTypeMappingForFormat("xml",
+
             new MediaTypeHeaderValue("application/xml"));
+
         opts.RespectBrowserAcceptHeader = true;
+
         opts.ReturnHttpNotAcceptable = true;
+
     });
+
 ```
 
 ### ViewComponent
 
 ```
+
  public class PageSize : ViewComponent {
 
         public async Task<IViewComponentResult> InvokeAsync() {
+
             HttpClient client = new HttpClient();
+
             HttpResponseMessage response
+
                 = await client.GetAsync("http://apress.com");
+
             return View(response.Content.Headers.ContentLength);
+
         }
+
     }
+
 ```
 
-### Taghelper 可以扩展一些自定义的标记 其实就是后台生成html代码的一种形式
+### Taghelper 
+
+> 可以扩展一些自定义的标记 其实就是后台生成html代码的一种形式
 
 > 扩展标记，可以从后台进行前端Html的配置
 
 > HtmlTargetElement 属性中配置那些html元素，那些样式起作用
 
 > 定义一个Taghelper  formbutton 设置其属性
+
 ```
+
     [HtmlTargetElement("button", Attributes = "bs-button-color", ParentTag = "div")]
+
     [HtmlTargetElement("a", Attributes = "bs-button-color", ParentTag = "div")]
+
     [HtmlTargetElement("formbutton")]
+
     public class LYFButtonTagHelper : TagHelper {
 
         public string BsButtonColor { get; set; } = "primary";
 
         public override void Process(TagHelperContext context,
+
                                      TagHelperOutput output) {
 
             output.Attributes.SetAttribute("class", $"btn btn-{BsButtonColor}");
+
         }
+
     }
+
 ```
 
 > View中用法
 
 ```
+
 <formbutton>hello</formbutton>
+
 ```
 
 > 本质上所有的mvc视图元素都是来自Taghelper 比如form
 
 ```
+
 <form method="post" asp-controller="Home" asp-action="Create"
+
       asp-antiforgery="true">
+
     <div class="form-group">
+
         <label asp-for="Name"></label>
+
         <input class="form-control" asp-for="Name" />
+
     </div>
+
     <div class="form-group">
+
         <label asp-for="Country"></label>
+
         <select class="form-control" asp-for="Country" asp-items="ViewBag.Countries">
+
             <option disabled selected value="">Select a Country</option>
+
         </select>
+
     </div>
+
     <div class="form-group">
+
         <label asp-for="Population"></label>
+
         <input class="form-control" asp-for="Population" />
+
     </div>
+
     <div class="form-group">
+
         <label asp-for="Notes"></label>
+
         <textarea class="form-control" asp-for="Notes"></textarea>
+
     </div>
+
     <button type="submit" class="btn btn-primary">Add</button>
+
     <a class="btn btn-primary" href="/Home/Index">Cancel</a>
+
 </form>
 
 ```
@@ -12421,7 +16582,9 @@ services.AddMvc()
 > > SignalR 支持以下用于处理实时通信的技术（按正常回退的顺序）：
 
 > > WebSockets
+
 > > Server-Sent Events
+
 > > 长轮询
 
 > > SignalR 自动选择服务器和客户端能力范围内的最佳传输方法。
@@ -12479,17 +16642,27 @@ services.AddMvc()
 > > > C#
 
 ```
+
 using Microsoft.AspNetCore.SignalR;
 
 namespace SignalRChat.Hubs
+
 {
+
     public class ChatHub : Hub
+
     {
+
         public async Task SendMessage(string user, string message)
+
         {
+
             await Clients.All.SendAsync("ReceiveMessage", user, message);
+
         }
+
     }
+
 }
 
 ```
@@ -12505,25 +16678,35 @@ namespace SignalRChat.Hubs
 C#
 
 ```
+
 using SignalRChat.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddRazorPages();
+
 builder.Services.AddSignalR();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
+
 {
+
     app.UseExceptionHandler("/Error");
+
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
     app.UseHsts();
+
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -12531,9 +16714,11 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
 app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
+
 ```
 
 > > > 以上突出显示的代码将 SignalR 添加到 ASP.NET Core 依赖关系注入和路由系统。
@@ -12543,69 +16728,119 @@ app.Run();
 > > > CSHTML
 
 ```
+
 @page
+
 <div class="container">
+
     <div class="row p-1">
+
         <div class="col-1">User</div>
+
         <div class="col-5"><input type="text" id="userInput" /></div>
+
     </div>
+
     <div class="row p-1">
+
         <div class="col-1">Message</div>
+
         <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
+
     </div>
+
     <div class="row p-1">
+
         <div class="col-6 text-end">
+
             <input type="button" id="sendButton" value="Send Message" />
+
         </div>
+
     </div>
+
     <div class="row p-1">
+
         <div class="col-6">
+
             <hr />
+
         </div>
+
     </div>
+
     <div class="row p-1">
+
         <div class="col-6">
+
             <ul id="messagesList"></ul>
+
         </div>
+
     </div>
+
 </div>
+
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
+
 <script src="~/js/chat.js"></script>
+
 ```
 
 > > > JavaScript
 
 ```
+
 "use strict";
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
 //Disable the send button until connection is established.
+
 document.getElementById("sendButton").disabled = true;
 
 connection.on("ReceiveMessage", function (user, message) {
+
     var li = document.createElement("li");
+
     document.getElementById("messagesList").appendChild(li);
+
     // We can assign user-supplied strings to an element's textContent because it
+
     // is not interpreted as markup. If you're assigning in any other way, you 
+
     // should be aware of possible script injection concerns.
+
     li.textContent = `${user} says ${message}`;
+
 });
 
 connection.start().then(function () {
+
     document.getElementById("sendButton").disabled = false;
+
 }).catch(function (err) {
+
     return console.error(err.toString());
+
 });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
+
     var user = document.getElementById("userInput").value;
+
     var message = document.getElementById("messageInput").value;
+
     connection.invoke("SendMessage", user, message).catch(function (err) {
+
         return console.error(err.toString());
+
     });
+
     event.preventDefault();
+
 });
+
 ```
 
 ## Tensorflow
@@ -12615,7 +16850,9 @@ document.getElementById("sendButton").addEventListener("click", function (event)
 > https://github.com/migueldeicaza/TensorFlowSharp
 
 '''
+
 When to use TensorFlowSharp
+
 TensorFlowSharp is a good runtime to run your existing models, and is mostly a straight binding to the underlying TensorFlow runtime. Most people will want to use a higher-level library for interfacing with TensorFlow.
 
 The library was designed to blend in the .NET ecosystem and use the .NET naming conventions.
@@ -12623,6 +16860,7 @@ The library was designed to blend in the .NET ecosystem and use the .NET naming 
 I strongly recommend that you use TensorFlow.NET which takes a different approach than TensorFlowSharp, it uses the Python naming convention and has a much broader support for the higher level operations that you are likely to need - and is also actively maintained.
 
 TensorFlowSharp
+
 TensorFlowSharp are .NET bindings to the TensorFlow library published here:
 
 https://github.com/tensorflow/tensorflow
@@ -12636,12 +16874,15 @@ You can prototype using TensorFlow or Keras in Python, then save your graphs or 
 The current API documentation is here.
 
 Using TensorFlowSharp
+
 Installation
+
 The easiest way to get started is to use the NuGet package for TensorFlowSharp which contains both the .NET API as well as the native libraries for 64-bit Linux, Mac and Windows using the CPU backend.
 
 You can install using NuGet like this:
 
 nuget install TensorFlowSharp
+
 Or select it from the NuGet packages UI on Visual Studio.
 
 On Visual Studio, make sure that you are targeting .NET 4.6.1 or later, as this package uses some features of newer .NETs. Otherwise, the package will not be added. Once you do this, you can just use the TensorFlowSharp nuget
@@ -12649,6 +16890,7 @@ On Visual Studio, make sure that you are targeting .NET 4.6.1 or later, as this 
 Alternatively, you can download it directly.
 
 Using TensorFlowSharp
+
 Your best source of information right now are the SampleTest that exercises various APIs of TensorFlowSharp, or the stand-alone samples located in "Examples".
 
 This API binding is closer design-wise to the Java and Go bindings which use explicit TensorFlow graphs and sessions. Your application will typically create a graph (TFGraph) and setup the operations there, then create a session from it (TFSession), then use the session runner to setup inputs and outputs and execute the pipeline.
@@ -12656,143 +16898,221 @@ This API binding is closer design-wise to the Java and Go bindings which use exp
 Something like this:
 
 using (var graph = new TFGraph ())
+
 {
+
     // Load the model
+
     graph.Import (File.ReadAllBytes ("MySavedModel"));
+
     using (var session = new TFSession (graph))
+
     {
+
         // Setup the runner
+
         var runner = session.GetRunner ();
+
         runner.AddInput (graph ["input"] [0], tensor);
+
         runner.Fetch (graph ["output"] [0]);
 
         // Run the model
+
         var output = runner.Run ();
 
         // Fetch the results from output:
+
         TFTensor result = output [0];
+
     }
+
 }
+
 If your application is sensitive to GC cycles, you can run your model as follows. The Run method will then allocate managed memory only at the first call and reuse it later on. Note that this requires you to reuse the Runner instance and not to change the shape of the input data:
 
 // Some input matrices
+
 var inputs = new float[][,] {
+
     new float[,] { { 1, 2 }, { 3, 4 } },
+
     new float[,] { { 2, 4 }, { 6, 8 } }
+
 };
 
 // Assumes all input matrices have identical shape
+
 var shape = new long[] { inputs[0].GetLongLength(0), inputs[0].GetLongLength(1) };
+
 var size = inputs[0].Length * sizeof(float);
 
 // Empty input and output tensors
+
 var input = new TFTensor(TFDataType.Float, shape, size);
+
 var output = new TFTensor[1];
 
 // Result array for a single run
+
 var result = new float[1, 1];
 
 using (var graph = new TFGraph())
+
 {
+
     // Load the model
+
     graph.Import(File.ReadAllBytes("MySavedModel"));
+
     using (var session = new TFSession(graph))
+
     {
+
         // Setup the runner
+
         var runner = session.GetRunner();
+
         runner.AddInput(graph["input"][0], input);
+
         runner.Fetch(graph["output"][0]);
 
         // Run the model on each input matrix
+
         for (int i = 0; i < inputs.Length; i++)
+
         {
+
             // Mutate the input tensor
+
             input.SetValue(inputs[i]);
 
             // Run the model
+
             runner.Run(output);
 
             // Fetch the result from output into `result`
+
             output[0].GetValue(result);
+
         }
+
     }
+
 }
+
 In scenarios where you do not need to setup the graph independently, the session will create one for you. The following example shows how to abuse TensorFlow to compute the addition of two numbers:
 
 using (var session = new TFSession())
+
 {
+
     var graph = session.Graph;
 
     var a = graph.Const(2);
+
     var b = graph.Const(3);
+
     Console.WriteLine("a=2 b=3");
 
     // Add two constants
+
     var addingResults = session.GetRunner().Run(graph.Add(a, b));
+
     var addingResultValue = addingResults.GetValue();
+
     Console.WriteLine("a+b={0}", addingResultValue);
 
     // Multiply two constants
+
     var multiplyResults = session.GetRunner().Run(graph.Mul(a, b));
+
     var multiplyResultValue = multiplyResults.GetValue();
+
     Console.WriteLine("a*b={0}", multiplyResultValue);
+
 }
+
 Here is an F# scripting version of the same example, you can use this in F# Interactive:
 
 #r @"packages\TensorFlowSharp.1.4.0\lib\net471\TensorFlowSharp.dll"
 
 open System
+
 open System.IO
+
 open TensorFlow
 
 // set the path to find the native DLL
+
 Environment.SetEnvironmentVariable("Path", 
+
     Environment.GetEnvironmentVariable("Path") + ";" + __SOURCE_DIRECTORY__ + @"/packages/TensorFlowSharp.1.2.2/native")
 
 module AddTwoNumbers = 
+
     let session = new TFSession()
+
     let graph = session.Graph
 
     let a = graph.Const(new TFTensor(2))
+
     let b = graph.Const(new TFTensor(3))
+
     Console.WriteLine("a=2 b=3")
 
     // Add two constants
+
     let addingResults = session.GetRunner().Run(graph.Add(a, b))
+
     let addingResultValue = addingResults.GetValue()
+
     Console.WriteLine("a+b={0}", addingResultValue)
 
     // Multiply two constants
+
     let multiplyResults = session.GetRunner().Run(graph.Mul(a, b))
+
     let multiplyResultValue = multiplyResults.GetValue()
+
     Console.WriteLine("a*b={0}", multiplyResultValue)
+
 Working on TensorFlowSharp
+
 If you want to work on extending TensorFlowSharp or contribute to its development read the CONTRIBUTING.md file.
 
 Please keep in mind that this requires a modern version of C# as this uses some new capabilities there. So you will want to use Visual Studio 2017.
 
 Possible Contributions
+
 Build More Tests
+
 Would love to have more tests to ensure the proper operation of the framework.
 
 Samples
+
 The binding is pretty much complete, and at this point, I want to improve the API to be easier and more pleasant to use from both C# and F#. Creating samples that use Tensorflow is a good way of finding easy wins on the usability of the API, there are some here:
 
 https://github.com/tensorflow/models
 
 Packaging
+
 Mobile: we need to package the library for consumption on Android and iOS.
 
 Documentation Styling
+
 The API documentation has not been styled, I am using the barebones template for documentation, and it can use some work.
 
 Issues
+
 I have logged some usability problems and bugs in Issues, feel free to take on one of those tasks.
 
 Documentation
+
 Much of the online documentation comes from TensorFlow and is licensed under the terms of Apache 2 License, in particular all the generated documentation for the various operations that is generated by using the tensorflow reflection APIs.
 
 Last API update: Release 1.9
+
 '''
 
 ## gRPC 
@@ -12800,19 +17120,27 @@ Last API update: Release 1.9
 ### gRPC 概述
 
 ```
+
 gRPC 是一种与语言无关的高性能远程过程调用 (RPC) 框架。
 
 gRPC 的主要优点是：
 
 现代高性能轻量级 RPC 框架。
+
 协定优先 API 开发，默认使用协议缓冲区，允许与语言无关的实现。
+
 可用于多种语言的工具，以生成强类型服务器和客户端。
+
 支持客户端、服务器和双向流式处理调用。
+
 使用 Protobuf 二进制序列化减少对网络的使用。
+
 这些优点使 gRPC 适用于：
 
 效率至关重要的轻量级微服务。
+
 需要多种语言用于开发的 Polyglot 系统。
+
 需要处理流式处理请求或响应的点对点实时服务。
 
  GRPC是google开源的一个高性能、跨语言的RPC框架，基于HTTP2协议，基于protobuf 3.x，基于Netty 4.x +。GRPC与thrift、avro-rpc等其实在总体原理上并没有太大的区别，简而言之GRPC并没有太多突破性的创新。（如下描述，均基于JAVA语言的实现）
@@ -12826,76 +17154,115 @@ gRPC 的主要优点是：
     3）启动一个Server端，server端通过侦听指定的port，来等待Client链接请求，通常使用Netty来构建，GRPC内置了Netty的支持。
 
     4）启动一个或者多个Client端，Client也是基于Netty，Client通过与Server建立TCP长链接，并发送请求；Request与Response均被封装成HTTP2的stream Frame，通过Netty Channel进行交互。
+
 ```
 
 ### gRPC 服务项目模板
 
 ```
+
 对 .proto 文件的 C# 工具支持
+
 gRPC 使用协定优先方法进行 API 开发。 在 .proto 文件中定义服务和消息：
 
 ProtoBuf
 
 ```
+
 syntax = "proto3";
 
 service Greeter {
+
   rpc SayHello (HelloRequest) returns (HelloReply);
+
 }
 
 message HelloRequest {
+
   string name = 1;
+
 }
 
 message HelloReply {
+
   string message = 1;
+
 }
 
 通过在项目中包含 .proto 文件，可自动生成用于服务、客户端和消息的 .NET 类型：
 
 将包引用添加到 Grpc.Tools 包。
+
 将 .proto 文件添加到 <Protobuf> 项目组。
+
 ```
+
 XML
+
 ```
+
 <ItemGroup>
+
   <Protobuf Include="Protos\greet.proto" />
+
 </ItemGroup>
+
 ```
+
 有关 gRPC 工具支持的详细信息，请参阅使用 C# 的 gRPC 服务。
 
 ASP.NET Core 上的 gRPC 服务
+
 gRPC 服务可以托管在 ASP.NET Core 上。 这些服务与日志记录、依赖关系注入 (DI)、身份验证和授权等 ASP.NET Core 功能完全集成。
 
 将 gRPC 服务添加到 ASP.NET Core 应用
+
 gRPC 需要 Grpc.AspNetCore 包。 若要了解如何在 .NET 应用中配置 gRPC，请查看配置 gRPC。
+
 ```
 
 ### ASP.NET Core gRPC 服务项目模板提供了一个入门版服务：
 
 ```
+
 public class GreeterService : Greeter.GreeterBase
+
 {
+
     private readonly ILogger<GreeterService> _logger;
 
     public GreeterService(ILogger<GreeterService> logger)
+
     {
+
         _logger = logger;
+
     }
 
     public override Task<HelloReply> SayHello(HelloRequest request,
+
         ServerCallContext context)
+
     {
+
         _logger.LogInformation("Saying hello to {Name}", request.Name);
+
         return Task.FromResult(new HelloReply 
+
         {
+
             Message = "Hello " + request.Name
+
         });
+
     }
+
 }
+
 GreeterService 继承自 GreeterBase 类型，后者是从 .proto 文件的 Greeter 服务生成的。 Startup.csProgram.cs 中的客户端可以访问该服务：
 
 app.MapGrpcService<GreeterService>();
+
 若要详细了解 ASP.NET Core 上的 gRPC 服务，请参阅使用 ASP.NET Core 的 gRPC 服务。
 
 ```
@@ -12903,18 +17270,23 @@ app.MapGrpcService<GreeterService>();
 ### 使用 .NET 客户端调用 gRPC 服务
 
 ```
+
 gRPC 客户端是从 .proto 文件生成的具体客户端类型。 具体 gRPC 客户端具有转换为 .proto 文件中 gRPC 服务的方法。
 
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
+
 var client = new Greeter.GreeterClient(channel);
 
 var response = await client.SayHelloAsync(
+
     new HelloRequest { Name = "World" });
 
 Console.WriteLine(response.Message);
+
 gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期连接。 可以使用 GrpcChannel.ForAddress 创建通道。
 
 有关创建客户端、调用不同服务方法的详细信息，请参阅使用 .NET 客户端调用 gRPC 服务。
+
 ```
 
 ## Php
@@ -13137,38 +17509,37 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 
 ##### * 独占锁（Exclusive Lock）
 
-###### 独占锁锁定的资源只允许进行锁定操作的程序使用，
-其它任何对它的操作均不会被接受。
-执行数据更新命令，即INSERT、 UPDATE 或DELETE 命令时，SQL Server 会自动使用独占锁。
-但当对象上有其它锁存在时，无法对其加独占锁。独占锁一直到事务结束才能被释放。
+> 独占锁锁定的资源只允许进行锁定操作的程序使用，其它任何对它的操作均不会被接受。
 
-##### * 共享锁（Shared Lock）
+> 执行数据更新命令，即INSERT、 UPDATE 或DELETE 命令时，SQL Server 会自动使用独占锁。
 
-###### 共享锁锁定的资源可以被其它用户读取，但其它用户不能修改它。
-在SELECT 命令执行时，SQL Server 通常会对对象进行共享锁锁定。
-通常加共享锁的数据页被读取完毕后，共享锁就会立即被释放。
+> 但当对象上有其它锁存在时，无法对其加独占锁。独占锁一直到事务结束才能被释放。
 
-##### * 更新锁（Update Lock）
+##### 共享锁（Shared Lock）
 
-###### 更新锁是为了防止死锁而设立的。当SQL Server 准备更新数据时，
-它首先对数据对象作更新锁锁定，这样数据将不能被修改，
-但可以读取。等到SQL Server 确定要进行更新数据操作时，
-它会自动将更新锁换为独占锁。但当对象上有其它锁存在时，
-无法对其作更新锁锁定。
+> 共享锁锁定的资源可以被其它用户读取，但其它用户不能修改它。
+
+> 在SELECT 命令执行时，SQL Server 通常会对对象进行共享锁锁定。
+
+> 通常加共享锁的数据页被读取完毕后，共享锁就会立即被释放。
+
+##### 更新锁（Update Lock）
+
+> 更新锁是为了防止死锁而设立的。当SQL Server 准备更新数据时，它首先对数据对象作更新锁锁定，这样数据将不能被修改，但可以读取。等到SQL Server 确定要进行更新数据操作时，
+
+> 它会自动将更新锁换为独占锁。但当对象上有其它锁存在时，无法对其作更新锁锁定。
 
 #### 程序员角度
 
-##### * 乐观锁（Optimistic Lock）
+##### 乐观锁（Optimistic Lock）
 
-###### 乐观锁假定在处理数据时，不需要在应用程序的代码中做任何事情就可以直接在记录上加锁、
-即完全依靠数据库来管理锁的工作。
-一般情况下，当执行事务处理时SQL Server会自动对事务处理范围内更新到的表做锁定。
+> 乐观锁假定在处理数据时，不需要在应用程序的代码中做任何事情就可以直接在记录上加锁、即完全依靠数据库来管理锁的工作。
 
-##### * 悲观锁（Pessimistic Lock）
+> 一般情况下，当执行事务处理时SQL Server会自动对事务处理范围内更新到的表做锁定。
 
-###### 悲观锁对数据库系统的自动管理不感冒，
-需要程序员直接管理数据或对象上的加锁处理，
-并负责获取、共享和放弃正在使用的数据上的任何锁。
+##### 悲观锁（Pessimistic Lock）
+
+> 悲观锁对数据库系统的自动管理不感冒，需要程序员直接管理数据或对象上的加锁处理，并负责获取、共享和放弃正在使用的数据上的任何锁。
 
 ### 数据库中事务的 
 
@@ -13176,32 +17547,19 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 
 ##### 原子性 (Atomicity)：
 
-###### 事务的原子性是指一个事务中包含的一条语句或者多条语句构成了一个完整的逻辑单元，
-这个逻辑单元具有不可再分的原子性。
-这个逻辑单元要么一起提交执行全部成功，要么一起提交执行全部失败。
+> 事务的原子性是指一个事务中包含的一条语句或者多条语句构成了一个完整的逻辑单元，这个逻辑单元具有不可再分的原子性。这个逻辑单元要么一起提交执行全部成功，要么一起提交执行全部失败。
 
 ##### 一致性 (Consistency)：
 
-###### 可以理解为数据的完整性，事务的提交要确保在数据库上的操作没有破坏数据的完整性，
-比如说不要违背一些约束的数据插入或者修改行为。
-一旦破坏了数据的完整性，SQL Server 会回滚这个事务来确保数据库中的数据是一致的。
+> 可以理解为数据的完整性，事务的提交要确保在数据库上的操作没有破坏数据的完整性，比如说不要违背一些约束的数据插入或者修改行为。一旦破坏了数据的完整性，SQL Server 会回滚这个事务来确保数据库中的数据是一致的。
 
 ##### 隔离性(Isolation)：
 
-###### 与数据库中的事务隔离级别以及锁相关，多个用户可以对同一数据并发访问而又不破坏数据的正确性和完整性。
-但是，并行事务的修改必须与其它并行事务的修改相互独立，隔离。
-但是在不同的隔离级别下，事务的读取操作可能得到的结果是不同的。
+> 与数据库中的事务隔离级别以及锁相关，多个用户可以对同一数据并发访问而又不破坏数据的正确性和完整性。但是，并行事务的修改必须与其它并行事务的修改相互独立，隔离。但是在不同的隔离级别下，事务的读取操作可能得到的结果是不同的。
 
 ##### 持久性(Durability)：
 
-###### 数据持久化，事务一旦对数据的操作完成并提交后，数据修改就已经完成，
-即使服务重启这些数据也不会改变。
-相反，如果在事务的执行过程中，系统服务崩溃或者重启，
-那么事务所有的操作就会被回滚，即回到事务操作之前的状态。
-
-### 分支主题3
-
-### 分支主题4
+> 数据持久化，事务一旦对数据的操作完成并提交后，数据修改就已经完成，即使服务重启这些数据也不会改变。相反，如果在事务的执行过程中，系统服务崩溃或者重启，那么事务所有的操作就会被回滚，即回到事务操作之前的状态。
 
 ## NoSQL：选择合适的数据库
 
@@ -13363,47 +17721,47 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 
 #### 发展史
 
-##### 1970——IBM的Codd博士发表A Relational Modeiof Data for Large Shared Data Banks
+> 1970——IBM的Codd博士发表A Relational Modeiof Data for Large Shared Data Banks
 
-##### 1978年——Oracle在PDP-11上诞生
+> 1978年——Oracle在PDP-11上诞生
 
-##### 1983年——用C语言编写的Oracle 3
+> 1983年——用C语言编写的Oracle 3
 
-##### 1993年——基于Unix的Oracle 7
+> 1993年——基于Unix的Oracle 7
 
-##### 1997年~1999年——基于Java的Oracle 8和基于lnternet平台的Oracle 8i
+> 1997年~1999年——基于Java的Oracle 8和基于lnternet平台的Oracle 8i
 
-##### 2001年——支持RAC的Oracle 9i
+> 2001年——支持RAC的Oracle 9i
 
-##### 2003年——支持网格计算的Oracle 10g
+> 2003年——支持网格计算的Oracle 10g
 
-##### 2007年——Oracle终极版本Oracle 11g
+> 2007年——Oracle终极版本Oracle 11g
 
 #### 网格计算
 
-##### 虚拟化
+> 虚拟化
 
-##### 动态供应
+> 动态供应
 
-##### 资源集中
+> 资源集中
 
-##### 自适应软件
+> 自适应软件
 
-##### 统一管理
+> 统一管理
 
 #### Oracle 11g新特性
 
-##### 企业网格管理的高可用性
+> 企业网格管理的高可用性
 
-##### 更加优化的性能
+> 更加优化的性能
 
-##### 简化的信息管理
+> 简化的信息管理
 
-##### 集成的信息
+> 集成的信息
 
-##### 内置的商业智能
+> 内置的商业智能
 
-##### 丰富的开发平台
+> 丰富的开发平台
 
 ### 数据库结构
 
@@ -13411,7 +17769,7 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 
 ##### 实例
 
-###### 一般情况下Oracle数据库都是一个数据库包含一个实例
+> 一般情况下Oracle数据库都是一个数据库包含一个实例
 
 ##### 数据库
 
@@ -13419,27 +17777,27 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 
 ####### 表空间
 
-   * SYSTEM表空间
+> SYSTEM表空间
 
-   * SYSAUX表空间
+> SYSAUX表空间
 
-   * 撤销表空间
+> 撤销表空间
 
-   * USERS表空间
+> USERS表空间
 
 ####### 数据文件
 
-   * 系统数据
+> 系统数据
 
-   * 用户数据
+> 用户数据
 
 ####### 说明
 
-   * 表空间是一个数据库的逻辑区域
+> 表空间是一个数据库的逻辑区域
 
-   * 每个表空间由一个或多个数据文件组成
+> 每个表空间由一个或多个数据文件组成
 
-   * 一个数据文件只能属于一个表空间
+> 一个数据文件只能属于一个表空间
 
 ###### 控制文件
 
@@ -13479,57 +17837,57 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 
 #### 数据字典
 
-##### 存放整个数据库实例重要信息的一组表，多数表归sys用户所有
+> 存放整个数据库实例重要信息的一组表，多数表归sys用户所有
 
 ##### 数据字典构成
 
 ###### USER_
 
-####### 记录用户对象信息
+> 记录用户对象信息
 
 ###### ALL_
 
-####### 记录用户的对象信息及被授权访问的对象信息
+> 记录用户的对象信息及被授权访问的对象信息
 
 ###### DBA_
 
-####### 包含数据库实例的所有对象信息
+> 包含数据库实例的所有对象信息
 
 ###### V$_
 
-####### 当前实例的动态视图
+> 当前实例的动态视图
 
 ###### GV_
 
-####### 分布式环境下所有实例的动态视图
+> 分布式环境下所有实例的动态视图
 
 ##### 常用数据字典
 
-###### DBA_TABLES(=TABS)
+> DBA_TABLES(=TABS)
 
-###### DBA_TAB_COLUMNS(=COLS)
+> DBA_TAB_COLUMNS(=COLS)
 
-###### DBA_VIEWS
+> DBA_VIEWS
 
-###### DBA_SYNONYMS(=SYN)
+> DBA_SYNONYMS(=SYN)
 
-###### DBA_SEQUENCES(=SEQ)
+> DBA_SEQUENCES(=SEQ)
 
-###### DBA_CONSTRAINTS
+> DBA_CONSTRAINTS
 
-###### DBA_INDEXES(=IND)
+> DBA_INDEXES(=IND)
 
-###### DBA_IND_COLUMNS
+> DBA_IND_COLUMNS
 
-###### DBA_TRIGGERS
+> DBA_TRIGGERS
 
-###### DBA_SOUCE
+> DBA_SOUCE
 
-###### DBA_SEGMENTS
+> DBA_SEGMENTS
 
-###### DBA_EXTENTS
+> DBA_EXTENTS
 
-###### DBA_OBJECTS
+> DBA_OBJECTS
 
 ### SQL语言
 
@@ -13539,49 +17897,49 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 
 ###### 常用数据类型
 
-####### varchar2(n)：变长字符串n<=4000
+> varchar2(n)：变长字符串n<=4000
 
-####### char(n)：定长字符串n<=2000
+> char(n)：定长字符串n<=2000
 
-####### number(p,s)：p表示精度，s表示小数位数，最大位数是38位
+> number(p,s)：p表示精度，s表示小数位数，最大位数是38位
 
-####### date：时问日期（7字节）
+> date：时问日期（7字节）
 
-####### binary_float：浮点型，32位
+> binary_float：浮点型，32位
 
-####### binary_double：双精度型，64位
+> binary_double：双精度型，64位
 
-####### blob：大二进制对象，<=4G
+> blob：大二进制对象，<=4G
 
-####### clob：大字符串对象，<=4G
+> clob：大字符串对象，<=4G
 
-####### bfile：外部的二进制文件
+> bfile：外部的二进制文件
 
 ###### 表
 
 ###### 主键
 
-####### 在创建表时定义主键
+> 在创建表时定义主键
 
-####### 使用alter table语句定义主键
+> 使用alter table语句定义主键
 
-####### 使用alter table修改主键状态
+> 使用alter table修改主键状态
 
 ###### 外键
 
-####### 在创建表时定义外键
+> 在创建表时定义外键
 
-####### 使用alter table语句定义外键
+> 使用alter table语句定义外键
 
-####### 使用alter table修改外键状态
+> 使用alter table修改外键状态
 
 ###### 约束
 
-####### check约束
+> check约束
 
-####### not null约束
+> not null约束
 
-####### unique约束
+> unique约束
 
 ###### 索引
 
@@ -13603,9 +17961,9 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 
 ###### 复制表数据
 
-####### create table…as select…
+> create table…as select…
 
-####### insert into…select
+> insert into…select
 
 ##### update
 
@@ -13627,167 +17985,163 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 
 ####### 比较运算符
 
-   * =
+> =
 
-   * <>
+> <>
 
-   * <
+> <
 
-   * <=
+> <=
 
-   * >=
+> >=
 
-   * LIKE
+> LIKE
 
-      * %
+> %
 
-      * _
+> _
 
-####### 布尔操作
+> 布尔操作
 
-   * OR
+> OR
 
-   * AND
+> AND
 
-   * NOT
+> NOT
 
-####### BETWEEN…AND…
+> BETWEEN…AND…IN
 
-####### IN
+> order by子句
 
-###### order by子句
+> asc
 
-####### asc
+> desc
 
-####### desc
+> distinct
 
-###### distinct
+> 算数运算：
 
-###### 算数运算
+> +
 
-####### +
+> -
 
-####### -
+> *
 
-####### *
-
-####### /
+> /
 
 ###### 基本函数
 
-####### 字符函数
+> 字符函数
 
-   * concat(c1,c2)
+> concat(c1,c2)
 
-   * length(c)
+> length(c)
 
-   * lower(c)/upper(c)
+> lower(c)/upper(c)
 
-   * ltrim(c)/rtrim(c)/trim(c)
+> ltrim(c)/rtrim(c)/trim(c)
 
-   * replace(c1,c2,c3)
+> replace(c1,c2,c3)
 
-   * substr(c1,i,j)
+> substr(c1,i,j)
 
-####### 数字函数
+> 数字函数
 
-   * abs(n)
+> abs(n)
 
-   * acos(n)/asin(n)/atan(n)/cos(n)/sin(n)/tan(n)
+> acos(n)/asin(n)/atan(n)/cos(n)/sin(n)/tan(n)
 
-   * ceil(n)/floor(n)
+> ceil(n)/floor(n)
 
-   * exp(n)/ln(n)
+> exp(n)/ln(n)
 
-   * power(n1,n2)
+> power(n1,n2)
 
-   * round(n1,n2)
+> round(n1,n2)
 
-   * sign(n)
+> sign(n)
 
-   * sqrt(n)
+> sqrt(n)
 
-####### 日期函数
+> 日期函数
 
-   * add_months(d,i)
+> add_months(d,i)
 
-   * last_day(d)
+> last_day(d)
 
-   * month_between(d1,d2)
+> month_between(d1,d2)
 
-   * new_time(d,tz1,tz2)
+> new_time(d,tz1,tz2)
 
-   * sysdate
+> sysdate
 
-####### 转换函数
+> 转换函数
 
-   * convert(c,dset,sset)
+> convert(c,dset,sset)
 
-   * to_char(x,fmt)
+> to_char(x,fmt)
 
-   * to_date(c,fmt)
+> to_date(c,fmt)
 
-####### 分组函数/聚合函数
+> 分组函数/聚合函数
 
-   * AVG
+> AVG
 
-   * MAX
+> MAX
 
-   * MIN
+> MIN
 
-   * SUM
+> SUM
 
-   * COUNT
+> COUNT
 
-   * STDDEV
+> STDDEV
 
-   * VARIANCE
+> VARIANCE
 
-###### group by
+> group by
 
-###### having子句
+> having子句
 
 ###### 集合操作
 
-####### UNION
+> UNION
 
-####### INTERSECT
+> INTERSECT
 
-####### MINUS
+> MINUS
 
 ###### 子查询
 
-###### 表连接
+> 表连接
 
-####### 内连接
+> 内连接 inner join
 
-   * inner join
+> 外连接
 
-####### 外连接
+> 左外连接
 
-   * 左外连接
+> 右外连接
 
-   * 右外连接
+> 全外连接
 
-   * 全外连接
+> case语句
 
-###### case语句
-
-###### decode函数
+> decode函数
 
 #### DCL
 
-##### grant
+> grant
 
-##### revoke
+> revoke
 
 #### TCL
 
-##### commit
+> commit
 
-##### rollback
+> rollback
 
-##### savepoint
+> savepoint
 
 ### PL/SQL
 
@@ -13965,15 +18319,15 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 
 ####### 导致全表扫描的情况
 
-   * 查询的表没有索引
+> 查询的表没有索引
 
-   * 需要返回所有的行
+> 需要返回所有的行
 
-   * 条件中有LIKE且使用了%
+> 条件中有LIKE且使用了%
 
-   * 对索引列使用了函数
+> 对索引列使用了函数
 
-   * 条件中有IS NULL或IS NOT NULL
+> 条件中有IS NULL或IS NOT NULL
 
 ###### 监视索引是否被使用
 
@@ -14019,19 +18373,25 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 
 ### 数据库事务隔离级别
 
-#### 已提交读模式：SET TRANSACTION ISOLATION LEVEL＝READ COMMITTED;
+#### 已提交读模式
 
-##### Oracle 默认使用的事务隔离级别。事务内执行的查询只能看到查询执行前（而非事务开始前）就已经提交的数据。Oracle 的查询永远不会读取脏数据（未提交的数据）。
+> > SET TRANSACTION ISOLATION LEVEL＝READ COMMITTED;
 
-##### Oracle 不会阻止一个事务修改另一事务中的查询正在访问的数据，因此在一个事务内的两个查询的执行间歇期间，数据有可能被其他事务修改。举例来说，如果一个事务内同一查询执行两次，可能会遇到不可重复读取或不存在读取的现象。 
+> Oracle 默认使用的事务隔离级别。事务内执行的查询只能看到查询执行前（而非事务开始前）就已经提交的数据。Oracle 的查询永远不会读取脏数据（未提交的数据）。
 
-#### 串行模式：SET TRANSACTION ISOLATION LEVEL＝ SERIALIZABLE;
+> Oracle 不会阻止一个事务修改另一事务中的查询正在访问的数据，因此在一个事务内的两个查询的执行间歇期间，数据有可能被其他事务修改。举例来说，如果一个事务内同一查询执行两次，可能会遇到不可重复读取或不存在读取的现象。 
 
-##### 串行化隔离的事务只能看到事务执行前就已经提交的数据，以及事务内 INSERT ， UPDATE ，及 DELETE 语句对数据的修改。串行化隔离的事务不会出现不可重复读取或不存在读取的现象。 
+#### 串行模式
 
-#### 只读模式：SET TRANSACTION＝ READ ONLY;
+> > SET TRANSACTION ISOLATION LEVEL＝ SERIALIZABLE;
 
-##### 只读事务只能看到事务执行前就已经提交的数据，且事务中不能执行 INSERT ， UPDATE ，及 DELETE 语句。
+> 串行化隔离的事务只能看到事务执行前就已经提交的数据，以及事务内 INSERT ， UPDATE ，及 DELETE 语句对数据的修改。串行化隔离的事务不会出现不可重复读取或不存在读取的现象。 
+
+#### 只读模式
+
+> > SET TRANSACTION＝ READ ONLY;
+
+> 只读事务只能看到事务执行前就已经提交的数据，且事务中不能执行 INSERT ， UPDATE ，及 DELETE 语句。
 
 ### 
 
@@ -14064,124 +18424,169 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 #### 列转行UNPIVOT
 
 ### SQL 事务隔离级别:
-1、用于控制并发用户如何读写数据的操做。
-2、读操作默认使用共享锁；写操作需要使用排它锁。
-3、读操作能够控制他的处理的方式，写操作不能控制它的处理方式
-read uncommited（读取未提交数据），
-read commited（读取已提交数据）读取的默认方式，
-repeatable read（可重复读），
-serializable（可序列化），
-snapshot（快照），
-read commited 
-snapshot（已经提交读隔离）（后两个是sql server 2005 里面 引入的）。
-隔离的强度依次递增。
 
-隔离级别越高,读操作的请求锁定就越严格,
-锁的持有时间久越长;所以隔离级别越高,
-一致性就越高,并发性就越低,同时性能也相对影响越大.
+> > 1、用于控制并发用户如何读写数据的操做。
+
+> > 2、读操作默认使用共享锁；写操作需要使用排它锁。
+
+> > 3、读操作能够控制他的处理的方式，写操作不能控制它的处理方式
+
+> read uncommited（读取未提交数据），
+
+> read commited（读取已提交数据）读取的默认方式，
+
+> repeatable read（可重复读），
+
+> serializable（可序列化），
+
+> snapshot（快照），
+
+> read commited 
+
+> snapshot（已经提交读隔离）（后两个是sql server 2005 里面 引入的）。
+
+> > 隔离的强度依次递增。
+
+> > 隔离级别越高,读操作的请求锁定就越严格,
+
+> > 锁的持有时间久越长;所以隔离级别越高,
+
+> > 一致性就越高,并发性就越低,同时性能也相对影响越大.
 
 #### read uncommited（读取未提交数据），
 
-##### read uncommitted：最低的隔离级别：查询的时候不会请求共享锁，
-所以不会和排它锁产生冲突（不会等待排它锁执行完），
-查询效率非常高，速度飞快。但是缺点：会查到“脏数据”
-（排它锁的事务已经将数据修改，还没提交，这个时候查询到的数据 是已经更改过的。如果事务回滚，就是“脏数据”）
-优点：查询效率非常高，速度非常快。
-缺点：会产生“脏数据”
-适用性：
-适用于 像聊天软件的 聊天记录，会是软件的运行速度非常快。 但是不适用于 商务软件。尤其是银行
+> > read uncommitted：最低的隔离级别：查询的时候不会请求共享锁，
+
+> 所以不会和排它锁产生冲突（不会等待排它锁执行完），
+
+> 查询效率非常高，速度飞快。但是缺点：会查到“脏数据”
+
+> （排它锁的事务已经将数据修改，还没提交，这个时候查询到的数据 是已经更改过的。如果事务回滚，就是“脏数据”）
+
+> 优点：查询效率非常高，速度非常快。
+
+> 缺点：会产生“脏数据”
+
+> 适用性：
+
+> 适用于 像聊天软件的 聊天记录，会是软件的运行速度非常快。 但是不适用于 商务软件。尤其是银行
+
 set transaction isolation level read uncommitted;
 
 #### read commited（读取已提交数据）读取的默认方式，
 
-##### 读取的默认隔离级别就是read committed 和上面正好相反。
-如果上面情况，采用read committed 隔离级别查询的话查到的就是还没有更改之前的数据。
-set transaction isolation level read committed;
+> > 读取的默认隔离级别就是read committed 和上面正好相反。
+
+> 如果上面情况，采用read committed 隔离级别查询的话查到的就是还没有更改之前的数据。
+
+> set transaction isolation level read committed;
 
 #### repeatable read（可重复读），
 
-#####  查询的时候会加上共享锁，但是查询完成之后，共享锁就会被撤销。
-比如一些购票系统，如果查到票了，当买的时候就没有，这是不行的。
-所以要在查询到数据之后做一些延迟共享锁，进而阻塞排它锁来修改。
-（如果查询的事务没有提交，不会释放共享锁，这个时候独占锁就不能访问这条数据）
-注意：1、repeatable 只会锁定查询的数据 ，而 其他行数据还可以进行 修改（更新、删除）（下面那条语句共享锁只会锁定 shipperid为4 的行）
-       2、其他进行插入数据，并且插入的数据满足第一次开始事务时的 查询的筛选条件的时候；
-第二次查询的时候就会将新插入的数据 查询出来。这就叫做“幻读”（解决幻读，需要更高级别的隔离，就是下面的serializable）
-set transaction isolation level repeatable read;
+> > 查询的时候会加上共享锁，但是查询完成之后，共享锁就会被撤销。
+
+> 比如一些购票系统，如果查到票了，当买的时候就没有，这是不行的。
+
+> 所以要在查询到数据之后做一些延迟共享锁，进而阻塞排它锁来修改。
+
+> （如果查询的事务没有提交，不会释放共享锁，这个时候独占锁就不能访问这条数据）
+
+> 注意：
+
+> 1、repeatable 只会锁定查询的数据 ，而 其他行数据还可以进行 修改（更新、删除）（下面那条语句共享锁只会锁定 shipperid为4 的行）
+
+> 2、其他进行插入数据，并且插入的数据满足第一次开始事务时的 查询的筛选条件的时候；
+
+> 第二次查询的时候就会将新插入的数据 查询出来。这就叫做“幻读”（解决幻读，需要更高级别的隔离，就是下面的serializable）
+
+> set transaction isolation level repeatable read;
 
 #### serializable（可序列化），
 
-#####  更高级的 隔离。用户解决“幻读”（上面提到的）。
-就是使用上面的（repeatable read）  加上共享锁 并不撤销，如果锁定的 一行数据，
-那么 其他的进程 还可以对 其他的数据进行操作，也可以 进行新增和删除的操作。
-   所以如果想要在查询的时候，不能对整张表进行任何操作，
-那么就要 将表的结构也 锁定    （就需要使用 更强的 锁定）
-set transaction isolation level serializable;
+> > 更高级的 隔离。用户解决“幻读”（上面提到的）。
+
+> 就是使用上面的（repeatable read）  加上共享锁 并不撤销，如果锁定的 一行数据，
+
+> 那么 其他的进程 还可以对 其他的数据进行操作，也可以 进行新增和删除的操作。
+
+> 所以如果想要在查询的时候，不能对整张表进行任何操作，
+
+> 那么就要 将表的结构也 锁定    （就需要使用 更强的 锁定）
+
+> set transaction isolation level serializable;
 
 #### snapshot（快照），
 
-##### 为数据产生一个临时数据库，当sql server 数据更新之前将当前数据库复制到 tempdb数据库里面，
-查询就是从tempdb数据库中查询，但是不能再 使用 snapshot 线程的事务内执行 修改操作，
-因为不能修改 旧版本数据库（tempdb），会报错。
-snapshot隔离级别，读操作 不适用 共享锁，使用的是“行版本控制”，
-所以读数据的性能效率很高，但是修改操作性能就降低的很多。
-因为是将 数据库  中的数据 复制到 tempdb 数据库中，所以不会产生 幻读。
-set transaction isolation level snapshot;
+> > 为数据产生一个临时数据库，当sql server 数据更新之前将当前数据库复制到 tempdb数据库里面，
 
-###### 带来两个问题：
+> 查询就是从tempdb数据库中查询，但是不能再 使用 snapshot 线程的事务内执行 修改操作，
 
-####### 1、当 另外一个事务  已经提交，但是这边的查询到数据还是没有修改。因为 每次查询到的快照是针对于 本次回话对应的那个 transaction 的，因为在这个事务里面是没有修改的，所以查询到的数据是没有修改的。
+> 因为不能修改 旧版本数据库（tempdb），会报错。
 
-####### 2、（更新问题）因为 那边的数据已经是 飞凤公司了，但是这里还是   联邦,所以,在这个事务里面是不能对表进行修改,因为访问的是临时数据库,想要对 数据库修改是不可能的（sql server 就会报错，阻止修改） 
+> snapshot隔离级别，读操作 不适用 共享锁，使用的是“行版本控制”，
+
+> 所以读数据的性能效率很高，但是修改操作性能就降低的很多。
+
+> 因为是将 数据库  中的数据 复制到 tempdb 数据库中，所以不会产生 幻读。
+
+> set transaction isolation level snapshot;
+
+> >带来两个问题：
+
+> > 1、当 另外一个事务  已经提交，但是这边的查询到数据还是没有修改。因为 每次查询到的快照是针对于 本次回话对应的那个 transaction 的，因为在这个事务里面是没有修改的，所以查询到的数据是没有修改的。
+
+> > 2、（更新问题）因为 那边的数据已经是 飞凤公司了，但是这里还是   联邦,所以,在这个事务里面是不能对表进行修改,因为访问的是临时数据库,想要对 数据库修改是不可能的（sql server 就会报错，阻止修改） 
 
 #### read commited snapshot（已经提交读隔离）
 
-##### 读取的默认隔离级别就是read committed 和上面正好相反。
-如果上面情况，采用read committed 隔离级别查询的话查到的就是还没有更改之前的数据。
-alter database ssdemo set read_committed_snapshot on;
+> > 读取的默认隔离级别就是read committed 和上面正好相反。
+
+> 如果上面情况，采用read committed 隔离级别查询的话查到的就是还没有更改之前的数据。
+
+> alter database ssdemo set read_committed_snapshot on;
 
 #### Sql Server 事务隔离级别的查看及更改
 
-根据自身 Sql Server 的情况来自定义 事务隔离级别，将会更加的满足需求，或提升性能。例如，对于逻辑简单的 Sql Server,完全可以使用 read uncommitted 模式，来减少死锁，减少堵塞， 提升性能和响应。对于此种应用场景应该是蛮多的，但是却没有一个全局设置，你妹呀！
+> 根据自身 Sql Server 的情况来自定义 事务隔离级别，将会更加的满足需求，或提升性能。例如，对于逻辑简单的 Sql Server,完全可以使用 read uncommitted 模式，来减少死锁，减少堵塞， 提升性能和响应。对于此种应用场景应该是蛮多的，但是却没有一个全局设置，你妹呀！
 
-这个功能真的很强大，但是不知道微软为什么把它的最大作用域定义为 当前链接，蛋疼，真的很蛋疼，没法全局设置，下面也尽可能详细的解释如何少设置，多舒服的使用吧
+> 这个功能真的很强大，但是不知道微软为什么把它的最大作用域定义为 当前链接，蛋疼，真的很蛋疼，没法全局设置，下面也尽可能详细的解释如何少设置，多舒服的使用吧
 
-查看 当前 Sql Server 事务隔离级别 的设置：
+> 查看 当前 Sql Server 事务隔离级别 的设置：
 
-DBCC Useroptions -> isolation level 这一项的 Value 既是当前的设置值
+> DBCC Useroptions -> isolation level 这一项的 Value 既是当前的设置值
 
-但是我不得不说，这个命令几乎是废物，为什么呢，因为 事务隔离级别 的作用域是 当前链接，也就是，你查看的是当前链接的 级别，但是sql server 同时 150+ 个链接是很正常的，其他链接呢，你说蛋疼不，我X
+> 但是我不得不说，这个命令几乎是废物，为什么呢，因为 事务隔离级别 的作用域是 当前链接，也就是，你查看的是当前链接的 级别，但是sql server 同时 150+ 个链接是很正常的，其他链接呢，你说蛋疼不，我X
 
-设置Sql Server 事务隔离级别
+> 设置Sql Server 事务隔离级别
 
-Sql Server 事务隔离级别 的设置也同样很蛋疼，很纠结，很恶心。但是稍微好一点的是，其设置可以在多个场合，多种方式设置，稍微弥补了一点点.
+> Sql Server 事务隔离级别 的设置也同样很蛋疼，很纠结，很恶心。但是稍微好一点的是，其设置可以在多个场合，多种方式设置，稍微弥补了一点点.
 
 1. Transact-SQL 语句中的设置
 
-就是在当前 SQL 语句中，设置的事务隔离级别只影响当前 sql 语句, 有两种方式：
+> 就是在当前 SQL 语句中，设置的事务隔离级别只影响当前 sql 语句, 有两种方式：
 
-复制代码
--- the first method
+> > -- the first method
 
-select *  from Table1 with(nolock) 
+> > select *  from Table1 with(nolock) 
 
--- the second method
+> > -- the second method
 
-SET TRANSACTION ISOLATION LEVEL Read UnCommitted;
+> > SET TRANSACTION ISOLATION LEVEL Read UnCommitted;
 
-select *  from Table1 
-复制代码
-这种方式比较灵活，可以重点语句重点对待，缺点就是 要设置的实在是太多了，因为这种方式的作用域实在是太小了啊啊啊啊
+> > select *  from Table1 
 
-2. ADO.NET 中的设置
+> > 这种方式比较灵活，可以重点语句重点对待，缺点就是 要设置的实在是太多了，因为这种方式的作用域实在是太小了啊啊啊啊
 
-使用 System.Data.SqlClient 托管命名空间的 ADO.NET 应用程序可以调用 SqlConnection.BeginTransaction 方法并将 IsolationLevel 选项设置为 Unspecified、Chaos、ReadUncommitted、ReadCommitted、RepeatableRead、Serializable 或 Snapshot。
+1. ADO.NET 中的设置
+
+> 使用 System.Data.SqlClient 托管命名空间的 ADO.NET 应用程序可以调用 SqlConnection.BeginTransaction 方法并将 IsolationLevel 选项设置为 Unspecified、Chaos、ReadUncommitted、ReadCommitted、RepeatableRead、Serializable 或 Snapshot。
 
 就是 SqlConnection 中设置了，代码如下：
 
 System.Data.SqlClient.SqlConnection con = new SqlConnection();
 
 con.BeginTransaction(IsolationLevel.ReadUncommitted);
+
 这种方式有点就是作用域范围变大了；缺点就是要在 C## 设置，最要命的是，如果用了ORM，如何让我设置！！！！！！！！！！！！！
 
 当然，还有其他的设置，详情请参考：调整事务隔离级别
@@ -14276,132 +18681,174 @@ ISO 标准定义了下列隔离级别，SQL Server 数据库引擎支持所有�
 
 ### 特点
 
-#### 1.NoSQL文件存储。这是和传统关系型数据库的主要区别；支持实体类的字段更新；
+> 1.NoSQL文件存储。这是和传统关系型数据库的主要区别；支持实体类的字段更新；
 
-#### 2.类似MongoDB的简单API；
+> 2.类似MongoDB的简单API；
 
-#### 3.完全使用C#代码,在.NET 4.0环境下编写，核心dll小巧,只有168K;
+> 3.完全使用C#代码,在.NET 4.0环境下编写，核心dll小巧,只有168K;
 
-#### 4.支持ACID事务处理；
+> 4.支持ACID事务处理；
 
-#### 5.可以进行写入失败的恢复；
+> 5.可以进行写入失败的恢复；
 
-#### 6.存储到文件或者数据流中（类似MongoDB的GridFS）;
+> 6.存储到文件或者数据流中（类似MongoDB的GridFS）;
 
-#### 7.类似Sqlite的单一文件存储；
+> 7.类似Sqlite的单一文件存储；
 
-#### 8.支持文件索引，可以进行快速搜索；可以直接存储文件；
+> 8.支持文件索引，可以进行快速搜索；可以直接存储文件；
 
-#### 9.支持Linq查询；【这也许是C#编写最直接的好处】;
+> 9.支持Linq查询；【这也许是C#编写最直接的好处】;
 
-#### 10.支持命令行操作数据库，官方提供了一个Shell command line;
+> 10.支持命令行操作数据库，官方提供了一个Shell command line;
 
-#### 11.完全开源和免费，包括商业使用；
+> 11.完全开源和免费，包括商业使用；
 
-#### Serverless NoSQL 文档存储
+> Serverless NoSQL 文档存储
 
-#### 类似于 MongoDB 的简单 API
+> 类似于 MongoDB 的简单 API
 
-#### 100% C## 代码，支持.NET 3.5 / .NET 4.0 / NETStandard 1.3 / NETStandard 2.0，单 DLL (小于 300kb)
+> 100% C## 代码，支持.NET 3.5 / .NET 4.0 / NETStandard 1.3 / NETStandard 2.0，单 DLL (小于 300kb)
 
-#### 支持线程和进程安全
+> 支持线程和进程安全
 
-#### 支持文档/操作级别的 ACID
+> 支持文档/操作级别的 ACID
 
-#### 支持写失败后的数据还原 (日志模式)
+> 支持写失败后的数据还原 (日志模式)
 
-#### 可使用 DES (AES) 加密算法进行数据文件加密
+> 可使用 DES (AES) 加密算法进行数据文件加密
 
-#### 可使用特性或 fluent 映射 API 将你的 POCO类映射为 BsonDocument
+> 可使用特性或 fluent 映射 API 将你的 POCO类映射为 BsonDocument
 
-#### 可存储文件与流数据 (类似 MongoDB 的 GridFS)
+> 可存储文件与流数据 (类似 MongoDB 的 GridFS)
 
-#### 单数据文件存储 (类似 SQLite)
+> 单数据文件存储 (类似 SQLite)
 
-#### 支持基于文档字段索引的快速搜索 (每个集合支持多达16个索引)
+> 支持基于文档字段索引的快速搜索 (每个集合支持多达16个索引)
 
-#### 支持 LINQ 查询
+> 支持 LINQ 查询
 
-#### Shell 命令行 - 试试这个在线版本
+> Shell 命令行 - 试试这个在线版本
 
-#### 相当快 - 这里是与 SQLite 的对比结果
+> 相当快 - 这里是与 SQLite 的对比结果
 
-#### 开源，对所有人免费 - 包括商业应用
+> 开源，对所有人免费 - 包括商业应用
 
 ### LiteDB使用基本案例
 
 #### 创建实体类
 
-##### public class Customer
+public class Customer
+
 {
+
     public int Id { get; set; }
+
     public string Name { get; set; }
+
     public string[] Phones { get; set; }
+
     public bool IsActive { get; set; }
+
 }
 
 #### 使用Demo
 
-##### 使用过程首先要添加dll应用，以及引入命名空间：
+使用过程首先要添加dll应用，以及引入命名空间：
+
 using LiteDB;
+
     下面是测试代码，会在当前目录下创建一个sample.db的数据库文件：
 
 //打开或者创建新的数据库
+
 using (var db = new LiteDatabase("sample.db"))
+
 {
+
     //获取 customers 集合，如果没有会创建，相当于表
+
     var col = db.GetCollection<Customer>("customers");
+
     //创建 customers 实例
+
     var customer = new Customer
+
     {
+
         Name = "John Doe",
+
         Phones = new string[] { "8000-0000", "9000-0000" },
+
         IsActive = true
+
     };
+
     // 将新的对象插入到数据表中，Id是自增，自动生成的
+
     col.Insert(customer);
+
     // 更新实例
+
     customer.Name = "Joana Doe";
+
     //保存到数据库
+
     col.Update(customer);
+
     // 使用对象的属性，这个方法生成索引，来进行检索
+
     col.EnsureIndex(x => x.Name);
+
     //使用LINQ语法来检索
+
     var results = col.Find(x => x.Name.StartsWith("Jo"));
+
 }
+
     上述过程很清楚，根据注释理解几乎不用费神。
 
 ### 使用场景
 
-#### 1.桌面或者本地小型的应用程序
+> 1.桌面或者本地小型的应用程序
 
-#### 2.小型web应用程序
+> 2.小型web应用程序
 
-#### 3.单个数据库账户或者单个用户数据的存储
+> 3.单个数据库账户或者单个用户数据的存储
 
-#### 4.少量用户的并发写操作的应用程序
+> 4.少量用户的并发写操作的应用程序
 
 ### LiteDB的技术细节
 
 #### LiteDB的工作原理
 
-##### LiteDB是虽然单个文件类型的数据库，但是数据库有很多信息，
+> LiteDB是虽然单个文件类型的数据库，但是数据库有很多信息，
+
 例如索引，集合，文件等。为了管理这些信息，LiteDB实现了数据库页的概念。
+
 页 是一个拥有4096 字节的 存储相同信息的地址块。
+
 页 也是操作磁盘文件(读写)的最小单元。LiteDB有6种页类型。
+
 其作用也不一样，分布是：Header Page，Collection Page，Index Page， Data Page，Extend Page，Empty Page。
+
 鉴于篇幅较大，这里只介绍重要的Data Page。
+
 其他几个页面的作用看文件也很容易。Data Page的作用是存储核心的数据，是以序列化后的BSON格式来存储。
+
 值得注意的是，如果存储的数据太大，超过page大小，数据块就会使用一个指针指向Extend Page。
 
 　　在上面的代码中，我们初始化数据库是这样的：
 
 1
+
 var db = new LiteDatabase("MyData.db");
+
 　　这种情况比较好用，可以打开或者创建新的数据库，同样也可以使用连接名称来获取，例如：
 
 1
+
 var db = new LiteDatabase("userdb");
+
 　　这样会直接从connectionStrings找到这个名称的连接。包括了文件名称，使用模式，以及版本信息。一般情况下直接使用第一种即可。
 
 　　LiteDB的数据库连接完整形式是：filename=C:\Path\mydb.db; journal=false; version=5　　
@@ -14419,31 +18866,41 @@ var db = new LiteDatabase("userdb");
 　　LiteDB使用Query的查询方式有以下一些方法，详细讲解几个重要的，其他几个大家理解一下，也应该不难，如果有不准确的地方，还请指正： 
 
 Query.All 返回所有的数据，可以使用指定的索引字段进行排序
+
 Query.EQ 查找返回和指定字段值相等的数据
+
 Query.LT/LTE 查找< 或 <= 某个值的数据
+
 Query.GT/GTE 查找> 或 >= 某个值的数据
+
 Query.Between 查找在指定区间范围内的数据
+
 Query.In - 和SQL的in类似吧，查找和列表中值相等的数据
+
 Query.Not - 和EQ相反，是不等于某个值的数据
+
 Query.StartsWith 查找以某个字符串开头的数据
+
 Query.Contains 查找保护某个字符串的数据，这个查询只扫描索引
+
 Query.And 2个查询的交集
+
 Query.Or 2个查询结果的并集
 
-　　看看实际代码：
+看看实际代码：
 
-1
-2
-3
-4
-5
-6
 var results = collection.Find(Query.EQ("Name", "John Doe"));
+
 var results = collection.Find(Query.GTE("Age", 25));
+
 var results = collection.Find(Query.And(
+
     Query.EQ("FirstName", "John"), Query.EQ("LastName", "Doe")
+
 ));
+
 var results = collection.Find(Query.StartsWith("Name", "Jo"));
+
 　　如图，语法是左边是字段，右边是值。注意LiteDB不支持这种表达式：CreationDate == DueDate。
 
 　　下面介绍使用Linq的查询的几个主要方法：
@@ -14451,40 +18908,42 @@ var results = collection.Find(Query.StartsWith("Name", "Jo"));
 FindAll: 查找表或者集合中所有的结果记录
 
 FindOne:返回第一个或者默认的结果
+
 FindById: 通过索引返回单个结果
+
 Find: 使用查询表达式或者linq表达式查询返回结果
 
  看看几个例子：
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
+
 collection.EnsureIndex(x => x.Name);
+
 var result = collection
+
     .Find(Query.EQ("Name", "John Doe")) 
+
     .Where(x => x.CreationDate >= x.DueDate.AddDays(-5)) 
+
     .OrderBy(x => x.Age)
+
     .Select(x => new
+
     { 
+
         FullName = x.FirstName + " " + x.LastName, 
+
         DueDays = x.DueDate - x.CreationDate 
+
     });
+
  当然还有一些方法如：Count() , Exists(),Min() , Max()等方法。。比较好理解。看看linq表达式的查询案例：
 
-1
-2
-3
-4
 var collection = db.GetCollection<Customer>("customer");
+
 var results = collection.Find(x => x.Name == "John Doe");
+
 var results = collection.Find(x => x.Age > 30);
+
 var results = collection.Find(x => x.Name.StartsWith("John") && x.Age > 30);
 
 ##### Query.All 返回所有的数据，可以使用指定的索引字段进行排序
@@ -14518,52 +18977,93 @@ var results = collection.Find(x => x.Name.StartsWith("John") && x.Age > 30);
 #### 基本示例
 
 ##### namespace Inovance.FA.FAOutTest.Views
+
 {
+
     
+
     /// <summary>
+
     /// SelectDevices.xaml 的交互逻辑
+
     /// </summary>
+
     public partial class TestLiteDB
+
     {
+
         public TestLiteDB() : base("")
+
         {
+
     InitializeComponent();
+
     this.Loaded += TestLiteDB_Loaded;
+
         }
 
         private void TestLiteDB_Loaded(object sender, RoutedEventArgs e)
+
         {
+
      InitDB();
+
         }
 
         public void InitDB()
+
         {
+
             using (var db = new LiteDatabase("sample.db"))
+
             {
+
                 //获取 customers 集合，如果没有会创建，相当于表
+
                 var col = db.GetCollection<Customer>("customers");
+
                 //创建 customers 实例
+
                 var customer = new Customer
+
                 {
+
                     Name = "John Doe",
+
                     Phones = new string[] { "8000-0000", "9000-0000" },
+
                     IsActive = true
+
                 };
+
                 // 将新的对象插入到数据表中，Id是自增，自动生成的
+
                 col.Insert(customer);
+
                 // 更新实例
+
                 customer.Name = "Joana Doe";
+
                 //保存到数据库
+
                 col.Update(customer);
+
                 // 使用对象的属性，这个方法生成索引，来进行检索
+
                 col.EnsureIndex(x => x.Name);
+
                 //使用LINQ语法来检索
+
                 var results = col.Find(x => x.Name.StartsWith("Jo"));
 
                 tbContent.Text = JsonConvert.SerializeObject(results);
+
             }
+
         }
+
     }
+
 }
 
 ## LabView
@@ -15401,26 +19901,45 @@ var results = collection.Find(x => x.Name.StartsWith("John") && x.Age > 30);
 ###### FALoggerService
 
 using Inovance.FA.Plugin.Interfaces;
+
 using Inovance.FA.Plugin.Services;
+
 using log4net;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.ComponentModel.Composition;
+
 using System.Linq;
+
 using System.Reflection;
+
 using System.Text;
+
 using System.Threading.Tasks;
 
 namespace Inovance.FA.FACommonService
+
 {
+
     [Export(typeof(IFALogger))]
+
     public class FALoggerService : IFALogger
+
     {
+
         ILog logger;
+
         public FALoggerService()
+
         {
+
             logger = log4net.LogManager.GetLogger("RollingLogFileAppender"); 
+
         }
+
         public bool IsDebugEnabled => true;
 
         public bool IsInfoEnabled => true;
@@ -15432,139 +19951,231 @@ namespace Inovance.FA.FACommonService
         public bool IsFatalEnabled => true;
 
         public void Debug(object message)
+
         {
+
             logger.Debug(message);
+
         }
 
         public void Debug(object message, Exception exception)
+
         {
+
             logger.Debug(message, exception);
+
         }
 
         public void DebugFormat(string format, params object[] args)
+
         {
+
             logger.DebugFormat(format, args);
+
         }
 
         public void Error(object message)
+
         {
+
             logger.Error(message);
+
         }
 
         public void Error(object message, Exception exception)
+
         {
+
             logger.Error(message, exception);
+
         }
 
         public void ErrorFormat(string format, params object[] args)
+
         {
+
             logger.ErrorFormat(format, args);
+
         }
 
         public void Fatal(object message)
+
         {
+
             logger.Fatal(message);
+
         }
 
         public void Fatal(object message, Exception exception)
+
         {
+
             logger.Fatal(message, exception);
+
         }
 
         public void FatalFormat(string format, params object[] args)
+
         {
+
             logger.FatalFormat(format, args);
+
         }
 
         public void Info(object message)
+
         {
+
             logger.Info(message);
+
         }
 
         public void Info(object message, Exception exception)
+
         {
+
             logger.Info(message, exception);
+
         }
 
         public void InfoFormat(string format, params object[] args)
+
         {
+
             logger.InfoFormat(format, args);
+
         }
 
         public void Warn(object message)
+
         {
+
             logger.Warn(message);
+
         }
 
         public void Warn(object message, Exception exception)
+
         {
+
             logger.Warn(message, exception);
+
         }
 
         public void WarnFormat(string format, params object[] args)
+
         {
+
             logger.WarnFormat(format, args);
+
         }
+
     }
+
 }
 
 ###### FAMessageService
 
 using Inovance.FA.Plugin.Services;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.ComponentModel.Composition;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
+
 using System.Windows;
 
 namespace Inovance.FA.FACommonService
+
 {
+
     [Export(typeof(IFAMessageBox))]
+
     public class FAMessageService : IFAMessageBox
+
     {
+
         public string Title = "FA";
+
         public void ShowDebug(string message)
+
         {
+
             MessageBox.Show(message, Title, MessageBoxButton.OK, MessageBoxImage.Information);
+
         }
 
         public void ShowError(string message, Exception ex=null)
+
         {
+
             if (ex == null)
+
             {
+
                 MessageBox.Show(message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
+
             else
+
             {
+
                 MessageBox.Show($"{message}/r/n{ex.ToString()}/r/n{ex.Message}/r/n{ex.StackTrace}/r/n", Title, MessageBoxButton.OK, MessageBoxImage.Error);
+
             }
+
             
+
         }
 
         public void ShowInfo(string message)
+
         {
+
             MessageBox.Show(message, Title, MessageBoxButton.OK, MessageBoxImage.Information);
+
         }
 
         public bool ShowQuestion(string message)
+
         {
+
             if (MessageBox.Show(message, Title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+
             {
+
                 return true;
+
             }
+
             else
+
             {
+
                 return false;
+
             }
+
         }
 
         public void ShowWarn(string message)
+
         {
+
             MessageBox.Show(message, Title, MessageBoxButton.OK, MessageBoxImage.Warning);
+
         }
+
     }
+
 }
 
 ##### FACommonViews
@@ -15572,107 +20183,191 @@ namespace Inovance.FA.FACommonService
 ###### DebugPanel.xaml
 
 <inplug:FAView x:Class="Inovance.FA.FACommonViews.Views.DebugPanel"
+
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+
              xmlns:local="clr-namespace:Inovance.FA.FACommonViews.Views"
+
              xmlns:facontrols="clr-namespace:Inovance.FA.Controls;assembly=FAControls"
+
              xmlns:localvm="clr-namespace:Inovance.FA.FACommonViews.ViewModels"
+
              xmlns:inplug="clr-namespace:Inovance.FA.Plugin;assembly=FAPlugin"
+
              mc:Ignorable="d" 
+
              d:DesignHeight="300" d:DesignWidth="600" Width="600" Height="300" >
+
     <!--<inplug:FAView.DataContext>
+
         <localvm:DebugPanelViewModel/>
+
     </inplug:FAView.DataContext>-->
+
     <Grid>
+
         <Grid.RowDefinitions>
+
             <RowDefinition Height="30" />
+
             <RowDefinition Height="*" />
+
         </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
+
             <ColumnDefinition Width="*" />
+
         </Grid.ColumnDefinitions>
+
         <Label Content="显示输出来源" HorizontalAlignment="Left" Grid.Row="0" />
+
         <!--Text="{Binding Message}"-->
+
         <TextBlock Text="{Binding Message}" HorizontalAlignment="Left" Grid.Row="1"/>
+
     </Grid>
+
 </inplug:FAView>
 
 ###### DebugPanelViewModel
 
 using Inovance.FA.Plugin;
+
 using Inovance.FA.Plugin.Services;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.Collections.ObjectModel;
+
 using System.ComponentModel.Composition;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
 
 namespace Inovance.FA.FACommonViews.ViewModels
+
 {
+
     [Export(typeof(IDebugOut))]
+
     [Export(typeof(FAViewModel))]
+
     public class DebugPanelViewModel : FAViewModel, IDebugOut
+
     {
+
         public string message = "请输入";
+
         public string Message
+
         {
+
             get
+
             {
+
                 return message;
+
             }
+
             set
+
             {
+
                 message = value;
+
                 RaisePropertyChanged("Message");
+
             }
 
         }
 
         public void Debug(string Message)
+
         {
+
             this.Message= Message;
+
         }
+
     }
+
 }
 
 ###### DebugPanel.Xaml.cs
 
 using Inovance.FA.Controls;
+
 using Inovance.FA.Plugin;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.ComponentModel.Composition;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
+
 using System.Windows;
+
 using System.Windows.Controls;
+
 using System.Windows.Data;
+
 using System.Windows.Documents;
+
 using System.Windows.Input;
+
 using System.Windows.Media;
+
 using System.Windows.Media.Imaging;
+
 using System.Windows.Navigation;
+
 using System.Windows.Shapes;
 
 namespace Inovance.FA.FACommonViews.Views
+
 {
+
     [Export(typeof(FAView))]
+
     /// <summary>
+
     /// SelectDevices.xaml 的交互逻辑
+
     /// </summary>
+
     public partial class DebugPanel:FAView
+
     {
+
         public DebugPanel():base("DebugPanelViewModel")
+
         {
+
             InitializeComponent();
+
         }
 
     }
+
 }
 
 #### 插件实现层
@@ -15682,64 +20377,109 @@ namespace Inovance.FA.FACommonViews.Views
 ###### MyFAPlugin1
 
 using Inovance.FA.Plugin;
+
 using Inovance.FA.Plugin.Services;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.ComponentModel.Composition;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading;
+
 using System.Threading.Tasks;
 
 namespace Inovance.FA.MyFAPlugin1
+
 {
+
     [Export(typeof(FAPluginBase))]
+
     public class MyFAPlugin1 : FAPluginBase
+
     {
+
         //IFALogger FALogger { get; set; }
 
         [ImportingConstructor]
+
         public MyFAPlugin1() //IFALogger logger
+
         {
+
             this.ID = "MyFAPlugin1";
+
             this.Name = "MyFAPlugin1";
+
             this.Categorys = new List<FACategory>();
+
             ///FALogger = logger;
+
         }
 
         public override void Init()
+
         {
+
             base.Init();
+
             
+
             this.MessageReceived += MyFAPlugin1_MessageReceived;
+
             //FAMessageBox.ShowInfo("MyFAPlugin1.Init()-MyFAPlugin1 inited!");
+
             this.PluginInited += MyFAPlugin1_PluginInited;
+
         }
 
         private void MyFAPlugin1_PluginInited(object sender, EventArgs e)
+
         {
 
             ThreadPool.QueueUserWorkItem(o =>
+
             {
+
                 Thread.Sleep(10000);
+
                 while (true)
+
                 {
+
                     SendMessage("MyFAPlugin2", "string", Encoding.UTF8.GetBytes("This is a test message from MyFAPlugin1 !"));
+
                     Thread.Sleep(100);
+
                 };
+
             });
+
             FALogger.Info("MyFAPlugin1 inited! This message is from MYFAPlugin1.dll");
+
             //FADebugOut.Debug("MyFAPlugin1 inited! This message is from MYFAPlugin1.dll");
 
         }
 
         private void MyFAPlugin1_MessageReceived(object sender, Plugin.Args.MessageReceivedEventArgs e)
+
         {
+
             FALogger.Info($"MyFAPlugin1.MyFAPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
+
             //FAMessageBox.ShowInfo($"MyFAPlugin1.MyFAPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{e.Data.ToString()}");
+
             //FADebugOut.Debug($"MyFAPlugin1.MyFAPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
+
         }
+
     }
+
 }
 
 ##### MyFAPlugin2
@@ -15747,84 +20487,145 @@ namespace Inovance.FA.MyFAPlugin1
 ###### MyFAPlugin2
 
 using Inovance.FA.Plugin;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.ComponentModel.Composition;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading;
+
 using System.Threading.Tasks;
 
 namespace Inovance.FA.MyFAPlugin2
+
 {
+
     [Export(typeof(FAPluginBase))]
+
     public class MyFAPlugin2 : FAPluginBase
+
     {
+
         public MyFAPlugin2()
+
         {
+
             this.ID = "MyFAPlugin2";
+
             this.Name = "MyFAPlugin2";
+
         }
 
         public override void Init()
+
         {
+
             base.Init();
+
             this.MessageReceived += MyFAPlugin2_MessageReceived;
+
             try
+
             {
+
                 throw new Exception("This is a test exception!");
+
             }
+
             catch(Exception ex)
+
             {
+
                 FALogger.Error("MyFAPlugin2.Init()-There is an error", ex);
+
                 //FADebugOut.Debug("MyFAPlugin2.Init()-There is an error:"+ex.Message);
+
             }
+
             this.PluginInited += MyFAPlugin2_PluginInited;
+
         }
 
         private void MyFAPlugin2_PluginInited(object sender, EventArgs e)
+
         {
+
             ThreadPool.QueueUserWorkItem(o =>
+
             {
+
                 Thread.Sleep(10000);
+
                 while (true)
+
                 {
+
                     SendMessage("MyFAPlugin1", "string", Encoding.UTF8.GetBytes("This is a test message from MyFAPlugin2 !"));
+
                     Thread.Sleep(100);
+
                 };
 
             });
+
         }
 
         private void MyFAPlugin2_MessageReceived(object sender, Plugin.Args.MessageReceivedEventArgs e)
+
         {
+
             FALogger.Info($"MyFAPlugin2.MyFAPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
+
             //FAMessageBox.ShowInfo($"MyFAPlugin2.MyFAPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{e.Data.ToString()}");
+
             //FADebugOut.Debug($"MyFAPlugin2.MyFAPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
+
         }
+
     }
+
 }
 
 #### FAStaticData
 
 using System;
+
 using System.Collections.Generic;
+
 using System.ComponentModel.Composition;
+
 using System.ComponentModel.Composition.Hosting;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
 
 namespace Inovance.FA.Plugin
+
 {
+
     public class FAStaticData
+
     {
+
         public static CompositionContainer Container = null;
 
         //[ImportMany(typeof(FAView))]
+
         ////private IEnumerable<Lazy<View, IViewMetadata>> views { get; set; }
+
         //public static IEnumerable<FAView> Views { get; set; }
+
     }
+
 }
 
 ### Controls
@@ -15834,119 +20635,207 @@ namespace Inovance.FA.Plugin
 ##### ProjectVisableConverter
 
 using Inovance.FA.Plugin;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.Globalization;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
+
 using System.Windows;
+
 using System.Windows.Data;
 
 namespace Inovance.FA.Controls.Conveter
+
 {
+
     [ValueConversion(typeof(FAProject), typeof(Visibility))]
+
     public class ProjectVisableConverter : IValueConverter
+
     {
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+
         {
+
             if (value!=null&&value is FAProject)
+
             {
+
                 return Visibility.Visible;
+
             }
+
             else
+
             {
+
                 return Visibility.Collapsed;
+
             }
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+
         {
+
             throw new NotImplementedException();
+
         }
+
     }
+
 }
 
 #### DialogCloser
 
 using System;
+
 using System.Collections.Generic;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
+
 using System.Windows;
 
 namespace Inovance.FA.Controls
+
 {
+
     public static class DialogCloser
+
     {
+
         public static readonly DependencyProperty DialogResultProperty =
+
             DependencyProperty.RegisterAttached("DialogResult",
+
                                                 typeof(bool?),
+
                                                 typeof(DialogCloser),
+
                                                 new PropertyMetadata(DialogResultChanged));
 
         private static void DialogResultChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+
         {
+
             var window = d as Window;
+
             if (window != null)
+
             {
+
                 window.DialogResult = e.NewValue as bool?;
+
             }
+
         }
 
         public static void SetDialogResult(Window target, bool? value)
+
         {
+
             target.SetValue(DialogResultProperty, value);
+
         }
+
     }
+
 }
 
 #### FADialog
 
 using System;
+
 using System.Collections.Generic;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
+
 using System.Windows;
+
 using System.Windows.Data;
 
 namespace Inovance.FA.Controls
+
 {
+
     public class FADialog : FAWindow
+
     {
+
         public FADialog()
+
         {
+
             this.WindowStyle = WindowStyle.ToolWindow;
+
             this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
         }
+
     }
+
 }
 
 #### FAWindow
 
 using System;
+
 using System.Collections.Generic;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
+
 using System.Windows;
+
 using System.Windows.Data;
 
 namespace Inovance.FA.Controls
+
 {
+
     public class FAWindow:Window
+
     {
+
         public FAWindow()
+
         {
+
             Binding binding = new Binding();
+
             //binding.Source = DialogCloser.DialogResultProperty;
+
             binding.Path = new PropertyPath("DialogResult");
+
             binding.Mode = BindingMode.TwoWay;
+
             this.SetBinding(DialogCloser.DialogResultProperty, binding);
+
         }
+
     }
+
 }
 
 ### Plugin接口层
@@ -15956,69 +20845,115 @@ namespace Inovance.FA.Controls
 ##### FAPluginBase
 
 using Inovance.FA.Plugin.Args;
+
 using Inovance.FA.Plugin.Services;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.ComponentModel.Composition;
+
 using System.Threading;
 
 namespace Inovance.FA.Plugin
+
 {
+
     public class FAPluginBase:FAObject
+
     {
 
         public FAPluginBase()
+
         {
+
             
+
         }
+
         public bool Inited { get; set; } = false;
+
         public List<FACategory> Categorys { get; set; }
+
         public FAEquipmentType EquipmentType { get; set; }
 
         [Import]
+
         public IFALogger FALogger { get; set; }
 
         [Import]
+
         public IFAMessageBox FAMessageBox { get; set; }
 
         //[Import]
+
         //public IDebugOut FADebugOut { get; set; }
 
         public virtual void Init()
+
         {
+
             ThreadPool.QueueUserWorkItem(o => {
+
                 while (!Inited)
+
                 {
+
                     Thread.Sleep(100);
+
                 }
+
                 FALogger.Info($"FAPluginBase.Init()-{this.ToString()} Inited!");
+
                 //FADebugOut.Debug($"FAPluginBase.Init()-{this.ToString()} Inited!");
+
                 if (PluginInited != null)
+
                 {
+
                     PluginInited(this, new EventArgs());
+
                 }
+
             });
+
         }
 
         public void SendMessage(string ReceiverID,string DataType, byte[] Data)
+
         {
+
             if (MessageSend != null)
+
             {
+
                 MessageSend(this, new MessageReceivedEventArgs { Data = Data,DataType=DataType, SenderID = this.ID ,ReceiverID=ReceiverID});
+
             }
+
         }
 
         public void RaiseMessageReceived(MessageReceivedEventArgs e)
+
         {
+
             if (MessageReceived != null)
+
             {
+
                 MessageReceived(this, e);
+
             }
+
         }
 
         public event EventHandler<EventArgs> PluginInited;
+
         public event EventHandler<MessageReceivedEventArgs> MessageSend;
+
         public event EventHandler<MessageReceivedEventArgs> MessageReceived;
+
     }
 
 }
@@ -16026,42 +20961,71 @@ namespace Inovance.FA.Plugin
 ##### FAView
 
 using System;
+
 using System.Collections.Generic;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
+
 using System.Windows;
+
 using System.Windows.Controls;
 
 namespace Inovance.FA.Plugin
+
 {
+
     public class FAView:UserControl
+
     {
+
         public FAView(string ViewModelName)
+
         {
+
             if(!string.IsNullOrEmpty(ViewModelName))
+
             {
+
                 DataContext = FAStaticData.Container.GetExportedValues<FAViewModel>().FirstOrDefault(v => v.Name.Equals(ViewModelName));
+
             }
+
         }
+
         public bool IsReadOnly { get; set; }
+
     }
+
 }
 
 ##### FAViewModel
 
 using Inovance.FA.Plugin.Services;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.ComponentModel;
+
 using System.ComponentModel.Composition;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
 
 namespace Inovance.FA.Plugin
+
 {
+
     public abstract class FAViewModel:INotifyPropertyChanged
+
     {
 
         public IFALogger FALogger { get; set; }
@@ -16069,54 +21033,95 @@ namespace Inovance.FA.Plugin
         public IFAMessageBox FAMessageBox { get; set; }
 
         public FAViewModel()
+
         {
+
             FALogger = FAStaticData.Container.GetExportedValue<IFALogger>();
+
             FAMessageBox = FAStaticData.Container.GetExportedValue<IFAMessageBox>();
+
         }
 
         public string Name
+
         {
+
             get
+
             {
+
                 return this.GetType().Name;
+
             }
+
         }
+
         private FAProject project = null;
+
         public FAProject Project
+
         {
+
             get
+
             {
+
                 return project;
+
             }
+
             set
+
             {
+
                 project = value;
+
                 RaisePropertyChanged("Project");
+
             }
+
         }
 
         public bool? dialogResult;
+
         public bool? DialogResult
+
         {
+
             get
+
             {
+
                 return dialogResult;
+
             }
+
             set
+
             {
+
                 dialogResult = value;
+
                 RaisePropertyChanged("DialogResult");
+
             }
+
         }
 
         protected virtual void RaisePropertyChanged(string propertyName)
+
 		{
+
 			if (PropertyChanged != null)
+
 				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;
+
 	}
+
 }
 
 #### 服务接口层
@@ -16124,53 +21129,93 @@ namespace Inovance.FA.Plugin
 ##### IDebugOut
 
 using System;
+
 using System.Collections.Generic;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
 
 namespace Inovance.FA.Plugin.Services
+
 {
+
     public interface IDebugOut
+
     {
+
         void Debug(string Message);
+
     }
+
 }
 
 ##### IFALogger
 
 using Inovance.FA.Plugin.Interfaces;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
 
 namespace Inovance.FA.Plugin.Services
+
 {
+
     public interface IFALogger: IFAService
+
 	{
+
 		void Debug(object message);
+
 		void Debug(object message, Exception exception);
+
 		void DebugFormat(string format, params object[] args);
+
 		void Info(object message);
+
 		void Info(object message, Exception exception);
+
 		void InfoFormat(string format, params object[] args);
+
 		void Warn(object message);
+
 		void Warn(object message, Exception exception);
+
 		void WarnFormat(string format, params object[] args);
+
 		void Error(object message);
+
 		void Error(object message, Exception exception);
+
 		void ErrorFormat(string format, params object[] args);
+
 		void Fatal(object message);
+
 		void Fatal(object message, Exception exception);
+
 		void FatalFormat(string format, params object[] args);
+
 		bool IsDebugEnabled { get; }
+
 		bool IsInfoEnabled { get; }
+
 		bool IsWarnEnabled { get; }
+
 		bool IsErrorEnabled { get; }
+
 		bool IsFatalEnabled { get; }
+
 	}
+
 }
 
 ##### IFAMessageBox
@@ -16178,14 +21223,23 @@ namespace Inovance.FA.Plugin.Services
 using System;
 
 namespace Inovance.FA.Plugin.Services
+
 {
+
     public interface IFAMessageBox 
+
     {
+
         void ShowInfo(string message);
+
         void ShowError(string message,Exception ex);
+
         void ShowDebug(string message);
+
         void ShowWarn(string message);
+
         bool ShowQuestion(string message);
+
     }
 
 }
@@ -16195,23 +21249,39 @@ namespace Inovance.FA.Plugin.Services
 ##### MessageReceivedEventArgs
 
 using System;
+
 using System.Collections.Generic;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
 
 namespace Inovance.FA.Plugin.Args
+
 {
+
     public class MessageReceivedEventArgs:EventArgs
+
     {
+
         public string SenderID { get; set; }
+
         public string ReceiverID { get; set; }
+
         public string DataType { get; set; }
+
         public byte[] Data
+
         {
+
             get; set;
+
         }
+
     }
+
 }
 
 ### Core
@@ -16219,83 +21289,147 @@ namespace Inovance.FA.Plugin.Args
 #### FABuilder
 
 using Inovance.FA.Plugin;
+
 using Inovance.FA.Plugin.Services;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.ComponentModel.Composition;
+
 using System.ComponentModel.Composition.Hosting;
+
 using System.IO;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading;
+
 using System.Threading.Tasks;
 
 namespace Inovance.FA.Core
+
 {
+
     
+
     public class FABuilder
+
     {
+
         [ImportMany(typeof(FAPluginBase))]
+
         public static IEnumerable<FAPluginBase> Plugins { get; private set; }
 
         //[ImportMany(typeof(FAView))]
+
         ////private IEnumerable<Lazy<View, IViewMetadata>> views { get; set; }
+
         //public static IEnumerable<FAView> Views { get; private set; }
 
         [Import(typeof(IFALogger))]
+
         public IFALogger logger { get; set; }
 
         //private CompositionContainer container = null;
 
         public void Load()
+
         {
+
             var catalog = new DirectoryCatalog(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins"), "*");
+
             FAStaticData.Container = new CompositionContainer(catalog);
+
             try
+
             {
+
                 Plugins = FAStaticData.Container.GetExportedValues<FAPluginBase>();
+
                 foreach (var plugin in Plugins)
+
                 {
+
                     plugin.Init();
+
                     plugin.Inited = true;
+
                     plugin.MessageSend += Plugin_MessageSend;
+
                 }
+
             }
+
             catch (CompositionException compositionEx)
+
             {
+
                 logger.Error("FABuilder.Load Plugins Failed!", compositionEx);
+
             }
+
             //try
+
             //{
+
             //    FAStaticData.Views = FAStaticData.Container.GetExportedValues<FAView>();
+
             //}
+
             //catch (CompositionException compositionEx)
+
             //{
+
             //    logger.Error("FABuilder.Load Views Failed!", compositionEx);
+
             //}
 
             
+
         }
 
         private void Plugin_MessageSend(object sender, Plugin.Args.MessageReceivedEventArgs e)
+
         {
+
             if (e != null && !String.IsNullOrEmpty(e.ReceiverID))
+
             {
+
                 var plugin = Plugins.Where(p => p.ID == e.ReceiverID).FirstOrDefault();
+
                 ThreadPool.QueueUserWorkItem(o => {
+
                     if (plugin != null)
+
                     {
+
                         while (!plugin.Inited)
+
                         {
+
                             Thread.Sleep(100);
+
                         }
+
                         plugin.RaiseMessageReceived(e);
+
                     }
+
                 });
+
                 
+
             }
+
         }
+
     }
+
 }
 
 ### Viwes
@@ -16305,81 +21439,149 @@ namespace Inovance.FA.Core
 ##### Xaml
 
 <facontrols:FADialog x:Class="Inovance.FA.Views.Views.CreateProject"
+
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+
              xmlns:local="clr-namespace:Inovance.FA.Views.Views"
+
              xmlns:facontrols="clr-namespace:Inovance.FA.Controls;assembly=FAControls"
+
              xmlns:localvm="clr-namespace:Inovance.FA.Views.ViewModels"
+
              mc:Ignorable="d" 
+
              d:DesignHeight="300" d:DesignWidth="600" Width="600" Height="300" >
+
     <Window.DataContext>
+
         <localvm:CreateProjectViewModel/>
+
     </Window.DataContext>
+
     <Grid>
+
         <Grid.RowDefinitions>
+
             <RowDefinition Height="*" />
+
             <RowDefinition Height="30" />
+
             <RowDefinition Height="30" />
+
             <RowDefinition Height="30" />
+
             <RowDefinition Height="60" />
+
             <RowDefinition Height="30" />
+
             <RowDefinition Height="*" />
+
         </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
+
             <ColumnDefinition Width="*" />
+
             <ColumnDefinition Width="200" />
+
             <ColumnDefinition Width="300" />
+
             <ColumnDefinition Width="*" />
+
         </Grid.ColumnDefinitions>
+
         <Label Content="项目名称：" Grid.Row="1" Grid.Column="1" />
+
         <Label Content="路径：" Grid.Row="2" Grid.Column="1" />
+
         <Label Content="作者" Grid.Row="3" Grid.Column="1" />
+
         <Label Content="备注" Grid.Row="4" Grid.Column="1" />
+
         <Button Content="创建" Grid.Row="5" Grid.Column="2" Command="{Binding CreateProjectCommand}"/>
 
         <TextBox Text="{Binding Project.Name, Mode=TwoWay}" Grid.Row="1" Grid.Column="2" />
+
         <TextBox Text="{Binding Project.BasePath, Mode=TwoWay}"  Grid.Row="2" Grid.Column="2" />
+
         <TextBox Text="{Binding Project.Author, Mode=TwoWay}"  Grid.Row="3" Grid.Column="2" />
+
         <TextBox Text="{Binding Project.Description, Mode=TwoWay}" Grid.Row="4" Grid.Column="2" />
+
     </Grid>
+
 </facontrols:FADialog>
 
 ##### ViewModel
 
 using Inovance.FA.Plugin;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.Collections.ObjectModel;
+
 using System.IO;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
 
 namespace Inovance.FA.Views.ViewModels
+
 {
+
     public class CreateProjectViewModel : FAViewModel
+
     {
+
         public FACommand CreateProjectCommand
+
         {
+
             get;
+
             set;
+
         }
+
         public CreateProjectViewModel()
+
         {
+
             Project = new FAProject(LanguageResource.Resource.DefaultProjectName);
+
             Project.BasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"FAProject", Project.Name);
+
             Project.Author = Environment.UserName;
+
             Project.Description = LanguageResource.Resource.DefaultProjectDescrption;
+
             CreateProjectCommand = new FACommand(o => {
+
                 RaisePropertyChanged("Project");
+
                 this.DialogResult = true;
+
                 FAMessageBox.ShowInfo($"[{Project.Author}]创建项目[{Project.Name}]成功！");
+
                 FALogger.Info($"创建项目[{Project.Name}]成功！");
+
             });
+
         }
+
     }
+
 }
 
 #### MainWindow
@@ -16387,635 +21589,1235 @@ namespace Inovance.FA.Views.ViewModels
 ##### Xaml
 
 <facontrols:FAWindow x:Class="Inovance.FA.Views.Views.MainWindow"
+
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
         xmlns:local="clr-namespace:Inovance.FA.Views"
+
         xmlns:inplug="clr-namespace:Inovance.FA.Plugin;assembly=FAPlugin"
+
         xmlns:facontrols="clr-namespace:Inovance.FA.Controls;assembly=FAControls"
+
         xmlns:lanrs="clr-namespace:Inovance.FA.LanguageResource;assembly=LanguageResource"
+
         xmlns:localvm="clr-namespace:Inovance.FA.Views.ViewModels"
+
         xmlns:facvt="clr-namespace:Inovance.FA.Controls.Conveter;assembly=FAControls"
+
         xmlns:avalon="https://github.com/Dirkster99/AvalonDock"
+
         mc:Ignorable="d"
+
         Title ="{x:Static lanrs:Resource.AppTitle}" WindowState="Maximized"  Margin="3" Height="450" Width="800">
+
     <Window.DataContext>
+
         <localvm:MainWindowViewModel/>
+
     </Window.DataContext>
+
     <Window.Resources>
+
         <facvt:ProjectVisableConverter x:Key="ProjectVisableConverter"/>
+
         <local:ViewLocator x:Key="InViewLocator"/>
+
     </Window.Resources>
+
     <Grid>
+
         <Grid.RowDefinitions>
+
             <RowDefinition Height="Auto" />
+
             <RowDefinition Height="Auto" />
+
             <RowDefinition Height="*" />
+
             <RowDefinition Height="Auto" />
+
         </Grid.RowDefinitions>
+
         <Menu Grid.Row="0">
+
             <MenuItem Header="项目(_P)" >
+
                 <MenuItem  Header="新建(_N)" Command="{Binding CreateProjectCommand}" CommandParameter="新项目">
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="打开(_O)" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="移植项目(_M)" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="关闭(_C)" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="删除项目(_D)" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <Separator/>
+
                 <MenuItem  Header="保存(_S)" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="另存为(_A)" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="归档(_H)" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <Separator/>
+
                 <MenuItem  Header="项目服务器(_H)" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                     <MenuItem  Header="管理项目服务器" >
+
                     </MenuItem>
+
                     <MenuItem  Header="离线运行" >
+
                         <MenuItem.Icon>
+
                             <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                         </MenuItem.Icon>
+
                     </MenuItem>
+
                 </MenuItem>
+
                 <Separator/>
+
                 <MenuItem  Header="读卡器/USB存储器" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="存储卡文件(_F)" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <Separator/>
+
                 <MenuItem  Header="启动完整性基本检查" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <Separator/>
+
                 <MenuItem  Header="推出(_X)" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
             </MenuItem>
+
             <MenuItem Header="编辑(_E)">
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
             </MenuItem>
+
             <MenuItem Header="视图(_V)">
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
             </MenuItem>
+
             <MenuItem Header="插入(_I)">
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
             </MenuItem>
+
             <MenuItem Header="在线(_O)">
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
             </MenuItem>
+
             <MenuItem Header="选项(_N)">
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
             </MenuItem>
+
             <MenuItem Header="工具(_T)">
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
             </MenuItem>
+
             <MenuItem Header="窗口(_W)">
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="子菜单1" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
             </MenuItem>
+
             <MenuItem Header="帮助(_H)">
+
                 <MenuItem  Header="显示帮助" >
+
                     <MenuItem.Icon>
+
                         <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+
                     </MenuItem.Icon>
+
                 </MenuItem>
+
                 <MenuItem  Header="Internet上得服务帮助与支持" />
 
                 <MenuItem  Header="FA中的帮助与支持(_T) Ctrl+Shift+F7" />
+
                 <Separator />
+
                 <MenuItem  Header="已安装的产品(_I)..." />
+
             </MenuItem>
+
         </Menu>
+
         <ToolBarTray Grid.Row="1" Background="White">
+
             <ToolBar Band="1" BandIndex="1" >
+
                 <Button >
+
                     <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+
                 </Button>
+
                 <Button>
+
                     <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+
                 </Button>
+
                 <Button>
+
                     <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+
                 </Button>
+
             </ToolBar>
+
             <ToolBar Band="1" BandIndex="2">
+
                 <Button>
+
                     <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+
                 </Button>
+
                 <Button>
+
                     <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+
                 </Button>
+
             </ToolBar>
+
             <ToolBar Band="1" BandIndex="3">
+
                 <Button>
+
                     <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+
                 </Button>
+
                 <Button ToolTip="Help">
+
                     <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+
                 </Button>
+
                 <Separator/>
+
             </ToolBar>
+
         </ToolBarTray>
+
         <!--<DockPanel Grid.Row="1" Background="LightBlue" >
+
             <TextBlock DockPanel.Dock="Top" Text="Hello!"/>
+
         </DockPanel>-->
+
         <Grid Grid.Row="2" Background="LightBlue" >
+
             <Grid.RowDefinitions>
+
                 <RowDefinition Height="0"/>
+
                 <RowDefinition Height="*"/>
+
                 <RowDefinition Height="24"/>
+
             </Grid.RowDefinitions>
+
             <!--<Menu>
+
                 <MenuItem Header="File">
+
                     <MenuItem Header="New Document" Click="NewDocument_Click"  Name="NewDocument"/>
+
                     <MenuItem Header="Exit"/>
+
                 </MenuItem>
+
             </Menu>-->
+
             <DockingManager x:Name="dockManager"
+
             Grid.Row="1"
+
             AllowMixedOrientation="True"
+
             AutoWindowSizeWhenOpened="True"
+
             IsVirtualizingAnchorable="True"
+
             IsVirtualizingDocument="True">
+
                 <DockingManager.DocumentHeaderTemplate>
+
                     <DataTemplate>
+
                         <StackPanel Orientation="Horizontal">
+
                             <Image Margin="0,0,4,0" Source="{Binding IconSource}" />
+
                             <TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" />
+
                         </StackPanel>
+
                     </DataTemplate>
+
                 </DockingManager.DocumentHeaderTemplate>
+
                 <LayoutRoot>
+
                     <LayoutPanel Orientation="Horizontal">
+
                         <LayoutAnchorablePane DockWidth="150">
+
                             <LayoutAnchorable x:Name="WinFormsWindow"
+
                             Title="项目树"
+
                             CanClose="False"
+
                             CanHide="False"
+
                             ContentId="WinFormsWindow"
+
                             ToolTip="My WinForms Tool">
+
                                 <TreeView>
+
                                     <TreeViewItem Header="{Binding Project.Name}" ToolTip="{Binding Project.Description}" Visibility="{Binding Project,Converter={StaticResource ProjectVisableConverter},Mode=OneWay}"/>
+
                                     <TreeViewItem Header="在线访问"/>
+
                                     <TreeViewItem Header="读卡器/本地USB存储器"/>
+
                                 </TreeView>
+
                             </LayoutAnchorable>
+
                         </LayoutAnchorablePane>
+
                         <LayoutDocumentPaneGroup>
+
                             <LayoutDocumentPane
+
                                 x:Name="LayoutDocumentPane">
+
                                 <!--ContentId="document1"-->
+
                                 <LayoutDocument
+
                                 CanClose="False"
+
                                 Title="欢迎页面"
+
                                 >
+
                                     <Grid>
+
                                         <Grid.ColumnDefinitions>
+
                                             <ColumnDefinition Width="10"/>
+
                                             <ColumnDefinition Width="120"/>
+
                                             <ColumnDefinition Width="*"/>
+
                                         </Grid.ColumnDefinitions>
+
                                         <Grid.RowDefinitions>
+
                                             <RowDefinition Height="Auto" />
+
                                             <RowDefinition Height="Auto" />
+
                                             <RowDefinition Height="Auto" />
+
                                             <RowDefinition Height="Auto" />
+
                                             <RowDefinition Height="Auto" />
+
                                         </Grid.RowDefinitions>
+
                                         <Button
+
                                             Grid.Row="0"
+
                                             Grid.Column="1"
+
                                             Height="28"
+
                                             VerticalAlignment="Top"
+
                                             Command="{Binding TestCommand}" 
+
                                             CommandParameter="Hai" 
+
                                             Content="Test Button 1" />
+
                                         <Button
+
                                             Grid.Row="1"
+
                                             Grid.Column="1"
+
                                             Height="28"
+
                                             VerticalAlignment="Top"
+
                                             Command="{Binding TestCommand}" 
+
                                             Content="Test Button 2" />
+
                                         <Button
+
                                             Grid.Row="2"
+
                                             Grid.Column="1"
+
                                             Height="28"
+
                                             VerticalAlignment="Top"
+
                                             Command="{Binding TestCommand}" 
+
                                             CommandParameter="{Binding ElementName=tbValue,Path=Text}"
+
                                             Content="Test Button 3" />
+
                                         <TextBox 
+
                                             x:Name="tbValue" 
+
                                             Grid.Row="5" 
+
                                             Grid.Column="1"
+
                                             Text="Document 1 Content" />
+
                                     </Grid>
+
                                 </LayoutDocument>
+
                                 <LayoutDocument Title="文档2" ContentId="document2">
+
                                     <TextBox
+
                                     Background="Transparent"
+
                                     BorderThickness="0"
+
                                     Foreground="White"
+
                                     Text="{Binding TestTimer, Mode=OneWay, StringFormat='Document 2 Attached to Timer ->\{0\}'}" />
+
                                 </LayoutDocument>
+
                                 <LayoutDocument Title="依赖注入测试" ContentId="document2">
+
                                     <Grid>
+
                                         <Grid.RowDefinitions>
+
                                             <RowDefinition Height="*"/>
+
                                             <RowDefinition Height="30"/>
+
                                             <RowDefinition Height="30"/>
+
                                             <RowDefinition Height="30"/>
+
                                             <RowDefinition Height="*"/>
+
                                         </Grid.RowDefinitions>
+
                                         <Grid.ColumnDefinitions>
+
                                             <ColumnDefinition Width="*"/>
+
                                             <ColumnDefinition Width="200"/>
+
                                             <ColumnDefinition Width="200"/>
+
                                             <ColumnDefinition Width="200"/>
+
                                             <ColumnDefinition Width="200"/>
+
                                             <ColumnDefinition Width="*"/>
+
                                         </Grid.ColumnDefinitions>
+
                                         <Label  Grid.Row="1" Grid.Column="1" Content="数值1"/>
+
                                         <TextBox  Grid.Row="1" Grid.Column="2" />
+
                                         <Label  Grid.Row="1" Grid.Column="3" Content="数值2"/>
+
                                         <TextBox  Grid.Row="1" Grid.Column="4" />
+
                                         <Button Margin="3"  Grid.Row="2" Grid.Column="1"  Content="{x:Static lanrs:Resource.Button1}" />
+
                                         <Button Padding="5"  Grid.Row="2" Grid.Column="2" Content="{x:Static lanrs:Resource.Button2}"/>
+
                                         <Button  Grid.Row="2" Grid.Column="3" Content="{x:Static lanrs:Resource.Button3}"/>
+
                                         <Button  Grid.Row="2" Grid.Column="4" Content="{x:Static lanrs:Resource.Button4}"/>
 
                                         <Button Margin="3"  Grid.Row="3" Grid.Column="1"  Content="测试"/>
+
                                         <Button Padding="5"  Grid.Row="3" Grid.Column="2" Content=""/>
+
                                         <Button  Grid.Row="3" Grid.Column="3" Content=""/>
+
                                         <Button  Grid.Row="3" Grid.Column="4" Content=""/>
+
                                     </Grid>
+
                                 </LayoutDocument>
+
                             </LayoutDocumentPane>
+
                         </LayoutDocumentPaneGroup>
+
                         <LayoutAnchorablePaneGroup DockWidth="150">
+
                             <LayoutAnchorablePane>
+
                                 <LayoutAnchorable
+
                                 Title="属性"
+
                                 ContentId="toolWindow1"
+
                                 CanHide="False">
+
                                     <StackPanel MinHeight="450">
+
                                         <TextBox Text="{Binding TestTimer, Mode=OneWay, StringFormat='Tool Window 1 Attached to Timer ->\{0\}'}" />
+
                                     </StackPanel>
+
                                 </LayoutAnchorable>
+
                                 <LayoutAnchorable
+
                                     Title="查找替换" 
+
                                     CanClose="False"
+
                                     CanHide="False"
+
                                     ContentId="toolWindow2">
+
                                     <TextBlock Text="{Binding FocusedElement}" />
+
                                 </LayoutAnchorable>
+
                             </LayoutAnchorablePane>
+
                         </LayoutAnchorablePaneGroup>
+
                     </LayoutPanel>
 
                     <LayoutRoot.LeftSide>
+
                         <LayoutAnchorSide >
+
                             <LayoutAnchorGroup >
+
                                 <LayoutAnchorable
+
                                 Title="设备"
+
                                 ContentId="AutoHide1Content"
+
                                 IconSource="/FAViews;Component/Images/Blue.png" AutoHideWidth="150">
+
                                     <TextBox Text="{Binding TestTimer, Mode=OneWay, StringFormat='AutoHide Attached to Timer ->\{0\}'}" />
+
                                 </LayoutAnchorable>
+
                                 <LayoutAnchorable Title="文件" ContentId="AutoHide2Content" AutoHideWidth="150">
+
                                     <StackPanel Orientation="Vertical">
+
                                         <TextBox />
+
                                         <TextBox />
+
                                     </StackPanel>
+
                                 </LayoutAnchorable>
+
                             </LayoutAnchorGroup>
+
                         </LayoutAnchorSide>
+
                     </LayoutRoot.LeftSide>
 
                     <LayoutRoot.BottomSide>
+
                         <LayoutAnchorSide>
+
                             <LayoutAnchorGroup>
+
                                 <LayoutAnchorable
+
 								FloatingHeight="200"
+
                                 Title="调试"
+
                                 CanClose="False"
+
                                 CanHide="False"
+
                                 ContentId="AutoHide1Content"
+
                                 IconSource="/FAViews;Component/Images/Blue.png">
+
                                     <TextBox Text="{Binding TestTimer, Mode=OneWay, StringFormat='AutoHide Attached to Timer ->\{0\}'}" />
+
                                 </LayoutAnchorable>
+
                                 <LayoutAnchorable 
+
                                     Title="输出" 
+
                                     FloatingHeight="200" 
+
                                     ContentId="AutoHide2Content"
+
                                     CanClose="False"
+
                                     CanHide="False">
+
                                     <ContentControl Content="{Binding DebugPanel, Source={StaticResource InViewLocator}}"/>
+
                                 </LayoutAnchorable>
+
                             </LayoutAnchorGroup>
+
                         </LayoutAnchorSide>
+
                     </LayoutRoot.BottomSide>
+
                 </LayoutRoot>
+
             </DockingManager>
+
             <StatusBar Grid.Row="2">
+
                 <StatusBarItem Content="Inovance FA"/>
+
             </StatusBar>
+
         </Grid>
+
     </Grid>
+
 </facontrols:FAWindow>
 
 ##### ViewModel
 
 using Inovance.FA.Core;
+
 using Inovance.FA.Plugin;
+
 using Inovance.FA.Plugin.Services;
+
 using Inovance.FA.Views.Views;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.Collections.ObjectModel;
+
 using System.ComponentModel.Composition;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
+
 using System.Windows;
+
 using System.Windows.Input;
 
 namespace Inovance.FA.Views.ViewModels
+
 {
+
     public class MainWindowViewModel : FAViewModel
+
     {
+
         //[Import]
+
         //public static ViewLocator Locator;
+
         public FACommand TestCommand
+
         {
+
             get;
+
             set;
+
         }
 
         public FACommand SelectDevicesCommand
+
         {
+
             get;
+
             set;
+
         }
 
         public FACommand CreateProjectCommand
+
         {
+
             get;
+
             set;
+
         }
 
         public MainWindowViewModel()
+
         {
+
             
+
             TestCommand = new FACommand(ShowMessage);
+
             SelectDevicesCommand = new FACommand(SelectDevices);
+
             CreateProjectCommand = new FACommand((o) => {
 
                 
+
                 //Project = new FAProject(o.ToString());
+
                 CreateProject CreateProjectWindow = new CreateProject();
+
                 if (CreateProjectWindow.ShowDialog() == true)
+
                 {
+
                     Project = (CreateProjectWindow.DataContext as CreateProjectViewModel).Project;
 
                     FAStaticData.Container.GetExportedValue<IDebugOut>().Debug($"{Project.Author}创建了项目：{Project.Name} ！");
+
                 }
+
             });
 
            
+
         }
+
         public void ShowMessage(object obj)       //消息 方法
+
         {
+
             if (obj != null)
+
             {
+
                 MessageBox.Show(obj.ToString());
+
             }
+
             else
+
             {
+
                 MessageBox.Show("obj is null");
+
             }
+
         }
 
         public void SelectDevices(object obj)       //消息 方法
+
         {
+
             SelectDevices selectDevices = new SelectDevices();
+
             var items = new ObservableCollection<string>((from p in FABuilder.Plugins select p.Name).ToList());
+
             (selectDevices.DataContext as SelectDevicesViewModel).FACategorys = items;
+
             selectDevices.ShowDialog();
+
         }
 
     }
+
 }
 
 #### SelectDevices
@@ -17023,105 +22825,181 @@ namespace Inovance.FA.Views.ViewModels
 ##### Xaml
 
 <facontrols:FAWindow x:Class="Inovance.FA.Views.Views.SelectDevices"
+
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+
              xmlns:local="clr-namespace:Inovance.FA.Views.Views"
+
              xmlns:facontrols="clr-namespace:Inovance.FA.Controls;assembly=FAControls"
+
              xmlns:localvm="clr-namespace:Inovance.FA.Views.ViewModels"
+
              mc:Ignorable="d" 
+
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Window.DataContext>
+
         <localvm:SelectDevicesViewModel/>
+
     </Window.DataContext>
+
     <Grid>
+
         <Grid.RowDefinitions>
+
             <RowDefinition Height="*" />
+
             <RowDefinition Height="30" />
+
         </Grid.RowDefinitions>
+
         <ListView Name="lst" Grid.Row="0"  ItemsSource ="{Binding FACategorys}"/>
+
         <Button Grid.Row="1" Click="Button_Click"/>
+
     </Grid>
+
 </facontrols:FAWindow>
 
 ##### ViewModel
 
 using Inovance.FA.Plugin;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.Collections.ObjectModel;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
 
 namespace Inovance.FA.Views.ViewModels
+
 {
+
     public class SelectDevicesViewModel:FAViewModel
+
     {
+
         public ObservableCollection<string> faCategorys = null;
 
         public ObservableCollection<string> FACategorys {
+
             get {
+
                 return faCategorys;
+
             }
+
             set {
+
                 faCategorys = value;
+
                 RaisePropertyChanged("FACategorys");
+
             }
+
         }
 
 	}
+
 }
 
 #### ViewLocator
 
 using Inovance.FA.Plugin;
+
 using Inovance.FA.Plugin.Services;
+
 using System;
+
 using System.Collections.Generic;
+
 using System.ComponentModel.Composition;
+
 using System.Dynamic;
+
 using System.Linq;
+
 using System.Text;
+
 using System.Threading.Tasks;
 
 namespace Inovance.FA.Views
+
 {
+
     //[Export(typeof(ViewLocator))]
+
     public class ViewLocator : DynamicObject, IPartImportsSatisfiedNotification
+
     {
+
         //[ImportMany(typeof(FAView))]
+
         ////private IEnumerable<Lazy<View, IViewMetadata>> views { get; set; }
+
         //public static IEnumerable<FAView> Views { get; set; }
 
         public IFALogger FALogger { get {
+
                 return FAStaticData.Container.GetExportedValue<IFALogger>();
+
             } }
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
+
         {
+
             string name = binder.Name;
+
             var views = FAStaticData.Container.GetExportedValues<FAView>();
+
             if (views == null)
+
             {
+
                 result = null;
+
                 return false;
+
             }
+
             var view = views.FirstOrDefault(v => v.GetType().Name.Equals(name));
 
             // Error handling
+
             if (null == view)
+
                 FALogger.Error("views is null at TryGetMember");
+
             result = view;
+
             return null != result;
+
         }
 
         public void OnImportsSatisfied()
+
         {
+
             FALogger.Info($"{this.GetType()} Composition complete");
+
         }
+
     }
+
 }
 
 ### 外部包依赖
@@ -17167,6 +23045,7 @@ namespace Inovance.FA.Views
 ### 算法
 
 #### 算法复杂度
+
 （O(n)渐进表示法）
 
 ##### 时间复杂度
@@ -17596,6 +23475,7 @@ namespace Inovance.FA.Views
 #### 线性表
 
 ##### 顺序表
+
 (增，删，查，改，销毁)
 
 ###### 静态顺序表
@@ -17603,6 +23483,7 @@ namespace Inovance.FA.Views
 ###### 动态顺序表
 
 ##### 链表
+
 (增，删，查，改，销毁)
 
 ###### 单链表
@@ -17655,11 +23536,11 @@ namespace Inovance.FA.Views
 
 ####### 顺序队列
 
-   * 顺序栈
+> 顺序栈
 
-   * 链式栈
+> 链式栈
 
-   * 栈的应用
+> 栈的应用
 
 ###### 队列
 
@@ -17722,13 +23603,14 @@ namespace Inovance.FA.Views
 ####### 二叉树的创建
 
 ####### 二叉树的遍历
+
 (递归和非递归)
 
-   * 前序遍历
+> 前序遍历
 
-   * 中序遍历
+> 中序遍历
 
-   * 后序遍历
+> 后序遍历
 
 ####### 二叉树的增、删、查、改、销毁
 
@@ -17767,6 +23649,7 @@ namespace Inovance.FA.Views
 ###### huffman编码
 
 ###### huffman树的应用
+
 (文件压缩与解压缩)
 
 #### 搜索
@@ -17787,21 +23670,21 @@ namespace Inovance.FA.Views
 
 ####### 二叉树结构
 
-   * 二叉搜索树
+> 二叉搜索树
 
-   * 平衡树
+> 平衡树
 
-      * AVL树
+   > AVL树
 
-      * 红黑树
+   > 红黑树
 
 ####### 多叉树结构
 
-   * B-树
+> B-树
 
-   * B+树
+> B+树
 
-   * B*树
+> B*树
 
 ###### 哈希查找
 
