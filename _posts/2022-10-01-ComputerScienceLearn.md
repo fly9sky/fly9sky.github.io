@@ -2533,6 +2533,15 @@ tar: Error is not recoverable: exiting now
 
 /usr/dotnet$ export export DOTNET_ROOT=/usr/dotnet
 /usr/dotnet$ export PATH=$PATH:/usr/dotnet
+
+
+-------------------
+~$ sudo gedit  ~/.bashrc
+add: 
+export export DOTNET_ROOT=/usr/dotnet
+export PATH=$PATH:/usr/dotnet
+~$ source ~/.bashrc
+
 /usr/dotnet$ dotnet
 
 Usage: dotnet [options]
