@@ -75,47 +75,6 @@ date: 2022-10-01 09:01:01
     - [安装方法二](#安装方法二)
     - [kubernetes 集群搭建（二进制）](#kubernetes-集群搭建二进制)
     - [kubernetes 集群 YAML 文件详解](#kubernetes-集群-yaml-文件详解)
-- [结构化程序设计](#结构化程序设计)
-- [面向对象程序设计](#面向对象程序设计)
-  - [面向对象设计原则](#面向对象设计原则)
-    - [1、单一职责原则 SRP](#1单一职责原则-srp)
-    - [2、开闭原则 OCP](#2开闭原则-ocp)
-    - [3、里氏代换原则 LSP](#3里氏代换原则-lsp)
-    - [4、依赖倒转原则 DIP](#4依赖倒转原则-dip)
-    - [5、接口隔离原则 ISP](#5接口隔离原则-isp)
-    - [6、合成复用原则 CRP](#6合成复用原则-crp)
-    - [7、迪米特法则（最少知道原则）DP](#7迪米特法则最少知道原则dp)
-- [Gof设计模式](#gof设计模式)
-  - [行为型](#行为型)
-    - [Iterator（迭代器模式）](#iterator迭代器模式)
-    - [Interpreter（解析器模式）](#interpreter解析器模式)
-    - [Observer（观察者模式）](#observer观察者模式)
-    - [Mediator（中介者模式）](#mediator中介者模式)
-    - [Visitor（访问者模式）](#visitor访问者模式)
-    - [Memento（备忘录模式）](#memento备忘录模式)
-    - [State（状态模式）](#state状态模式)
-    - [Strategy（策略模式）](#strategy策略模式)
-    - [Template Method（模板方法模式）](#template-method模板方法模式)
-    - [Command（命令模式）](#command命令模式)
-    - [Chain of Responsibility（职责链模式）](#chain-of-responsibility职责链模式)
-  - [创建型](#创建型)
-    - [Singleton（单例模式）](#singleton单例模式)
-    - [Prototype（原型模式）](#prototype原型模式)
-    - [Builder（建造者模式）](#builder建造者模式)
-    - [Factory Method(工厂模式)](#factory-method工厂模式)
-    - [ Abstract Factory（抽象工厂模式）](#abstract-factory抽象工厂模式)
-  - [结构型](#结构型)
-    - [Bridge（桥接模式）](#bridge桥接模式)
-    - [Facade（外观模式）](#facade外观模式)
-    - [Composite(组合模式)](#composite组合模式)
-    - [Decorator(装饰模式)：](#decorator装饰模式)
-    - [Adapter（适配器模式）](#adapter适配器模式)
-    - [Proxy（代理模式）](#proxy代理模式)
-    - [Flyweight（享元模式）](#flyweight享元模式)
-  - [模式之间关系](#模式之间关系)
-  - [其他](#其他)
-  - [参考资料](#参考资料)
-    - [23种设计模式UML图](#23种设计模式uml图)
 - [C# .Net Base](#c-net-base)
   - [CLR基础 CLR的执行模型](#clr基础-clr的执行模型)
   - [生成、打包、部署和管理应用程序及类型](#生成打包部署和管理应用程序及类型)
@@ -2341,58 +2300,7 @@ date: 2022-10-01 09:01:01
 > dpkg-deb: error: paste subprocess was killed by signal (Broken pipe)
 
 ```
-liyafei@liyafei-ubuntu:~$ dotnet 
-Command 'dotnet' not found, but can be installed with:
-sudo snap install dotnet-sdk   # version 7.0.203, or
-sudo apt  install dotnet-host  # version 6.0.116-0ubuntu1~22.04.1
-See 'snap info dotnet-sdk' for additional versions.
-liyafei@liyafei-ubuntu:~$ sudo apt  install dotnet-host
-[sudo] password for liyafei: 
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-You might want to run 'apt --fix-broken install' to correct these.
-The following packages have unmet dependencies:
- unixodbc : Depends: odbcinst1debian2 (>= 2.3.11-1) but it is not going to be installed
-            Depends: libodbc1 (>= 2.3.11-1) but it is not going to be installed
- unixodbc-dev : Depends: odbcinst1debian2 (= 2.3.11-1) but it is not going to be installed
-E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
-liyafei@liyafei-ubuntu:~$ sudo apt --fix-broken
-E: Command line option --fix-broken is not understood in combination with the other options
-liyafei@liyafei-ubuntu:~$ sudo apt  install dotnet-host --fix-broken
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-You might want to run 'apt --fix-broken install' to correct these.
-The following packages have unmet dependencies:
- unixodbc : Depends: odbcinst1debian2 (>= 2.3.11-1) but it is not going to be installed
-            Depends: libodbc1 (>= 2.3.11-1) but it is not going to be installed
- unixodbc-dev : Depends: odbcinst1debian2 (= 2.3.11-1) but it is not going to be installed
-E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
-liyafei@liyafei-ubuntu:~$ sudo apt  install dotnet-host --fix-broken
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-You might want to run 'apt --fix-broken install' to correct these.
-The following packages have unmet dependencies:
- unixodbc : Depends: odbcinst1debian2 (>= 2.3.11-1) but it is not going to be installed
-            Depends: libodbc1 (>= 2.3.11-1) but it is not going to be installed
- unixodbc-dev : Depends: odbcinst1debian2 (= 2.3.11-1) but it is not going to be installed
-E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
-liyafei@liyafei-ubuntu:~$ sudo apt  install dotnet-host --fix-broken
-[sudo] password for liyafei: 
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-You might want to run 'apt --fix-broken install' to correct these.
-The following packages have unmet dependencies:
- unixodbc : Depends: odbcinst1debian2 (>= 2.3.11-1) but it is not going to be installed
-            Depends: libodbc1 (>= 2.3.11-1) but it is not going to be installed
- unixodbc-dev : Depends: odbcinst1debian2 (= 2.3.11-1) but it is not going to be installed
-E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
-liyafei@liyafei-ubuntu:~$ sudo apt  --fix-broken
-E: Command line option --fix-broken is not understood in combination with the other options
-liyafei@liyafei-ubuntu:~$ sudo apt --fix-broken install
+~$ sudo apt --fix-broken install
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
@@ -2442,107 +2350,7 @@ Errors were encountered while processing:
  /var/cache/apt/archives/odbcinst1debian2_2.3.11-1_amd64.deb
  /var/cache/apt/archives/libodbc1_2.3.11-1_amd64.deb
 E: Sub-process /usr/bin/dpkg returned an error code (1)
-liyafei@liyafei-ubuntu:~$ sudo apt --fix-broken install
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-Correcting dependencies... Done
-The following packages were automatically installed and are no longer required:
-  aspnetcore-targeting-pack-6.0 libflashrom1 libftdi1-2 libllvm13
-  liblttng-ust-common1 liblttng-ust-ctl5 liblttng-ust1 libodbc2 libodbccr2
-  libodbcinst2 libsss-nss-idmap0 libunwind-13 netstandard-targeting-pack-2.1
-  unixodbc-common
-Use 'sudo apt autoremove' to remove them.
-The following additional packages will be installed:
-  libodbc1 odbcinst odbcinst1debian2
-Suggested packages:
-  unixodbc-bin
-The following NEW packages will be installed:
-  libodbc1 odbcinst1debian2
-The following packages will be upgraded:
-  odbcinst
-1 upgraded, 2 newly installed, 0 to remove and 162 not upgraded.
-11 not fully installed or removed.
-Need to get 0 B/607 kB of archives.
-After this operation, 892 kB of additional disk space will be used.
-Do you want to continue? [Y/n] Y
-(Reading database ... 201109 files and directories currently installed.)
-Preparing to unpack .../odbcinst_2.3.11-1_amd64.deb ...
-Unpacking odbcinst (2.3.11-1) over (2.3.9-5) ...
-dpkg: error processing archive /var/cache/apt/archives/odbcinst_2.3.11-1_amd64.d
-eb (--unpack):
- trying to overwrite '/etc/odbc.ini', which is also in package unixodbc-common 2
-.3.9-5
-Preparing to unpack .../odbcinst1debian2_2.3.11-1_amd64.deb ...
-Unpacking odbcinst1debian2:amd64 (2.3.11-1) ...
-dpkg: error processing archive /var/cache/apt/archives/odbcinst1debian2_2.3.11-1
-_amd64.deb (--unpack):
- trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbcinst.so.2.0.0', which is 
-also in package libodbcinst2:amd64 2.3.9-5
-dpkg-deb: error: paste subprocess was killed by signal (Broken pipe)
-Preparing to unpack .../libodbc1_2.3.11-1_amd64.deb ...
-Unpacking libodbc1:amd64 (2.3.11-1) ...
-dpkg: error processing archive /var/cache/apt/archives/libodbc1_2.3.11-1_amd64.d
-eb (--unpack):
- trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbc.so.2.0.0', which is also
- in package libodbc2:amd64 2.3.9-5
-dpkg-deb: error: paste subprocess was killed by signal (Broken pipe)
-Errors were encountered while processing:
- /var/cache/apt/archives/odbcinst_2.3.11-1_amd64.deb
- /var/cache/apt/archives/odbcinst1debian2_2.3.11-1_amd64.deb
- /var/cache/apt/archives/libodbc1_2.3.11-1_amd64.deb
-E: Sub-process /usr/bin/dpkg returned an error code (1)
-liyafei@liyafei-ubuntu:~$ sudo apt --fix-broken install
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-Correcting dependencies... Done
-The following packages were automatically installed and are no longer required:
-  aspnetcore-targeting-pack-6.0 libflashrom1 libftdi1-2 libllvm13
-  liblttng-ust-common1 liblttng-ust-ctl5 liblttng-ust1 libodbc2 libodbccr2
-  libodbcinst2 libsss-nss-idmap0 libunwind-13 netstandard-targeting-pack-2.1
-  unixodbc-common
-Use 'sudo apt autoremove' to remove them.
-The following additional packages will be installed:
-  libodbc1 odbcinst odbcinst1debian2
-Suggested packages:
-  unixodbc-bin
-The following NEW packages will be installed:
-  libodbc1 odbcinst1debian2
-The following packages will be upgraded:
-  odbcinst
-1 upgraded, 2 newly installed, 0 to remove and 162 not upgraded.
-11 not fully installed or removed.
-Need to get 0 B/607 kB of archives.
-After this operation, 892 kB of additional disk space will be used.
-Do you want to continue? [Y/n] Y
-(Reading database ... 201109 files and directories currently installed.)
-Preparing to unpack .../odbcinst_2.3.11-1_amd64.deb ...
-Unpacking odbcinst (2.3.11-1) over (2.3.9-5) ...
-dpkg: error processing archive /var/cache/apt/archives/odbcinst_2.3.11-1_amd64.d
-eb (--unpack):
- trying to overwrite '/etc/odbc.ini', which is also in package unixodbc-common 2
-.3.9-5
-Preparing to unpack .../odbcinst1debian2_2.3.11-1_amd64.deb ...
-Unpacking odbcinst1debian2:amd64 (2.3.11-1) ...
-dpkg: error processing archive /var/cache/apt/archives/odbcinst1debian2_2.3.11-1
-_amd64.deb (--unpack):
- trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbcinst.so.2.0.0', which is 
-also in package libodbcinst2:amd64 2.3.9-5
-dpkg-deb: error: paste subprocess was killed by signal (Broken pipe)
-Preparing to unpack .../libodbc1_2.3.11-1_amd64.deb ...
-Unpacking libodbc1:amd64 (2.3.11-1) ...
-dpkg: error processing archive /var/cache/apt/archives/libodbc1_2.3.11-1_amd64.d
-eb (--unpack):
- trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbc.so.2.0.0', which is also
- in package libodbc2:amd64 2.3.9-5
-dpkg-deb: error: paste subprocess was killed by signal (Broken pipe)
-Errors were encountered while processing:
- /var/cache/apt/archives/odbcinst_2.3.11-1_amd64.deb
- /var/cache/apt/archives/odbcinst1debian2_2.3.11-1_amd64.deb
- /var/cache/apt/archives/libodbc1_2.3.11-1_amd64.deb
-E: Sub-process /usr/bin/dpkg returned an error code (1)
-liyafei@liyafei-ubuntu:~$ sudo dpkg -i --force-overwrite /var/cache/apt/archives/odbcinst_2.3.11-1_amd64.deb
+~$ sudo dpkg -i --force-overwrite /var/cache/apt/archives/odbcinst_2.3.11-1_amd64.deb
 (Reading database ... 201109 files and directories currently installed.)
 Preparing to unpack .../odbcinst_2.3.11-1_amd64.deb ...
 Unpacking odbcinst (2.3.11-1) over (2.3.9-5) ...
@@ -2557,7 +2365,7 @@ dpkg: error processing package odbcinst (--install):
 Processing triggers for man-db (2.10.2-1) ...
 Errors were encountered while processing:
  odbcinst
-liyafei@liyafei-ubuntu:~$ sudo dpkg -i --force-overwrite /var/cache/apt/archives/odbcinst1debian2_2.3.11-1_amd64.deb
+~$ sudo dpkg -i --force-overwrite /var/cache/apt/archives/odbcinst1debian2_2.3.11-1_amd64.deb
 (Reading database ... 201111 files and directories currently installed.)
 Preparing to unpack .../odbcinst1debian2_2.3.11-1_amd64.deb ...
 Unpacking odbcinst1debian2:amd64 (2.3.11-1) ...
@@ -2573,7 +2381,7 @@ dpkg: error processing package odbcinst1debian2:amd64 (--install):
  dependency problems - leaving unconfigured
 Errors were encountered while processing:
  odbcinst1debian2:amd64
-liyafei@liyafei-ubuntu:~$ sudo dpkg -i --force-overwrite /var/cache/apt/archives/libodbc1_2.3.11-1_amd64.deb
+~$ sudo dpkg -i --force-overwrite /var/cache/apt/archives/libodbc1_2.3.11-1_amd64.deb
 (Reading database ... 201115 files and directories currently installed.)
 Preparing to unpack .../libodbc1_2.3.11-1_amd64.deb ...
 Unpacking libodbc1:amd64 (2.3.11-1) ...
@@ -2587,7 +2395,7 @@ dpkg: warning: overriding problem because --force enabled:
 dpkg: warning: trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbc.so.2', which is also in package libodbc2:amd64 2.3.9-5
 Setting up libodbc1:amd64 (2.3.11-1) ...
 Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
-liyafei@liyafei-ubuntu:~$ sudo apt --fix-broken install
+~$ sudo apt --fix-broken install
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
@@ -2620,7 +2428,13 @@ Setting up gnustep-base-runtime (1.28.0-4build1) ...
 Setting up unar (1.10.1-2build11) ...
 Setting up bookworm (1.1.2+git20210715-2build1) ...
 Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
-liyafei@liyafei-ubuntu:~$ sudo apt  install dotnet-host
+```
+
+> A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist
+
+```
+
+~$ sudo apt  install dotnet-host
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
@@ -2643,11 +2457,11 @@ Preparing to unpack .../dotnet-host_7.0.5-1_amd64.deb ...
 Unpacking dotnet-host (7.0.5-1) ...
 Setting up dotnet-host (7.0.5-1) ...
 Processing triggers for man-db (2.10.2-1) ...
-liyafei@liyafei-ubuntu:~$ dotnet --version
+~$ dotnet --version
 A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist
-liyafei@liyafei-ubuntu:~$ dotnet -v
+~$ dotnet -v
 A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist
-liyafei@liyafei-ubuntu:~$ dotnet
+~$ dotnet
 
 Usage: dotnet [options]
 Usage: dotnet [path-to-application]
@@ -2660,14 +2474,92 @@ Options:
 
 path-to-application:
   The path to an application .dll file to execute.
-liyafei@liyafei-ubuntu:~$ dotnet --info
+~$ dotnet --info
 A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist
-liyafei@liyafei-ubuntu:~$ 
+~$ 
 ```
 
-> A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist
+> > fix below
 
 ```
+
+~$ dotnet --info
+A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist
+~$ sudo apt-get remove dotnet* -y
+
+~$ sudo apt-get remove aspnet* -y
+
+~$ whereis dotnet
+dotnet: /usr/lib/dotnet
+~$ sudo rm -rf /usr/lib/dotnet
+
+~$ wget https://download.visualstudio.microsoft.com/download/pr/8159607a-e686-4ead-ac99-b4c97290a5fd/ec6070b1b2cc0651ebe57cf1bd411315/dotnet-sdk-6.0.401-linux-x64.tar.gz
+--2023-04-27 11:03:39--  https://download.visualstudio.microsoft.com/download/pr/8159607a-e686-4ead-ac99-b4c97290a5fd/ec6070b1b2cc0651ebe57cf1bd411315/dotnet-sdk-6.0.401-linux-x64.tar.gz
+Resolving download.visualstudio.microsoft.com (download.visualstudio.microsoft.com)... 117.24.10.17
+Connecting to download.visualstudio.microsoft.com (download.visualstudio.microsoft.com)|117.24.10.17|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 185736764 (177M) [application/octet-stream]
+Saving to: ‘dotnet-sdk-6.0.401-linux-x64.tar.gz’
+
+dotnet-sdk-6.0.401- 100%[===================>] 177.13M   488KB/s    in 6m 14s  
+
+2023-04-27 11:09:55 (485 KB/s) - ‘dotnet-sdk-6.0.401-linux-x64.tar.gz’ saved [185736764/185736764]
+
+~$ tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz   -C /path/dotnet
+tar: /path/dotnet: Cannot open: No such file or directory
+tar: Error is not recoverable: exiting now
+~$ tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz   -C /var/dotnet
+tar: /var/dotnet: Cannot open: No such file or directory
+tar: Error is not recoverable: exiting now
+~$ cd var
+bash: cd: var: No such file or directory
+~$ cd usr
+bash: cd: usr: No such file or directory
+~$ cd /usr
+/usr$ mkdir dotnet
+mkdir: cannot create directory ‘dotnet’: Permission denied
+/usr$ sudo mkdir dotnet
+/usr$ sudo tar tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz   -C /usr/dotnet
+tar: You may not specify more than one '-Acdtrux', '--delete' or  '--test-label' option
+Try 'tar --help' or 'tar --usage' for more information.
+/usr$ sudo tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz   -C /usr/dotnet
+tar (child): dotnet-sdk-6.0.401-linux-x64.tar.gz: Cannot open: No such file or directory
+tar (child): Error is not recoverable: exiting now
+tar: Child returned status 2
+tar: Error is not recoverable: exiting now
+/usr$ cd
+~$ sudo tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz   -C /usr/dotnet
+
+
+/usr/dotnet$ export export DOTNET_ROOT=/usr/dotnet
+/usr/dotnet$ export PATH=$PATH:/usr/dotnet
+/usr/dotnet$ dotnet
+
+Usage: dotnet [options]
+Usage: dotnet [path-to-application]
+
+Options:
+  -h|--help         Display help.
+  --info            Display .NET information.
+  --list-sdks       Display the installed SDKs.
+  --list-runtimes   Display the installed runtimes.
+
+path-to-application:
+  The path to an application .dll file to execute.
+/usr/dotnet$ dotnet --info
+.NET SDK (reflecting any global.json):
+ Version:   6.0.401
+ Commit:    0906eae6f8
+
+Runtime Environment:
+ OS Name:     ubuntu
+ OS Version:  22.04
+ OS Platform: Linux
+ RID:         ubuntu.22.04-x64
+ Base Path:   /usr/dotnet/sdk/6.0.401/
+
+global.json file:
+  Not found
 
 ```
 
@@ -5552,210 +5444,6 @@ spec.containers[]		List	这里是Spec对象的容器列表定义，是个列表
 spec.containers[].name	String	这里定义容器的名字	
 
 spec.containers[].image	String	这里定义要用到的镜像名称，如果镜像的标签是 latest，每次使用该镜像都会从远程下载	
-
-## 结构化程序设计
-
-## 面向对象程序设计
-
-### 面向对象设计原则
-
-#### 1、单一职责原则 SRP
-
-> （Single Responsibility Principle）
-
-> 一个类，只有一个引起它变化的原因。
-
-> 应该只有一个职责。
-
-> 每一个职责都是变化的一个轴线，如果一个类有一个以上的职责，这些职责就耦合在了一起。
-
-> 这会导致脆弱的设计。
-
-> 当一个职责发生变化时，可能会影响其它的职责。另外，多个职责耦合在一起，会影响复用性。例如：要实现逻辑和界面的分离。
-
-#### 2、开闭原则 OCP
-
-> （Open Close Principle）
-
-> 开闭原则就是说对扩展开放，对修改关闭。
-
-> 在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。
-
-> 所以一句话概括就是：为了使程序的扩展性好，易于维护和升级。
-
-> 想要达到这样的效果，我们需要使用接口和抽象类，后面的具体设计中我们会提到这点。
-
-#### 3、里氏代换原则 LSP
-
-> （Liskov Substitution Principle）
-
-> 里氏代换原则(Liskov Substitution Principle LSP)面向对象设计的基本原则之一。
-
-> 里氏代换原则中说，任何基类可以出现的地方，子类一定可以出现。
-
-> LSP是继承复用的基石，只有当衍生类可以替换掉基类，软件单位的功能不受到影响时，基类才能真正被复用，
-
-> 而衍生类也能够在基类的基础上增加新的行为。
-
-> 里氏代换原则是对“开-闭”原则的补充。实现“开-闭”原则的关键步骤就是抽象化。
-
-> 而基类与子类的继承关系就是抽象化的具体实现，所以里氏代换原则是对实现抽象化的具体步骤的规范。
-
-#### 4、依赖倒转原则 DIP
-
-> （Dependence Inversion Principle）
-
-> 所谓依赖倒置原则（Dependence Inversion Principle）就是要依赖于抽象，不要依赖于具体。
-
-> 实现开闭原则的关键是抽象化，并且从抽象化导出具体化实现，
-
-> 如果说开闭原则是面向对象设计的目标的话，那么依赖倒转原则就是面向对象设计的主要手段。
-
-#### 5、接口隔离原则 ISP
-
-> （Interface Segregation Principle）
-
-> 这个原则的意思是：使用多个隔离的接口，比使用单个接口要好。
-
-> 还是一个降低类之间的耦合度的意思，从这儿我们看出，其实设计模式就是一个软件的设计思想，
-
-> 从大型软件架构出发，为了升级和维护方便。所以上文中多次出现：降低依赖，降低耦合。
-
-#### 6、合成复用原则 CRP
-
-> （Composite Reuse Principle）
-
-> 合成复用原则就是指在一个新的对象里通过关联关系（包括组合关系和聚合关系）来使用一些已有的对象，使之成为新对象的一部分；
-
-> 新对象通过委派调用已有对象的方法达到复用其已有功能的目的。简言之：要尽量使用组合/聚合关系，少用继承。
-
-#### 7、迪米特法则（最少知道原则）DP
-
-> （Demeter Principle）
-
-> 为什么叫最少知道原则，就是说：一个实体应当尽量少的与其他实体之间发生相互作用，使得系统功能模块相对独立。
-
-> 也就是说一个软件实体应当尽可能少的与其他实体发生相互作用。
-
-> 这样，当一个模块修改时，就会尽量少的影响其他的模块，扩展会相对容易，这是对软件实体之间通信的限制，它要求限制软件实体之间通信的宽度和深度。
-
-## Gof设计模式
-
-> GoF:（Gang of Four，GOF设计模式）---四人组
-
-> Design Patterns: Elements of Reusable Object-Oriented Software（即后述《设计模式》一书），由 Erich Gamma、Richard Helm、Ralph Johnson 和 John 
-
-> Vlissides 合著（Addison-Wesley，1995）。这几位作者常被称为“四人组（Gang of Four）”，而这本书也就被称为“四人组（或 GoF）”书。
-
-### 行为型
-
-#### Iterator（迭代器模式）
-
-> Iterator（迭代器模式）：提供一种方法顺序访问一个聚合对象中各个元素, 而又不需暴露该对象的内部表示。
-
-#### Interpreter（解析器模式）
-
-> Interpreter（解析器模式）：给定一个语言, 定义它的文法的一种表示，并定义一个解释器, 该解释器使用该表示来解释语言中的句子。
-
-#### Observer（观察者模式）
-
-> Observer（观察者模式）：定义对象间的一种一对多的依赖关系,以便当一个对象的状态发生改变时,所有依赖于它的对象都得到通知并自动刷新。
-
-#### Mediator（中介者模式）
-
-> Mediator（中介者模式）：用一个中介对象来封装一系列的对象交互。
-
-> 中介者使各对象不需要显式地相互引用，从而使其耦合松散，而且可以独立地改变它们之间的交互。
-
-#### Visitor（访问者模式）
-
-> Visitor（访问者模式）：表示一个作用于某对象结构中的各元素的操作。它使你可以在不改变各元素的类的前提下定义作用于这些元素的新操作。
-
-#### Memento（备忘录模式）
-
-> Memento（备忘录模式）：在不破坏封装性的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态。这样以后就可将该对象恢复到保存的状态。
-
-#### State（状态模式）
-
-> State（状态模式）：允许一个对象在其内部状态改变时改变它的行为。对象看起来似乎修改了它所属的类。
-
-#### Strategy（策略模式）
-
-> Strategy（策略模式）：定义一系列的算法,把它们一个个封装起来, 并且使它们可相互替换。本模式使得算法的变化可独立于使用它的客户。
-
-#### Template Method（模板方法模式）
-
-> Template Method（模板方法模式）：定义一个操作中的算法的骨架，而将一些步骤延迟到子类中。
-
-> Template Method 使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
-
-#### Command（命令模式）
-
-> Command（命令模式）：将一个请求封装为一个对象，从而使你可用不同的请求对客户进行参数化；对请求排队或记录请求日志，以及支持可取消的操作。
-
-#### Chain of Responsibility（职责链模式）
-
-> Chain of Responsibility（职责链模式）：为解除请求的发送者和接收者之间耦合，而使多个对象都有机会处理这个请求。将这些对象连成一条链，并沿着这条链传递该请求，直到有一个对象处理它。
-
-### 创建型
-
-#### Singleton（单例模式）
-
-> Singleton（单例模式）：保证一个类仅有一个实例，并提供一个访问它的全局访问点。
-
-#### Prototype（原型模式）
-
-> Prototype（原型模式）：用原型实例指定创建对象的种类，并且通过拷贝这个原型来创建新的对象。 
-
-#### Builder（建造者模式）
-
-> Builder（建造者模式）：将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示
-
-#### Factory Method(工厂模式)
-
-> Factory Method(工厂模式)：定义一个用于创建对象的接口，让子类决定将哪一个类实例化。 Factory Method使一个类的实例化延迟到其子类
-
-####  Abstract Factory（抽象工厂模式）
-
-> Abstract Factory（抽象工厂模式）：提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。
-
-### 结构型
-
-#### Bridge（桥接模式）
-
-> Bridge（桥接模式）：将抽象部分与它的实现部分分离，使它们都可以独立地变化。
-
-#### Facade（外观模式）
-
-> Facade（外观模式）：为子系统中的一组接口提供一个一致的界面， Facade模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。
-
-#### Composite(组合模式)
-
-> Composite(组合模式)：将对象组合成树形结构以表示“部分-整体”的层次结构。它使得客户对单个对象和复合对象的使用具有一致性。
-
-#### Decorator(装饰模式)：
-
-> Decorator(装饰模式)：动态地给一个对象添加一些额外的职责。就扩展功能而言， 它比生成子类方式更为灵活。
-
-#### Adapter（适配器模式）
-
-> Adapter（适配器模式）：将一个类的接口转换成客户希望的另外一个接口。Adapter模式使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。
-
-#### Proxy（代理模式）
-
-> Proxy（代理模式）：为其他对象提供一个代理以控制对这个对象的访问。
-
-#### Flyweight（享元模式）
-
-> Flyweight（享元模式）：运用共享技术有效地支持大量细粒度的对象。
-
-### 模式之间关系
-
-### 其他
-
-### 参考资料
-
-#### 23种设计模式UML图
 
 ## C# .Net Base 
 
@@ -24068,4 +23756,4 @@ namespace Inovance.FA.Views
 
 ## 备注
 
-> 最后修改时间：2023-04-23 11:15
+> 最后修改时间：2023-04-27 11:33
