@@ -38,6 +38,7 @@ date: 2022-10-01 09:01:01
     - [GithubCli](#githubcli)
     - [Login](#login)
     - [Git helper](#git-helper)
+  - [Q\&A](#qa)
 - [Docker](#docker)
   - [Docker 安装 \& 配置镜像加速器](#docker-安装--配置镜像加速器)
   - [container容器](#container容器)
@@ -2334,6 +2335,341 @@ date: 2022-10-01 09:01:01
 > 推送分支： 
 
 > $ git push origin main
+
+### Q&A
+
+> dpkg-deb: error: paste subprocess was killed by signal (Broken pipe)
+
+```
+liyafei@liyafei-ubuntu:~$ dotnet 
+Command 'dotnet' not found, but can be installed with:
+sudo snap install dotnet-sdk   # version 7.0.203, or
+sudo apt  install dotnet-host  # version 6.0.116-0ubuntu1~22.04.1
+See 'snap info dotnet-sdk' for additional versions.
+liyafei@liyafei-ubuntu:~$ sudo apt  install dotnet-host
+[sudo] password for liyafei: 
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+You might want to run 'apt --fix-broken install' to correct these.
+The following packages have unmet dependencies:
+ unixodbc : Depends: odbcinst1debian2 (>= 2.3.11-1) but it is not going to be installed
+            Depends: libodbc1 (>= 2.3.11-1) but it is not going to be installed
+ unixodbc-dev : Depends: odbcinst1debian2 (= 2.3.11-1) but it is not going to be installed
+E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
+liyafei@liyafei-ubuntu:~$ sudo apt --fix-broken
+E: Command line option --fix-broken is not understood in combination with the other options
+liyafei@liyafei-ubuntu:~$ sudo apt  install dotnet-host --fix-broken
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+You might want to run 'apt --fix-broken install' to correct these.
+The following packages have unmet dependencies:
+ unixodbc : Depends: odbcinst1debian2 (>= 2.3.11-1) but it is not going to be installed
+            Depends: libodbc1 (>= 2.3.11-1) but it is not going to be installed
+ unixodbc-dev : Depends: odbcinst1debian2 (= 2.3.11-1) but it is not going to be installed
+E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
+liyafei@liyafei-ubuntu:~$ sudo apt  install dotnet-host --fix-broken
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+You might want to run 'apt --fix-broken install' to correct these.
+The following packages have unmet dependencies:
+ unixodbc : Depends: odbcinst1debian2 (>= 2.3.11-1) but it is not going to be installed
+            Depends: libodbc1 (>= 2.3.11-1) but it is not going to be installed
+ unixodbc-dev : Depends: odbcinst1debian2 (= 2.3.11-1) but it is not going to be installed
+E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
+liyafei@liyafei-ubuntu:~$ sudo apt  install dotnet-host --fix-broken
+[sudo] password for liyafei: 
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+You might want to run 'apt --fix-broken install' to correct these.
+The following packages have unmet dependencies:
+ unixodbc : Depends: odbcinst1debian2 (>= 2.3.11-1) but it is not going to be installed
+            Depends: libodbc1 (>= 2.3.11-1) but it is not going to be installed
+ unixodbc-dev : Depends: odbcinst1debian2 (= 2.3.11-1) but it is not going to be installed
+E: Unmet dependencies. Try 'apt --fix-broken install' with no packages (or specify a solution).
+liyafei@liyafei-ubuntu:~$ sudo apt  --fix-broken
+E: Command line option --fix-broken is not understood in combination with the other options
+liyafei@liyafei-ubuntu:~$ sudo apt --fix-broken install
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Correcting dependencies... Done
+The following packages were automatically installed and are no longer required:
+  aspnetcore-targeting-pack-6.0 libflashrom1 libftdi1-2 libllvm13
+  liblttng-ust-common1 liblttng-ust-ctl5 liblttng-ust1 libodbc2 libodbccr2
+  libodbcinst2 libsss-nss-idmap0 libunwind-13 netstandard-targeting-pack-2.1
+  unixodbc-common
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  libodbc1 odbcinst odbcinst1debian2
+Suggested packages:
+  unixodbc-bin
+The following NEW packages will be installed:
+  libodbc1 odbcinst1debian2
+The following packages will be upgraded:
+  odbcinst
+1 upgraded, 2 newly installed, 0 to remove and 162 not upgraded.
+11 not fully installed or removed.
+Need to get 0 B/607 kB of archives.
+After this operation, 892 kB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+(Reading database ... 201109 files and directories currently installed.)
+Preparing to unpack .../odbcinst_2.3.11-1_amd64.deb ...
+Unpacking odbcinst (2.3.11-1) over (2.3.9-5) ...
+dpkg: error processing archive /var/cache/apt/archives/odbcinst_2.3.11-1_amd64.d
+eb (--unpack):
+ trying to overwrite '/etc/odbc.ini', which is also in package unixodbc-common 2
+.3.9-5
+Preparing to unpack .../odbcinst1debian2_2.3.11-1_amd64.deb ...
+Unpacking odbcinst1debian2:amd64 (2.3.11-1) ...
+dpkg: error processing archive /var/cache/apt/archives/odbcinst1debian2_2.3.11-1
+_amd64.deb (--unpack):
+ trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbcinst.so.2.0.0', which is 
+also in package libodbcinst2:amd64 2.3.9-5
+dpkg-deb: error: paste subprocess was killed by signal (Broken pipe)
+Preparing to unpack .../libodbc1_2.3.11-1_amd64.deb ...
+Unpacking libodbc1:amd64 (2.3.11-1) ...
+dpkg: error processing archive /var/cache/apt/archives/libodbc1_2.3.11-1_amd64.d
+eb (--unpack):
+ trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbc.so.2.0.0', which is also
+ in package libodbc2:amd64 2.3.9-5
+dpkg-deb: error: paste subprocess was killed by signal (Broken pipe)
+Errors were encountered while processing:
+ /var/cache/apt/archives/odbcinst_2.3.11-1_amd64.deb
+ /var/cache/apt/archives/odbcinst1debian2_2.3.11-1_amd64.deb
+ /var/cache/apt/archives/libodbc1_2.3.11-1_amd64.deb
+E: Sub-process /usr/bin/dpkg returned an error code (1)
+liyafei@liyafei-ubuntu:~$ sudo apt --fix-broken install
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Correcting dependencies... Done
+The following packages were automatically installed and are no longer required:
+  aspnetcore-targeting-pack-6.0 libflashrom1 libftdi1-2 libllvm13
+  liblttng-ust-common1 liblttng-ust-ctl5 liblttng-ust1 libodbc2 libodbccr2
+  libodbcinst2 libsss-nss-idmap0 libunwind-13 netstandard-targeting-pack-2.1
+  unixodbc-common
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  libodbc1 odbcinst odbcinst1debian2
+Suggested packages:
+  unixodbc-bin
+The following NEW packages will be installed:
+  libodbc1 odbcinst1debian2
+The following packages will be upgraded:
+  odbcinst
+1 upgraded, 2 newly installed, 0 to remove and 162 not upgraded.
+11 not fully installed or removed.
+Need to get 0 B/607 kB of archives.
+After this operation, 892 kB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+(Reading database ... 201109 files and directories currently installed.)
+Preparing to unpack .../odbcinst_2.3.11-1_amd64.deb ...
+Unpacking odbcinst (2.3.11-1) over (2.3.9-5) ...
+dpkg: error processing archive /var/cache/apt/archives/odbcinst_2.3.11-1_amd64.d
+eb (--unpack):
+ trying to overwrite '/etc/odbc.ini', which is also in package unixodbc-common 2
+.3.9-5
+Preparing to unpack .../odbcinst1debian2_2.3.11-1_amd64.deb ...
+Unpacking odbcinst1debian2:amd64 (2.3.11-1) ...
+dpkg: error processing archive /var/cache/apt/archives/odbcinst1debian2_2.3.11-1
+_amd64.deb (--unpack):
+ trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbcinst.so.2.0.0', which is 
+also in package libodbcinst2:amd64 2.3.9-5
+dpkg-deb: error: paste subprocess was killed by signal (Broken pipe)
+Preparing to unpack .../libodbc1_2.3.11-1_amd64.deb ...
+Unpacking libodbc1:amd64 (2.3.11-1) ...
+dpkg: error processing archive /var/cache/apt/archives/libodbc1_2.3.11-1_amd64.d
+eb (--unpack):
+ trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbc.so.2.0.0', which is also
+ in package libodbc2:amd64 2.3.9-5
+dpkg-deb: error: paste subprocess was killed by signal (Broken pipe)
+Errors were encountered while processing:
+ /var/cache/apt/archives/odbcinst_2.3.11-1_amd64.deb
+ /var/cache/apt/archives/odbcinst1debian2_2.3.11-1_amd64.deb
+ /var/cache/apt/archives/libodbc1_2.3.11-1_amd64.deb
+E: Sub-process /usr/bin/dpkg returned an error code (1)
+liyafei@liyafei-ubuntu:~$ sudo apt --fix-broken install
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Correcting dependencies... Done
+The following packages were automatically installed and are no longer required:
+  aspnetcore-targeting-pack-6.0 libflashrom1 libftdi1-2 libllvm13
+  liblttng-ust-common1 liblttng-ust-ctl5 liblttng-ust1 libodbc2 libodbccr2
+  libodbcinst2 libsss-nss-idmap0 libunwind-13 netstandard-targeting-pack-2.1
+  unixodbc-common
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  libodbc1 odbcinst odbcinst1debian2
+Suggested packages:
+  unixodbc-bin
+The following NEW packages will be installed:
+  libodbc1 odbcinst1debian2
+The following packages will be upgraded:
+  odbcinst
+1 upgraded, 2 newly installed, 0 to remove and 162 not upgraded.
+11 not fully installed or removed.
+Need to get 0 B/607 kB of archives.
+After this operation, 892 kB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+(Reading database ... 201109 files and directories currently installed.)
+Preparing to unpack .../odbcinst_2.3.11-1_amd64.deb ...
+Unpacking odbcinst (2.3.11-1) over (2.3.9-5) ...
+dpkg: error processing archive /var/cache/apt/archives/odbcinst_2.3.11-1_amd64.d
+eb (--unpack):
+ trying to overwrite '/etc/odbc.ini', which is also in package unixodbc-common 2
+.3.9-5
+Preparing to unpack .../odbcinst1debian2_2.3.11-1_amd64.deb ...
+Unpacking odbcinst1debian2:amd64 (2.3.11-1) ...
+dpkg: error processing archive /var/cache/apt/archives/odbcinst1debian2_2.3.11-1
+_amd64.deb (--unpack):
+ trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbcinst.so.2.0.0', which is 
+also in package libodbcinst2:amd64 2.3.9-5
+dpkg-deb: error: paste subprocess was killed by signal (Broken pipe)
+Preparing to unpack .../libodbc1_2.3.11-1_amd64.deb ...
+Unpacking libodbc1:amd64 (2.3.11-1) ...
+dpkg: error processing archive /var/cache/apt/archives/libodbc1_2.3.11-1_amd64.d
+eb (--unpack):
+ trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbc.so.2.0.0', which is also
+ in package libodbc2:amd64 2.3.9-5
+dpkg-deb: error: paste subprocess was killed by signal (Broken pipe)
+Errors were encountered while processing:
+ /var/cache/apt/archives/odbcinst_2.3.11-1_amd64.deb
+ /var/cache/apt/archives/odbcinst1debian2_2.3.11-1_amd64.deb
+ /var/cache/apt/archives/libodbc1_2.3.11-1_amd64.deb
+E: Sub-process /usr/bin/dpkg returned an error code (1)
+liyafei@liyafei-ubuntu:~$ sudo dpkg -i --force-overwrite /var/cache/apt/archives/odbcinst_2.3.11-1_amd64.deb
+(Reading database ... 201109 files and directories currently installed.)
+Preparing to unpack .../odbcinst_2.3.11-1_amd64.deb ...
+Unpacking odbcinst (2.3.11-1) over (2.3.9-5) ...
+dpkg: warning: overriding problem because --force enabled:
+dpkg: warning: trying to overwrite '/etc/odbc.ini', which is also in package unixodbc-common 2.3.9-5
+dpkg: dependency problems prevent configuration of odbcinst:
+ odbcinst depends on odbcinst1debian2 (>= 2.3.11-1); however:
+  Package odbcinst1debian2:amd64 is not installed.
+
+dpkg: error processing package odbcinst (--install):
+ dependency problems - leaving unconfigured
+Processing triggers for man-db (2.10.2-1) ...
+Errors were encountered while processing:
+ odbcinst
+liyafei@liyafei-ubuntu:~$ sudo dpkg -i --force-overwrite /var/cache/apt/archives/odbcinst1debian2_2.3.11-1_amd64.deb
+(Reading database ... 201111 files and directories currently installed.)
+Preparing to unpack .../odbcinst1debian2_2.3.11-1_amd64.deb ...
+Unpacking odbcinst1debian2:amd64 (2.3.11-1) ...
+dpkg: warning: overriding problem because --force enabled:
+dpkg: warning: trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbcinst.so.2.0.0', which is also in package libodbcinst2:amd64 2.3.9-5
+dpkg: warning: overriding problem because --force enabled:
+dpkg: warning: trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbcinst.so.2', which is also in package libodbcinst2:amd64 2.3.9-5
+dpkg: dependency problems prevent configuration of odbcinst1debian2:amd64:
+ odbcinst1debian2:amd64 depends on odbcinst (>= 2.3.11-1); however:
+  Package odbcinst is not configured yet.
+
+dpkg: error processing package odbcinst1debian2:amd64 (--install):
+ dependency problems - leaving unconfigured
+Errors were encountered while processing:
+ odbcinst1debian2:amd64
+liyafei@liyafei-ubuntu:~$ sudo dpkg -i --force-overwrite /var/cache/apt/archives/libodbc1_2.3.11-1_amd64.deb
+(Reading database ... 201115 files and directories currently installed.)
+Preparing to unpack .../libodbc1_2.3.11-1_amd64.deb ...
+Unpacking libodbc1:amd64 (2.3.11-1) ...
+dpkg: warning: overriding problem because --force enabled:
+dpkg: warning: trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbc.so.2.0.0', which is also in package libodbc2:amd64 2.3.9-5
+dpkg: warning: overriding problem because --force enabled:
+dpkg: warning: trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbccr.so.2.0.0', which is also in package libodbccr2:amd64 2.3.9-5
+dpkg: warning: overriding problem because --force enabled:
+dpkg: warning: trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbccr.so.2', which is also in package libodbccr2:amd64 2.3.9-5
+dpkg: warning: overriding problem because --force enabled:
+dpkg: warning: trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbc.so.2', which is also in package libodbc2:amd64 2.3.9-5
+Setting up libodbc1:amd64 (2.3.11-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+liyafei@liyafei-ubuntu:~$ sudo apt --fix-broken install
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  aspnetcore-targeting-pack-6.0 libflashrom1 libftdi1-2 libllvm13
+  liblttng-ust-common1 liblttng-ust-ctl5 liblttng-ust1 libodbc2 libodbccr2
+  libodbcinst2 libsss-nss-idmap0 libunwind-13 netstandard-targeting-pack-2.1
+  unixodbc-common
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 162 not upgraded.
+13 not fully installed or removed.
+After this operation, 0 B of additional disk space will be used.
+Setting up gnustep-common (2.9.0-3) ...
+Setting up libgranite-common (6.2.0-1) ...
+Setting up html2text (1.3.2a-28) ...
+Setting up libgranite6:amd64 (6.2.0-1) ...
+Setting up odbcinst1debian2:amd64 (2.3.11-1) ...
+Setting up odbcinst (2.3.11-1) ...
+Setting up unixodbc (2.3.11-1) ...
+Setting up unixodbc-dev (2.3.11-1) ...
+Processing triggers for desktop-file-utils (0.26-1ubuntu3) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Processing triggers for gnome-menus (3.36.0-1ubuntu3) ...
+Processing triggers for libglib2.0-0:amd64 (2.72.4-0ubuntu1) ...
+Processing triggers for sgml-base (1.30) ...
+Processing triggers for mailcap (3.70+nmu1ubuntu1) ...
+Setting up gnustep-base-common (1.28.0-4build1) ...
+Setting up libgnustep-base1.28 (1.28.0-4build1) ...
+Setting up gnustep-base-runtime (1.28.0-4build1) ...
+Setting up unar (1.10.1-2build11) ...
+Setting up bookworm (1.1.2+git20210715-2build1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+liyafei@liyafei-ubuntu:~$ sudo apt  install dotnet-host
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  aspnetcore-targeting-pack-6.0 libflashrom1 libftdi1-2 libllvm13
+  liblttng-ust-common1 liblttng-ust-ctl5 liblttng-ust1 libodbc2 libodbccr2
+  libodbcinst2 libsss-nss-idmap0 libunwind-13 netstandard-targeting-pack-2.1
+  unixodbc-common
+Use 'sudo apt autoremove' to remove them.
+The following NEW packages will be installed:
+  dotnet-host
+0 upgraded, 1 newly installed, 0 to remove and 162 not upgraded.
+Need to get 57.2 kB of archives.
+After this operation, 252 kB of additional disk space will be used.
+Get:1 https://packages.microsoft.com/ubuntu/22.04/prod jammy/main amd64 dotnet-host amd64 7.0.5-1 [57.2 kB]
+Fetched 57.2 kB in 2s (30.4 kB/s)      
+Selecting previously unselected package dotnet-host.
+(Reading database ... 201120 files and directories currently installed.)
+Preparing to unpack .../dotnet-host_7.0.5-1_amd64.deb ...
+Unpacking dotnet-host (7.0.5-1) ...
+Setting up dotnet-host (7.0.5-1) ...
+Processing triggers for man-db (2.10.2-1) ...
+liyafei@liyafei-ubuntu:~$ dotnet --version
+A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist
+liyafei@liyafei-ubuntu:~$ dotnet -v
+A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist
+liyafei@liyafei-ubuntu:~$ dotnet
+
+Usage: dotnet [options]
+Usage: dotnet [path-to-application]
+
+Options:
+  -h|--help         Display help.
+  --info            Display .NET information.
+  --list-sdks       Display the installed SDKs.
+  --list-runtimes   Display the installed runtimes.
+
+path-to-application:
+  The path to an application .dll file to execute.
+liyafei@liyafei-ubuntu:~$ dotnet --info
+A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist
+liyafei@liyafei-ubuntu:~$ 
+```
+
+> A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist
+
+```
+
+```
 
 ## Docker 
 
