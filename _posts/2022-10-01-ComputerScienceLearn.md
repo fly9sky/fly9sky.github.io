@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  计算机科学技术编程等相关学习内容总结
+title: 计算机科学技术编程等相关学习内容总结
 description: 计算机科学相关学习内容总结,包括各种操作系统安装配置，各种编程语言学习等
 date: 2022-10-01 09:01:01
 ---
@@ -308,7 +308,7 @@ date: 2022-10-01 09:01:01
     - [导入](#导入)
     - [SASS 混合器 混合器继承](#sass-混合器-混合器继承)
 - [Font Awesome](#font-awesome)
-- [Asp.net core MVC 一些总结](#aspnet-core-mvc-一些总结)
+- [.Net Core](#net-core)
   - [Router](#router)
     - [property router](#property-router)
     - [设置路由中间件](#设置路由中间件)
@@ -316,7 +316,10 @@ date: 2022-10-01 09:01:01
     - [高级路由](#高级路由)
   - [Session](#session)
   - [授权认证管理](#授权认证管理)
-    - [认证](#认证)
+    - [认证 Authentication](#认证-authentication)
+      - [Identity](#identity)
+      - [多重身份验证](#多重身份验证)
+    - [授权  Authorize](#授权--authorize)
   - [DI](#di)
   - [Filters](#filters)
     - [授权过滤器 AuthorizeAttribute](#授权过滤器-authorizeattribute)
@@ -334,7 +337,7 @@ date: 2022-10-01 09:01:01
   - [Taghelper](#taghelper)
   - [SignalR](#signalr)
 - [Tensorflow](#tensorflow)
-- [C# 调用 Tensorflow](#c-调用-tensorflow)
+  - [C# .NET 中调用 Tensorflow](#c-net-中调用-tensorflow)
 - [gRPC](#grpc)
   - [gRPC 概述](#grpc-概述)
   - [gRPC 服务项目模板](#grpc-服务项目模板)
@@ -2237,7 +2240,7 @@ date: 2022-10-01 09:01:01
 
 > 较GPL 宽松
 
-#### BSD  
+#### BSD 
 
 > 发布带源代码 则源代码必须遵循BSD
 
@@ -2281,7 +2284,7 @@ date: 2022-10-01 09:01:01
 
 #### Git helper 
 
-> $ git clone git@github.com:devgis/MyWriting.git  //need your private key
+> $ git clone git@github.com:devgis/MyWriting.git //need your private key
 
 > 提交修改 上传修改的代码后执行增加修改： 
 
@@ -2306,19 +2309,19 @@ Building dependency tree... Done
 Reading state information... Done
 Correcting dependencies... Done
 The following packages were automatically installed and are no longer required:
-  aspnetcore-targeting-pack-6.0 libflashrom1 libftdi1-2 libllvm13
-  liblttng-ust-common1 liblttng-ust-ctl5 liblttng-ust1 libodbc2 libodbccr2
-  libodbcinst2 libsss-nss-idmap0 libunwind-13 netstandard-targeting-pack-2.1
-  unixodbc-common
+ aspnetcore-targeting-pack-6.0 libflashrom1 libftdi1-2 libllvm13
+ liblttng-ust-common1 liblttng-ust-ctl5 liblttng-ust1 libodbc2 libodbccr2
+ libodbcinst2 libsss-nss-idmap0 libunwind-13 netstandard-targeting-pack-2.1
+ unixodbc-common
 Use 'sudo apt autoremove' to remove them.
 The following additional packages will be installed:
-  libodbc1 odbcinst odbcinst1debian2
+ libodbc1 odbcinst odbcinst1debian2
 Suggested packages:
-  unixodbc-bin
+ unixodbc-bin
 The following NEW packages will be installed:
-  libodbc1 odbcinst1debian2
+ libodbc1 odbcinst1debian2
 The following packages will be upgraded:
-  odbcinst
+ odbcinst
 1 upgraded, 2 newly installed, 0 to remove and 162 not upgraded.
 11 not fully installed or removed.
 Need to get 0 B/607 kB of archives.
@@ -2358,7 +2361,7 @@ dpkg: warning: overriding problem because --force enabled:
 dpkg: warning: trying to overwrite '/etc/odbc.ini', which is also in package unixodbc-common 2.3.9-5
 dpkg: dependency problems prevent configuration of odbcinst:
  odbcinst depends on odbcinst1debian2 (>= 2.3.11-1); however:
-  Package odbcinst1debian2:amd64 is not installed.
+ Package odbcinst1debian2:amd64 is not installed.
 
 dpkg: error processing package odbcinst (--install):
  dependency problems - leaving unconfigured
@@ -2375,7 +2378,7 @@ dpkg: warning: overriding problem because --force enabled:
 dpkg: warning: trying to overwrite '/usr/lib/x86_64-linux-gnu/libodbcinst.so.2', which is also in package libodbcinst2:amd64 2.3.9-5
 dpkg: dependency problems prevent configuration of odbcinst1debian2:amd64:
  odbcinst1debian2:amd64 depends on odbcinst (>= 2.3.11-1); however:
-  Package odbcinst is not configured yet.
+ Package odbcinst is not configured yet.
 
 dpkg: error processing package odbcinst1debian2:amd64 (--install):
  dependency problems - leaving unconfigured
@@ -2400,10 +2403,10 @@ Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
 The following packages were automatically installed and are no longer required:
-  aspnetcore-targeting-pack-6.0 libflashrom1 libftdi1-2 libllvm13
-  liblttng-ust-common1 liblttng-ust-ctl5 liblttng-ust1 libodbc2 libodbccr2
-  libodbcinst2 libsss-nss-idmap0 libunwind-13 netstandard-targeting-pack-2.1
-  unixodbc-common
+ aspnetcore-targeting-pack-6.0 libflashrom1 libftdi1-2 libllvm13
+ liblttng-ust-common1 liblttng-ust-ctl5 liblttng-ust1 libodbc2 libodbccr2
+ libodbcinst2 libsss-nss-idmap0 libunwind-13 netstandard-targeting-pack-2.1
+ unixodbc-common
 Use 'sudo apt autoremove' to remove them.
 0 upgraded, 0 newly installed, 0 to remove and 162 not upgraded.
 13 not fully installed or removed.
@@ -2434,23 +2437,23 @@ Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
 
 ```
 
-~$ sudo apt  install dotnet-host
+~$ sudo apt install dotnet-host
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
 The following packages were automatically installed and are no longer required:
-  aspnetcore-targeting-pack-6.0 libflashrom1 libftdi1-2 libllvm13
-  liblttng-ust-common1 liblttng-ust-ctl5 liblttng-ust1 libodbc2 libodbccr2
-  libodbcinst2 libsss-nss-idmap0 libunwind-13 netstandard-targeting-pack-2.1
-  unixodbc-common
+ aspnetcore-targeting-pack-6.0 libflashrom1 libftdi1-2 libllvm13
+ liblttng-ust-common1 liblttng-ust-ctl5 liblttng-ust1 libodbc2 libodbccr2
+ libodbcinst2 libsss-nss-idmap0 libunwind-13 netstandard-targeting-pack-2.1
+ unixodbc-common
 Use 'sudo apt autoremove' to remove them.
 The following NEW packages will be installed:
-  dotnet-host
+ dotnet-host
 0 upgraded, 1 newly installed, 0 to remove and 162 not upgraded.
 Need to get 57.2 kB of archives.
 After this operation, 252 kB of additional disk space will be used.
 Get:1 https://packages.microsoft.com/ubuntu/22.04/prod jammy/main amd64 dotnet-host amd64 7.0.5-1 [57.2 kB]
-Fetched 57.2 kB in 2s (30.4 kB/s)      
+Fetched 57.2 kB in 2s (30.4 kB/s)   
 Selecting previously unselected package dotnet-host.
 (Reading database ... 201120 files and directories currently installed.)
 Preparing to unpack .../dotnet-host_7.0.5-1_amd64.deb ...
@@ -2467,13 +2470,13 @@ Usage: dotnet [options]
 Usage: dotnet [path-to-application]
 
 Options:
-  -h|--help         Display help.
-  --info            Display .NET information.
-  --list-sdks       Display the installed SDKs.
-  --list-runtimes   Display the installed runtimes.
+ -h|--help     Display help.
+ --info      Display .NET information.
+ --list-sdks    Display the installed SDKs.
+ --list-runtimes  Display the installed runtimes.
 
 path-to-application:
-  The path to an application .dll file to execute.
+ The path to an application .dll file to execute.
 ~$ dotnet --info
 A fatal error occurred. The folder [/usr/share/dotnet/host/fxr] does not exist
 ~$ 
@@ -2494,21 +2497,21 @@ dotnet: /usr/lib/dotnet
 ~$ sudo rm -rf /usr/lib/dotnet
 
 ~$ wget https://download.visualstudio.microsoft.com/download/pr/8159607a-e686-4ead-ac99-b4c97290a5fd/ec6070b1b2cc0651ebe57cf1bd411315/dotnet-sdk-6.0.401-linux-x64.tar.gz
---2023-04-27 11:03:39--  https://download.visualstudio.microsoft.com/download/pr/8159607a-e686-4ead-ac99-b4c97290a5fd/ec6070b1b2cc0651ebe57cf1bd411315/dotnet-sdk-6.0.401-linux-x64.tar.gz
+--2023-04-27 11:03:39-- https://download.visualstudio.microsoft.com/download/pr/8159607a-e686-4ead-ac99-b4c97290a5fd/ec6070b1b2cc0651ebe57cf1bd411315/dotnet-sdk-6.0.401-linux-x64.tar.gz
 Resolving download.visualstudio.microsoft.com (download.visualstudio.microsoft.com)... 117.24.10.17
 Connecting to download.visualstudio.microsoft.com (download.visualstudio.microsoft.com)|117.24.10.17|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 185736764 (177M) [application/octet-stream]
 Saving to: ‘dotnet-sdk-6.0.401-linux-x64.tar.gz’
 
-dotnet-sdk-6.0.401- 100%[===================>] 177.13M   488KB/s    in 6m 14s  
+dotnet-sdk-6.0.401- 100%[===================>] 177.13M  488KB/s  in 6m 14s 
 
 2023-04-27 11:09:55 (485 KB/s) - ‘dotnet-sdk-6.0.401-linux-x64.tar.gz’ saved [185736764/185736764]
 
-~$ tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz   -C /path/dotnet
+~$ tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz  -C /path/dotnet
 tar: /path/dotnet: Cannot open: No such file or directory
 tar: Error is not recoverable: exiting now
-~$ tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz   -C /var/dotnet
+~$ tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz  -C /var/dotnet
 tar: /var/dotnet: Cannot open: No such file or directory
 tar: Error is not recoverable: exiting now
 ~$ cd var
@@ -2519,16 +2522,16 @@ bash: cd: usr: No such file or directory
 /usr$ mkdir dotnet
 mkdir: cannot create directory ‘dotnet’: Permission denied
 /usr$ sudo mkdir dotnet
-/usr$ sudo tar tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz   -C /usr/dotnet
-tar: You may not specify more than one '-Acdtrux', '--delete' or  '--test-label' option
+/usr$ sudo tar tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz  -C /usr/dotnet
+tar: You may not specify more than one '-Acdtrux', '--delete' or '--test-label' option
 Try 'tar --help' or 'tar --usage' for more information.
-/usr$ sudo tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz   -C /usr/dotnet
+/usr$ sudo tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz  -C /usr/dotnet
 tar (child): dotnet-sdk-6.0.401-linux-x64.tar.gz: Cannot open: No such file or directory
 tar (child): Error is not recoverable: exiting now
 tar: Child returned status 2
 tar: Error is not recoverable: exiting now
 /usr$ cd
-~$ sudo tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz   -C /usr/dotnet
+~$ sudo tar -zxvf dotnet-sdk-6.0.401-linux-x64.tar.gz  -C /usr/dotnet
 
 
 /usr/dotnet$ export export DOTNET_ROOT=/usr/dotnet
@@ -2536,7 +2539,7 @@ tar: Error is not recoverable: exiting now
 
 
 -------------------
-~$ sudo gedit  ~/.bashrc
+~$ sudo gedit ~/.bashrc
 add: 
 export export DOTNET_ROOT=/usr/dotnet
 export PATH=$PATH:/usr/dotnet
@@ -2548,27 +2551,27 @@ Usage: dotnet [options]
 Usage: dotnet [path-to-application]
 
 Options:
-  -h|--help         Display help.
-  --info            Display .NET information.
-  --list-sdks       Display the installed SDKs.
-  --list-runtimes   Display the installed runtimes.
+ -h|--help     Display help.
+ --info      Display .NET information.
+ --list-sdks    Display the installed SDKs.
+ --list-runtimes  Display the installed runtimes.
 
 path-to-application:
-  The path to an application .dll file to execute.
+ The path to an application .dll file to execute.
 /usr/dotnet$ dotnet --info
 .NET SDK (reflecting any global.json):
- Version:   6.0.401
- Commit:    0906eae6f8
+ Version:  6.0.401
+ Commit:  0906eae6f8
 
 Runtime Environment:
- OS Name:     ubuntu
- OS Version:  22.04
+ OS Name:   ubuntu
+ OS Version: 22.04
  OS Platform: Linux
- RID:         ubuntu.22.04-x64
- Base Path:   /usr/dotnet/sdk/6.0.401/
+ RID:     ubuntu.22.04-x64
+ Base Path:  /usr/dotnet/sdk/6.0.401/
 
 global.json file:
-  Not found
+ Not found
 
 ```
 
@@ -2754,19 +2757,19 @@ global.json file:
 
 > > run： 创建并运行容器，格式：docker run [OPTIONS] IMAGE [COMMAND] [ARG...]，参数说明：
 
-> > -d , --detach            # 后台运行
+> > -d , --detach      # 后台运行
 
-> > -it, --interactive tty   # 交互终端形式运行
+> > -it, --interactive tty  # 交互终端形式运行
 
-> > -p , --publish list      # 指定端口
+> > -p , --publish list   # 指定端口
 
-> > -v , --volume list       # 挂载存储卷
+> > -v , --volume list    # 挂载存储卷
 
-> > 		 --name string       # 定义名字
+> > 		 --name string    # 定义名字
 
-> > 		 --rm                # 容器终止后自动删除（不支持在后台运行的容器）
+> > 		 --rm        # 容器终止后自动删除（不支持在后台运行的容器）
 
-> > 		 --restart string    # no、on-failure（非正常退出时重启，on-failure:3 最多重启三次）、always、unless-stopped
+> > 		 --restart string  # no、on-failure（非正常退出时重启，on-failure:3 最多重启三次）、always、unless-stopped
 
 > > docker run 的参数甚多，可通过 --help 查询，后续这些复杂的配置都会移交给 Docker Compose，以上几个足以应用70%~80%的场景，例：
 
@@ -2788,11 +2791,11 @@ global.json file:
 
 > > rm：移除容器，格式：docker rm [OPTIONS] CONTAINER [CONTAINER...]，参数说明：
 
-> > -f, --force     Force the removal of a running container
+> > -f, --force   Force the removal of a running container
 
-> > -l, --link      Remove the specified link
+> > -l, --link   Remove the specified link
 
-> > -v, --volumes   Remove the volumes associated with the container
+> > -v, --volumes  Remove the volumes associated with the container
 
 > > exec：在运行的容器中执行命令，不过更常用的还是先进入容器再执行命令，例子:docker exec -it my-nginx bash。
 
@@ -2812,7 +2815,7 @@ global.json file:
 
 > > docker login [OPTIONS] [SERVER]
 
-> > docker logout  [SERVER]
+> > docker logout [SERVER]
 
 > > 如果是Docker Hub，则示例如下：
 
@@ -2846,19 +2849,19 @@ global.json file:
 
 > > docker image ls # 列出当前环境下的镜像
 
-> > docker images   # 列出当前环境下的镜像
+> > docker images  # 列出当前环境下的镜像
 
-> > docker image rm ididididid      # 安装id删除镜像
+> > docker image rm ididididid   # 安装id删除镜像
 
 > > 操作容器
 
-> > docker run -i -t --rm centos /bin/bash   # 启动一个centos容器并进入，此时容器是干干净净，没有一点东西的，do everything
+> > docker run -i -t --rm centos /bin/bash  # 启动一个centos容器并进入，此时容器是干干净净，没有一点东西的，do everything
 
-> > docker container kill container_id    # 杀掉这个容器，强行终止
+> > docker container kill container_id  # 杀掉这个容器，强行终止
 
-> > docker container rm container_id      # 删除这个容器
+> > docker container rm container_id   # 删除这个容器
 
-> > docker container ls            # 查找当前容器
+> > docker container ls      # 查找当前容器
 
 > > docker ps // 查看所有正在运行容器
 
@@ -2868,9 +2871,9 @@ global.json file:
 
 > > docker ps -a -q // 查看所有容器ID
 
-> > docker stop $(docker ps -a -q) //  stop停止所有容器
+> > docker stop $(docker ps -a -q) // stop停止所有容器
 
-> > docker  rm $(docker ps -a -q) //   remove删除所有容器
+> > docker rm $(docker ps -a -q) //  remove删除所有容器
 
 ### Docker-compose 
 
@@ -2930,7 +2933,7 @@ global.json file:
 
 > > -p --project-name NAME 指定项目名称，默认使用当前所在目录为项目名
 
-> > --verbose  输出更多调试信息
+> > --verbose 输出更多调试信息
 
 > > -v，-version 打印版本并退出
 
@@ -2964,7 +2967,7 @@ global.json file:
 
 > 3，docker-compose ps
 
-> > docker-compose  ps [options] [SERVICE...]
+> > docker-compose ps [options] [SERVICE...]
 
 > > 列出项目中所有在运行的容器
 
@@ -3226,13 +3229,13 @@ global.json file:
 
 > > ports:
 
-> >   - 8080
+> >  - 8080
 
 > > networks:
 
-> >   - front-tier
+> >  - front-tier
 
-> >   - back-tier
+> >  - back-tier
 
 > > 
 
@@ -3242,11 +3245,11 @@ global.json file:
 
 > > links:
 
-> >   - web
+> >  - web
 
 > > networks:
 
-> >   - back-tier
+> >  - back-tier
 
 > > 
 
@@ -3256,21 +3259,21 @@ global.json file:
 
 > > ports:
 
-> >   - 80:80
+> >  - 80:80
 
 > > links:
 
-> >   - web
+> >  - web
 
 > > networks:
 
-> >   - front-tier
+> >  - front-tier
 
-> >   - back-tier
+> >  - back-tier
 
 > > volumes:
 
-> >   - /var/run/docker.sock:/var/run/docker.sock 
+> >  - /var/run/docker.sock:/var/run/docker.sock 
 
 > > 
 
@@ -3298,7 +3301,7 @@ global.json file:
 
 > > web: 
 
-> >     image: hello-world
+> >   image: hello-world
 
 > 3，build
 
@@ -3380,9 +3383,9 @@ global.json file:
 
 > > depends_on:
 
-> >   - db
+> >  - db
 
-> >   - redis
+> >  - redis
 
 > > redis:
 
@@ -3442,9 +3445,9 @@ global.json file:
 
 > > 
 
-> 162.242.195.82  somehost
+> 162.242.195.82 somehost
 
-> 50.31.209.229   otherhost
+> 50.31.209.229  otherhost
 
 > 12,volumes
 
@@ -3486,9 +3489,9 @@ global.json file:
 
 > > volumes_from:
 
-> > - service_name    
+> > - service_name  
 
-> >  - container_name
+> > - container_name
 
 > 14,dns
 
@@ -3500,9 +3503,9 @@ global.json file:
 
 > > dns：
 
-> > - 8.8.8.8    
+> > - 8.8.8.8  
 
-> >   - 9.9.9.9
+> >  - 9.9.9.9
 
 > 15,expose
 
@@ -3560,13 +3563,13 @@ global.json file:
 
 > > ports: 
 
-> >   - "6061:80"
+> >  - "6061:80"
 
 > > container_name: "web1"
 
 > > networks:
 
-> >   - dev
+> >  - dev
 
 > > web2:
 
@@ -3574,15 +3577,15 @@ global.json file:
 
 > > ports: 
 
-> >   - "6062:80"
+> >  - "6062:80"
 
 > > container_name: "web2"
 
 > > networks:
 
-> >   - dev
+> >  - dev
 
-> >   - pro
+> >  - pro
 
 > > web3:
 
@@ -3590,13 +3593,13 @@ global.json file:
 
 > > ports: 
 
-> >   - "6063:80"
+> >  - "6063:80"
 
 > > container_name: "web3"
 
 > > networks:
 
-> >   - pro
+> >  - pro
 
 > > networks:
 
@@ -3868,35 +3871,35 @@ kube-proxy
 
 containers:
 
-- image: sample:v2  
+- image: sample:v2 
 
-     name: war
+   name: war
 
-     lifecycle：
+   lifecycle：
 
-      posrStart:
+   posrStart:
 
-       exec:
+    exec:
 
-         command:
+     command:
 
-          - “cp”
+     - “cp”
 
-          - “/sample.war”
+     - “/sample.war”
 
-          - “/app”
+     - “/app”
 
-      prestop:
+   prestop:
 
-       httpGet:
+    httpGet:
 
-        host: monitor.com
+    host: monitor.com
 
-        psth: /waring
+    psth: /waring
 
-        port: 8080
+    port: 8080
 
-        scheme: HTTP
+    scheme: HTTP
 
 ```
 
@@ -3992,17 +3995,17 @@ kind: Service
 
 metadata:
 
-  name: redis-service
+ name: redis-service
 
 spec:
 
-  ports:
+ ports:
 
-  - port: 6379
+ - port: 6379
 
-    targetPort: 6379
+  targetPort: 6379
 
-    protocol: TCP
+  protocol: TCP
 
 ```
 
@@ -4016,19 +4019,19 @@ kind: Endpoints
 
 metadata:
 
-  name: redis-service
+ name: redis-service
 
 subsets:
 
-  - addresses:
+ - addresses:
 
-    - ip: 10.0.251.145
+  - ip: 10.0.251.145
 
-    ports:
+  ports:
 
-    - port: 6379
+  - port: 6379
 
-      protocol: TCP
+   protocol: TCP
 
 ```
 
@@ -4038,23 +4041,23 @@ subsets:
 
 [root@k8s-master demon]# kubectl describe service redis-service
 
-Name:            redis-service
+Name:      redis-service
 
-Namespace:        default
+Namespace:    default
 
-Labels:            <none>
+Labels:      <none>
 
-Selector:        <none>
+Selector:    <none>
 
-Type:            ClusterIP
+Type:      ClusterIP
 
-IP:            10.254.52.88
+IP:      10.254.52.88
 
-Port:            <unset> 6379/TCP
+Port:      <unset> 6379/TCP
 
-Endpoints:        10.0.251.145:6379
+Endpoints:    10.0.251.145:6379
 
-Session Affinity:    None
+Session Affinity:  None
 
 No events.
 
@@ -4128,31 +4131,31 @@ kind: Deployment
 
 metadata:
 
-  name: nginx-deployment
+ name: nginx-deployment
 
 spec:
 
-  replicas: 3
+ replicas: 3
 
-  template:
+ template:
 
-    metadata:
+  metadata:
 
-      labels:
+   labels:
 
-        app: nginx
+    app: nginx
 
-    spec:
+  spec:
 
-      containers:
+   containers:
 
-      - name: nginx
+   - name: nginx
 
-        image: nginx:1.7.9
+    image: nginx:1.7.9
 
-        ports:
+    ports:
 
-        - containerPort: 80
+    - containerPort: 80
 
 ```
 
@@ -4166,15 +4169,15 @@ deployment "nginx-deployment" created
 
 $ kubectl get deployments
 
-NAME       DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+NAME    DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
 
-nginx-deployment   3         0         0            0           1s
+nginx-deployment  3     0     0      0      1s
 
 $ kubectl get deployments
 
-NAME       DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+NAME    DESIRED  CURRENT  UP-TO-DATE  AVAILABLE  AGE
 
-nginx-deployment   3         3         3            3           18s
+nginx-deployment  3     3     3      3      18s
 
 ```
 
@@ -4198,55 +4201,55 @@ $ kubectl rollout history deployment/nginx-deployment
 
 deployments "nginx-deployment":
 
-REVISION    CHANGE-CAUSE
+REVISION  CHANGE-CAUSE
 
-1           kubectl create -f docs/user-guide/nginx-deployment.yaml --record
+1      kubectl create -f docs/user-guide/nginx-deployment.yaml --record
 
-2           kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1
+2      kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1
 
-3           kubectl set image deployment/nginx-deployment nginx=nginx:1.91
+3      kubectl set image deployment/nginx-deployment nginx=nginx:1.91
 
 $ kubectl rollout history deployment/nginx-deployment --revision=2
 
 deployments "nginx-deployment" revision 2
 
-  Labels:       app=nginx
+ Labels:    app=nginx
 
-          pod-template-hash=1159050644
+     pod-template-hash=1159050644
 
-  Annotations:  kubernetes.io/change-cause=kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1
+ Annotations: kubernetes.io/change-cause=kubectl set image deployment/nginx-deployment nginx=nginx:1.9.1
 
-  Containers:
+ Containers:
 
-   nginx:
+  nginx:
 
-    Image:      nginx:1.9.1
+  Image:   nginx:1.9.1
 
-    Port:       80/TCP
+  Port:    80/TCP
 
-     QoS Tier:
+   QoS Tier:
 
-        cpu:      BestEffort
+    cpu:   BestEffort
 
-        memory:   BestEffort
+    memory:  BestEffort
 
-    Environment Variables:      <none>
+  Environment Variables:   <none>
 
-  No volumes.
+ No volumes.
 
 ```
 
 > > > 最后介绍下Deployment的一些基础命令。
 
-> > > > $ kubectl describe deployments  #查询详细信息，获取升级进度
+> > > > $ kubectl describe deployments #查询详细信息，获取升级进度
 
-> > > > $ kubectl rollout pause deployment/nginx-deployment2  #暂停升级
+> > > > $ kubectl rollout pause deployment/nginx-deployment2 #暂停升级
 
-> > > > $ kubectl rollout resume deployment/nginx-deployment2  #继续升级
+> > > > $ kubectl rollout resume deployment/nginx-deployment2 #继续升级
 
-> > > > $ kubectl rollout undo deployment/nginx-deployment2  #升级回滚
+> > > > $ kubectl rollout undo deployment/nginx-deployment2 #升级回滚
 
-> > > > $ kubectl scale deployment nginx-deployment --replicas 10  #弹性伸缩Pod数量
+> > > > $ kubectl scale deployment nginx-deployment --replicas 10 #弹性伸缩Pod数量
 
 > > > 关于多重升级，举例，当你创建了一个nginx1.7的Deployment，要求副本数量为5之后，Deployment Controller会逐步的将5个1.7的Pod启动起来；当启动到3个的时候，你又发出更新Deployment中Nginx到1.9的命令；这时Deployment Controller会立即将已启动的3个1.7Pod杀掉，然后逐步启动1.9的Pod。Deployment Controller不会等到1.7的Pod都启动完成之后，再依次杀掉1.7，启动1.9。
 
@@ -4256,31 +4259,31 @@ deployments "nginx-deployment" revision 2
 
 > > 在Docker的设计实现中，容器中的数据是临时的，即当容器被销毁时，其中的数据将会丢失。如果需要持久化数据，需要使用Docker数据卷挂载宿主机上的文件或者目录到容器中。在Kubernetes中，当Pod重建的时候，数据是会丢失的，Kubernetes也是通过数据卷挂载来提供Pod数据的持久化的。Kubernetes数据卷是对Docker数据卷的扩展，Kubernetes数据卷是Pod级别的，可以用来实现Pod中容器的文件共享。目前，Kubernetes支持的数据卷类型如下：
 
-> > > 1)        EmptyDir
+> > > 1)    EmptyDir
 
-> > > 2)        HostPath
+> > > 2)    HostPath
 
-> > > 3)        GCE Persistent Disk
+> > > 3)    GCE Persistent Disk
 
-> > > 4)        AWS Elastic Block Store
+> > > 4)    AWS Elastic Block Store
 
-> > > 5)        NFS
+> > > 5)    NFS
 
-> > > 6)        iSCSI
+> > > 6)    iSCSI
 
-> > > 7)        Flocker
+> > > 7)    Flocker
 
-> > > 8)        GlusterFS
+> > > 8)    GlusterFS
 
-> > > 9)        RBD
+> > > 9)    RBD
 
-> > > 10)    Git Repo
+> > > 10)  Git Repo
 
-> > > 11)    Secret
+> > > 11)  Secret
 
-> > > 12)    Persistent Volume Claim
+> > > 12)  Persistent Volume Claim
 
-> > > 13)    Downward API
+> > > 13)  Downward API
 
 > > 本地数据卷
 
@@ -4306,15 +4309,15 @@ deployments "nginx-deployment" revision 2
 
 > > > 理解每个存储系统是一件复杂的事情，特别是对于普通用户来说，有时候并不需要关心各种存储实现，只希望能够安全可靠地存储数据。Kubernetes中提供了Persistent Volume和Persistent Volume Claim机制，这是存储消费模式。Persistent Volume是由系统管理员配置创建的一个数据卷（目前支持HostPath、GCE Persistent Disk、AWS Elastic Block Store、NFS、iSCSI、GlusterFS、RBD），它代表了某一类存储插件实现；而对于普通用户来说，通过Persistent Volume Claim可请求并获得合适的Persistent Volume，而无须感知后端的存储实现。Persistent Volume和Persistent Volume Claim的关系其实类似于Pod和Node，Pod消费Node资源，Persistent Volume Claim则消费Persistent Volume资源。Persistent Volume和Persistent Volume Claim相互关联，有着完整的生命周期管理：
 
-> > > 1)        准备：系统管理员规划或创建一批Persistent Volume；
+> > > 1)    准备：系统管理员规划或创建一批Persistent Volume；
 
-> > > 2)        绑定：用户通过创建Persistent Volume Claim来声明存储请求，Kubernetes发现有存储请求的时候，就去查找符合条件的Persistent Volume（最小满足策略）。找到合适的就绑定上，找不到就一直处于等待状态；
+> > > 2)    绑定：用户通过创建Persistent Volume Claim来声明存储请求，Kubernetes发现有存储请求的时候，就去查找符合条件的Persistent Volume（最小满足策略）。找到合适的就绑定上，找不到就一直处于等待状态；
 
-> > > 3)        使用：创建Pod的时候使用Persistent Volume Claim；
+> > > 3)    使用：创建Pod的时候使用Persistent Volume Claim；
 
-> > > 4)        释放：当用户删除绑定在Persistent Volume上的Persistent Volume Claim时，Persistent Volume进入释放状态，此时Persistent Volume中还残留着上一个Persistent Volume Claim的数据，状态还不可用；
+> > > 4)    释放：当用户删除绑定在Persistent Volume上的Persistent Volume Claim时，Persistent Volume进入释放状态，此时Persistent Volume中还残留着上一个Persistent Volume Claim的数据，状态还不可用；
 
-> > > 5)        回收：是否的Persistent Volume需要回收才能再次使用。回收策略可以是人工的也可以是Kubernetes自动进行清理（仅支持NFS和HostPath）
+> > > 5)    回收：是否的Persistent Volume需要回收才能再次使用。回收策略可以是人工的也可以是Kubernetes自动进行清理（仅支持NFS和HostPath）
 
 > > 信息数据卷
 
@@ -4702,7 +4705,7 @@ systemctl disable firewalld //开机不启动防火墙
 
 swapoff -a # 临时关闭
 
-sed -ri 's/.*swap.*/#&/' /etc/fstab    # 永久
+sed -ri 's/.*swap.*/#&/' /etc/fstab  # 永久
 
 ```
 
@@ -4744,7 +4747,7 @@ net.bridge.bridge-nf-call-iptables = 1
 
 EOF
 
-sysctl --system  # 生效
+sysctl --system # 生效
 
 ```
 
@@ -4778,7 +4781,7 @@ $ cat > /etc/docker/daemon.json << EOF
 
 {
 
-  "registry-mirrors": ["https://b9pmyelo.mirror.aliyuncs.com"]
+ "registry-mirrors": ["https://b9pmyelo.mirror.aliyuncs.com"]
 
 }
 
@@ -4832,15 +4835,15 @@ $ systemctl enable kubelet
 
 $ kubeadm init \
 
-  --apiserver-advertise-address=192.168.26.128 \
+ --apiserver-advertise-address=192.168.26.128 \
 
-  --image-repository registry.aliyuncs.com/google_containers \
+ --image-repository registry.aliyuncs.com/google_containers \
 
-  --kubernetes-version v1.18.0 \
+ --kubernetes-version v1.18.0 \
 
-  --service-cidr=10.96.0.0/12 \
+ --service-cidr=10.96.0.0/12 \
 
-  --pod-network-cidr=10.244.0.0/16
+ --pod-network-cidr=10.244.0.0/16
 
 ```
 
@@ -4872,7 +4875,7 @@ $ kubectl get nodes
 
 $ kubeadm join 192.168.1.11:6443 --token esce21.q6hetwm8si29qxwn \
 
-    --discovery-token-ca-cert-hash sha256:00603a05805807501d7181c3d60b478788408cfe6cedefedb1f97569708be9c5
+  --discovery-token-ca-cert-hash sha256:00603a05805807501d7181c3d60b478788408cfe6cedefedb1f97569708be9c5
 
 ```
 
@@ -4892,9 +4895,9 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documen
 
 kubectl get pods -n kube-system
 
-NAME                          READY   STATUS    RESTARTS   AGE
+NAME             READY  STATUS  RESTARTS  AGE
 
-kube-flannel-ds-amd64-2pc95   1/1     Running   0          72s
+kube-flannel-ds-amd64-2pc95  1/1   Running  0     72s
 
 ```
 
@@ -9614,27 +9617,27 @@ Identifies the Width dependency property.
 
 ```
 
-        public static readonly DependencyProperty AngleProperty =
+    public static readonly DependencyProperty AngleProperty =
 
-            DependencyProperty.RegisterAttached("Angle", typeof(double), typeof(RotationManager), new PropertyMetadata(0.0,OnAngleChanged));
+      DependencyProperty.RegisterAttached("Angle", typeof(double), typeof(RotationManager), new PropertyMetadata(0.0,OnAngleChanged));
 
-        private static void OnAngleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+    private static void OnAngleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
 
-        {
+    {
 
-            var element = obj as UIElement;
+      var element = obj as UIElement;
 
-            if (element != null)
+      if (element != null)
 
-            {
+      {
 
-                element.RenderTransformOrigin = new Point(0.5, 0.5);
+        element.RenderTransformOrigin = new Point(0.5, 0.5);
 
-                element.RenderTransform = new RotateTransform((double)e.NewValue);
+        element.RenderTransform = new RotateTransform((double)e.NewValue);
 
-            }
+      }
 
-        }
+    }
 
 ```
 
@@ -9678,19 +9681,19 @@ public class SpinnerControl : ItemsControl
 
 {
 
-    static SpinnerControl()
+  static SpinnerControl()
 
-    {
+  {
 
-        DefaultStyleKeyProperty.OverrideMetadata(
+    DefaultStyleKeyProperty.OverrideMetadata(
 
-            typeof(SpinnerControl),
+      typeof(SpinnerControl),
 
-            new FrameworkPropertyMetadata(typeof(SpinnerControl))
+      new FrameworkPropertyMetadata(typeof(SpinnerControl))
 
-        );
+    );
 
-    }
+  }
 
 }
 
@@ -9704,13 +9707,13 @@ public class SpinnerControl : ItemsControl
 
 <StackPanel Canvas.Top="50" DataContext="{Binding Source={StaticResource XmlTeamsSource}}">
 
-  <Button Content="{Binding XPath=Team/@TeamName}"/>
+ <Button Content="{Binding XPath=Team/@TeamName}"/>
 
 </StackPanel>
 
 ```
 
-####  WPF 设计器集成
+#### WPF 设计器集成
 
 > 如何自定义依赖属性
 
@@ -9724,23 +9727,23 @@ public class SpinnerControl : ItemsControl
 
  public static DependencyProperty TextProperty;
 
-       TextProperty =
+    TextProperty =
 
-       DependencyProperty.Register("Text", //属性名称
+    DependencyProperty.Register("Text", //属性名称
 
-       typeof(string), //属性类型
+    typeof(string), //属性类型
 
-       typeof(TestDependencyPropertyWindow), //该属性所有者，即将该属性注册到那个类上
+    typeof(TestDependencyPropertyWindow), //该属性所有者，即将该属性注册到那个类上
 
-       new PropertyMetadata("")); //属性默认值
+    new PropertyMetadata("")); //属性默认值
 
 public string Text
 
 {
 
-   get { return (string)GetValue(TextProperty); }
+  get { return (string)GetValue(TextProperty); }
 
-   set { SetValue(TextProperty, value); }
+  set { SetValue(TextProperty, value); }
 
 }
 
@@ -9842,17 +9845,17 @@ public string Text
 
 ```
 
-> 创建只应用按钮的样式  
+> 创建只应用按钮的样式 
 
 ```
 
 <Style x:Key="BigFontButtonStyle" TargetType="Button">
 
-    <Setter Property="FontFamily" Value="Times New Roman"/>
+  <Setter Property="FontFamily" Value="Times New Roman"/>
 
-    <Setter Property="FontSize" Value="18"/>
+  <Setter Property="FontSize" Value="18"/>
 
-    <Setter Property="FontWeight" Value="Bold"/>
+  <Setter Property="FontWeight" Value="Bold"/>
 
 </Style>
 
@@ -9864,21 +9867,21 @@ public string Text
 
  <Window.Resources>
 
-        <Style x:Key="MouseOverHighlightStyle">
+    <Style x:Key="MouseOverHighlightStyle">
 
-            <EventSetter Event="TextBlock.MouseEnter" Handler="element_MouseEnter"></EventSetter>
+      <EventSetter Event="TextBlock.MouseEnter" Handler="element_MouseEnter"></EventSetter>
 
-            <EventSetter Event="TextBlock.MouseLeave" Handler="element_MouseLeave"></EventSetter>
+      <EventSetter Event="TextBlock.MouseLeave" Handler="element_MouseLeave"></EventSetter>
 
-        </Style>
+    </Style>
 
-    </Window.Resources>
+  </Window.Resources>
 
-    <Grid Name="gird1" ShowGridLines="True">
+  <Grid Name="gird1" ShowGridLines="True">
 
-        <TextBlock Style="{StaticResource MouseOverHighlightStyle}"></TextBlock>
+    <TextBlock Style="{StaticResource MouseOverHighlightStyle}"></TextBlock>
 
-    </Grid>
+  </Grid>
 
 ```
 
@@ -9888,31 +9891,31 @@ public string Text
 
  <Window.Resources>
 
-        <Style x:Key="BigFontButtonStyle">
+    <Style x:Key="BigFontButtonStyle">
 
-            <Setter Property="Control.FontFamily" Value="Times New Roman"/>
+      <Setter Property="Control.FontFamily" Value="Times New Roman"/>
 
-            <Setter Property="Control.FontSize" Value="18"/>
+      <Setter Property="Control.FontSize" Value="18"/>
 
-            <Setter Property="Control.FontWeight" Value="Bold"/>
+      <Setter Property="Control.FontWeight" Value="Bold"/>
 
-        </Style>
+    </Style>
 
-        <Style x:Key="NewBigButtonBigFontStyle" BasedOn="{StaticResource BigFontButtonStyle}">
+    <Style x:Key="NewBigButtonBigFontStyle" BasedOn="{StaticResource BigFontButtonStyle}">
 
-            <Setter Property="Control.Foreground" Value="Red"/>
+      <Setter Property="Control.Foreground" Value="Red"/>
 
-            <Setter Property="Control.Background" Value="DarkBlue"/>
+      <Setter Property="Control.Background" Value="DarkBlue"/>
 
-        </Style>
+    </Style>
 
-    </Window.Resources>
+  </Window.Resources>
 
-    <Grid Name="gird1" ShowGridLines="True">
+  <Grid Name="gird1" ShowGridLines="True">
 
-        <TextBlock Style="{StaticResource NewBigButtonBigFontStyle}">test</TextBlock>
+    <TextBlock Style="{StaticResource NewBigButtonBigFontStyle}">test</TextBlock>
 
-    </Grid>
+  </Grid>
 
 ```
 
@@ -9922,27 +9925,27 @@ public string Text
 
  <Window.Resources>
 
-        <Style TargetType="Button">
+    <Style TargetType="Button">
 
-            <Setter Property="Control.FontFamily" Value="Times New Roman"/>
+      <Setter Property="Control.FontFamily" Value="Times New Roman"/>
 
-            <Setter Property="Control.FontSize" Value="18"/>
+      <Setter Property="Control.FontSize" Value="18"/>
 
-            <Setter Property="Control.FontWeight" Value="Bold"/>
+      <Setter Property="Control.FontWeight" Value="Bold"/>
 
-        </Style>
+    </Style>
 
-    </Window.Resources>
+  </Window.Resources>
 
-    <Grid Name="gird1" ShowGridLines="True">
+  <Grid Name="gird1" ShowGridLines="True">
 
-        <Button>one</Button>
+    <Button>one</Button>
 
-        <Button Style="{x:Null}">two</Button>
+    <Button Style="{x:Null}">two</Button>
 
-        <Button>three</Button>
+    <Button>three</Button>
 
-    </Grid>
+  </Grid>
 
 ```
 
@@ -9952,59 +9955,59 @@ public string Text
 
 ```
 
-   <Window.Resources>
+  <Window.Resources>
 
-        <Style x:Key="BigFontButton">
+    <Style x:Key="BigFontButton">
 
-            <Style.Setters>
+      <Style.Setters>
 
-                <Setter Property="Control.FontFamily" Value="Times New Roman"/>
+        <Setter Property="Control.FontFamily" Value="Times New Roman"/>
 
-                <Setter Property="Control.FontSize" Value="18"/>
+        <Setter Property="Control.FontSize" Value="18"/>
 
-                <Setter Property="Control.FontWeight" Value="Bold"/>
+        <Setter Property="Control.FontWeight" Value="Bold"/>
 
-            </Style.Setters>
+      </Style.Setters>
 
-            <Style.Triggers>
+      <Style.Triggers>
 
-                <Trigger Property="Control.IsFocused" Value="True">
+        <Trigger Property="Control.IsFocused" Value="True">
 
-                    <Setter Property="Control.Foreground" Value="DarkRed"/>
+          <Setter Property="Control.Foreground" Value="DarkRed"/>
 
-                </Trigger>
+        </Trigger>
 
-            </Style.Triggers>
+      </Style.Triggers>
 
-        </Style>
+    </Style>
 
-    </Window.Resources>
+  </Window.Resources>
 
 ```
 
 > MultiTrigger	与Trigger类似，但这种触发器联合了多个条件。只有满足了所有这些条件，才会启动触发器。
 
-    <Style.Triggers>
+  <Style.Triggers>
 
-                <MultiDataTrigger>
+        <MultiDataTrigger>
 
-                    <MultiDataTrigger.Conditions>
+          <MultiDataTrigger.Conditions>
 
-                        <Condition Property="Control.IsFocused" Value="true"/>
+            <Condition Property="Control.IsFocused" Value="true"/>
 
-                        <Condition Property="Control.IsMouseOver" Value="true"/>
+            <Condition Property="Control.IsMouseOver" Value="true"/>
 
-                    </MultiDataTrigger.Conditions>
+          </MultiDataTrigger.Conditions>
 
-                    <MultiDataTrigger.Setters>
+          <MultiDataTrigger.Setters>
 
-                        <Setter Property="Control.Foreground" Value="DarkRed"/>
+            <Setter Property="Control.Foreground" Value="DarkRed"/>
 
-                    </MultiDataTrigger.Setters>
+          </MultiDataTrigger.Setters>
 
-                </MultiDataTrigger>
+        </MultiDataTrigger>
 
-            </Style.Triggers>
+      </Style.Triggers>
 
 > DataTrigger	这种触发器使用数据绑定，与Trigger类似，只不过监视的是任意绑定数据的变化。
 
@@ -10012,69 +10015,69 @@ public string Text
 
  <Window.Resources>
 
-        <Style x:Key="BigFontButton">
+    <Style x:Key="BigFontButton">
 
-            <Style.Setters>
+      <Style.Setters>
 
-                <Setter Property="Control.FontFamily" Value="Times New Roman"/>
+        <Setter Property="Control.FontFamily" Value="Times New Roman"/>
 
-                <Setter Property="Control.FontSize" Value="18"/>
+        <Setter Property="Control.FontSize" Value="18"/>
 
-                <Setter Property="Control.FontWeight" Value="Bold"/>
+        <Setter Property="Control.FontWeight" Value="Bold"/>
 
-            </Style.Setters>
+      </Style.Setters>
 
-            <Style.Triggers>
+      <Style.Triggers>
 
-                <EventTrigger RoutedEvent="Mouse.MouseEnter">
+        <EventTrigger RoutedEvent="Mouse.MouseEnter">
 
-                    <EventTrigger.Actions>
+          <EventTrigger.Actions>
 
-                        <BeginStoryboard>
+            <BeginStoryboard>
 
-                            <Storyboard>
+              <Storyboard>
 
-                                <DoubleAnimation Duration="0:0:3" Storyboard.TargetProperty="FontSize"
+                <DoubleAnimation Duration="0:0:3" Storyboard.TargetProperty="FontSize"
 
-                                                 To="50"/>
+                         To="50"/>
 
-                            </Storyboard>
+              </Storyboard>
 
-                        </BeginStoryboard>
+            </BeginStoryboard>
 
-                    </EventTrigger.Actions>
+          </EventTrigger.Actions>
 
-                </EventTrigger>
+        </EventTrigger>
 
-                <EventTrigger RoutedEvent="Mouse.MouseLeave">
+        <EventTrigger RoutedEvent="Mouse.MouseLeave">
 
-                    <EventTrigger.Actions>
+          <EventTrigger.Actions>
 
-                        <BeginStoryboard>
+            <BeginStoryboard>
 
-                            <Storyboard>
+              <Storyboard>
 
-                                <DoubleAnimation Duration="0:0:3" Storyboard.TargetProperty="FontSize"/>
+                <DoubleAnimation Duration="0:0:3" Storyboard.TargetProperty="FontSize"/>
 
-                            </Storyboard>
+              </Storyboard>
 
-                        </BeginStoryboard>
+            </BeginStoryboard>
 
-                    </EventTrigger.Actions>
+          </EventTrigger.Actions>
 
-                </EventTrigger>
+        </EventTrigger>
 
-            </Style.Triggers>
+      </Style.Triggers>
 
-        </Style>
+    </Style>
 
-    </Window.Resources>
+  </Window.Resources>
 
-    <Grid Name="gird1" ShowGridLines="True">
+  <Grid Name="gird1" ShowGridLines="True">
 
-        <Button HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource BigFontButton}">onesfsfsfsfsdfsdf</Button>
+    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource BigFontButton}">onesfsfsfsfsdfsdf</Button>
 
-    </Grid>
+  </Grid>
 
 ```
 
@@ -10134,61 +10137,61 @@ public string Text
 
  public interface ICopyAble
 
-    {
-
-        /// <summary>
-
-        /// 复制操作
-
-        /// </summary>
-
-        /// <param name="IsDeleteSource">是否删除源</param>
-
-        /// <returns></returns>
-
-        CopyPasteData Copy(bool IsDeleteSource);
-
-        /// <summary>
-
-        /// 剪贴版的清空操作
-
-        /// </summary>
-
-        /// <param name="Data"></param>
-
-        void Remove(CopyPasteData Data);
-
-    }
-
-```
-
-####  IPasteAble
-
-```
+  {
 
     /// <summary>
 
-    /// 复制粘贴服务接口
-
-    /// 可以根据用户自己实现具体支持的数据类型所以定义为泛型类
+    /// 复制操作
 
     /// </summary>
 
-    /// <typeparam name="T"></typeparam>
+    /// <param name="IsDeleteSource">是否删除源</param>
 
-    public interface IPasteAble
+    /// <returns></returns>
 
-    {
+    CopyPasteData Copy(bool IsDeleteSource);
 
-        /// <summary>
+    /// <summary>
 
-        /// 粘贴操作
+    /// 剪贴版的清空操作
 
-        /// </summary>
+    /// </summary>
 
-        void Paste(CopyPasteData Data);
+    /// <param name="Data"></param>
 
-    }
+    void Remove(CopyPasteData Data);
+
+  }
+
+```
+
+#### IPasteAble
+
+```
+
+  /// <summary>
+
+  /// 复制粘贴服务接口
+
+  /// 可以根据用户自己实现具体支持的数据类型所以定义为泛型类
+
+  /// </summary>
+
+  /// <typeparam name="T"></typeparam>
+
+  public interface IPasteAble
+
+  {
+
+    /// <summary>
+
+    /// 粘贴操作
+
+    /// </summary>
+
+    void Paste(CopyPasteData Data);
+
+  }
 
 ```
 
@@ -10196,143 +10199,143 @@ public string Text
 
 ```
 
-    public class CopyPasteProxy
+  public class CopyPasteProxy
+
+  {
+
+    public CopyPasteData Data { get; set; }
+
+    public ICopyAble Source { get; set; }
+
+    public void Copy(ICopyAble Source,bool IsDeleteSource)
 
     {
 
-        public CopyPasteData Data { get; set; }
+      this.Source = Source;
 
-        public ICopyAble Source { get; set; }
+      if (Source != null)
 
-        public void Copy(ICopyAble Source,bool IsDeleteSource)
+      {
 
-        {
+        Data = Source.Copy(IsDeleteSource);
 
-            this.Source = Source;
+      }
 
-            if (Source != null)
+      else
 
-            {
+      {
 
-                Data = Source.Copy(IsDeleteSource);
+        Data = new CopyPasteData();
 
-            }
-
-            else
-
-            {
-
-                Data = new CopyPasteData();
-
-            }
-
-        }
-
-        public void Paste(IPasteAble Destination, bool IsDeleteSource)
-
-        {
-
-            if (Destination != null)
-
-            {
-
-                Destination.Paste(Data);
-
-                if (IsDeleteSource)
-
-                {
-
-                    Source.Remove(Data);
-
-                }
-
-            }
-
-        }
-
-        public void OnCopy(bool IsDeleteSource)
-
-        {
-
-            if (Keyboard.FocusedElement is DependencyObject)
-
-            {
-
-                var c = GetParent<ICopyAble>(Keyboard.FocusedElement as DependencyObject);
-
-                if (c != null && c is ICopyAble)
-
-                {
-
-                    Copy(c as ICopyAble, IsDeleteSource);
-
-                }
-
-            }
-
-        }
-
-        public void OnPaste(bool IsDeleteSource)
-
-        {
-
-            if (Keyboard.FocusedElement is DependencyObject)
-
-            {
-
-                var p = GetParent<IPasteAble>(Keyboard.FocusedElement as DependencyObject);
-
-                if (p != null && p is IPasteAble)
-
-                {
-
-                    Paste(p as IPasteAble, IsDeleteSource);
-
-                }
-
-            }
-
-        }
-
-        private DependencyObject GetParent<T>(DependencyObject o)
-
-        {
-
-            if (o != null && o is DependencyObject)
-
-            {
-
-                var p = VisualTreeHelper.GetParent(o as UIElement);
-
-                if (p != null && p is T)
-
-                {
-
-                    return p;
-
-                }
-
-                else if(p != null)
-
-                {
-
-                    return GetParent<T>(p);
-
-                }
-
-                {
-
-                    return null;
-
-                }
-
-            }
-
-            return null;
-
-        }
+      }
 
     }
+
+    public void Paste(IPasteAble Destination, bool IsDeleteSource)
+
+    {
+
+      if (Destination != null)
+
+      {
+
+        Destination.Paste(Data);
+
+        if (IsDeleteSource)
+
+        {
+
+          Source.Remove(Data);
+
+        }
+
+      }
+
+    }
+
+    public void OnCopy(bool IsDeleteSource)
+
+    {
+
+      if (Keyboard.FocusedElement is DependencyObject)
+
+      {
+
+        var c = GetParent<ICopyAble>(Keyboard.FocusedElement as DependencyObject);
+
+        if (c != null && c is ICopyAble)
+
+        {
+
+          Copy(c as ICopyAble, IsDeleteSource);
+
+        }
+
+      }
+
+    }
+
+    public void OnPaste(bool IsDeleteSource)
+
+    {
+
+      if (Keyboard.FocusedElement is DependencyObject)
+
+      {
+
+        var p = GetParent<IPasteAble>(Keyboard.FocusedElement as DependencyObject);
+
+        if (p != null && p is IPasteAble)
+
+        {
+
+          Paste(p as IPasteAble, IsDeleteSource);
+
+        }
+
+      }
+
+    }
+
+    private DependencyObject GetParent<T>(DependencyObject o)
+
+    {
+
+      if (o != null && o is DependencyObject)
+
+      {
+
+        var p = VisualTreeHelper.GetParent(o as UIElement);
+
+        if (p != null && p is T)
+
+        {
+
+          return p;
+
+        }
+
+        else if(p != null)
+
+        {
+
+          return GetParent<T>(p);
+
+        }
+
+        {
+
+          return null;
+
+        }
+
+      }
+
+      return null;
+
+    }
+
+  }
 
 ```
 
@@ -10340,55 +10343,55 @@ public string Text
 
 ```
 
-  public class CopyPasteData
+ public class CopyPasteData
 
-    {
+  {
 
-        /// <summary>
+    /// <summary>
 
-        /// 数据类型
+    /// 数据类型
 
-        /// </summary>
+    /// </summary>
 
-        public string DataType { get; set; } = "ClipboardDataFromMemo";
+    public string DataType { get; set; } = "ClipboardDataFromMemo";
 
-        /// <summary>
+    /// <summary>
 
-        /// 数据是否从系统剪贴版获取
+    /// 数据是否从系统剪贴版获取
 
-        /// </summary>
+    /// </summary>
 
-        public bool IsFromClipboard { get; set; } = true;
+    public bool IsFromClipboard { get; set; } = true;
 
-        /// <summary>
+    /// <summary>
 
-        /// 数据对象 IsFromClipboard为true则此值无效需要直接获取剪贴板数据
+    /// 数据对象 IsFromClipboard为true则此值无效需要直接获取剪贴板数据
 
-        /// </summary>
+    /// </summary>
 
-        public object Data { get; set; } = null;
+    public object Data { get; set; } = null;
 
-        /// <summary>
+    /// <summary>
 
-        /// 获取剪贴板数据
+    /// 获取剪贴板数据
 
-        /// 数据对象 IsFromClipboard为true则此值有效 当然客户可以直接从系统剪贴板直接获取数据
+    /// 数据对象 IsFromClipboard为true则此值有效 当然客户可以直接从系统剪贴板直接获取数据
 
-        /// </summary>
+    /// </summary>
 
-        public IDataObject ClipboardData
+    public IDataObject ClipboardData
 
-        {   get
+    {  get
 
-            {
+      {
 
-                return Clipboard.GetDataObject();
+        return Clipboard.GetDataObject();
 
-            } 
-
-        }
+      } 
 
     }
+
+  }
 
 ```
 
@@ -10426,59 +10429,59 @@ namespace Inovance.FA.FAOutTest.Behaviors
 
 {
 
-    public class EffectBehavior : Behavior<FrameworkElement>
+  public class EffectBehavior : Behavior<FrameworkElement>
+
+  {
+
+    //使用 Behavior 必须重写以下两个虚方法
+
+    protected override void OnAttached()
 
     {
 
-        //使用 Behavior 必须重写以下两个虚方法
+      base.OnAttached();
 
-        protected override void OnAttached()
+      //AssociatedObject为关联对象， 是Behavior<T>中的T
 
-        {
+      AssociatedObject.MouseMove += AssociatedObject_MouseMove;
 
-            base.OnAttached();
-
-            //AssociatedObject为关联对象， 是Behavior<T>中的T
-
-            AssociatedObject.MouseMove += AssociatedObject_MouseMove;
-
-            AssociatedObject.MouseLeave += AssociatedObject_MouseLeave;
-
-        }
-
-        private void AssociatedObject_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
-
-        {
-
-            var element = sender as FrameworkElement;
-
-            element.Effect = (Effect)new DropShadowEffect() { Color = Colors.Transparent, ShadowDepth = 0 };
-
-        }
-
-        private void AssociatedObject_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-
-        {
-
-            var element = sender as FrameworkElement;
-
-            element.Effect = (Effect)new DropShadowEffect() { Color = Colors.Red, ShadowDepth = 0 };
-
-        }
-
-        protected override void OnDetaching()
-
-        {
-
-            base.OnDetaching();
-
-            AssociatedObject.MouseMove -= AssociatedObject_MouseMove;
-
-            AssociatedObject.MouseLeave -= AssociatedObject_MouseLeave;
-
-        }
+      AssociatedObject.MouseLeave += AssociatedObject_MouseLeave;
 
     }
+
+    private void AssociatedObject_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+
+    {
+
+      var element = sender as FrameworkElement;
+
+      element.Effect = (Effect)new DropShadowEffect() { Color = Colors.Transparent, ShadowDepth = 0 };
+
+    }
+
+    private void AssociatedObject_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+
+    {
+
+      var element = sender as FrameworkElement;
+
+      element.Effect = (Effect)new DropShadowEffect() { Color = Colors.Red, ShadowDepth = 0 };
+
+    }
+
+    protected override void OnDetaching()
+
+    {
+
+      base.OnDetaching();
+
+      AssociatedObject.MouseMove -= AssociatedObject_MouseMove;
+
+      AssociatedObject.MouseLeave -= AssociatedObject_MouseLeave;
+
+    }
+
+  }
 
 }
 
@@ -10530,101 +10533,101 @@ namespace Inovance.FA.FAOutTest.Behaviors
 
 public abstract class ViewModel : INotifyPropertyChanged
 
+  {
+
+    public ILogger Logger { get; set; }
+
+    public IMessageBox MessageBox { get; set; }
+
+    public ViewModel()
+
     {
 
-        public ILogger Logger { get; set; }
+      Logger = StaticData.Container.GetExportedValue<ILogger>();
 
-        public IMessageBox MessageBox { get; set; }
-
-        public ViewModel()
-
-        {
-
-            Logger = StaticData.Container.GetExportedValue<ILogger>();
-
-            MessageBox = StaticData.Container.GetExportedValue<IMessageBox>();
-
-        }
-
-        public string Name
-
-        {
-
-            get
-
-            {
-
-                return this.GetType().Name;
-
-            }
-
-        }
-
-        public bool? dialogResult;
-
-        public bool? DialogResult
-
-        {
-
-            get
-
-            {
-
-                return dialogResult;
-
-            }
-
-            set
-
-            {
-
-                dialogResult = value;
-
-                RaisePropertyChanged("DialogResult");
-
-            }
-
-        }
-
-        protected virtual void RaisePropertyChanged(string propertyName)
-
-        {
-
-            if (PropertyChanged != null)
-
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public bool SetProperty<T>(ref T Source, T NewValue, [CallerMemberName] string? propertyName = null) where T : IComparable
-
-        {
-
-            if (EqualityComparer<T>.Default.Equals(Source, NewValue))
-
-            {
-
-                return false;
-
-            }
-
-            else
-
-            {
-
-                Source = NewValue;
-
-                RaisePropertyChanged(propertyName);
-
-            }
-
-            return true;
-
-        }
+      MessageBox = StaticData.Container.GetExportedValue<IMessageBox>();
 
     }
+
+    public string Name
+
+    {
+
+      get
+
+      {
+
+        return this.GetType().Name;
+
+      }
+
+    }
+
+    public bool? dialogResult;
+
+    public bool? DialogResult
+
+    {
+
+      get
+
+      {
+
+        return dialogResult;
+
+      }
+
+      set
+
+      {
+
+        dialogResult = value;
+
+        RaisePropertyChanged("DialogResult");
+
+      }
+
+    }
+
+    protected virtual void RaisePropertyChanged(string propertyName)
+
+    {
+
+      if (PropertyChanged != null)
+
+        PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public bool SetProperty<T>(ref T Source, T NewValue, [CallerMemberName] string? propertyName = null) where T : IComparable
+
+    {
+
+      if (EqualityComparer<T>.Default.Equals(Source, NewValue))
+
+      {
+
+        return false;
+
+      }
+
+      else
+
+      {
+
+        Source = NewValue;
+
+        RaisePropertyChanged(propertyName);
+
+      }
+
+      return true;
+
+    }
+
+  }
 
 ```
 
@@ -10634,13 +10637,13 @@ public abstract class ViewModel : INotifyPropertyChanged
 
 public List<DataNode> projectNodes;
 
-               public List<DataNode> ProjectNodes{
+        public List<DataNode> ProjectNodes{
 
-            get => projectNodes;
+      get => projectNodes;
 
-            set => SetProperty(ref projectNodes, value);
+      set => SetProperty(ref projectNodes, value);
 
-        }
+    }
 
 ```
 
@@ -10664,11 +10667,11 @@ public List<DataNode> projectNodes;
 
 > Activated：当激活应用程序中的窗口时发生该事件，当切换到另外一个window程序时也会触发。
 
-> > 1、  应用程序打开第一个窗口。
+> > 1、 应用程序打开第一个窗口。
 
-> > 2、  用户使用Alt+Tab组合件或者使用任务管理器切换到该应用程序。
+> > 2、 用户使用Alt+Tab组合件或者使用任务管理器切换到该应用程序。
 
-> > 3、  用户单击应用程序中一个窗口的任务栏按钮。
+> > 3、 用户单击应用程序中一个窗口的任务栏按钮。
 
 > Deactivated：当取消激活应用程序中的窗口时发生该事件，当切换到另外一个window程序时也会触发。
 
@@ -10688,63 +10691,63 @@ using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 <Window x:Class="ChildWindowDemo.ChildWindow.ChildWindow"
 
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"  
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
 
-        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
 
-        Width="300" Height="150" 
+    Width="300" Height="150" 
 
-        Title="{Binding Title}"
+    Title="{Binding Title}"
 
-        x:Name="confirmationWindow" Topmost="True" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+    x:Name="confirmationWindow" Topmost="True" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
 
-    <Grid x:Name="LayoutRoot" Margin="2">
+  <Grid x:Name="LayoutRoot" Margin="2">
 
-        <Grid.RowDefinitions>
+    <Grid.RowDefinitions>
 
-            <RowDefinition />
+      <RowDefinition />
 
-            <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
 
-        </Grid.RowDefinitions>
+    </Grid.RowDefinitions>
 
-        <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Content="{Binding Content}"/>
+    <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Content="{Binding Content}"/>
 
-        <Button Content="Cancel" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0" Grid.Row="1">
+    <Button Content="Cancel" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0" Grid.Row="1">
 
-            <i:Interaction.Triggers>
+      <i:Interaction.Triggers>
 
-                <i:EventTrigger EventName="Click">
+        <i:EventTrigger EventName="Click">
 
-                    <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
+          <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
 
-                </i:EventTrigger>
+        </i:EventTrigger>
 
-            </i:Interaction.Triggers>
+      </i:Interaction.Triggers>
 
-        </Button>
+    </Button>
 
-        <Button Content="OK" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,79,0" Grid.Row="1">
+    <Button Content="OK" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,79,0" Grid.Row="1">
 
-            <i:Interaction.Triggers>
+      <i:Interaction.Triggers>
 
-                <i:EventTrigger EventName="Click">
+        <i:EventTrigger EventName="Click">
 
-                    <ei:ChangePropertyAction PropertyName="Confirmed" TargetObject="{Binding}" Value="True"/>
+          <ei:ChangePropertyAction PropertyName="Confirmed" TargetObject="{Binding}" Value="True"/>
 
-                    <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
+          <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
 
-                </i:EventTrigger>
+        </i:EventTrigger>
 
-            </i:Interaction.Triggers>
+      </i:Interaction.Triggers>
 
-        </Button>
+    </Button>
 
-    </Grid>
+  </Grid>
 
 </Window>
 
@@ -10760,63 +10763,63 @@ using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 public class ChildWindowActionBase : TriggerAction<FrameworkElement>
 
+  {
+
+    protected override void Invoke(object parameter)
+
     {
 
-        protected override void Invoke(object parameter)
+      var arg = parameter as InteractionRequestedEventArgs;
+
+      if (arg == null)
+
+        return;
+
+      var windows = this.GetChildWindow(arg.Context);
+
+      var callback = arg.Callback;
+
+      EventHandler handler = null;
+
+      handler =
+
+        (o, e) =>
 
         {
 
-            var arg = parameter as InteractionRequestedEventArgs;
+          windows.Closed -= handler;
 
-            if (arg == null)
+          callback();
 
-                return;
+        };
 
-            var windows = this.GetChildWindow(arg.Context);
+      windows.Closed += handler;
 
-            var callback = arg.Callback;
-
-            EventHandler handler = null;
-
-            handler =
-
-                (o, e) =>
-
-                {
-
-                    windows.Closed -= handler;
-
-                    callback();
-
-                };
-
-            windows.Closed += handler;
-
-            windows.ShowDialog();
-
-        }
-
-        Window GetChildWindow(Notification notification)
-
-        {
-
-            var childWindow = this.CreateDefaultWindow(notification);
-
-            childWindow.DataContext = notification;
-
-            return childWindow;
-
-        }
-
-        Window CreateDefaultWindow(Notification notification)
-
-        {
-
-            return (Window)new ChildWindow.ChildWindow();
-
-        }
+      windows.ShowDialog();
 
     }
+
+    Window GetChildWindow(Notification notification)
+
+    {
+
+      var childWindow = this.CreateDefaultWindow(notification);
+
+      childWindow.DataContext = notification;
+
+      return childWindow;
+
+    }
+
+    Window CreateDefaultWindow(Notification notification)
+
+    {
+
+      return (Window)new ChildWindow.ChildWindow();
+
+    }
+
+  }
 
 ```
 
@@ -10826,39 +10829,39 @@ public class ChildWindowActionBase : TriggerAction<FrameworkElement>
 
 <Window x:Class="ChildWindowDemo.MainWindow"
 
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 
-        xmlns:prism="http://www.codeplex.com/prism"
+    xmlns:prism="http://www.codeplex.com/prism"
 
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 
-        xmlns:local="clr-namespace:ChildWindowDemo"
+    xmlns:local="clr-namespace:ChildWindowDemo"
 
-        Title="MainWindow" Height="200" Width="300">
+    Title="MainWindow" Height="200" Width="300">
 
-    <i:Interaction.Triggers>
+  <i:Interaction.Triggers>
 
-        <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest, Mode=OneWay}">
+    <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest, Mode=OneWay}">
 
-            <local:ChildWindowActionBase/>
+      <local:ChildWindowActionBase/>
 
-        </prism:InteractionRequestTrigger>
+    </prism:InteractionRequestTrigger>
 
-    </i:Interaction.Triggers>
+  </i:Interaction.Triggers>
 
-    <Grid>
+  <Grid>
 
-        <Button Command="{Binding RaiseConfirmation}" Content="Click Me !" HorizontalAlignment="Left" Margin="29,31,0,0" VerticalAlignment="Top" Width="217" Height="55"/>
+    <Button Command="{Binding RaiseConfirmation}" Content="Click Me !" HorizontalAlignment="Left" Margin="29,31,0,0" VerticalAlignment="Top" Width="217" Height="55"/>
 
-        <TextBlock HorizontalAlignment="Left" Margin="29,106,0,0" TextWrapping="Wrap" Text="{Binding ConfirmationResult}" VerticalAlignment="Top"/>
+    <TextBlock HorizontalAlignment="Left" Margin="29,106,0,0" TextWrapping="Wrap" Text="{Binding ConfirmationResult}" VerticalAlignment="Top"/>
 
-    </Grid>
+  </Grid>
 
 </Window>
 
@@ -10870,55 +10873,55 @@ public class ChildWindowActionBase : TriggerAction<FrameworkElement>
 
 public class MainWindowViewModel : NotificationObject
 
+  {
+
+    public MainWindowViewModel()
+
     {
 
-        public MainWindowViewModel()
+      this.RaiseConfirmation = new DelegateCommand(this.OnRaiseConfirmation);
 
-        {
-
-            this.RaiseConfirmation = new DelegateCommand(this.OnRaiseConfirmation);
-
-            this.ConfirmationRequest = new InteractionRequest<Confirmation>();
-
-        }
-
-        public InteractionRequest<Confirmation> ConfirmationRequest { get; private set; }
-
-        public DelegateCommand RaiseConfirmation { get; private set; }
-
-        private string result;
-
-        public string ConfirmationResult
-
-        {
-
-            get { return result; }
-
-            set
-
-            {
-
-                result = value;
-
-                this.RaisePropertyChanged(() => this.ConfirmationResult);
-
-            }
-
-        }
-
-        private void OnRaiseConfirmation()
-
-        {
-
-            this.ConfirmationRequest.Raise(
-
-                new Confirmation { Content = "是否确认", Title = "子窗体" },
-
-                (cb) => { ConfirmationResult = cb.Confirmed ? "确认" : "取消"; });
-
-        }      
+      this.ConfirmationRequest = new InteractionRequest<Confirmation>();
 
     }
+
+    public InteractionRequest<Confirmation> ConfirmationRequest { get; private set; }
+
+    public DelegateCommand RaiseConfirmation { get; private set; }
+
+    private string result;
+
+    public string ConfirmationResult
+
+    {
+
+      get { return result; }
+
+      set
+
+      {
+
+        result = value;
+
+        this.RaisePropertyChanged(() => this.ConfirmationResult);
+
+      }
+
+    }
+
+    private void OnRaiseConfirmation()
+
+    {
+
+      this.ConfirmationRequest.Raise(
+
+        new Confirmation { Content = "是否确认", Title = "子窗体" },
+
+        (cb) => { ConfirmationResult = cb.Confirmed ? "确认" : "取消"; });
+
+    }   
+
+  }
 
 ```
 
@@ -10932,11 +10935,11 @@ http://www.cnblogs.com/sunthx/p/3539900.html
 
 #### Prism框架中一些非常重要的概念
 
-#####  Modules
+##### Modules
 
 > Modules是能够独立开发、测试、部署的功能单元，
 
-> Modules可以被设计成实现特定业务逻辑的模块（如Profile Management），也可以被设计成实现通用基础设施或服务的模块  　（如Logging、Exception Management）。
+> Modules可以被设计成实现特定业务逻辑的模块（如Profile Management），也可以被设计成实现通用基础设施或服务的模块 　（如Logging、Exception Management）。
 
 ##### Module Catalog：
 
@@ -11056,17 +11059,17 @@ public class MockViewModel : BindableBase
 
 {
 
-    private string _myProperty;
+  private string _myProperty;
 
-    public string MyProperty
+  public string MyProperty
 
-    {
+  {
 
-        get { return _myProperty; }
+    get { return _myProperty; }
 
-        set { SetProperty(ref _myProperty, value); }
+    set { SetProperty(ref _myProperty, value); }
 
-    }
+  }
 
 }
 
@@ -11082,51 +11085,51 @@ public class DomainObject : BindableBase, INotifyDataErrorInfo
 
 {
 
-    public ErrorsContainer<string> _errorsContainer;
+  public ErrorsContainer<string> _errorsContainer;
 
-    protected ErrorsContainer<string> ErrorsContainer
+  protected ErrorsContainer<string> ErrorsContainer
 
-    {
+  {
 
-        get
-
-        {
-
-            if (_errorsContainer == null)
-
-                _errorsContainer = new ErrorsContainer<string>(s => OnErrorsChanged(s));
-
-            return _errorsContainer;
-
-        }
-
-    }
-
-    public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-
-    public void OnErrorsChanged(string propertyName)
+    get
 
     {
 
-        ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+      if (_errorsContainer == null)
+
+        _errorsContainer = new ErrorsContainer<string>(s => OnErrorsChanged(s));
+
+      return _errorsContainer;
 
     }
 
-    public IEnumerable GetErrors(string propertyName)
+  }
 
-    {
+  public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
 
-        return ErrorsContainer.GetErrors(propertyName);
+  public void OnErrorsChanged(string propertyName)
 
-    }
+  {
 
-    public bool HasErrors
+    ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
 
-    {
+  }
 
-        get { return ErrorsContainer.HasErrors; }
+  public IEnumerable GetErrors(string propertyName)
 
-    }
+  {
+
+    return ErrorsContainer.GetErrors(propertyName);
+
+  }
+
+  public bool HasErrors
+
+  {
+
+    get { return ErrorsContainer.HasErrors; }
+
+  }
 
 }
 
@@ -11140,37 +11143,37 @@ public class MockValidatingViewModel : DomainObject
 
 {
 
-    private int mockProperty;
+  private int mockProperty;
 
-    public int MockProperty
+  public int MockProperty
+
+  {
+
+    get
 
     {
 
-        get
-
-        {
-
-            return mockProperty;
-
-        }
-
-        set
-
-        {
-
-            SetProperty(ref mockProperty, value);
-
-            if (mockProperty < 0)
-
-                ErrorsContainer.SetErrors(() => MockProperty, new string[] { "value cannot be less than 0" });
-
-            else
-
-                ErrorsContainer.ClearErrors(() => MockProperty);
-
-        }
+      return mockProperty;
 
     }
+
+    set
+
+    {
+
+      SetProperty(ref mockProperty, value);
+
+      if (mockProperty < 0)
+
+        ErrorsContainer.SetErrors(() => MockProperty, new string[] { "value cannot be less than 0" });
+
+      else
+
+        ErrorsContainer.ClearErrors(() => MockProperty);
+
+    }
+
+  }
 
 }
 
@@ -11188,7 +11191,7 @@ public CheckUserViewModel()
 
 {
 
-    SubmitCommand = new DelegateCommand(Submit, CanSubmit);
+  SubmitCommand = new DelegateCommand(Submit, CanSubmit);
 
 }
 
@@ -11196,7 +11199,7 @@ private void Submit()
 
 {
 
-    //implement logic
+  //implement logic
 
 }
 
@@ -11204,7 +11207,7 @@ private bool CanSubmit()
 
 {
 
-    return true;
+  return true;
 
 }
 
@@ -11220,7 +11223,7 @@ public CheckUserViewModel()
 
 {
 
-    SubmitCommand = new DelegateCommand<string>(Submit, CanSubmit);
+  SubmitCommand = new DelegateCommand<string>(Submit, CanSubmit);
 
 }
 
@@ -11228,7 +11231,7 @@ private void Submit(string parameter)
 
 {
 
-    //implement logic
+  //implement logic
 
 }
 
@@ -11236,7 +11239,7 @@ private bool CanSubmit(string parameter)
 
 {
 
-    return true;
+  return true;
 
 }
 
@@ -11254,9 +11257,9 @@ public bool IsEnabled
 
 {
 
-    get { return _isEnabled; }
+  get { return _isEnabled; }
 
-    set { SetProperty(ref _isEnabled, value); }
+  set { SetProperty(ref _isEnabled, value); }
 
 }
 
@@ -11266,9 +11269,9 @@ public bool CanSave
 
 {
 
-    get { return _canSave; }
+  get { return _canSave; }
 
-    set { SetProperty(ref _canSave, value); }
+  set { SetProperty(ref _canSave, value); }
 
 }
 
@@ -11276,13 +11279,13 @@ public CheckUserViewModel()
 
 {
 
-    SubmitCommand = new DelegateCommand(Submit, CanSubmit).ObservesProperty(() => IsEnabled);
+  SubmitCommand = new DelegateCommand(Submit, CanSubmit).ObservesProperty(() => IsEnabled);
 
-    //也可以写成串联方式
+  //也可以写成串联方式
 
-    SubmitCommand = new DelegateCommand(Submit, CanSubmit).ObservesProperty(() => IsEnabled).ObservesProperty<bool>(() => CanSave);
+  SubmitCommand = new DelegateCommand(Submit, CanSubmit).ObservesProperty(() => IsEnabled).ObservesProperty<bool>(() => CanSave);
 
-    SubmitCommand = new DelegateCommand(Submit).ObservesCanExecute(() => IsEnabled);
+  SubmitCommand = new DelegateCommand(Submit).ObservesCanExecute(() => IsEnabled);
 
 }
 
@@ -11304,15 +11307,15 @@ public class MainPageViewModel
 
 {
 
-    IEventAggregator _eventAggregator;
+  IEventAggregator _eventAggregator;
 
-    public MainPageViewModel(IEventAggregator ea)
+  public MainPageViewModel(IEventAggregator ea)
 
-    {
+  {
 
-        _eventAggregator = ea;
+    _eventAggregator = ea;
 
-    }
+  }
 
 }
 
@@ -11330,21 +11333,21 @@ public class MainPageViewModel
 
 {
 
-    public MainPageViewModel(IEventAggregator ea)
+  public MainPageViewModel(IEventAggregator ea)
 
-    {
+  {
 
-        ea.GetEvent<TickerSymbolSelectedEvent>().Subscribe(ShowNews);
+    ea.GetEvent<TickerSymbolSelectedEvent>().Subscribe(ShowNews);
 
-    }
+  }
 
-    void ShowNews(string companySymbol)
+  void ShowNews(string companySymbol)
 
-    {
+  {
 
-        //implement logic
+    //implement logic
 
-    }
+  }
 
 }
 
@@ -11376,33 +11379,33 @@ public class MainPageViewModel
 
 {
 
-    TickerSymbolSelectedEvent _event;
+  TickerSymbolSelectedEvent _event;
 
-    public MainPageViewModel(IEventAggregator ea)
+  public MainPageViewModel(IEventAggregator ea)
 
-    {
+  {
 
-        _event = ea.GetEvent<TickerSymbolSelectedEvent>();
+    _event = ea.GetEvent<TickerSymbolSelectedEvent>();
 
-        _event.Subscribe(ShowNews);
+    _event.Subscribe(ShowNews);
 
-    }
+  }
 
-    void Unsubscribe()
+  void Unsubscribe()
 
-    {
+  {
 
-        _event.Unsubscribe(ShowNews);
+    _event.Unsubscribe(ShowNews);
 
-    }
+  }
 
-    void ShowNews(string companySymbol)
+  void ShowNews(string companySymbol)
 
-    {
+  {
 
-        //implement logic
+    //implement logic
 
-    }
+  }
 
 }
 
@@ -11410,7 +11413,7 @@ public class MainPageViewModel
 
 #### Productivity Tools
 
-####  Prism.Wpf 和 Prism.Unity
+#### Prism.Wpf 和 Prism.Unity
 
 这篇是 Prism 8.0 入门的第二篇文章，上一篇介绍了 Prism.Core，这篇文章主要介绍 Prism.Wpf 和 Prism.Unity。
 
@@ -11458,15 +11461,15 @@ Copy
 
 <prism:PrismApplication x:Class="PrismTest.App"
 
-                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
-                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
-                        xmlns:prism="http://prismlibrary.com/">
+            xmlns:prism="http://prismlibrary.com/">
 
-    <Application.Resources>
+  <Application.Resources>
 
-    </Application.Resources>
+  </Application.Resources>
 
 </prism:PrismApplication>
 
@@ -11480,15 +11483,15 @@ public partial class App : PrismApplication
 
 {
 
-    public App()
+  public App()
 
-    {
+  {
 
-    }
+  }
 
-    protected override Window CreateShell()
+  protected override Window CreateShell()
 
-        => Container.Resolve<ShellWindow>();
+    => Container.Resolve<ShellWindow>();
 
 }
 
@@ -11504,25 +11507,25 @@ protected override void RegisterTypes(IContainerRegistry containerRegistry)
 
 {
 
-    // Core Services
+  // Core Services
 
-    // App Services
+  // App Services
 
-    // Views
+  // Views
 
-    containerRegistry.RegisterForNavigation<BlankPage, BlankViewModel>(PageKeys.Blank);
+  containerRegistry.RegisterForNavigation<BlankPage, BlankViewModel>(PageKeys.Blank);
 
-    containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(PageKeys.Main);
+  containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(PageKeys.Main);
 
-    containerRegistry.RegisterForNavigation<ShellWindow, ShellViewModel>();
+  containerRegistry.RegisterForNavigation<ShellWindow, ShellViewModel>();
 
-    // Configuration
+  // Configuration
 
-    var configuration = BuildConfiguration();
+  var configuration = BuildConfiguration();
 
-    // Register configurations to IoC
+  // Register configurations to IoC
 
-    containerRegistry.RegisterInstance<IConfiguration>(configuration);
+  containerRegistry.RegisterInstance<IConfiguration>(configuration);
 
 }
 
@@ -11534,7 +11537,7 @@ Copy
 
 <UserControl.DataContext>
 
-    <viewmodels:MainViewModel/>
+  <viewmodels:MainViewModel/>
 
 </UserControl.DataContext>
 
@@ -11544,19 +11547,19 @@ Copy
 
 <TextBlock
 
-  Text="{Binding
+ Text="{Binding
 
-    Path=Foo,
+  Path=Foo,
 
-    Converter={prism:ContainerProvider {x:Type local:MyConverter}}}" />
+  Converter={prism:ContainerProvider {x:Type local:MyConverter}}}" />
 
 <Window>
 
-  <Window.DataContext>
+ <Window.DataContext>
 
-    <prism:ContainerProvider Type="{x:Type local:MyViewModel}" />
+  <prism:ContainerProvider Type="{x:Type local:MyViewModel}" />
 
-  </Window.DataContext>
+ </Window.DataContext>
 
 </Window>
 
@@ -11568,11 +11571,11 @@ Copy
 
 <Window x:Class="Demo.Views.MainWindow"
 
-    ...
+  ...
 
-    xmlns:prism="http://prismlibrary.com/"
+  xmlns:prism="http://prismlibrary.com/"
 
-    prism:ViewModelLocator.AutoWireViewModel="True">
+  prism:ViewModelLocator.AutoWireViewModel="True">
 
 在将 View 的 ViewModelLocator.AutoWireViewModel 附加属性设置为 True 的同时，Prism 会为查找这个 View 对应的 ViewModel 类型，然后从 Container 中解析这个类型并设置为 View 的 DataContext。它首先查找 ViewModelLocationProvider 中已经使用 Register 注册的类型，Register 函数的使用方式如下：
 
@@ -11606,21 +11609,21 @@ protected override void ConfigureViewModelLocator()
 
 {
 
-    base.ConfigureViewModelLocator();
+  base.ConfigureViewModelLocator();
 
-    ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
+  ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
 
-    {
+  {
 
-        var viewName = viewType.FullName.Replace(".ViewModels.", ".CustomNamespace.");
+    var viewName = viewType.FullName.Replace(".ViewModels.", ".CustomNamespace.");
 
-        var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+    var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
 
-        var viewModelName = $"{viewName}ViewModel, {viewAssemblyName}";
+    var viewModelName = $"{viewName}ViewModel, {viewAssemblyName}";
 
-        return Type.GetType(viewModelName);
+    return Type.GetType(viewModelName);
 
-    });
+  });
 
 }
 
@@ -11642,9 +11645,9 @@ if (dialogResult == true)
 
 {
 
-    var user = window.User;
+  var user = window.User;
 
-    //other code;
+  //other code;
 
 }
 
@@ -11656,7 +11659,7 @@ public MainWindowViewModel(IDialogService dialogService)
 
 {
 
-    _dialogService = dialogService;
+  _dialogService = dialogService;
 
 }
 
@@ -11674,7 +11677,7 @@ var parameters = new DialogParameters
 
 {
 
-    { "UserName", "Admin" }
+  { "UserName", "Admin" }
 
 };
 
@@ -11682,15 +11685,15 @@ _dialogService.ShowDialog("CreateUser", parameters, dialogResult =>
 
 {
 
-    if (dialogResult.Result == ButtonResult.OK)
+  if (dialogResult.Result == ButtonResult.OK)
 
-    {
+  {
 
-        var user = dialogResult.Parameters.GetValue<User>("User");
+    var user = dialogResult.Parameters.GetValue<User>("User");
 
-        //other code
+    //other code
 
-    }
+  }
 
 });
 
@@ -11712,17 +11715,17 @@ Copy
 
 <prism:Dialog.WindowStyle>
 
-    <Style TargetType="Window">
+  <Style TargetType="Window">
 
-        <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
+    <Setter Property="prism:Dialog.WindowStartupLocation" Value="CenterScreen" />
 
-        <Setter Property="ResizeMode" Value="NoResize"/>
+    <Setter Property="ResizeMode" Value="NoResize"/>
 
-        <Setter Property="ShowInTaskbar" Value="False"/>
+    <Setter Property="ShowInTaskbar" Value="False"/>
 
-        <Setter Property="SizeToContent" Value="WidthAndHeight"/>
+    <Setter Property="SizeToContent" Value="WidthAndHeight"/>
 
-    </Style>
+  </Style>
 
 </prism:Dialog.WindowStyle>
 
@@ -11734,45 +11737,45 @@ public interface IDialogAware
 
 {
 
-    /// <summary>
+  /// <summary>
 
-    /// 确定是否可以关闭对话框。
+  /// 确定是否可以关闭对话框。
 
-    /// </summary>
+  /// </summary>
 
-    bool CanCloseDialog();
+  bool CanCloseDialog();
 
-    /// <summary>
+  /// <summary>
 
-    /// 关闭对话框时调用。
+  /// 关闭对话框时调用。
 
-    /// </summary>
+  /// </summary>
 
-    void OnDialogClosed();
+  void OnDialogClosed();
 
-    /// <summary>
+  /// <summary>
 
-    /// 在对话框打开时调用。
+  /// 在对话框打开时调用。
 
-    /// </summary>
+  /// </summary>
 
-    void OnDialogOpened(IDialogParameters parameters);
+  void OnDialogOpened(IDialogParameters parameters);
 
-    /// <summary>
+  /// <summary>
 
-    /// 将显示在窗口标题栏中的对话框的标题。
+  /// 将显示在窗口标题栏中的对话框的标题。
 
-    /// </summary>
+  /// </summary>
 
-    string Title { get; }
+  string Title { get; }
 
-    /// <summary>
+  /// <summary>
 
-    /// 指示 IDialogWindow 关闭对话框。
+  /// 指示 IDialogWindow 关闭对话框。
 
-    /// </summary>
+  /// </summary>
 
-    event Action<IDialogResult> RequestClose;
+  event Action<IDialogResult> RequestClose;
 
 }
 
@@ -11784,73 +11787,73 @@ public class CreateUserViewModel : BindableBase, IDialogAware
 
 {
 
-    public string Title => "Create User";
+  public string Title => "Create User";
 
-    public event Action<IDialogResult> RequestClose;
+  public event Action<IDialogResult> RequestClose;
 
-    private DelegateCommand _createCommand;
+  private DelegateCommand _createCommand;
 
-    public DelegateCommand CreateCommand => _createCommand ??= new DelegateCommand(Create);
+  public DelegateCommand CreateCommand => _createCommand ??= new DelegateCommand(Create);
 
-    private string _userName;
+  private string _userName;
 
-    public string UserName
+  public string UserName
+
+  {
+
+    get { return _userName; }
+
+    set { SetProperty(ref _userName, value); }
+
+  }
+
+  
+
+  public virtual void RaiseRequestClose(IDialogResult dialogResult)
+
+  {
+
+    RequestClose?.Invoke(dialogResult);
+
+  }
+
+  public virtual bool CanCloseDialog()
+
+  {
+
+    return true;
+
+  }
+
+  public virtual void OnDialogClosed()
+
+  {
+
+  }
+
+  public virtual void OnDialogOpened(IDialogParameters parameters)
+
+  {
+
+    UserName = parameters.GetValue<string>("UserName");
+
+  }
+
+  protected virtual void Create()
+
+  {
+
+    var parameters = new DialogParameters
 
     {
 
-        get { return _userName; }
+      { "User", new User{Name=UserName} }
 
-        set { SetProperty(ref _userName, value); }
+    };
 
-    }
+    RaiseRequestClose(new DialogResult(ButtonResult.OK, parameters));
 
-   
-
-    public virtual void RaiseRequestClose(IDialogResult dialogResult)
-
-    {
-
-        RequestClose?.Invoke(dialogResult);
-
-    }
-
-    public virtual bool CanCloseDialog()
-
-    {
-
-        return true;
-
-    }
-
-    public virtual void OnDialogClosed()
-
-    {
-
-    }
-
-    public virtual void OnDialogOpened(IDialogParameters parameters)
-
-    {
-
-        UserName = parameters.GetValue<string>("UserName");
-
-    }
-
-    protected virtual void Create()
-
-    {
-
-        var parameters = new DialogParameters
-
-        {
-
-            { "User", new User{Name=UserName} }
-
-        };
-
-        RaiseRequestClose(new DialogResult(ButtonResult.OK, parameters));
-
-    }
+  }
 
 }
 
@@ -11864,7 +11867,7 @@ public partial class MyPrismWindow: MyWindow, IDialogWindow
 
 {
 
-    public IDialogResult Result { get; set; }
+  public IDialogResult Result { get; set; }
 
 }
 
@@ -11876,7 +11879,7 @@ protected override void RegisterTypes(IContainerRegistry containerRegistry)
 
 {
 
-    containerRegistry.RegisterDialogWindow<MyPrismWindow>();
+  containerRegistry.RegisterDialogWindow<MyPrismWindow>();
 
 }
 
@@ -12130,7 +12133,7 @@ protected override void RegisterTypes(IContainerRegistry containerRegistry)
 
 #### 绑定表达式 
 
-> 数据绑定表达式使用XAML扩展标记，以Binding开头，实际上是创建了System.Windows.Data.Binding类实例，且设置两个属性：ElementName属性（源元素）和Path属性（源元素中的属性）。  
+> 数据绑定表达式使用XAML扩展标记，以Binding开头，实际上是创建了System.Windows.Data.Binding类实例，且设置两个属性：ElementName属性（源元素）和Path属性（源元素中的属性）。 
 
 #### 绑定错误
 
@@ -12478,7 +12481,7 @@ protected override void RegisterTypes(IContainerRegistry containerRegistry)
 
  <TextBlock.RenderTransform> 
 
-    <RotateTransform Angle="0" x:Name="rt1"></RotateTransform> 
+  <RotateTransform Angle="0" x:Name="rt1"></RotateTransform> 
 
 </TextBlock.RenderTransform> 
 
@@ -12634,13 +12637,13 @@ System.Windows.Media.Animation.VectorAnimationBase
 
 <Button x:Name="btn" Content="Move!" HorizontalAlignment="Left" VerticalAlignment="top" Width="60" Height="60" Click="Button_Click">
 
-        <Button.RenderTransform>
+    <Button.RenderTransform>
 
-            <TranslateTransform x:Name="tt" X="0" Y="0"/>
+      <TranslateTransform x:Name="tt" X="0" Y="0"/>
 
-        </Button.RenderTransform>
+    </Button.RenderTransform>
 
-    </Button>
+  </Button>
 
 </Grid>
 
@@ -12648,63 +12651,63 @@ System.Windows.Media.Animation.VectorAnimationBase
 
 ```
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+    private void Button_Click(object sender, RoutedEventArgs e)
 
-        {
+    {
 
-            //定义简单动画的实例
+      //定义简单动画的实例
 
-              DoubleAnimation daX = new DoubleAnimation();
+       DoubleAnimation daX = new DoubleAnimation();
 
-            DoubleAnimation daY = new DoubleAnimation();
+      DoubleAnimation daY = new DoubleAnimation();
 
-            //指定起点
+      //指定起点
 
-             daX.From = 0D;
+       daX.From = 0D;
 
-            daY.From = 0D;
+      daY.From = 0D;
 
-            //指定终点
+      //指定终点
 
-            Random r = new Random();
+      Random r = new Random();
 
-            daX.To = r.NextDouble() * 300;
+      daX.To = r.NextDouble() * 300;
 
-            daY.To = r.NextDouble() * 300;
+      daY.To = r.NextDouble() * 300;
 
-            //daX.By = 100D;
+      //daX.By = 100D;
 
-            //daY.By = 100D;
+      //daY.By = 100D;
 
-            //指定时长300ms
+      //指定时长300ms
 
-            Duration duration=new Duration(TimeSpan.FromMilliseconds(300));
+      Duration duration=new Duration(TimeSpan.FromMilliseconds(300));
 
-            daY.Duration = duration;
+      daY.Duration = duration;
 
-            daX.Duration = duration;
+      daX.Duration = duration;
 
-            //将动画添加到偏移变形的实例上面 和Binding的格式有点像
+      //将动画添加到偏移变形的实例上面 和Binding的格式有点像
 
-            //this.textBox.SetBinding（TextBox.TextProperty,binding）
+      //this.textBox.SetBinding（TextBox.TextProperty,binding）
 
-            
+      
 
-            //让按钮发生改变作为动画
+      //让按钮发生改变作为动画
 
-            //btn.BeginAnimation(Button.WidthProperty, daX);
+      //btn.BeginAnimation(Button.WidthProperty, daX);
 
-            //btn.BeginAnimation(Button.HeightProperty, daY);
+      //btn.BeginAnimation(Button.HeightProperty, daY);
 
-            
+      
 
-            //让 位置发生改变作为动画
+      //让 位置发生改变作为动画
 
-            this.tt.BeginAnimation(TranslateTransform.XProperty, daX);
+      this.tt.BeginAnimation(TranslateTransform.XProperty, daX);
 
-            this.tt.BeginAnimation(TranslateTransform.YProperty, daY);
+      this.tt.BeginAnimation(TranslateTransform.YProperty, daY);
 
-        }
+    }
 
 ```
 
@@ -12882,19 +12885,19 @@ this.tt.BeginAnimation(TranslateTransform.YProperty, dakY);
 
 ```
 
-#####   <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1">
+#####  <Border BorderBrush="Gray" BorderThickness="1" Grid.Row="1">
 
 <Ellipse x:Name="ballG" Height="80" Width="80" Fill="Green" HorizontalAlignment="Left">
 
-    <Ellipse.RenderTransform>
+  <Ellipse.RenderTransform>
 
-        <TranslateTransform x:Name="ttG"/>
+    <TranslateTransform x:Name="ttG"/>
 
-    </Ellipse.RenderTransform>
+  </Ellipse.RenderTransform>
 
 </Ellipse>
 
-        </Border>
+    </Border>
 
 ```
 
@@ -14550,43 +14553,43 @@ Foudation更进一步，使用跨范围的媒体查询，避免使用过多的ma
 
 // Defining values
 
-$small-range:   (0em, 40em);       /* 0, 640px */
+$small-range:  (0em, 40em);    /* 0, 640px */
 
-$medium-range:  (40.063em, 64em);  /* 641px, 1024px */
+$medium-range: (40.063em, 64em); /* 641px, 1024px */
 
-$large-range:   (64.063em, 90em);  /* 1025px, 1440px */
+$large-range:  (64.063em, 90em); /* 1025px, 1440px */
 
-$xlarge-range:  (90.063em, 120em); /* 1441px, 1920px */
+$xlarge-range: (90.063em, 120em); /* 1441px, 1920px */
 
-$xxlarge-range: (120.063em);       /* 1921px */
+$xxlarge-range: (120.063em);    /* 1921px */
 
  
 
 // Defining media queries
 
-$screen:       "only screen" !default;
+$screen:    "only screen" !default;
 
-$landscape:    "#{$screen} and (orientation: landscape)" !default;
+$landscape:  "#{$screen} and (orientation: landscape)" !default;
 
-$portrait:     "#{$screen} and (orientation: portrait)" !default;
+$portrait:   "#{$screen} and (orientation: portrait)" !default;
 
-$small-up:     $screen !default;
+$small-up:   $screen !default;
 
-$small-only:   "#{$screen} and (max-width: #{upper-bound($small-range)})" !default;
+$small-only:  "#{$screen} and (max-width: #{upper-bound($small-range)})" !default;
 
-$medium-up:    "#{$screen} and (min-width:#{lower-bound($medium-range)})" !default;
+$medium-up:  "#{$screen} and (min-width:#{lower-bound($medium-range)})" !default;
 
-$medium-only:  "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max-width:#{upper-bound($medium-range)})" !default;
+$medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max-width:#{upper-bound($medium-range)})" !default;
 
-$large-up:     "#{$screen} and (min-width:#{lower-bound($large-range)})" !default;
+$large-up:   "#{$screen} and (min-width:#{lower-bound($large-range)})" !default;
 
-$large-only:   "#{$screen} and (min-width:#{lower-bound($large-range)}) and (max-width:#{upper-bound($large-range)})" !default;
+$large-only:  "#{$screen} and (min-width:#{lower-bound($large-range)}) and (max-width:#{upper-bound($large-range)})" !default;
 
-$xlarge-up:    "#{$screen} and (min-width:#{lower-bound($xlarge-range)})" !default;
+$xlarge-up:  "#{$screen} and (min-width:#{lower-bound($xlarge-range)})" !default;
 
-$xlarge-only:  "#{$screen} and (min-width:#{lower-bound($xlarge-range)}) and (max-width:#{upper-bound($xlarge-range)})" !default;
+$xlarge-only: "#{$screen} and (min-width:#{lower-bound($xlarge-range)}) and (max-width:#{upper-bound($xlarge-range)})" !default;
 
-$xxlarge-up:   "#{$screen} and (min-width:#{lower-bound($xxlarge-range)})" !default;
+$xxlarge-up:  "#{$screen} and (min-width:#{lower-bound($xxlarge-range)})" !default;
 
 $xxlarge-only: "#{$screen} and (min-width:#{lower-bound($xxlarge-range)}) and (max-width:#{upper-bound($xxlarge-range)})" !default;
 
@@ -14594,23 +14597,23 @@ $xxlarge-only: "#{$screen} and (min-width:#{lower-bound($xxlarge-range)}) and (m
 
 // Usage
 
-@media #{$small-up}     { ... }
+@media #{$small-up}   { ... }
 
-@media #{$small-only}   { ... }
+@media #{$small-only}  { ... }
 
-@media #{$medium-up}    { ... }
+@media #{$medium-up}  { ... }
 
-@media #{$medium-only}  { ... }
+@media #{$medium-only} { ... }
 
-@media #{$large-up}     { ... }
+@media #{$large-up}   { ... }
 
-@media #{$large-only}   { ... }
+@media #{$large-only}  { ... }
 
-@media #{$xlarge-up}    { ... }
+@media #{$xlarge-up}  { ... }
 
-@media #{$xlarge-only}  { ... }
+@media #{$xlarge-only} { ... }
 
-@media #{$xxlarge-up}   { ... }
+@media #{$xxlarge-up}  { ... }
 
 @media #{$xxlarge-only} { ... }
 
@@ -14624,39 +14627,39 @@ $xxlarge-only: "#{$screen} and (min-width:#{lower-bound($xxlarge-range)}) and (m
 
 @mixin respond-to($breakpoint) {
 
-  @if $breakpoint == "small" {
+ @if $breakpoint == "small" {
 
-    @media (min-width: 767px) {
+  @media (min-width: 767px) {
 
-      @content;
-
-    }
+   @content;
 
   }
+
+ }
 
  
 
-  @else if $breakpoint == "medium" {
+ @else if $breakpoint == "medium" {
 
-    @media (min-width: 992px) {
+  @media (min-width: 992px) {
 
-      @content;
-
-    }
+   @content;
 
   }
+
+ }
 
  
 
-  @else if $breakpoint == "large" {
+ @else if $breakpoint == "large" {
 
-    @media (min-width: 1200px) {
+  @media (min-width: 1200px) {
 
-      @content;
-
-    }
+   @content;
 
   }
+
+ }
 
 }
 
@@ -14676,7 +14679,7 @@ a.断点不easy从mixin里拿出来，放到配置文件中去。
 
 b.冗余太多。
 
-> 3. 可配置的mixin(With a configurable mixin  )
+> 3. 可配置的mixin(With a configurable mixin )
 
 <为了解决上面的两个问题，我们须要从断点mixin中抽出一个列表，仅仅剩下mixin核心，然后这个列表就能够随便移动，或者扔到配置文件中。
 
@@ -14684,11 +14687,11 @@ b.冗余太多。
 
 $breakpoints: (
 
-  'small'  : 767px,
+ 'small' : 767px,
 
-  'medium' : 992px,
+ 'medium' : 992px,
 
-  'large'  : 1200px
+ 'large' : 1200px
 
 );
 
@@ -14696,37 +14699,37 @@ $breakpoints: (
 
 @mixin respond-to($breakpoint) {
 
-  // Retrieves the value from the key
+ // Retrieves the value from the key
 
-  $value: map-get($breakpoints, $breakpoint);
-
- 
-
-  // If the key exists in the map
-
-  @if $value != null {
-
-    // Prints a media query based on the value
-
-    @media (min-width: $value) {
-
-      @content;
-
-    }
-
-  }
+ $value: map-get($breakpoints, $breakpoint);
 
  
 
-  // If the key doesn't exist in the map
+ // If the key exists in the map
 
-  @else {
+ @if $value != null {
 
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+  // Prints a media query based on the value
 
-        + "Please make sure it is defined in `$breakpoints` map.";
+  @media (min-width: $value) {
+
+   @content;
 
   }
+
+ }
+
+ 
+
+ // If the key doesn't exist in the map
+
+ @else {
+
+  @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+
+    + "Please make sure it is defined in `$breakpoints` map.";
+
+ }
 
 }
 
@@ -14736,43 +14739,43 @@ $breakpoints: (
 
 $breakpoints: (
 
-  'small'  : ( min-width:  767px ),
+ 'small' : ( min-width: 767px ),
 
-  'medium' : ( min-width:  992px ),
+ 'medium' : ( min-width: 992px ),
 
-  'large'  : ( min-width: 1200px )
+ 'large' : ( min-width: 1200px )
 
 );
 
-  
+ 
 
 @mixin respond-to($name) {
 
-  // If the key exists in the map
+ // If the key exists in the map
 
-  @if map-has-key($breakpoints, $name) {
+ @if map-has-key($breakpoints, $name) {
 
-    // Prints a media query based on the value
+  // Prints a media query based on the value
 
-    @media #{inspect(map-get($breakpoints, $name))} {
+  @media #{inspect(map-get($breakpoints, $name))} {
 
-      @content;
-
-    }
+   @content;
 
   }
+
+ }
 
  
 
-  // If the key doesn't exist in the map
+ // If the key doesn't exist in the map
 
-  @else {
+ @else {
 
-    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+  @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
 
-        + "Please make sure it is defined in `$breakpoints` map.";
+    + "Please make sure it is defined in `$breakpoints` map.";
 
-  }
+ }
 
 }
 
@@ -14822,13 +14825,13 @@ $mq-static-breakpoint: desktop;
 
 $mq-breakpoints: (
 
-  mobile:  320px,
+ mobile: 320px,
 
-  tablet:  740px,
+ tablet: 740px,
 
-  desktop: 980px,
+ desktop: 980px,
 
-  wide:    1300px
+ wide:  1300px
 
 );
 
@@ -14838,11 +14841,11 @@ $mq-breakpoints: (
 
 selector {
 
-  @include mq($from: mobile) {
+ @include mq($from: mobile) {
 
-    property: value;
+  property: value;
 
-  }
+ }
 
 }
 
@@ -14860,11 +14863,11 @@ $surfboard-height: (min-height 1000px) (orientation portrait);
 
 selector {
 
-  @include breakpoint($high-tide) {
+ @include breakpoint($high-tide) {
 
-    property: value;
+  property: value;
 
-  }
+ }
 
 }
 
@@ -14872,11 +14875,11 @@ Breakup
 
 $breakup-breakpoints: (
 
-  'thin' '(max-width: 35.999em)',
+ 'thin' '(max-width: 35.999em)',
 
-  'wide' '(min-width: 36em)',
+ 'wide' '(min-width: 36em)',
 
-  'full' '(min-width: 61em)'
+ 'full' '(min-width: 61em)'
 
 );
 
@@ -14884,11 +14887,11 @@ $breakup-breakpoints: (
 
 selector {
 
-  @include breakup-block('thin') {
+ @include breakup-block('thin') {
 
-    property: value;
+  property: value;
 
-  }
+ }
 
 }
 
@@ -14952,7 +14955,7 @@ selector {
 
 #### 按钮卡片
 
-###  Sass
+### Sass
 
 #### 变量
 
@@ -14962,25 +14965,25 @@ selector {
 
 #### SASS 混合器 混合器继承
 
-> 混合器 Sass中的混合器类似于js的函数，将一段代码定义成混合器以实现代码的重用  编译后其实会转换成正常的css
+> 混合器 Sass中的混合器类似于js的函数，将一段代码定义成混合器以实现代码的重用 编译后其实会转换成正常的css
 
 > 声明混合器：@mixin mixName 
 
-> 调用混合器  @include minName 如
+> 调用混合器 @include minName 如
 
 @mixin border-round{
 
-    -moz-border:1px solid red;
+  -moz-border:1px solid red;
 
-    -webkit-border:1px solid red;
+  -webkit-border:1px solid red;
 
-    border:1px solid red
+  border:1px solid red
 
 }
 
 #top{
 
-    @include border-round;
+  @include border-round;
 
 }
 
@@ -14988,39 +14991,39 @@ selector {
 
 #top {
 
-  -moz-border: 1px solid red;
+ -moz-border: 1px solid red;
 
-  -webkit-border: 1px solid red;
+ -webkit-border: 1px solid red;
 
-  border: 1px solid red; }
+ border: 1px solid red; }
 
 > 混合器css规则 混合器中也可以包含css规则
 
 @mixin testmix{
 
-    list-style:none;
+  list-style:none;
 
-    li{
+  li{
 
-        color:red;
+    color:red;
 
-        padding:30px;
+    padding:30px;
 
-    }
+  }
 
-    >.top{
+  >.top{
 
-        background:red
+    background:red
 
-    }
+  }
 
 }
 
 ul.parent{
 
-    border:1px solid red;
+  border:1px solid red;
 
-    @include testmix;
+  @include testmix;
 
 }
 
@@ -15028,23 +15031,23 @@ ul.parent{
 
 ul.parent {
 
-  border: 1px solid red;
+ border: 1px solid red;
 
-  list-style: none; 
-
-}
-
-  ul.parent li {
-
-    color: red;
-
-    padding: 30px; 
+ list-style: none; 
 
 }
 
-  ul.parent > .top {
+ ul.parent li {
 
-    background: red;
+  color: red;
+
+  padding: 30px; 
+
+}
+
+ ul.parent > .top {
+
+  background: red;
 
  }
 
@@ -15052,21 +15055,21 @@ ul.parent {
 
 @mixin test($color,$size,$hoverColor){
 
-    color:$color;
+  color:$color;
 
-    border:$size solid red;
+  border:$size solid red;
 
-    &:hover{
+  &:hover{
 
-        color:$hoverColor
+    color:$hoverColor
 
-    }
+  }
 
 }
 
 #top{
 
-    @include test(red,1px,blue);
+  @include test(red,1px,blue);
 
 }
 
@@ -15074,15 +15077,15 @@ ul.parent {
 
 #top {
 
-  color: red;
+ color: red;
 
-  border: 1px solid red; 
+ border: 1px solid red; 
 
 }
 
-  #top:hover {
+ #top:hover {
 
-    color: blue; 
+  color: blue; 
 
 }
 
@@ -15092,21 +15095,21 @@ ul.parent {
 
 @mixin test($color,$size,$hoverColor){
 
-    color:$color;
+  color:$color;
 
-    border:$size solid red;
+  border:$size solid red;
 
-    &:hover{
+  &:hover{
 
-        color:$hoverColor
+    color:$hoverColor
 
-    }
+  }
 
 }
 
 #top{
 
-    @include test($size:1px,$hoverColor:blue,$color:red);
+  @include test($size:1px,$hoverColor:blue,$color:red);
 
 }
 
@@ -15114,31 +15117,31 @@ ul.parent {
 
 #top {
 
-  color: red;
+ color: red;
 
-  border: 1px solid red;
+ border: 1px solid red;
 
-  }
+ }
 
 #top:hover {
 
-    color: blue;
+  color: blue;
 
-  }
+ }
 
 > 参数默认值 混合器允许你定义参数默认值 如下
 
 @mixin test($normal,$hover:red){
 
-    color:$normal;
+  color:$normal;
 
-    background-color:$hover
+  background-color:$hover
 
 }
 
 #top{
 
-    @include test(skyblue,orange);
+  @include test(skyblue,orange);
 
 }
 
@@ -15146,53 +15149,53 @@ ul.parent {
 
 #top {
 
-  color: skyblue;
+ color: skyblue;
 
-  background-color: orange;
+ background-color: orange;
 
-  }
+ }
 
-  //不指定color
+ //不指定color
 
 @mixin test($normal,$hover:red){
 
-    color:$normal;
+  color:$normal;
 
-    background-color:$hover
+  background-color:$hover
 
 }
 
 #top{
 
-    @include test(skyblue);
+  @include test(skyblue);
 
 }
 
 //编译后
 
-  
+ 
 
 #top {
 
-  color: skyblue;
+ color: skyblue;
 
-  background-color: red; }
+ background-color: red; }
 
 > Sass继承 Sass中也可实现继承类似面向对象思想子类继承父类，sass可以继承多个父类 这个”父类“可以是类，id 标签 状态等。 继承语法 @extend name 如
 
 .error{
 
-    color:red;
+  color:red;
 
-    font-size:15px;
+  font-size:15px;
 
 }
 
 .danger-error{
 
-    @extend .error;
+  @extend .error;
 
-    font-size:20px;
+  font-size:20px;
 
 }
 
@@ -15200,15 +15203,15 @@ ul.parent {
 
 .error, .danger-error {
 
-  color: red;
+ color: red;
 
-  font-size: 15px;
+ font-size: 15px;
 
 }
 
 .danger-error {
 
-  font-size: 20px; 
+ font-size: 20px; 
 
 }
 
@@ -15216,23 +15219,23 @@ ul.parent {
 
 .error{
 
-    color:red;
+  color:red;
 
-    font-size:15px;
+  font-size:15px;
 
-    >.te{
+  >.te{
 
-        padding:10px
+    padding:10px
 
-    }
+  }
 
 }
 
 .danger-error{
 
-    @extend .error;
+  @extend .error;
 
-    font-size:20px;
+  font-size:20px;
 
 }
 
@@ -15240,21 +15243,21 @@ ul.parent {
 
 .error, .danger-error {
 
-  color: red;
+ color: red;
 
-  font-size: 15px; 
+ font-size: 15px; 
 
 }
 
 .error > .te, .danger-error > .te {
 
-    padding: 10px;
+  padding: 10px;
 
-  }
+ }
 
 .danger-error {
 
-  font-size: 20px; 
+ font-size: 20px; 
 
  }
 
@@ -15262,17 +15265,17 @@ ul.parent {
 
 .error a{
 
-    color:red;
+  color:red;
 
-    font-size:10px;
+  font-size:10px;
 
 }
 
 .danger{
 
-    @extend .error;
+  @extend .error;
 
-    color:orange;
+  color:orange;
 
 }
 
@@ -15280,15 +15283,15 @@ ul.parent {
 
 .error a, .danger a {
 
-  color: red;
+ color: red;
 
-  font-size: 10px; 
+ font-size: 10px; 
 
 }
 
 .danger {
 
-  color: orange; 
+ color: orange; 
 
 }
 
@@ -15296,27 +15299,27 @@ ul.parent {
 
 .one{
 
-    color:red;
+  color:red;
 
 }
 
 .two{
 
-    border:1px solid red;
+  border:1px solid red;
 
 }
 
 .three{
 
-    @extend .one;
+  @extend .one;
 
-    @extend .two;
+  @extend .two;
 
-    //或者这样写@extend .one,.two
+  //或者这样写@extend .one,.two
 
-    //
+  //
 
-    background:blue;
+  background:blue;
 
 }
 
@@ -15324,19 +15327,19 @@ ul.parent {
 
 .one, .three {
 
-  color: red; 
+ color: red; 
 
 }
 
 .two, .three {
 
-  border: 1px solid red;
+ border: 1px solid red;
 
 }
 
 .three {
 
-  background: blue;
+ background: blue;
 
 }
 
@@ -15346,13 +15349,13 @@ ul.parent {
 
 %test{
 
-    border:1px solid red;
+  border:1px solid red;
 
 }
 
 #main{
 
-    @extend %test;
+  @extend %test;
 
 }
 
@@ -15360,21 +15363,21 @@ ul.parent {
 
 #main {
 
-  border: 1px solid red; 
+ border: 1px solid red; 
 
 }
 
 #meng a%long{
 
-    color:blue;
+  color:blue;
 
-    border:1px solid red;
+  border:1px solid red;
 
 }
 
 .notice{
 
-    @extend %long;
+  @extend %long;
 
 }
 
@@ -15382,9 +15385,9 @@ ul.parent {
 
 #meng a.notice {
 
-  color: blue;
+ color: blue;
 
-  border: 1px solid red; 
+ border: 1px solid red; 
 
 }
 
@@ -15392,19 +15395,19 @@ ul.parent {
 
 .one{
 
-    height:400px;
+  height:400px;
 
 }
 
 @media print{
 
-    .two{
+  .two{
 
-        @extend .one
+    @extend .one
 
-    }
+  }
 
-    width:300px;
+  width:300px;
 
 }
 
@@ -15414,7 +15417,7 @@ ul.parent {
 
  
 
-继承只会在生成css时复制选择器，而不会复制大段的css属性  如果不小心会让生成css中包含大量的选择器复制  避免这种情况的最好办法：  不要在继承css规则中使用后代选择器如
+继承只会在生成css时复制选择器，而不会复制大段的css属性 如果不小心会让生成css中包含大量的选择器复制 避免这种情况的最好办法： 不要在继承css规则中使用后代选择器如
 
  
 
@@ -15426,9 +15429,9 @@ ul.parent {
 
  }
 
-##  Font Awesome
+## Font Awesome
 
-## Asp.net core MVC 一些总结
+## .Net Core
 
 ### Router
 
@@ -15444,17 +15447,17 @@ app.UseMvc(routes =>
 
 {
 
-    routes.MapRoute(
+  routes.MapRoute(
 
-        name: "default",
+    name: "default",
 
-        template: "{controller=Home}/{action=Index}/{id?}");
+    template: "{controller=Home}/{action=Index}/{id?}");
 
 });
 
 ```
 
-> 常规路由：routes.MapRoute(name: "default",template: "{controller=Home}/{action=Index}/{id?}");  这是一个常规路由
+> 常规路由：routes.MapRoute(name: "default",template: "{controller=Home}/{action=Index}/{id?}"); 这是一个常规路由
 
 #### 多路由 
 
@@ -15464,15 +15467,15 @@ app.UseMvc(routes =>
 
 {
 
-    routes.MapRoute("blog", "blog/{*article}",
+  routes.MapRoute("blog", "blog/{*article}",
 
-        defaults: new { Controller = "Blog", Action = "Index" });
+    defaults: new { Controller = "Blog", Action = "Index" });
 
-    routes.MapRoute(
+  routes.MapRoute(
 
-        name: "default",
+    name: "default",
 
-        template: "{controller=Home}/{action=Index}/{id?}");
+    template: "{controller=Home}/{action=Index}/{id?}");
 
 });
 
@@ -15484,31 +15487,31 @@ app.UseMvc(routes =>
 
 app.UseMvc(routes => {
 
-    routes.MapRoute(
+  routes.MapRoute(
 
-        name: "areas",
+    name: "areas",
 
-        template: "{area:exists}/{controller=Home}/{action=Index}");
+    template: "{area:exists}/{controller=Home}/{action=Index}");
 
-    routes.Routes.Add(new LegacyRoute(
+  routes.Routes.Add(new LegacyRoute(
 
-        routes.DefaultHandler,
+    routes.DefaultHandler,
 
-        "/articles/Windows_3.1_Overview.html",
+    "/articles/Windows_3.1_Overview.html",
 
-        "/old/.NET_1.0_Class_Library"));
+    "/old/.NET_1.0_Class_Library"));
 
-    routes.MapRoute(
+  routes.MapRoute(
 
-        name: "default",
+    name: "default",
 
-        template: "{controller=Home}/{action=Index}/{id?}");
+    template: "{controller=Home}/{action=Index}/{id?}");
 
-    routes.MapRoute(
+  routes.MapRoute(
 
-        name: "out",
+    name: "out",
 
-        template: "outbound/{controller=Home}/{action=Index}");
+    template: "outbound/{controller=Home}/{action=Index}");
 
 });
 
@@ -15532,63 +15535,63 @@ namespace SportsStore.Models
 
 {
 
-    public class SessionCart : Cart
+  public class SessionCart : Cart
+
+  {
+
+    public static Cart GetCart(IServiceProvider services)
 
     {
 
-        public static Cart GetCart(IServiceProvider services)
+      ISession session = services.GetRequiredService<IHttpContextAccessor>()?
 
-        {
+        .HttpContext.Session;
 
-            ISession session = services.GetRequiredService<IHttpContextAccessor>()?
+      SessionCart cart = session?.GetJson<SessionCart>("Cart")
 
-                .HttpContext.Session;
+        ?? new SessionCart();
 
-            SessionCart cart = session?.GetJson<SessionCart>("Cart")
+      cart.Session = session;
 
-                ?? new SessionCart();
-
-            cart.Session = session;
-
-            return cart;
-
-        }
-
-        [JsonIgnore]
-
-        public ISession Session { get; set; }
-
-        public override void AddItem(Product product, int quantity)
-
-        {
-
-            base.AddItem(product, quantity);
-
-            Session.SetJson("Cart", this);
-
-        }
-
-        public override void RemoveLine(Product product)
-
-        {
-
-            base.RemoveLine(product);
-
-            Session.SetJson("Cart", this);
-
-        }
-
-        public override void Clear()
-
-        {
-
-            base.Clear();
-
-            Session.Remove("Cart");
-
-        }
+      return cart;
 
     }
+
+    [JsonIgnore]
+
+    public ISession Session { get; set; }
+
+    public override void AddItem(Product product, int quantity)
+
+    {
+
+      base.AddItem(product, quantity);
+
+      Session.SetJson("Cart", this);
+
+    }
+
+    public override void RemoveLine(Product product)
+
+    {
+
+      base.RemoveLine(product);
+
+      Session.SetJson("Cart", this);
+
+    }
+
+    public override void Clear()
+
+    {
+
+      base.Clear();
+
+      Session.Remove("Cart");
+
+    }
+
+  }
 
 }
 
@@ -15596,7 +15599,42 @@ namespace SportsStore.Models
 
 ### 授权认证管理
 
-#### 认证
+#### 认证 Authentication 
+
+> 身份验证是确定用户身份的过程。 授权是确定用户是否有权访问资源的过程。 在 ASP.NET Core 中，身份验证由身份验证服务 IAuthenticationService 负责，而它供身份验证中间件使用。 身份验证服务会使用已注册的身份验证处理程序来完成与身份验证相关的操作。 与身份验证相关的操作示例包括：
+
+> > 对用户进行身份验证。
+
+> > 在未经身份验证的用户试图访问受限资源时作出响应。
+
+> 身份验证负责提供 ClaimsPrincipal 进行授权，以针对其进行权限决策。 可通过多种身份验证方案方法来选择使用哪种身份验证处理程序负责生成正确的声明集：
+
+> > 身份验证方案
+
+> > > 身份验证方案的身份验证操作负责根据请求上下文构造用户的身份。 它会返回一个 AuthenticateResult指示身份验证是否成功；若成功，则还在身份验证票证中指示用户的身份。 请参阅 AuthenticateAsync。 身份验证示例包括：
+
+> > > > 根据 cookie 构造用户身份的 cookie 身份验证方案。
+
+> > > > 对 JWT 持有者令牌进行反序列化和验证以构造用户身份的 JWT 持有者方案。
+
+> > > 当未经身份验证的用户请求要求身份验证的终结点时，授权会发起身份验证挑战。 例如，当匿名用户请求受限资源或访问登录链接时，会引发身份验证挑战。 授权会使用指定的身份验证方案发起挑战；如果未指定任何方案，则使用默认方案。 请参阅 ChallengeAsync。 身份验证挑战示例包括：
+
+> > > > 将用户重定向到登录页面的 cookie 身份验证方案。
+
+> > > > 返回具有 www-authenticate: bearer 标头的 401 结果的 JWT 持有者方案。
+
+> > > 身份验证处理程序：
+
+> > > > 是一种实现方案行为的类型。
+
+> > > > 派生自 IAuthenticationHandler 或 AuthenticationHandler<TOptions>。
+
+> > > > 具有对用户进行身份验证的主要责任。
+
+> > 默认身份验证方案。
+
+> > 直接设置 HttpContext.User。
+
 
 ```
 
@@ -15616,77 +15654,77 @@ using SportsStore.Models;
 
 public class AccountController : Controller {
 
-    private UserManager<IdentityUser> userManager;
+  private UserManager<IdentityUser> userManager;
 
-    private SignInManager<IdentityUser> signInManager;
+  private SignInManager<IdentityUser> signInManager;
 
-    public AccountController(UserManager<IdentityUser> userMgr,
+  public AccountController(UserManager<IdentityUser> userMgr,
 
-            SignInManager<IdentityUser> signInMgr) {
+      SignInManager<IdentityUser> signInMgr) {
 
-        userManager = userMgr;
+    userManager = userMgr;
 
-        signInManager = signInMgr;
+    signInManager = signInMgr;
 
-        IdentitySeedData.EnsurePopulated(userMgr).Wait();
+    IdentitySeedData.EnsurePopulated(userMgr).Wait();
 
-    }
+  }
 
-    [AllowAnonymous]
+  [AllowAnonymous]
 
-    public ViewResult Login(string returnUrl) {
+  public ViewResult Login(string returnUrl) {
 
-        return View(new LoginModel {
+    return View(new LoginModel {
 
-            ReturnUrl = returnUrl
+      ReturnUrl = returnUrl
 
-        });
+    });
 
-    }
+  }
 
-    [HttpPost]
+  [HttpPost]
 
-    [AllowAnonymous]
+  [AllowAnonymous]
 
-    [ValidateAntiForgeryToken]
+  [ValidateAntiForgeryToken]
 
-    public async Task<IActionResult> Login(LoginModel loginModel) {
+  public async Task<IActionResult> Login(LoginModel loginModel) {
 
-        if (ModelState.IsValid) {
+    if (ModelState.IsValid) {
 
-            IdentityUser user =
+      IdentityUser user =
 
-                await userManager.FindByNameAsync(loginModel.Name);
+        await userManager.FindByNameAsync(loginModel.Name);
 
-            if (user != null) {
-
-                await signInManager.SignOutAsync();
-
-                if ((await signInManager.PasswordSignInAsync(user,
-
-                        loginModel.Password, false, false)).Succeeded) {
-
-                    return Redirect(loginModel?.ReturnUrl ?? "/Admin/Index");
-
-                }
-
-            }
-
-        }
-
-        ModelState.AddModelError("", "Invalid name or password");
-
-        return View(loginModel);
-
-    }
-
-    public async Task<RedirectResult> Logout(string returnUrl = "/") {
+      if (user != null) {
 
         await signInManager.SignOutAsync();
 
-        return Redirect(returnUrl);
+        if ((await signInManager.PasswordSignInAsync(user,
+
+            loginModel.Password, false, false)).Succeeded) {
+
+          return Redirect(loginModel?.ReturnUrl ?? "/Admin/Index");
+
+        }
+
+      }
 
     }
+
+    ModelState.AddModelError("", "Invalid name or password");
+
+    return View(loginModel);
+
+  }
+
+  public async Task<RedirectResult> Logout(string returnUrl = "/") {
+
+    await signInManager.SignOutAsync();
+
+    return Redirect(returnUrl);
+
+  }
 
 }
 
@@ -15700,9 +15738,9 @@ public class AccountController : Controller {
 
 @{
 
-    ViewBag.Title = "Log In";
+  ViewBag.Title = "Log In";
 
-    Layout = "_AdminLayout";
+  Layout = "_AdminLayout";
 
 }
 
@@ -15710,32 +15748,353 @@ public class AccountController : Controller {
 
 <form asp-action="Login" asp-controller="Account" method="post">
 
-    <input type="hidden" asp-for="ReturnUrl" />
+  <input type="hidden" asp-for="ReturnUrl" />
 
-    <div class="form-group">
+  <div class="form-group">
 
-        <label asp-for="Name"></label>
+    <label asp-for="Name"></label>
 
-        <div><span asp-validation-for="Name" class="text-danger"></span></div>
+    <div><span asp-validation-for="Name" class="text-danger"></span></div>
 
-        <input asp-for="Name" class="form-control" />
+    <input asp-for="Name" class="form-control" />
 
-    </div>
+  </div>
 
-    <div class="form-group">
+  <div class="form-group">
 
-        <label asp-for="Password"></label>
+    <label asp-for="Password"></label>
 
-        <div><span asp-validation-for="Password" class="text-danger"></span></div>
+    <div><span asp-validation-for="Password" class="text-danger"></span></div>
 
-        <input asp-for="Password" class="form-control" />
+    <input asp-for="Password" class="form-control" />
 
-    </div>
+  </div>
 
-    <button class="btn btn-primary" type="submit">Log In</button>
+  <button class="btn btn-primary" type="submit">Log In</button>
 
 </form>
 
+```
+
+##### Identity
+
+> Identity是一个一个 API，它支持用户界面 (UI) 登录功能。
+
+> 管理用户、密码、配置文件数据、角色、声明、令牌、电子邮件确认等等。
+
+> > 可以理解为.net core提供的一套用户管理系统，经过简单的配置就可以使用，当然也是可以自定义界面（需要添加基架标识(Scaffold Identity )） 
+
+> > 使用Scaffold Identity 授权到MVC 项目
+
+> > > 1.从解决方案资源管理器，右键单击该项目 >添加 > 新基架项。
+
+> > > 2.从左窗格添加基架对话框中，选择标识 > 添加。
+
+> > > 3.在中ADD 标识添加对话框中，选择所需的选项。
+
+> 使用Identity主要步骤：
+
+> 配置 Identity 服务 这些服务添加在 Program.cs 中。 包括配置数据库链接，典型模式是按以下顺序调用方法：
+
+> > Add{Service}
+
+> > builder.Services.Configure{Service}
+
+> 构建 Register、Login、LogOut 和 RegisterConfirmation 的基架
+
+
+##### 多重身份验证
+
+> 多重身份验证 (MFA) 是在登录事件期间请求用户进行其他形式的身份验证的过程。 此提示可以是输入手机中的代码、使用 FIDO2 密钥或提供指纹扫描。 需要进行另一种形式的身份验证时，安全性便得到了增强。 攻击者无法轻松获取或复制额外的因素。
+
+> MFA TOTP（基于时间的一次性密码算法）
+
+> > 使用 ASP.NET Core Identity时，默认支持使用 TOTP 的 MFA。 此方法可与任何合规的验证器应用一起使用，包括：
+
+> > > Microsoft Authenticator
+
+> > > Google Authenticator
+
+> > 若要禁用对 MFA TOTP 的支持，请使用 AddIdentity 而不是 AddDefaultIdentity配置身份验证。 AddDefaultIdentity 在内部调用 AddDefaultTokenProviders ，这将注册多个令牌提供程序，包括一个用于 MFA TOTP 的令牌提供程序。 若要仅注册特定的令牌提供程序，请为每个所需的提供程序调用 AddTokenProvider 。 有关可用令牌提供程序的详细信息，请参阅 GitHub 上的 AddDefaultTokenProviders 源。
+
+> > > MFA FIDO2 或无密码
+
+> > > FIDO2 目前是：
+
+> > > 实现 MFA 的最安全方法。唯一可防止钓鱼攻击的 MFA 流。
+
+> > > 目前，ASP.NET Core 不能直接支持 FIDO2。 FIDO2 可用于 MFA 或无密码流。
+
+> > > Azure Active Directory 提供对 FIDO2 和无密码流的支持。
+
+> MFA 短信
+
+> > 与密码身份验证（单因素）相比，使用短信的 MFA 大大提高了安全性。 但是，不再建议使用短信作为第二个因素。 此类型的实现存在太多已知攻击媒介。
+
+#### 授权  Authorize
+
+> 简单授权
+
+> > ASP.NET Core 中的授权由 AuthorizeAttribute 及其各种参数控制。 在其最基本的形式中，将 [Authorize] 属性应用于控制器、操作或 Razor 页面，将对该组件的访问权限限制为经过身份验证的用户。
+
+> 基于角色的授权
+
+> > 角色服务添加到 Identity 通过调用应用配置中的角色类型来AddRoles注册Program.cs基于角色的Identity授权服务。 以下示例中的角色类型为 IdentityRole：builder.Services.AddDefaultIdentity<IdentityUser>( ... ).AddRoles<IdentityRole>()
+
+> > [Authorize(Roles = "HRManager,Finance")]
+
+> > 基于 Policy 的角色检查
+
+```
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdministratorRole",
+         policy => policy.RequireRole("Administrator"));
+
+
+    options.AddPolicy("ElevatedRights", policy =>
+        policy.RequireRole("Administrator", "PowerUser", "BackupAdministrator"));
+});
+
+
+[Authorize(Policy = "RequireAdministratorRole")]
+```
+
+> 基于声明的授权
+
+> > 添加声明检查
+
+```
+builder.Services.AddAuthorization(options =>
+{
+   options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
+});
+```
+
+> > 使用 [Authorize] 属性上的 Policy 属性应用策略，以指定策略名称；[Authorize(Policy = "EmployeeOnly")]
+
+> 基于策略的授权
+
+> > IAuthorizationService
+
+> > 典型的授权服务配置：
+
+```
+// Add all of your handlers to DI.
+builder.Services.AddSingleton<IAuthorizationHandler, MyHandler1>();
+// MyHandler2, ...
+
+builder.Services.AddSingleton<IAuthorizationHandler, MyHandlerN>();
+
+// Configure your policies
+builder.Services.AddAuthorization(options =>
+      options.AddPolicy("Something",
+      policy => policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")));
+```
+
+> > > 将策略应用于 MVC 控制器 [Authorize(Policy = "AtLeast21")]
+
+> 授权策略提供程序
+
+
+> > 通常在使用基于策略的授权时，通过在授权服务配置中调用 AuthorizationOptions.AddPolicy 来注册策略。 在某些情况下，可能无法（或不可取）采用此方式注册所有授权策略。 在这些情况下，可以使用自定义 IAuthorizationPolicyProvider 来控制如何提供授权策略。
+
+> > 自定义 IAuthorizationPolicyProvider 可能很有用的方案示例包括：
+
+> > > 使用外部服务提供策略评估。
+
+> > > 使用大范围的策略（例如对于不同房间号或年龄），因此使用 AuthorizationOptions.AddPolicy 调用添加每个单独授权策略没有意义。
+
+> > > 在运行时基于外部数据源（如数据库）中的信息创建策略，或通过其他机制动态确定授权要求。
+
+> 自定义 AuthorizationMiddleware 的行为
+
+> 基于资源的授权
+
+> > 使用命令性授权
+
+授权作为服务 IAuthorizationService 实现，并在类中的服务集合 Startup 中注册。 该服务通过依赖项注入提供给页面处理程序或操作。
+
+```
+public class DocumentController : Controller
+{
+    private readonly IAuthorizationService _authorizationService;
+    private readonly IDocumentRepository _documentRepository;
+
+    public DocumentController(IAuthorizationService authorizationService,
+                              IDocumentRepository documentRepository)
+    {
+        _authorizationService = authorizationService;
+        _documentRepository = documentRepository;
+    }
+IAuthorizationService 有两个 AuthorizeAsync 方法重载：一个接受资源和策略名称，另一个接受资源和要评估的要求列表。
+
+
+Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user,
+                          object resource,
+                          IEnumerable<IAuthorizationRequirement> requirements);
+Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user,
+                          object resource,
+                          string policyName);
+
+在以下示例中，要保护的资源将加载到自定义 Document 对象中。 系统调用 AuthorizeAsync 重载以确定是否允许当前用户编辑提供的文档。 自定义“EditPolicy”授权策略已纳入决策中。 有关创建授权策略的详细信息，请参阅基于自定义策略的授权。
+
+以下代码示例假定身份验证已运行并设置了 User 属性。
+
+public async Task<IActionResult> OnGetAsync(Guid documentId)
+{
+    Document = _documentRepository.Find(documentId);
+
+    if (Document == null)
+    {
+        return new NotFoundResult();
+    }
+
+    var authorizationResult = await _authorizationService
+            .AuthorizeAsync(User, Document, "EditPolicy");
+
+    if (authorizationResult.Succeeded)
+    {
+        return Page();
+    }
+    else if (User.Identity.IsAuthenticated)
+    {
+        return new ForbidResult();
+    }
+    else
+    {
+        return new ChallengeResult();
+    }
+}
+```
+
+> > 编写基于资源的处理程序为基于资源的授权编写处理程序与编写普通的要求处理程序没有太大区别。 创建自定义要求类并实现要求处理程序类。 有关创建要求类的详细信息，请参阅要求。处理程序类指定要求和资源类型。 例如，使用 SameAuthorRequirement 和 Document 资源的处理程序如下所示：
+
+```
+public class DocumentAuthorizationHandler : 
+    AuthorizationHandler<SameAuthorRequirement, Document>
+{
+    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
+                                                   SameAuthorRequirement requirement,
+                                                   Document resource)
+    {
+        if (context.User.Identity?.Name == resource.Author)
+        {
+            context.Succeed(requirement);
+        }
+
+        return Task.CompletedTask;
+    }
+}
+
+public class SameAuthorRequirement : IAuthorizationRequirement { }
+在前面的示例中，假设 SameAuthorRequirement 是更泛型的 SpecificAuthorRequirement 类的特例。 SpecificAuthorRequirement 类（未显示）包含一个表示作者姓名的 Name 属性。 Name 属性可以设置为当前用户。
+
+在 Program.cs 中注册要求和处理程序：
+
+builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("EditPolicy", policy =>
+        policy.Requirements.Add(new SameAuthorRequirement()));
+});
+
+builder.Services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationHandler>();
+builder.Services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationCrudHandler>();
+builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
+```
+
+> > 如果要根据 CRUD 的结果做出决策， (创建、读取、更新、删除) 操作，请使用 OperationAuthorizationRequirement 帮助程序类。 借助此类，你可以编写单个处理程序，而不是为每种操作类型编写一个类。 若要使用它，请提供一些操作名称：
+
+```
+public static class Operations
+{
+    public static OperationAuthorizationRequirement Create =
+        new OperationAuthorizationRequirement { Name = nameof(Create) };
+    public static OperationAuthorizationRequirement Read =
+        new OperationAuthorizationRequirement { Name = nameof(Read) };
+    public static OperationAuthorizationRequirement Update =
+        new OperationAuthorizationRequirement { Name = nameof(Update) };
+    public static OperationAuthorizationRequirement Delete =
+        new OperationAuthorizationRequirement { Name = nameof(Delete) };
+}
+```
+
+> 基于视图的授权
+
+> > 开发人员通常希望根据当前用户标识显示、隐藏或以其他方式修改 UI。 可以通过依赖项注入在 MVC 视图中访问授权服务。 若要将授权服务注入 Razor 视图，请使用 @inject 指令：
+
+```
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+如果要在每个视图中使用授权服务，请将 @inject 指令 _ViewImports.cshtml 放入 Views 目录的文件。 有关详细信息，请参阅视图中的依赖关系注入。
+
+使用注入的授权服务调用 AuthorizeAsync，其方式与在基于资源的授权过程中检查的方式完全相同：
+
+@if ((await AuthorizationService.AuthorizeAsync(User, "PolicyName")).Succeeded)
+{
+    <p>This paragraph is displayed because you fulfilled PolicyName.</p>
+}
+有时资源是视图模型。 调用 AuthorizeAsync 的方式与在基于资源的授权过程中检查的方式完全相同：
+
+@if ((await AuthorizationService.AuthorizeAsync(User, Model, Operations.Edit)).Succeeded)
+{
+    <p><a class="btn btn-default" role="button"
+        href="@Url.Action("Edit", "Document", new { id = Model.Id })">Edit</a></p>
+}
+```
+
+> > 在前面的代码中，模型作为策略评估应考虑的资源传递。
+
+> 按方案限制标识
+
+> > 在某些情况下，例如单页应用程序 (SPA)，通常会使用多种身份验证方法。 例如，应用可能会针对登录使用基于 cookie 的身份验证，并使用 JWT 持有者身份验证来处理 JavaScript 请求。 在某些情况下，应用可能会有一个身份验证处理程序的多个实例。 例如，有两个 cookie 处理程序，一个包含基本标识，另一个是在多重身份验证 (MFA) 触发后创建的。 可能会触发 MFA，因为用户请求了需要额外安全性的操作。 有关当用户请求需要 MFA 的资源时强制执行 MFA 的详细信息，请参阅使用 MFA 保护部分这一 GitHub 问题。身份验证方案是在身份验证期间配置身份验证服务时命名的。 
+
+```
+// Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = "B2C_OR_AAD";
+    options.DefaultChallengeScheme = "B2C_OR_AAD";
+})
+.AddJwtBearer("B2C", jwtOptions =>
+{
+    jwtOptions.MetadataAddress = "B2C-MetadataAddress";
+    jwtOptions.Authority = "B2C-Authority";
+    jwtOptions.Audience = "B2C-Audience";
+})
+.AddJwtBearer("AAD", jwtOptions =>
+{
+    jwtOptions.MetadataAddress = "AAD-MetadataAddress";
+    jwtOptions.Authority = "AAD-Authority";
+    jwtOptions.Audience = "AAD-Audience";
+    jwtOptions.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateIssuerSigningKey = true,
+        ValidAudiences = builder.Configuration.GetSection("ValidAudiences").Get<string[]>(),
+        ValidIssuers = builder.Configuration.GetSection("ValidIssuers").Get<string[]>()
+    };
+})
+.AddPolicyScheme("B2C_OR_AAD", "B2C_OR_AAD", options =>
+{
+    options.ForwardDefaultSelector = context =>
+    {
+        string authorization = context.Request.Headers[HeaderNames.Authorization];
+        if (!string.IsNullOrEmpty(authorization) && authorization.StartsWith("Bearer "))
+        {
+            var token = authorization.Substring("Bearer ".Length).Trim();
+            var jwtHandler = new JwtSecurityTokenHandler();
+
+            return (jwtHandler.CanReadToken(token) && jwtHandler.ReadJwtToken(token).Issuer.Equals("B2C-Authority"))
+                ? "B2C" : "AAD";
+        }
+        return "AAD";
+    };
+});
 ```
 
 ### DI
@@ -15762,39 +16121,39 @@ public class AccountController : Controller {
 
 public class MyFilterAttribute : ResultFilterAttribute {
 
-    private string message;
+  private string message;
 
-    public MyFilterAttribute(string msg) {
+  public MyFilterAttribute(string msg) {
 
-        message = msg;
+    message = msg;
 
-    }
+  }
 
-    public override void OnResultExecuting(ResultExecutingContext context) {
+  public override void OnResultExecuting(ResultExecutingContext context) {
 
-        WriteMessage(context, $"<div>Before Result:{message}</div>");
+    WriteMessage(context, $"<div>Before Result:{message}</div>");
 
-    }
+  }
 
-    public override void OnResultExecuted(ResultExecutedContext context) {
+  public override void OnResultExecuted(ResultExecutedContext context) {
 
-        WriteMessage(context, $"<div>After Result:{message}</div>");
+    WriteMessage(context, $"<div>After Result:{message}</div>");
 
-    }
+  }
 
-    private void WriteMessage(FilterContext context, string msg) {
+  private void WriteMessage(FilterContext context, string msg) {
 
-        byte[] bytes = Encoding.ASCII
+    byte[] bytes = Encoding.ASCII
 
-            .GetBytes($"<div>{msg}</div>");
+      .GetBytes($"<div>{msg}</div>");
 
-        // Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true instead.
+    // Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true instead.
 
-        context.HttpContext.Response
+    context.HttpContext.Response
 
-            .Body.WriteAsync(bytes, 0, bytes.Length);
+      .Body.WriteAsync(bytes, 0, bytes.Length);
 
-    }
+  }
 
 }
 
@@ -15804,19 +16163,19 @@ public class MyFilterAttribute : ResultFilterAttribute {
 
 ```
 
-    [MyFilter("This is the Controller-Scoped Filter", Order = 10)]
+  [MyFilter("This is the Controller-Scoped Filter", Order = 10)]
 
-    public class HomeController : Controller {
+  public class HomeController : Controller {
 
-        [MyFilter("This is the First Action-Scoped Filter", Order = 1)]
+    [MyFilter("This is the First Action-Scoped Filter", Order = 1)]
 
-        [MyFilter("This is the Second Action-Scoped Filter", Order = -1)]
+    [MyFilter("This is the Second Action-Scoped Filter", Order = -1)]
 
-        public ViewResult Index() => View("Message",
+    public ViewResult Index() => View("Message",
 
-            "This is the Index action on the Home controller");
+      "This is the Index action on the Home controller");
 
-    }
+  }
 
 ```
 
@@ -15826,19 +16185,19 @@ public class MyFilterAttribute : ResultFilterAttribute {
 
  public class HttpsOnlyAttribute : Attribute, IAuthorizationFilter {
 
-        public void OnAuthorization(AuthorizationFilterContext context) {
+    public void OnAuthorization(AuthorizationFilterContext context) {
 
-            if (!context.HttpContext.Request.IsHttps) {
+      if (!context.HttpContext.Request.IsHttps) {
 
-                context.Result =
+        context.Result =
 
-                    new StatusCodeResult(StatusCodes.Status403Forbidden);
+          new StatusCodeResult(StatusCodes.Status403Forbidden);
 
-            }
-
-        }
+      }
 
     }
+
+  }
 
 ```
 
@@ -15848,45 +16207,45 @@ public class MyFilterAttribute : ResultFilterAttribute {
 
 public class CustomerResourceFilterAttribute : Attribute, IResourceFilter
 
+  {
+
+    private static Dictionary<string,object> cacheDic=new Dictionary<string, object>();
+
+    public void OnResourceExecuting(ResourceExecutingContext context)
+
     {
 
-        private static Dictionary<string,object> cacheDic=new Dictionary<string, object>();
+      var path=context.HttpContext.Request.Path; 
 
-        public void OnResourceExecuting(ResourceExecutingContext context)
+      if (cacheDic.ContainsKey(path))
 
-        {
+      {
 
-            var path=context.HttpContext.Request.Path; 
+        context.Result = (IActionResult)cacheDic[path];
 
-            if (cacheDic.ContainsKey(path))
+      }
 
-            {
+      Console.WriteLine("CustomerResourceFilterAttribute.OnResourceExecuting");
 
-                context.Result = (IActionResult)cacheDic[path];
+    }
 
-            }
+    public void OnResourceExecuted(ResourceExecutedContext context)
 
-            Console.WriteLine("CustomerResourceFilterAttribute.OnResourceExecuting");
+    {
 
-        }
+      var path = context.HttpContext.Request.Path;
 
-        public void OnResourceExecuted(ResourceExecutedContext context)
+      cacheDic[path] = context.Result;
 
-        {
+      Console.WriteLine("CustomerResourceFilterAttribute.OnResourceExecuted");
 
-            var path = context.HttpContext.Request.Path;
-
-            cacheDic[path] = context.Result;
-
-            Console.WriteLine("CustomerResourceFilterAttribute.OnResourceExecuted");
-
-        }
+    }
 
  
 
-         
+     
 
-    }
+  }
 
 ```
 
@@ -15896,33 +16255,33 @@ public class CustomerResourceFilterAttribute : Attribute, IResourceFilter
 
 public class RangeExceptionAttribute : ExceptionFilterAttribute {
 
-        public override void OnException(ExceptionContext context) {
+    public override void OnException(ExceptionContext context) {
 
-            if (context.Exception is ArgumentOutOfRangeException) {
+      if (context.Exception is ArgumentOutOfRangeException) {
 
-                context.Result = new ViewResult() {
+        context.Result = new ViewResult() {
 
-                    ViewName = "Message",
+          ViewName = "Message",
 
-                    ViewData = new ViewDataDictionary(
+          ViewData = new ViewDataDictionary(
 
-                        new EmptyModelMetadataProvider(),
+            new EmptyModelMetadataProvider(),
 
-                        new ModelStateDictionary()) {
+            new ModelStateDictionary()) {
 
-                        Model = @"The data received by the
+            Model = @"The data received by the
 
-                                application cannot be processed"
+                application cannot be processed"
 
-                    }
+          }
 
-                };
+        };
 
-            }
-
-        }
+      }
 
     }
+
+  }
 
 ```
 
@@ -15932,49 +16291,49 @@ public class RangeExceptionAttribute : ExceptionFilterAttribute {
 
 public class ProfileAttribute : ActionFilterAttribute {
 
-        private Stopwatch timer;
+    private Stopwatch timer;
 
-        private double actionTime;
+    private double actionTime;
 
-        public override async Task OnActionExecutionAsync(
+    public override async Task OnActionExecutionAsync(
 
-                ActionExecutingContext context,
+        ActionExecutingContext context,
 
-                ActionExecutionDelegate next) {
+        ActionExecutionDelegate next) {
 
-            timer = Stopwatch.StartNew();
+      timer = Stopwatch.StartNew();
 
-            await next();
+      await next();
 
-            actionTime = timer.Elapsed.TotalMilliseconds;
-
-        }
-
-        public override async Task OnResultExecutionAsync(
-
-                ResultExecutingContext context,
-
-                ResultExecutionDelegate next) {
-
-            await next();
-
-            timer.Stop();
-
-            string result = "<div>Action time: "
-
-                + $"{actionTime} ms</div><div>Total time: "
-
-                + $"{timer.Elapsed.TotalMilliseconds} ms</div>";
-
-            byte[] bytes = Encoding.ASCII.GetBytes(result);
-
-            await context.HttpContext.Response.Body.WriteAsync(bytes,
-
-                0, bytes.Length);
-
-        }
+      actionTime = timer.Elapsed.TotalMilliseconds;
 
     }
+
+    public override async Task OnResultExecutionAsync(
+
+        ResultExecutingContext context,
+
+        ResultExecutionDelegate next) {
+
+      await next();
+
+      timer.Stop();
+
+      string result = "<div>Action time: "
+
+        + $"{actionTime} ms</div><div>Total time: "
+
+        + $"{timer.Elapsed.TotalMilliseconds} ms</div>";
+
+      byte[] bytes = Encoding.ASCII.GetBytes(result);
+
+      await context.HttpContext.Response.Body.WriteAsync(bytes,
+
+        0, bytes.Length);
+
+    }
+
+  }
 
 ```
 
@@ -15982,37 +16341,37 @@ public class ProfileAttribute : ActionFilterAttribute {
 
 public class ViewResultDiagnostics : IActionFilter {
 
-        private IFilterDiagnostics diagnostics;
+    private IFilterDiagnostics diagnostics;
 
-        public ViewResultDiagnostics(IFilterDiagnostics diags) {
+    public ViewResultDiagnostics(IFilterDiagnostics diags) {
 
-            diagnostics = diags;
-
-        }
-
-        public void OnActionExecuting(ActionExecutingContext context) {
-
-            // do nothing - not used in this filter
-
-        }
-
-        public void OnActionExecuted(ActionExecutedContext context) {
-
-            ViewResult vr;
-
-            if ((vr = context.Result as ViewResult) != null) {
-
-                diagnostics.AddMessage($"View name: {vr.ViewName}");
-
-                diagnostics.AddMessage($@"Model type: 
-
-                    {vr.ViewData.Model.GetType().Name}");
-
-            }
-
-        }
+      diagnostics = diags;
 
     }
+
+    public void OnActionExecuting(ActionExecutingContext context) {
+
+      // do nothing - not used in this filter
+
+    }
+
+    public void OnActionExecuted(ActionExecutedContext context) {
+
+      ViewResult vr;
+
+      if ((vr = context.Result as ViewResult) != null) {
+
+        diagnostics.AddMessage($"View name: {vr.ViewName}");
+
+        diagnostics.AddMessage($@"Model type: 
+
+          {vr.ViewData.Model.GetType().Name}");
+
+      }
+
+    }
+
+  }
 
 ```
 
@@ -16020,43 +16379,43 @@ public class ViewResultDiagnostics : IActionFilter {
 
 ```
 
-     public class MessageAttribute : ResultFilterAttribute {
+   public class MessageAttribute : ResultFilterAttribute {
 
-        private string message;
+    private string message;
 
-        public MessageAttribute(string msg) {
+    public MessageAttribute(string msg) {
 
-            message = msg;
-
-        }
-
-        public override void OnResultExecuting(ResultExecutingContext context) {
-
-            WriteMessage(context, $"<div>Before Result:{message}</div>");
-
-        }
-
-        public override void OnResultExecuted(ResultExecutedContext context) {
-
-            WriteMessage(context, $"<div>After Result:{message}</div>");
-
-        }
-
-        private void WriteMessage(FilterContext context, string msg) {
-
-            byte[] bytes = Encoding.ASCII
-
-                .GetBytes($"<div>{msg}</div>");
-
-            // Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true instead.
-
-            context.HttpContext.Response
-
-                .Body.WriteAsync(bytes, 0, bytes.Length);
-
-        }
+      message = msg;
 
     }
+
+    public override void OnResultExecuting(ResultExecutingContext context) {
+
+      WriteMessage(context, $"<div>Before Result:{message}</div>");
+
+    }
+
+    public override void OnResultExecuted(ResultExecutedContext context) {
+
+      WriteMessage(context, $"<div>After Result:{message}</div>");
+
+    }
+
+    private void WriteMessage(FilterContext context, string msg) {
+
+      byte[] bytes = Encoding.ASCII
+
+        .GetBytes($"<div>{msg}</div>");
+
+      // Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true instead.
+
+      context.HttpContext.Response
+
+        .Body.WriteAsync(bytes, 0, bytes.Length);
+
+    }
+
+  }
 
 ```
 
@@ -16064,51 +16423,51 @@ public class ViewResultDiagnostics : IActionFilter {
 
  public class ViewResultDetailsAttribute : ResultFilterAttribute {
 
-        public override async Task OnResultExecutionAsync(
+    public override async Task OnResultExecutionAsync(
 
-                ResultExecutingContext context,
+        ResultExecutingContext context,
 
-                ResultExecutionDelegate next) {
+        ResultExecutionDelegate next) {
 
-            Dictionary<string, string> dict = new Dictionary<string, string> {
+      Dictionary<string, string> dict = new Dictionary<string, string> {
 
-                ["Result Type"] = context.Result.GetType().Name,
+        ["Result Type"] = context.Result.GetType().Name,
 
-            };
+      };
 
-            ViewResult vr;
+      ViewResult vr;
 
-            if ((vr = context.Result as ViewResult) != null) {
+      if ((vr = context.Result as ViewResult) != null) {
 
-                dict["View Name"] = vr.ViewName;
+        dict["View Name"] = vr.ViewName;
 
-                dict["Model Type"] = vr.ViewData.Model.GetType().Name;
+        dict["Model Type"] = vr.ViewData.Model.GetType().Name;
 
-                dict["Model Data"] = vr.ViewData.Model.ToString();
+        dict["Model Data"] = vr.ViewData.Model.ToString();
 
-            }
+      }
 
-            context.Result = new ViewResult {
+      context.Result = new ViewResult {
 
-                ViewName = "Message",
+        ViewName = "Message",
 
-                ViewData = new ViewDataDictionary(
+        ViewData = new ViewDataDictionary(
 
-                        new EmptyModelMetadataProvider(),
+            new EmptyModelMetadataProvider(),
 
-                        new ModelStateDictionary()) {
+            new ModelStateDictionary()) {
 
-                    Model = dict
-
-                }
-
-            };
-
-            await next();
+          Model = dict
 
         }
 
+      };
+
+      await next();
+
     }
+
+  }
 
 ```
 
@@ -16116,25 +16475,25 @@ public class ViewResultDiagnostics : IActionFilter {
 
 ```
 
-     public interface IFilterDiagnostics {
+   public interface IFilterDiagnostics {
 
-        IEnumerable<string> Messages { get; }
+    IEnumerable<string> Messages { get; }
 
-        void AddMessage(string message);
+    void AddMessage(string message);
 
-    }
+  }
 
-    public class DefaultFilterDiagnostics : IFilterDiagnostics {
+  public class DefaultFilterDiagnostics : IFilterDiagnostics {
 
-        private List<string> messages = new List<string>();
+    private List<string> messages = new List<string>();
 
-        public IEnumerable<string> Messages => messages;
+    public IEnumerable<string> Messages => messages;
 
-        public void AddMessage(string message) =>
+    public void AddMessage(string message) =>
 
-            messages.Add(message);
+      messages.Add(message);
 
-    }
+  }
 
 ```
 
@@ -16142,39 +16501,39 @@ public class ViewResultDiagnostics : IActionFilter {
 
 ```
 
-    public class DiagnosticsFilter : IAsyncResultFilter {
+  public class DiagnosticsFilter : IAsyncResultFilter {
 
-        private IFilterDiagnostics diagnostics;
+    private IFilterDiagnostics diagnostics;
 
-        public DiagnosticsFilter(IFilterDiagnostics diags) {
+    public DiagnosticsFilter(IFilterDiagnostics diags) {
 
-            diagnostics = diags;
-
-        }
-
-        public async Task OnResultExecutionAsync(
-
-                ResultExecutingContext context,
-
-                ResultExecutionDelegate next) {
-
-            await next();
-
-            foreach (string message in diagnostics?.Messages) {
-
-                byte[] bytes = Encoding.ASCII
-
-                    .GetBytes($"<div>{message}</div>");
-
-                await context.HttpContext.Response.Body
-
-                    .WriteAsync(bytes, 0, bytes.Length);
-
-            }
-
-        }
+      diagnostics = diags;
 
     }
+
+    public async Task OnResultExecutionAsync(
+
+        ResultExecutingContext context,
+
+        ResultExecutionDelegate next) {
+
+      await next();
+
+      foreach (string message in diagnostics?.Messages) {
+
+        byte[] bytes = Encoding.ASCII
+
+          .GetBytes($"<div>{message}</div>");
+
+        await context.HttpContext.Response.Body
+
+          .WriteAsync(bytes, 0, bytes.Length);
+
+      }
+
+    }
+
+  }
 
 ```
 
@@ -16182,59 +16541,59 @@ public class ViewResultDiagnostics : IActionFilter {
 
  public class TimeFilter : IAsyncActionFilter, IAsyncResultFilter {
 
-        private ConcurrentQueue<double> actionTimes = new ConcurrentQueue<double>();
+    private ConcurrentQueue<double> actionTimes = new ConcurrentQueue<double>();
 
-        private ConcurrentQueue<double> resultTimes = new ConcurrentQueue<double>();
+    private ConcurrentQueue<double> resultTimes = new ConcurrentQueue<double>();
 
-        private IFilterDiagnostics diagnostics;
+    private IFilterDiagnostics diagnostics;
 
-        public TimeFilter(IFilterDiagnostics diags) {
+    public TimeFilter(IFilterDiagnostics diags) {
 
-            diagnostics = diags;
-
-        }
-
-        public async Task OnActionExecutionAsync(
-
-                ActionExecutingContext context, ActionExecutionDelegate next) {
-
-            Stopwatch timer = Stopwatch.StartNew();
-
-            await next();
-
-            timer.Stop();
-
-            actionTimes.Enqueue(timer.Elapsed.TotalMilliseconds);
-
-            diagnostics.AddMessage($@"Action time: 
-
-                {timer.Elapsed.TotalMilliseconds} 
-
-                Average: {actionTimes.Average():F2}");
-
-        }
-
-        public async Task OnResultExecutionAsync(
-
-                ResultExecutingContext context, ResultExecutionDelegate next) {
-
-            Stopwatch timer = Stopwatch.StartNew();
-
-            await next();
-
-            timer.Stop();
-
-            resultTimes.Enqueue(timer.Elapsed.TotalMilliseconds);
-
-            diagnostics.AddMessage($@"Result time: 
-
-                {timer.Elapsed.TotalMilliseconds}
-
-                Average: {resultTimes.Average():F2}");
-
-        }
+      diagnostics = diags;
 
     }
+
+    public async Task OnActionExecutionAsync(
+
+        ActionExecutingContext context, ActionExecutionDelegate next) {
+
+      Stopwatch timer = Stopwatch.StartNew();
+
+      await next();
+
+      timer.Stop();
+
+      actionTimes.Enqueue(timer.Elapsed.TotalMilliseconds);
+
+      diagnostics.AddMessage($@"Action time: 
+
+        {timer.Elapsed.TotalMilliseconds} 
+
+        Average: {actionTimes.Average():F2}");
+
+    }
+
+    public async Task OnResultExecutionAsync(
+
+        ResultExecutingContext context, ResultExecutionDelegate next) {
+
+      Stopwatch timer = Stopwatch.StartNew();
+
+      await next();
+
+      timer.Stop();
+
+      resultTimes.Enqueue(timer.Elapsed.TotalMilliseconds);
+
+      diagnostics.AddMessage($@"Result time: 
+
+        {timer.Elapsed.TotalMilliseconds}
+
+        Average: {resultTimes.Average():F2}");
+
+    }
+
+  }
 
 ```
 
@@ -16242,61 +16601,61 @@ public class ViewResultDiagnostics : IActionFilter {
 
 > [HttpGet("object/{format?}")]
 
->    [FormatFilter]
+>  [FormatFilter]
 
 #### WebAPI
 
 ```
 
-    [Route("api/[controller]")]
+  [Route("api/[controller]")]
 
-    public class ContentController : Controller {
+  public class ContentController : Controller {
 
-        [HttpGet("string")]
+    [HttpGet("string")]
 
-        public string GetString() => "This is a string response";
+    public string GetString() => "This is a string response";
 
-        [HttpGet("object/{format?}")]
+    [HttpGet("object/{format?}")]
 
-        [FormatFilter]
+    [FormatFilter]
 
-        //[Produces("application/json", "application/xml")]
+    //[Produces("application/json", "application/xml")]
 
-        public Reservation GetObject() => new Reservation {
+    public Reservation GetObject() => new Reservation {
 
-            ReservationId = 100,
+      ReservationId = 100,
 
-            ClientName = "Joe",
+      ClientName = "Joe",
 
-            Location = "Board Room"
+      Location = "Board Room"
 
-        };
+    };
 
-        [HttpPost]
+    [HttpPost]
 
-        [Consumes("application/json")]
+    [Consumes("application/json")]
 
-        public Reservation ReceiveJson([FromBody] Reservation reservation) {
+    public Reservation ReceiveJson([FromBody] Reservation reservation) {
 
-            reservation.ClientName = "Json";
+      reservation.ClientName = "Json";
 
-            return reservation;
-
-        }
-
-        [HttpPost]
-
-        [Consumes("application/xml")]
-
-        public Reservation ReceiveXml([FromBody] Reservation reservation) {
-
-            reservation.ClientName = "Xml";
-
-            return reservation;
-
-        }
+      return reservation;
 
     }
+
+    [HttpPost]
+
+    [Consumes("application/xml")]
+
+    public Reservation ReceiveXml([FromBody] Reservation reservation) {
+
+      reservation.ClientName = "Xml";
+
+      return reservation;
+
+    }
+
+  }
 
 ```
 
@@ -16320,63 +16679,63 @@ public class ViewResultDiagnostics : IActionFilter {
 
 [Route("api/[controller]")]
 
-    public class ReservationController : Controller {
+  public class ReservationController : Controller {
 
-        private IRepository repository;
+    private IRepository repository;
 
-        public ReservationController(IRepository repo) => repository = repo;
+    public ReservationController(IRepository repo) => repository = repo;
 
-        [HttpGet]
+    [HttpGet]
 
-        public IEnumerable<Reservation> Get() => repository.Reservations;
+    public IEnumerable<Reservation> Get() => repository.Reservations;
 
-        [HttpGet("{id}")]
+    [HttpGet("{id}")]
 
-        public Reservation Get(int id) => repository[id];
+    public Reservation Get(int id) => repository[id];
 
-        [HttpPost]
+    [HttpPost]
 
-        public Reservation Post([FromBody] Reservation res) =>
+    public Reservation Post([FromBody] Reservation res) =>
 
-            repository.AddReservation(new Reservation {
+      repository.AddReservation(new Reservation {
 
-                ClientName = res.ClientName,
+        ClientName = res.ClientName,
 
-                Location = res.Location
+        Location = res.Location
 
-            });
+      });
 
-        [HttpPut]
+    [HttpPut]
 
-        public Reservation Put([FromBody] Reservation res) =>
+    public Reservation Put([FromBody] Reservation res) =>
 
-            repository.UpdateReservation(res);
+      repository.UpdateReservation(res);
 
-        [HttpPatch("{id}")]
+    [HttpPatch("{id}")]
 
-        public StatusCodeResult Patch(int id,
+    public StatusCodeResult Patch(int id,
 
-                [FromBody]JsonPatchDocument<Reservation> patch) {
+        [FromBody]JsonPatchDocument<Reservation> patch) {
 
-            Reservation res = Get(id);
+      Reservation res = Get(id);
 
-            if (res != null) {
+      if (res != null) {
 
-                patch.ApplyTo(res);
+        patch.ApplyTo(res);
 
-                return Ok();
+        return Ok();
 
-            }
+      }
 
-            return NotFound();
-
-        }
-
-        [HttpDelete("{id}")]
-
-        public void Delete(int id) => repository.DeleteReservation(id);
+      return NotFound();
 
     }
+
+    [HttpDelete("{id}")]
+
+    public void Delete(int id) => repository.DeleteReservation(id);
+
+  }
 
 ```
 
@@ -16386,55 +16745,55 @@ public class ViewResultDiagnostics : IActionFilter {
 
 @model IEnumerable<Reservation>
 
-@{  Layout = "_Layout"; }
+@{ Layout = "_Layout"; }
 
 <form id="addform" asp-action="AddReservation" method="post">
 
-    <div class="form-group">
+  <div class="form-group">
 
-        <label for="ClientName">Name:</label>
+    <label for="ClientName">Name:</label>
 
-        <input class="form-control" name="ClientName" />
+    <input class="form-control" name="ClientName" />
 
-    </div>
+  </div>
 
-    <div class="form-group">
+  <div class="form-group">
 
-        <label for="Location">Location:</label>
+    <label for="Location">Location:</label>
 
-        <input class="form-control" name="Location" />
+    <input class="form-control" name="Location" />
 
-    </div>
+  </div>
 
-    <div class="text-center panel-body">
+  <div class="text-center panel-body">
 
-        <button type="submit" class="btn btn-sm btn-primary">Add</button>
+    <button type="submit" class="btn btn-sm btn-primary">Add</button>
 
-    </div>
+  </div>
 
 </form>
 
 <table class="table table-sm table-striped table-bordered m-2">
 
-    <thead><tr><th>ID</th><th>Client</th><th>Location</th></tr></thead>
+  <thead><tr><th>ID</th><th>Client</th><th>Location</th></tr></thead>
 
-    <tbody>
+  <tbody>
 
-        @foreach (var r in Model) {
+    @foreach (var r in Model) {
 
-            <tr>
+      <tr>
 
-                <td>@r.ReservationId</td>
+        <td>@r.ReservationId</td>
 
-                <td>@r.ClientName</td>
+        <td>@r.ClientName</td>
 
-                <td>@r.Location</td>
+        <td>@r.Location</td>
 
-            </tr>
+      </tr>
 
-        }
+    }
 
-    </tbody>
+  </tbody>
 
 </table>
 
@@ -16444,21 +16803,21 @@ public class ViewResultDiagnostics : IActionFilter {
 
 services.AddMvc()
 
-    .AddXmlDataContractSerializerFormatters()
+  .AddXmlDataContractSerializerFormatters()
 
-    .AddMvcOptions(opts => {
+  .AddMvcOptions(opts => {
 
-        opts.EnableEndpointRouting = false;
+    opts.EnableEndpointRouting = false;
 
-        opts.FormatterMappings.SetMediaTypeMappingForFormat("xml",
+    opts.FormatterMappings.SetMediaTypeMappingForFormat("xml",
 
-            new MediaTypeHeaderValue("application/xml"));
+      new MediaTypeHeaderValue("application/xml"));
 
-        opts.RespectBrowserAcceptHeader = true;
+    opts.RespectBrowserAcceptHeader = true;
 
-        opts.ReturnHttpNotAcceptable = true;
+    opts.ReturnHttpNotAcceptable = true;
 
-    });
+  });
 
 ```
 
@@ -16468,19 +16827,19 @@ services.AddMvc()
 
  public class PageSize : ViewComponent {
 
-        public async Task<IViewComponentResult> InvokeAsync() {
+    public async Task<IViewComponentResult> InvokeAsync() {
 
-            HttpClient client = new HttpClient();
+      HttpClient client = new HttpClient();
 
-            HttpResponseMessage response
+      HttpResponseMessage response
 
-                = await client.GetAsync("http://apress.com");
+        = await client.GetAsync("http://apress.com");
 
-            return View(response.Content.Headers.ContentLength);
-
-        }
+      return View(response.Content.Headers.ContentLength);
 
     }
+
+  }
 
 ```
 
@@ -16492,29 +16851,29 @@ services.AddMvc()
 
 > HtmlTargetElement 属性中配置那些html元素，那些样式起作用
 
-> 定义一个Taghelper  formbutton 设置其属性
+> 定义一个Taghelper formbutton 设置其属性
 
 ```
 
-    [HtmlTargetElement("button", Attributes = "bs-button-color", ParentTag = "div")]
+  [HtmlTargetElement("button", Attributes = "bs-button-color", ParentTag = "div")]
 
-    [HtmlTargetElement("a", Attributes = "bs-button-color", ParentTag = "div")]
+  [HtmlTargetElement("a", Attributes = "bs-button-color", ParentTag = "div")]
 
-    [HtmlTargetElement("formbutton")]
+  [HtmlTargetElement("formbutton")]
 
-    public class LYFButtonTagHelper : TagHelper {
+  public class LYFButtonTagHelper : TagHelper {
 
-        public string BsButtonColor { get; set; } = "primary";
+    public string BsButtonColor { get; set; } = "primary";
 
-        public override void Process(TagHelperContext context,
+    public override void Process(TagHelperContext context,
 
-                                     TagHelperOutput output) {
+                   TagHelperOutput output) {
 
-            output.Attributes.SetAttribute("class", $"btn btn-{BsButtonColor}");
-
-        }
+      output.Attributes.SetAttribute("class", $"btn btn-{BsButtonColor}");
 
     }
+
+  }
 
 ```
 
@@ -16532,47 +16891,47 @@ services.AddMvc()
 
 <form method="post" asp-controller="Home" asp-action="Create"
 
-      asp-antiforgery="true">
+   asp-antiforgery="true">
 
-    <div class="form-group">
+  <div class="form-group">
 
-        <label asp-for="Name"></label>
+    <label asp-for="Name"></label>
 
-        <input class="form-control" asp-for="Name" />
+    <input class="form-control" asp-for="Name" />
 
-    </div>
+  </div>
 
-    <div class="form-group">
+  <div class="form-group">
 
-        <label asp-for="Country"></label>
+    <label asp-for="Country"></label>
 
-        <select class="form-control" asp-for="Country" asp-items="ViewBag.Countries">
+    <select class="form-control" asp-for="Country" asp-items="ViewBag.Countries">
 
-            <option disabled selected value="">Select a Country</option>
+      <option disabled selected value="">Select a Country</option>
 
-        </select>
+    </select>
 
-    </div>
+  </div>
 
-    <div class="form-group">
+  <div class="form-group">
 
-        <label asp-for="Population"></label>
+    <label asp-for="Population"></label>
 
-        <input class="form-control" asp-for="Population" />
+    <input class="form-control" asp-for="Population" />
 
-    </div>
+  </div>
 
-    <div class="form-group">
+  <div class="form-group">
 
-        <label asp-for="Notes"></label>
+    <label asp-for="Notes"></label>
 
-        <textarea class="form-control" asp-for="Notes"></textarea>
+    <textarea class="form-control" asp-for="Notes"></textarea>
 
-    </div>
+  </div>
 
-    <button type="submit" class="btn btn-primary">Add</button>
+  <button type="submit" class="btn btn-primary">Add</button>
 
-    <a class="btn btn-primary" href="/Home/Index">Cancel</a>
+  <a class="btn btn-primary" href="/Home/Index">Cancel</a>
 
 </form>
 
@@ -16682,19 +17041,19 @@ namespace SignalRChat.Hubs
 
 {
 
-    public class ChatHub : Hub
+  public class ChatHub : Hub
+
+  {
+
+    public async Task SendMessage(string user, string message)
 
     {
 
-        public async Task SendMessage(string user, string message)
-
-        {
-
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-
-        }
+      await Clients.All.SendAsync("ReceiveMessage", user, message);
 
     }
+
+  }
 
 }
 
@@ -16730,11 +17089,11 @@ if (!app.Environment.IsDevelopment())
 
 {
 
-    app.UseExceptionHandler("/Error");
+  app.UseExceptionHandler("/Error");
 
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+  // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 
-    app.UseHsts();
+  app.UseHsts();
 
 }
 
@@ -16766,51 +17125,51 @@ app.Run();
 
 <div class="container">
 
-    <div class="row p-1">
+  <div class="row p-1">
 
-        <div class="col-1">User</div>
+    <div class="col-1">User</div>
 
-        <div class="col-5"><input type="text" id="userInput" /></div>
+    <div class="col-5"><input type="text" id="userInput" /></div>
 
-    </div>
+  </div>
 
-    <div class="row p-1">
+  <div class="row p-1">
 
-        <div class="col-1">Message</div>
+    <div class="col-1">Message</div>
 
-        <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
+    <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
 
-    </div>
+  </div>
 
-    <div class="row p-1">
+  <div class="row p-1">
 
-        <div class="col-6 text-end">
+    <div class="col-6 text-end">
 
-            <input type="button" id="sendButton" value="Send Message" />
-
-        </div>
+      <input type="button" id="sendButton" value="Send Message" />
 
     </div>
 
-    <div class="row p-1">
+  </div>
 
-        <div class="col-6">
+  <div class="row p-1">
 
-            <hr />
+    <div class="col-6">
 
-        </div>
+      <hr />
+
+    </div>
+
+  </div>
+
+  <div class="row p-1">
+
+    <div class="col-6">
+
+      <ul id="messagesList"></ul>
 
     </div>
 
-    <div class="row p-1">
-
-        <div class="col-6">
-
-            <ul id="messagesList"></ul>
-
-        </div>
-
-    </div>
+  </div>
 
 </div>
 
@@ -16834,43 +17193,43 @@ document.getElementById("sendButton").disabled = true;
 
 connection.on("ReceiveMessage", function (user, message) {
 
-    var li = document.createElement("li");
+  var li = document.createElement("li");
 
-    document.getElementById("messagesList").appendChild(li);
+  document.getElementById("messagesList").appendChild(li);
 
-    // We can assign user-supplied strings to an element's textContent because it
+  // We can assign user-supplied strings to an element's textContent because it
 
-    // is not interpreted as markup. If you're assigning in any other way, you 
+  // is not interpreted as markup. If you're assigning in any other way, you 
 
-    // should be aware of possible script injection concerns.
+  // should be aware of possible script injection concerns.
 
-    li.textContent = `${user} says ${message}`;
+  li.textContent = `${user} says ${message}`;
 
 });
 
 connection.start().then(function () {
 
-    document.getElementById("sendButton").disabled = false;
+  document.getElementById("sendButton").disabled = false;
 
 }).catch(function (err) {
 
-    return console.error(err.toString());
+  return console.error(err.toString());
 
 });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
 
-    var user = document.getElementById("userInput").value;
+  var user = document.getElementById("userInput").value;
 
-    var message = document.getElementById("messageInput").value;
+  var message = document.getElementById("messageInput").value;
 
-    connection.invoke("SendMessage", user, message).catch(function (err) {
+  connection.invoke("SendMessage", user, message).catch(function (err) {
 
-        return console.error(err.toString());
+    return console.error(err.toString());
 
-    });
+  });
 
-    event.preventDefault();
+  event.preventDefault();
 
 });
 
@@ -16878,7 +17237,7 @@ document.getElementById("sendButton").addEventListener("click", function (event)
 
 ## Tensorflow
 
-## C# 调用 Tensorflow
+### C# .NET 中调用 Tensorflow
 
 > https://github.com/migueldeicaza/TensorFlowSharp
 
@@ -16934,31 +17293,31 @@ using (var graph = new TFGraph ())
 
 {
 
-    // Load the model
+  // Load the model
 
-    graph.Import (File.ReadAllBytes ("MySavedModel"));
+  graph.Import (File.ReadAllBytes ("MySavedModel"));
 
-    using (var session = new TFSession (graph))
+  using (var session = new TFSession (graph))
 
-    {
+  {
 
-        // Setup the runner
+    // Setup the runner
 
-        var runner = session.GetRunner ();
+    var runner = session.GetRunner ();
 
-        runner.AddInput (graph ["input"] [0], tensor);
+    runner.AddInput (graph ["input"] [0], tensor);
 
-        runner.Fetch (graph ["output"] [0]);
+    runner.Fetch (graph ["output"] [0]);
 
-        // Run the model
+    // Run the model
 
-        var output = runner.Run ();
+    var output = runner.Run ();
 
-        // Fetch the results from output:
+    // Fetch the results from output:
 
-        TFTensor result = output [0];
+    TFTensor result = output [0];
 
-    }
+  }
 
 }
 
@@ -16968,9 +17327,9 @@ If your application is sensitive to GC cycles, you can run your model as follows
 
 var inputs = new float[][,] {
 
-    new float[,] { { 1, 2 }, { 3, 4 } },
+  new float[,] { { 1, 2 }, { 3, 4 } },
 
-    new float[,] { { 2, 4 }, { 6, 8 } }
+  new float[,] { { 2, 4 }, { 6, 8 } }
 
 };
 
@@ -16994,43 +17353,43 @@ using (var graph = new TFGraph())
 
 {
 
-    // Load the model
+  // Load the model
 
-    graph.Import(File.ReadAllBytes("MySavedModel"));
+  graph.Import(File.ReadAllBytes("MySavedModel"));
 
-    using (var session = new TFSession(graph))
+  using (var session = new TFSession(graph))
+
+  {
+
+    // Setup the runner
+
+    var runner = session.GetRunner();
+
+    runner.AddInput(graph["input"][0], input);
+
+    runner.Fetch(graph["output"][0]);
+
+    // Run the model on each input matrix
+
+    for (int i = 0; i < inputs.Length; i++)
 
     {
 
-        // Setup the runner
+      // Mutate the input tensor
 
-        var runner = session.GetRunner();
+      input.SetValue(inputs[i]);
 
-        runner.AddInput(graph["input"][0], input);
+      // Run the model
 
-        runner.Fetch(graph["output"][0]);
+      runner.Run(output);
 
-        // Run the model on each input matrix
+      // Fetch the result from output into `result`
 
-        for (int i = 0; i < inputs.Length; i++)
-
-        {
-
-            // Mutate the input tensor
-
-            input.SetValue(inputs[i]);
-
-            // Run the model
-
-            runner.Run(output);
-
-            // Fetch the result from output into `result`
-
-            output[0].GetValue(result);
-
-        }
+      output[0].GetValue(result);
 
     }
+
+  }
 
 }
 
@@ -17040,29 +17399,29 @@ using (var session = new TFSession())
 
 {
 
-    var graph = session.Graph;
+  var graph = session.Graph;
 
-    var a = graph.Const(2);
+  var a = graph.Const(2);
 
-    var b = graph.Const(3);
+  var b = graph.Const(3);
 
-    Console.WriteLine("a=2 b=3");
+  Console.WriteLine("a=2 b=3");
 
-    // Add two constants
+  // Add two constants
 
-    var addingResults = session.GetRunner().Run(graph.Add(a, b));
+  var addingResults = session.GetRunner().Run(graph.Add(a, b));
 
-    var addingResultValue = addingResults.GetValue();
+  var addingResultValue = addingResults.GetValue();
 
-    Console.WriteLine("a+b={0}", addingResultValue);
+  Console.WriteLine("a+b={0}", addingResultValue);
 
-    // Multiply two constants
+  // Multiply two constants
 
-    var multiplyResults = session.GetRunner().Run(graph.Mul(a, b));
+  var multiplyResults = session.GetRunner().Run(graph.Mul(a, b));
 
-    var multiplyResultValue = multiplyResults.GetValue();
+  var multiplyResultValue = multiplyResults.GetValue();
 
-    Console.WriteLine("a*b={0}", multiplyResultValue);
+  Console.WriteLine("a*b={0}", multiplyResultValue);
 
 }
 
@@ -17080,35 +17439,35 @@ open TensorFlow
 
 Environment.SetEnvironmentVariable("Path", 
 
-    Environment.GetEnvironmentVariable("Path") + ";" + __SOURCE_DIRECTORY__ + @"/packages/TensorFlowSharp.1.2.2/native")
+  Environment.GetEnvironmentVariable("Path") + ";" + __SOURCE_DIRECTORY__ + @"/packages/TensorFlowSharp.1.2.2/native")
 
 module AddTwoNumbers = 
 
-    let session = new TFSession()
+  let session = new TFSession()
 
-    let graph = session.Graph
+  let graph = session.Graph
 
-    let a = graph.Const(new TFTensor(2))
+  let a = graph.Const(new TFTensor(2))
 
-    let b = graph.Const(new TFTensor(3))
+  let b = graph.Const(new TFTensor(3))
 
-    Console.WriteLine("a=2 b=3")
+  Console.WriteLine("a=2 b=3")
 
-    // Add two constants
+  // Add two constants
 
-    let addingResults = session.GetRunner().Run(graph.Add(a, b))
+  let addingResults = session.GetRunner().Run(graph.Add(a, b))
 
-    let addingResultValue = addingResults.GetValue()
+  let addingResultValue = addingResults.GetValue()
 
-    Console.WriteLine("a+b={0}", addingResultValue)
+  Console.WriteLine("a+b={0}", addingResultValue)
 
-    // Multiply two constants
+  // Multiply two constants
 
-    let multiplyResults = session.GetRunner().Run(graph.Mul(a, b))
+  let multiplyResults = session.GetRunner().Run(graph.Mul(a, b))
 
-    let multiplyResultValue = multiplyResults.GetValue()
+  let multiplyResultValue = multiplyResults.GetValue()
 
-    Console.WriteLine("a*b={0}", multiplyResultValue)
+  Console.WriteLine("a*b={0}", multiplyResultValue)
 
 Working on TensorFlowSharp
 
@@ -17178,15 +17537,15 @@ gRPC 的主要优点是：
 
  GRPC是google开源的一个高性能、跨语言的RPC框架，基于HTTP2协议，基于protobuf 3.x，基于Netty 4.x +。GRPC与thrift、avro-rpc等其实在总体原理上并没有太大的区别，简而言之GRPC并没有太多突破性的创新。（如下描述，均基于JAVA语言的实现）
 
-    对于开发者而言：
+  对于开发者而言：
 
-    1）需要使用protobuf定义接口，即.proto文件
+  1）需要使用protobuf定义接口，即.proto文件
 
-    2）然后使用compile工具生成特定语言的执行代码，比如JAVA、C/C++、Python等。类似于thrift，为了解决跨语言问题。
+  2）然后使用compile工具生成特定语言的执行代码，比如JAVA、C/C++、Python等。类似于thrift，为了解决跨语言问题。
 
-    3）启动一个Server端，server端通过侦听指定的port，来等待Client链接请求，通常使用Netty来构建，GRPC内置了Netty的支持。
+  3）启动一个Server端，server端通过侦听指定的port，来等待Client链接请求，通常使用Netty来构建，GRPC内置了Netty的支持。
 
-    4）启动一个或者多个Client端，Client也是基于Netty，Client通过与Server建立TCP长链接，并发送请求；Request与Response均被封装成HTTP2的stream Frame，通过Netty Channel进行交互。
+  4）启动一个或者多个Client端，Client也是基于Netty，Client通过与Server建立TCP长链接，并发送请求；Request与Response均被封装成HTTP2的stream Frame，通过Netty Channel进行交互。
 
 ```
 
@@ -17206,19 +17565,19 @@ syntax = "proto3";
 
 service Greeter {
 
-  rpc SayHello (HelloRequest) returns (HelloReply);
+ rpc SayHello (HelloRequest) returns (HelloReply);
 
 }
 
 message HelloRequest {
 
-  string name = 1;
+ string name = 1;
 
 }
 
 message HelloReply {
 
-  string message = 1;
+ string message = 1;
 
 }
 
@@ -17236,7 +17595,7 @@ XML
 
 <ItemGroup>
 
-  <Protobuf Include="Protos\greet.proto" />
+ <Protobuf Include="Protos\greet.proto" />
 
 </ItemGroup>
 
@@ -17262,33 +17621,33 @@ public class GreeterService : Greeter.GreeterBase
 
 {
 
-    private readonly ILogger<GreeterService> _logger;
+  private readonly ILogger<GreeterService> _logger;
 
-    public GreeterService(ILogger<GreeterService> logger)
+  public GreeterService(ILogger<GreeterService> logger)
+
+  {
+
+    _logger = logger;
+
+  }
+
+  public override Task<HelloReply> SayHello(HelloRequest request,
+
+    ServerCallContext context)
+
+  {
+
+    _logger.LogInformation("Saying hello to {Name}", request.Name);
+
+    return Task.FromResult(new HelloReply 
 
     {
 
-        _logger = logger;
+      Message = "Hello " + request.Name
 
-    }
+    });
 
-    public override Task<HelloReply> SayHello(HelloRequest request,
-
-        ServerCallContext context)
-
-    {
-
-        _logger.LogInformation("Saying hello to {Name}", request.Name);
-
-        return Task.FromResult(new HelloReply 
-
-        {
-
-            Message = "Hello " + request.Name
-
-        });
-
-    }
+  }
 
 }
 
@@ -17312,7 +17671,7 @@ var client = new Greeter.GreeterClient(channel);
 
 var response = await client.SayHelloAsync(
 
-    new HelloRequest { Name = "World" });
+  new HelloRequest { Name = "World" });
 
 Console.WriteLine(response.Message);
 
@@ -18538,13 +18897,13 @@ set transaction isolation level read uncommitted;
 
 > > 更高级的 隔离。用户解决“幻读”（上面提到的）。
 
-> 就是使用上面的（repeatable read）  加上共享锁 并不撤销，如果锁定的 一行数据，
+> 就是使用上面的（repeatable read） 加上共享锁 并不撤销，如果锁定的 一行数据，
 
 > 那么 其他的进程 还可以对 其他的数据进行操作，也可以 进行新增和删除的操作。
 
 > 所以如果想要在查询的时候，不能对整张表进行任何操作，
 
-> 那么就要 将表的结构也 锁定    （就需要使用 更强的 锁定）
+> 那么就要 将表的结构也 锁定  （就需要使用 更强的 锁定）
 
 > set transaction isolation level serializable;
 
@@ -18560,15 +18919,15 @@ set transaction isolation level read uncommitted;
 
 > 所以读数据的性能效率很高，但是修改操作性能就降低的很多。
 
-> 因为是将 数据库  中的数据 复制到 tempdb 数据库中，所以不会产生 幻读。
+> 因为是将 数据库 中的数据 复制到 tempdb 数据库中，所以不会产生 幻读。
 
 > set transaction isolation level snapshot;
 
 > >带来两个问题：
 
-> > 1、当 另外一个事务  已经提交，但是这边的查询到数据还是没有修改。因为 每次查询到的快照是针对于 本次回话对应的那个 transaction 的，因为在这个事务里面是没有修改的，所以查询到的数据是没有修改的。
+> > 1、当 另外一个事务 已经提交，但是这边的查询到数据还是没有修改。因为 每次查询到的快照是针对于 本次回话对应的那个 transaction 的，因为在这个事务里面是没有修改的，所以查询到的数据是没有修改的。
 
-> > 2、（更新问题）因为 那边的数据已经是 飞凤公司了，但是这里还是   联邦,所以,在这个事务里面是不能对表进行修改,因为访问的是临时数据库,想要对 数据库修改是不可能的（sql server 就会报错，阻止修改） 
+> > 2、（更新问题）因为 那边的数据已经是 飞凤公司了，但是这里还是  联邦,所以,在这个事务里面是不能对表进行修改,因为访问的是临时数据库,想要对 数据库修改是不可能的（sql server 就会报错，阻止修改） 
 
 #### read commited snapshot（已经提交读隔离）
 
@@ -18600,13 +18959,13 @@ set transaction isolation level read uncommitted;
 
 > > -- the first method
 
-> > select *  from Table1 with(nolock) 
+> > select * from Table1 with(nolock) 
 
 > > -- the second method
 
 > > SET TRANSACTION ISOLATION LEVEL Read UnCommitted;
 
-> > select *  from Table1 
+> > select * from Table1 
 
 > > 这种方式比较灵活，可以重点语句重点对待，缺点就是 要设置的实在是太多了，因为这种方式的作用域实在是太小了啊啊啊啊
 
@@ -18774,13 +19133,13 @@ public class Customer
 
 {
 
-    public int Id { get; set; }
+  public int Id { get; set; }
 
-    public string Name { get; set; }
+  public string Name { get; set; }
 
-    public string[] Phones { get; set; }
+  public string[] Phones { get; set; }
 
-    public bool IsActive { get; set; }
+  public bool IsActive { get; set; }
 
 }
 
@@ -18790,7 +19149,7 @@ public class Customer
 
 using LiteDB;
 
-    下面是测试代码，会在当前目录下创建一个sample.db的数据库文件：
+  下面是测试代码，会在当前目录下创建一个sample.db的数据库文件：
 
 //打开或者创建新的数据库
 
@@ -18798,47 +19157,47 @@ using (var db = new LiteDatabase("sample.db"))
 
 {
 
-    //获取 customers 集合，如果没有会创建，相当于表
+  //获取 customers 集合，如果没有会创建，相当于表
 
-    var col = db.GetCollection<Customer>("customers");
+  var col = db.GetCollection<Customer>("customers");
 
-    //创建 customers 实例
+  //创建 customers 实例
 
-    var customer = new Customer
+  var customer = new Customer
 
-    {
+  {
 
-        Name = "John Doe",
+    Name = "John Doe",
 
-        Phones = new string[] { "8000-0000", "9000-0000" },
+    Phones = new string[] { "8000-0000", "9000-0000" },
 
-        IsActive = true
+    IsActive = true
 
-    };
+  };
 
-    // 将新的对象插入到数据表中，Id是自增，自动生成的
+  // 将新的对象插入到数据表中，Id是自增，自动生成的
 
-    col.Insert(customer);
+  col.Insert(customer);
 
-    // 更新实例
+  // 更新实例
 
-    customer.Name = "Joana Doe";
+  customer.Name = "Joana Doe";
 
-    //保存到数据库
+  //保存到数据库
 
-    col.Update(customer);
+  col.Update(customer);
 
-    // 使用对象的属性，这个方法生成索引，来进行检索
+  // 使用对象的属性，这个方法生成索引，来进行检索
 
-    col.EnsureIndex(x => x.Name);
+  col.EnsureIndex(x => x.Name);
 
-    //使用LINQ语法来检索
+  //使用LINQ语法来检索
 
-    var results = col.Find(x => x.Name.StartsWith("Jo"));
+  var results = col.Find(x => x.Name.StartsWith("Jo"));
 
 }
 
-    上述过程很清楚，根据注释理解几乎不用费神。
+  上述过程很清楚，根据注释理解几乎不用费神。
 
 ### 使用场景
 
@@ -18928,7 +19287,7 @@ var results = collection.Find(Query.GTE("Age", 25));
 
 var results = collection.Find(Query.And(
 
-    Query.EQ("FirstName", "John"), Query.EQ("LastName", "Doe")
+  Query.EQ("FirstName", "John"), Query.EQ("LastName", "Doe")
 
 ));
 
@@ -18953,21 +19312,21 @@ collection.EnsureIndex(x => x.Name);
 
 var result = collection
 
-    .Find(Query.EQ("Name", "John Doe")) 
+  .Find(Query.EQ("Name", "John Doe")) 
 
-    .Where(x => x.CreationDate >= x.DueDate.AddDays(-5)) 
+  .Where(x => x.CreationDate >= x.DueDate.AddDays(-5)) 
 
-    .OrderBy(x => x.Age)
+  .OrderBy(x => x.Age)
 
-    .Select(x => new
+  .Select(x => new
 
-    { 
+  { 
 
-        FullName = x.FirstName + " " + x.LastName, 
+    FullName = x.FirstName + " " + x.LastName, 
 
-        DueDays = x.DueDate - x.CreationDate 
+    DueDays = x.DueDate - x.CreationDate 
 
-    });
+  });
 
  当然还有一些方法如：Count() , Exists(),Min() , Max()等方法。。比较好理解。看看linq表达式的查询案例：
 
@@ -19013,89 +19372,89 @@ var results = collection.Find(x => x.Name.StartsWith("John") && x.Age > 30);
 
 {
 
-    
+  
 
-    /// <summary>
+  /// <summary>
 
-    /// SelectDevices.xaml 的交互逻辑
+  /// SelectDevices.xaml 的交互逻辑
 
-    /// </summary>
+  /// </summary>
 
-    public partial class TestLiteDB
+  public partial class TestLiteDB
+
+  {
+
+    public TestLiteDB() : base("")
 
     {
-
-        public TestLiteDB() : base("")
-
-        {
 
     InitializeComponent();
 
     this.Loaded += TestLiteDB_Loaded;
 
-        }
+    }
 
-        private void TestLiteDB_Loaded(object sender, RoutedEventArgs e)
+    private void TestLiteDB_Loaded(object sender, RoutedEventArgs e)
 
-        {
+    {
 
      InitDB();
 
-        }
+    }
 
-        public void InitDB()
+    public void InitDB()
+
+    {
+
+      using (var db = new LiteDatabase("sample.db"))
+
+      {
+
+        //获取 customers 集合，如果没有会创建，相当于表
+
+        var col = db.GetCollection<Customer>("customers");
+
+        //创建 customers 实例
+
+        var customer = new Customer
 
         {
 
-            using (var db = new LiteDatabase("sample.db"))
+          Name = "John Doe",
 
-            {
+          Phones = new string[] { "8000-0000", "9000-0000" },
 
-                //获取 customers 集合，如果没有会创建，相当于表
+          IsActive = true
 
-                var col = db.GetCollection<Customer>("customers");
+        };
 
-                //创建 customers 实例
+        // 将新的对象插入到数据表中，Id是自增，自动生成的
 
-                var customer = new Customer
+        col.Insert(customer);
 
-                {
+        // 更新实例
 
-                    Name = "John Doe",
+        customer.Name = "Joana Doe";
 
-                    Phones = new string[] { "8000-0000", "9000-0000" },
+        //保存到数据库
 
-                    IsActive = true
+        col.Update(customer);
 
-                };
+        // 使用对象的属性，这个方法生成索引，来进行检索
 
-                // 将新的对象插入到数据表中，Id是自增，自动生成的
+        col.EnsureIndex(x => x.Name);
 
-                col.Insert(customer);
+        //使用LINQ语法来检索
 
-                // 更新实例
+        var results = col.Find(x => x.Name.StartsWith("Jo"));
 
-                customer.Name = "Joana Doe";
+        tbContent.Text = JsonConvert.SerializeObject(results);
 
-                //保存到数据库
-
-                col.Update(customer);
-
-                // 使用对象的属性，这个方法生成索引，来进行检索
-
-                col.EnsureIndex(x => x.Name);
-
-                //使用LINQ语法来检索
-
-                var results = col.Find(x => x.Name.StartsWith("Jo"));
-
-                tbContent.Text = JsonConvert.SerializeObject(results);
-
-            }
-
-        }
+      }
 
     }
+
+  }
 
 }
 
@@ -19957,153 +20316,153 @@ namespace Inovance.FA.FACommonService
 
 {
 
-    [Export(typeof(IFALogger))]
+  [Export(typeof(IFALogger))]
 
-    public class FALoggerService : IFALogger
+  public class FALoggerService : IFALogger
+
+  {
+
+    ILog logger;
+
+    public FALoggerService()
 
     {
 
-        ILog logger;
-
-        public FALoggerService()
-
-        {
-
-            logger = log4net.LogManager.GetLogger("RollingLogFileAppender"); 
-
-        }
-
-        public bool IsDebugEnabled => true;
-
-        public bool IsInfoEnabled => true;
-
-        public bool IsWarnEnabled => true;
-
-        public bool IsErrorEnabled => true;
-
-        public bool IsFatalEnabled => true;
-
-        public void Debug(object message)
-
-        {
-
-            logger.Debug(message);
-
-        }
-
-        public void Debug(object message, Exception exception)
-
-        {
-
-            logger.Debug(message, exception);
-
-        }
-
-        public void DebugFormat(string format, params object[] args)
-
-        {
-
-            logger.DebugFormat(format, args);
-
-        }
-
-        public void Error(object message)
-
-        {
-
-            logger.Error(message);
-
-        }
-
-        public void Error(object message, Exception exception)
-
-        {
-
-            logger.Error(message, exception);
-
-        }
-
-        public void ErrorFormat(string format, params object[] args)
-
-        {
-
-            logger.ErrorFormat(format, args);
-
-        }
-
-        public void Fatal(object message)
-
-        {
-
-            logger.Fatal(message);
-
-        }
-
-        public void Fatal(object message, Exception exception)
-
-        {
-
-            logger.Fatal(message, exception);
-
-        }
-
-        public void FatalFormat(string format, params object[] args)
-
-        {
-
-            logger.FatalFormat(format, args);
-
-        }
-
-        public void Info(object message)
-
-        {
-
-            logger.Info(message);
-
-        }
-
-        public void Info(object message, Exception exception)
-
-        {
-
-            logger.Info(message, exception);
-
-        }
-
-        public void InfoFormat(string format, params object[] args)
-
-        {
-
-            logger.InfoFormat(format, args);
-
-        }
-
-        public void Warn(object message)
-
-        {
-
-            logger.Warn(message);
-
-        }
-
-        public void Warn(object message, Exception exception)
-
-        {
-
-            logger.Warn(message, exception);
-
-        }
-
-        public void WarnFormat(string format, params object[] args)
-
-        {
-
-            logger.WarnFormat(format, args);
-
-        }
+      logger = log4net.LogManager.GetLogger("RollingLogFileAppender"); 
 
     }
+
+    public bool IsDebugEnabled => true;
+
+    public bool IsInfoEnabled => true;
+
+    public bool IsWarnEnabled => true;
+
+    public bool IsErrorEnabled => true;
+
+    public bool IsFatalEnabled => true;
+
+    public void Debug(object message)
+
+    {
+
+      logger.Debug(message);
+
+    }
+
+    public void Debug(object message, Exception exception)
+
+    {
+
+      logger.Debug(message, exception);
+
+    }
+
+    public void DebugFormat(string format, params object[] args)
+
+    {
+
+      logger.DebugFormat(format, args);
+
+    }
+
+    public void Error(object message)
+
+    {
+
+      logger.Error(message);
+
+    }
+
+    public void Error(object message, Exception exception)
+
+    {
+
+      logger.Error(message, exception);
+
+    }
+
+    public void ErrorFormat(string format, params object[] args)
+
+    {
+
+      logger.ErrorFormat(format, args);
+
+    }
+
+    public void Fatal(object message)
+
+    {
+
+      logger.Fatal(message);
+
+    }
+
+    public void Fatal(object message, Exception exception)
+
+    {
+
+      logger.Fatal(message, exception);
+
+    }
+
+    public void FatalFormat(string format, params object[] args)
+
+    {
+
+      logger.FatalFormat(format, args);
+
+    }
+
+    public void Info(object message)
+
+    {
+
+      logger.Info(message);
+
+    }
+
+    public void Info(object message, Exception exception)
+
+    {
+
+      logger.Info(message, exception);
+
+    }
+
+    public void InfoFormat(string format, params object[] args)
+
+    {
+
+      logger.InfoFormat(format, args);
+
+    }
+
+    public void Warn(object message)
+
+    {
+
+      logger.Warn(message);
+
+    }
+
+    public void Warn(object message, Exception exception)
+
+    {
+
+      logger.Warn(message, exception);
+
+    }
+
+    public void WarnFormat(string format, params object[] args)
+
+    {
+
+      logger.WarnFormat(format, args);
+
+    }
+
+  }
 
 }
 
@@ -20129,85 +20488,85 @@ namespace Inovance.FA.FACommonService
 
 {
 
-    [Export(typeof(IFAMessageBox))]
+  [Export(typeof(IFAMessageBox))]
 
-    public class FAMessageService : IFAMessageBox
+  public class FAMessageService : IFAMessageBox
+
+  {
+
+    public string Title = "FA";
+
+    public void ShowDebug(string message)
 
     {
 
-        public string Title = "FA";
-
-        public void ShowDebug(string message)
-
-        {
-
-            MessageBox.Show(message, Title, MessageBoxButton.OK, MessageBoxImage.Information);
-
-        }
-
-        public void ShowError(string message, Exception ex=null)
-
-        {
-
-            if (ex == null)
-
-            {
-
-                MessageBox.Show(message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
-
-            }
-
-            else
-
-            {
-
-                MessageBox.Show($"{message}/r/n{ex.ToString()}/r/n{ex.Message}/r/n{ex.StackTrace}/r/n", Title, MessageBoxButton.OK, MessageBoxImage.Error);
-
-            }
-
-            
-
-        }
-
-        public void ShowInfo(string message)
-
-        {
-
-            MessageBox.Show(message, Title, MessageBoxButton.OK, MessageBoxImage.Information);
-
-        }
-
-        public bool ShowQuestion(string message)
-
-        {
-
-            if (MessageBox.Show(message, Title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-
-            {
-
-                return true;
-
-            }
-
-            else
-
-            {
-
-                return false;
-
-            }
-
-        }
-
-        public void ShowWarn(string message)
-
-        {
-
-            MessageBox.Show(message, Title, MessageBoxButton.OK, MessageBoxImage.Warning);
-
-        }
+      MessageBox.Show(message, Title, MessageBoxButton.OK, MessageBoxImage.Information);
 
     }
+
+    public void ShowError(string message, Exception ex=null)
+
+    {
+
+      if (ex == null)
+
+      {
+
+        MessageBox.Show(message, Title, MessageBoxButton.OK, MessageBoxImage.Error);
+
+      }
+
+      else
+
+      {
+
+        MessageBox.Show($"{message}/r/n{ex.ToString()}/r/n{ex.Message}/r/n{ex.StackTrace}/r/n", Title, MessageBoxButton.OK, MessageBoxImage.Error);
+
+      }
+
+      
+
+    }
+
+    public void ShowInfo(string message)
+
+    {
+
+      MessageBox.Show(message, Title, MessageBoxButton.OK, MessageBoxImage.Information);
+
+    }
+
+    public bool ShowQuestion(string message)
+
+    {
+
+      if (MessageBox.Show(message, Title, MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+
+      {
+
+        return true;
+
+      }
+
+      else
+
+      {
+
+        return false;
+
+      }
+
+    }
+
+    public void ShowWarn(string message)
+
+    {
+
+      MessageBox.Show(message, Title, MessageBoxButton.OK, MessageBoxImage.Warning);
+
+    }
+
+  }
 
 }
 
@@ -20217,55 +20576,55 @@ namespace Inovance.FA.FACommonService
 
 <inplug:FAView x:Class="Inovance.FA.FACommonViews.Views.DebugPanel"
 
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 
-             xmlns:local="clr-namespace:Inovance.FA.FACommonViews.Views"
+       xmlns:local="clr-namespace:Inovance.FA.FACommonViews.Views"
 
-             xmlns:facontrols="clr-namespace:Inovance.FA.Controls;assembly=FAControls"
+       xmlns:facontrols="clr-namespace:Inovance.FA.Controls;assembly=FAControls"
 
-             xmlns:localvm="clr-namespace:Inovance.FA.FACommonViews.ViewModels"
+       xmlns:localvm="clr-namespace:Inovance.FA.FACommonViews.ViewModels"
 
-             xmlns:inplug="clr-namespace:Inovance.FA.Plugin;assembly=FAPlugin"
+       xmlns:inplug="clr-namespace:Inovance.FA.Plugin;assembly=FAPlugin"
 
-             mc:Ignorable="d" 
+       mc:Ignorable="d" 
 
-             d:DesignHeight="300" d:DesignWidth="600" Width="600" Height="300" >
+       d:DesignHeight="300" d:DesignWidth="600" Width="600" Height="300" >
 
-    <!--<inplug:FAView.DataContext>
+  <!--<inplug:FAView.DataContext>
 
-        <localvm:DebugPanelViewModel/>
+    <localvm:DebugPanelViewModel/>
 
-    </inplug:FAView.DataContext>-->
+  </inplug:FAView.DataContext>-->
 
-    <Grid>
+  <Grid>
 
-        <Grid.RowDefinitions>
+    <Grid.RowDefinitions>
 
-            <RowDefinition Height="30" />
+      <RowDefinition Height="30" />
 
-            <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
 
-        </Grid.RowDefinitions>
+    </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
+    <Grid.ColumnDefinitions>
 
-            <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
 
-        </Grid.ColumnDefinitions>
+    </Grid.ColumnDefinitions>
 
-        <Label Content="显示输出来源" HorizontalAlignment="Left" Grid.Row="0" />
+    <Label Content="显示输出来源" HorizontalAlignment="Left" Grid.Row="0" />
 
-        <!--Text="{Binding Message}"-->
+    <!--Text="{Binding Message}"-->
 
-        <TextBlock Text="{Binding Message}" HorizontalAlignment="Left" Grid.Row="1"/>
+    <TextBlock Text="{Binding Message}" HorizontalAlignment="Left" Grid.Row="1"/>
 
-    </Grid>
+  </Grid>
 
 </inplug:FAView>
 
@@ -20293,49 +20652,49 @@ namespace Inovance.FA.FACommonViews.ViewModels
 
 {
 
-    [Export(typeof(IDebugOut))]
+  [Export(typeof(IDebugOut))]
 
-    [Export(typeof(FAViewModel))]
+  [Export(typeof(FAViewModel))]
 
-    public class DebugPanelViewModel : FAViewModel, IDebugOut
+  public class DebugPanelViewModel : FAViewModel, IDebugOut
+
+  {
+
+    public string message = "请输入";
+
+    public string Message
 
     {
 
-        public string message = "请输入";
+      get
 
-        public string Message
+      {
 
-        {
+        return message;
 
-            get
+      }
 
-            {
+      set
 
-                return message;
+      {
 
-            }
+        message = value;
 
-            set
+        RaisePropertyChanged("Message");
 
-            {
-
-                message = value;
-
-                RaisePropertyChanged("Message");
-
-            }
-
-        }
-
-        public void Debug(string Message)
-
-        {
-
-            this.Message= Message;
-
-        }
+      }
 
     }
+
+    public void Debug(string Message)
+
+    {
+
+      this.Message= Message;
+
+    }
+
+  }
 
 }
 
@@ -20379,27 +20738,27 @@ namespace Inovance.FA.FACommonViews.Views
 
 {
 
-    [Export(typeof(FAView))]
+  [Export(typeof(FAView))]
 
-    /// <summary>
+  /// <summary>
 
-    /// SelectDevices.xaml 的交互逻辑
+  /// SelectDevices.xaml 的交互逻辑
 
-    /// </summary>
+  /// </summary>
 
-    public partial class DebugPanel:FAView
+  public partial class DebugPanel:FAView
+
+  {
+
+    public DebugPanel():base("DebugPanelViewModel")
 
     {
 
-        public DebugPanel():base("DebugPanelViewModel")
-
-        {
-
-            InitializeComponent();
-
-        }
+      InitializeComponent();
 
     }
+
+  }
 
 }
 
@@ -20431,87 +20790,87 @@ namespace Inovance.FA.MyFAPlugin1
 
 {
 
-    [Export(typeof(FAPluginBase))]
+  [Export(typeof(FAPluginBase))]
 
-    public class MyFAPlugin1 : FAPluginBase
+  public class MyFAPlugin1 : FAPluginBase
+
+  {
+
+    //IFALogger FALogger { get; set; }
+
+    [ImportingConstructor]
+
+    public MyFAPlugin1() //IFALogger logger
 
     {
 
-        //IFALogger FALogger { get; set; }
+      this.ID = "MyFAPlugin1";
 
-        [ImportingConstructor]
+      this.Name = "MyFAPlugin1";
 
-        public MyFAPlugin1() //IFALogger logger
+      this.Categorys = new List<FACategory>();
 
-        {
-
-            this.ID = "MyFAPlugin1";
-
-            this.Name = "MyFAPlugin1";
-
-            this.Categorys = new List<FACategory>();
-
-            ///FALogger = logger;
-
-        }
-
-        public override void Init()
-
-        {
-
-            base.Init();
-
-            
-
-            this.MessageReceived += MyFAPlugin1_MessageReceived;
-
-            //FAMessageBox.ShowInfo("MyFAPlugin1.Init()-MyFAPlugin1 inited!");
-
-            this.PluginInited += MyFAPlugin1_PluginInited;
-
-        }
-
-        private void MyFAPlugin1_PluginInited(object sender, EventArgs e)
-
-        {
-
-            ThreadPool.QueueUserWorkItem(o =>
-
-            {
-
-                Thread.Sleep(10000);
-
-                while (true)
-
-                {
-
-                    SendMessage("MyFAPlugin2", "string", Encoding.UTF8.GetBytes("This is a test message from MyFAPlugin1 !"));
-
-                    Thread.Sleep(100);
-
-                };
-
-            });
-
-            FALogger.Info("MyFAPlugin1 inited! This message is from MYFAPlugin1.dll");
-
-            //FADebugOut.Debug("MyFAPlugin1 inited! This message is from MYFAPlugin1.dll");
-
-        }
-
-        private void MyFAPlugin1_MessageReceived(object sender, Plugin.Args.MessageReceivedEventArgs e)
-
-        {
-
-            FALogger.Info($"MyFAPlugin1.MyFAPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
-
-            //FAMessageBox.ShowInfo($"MyFAPlugin1.MyFAPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{e.Data.ToString()}");
-
-            //FADebugOut.Debug($"MyFAPlugin1.MyFAPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
-
-        }
+      ///FALogger = logger;
 
     }
+
+    public override void Init()
+
+    {
+
+      base.Init();
+
+      
+
+      this.MessageReceived += MyFAPlugin1_MessageReceived;
+
+      //FAMessageBox.ShowInfo("MyFAPlugin1.Init()-MyFAPlugin1 inited!");
+
+      this.PluginInited += MyFAPlugin1_PluginInited;
+
+    }
+
+    private void MyFAPlugin1_PluginInited(object sender, EventArgs e)
+
+    {
+
+      ThreadPool.QueueUserWorkItem(o =>
+
+      {
+
+        Thread.Sleep(10000);
+
+        while (true)
+
+        {
+
+          SendMessage("MyFAPlugin2", "string", Encoding.UTF8.GetBytes("This is a test message from MyFAPlugin1 !"));
+
+          Thread.Sleep(100);
+
+        };
+
+      });
+
+      FALogger.Info("MyFAPlugin1 inited! This message is from MYFAPlugin1.dll");
+
+      //FADebugOut.Debug("MyFAPlugin1 inited! This message is from MYFAPlugin1.dll");
+
+    }
+
+    private void MyFAPlugin1_MessageReceived(object sender, Plugin.Args.MessageReceivedEventArgs e)
+
+    {
+
+      FALogger.Info($"MyFAPlugin1.MyFAPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
+
+      //FAMessageBox.ShowInfo($"MyFAPlugin1.MyFAPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{e.Data.ToString()}");
+
+      //FADebugOut.Debug($"MyFAPlugin1.MyFAPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
+
+    }
+
+  }
 
 }
 
@@ -20539,89 +20898,89 @@ namespace Inovance.FA.MyFAPlugin2
 
 {
 
-    [Export(typeof(FAPluginBase))]
+  [Export(typeof(FAPluginBase))]
 
-    public class MyFAPlugin2 : FAPluginBase
+  public class MyFAPlugin2 : FAPluginBase
+
+  {
+
+    public MyFAPlugin2()
 
     {
 
-        public MyFAPlugin2()
+      this.ID = "MyFAPlugin2";
 
-        {
-
-            this.ID = "MyFAPlugin2";
-
-            this.Name = "MyFAPlugin2";
-
-        }
-
-        public override void Init()
-
-        {
-
-            base.Init();
-
-            this.MessageReceived += MyFAPlugin2_MessageReceived;
-
-            try
-
-            {
-
-                throw new Exception("This is a test exception!");
-
-            }
-
-            catch(Exception ex)
-
-            {
-
-                FALogger.Error("MyFAPlugin2.Init()-There is an error", ex);
-
-                //FADebugOut.Debug("MyFAPlugin2.Init()-There is an error:"+ex.Message);
-
-            }
-
-            this.PluginInited += MyFAPlugin2_PluginInited;
-
-        }
-
-        private void MyFAPlugin2_PluginInited(object sender, EventArgs e)
-
-        {
-
-            ThreadPool.QueueUserWorkItem(o =>
-
-            {
-
-                Thread.Sleep(10000);
-
-                while (true)
-
-                {
-
-                    SendMessage("MyFAPlugin1", "string", Encoding.UTF8.GetBytes("This is a test message from MyFAPlugin2 !"));
-
-                    Thread.Sleep(100);
-
-                };
-
-            });
-
-        }
-
-        private void MyFAPlugin2_MessageReceived(object sender, Plugin.Args.MessageReceivedEventArgs e)
-
-        {
-
-            FALogger.Info($"MyFAPlugin2.MyFAPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
-
-            //FAMessageBox.ShowInfo($"MyFAPlugin2.MyFAPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{e.Data.ToString()}");
-
-            //FADebugOut.Debug($"MyFAPlugin2.MyFAPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
-
-        }
+      this.Name = "MyFAPlugin2";
 
     }
+
+    public override void Init()
+
+    {
+
+      base.Init();
+
+      this.MessageReceived += MyFAPlugin2_MessageReceived;
+
+      try
+
+      {
+
+        throw new Exception("This is a test exception!");
+
+      }
+
+      catch(Exception ex)
+
+      {
+
+        FALogger.Error("MyFAPlugin2.Init()-There is an error", ex);
+
+        //FADebugOut.Debug("MyFAPlugin2.Init()-There is an error:"+ex.Message);
+
+      }
+
+      this.PluginInited += MyFAPlugin2_PluginInited;
+
+    }
+
+    private void MyFAPlugin2_PluginInited(object sender, EventArgs e)
+
+    {
+
+      ThreadPool.QueueUserWorkItem(o =>
+
+      {
+
+        Thread.Sleep(10000);
+
+        while (true)
+
+        {
+
+          SendMessage("MyFAPlugin1", "string", Encoding.UTF8.GetBytes("This is a test message from MyFAPlugin2 !"));
+
+          Thread.Sleep(100);
+
+        };
+
+      });
+
+    }
+
+    private void MyFAPlugin2_MessageReceived(object sender, Plugin.Args.MessageReceivedEventArgs e)
+
+    {
+
+      FALogger.Info($"MyFAPlugin2.MyFAPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
+
+      //FAMessageBox.ShowInfo($"MyFAPlugin2.MyFAPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{e.Data.ToString()}");
+
+      //FADebugOut.Debug($"MyFAPlugin2.MyFAPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
+
+    }
+
+  }
 
 }
 
@@ -20645,19 +21004,19 @@ namespace Inovance.FA.Plugin
 
 {
 
-    public class FAStaticData
+  public class FAStaticData
 
-    {
+  {
 
-        public static CompositionContainer Container = null;
+    public static CompositionContainer Container = null;
 
-        //[ImportMany(typeof(FAView))]
+    //[ImportMany(typeof(FAView))]
 
-        ////private IEnumerable<Lazy<View, IViewMetadata>> views { get; set; }
+    ////private IEnumerable<Lazy<View, IViewMetadata>> views { get; set; }
 
-        //public static IEnumerable<FAView> Views { get; set; }
+    //public static IEnumerable<FAView> Views { get; set; }
 
-    }
+  }
 
 }
 
@@ -20689,43 +21048,43 @@ namespace Inovance.FA.Controls.Conveter
 
 {
 
-    [ValueConversion(typeof(FAProject), typeof(Visibility))]
+  [ValueConversion(typeof(FAProject), typeof(Visibility))]
 
-    public class ProjectVisableConverter : IValueConverter
+  public class ProjectVisableConverter : IValueConverter
+
+  {
+
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 
     {
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+      if (value!=null&&value is FAProject)
 
-        {
+      {
 
-            if (value!=null&&value is FAProject)
+        return Visibility.Visible;
 
-            {
+      }
 
-                return Visibility.Visible;
+      else
 
-            }
+      {
 
-            else
+        return Visibility.Collapsed;
 
-            {
-
-                return Visibility.Collapsed;
-
-            }
-
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-
-        {
-
-            throw new NotImplementedException();
-
-        }
+      }
 
     }
+
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+
+    {
+
+      throw new NotImplementedException();
+
+    }
+
+  }
 
 }
 
@@ -20747,45 +21106,45 @@ namespace Inovance.FA.Controls
 
 {
 
-    public static class DialogCloser
+  public static class DialogCloser
+
+  {
+
+    public static readonly DependencyProperty DialogResultProperty =
+
+      DependencyProperty.RegisterAttached("DialogResult",
+
+                        typeof(bool?),
+
+                        typeof(DialogCloser),
+
+                        new PropertyMetadata(DialogResultChanged));
+
+    private static void DialogResultChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 
     {
 
-        public static readonly DependencyProperty DialogResultProperty =
+      var window = d as Window;
 
-            DependencyProperty.RegisterAttached("DialogResult",
+      if (window != null)
 
-                                                typeof(bool?),
+      {
 
-                                                typeof(DialogCloser),
+        window.DialogResult = e.NewValue as bool?;
 
-                                                new PropertyMetadata(DialogResultChanged));
-
-        private static void DialogResultChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-
-        {
-
-            var window = d as Window;
-
-            if (window != null)
-
-            {
-
-                window.DialogResult = e.NewValue as bool?;
-
-            }
-
-        }
-
-        public static void SetDialogResult(Window target, bool? value)
-
-        {
-
-            target.SetValue(DialogResultProperty, value);
-
-        }
+      }
 
     }
+
+    public static void SetDialogResult(Window target, bool? value)
+
+    {
+
+      target.SetValue(DialogResultProperty, value);
+
+    }
+
+  }
 
 }
 
@@ -20809,21 +21168,21 @@ namespace Inovance.FA.Controls
 
 {
 
-    public class FADialog : FAWindow
+  public class FADialog : FAWindow
+
+  {
+
+    public FADialog()
 
     {
 
-        public FADialog()
+      this.WindowStyle = WindowStyle.ToolWindow;
 
-        {
-
-            this.WindowStyle = WindowStyle.ToolWindow;
-
-            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
-        }
+      this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
     }
+
+  }
 
 }
 
@@ -20847,27 +21206,27 @@ namespace Inovance.FA.Controls
 
 {
 
-    public class FAWindow:Window
+  public class FAWindow:Window
+
+  {
+
+    public FAWindow()
 
     {
 
-        public FAWindow()
+      Binding binding = new Binding();
 
-        {
+      //binding.Source = DialogCloser.DialogResultProperty;
 
-            Binding binding = new Binding();
+      binding.Path = new PropertyPath("DialogResult");
 
-            //binding.Source = DialogCloser.DialogResultProperty;
+      binding.Mode = BindingMode.TwoWay;
 
-            binding.Path = new PropertyPath("DialogResult");
-
-            binding.Mode = BindingMode.TwoWay;
-
-            this.SetBinding(DialogCloser.DialogResultProperty, binding);
-
-        }
+      this.SetBinding(DialogCloser.DialogResultProperty, binding);
 
     }
+
+  }
 
 }
 
@@ -20893,101 +21252,101 @@ namespace Inovance.FA.Plugin
 
 {
 
-    public class FAPluginBase:FAObject
+  public class FAPluginBase:FAObject
+
+  {
+
+    public FAPluginBase()
 
     {
 
-        public FAPluginBase()
-
-        {
-
-            
-
-        }
-
-        public bool Inited { get; set; } = false;
-
-        public List<FACategory> Categorys { get; set; }
-
-        public FAEquipmentType EquipmentType { get; set; }
-
-        [Import]
-
-        public IFALogger FALogger { get; set; }
-
-        [Import]
-
-        public IFAMessageBox FAMessageBox { get; set; }
-
-        //[Import]
-
-        //public IDebugOut FADebugOut { get; set; }
-
-        public virtual void Init()
-
-        {
-
-            ThreadPool.QueueUserWorkItem(o => {
-
-                while (!Inited)
-
-                {
-
-                    Thread.Sleep(100);
-
-                }
-
-                FALogger.Info($"FAPluginBase.Init()-{this.ToString()} Inited!");
-
-                //FADebugOut.Debug($"FAPluginBase.Init()-{this.ToString()} Inited!");
-
-                if (PluginInited != null)
-
-                {
-
-                    PluginInited(this, new EventArgs());
-
-                }
-
-            });
-
-        }
-
-        public void SendMessage(string ReceiverID,string DataType, byte[] Data)
-
-        {
-
-            if (MessageSend != null)
-
-            {
-
-                MessageSend(this, new MessageReceivedEventArgs { Data = Data,DataType=DataType, SenderID = this.ID ,ReceiverID=ReceiverID});
-
-            }
-
-        }
-
-        public void RaiseMessageReceived(MessageReceivedEventArgs e)
-
-        {
-
-            if (MessageReceived != null)
-
-            {
-
-                MessageReceived(this, e);
-
-            }
-
-        }
-
-        public event EventHandler<EventArgs> PluginInited;
-
-        public event EventHandler<MessageReceivedEventArgs> MessageSend;
-
-        public event EventHandler<MessageReceivedEventArgs> MessageReceived;
+      
 
     }
+
+    public bool Inited { get; set; } = false;
+
+    public List<FACategory> Categorys { get; set; }
+
+    public FAEquipmentType EquipmentType { get; set; }
+
+    [Import]
+
+    public IFALogger FALogger { get; set; }
+
+    [Import]
+
+    public IFAMessageBox FAMessageBox { get; set; }
+
+    //[Import]
+
+    //public IDebugOut FADebugOut { get; set; }
+
+    public virtual void Init()
+
+    {
+
+      ThreadPool.QueueUserWorkItem(o => {
+
+        while (!Inited)
+
+        {
+
+          Thread.Sleep(100);
+
+        }
+
+        FALogger.Info($"FAPluginBase.Init()-{this.ToString()} Inited!");
+
+        //FADebugOut.Debug($"FAPluginBase.Init()-{this.ToString()} Inited!");
+
+        if (PluginInited != null)
+
+        {
+
+          PluginInited(this, new EventArgs());
+
+        }
+
+      });
+
+    }
+
+    public void SendMessage(string ReceiverID,string DataType, byte[] Data)
+
+    {
+
+      if (MessageSend != null)
+
+      {
+
+        MessageSend(this, new MessageReceivedEventArgs { Data = Data,DataType=DataType, SenderID = this.ID ,ReceiverID=ReceiverID});
+
+      }
+
+    }
+
+    public void RaiseMessageReceived(MessageReceivedEventArgs e)
+
+    {
+
+      if (MessageReceived != null)
+
+      {
+
+        MessageReceived(this, e);
+
+      }
+
+    }
+
+    public event EventHandler<EventArgs> PluginInited;
+
+    public event EventHandler<MessageReceivedEventArgs> MessageSend;
+
+    public event EventHandler<MessageReceivedEventArgs> MessageReceived;
+
+  }
 
 }
 
@@ -21011,27 +21370,27 @@ namespace Inovance.FA.Plugin
 
 {
 
-    public class FAView:UserControl
+  public class FAView:UserControl
+
+  {
+
+    public FAView(string ViewModelName)
 
     {
 
-        public FAView(string ViewModelName)
+      if(!string.IsNullOrEmpty(ViewModelName))
 
-        {
+      {
 
-            if(!string.IsNullOrEmpty(ViewModelName))
+        DataContext = FAStaticData.Container.GetExportedValues<FAViewModel>().FirstOrDefault(v => v.Name.Equals(ViewModelName));
 
-            {
-
-                DataContext = FAStaticData.Container.GetExportedValues<FAViewModel>().FirstOrDefault(v => v.Name.Equals(ViewModelName));
-
-            }
-
-        }
-
-        public bool IsReadOnly { get; set; }
+      }
 
     }
+
+    public bool IsReadOnly { get; set; }
+
+  }
 
 }
 
@@ -21057,91 +21416,91 @@ namespace Inovance.FA.Plugin
 
 {
 
-    public abstract class FAViewModel:INotifyPropertyChanged
+  public abstract class FAViewModel:INotifyPropertyChanged
+
+  {
+
+    public IFALogger FALogger { get; set; }
+
+    public IFAMessageBox FAMessageBox { get; set; }
+
+    public FAViewModel()
 
     {
 
-        public IFALogger FALogger { get; set; }
+      FALogger = FAStaticData.Container.GetExportedValue<IFALogger>();
 
-        public IFAMessageBox FAMessageBox { get; set; }
+      FAMessageBox = FAStaticData.Container.GetExportedValue<IFAMessageBox>();
 
-        public FAViewModel()
+    }
 
-        {
+    public string Name
 
-            FALogger = FAStaticData.Container.GetExportedValue<IFALogger>();
+    {
 
-            FAMessageBox = FAStaticData.Container.GetExportedValue<IFAMessageBox>();
+      get
 
-        }
+      {
 
-        public string Name
+        return this.GetType().Name;
 
-        {
+      }
 
-            get
+    }
 
-            {
+    private FAProject project = null;
 
-                return this.GetType().Name;
+    public FAProject Project
 
-            }
+    {
 
-        }
+      get
 
-        private FAProject project = null;
+      {
 
-        public FAProject Project
+        return project;
 
-        {
+      }
 
-            get
+      set
 
-            {
+      {
 
-                return project;
+        project = value;
 
-            }
+        RaisePropertyChanged("Project");
 
-            set
+      }
 
-            {
+    }
 
-                project = value;
+    public bool? dialogResult;
 
-                RaisePropertyChanged("Project");
+    public bool? DialogResult
 
-            }
+    {
 
-        }
+      get
 
-        public bool? dialogResult;
+      {
 
-        public bool? DialogResult
+        return dialogResult;
 
-        {
+      }
 
-            get
+      set
 
-            {
+      {
 
-                return dialogResult;
+        dialogResult = value;
 
-            }
+        RaisePropertyChanged("DialogResult");
 
-            set
+      }
 
-            {
+    }
 
-                dialogResult = value;
-
-                RaisePropertyChanged("DialogResult");
-
-            }
-
-        }
-
-        protected virtual void RaisePropertyChanged(string propertyName)
+    protected virtual void RaisePropertyChanged(string propertyName)
 
 		{
 
@@ -21175,13 +21534,13 @@ namespace Inovance.FA.Plugin.Services
 
 {
 
-    public interface IDebugOut
+  public interface IDebugOut
 
-    {
+  {
 
-        void Debug(string Message);
+    void Debug(string Message);
 
-    }
+  }
 
 }
 
@@ -21203,7 +21562,7 @@ namespace Inovance.FA.Plugin.Services
 
 {
 
-    public interface IFALogger: IFAService
+  public interface IFALogger: IFAService
 
 	{
 
@@ -21259,21 +21618,21 @@ namespace Inovance.FA.Plugin.Services
 
 {
 
-    public interface IFAMessageBox 
+  public interface IFAMessageBox 
 
-    {
+  {
 
-        void ShowInfo(string message);
+    void ShowInfo(string message);
 
-        void ShowError(string message,Exception ex);
+    void ShowError(string message,Exception ex);
 
-        void ShowDebug(string message);
+    void ShowDebug(string message);
 
-        void ShowWarn(string message);
+    void ShowWarn(string message);
 
-        bool ShowQuestion(string message);
+    bool ShowQuestion(string message);
 
-    }
+  }
 
 }
 
@@ -21295,25 +21654,25 @@ namespace Inovance.FA.Plugin.Args
 
 {
 
-    public class MessageReceivedEventArgs:EventArgs
+  public class MessageReceivedEventArgs:EventArgs
+
+  {
+
+    public string SenderID { get; set; }
+
+    public string ReceiverID { get; set; }
+
+    public string DataType { get; set; }
+
+    public byte[] Data
 
     {
 
-        public string SenderID { get; set; }
-
-        public string ReceiverID { get; set; }
-
-        public string DataType { get; set; }
-
-        public byte[] Data
-
-        {
-
-            get; set;
-
-        }
+      get; set;
 
     }
+
+  }
 
 }
 
@@ -21347,121 +21706,121 @@ namespace Inovance.FA.Core
 
 {
 
-    
+  
 
-    public class FABuilder
+  public class FABuilder
+
+  {
+
+    [ImportMany(typeof(FAPluginBase))]
+
+    public static IEnumerable<FAPluginBase> Plugins { get; private set; }
+
+    //[ImportMany(typeof(FAView))]
+
+    ////private IEnumerable<Lazy<View, IViewMetadata>> views { get; set; }
+
+    //public static IEnumerable<FAView> Views { get; private set; }
+
+    [Import(typeof(IFALogger))]
+
+    public IFALogger logger { get; set; }
+
+    //private CompositionContainer container = null;
+
+    public void Load()
 
     {
 
-        [ImportMany(typeof(FAPluginBase))]
+      var catalog = new DirectoryCatalog(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins"), "*");
 
-        public static IEnumerable<FAPluginBase> Plugins { get; private set; }
+      FAStaticData.Container = new CompositionContainer(catalog);
 
-        //[ImportMany(typeof(FAView))]
+      try
 
-        ////private IEnumerable<Lazy<View, IViewMetadata>> views { get; set; }
+      {
 
-        //public static IEnumerable<FAView> Views { get; private set; }
+        Plugins = FAStaticData.Container.GetExportedValues<FAPluginBase>();
 
-        [Import(typeof(IFALogger))]
-
-        public IFALogger logger { get; set; }
-
-        //private CompositionContainer container = null;
-
-        public void Load()
+        foreach (var plugin in Plugins)
 
         {
 
-            var catalog = new DirectoryCatalog(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins"), "*");
+          plugin.Init();
 
-            FAStaticData.Container = new CompositionContainer(catalog);
+          plugin.Inited = true;
 
-            try
-
-            {
-
-                Plugins = FAStaticData.Container.GetExportedValues<FAPluginBase>();
-
-                foreach (var plugin in Plugins)
-
-                {
-
-                    plugin.Init();
-
-                    plugin.Inited = true;
-
-                    plugin.MessageSend += Plugin_MessageSend;
-
-                }
-
-            }
-
-            catch (CompositionException compositionEx)
-
-            {
-
-                logger.Error("FABuilder.Load Plugins Failed!", compositionEx);
-
-            }
-
-            //try
-
-            //{
-
-            //    FAStaticData.Views = FAStaticData.Container.GetExportedValues<FAView>();
-
-            //}
-
-            //catch (CompositionException compositionEx)
-
-            //{
-
-            //    logger.Error("FABuilder.Load Views Failed!", compositionEx);
-
-            //}
-
-            
+          plugin.MessageSend += Plugin_MessageSend;
 
         }
 
-        private void Plugin_MessageSend(object sender, Plugin.Args.MessageReceivedEventArgs e)
+      }
 
-        {
+      catch (CompositionException compositionEx)
 
-            if (e != null && !String.IsNullOrEmpty(e.ReceiverID))
+      {
 
-            {
+        logger.Error("FABuilder.Load Plugins Failed!", compositionEx);
 
-                var plugin = Plugins.Where(p => p.ID == e.ReceiverID).FirstOrDefault();
+      }
 
-                ThreadPool.QueueUserWorkItem(o => {
+      //try
 
-                    if (plugin != null)
+      //{
 
-                    {
+      //  FAStaticData.Views = FAStaticData.Container.GetExportedValues<FAView>();
 
-                        while (!plugin.Inited)
+      //}
 
-                        {
+      //catch (CompositionException compositionEx)
 
-                            Thread.Sleep(100);
+      //{
 
-                        }
+      //  logger.Error("FABuilder.Load Views Failed!", compositionEx);
 
-                        plugin.RaiseMessageReceived(e);
+      //}
 
-                    }
-
-                });
-
-                
-
-            }
-
-        }
+      
 
     }
+
+    private void Plugin_MessageSend(object sender, Plugin.Args.MessageReceivedEventArgs e)
+
+    {
+
+      if (e != null && !String.IsNullOrEmpty(e.ReceiverID))
+
+      {
+
+        var plugin = Plugins.Where(p => p.ID == e.ReceiverID).FirstOrDefault();
+
+        ThreadPool.QueueUserWorkItem(o => {
+
+          if (plugin != null)
+
+          {
+
+            while (!plugin.Inited)
+
+            {
+
+              Thread.Sleep(100);
+
+            }
+
+            plugin.RaiseMessageReceived(e);
+
+          }
+
+        });
+
+        
+
+      }
+
+    }
+
+  }
 
 }
 
@@ -21473,81 +21832,81 @@ namespace Inovance.FA.Core
 
 <facontrols:FADialog x:Class="Inovance.FA.Views.Views.CreateProject"
 
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 
-             xmlns:local="clr-namespace:Inovance.FA.Views.Views"
+       xmlns:local="clr-namespace:Inovance.FA.Views.Views"
 
-             xmlns:facontrols="clr-namespace:Inovance.FA.Controls;assembly=FAControls"
+       xmlns:facontrols="clr-namespace:Inovance.FA.Controls;assembly=FAControls"
 
-             xmlns:localvm="clr-namespace:Inovance.FA.Views.ViewModels"
+       xmlns:localvm="clr-namespace:Inovance.FA.Views.ViewModels"
 
-             mc:Ignorable="d" 
+       mc:Ignorable="d" 
 
-             d:DesignHeight="300" d:DesignWidth="600" Width="600" Height="300" >
+       d:DesignHeight="300" d:DesignWidth="600" Width="600" Height="300" >
 
-    <Window.DataContext>
+  <Window.DataContext>
 
-        <localvm:CreateProjectViewModel/>
+    <localvm:CreateProjectViewModel/>
 
-    </Window.DataContext>
+  </Window.DataContext>
 
-    <Grid>
+  <Grid>
 
-        <Grid.RowDefinitions>
+    <Grid.RowDefinitions>
 
-            <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
 
-            <RowDefinition Height="30" />
+      <RowDefinition Height="30" />
 
-            <RowDefinition Height="30" />
+      <RowDefinition Height="30" />
 
-            <RowDefinition Height="30" />
+      <RowDefinition Height="30" />
 
-            <RowDefinition Height="60" />
+      <RowDefinition Height="60" />
 
-            <RowDefinition Height="30" />
+      <RowDefinition Height="30" />
 
-            <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
 
-        </Grid.RowDefinitions>
+    </Grid.RowDefinitions>
 
-        <Grid.ColumnDefinitions>
+    <Grid.ColumnDefinitions>
 
-            <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
 
-            <ColumnDefinition Width="200" />
+      <ColumnDefinition Width="200" />
 
-            <ColumnDefinition Width="300" />
+      <ColumnDefinition Width="300" />
 
-            <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
 
-        </Grid.ColumnDefinitions>
+    </Grid.ColumnDefinitions>
 
-        <Label Content="项目名称：" Grid.Row="1" Grid.Column="1" />
+    <Label Content="项目名称：" Grid.Row="1" Grid.Column="1" />
 
-        <Label Content="路径：" Grid.Row="2" Grid.Column="1" />
+    <Label Content="路径：" Grid.Row="2" Grid.Column="1" />
 
-        <Label Content="作者" Grid.Row="3" Grid.Column="1" />
+    <Label Content="作者" Grid.Row="3" Grid.Column="1" />
 
-        <Label Content="备注" Grid.Row="4" Grid.Column="1" />
+    <Label Content="备注" Grid.Row="4" Grid.Column="1" />
 
-        <Button Content="创建" Grid.Row="5" Grid.Column="2" Command="{Binding CreateProjectCommand}"/>
+    <Button Content="创建" Grid.Row="5" Grid.Column="2" Command="{Binding CreateProjectCommand}"/>
 
-        <TextBox Text="{Binding Project.Name, Mode=TwoWay}" Grid.Row="1" Grid.Column="2" />
+    <TextBox Text="{Binding Project.Name, Mode=TwoWay}" Grid.Row="1" Grid.Column="2" />
 
-        <TextBox Text="{Binding Project.BasePath, Mode=TwoWay}"  Grid.Row="2" Grid.Column="2" />
+    <TextBox Text="{Binding Project.BasePath, Mode=TwoWay}" Grid.Row="2" Grid.Column="2" />
 
-        <TextBox Text="{Binding Project.Author, Mode=TwoWay}"  Grid.Row="3" Grid.Column="2" />
+    <TextBox Text="{Binding Project.Author, Mode=TwoWay}" Grid.Row="3" Grid.Column="2" />
 
-        <TextBox Text="{Binding Project.Description, Mode=TwoWay}" Grid.Row="4" Grid.Column="2" />
+    <TextBox Text="{Binding Project.Description, Mode=TwoWay}" Grid.Row="4" Grid.Column="2" />
 
-    </Grid>
+  </Grid>
 
 </facontrols:FADialog>
 
@@ -21573,47 +21932,47 @@ namespace Inovance.FA.Views.ViewModels
 
 {
 
-    public class CreateProjectViewModel : FAViewModel
+  public class CreateProjectViewModel : FAViewModel
+
+  {
+
+    public FACommand CreateProjectCommand
 
     {
 
-        public FACommand CreateProjectCommand
+      get;
 
-        {
-
-            get;
-
-            set;
-
-        }
-
-        public CreateProjectViewModel()
-
-        {
-
-            Project = new FAProject(LanguageResource.Resource.DefaultProjectName);
-
-            Project.BasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"FAProject", Project.Name);
-
-            Project.Author = Environment.UserName;
-
-            Project.Description = LanguageResource.Resource.DefaultProjectDescrption;
-
-            CreateProjectCommand = new FACommand(o => {
-
-                RaisePropertyChanged("Project");
-
-                this.DialogResult = true;
-
-                FAMessageBox.ShowInfo($"[{Project.Author}]创建项目[{Project.Name}]成功！");
-
-                FALogger.Info($"创建项目[{Project.Name}]成功！");
-
-            });
-
-        }
+      set;
 
     }
+
+    public CreateProjectViewModel()
+
+    {
+
+      Project = new FAProject(LanguageResource.Resource.DefaultProjectName);
+
+      Project.BasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"FAProject", Project.Name);
+
+      Project.Author = Environment.UserName;
+
+      Project.Description = LanguageResource.Resource.DefaultProjectDescrption;
+
+      CreateProjectCommand = new FACommand(o => {
+
+        RaisePropertyChanged("Project");
+
+        this.DialogResult = true;
+
+        FAMessageBox.ShowInfo($"[{Project.Author}]创建项目[{Project.Name}]成功！");
+
+        FALogger.Info($"创建项目[{Project.Name}]成功！");
+
+      });
+
+    }
+
+  }
 
 }
 
@@ -21623,1089 +21982,1089 @@ namespace Inovance.FA.Views.ViewModels
 
 <facontrols:FAWindow x:Class="Inovance.FA.Views.Views.MainWindow"
 
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 
-        xmlns:local="clr-namespace:Inovance.FA.Views"
+    xmlns:local="clr-namespace:Inovance.FA.Views"
 
-        xmlns:inplug="clr-namespace:Inovance.FA.Plugin;assembly=FAPlugin"
+    xmlns:inplug="clr-namespace:Inovance.FA.Plugin;assembly=FAPlugin"
 
-        xmlns:facontrols="clr-namespace:Inovance.FA.Controls;assembly=FAControls"
+    xmlns:facontrols="clr-namespace:Inovance.FA.Controls;assembly=FAControls"
 
-        xmlns:lanrs="clr-namespace:Inovance.FA.LanguageResource;assembly=LanguageResource"
+    xmlns:lanrs="clr-namespace:Inovance.FA.LanguageResource;assembly=LanguageResource"
 
-        xmlns:localvm="clr-namespace:Inovance.FA.Views.ViewModels"
+    xmlns:localvm="clr-namespace:Inovance.FA.Views.ViewModels"
 
-        xmlns:facvt="clr-namespace:Inovance.FA.Controls.Conveter;assembly=FAControls"
+    xmlns:facvt="clr-namespace:Inovance.FA.Controls.Conveter;assembly=FAControls"
 
-        xmlns:avalon="https://github.com/Dirkster99/AvalonDock"
+    xmlns:avalon="https://github.com/Dirkster99/AvalonDock"
 
-        mc:Ignorable="d"
+    mc:Ignorable="d"
 
-        Title ="{x:Static lanrs:Resource.AppTitle}" WindowState="Maximized"  Margin="3" Height="450" Width="800">
+    Title ="{x:Static lanrs:Resource.AppTitle}" WindowState="Maximized" Margin="3" Height="450" Width="800">
 
-    <Window.DataContext>
+  <Window.DataContext>
 
-        <localvm:MainWindowViewModel/>
+    <localvm:MainWindowViewModel/>
 
-    </Window.DataContext>
+  </Window.DataContext>
 
-    <Window.Resources>
+  <Window.Resources>
 
-        <facvt:ProjectVisableConverter x:Key="ProjectVisableConverter"/>
+    <facvt:ProjectVisableConverter x:Key="ProjectVisableConverter"/>
 
-        <local:ViewLocator x:Key="InViewLocator"/>
+    <local:ViewLocator x:Key="InViewLocator"/>
 
-    </Window.Resources>
+  </Window.Resources>
 
-    <Grid>
+  <Grid>
 
-        <Grid.RowDefinitions>
+    <Grid.RowDefinitions>
 
-            <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
 
-            <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
 
-            <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
 
-            <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
 
-        </Grid.RowDefinitions>
+    </Grid.RowDefinitions>
 
-        <Menu Grid.Row="0">
+    <Menu Grid.Row="0">
 
-            <MenuItem Header="项目(_P)" >
+      <MenuItem Header="项目(_P)" >
 
-                <MenuItem  Header="新建(_N)" Command="{Binding CreateProjectCommand}" CommandParameter="新项目">
+        <MenuItem Header="新建(_N)" Command="{Binding CreateProjectCommand}" CommandParameter="新项目">
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="打开(_O)" >
+        <MenuItem Header="打开(_O)" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="移植项目(_M)" >
+        <MenuItem Header="移植项目(_M)" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="关闭(_C)" >
+        <MenuItem Header="关闭(_C)" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="删除项目(_D)" >
+        <MenuItem Header="删除项目(_D)" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <Separator/>
+        <Separator/>
 
-                <MenuItem  Header="保存(_S)" >
+        <MenuItem Header="保存(_S)" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="另存为(_A)" >
+        <MenuItem Header="另存为(_A)" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="归档(_H)" >
+        <MenuItem Header="归档(_H)" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <Separator/>
+        <Separator/>
 
-                <MenuItem  Header="项目服务器(_H)" >
+        <MenuItem Header="项目服务器(_H)" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                    <MenuItem  Header="管理项目服务器" >
+          <MenuItem Header="管理项目服务器" >
 
-                    </MenuItem>
+          </MenuItem>
 
-                    <MenuItem  Header="离线运行" >
+          <MenuItem Header="离线运行" >
 
-                        <MenuItem.Icon>
+            <MenuItem.Icon>
 
-                            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+              <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                        </MenuItem.Icon>
+            </MenuItem.Icon>
 
-                    </MenuItem>
+          </MenuItem>
 
-                </MenuItem>
+        </MenuItem>
 
-                <Separator/>
+        <Separator/>
 
-                <MenuItem  Header="读卡器/USB存储器" >
+        <MenuItem Header="读卡器/USB存储器" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="存储卡文件(_F)" >
+        <MenuItem Header="存储卡文件(_F)" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <Separator/>
+        <Separator/>
 
-                <MenuItem  Header="启动完整性基本检查" >
+        <MenuItem Header="启动完整性基本检查" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <Separator/>
+        <Separator/>
 
-                <MenuItem  Header="推出(_X)" >
+        <MenuItem Header="推出(_X)" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-            </MenuItem>
+      </MenuItem>
 
-            <MenuItem Header="编辑(_E)">
+      <MenuItem Header="编辑(_E)">
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-            </MenuItem>
+      </MenuItem>
 
-            <MenuItem Header="视图(_V)">
+      <MenuItem Header="视图(_V)">
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-            </MenuItem>
+      </MenuItem>
 
-            <MenuItem Header="插入(_I)">
+      <MenuItem Header="插入(_I)">
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-            </MenuItem>
+      </MenuItem>
 
-            <MenuItem Header="在线(_O)">
+      <MenuItem Header="在线(_O)">
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-            </MenuItem>
+      </MenuItem>
 
-            <MenuItem Header="选项(_N)">
+      <MenuItem Header="选项(_N)">
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-            </MenuItem>
+      </MenuItem>
 
-            <MenuItem Header="工具(_T)">
+      <MenuItem Header="工具(_T)">
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-            </MenuItem>
+      </MenuItem>
 
-            <MenuItem Header="窗口(_W)">
+      <MenuItem Header="窗口(_W)">
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="子菜单1" >
+        <MenuItem Header="子菜单1" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-            </MenuItem>
+      </MenuItem>
 
-            <MenuItem Header="帮助(_H)">
+      <MenuItem Header="帮助(_H)">
 
-                <MenuItem  Header="显示帮助" >
+        <MenuItem Header="显示帮助" >
 
-                    <MenuItem.Icon>
+          <MenuItem.Icon>
 
-                        <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
 
-                    </MenuItem.Icon>
+          </MenuItem.Icon>
 
-                </MenuItem>
+        </MenuItem>
 
-                <MenuItem  Header="Internet上得服务帮助与支持" />
+        <MenuItem Header="Internet上得服务帮助与支持" />
 
-                <MenuItem  Header="FA中的帮助与支持(_T) Ctrl+Shift+F7" />
+        <MenuItem Header="FA中的帮助与支持(_T) Ctrl+Shift+F7" />
 
-                <Separator />
+        <Separator />
 
-                <MenuItem  Header="已安装的产品(_I)..." />
+        <MenuItem Header="已安装的产品(_I)..." />
 
-            </MenuItem>
+      </MenuItem>
 
-        </Menu>
+    </Menu>
 
-        <ToolBarTray Grid.Row="1" Background="White">
+    <ToolBarTray Grid.Row="1" Background="White">
 
-            <ToolBar Band="1" BandIndex="1" >
+      <ToolBar Band="1" BandIndex="1" >
 
-                <Button >
+        <Button >
 
-                    <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+          <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
 
-                </Button>
+        </Button>
 
-                <Button>
+        <Button>
 
-                    <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+          <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
 
-                </Button>
+        </Button>
 
-                <Button>
+        <Button>
 
-                    <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+          <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
 
-                </Button>
+        </Button>
 
-            </ToolBar>
+      </ToolBar>
 
-            <ToolBar Band="1" BandIndex="2">
+      <ToolBar Band="1" BandIndex="2">
 
-                <Button>
+        <Button>
 
-                    <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+          <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
 
-                </Button>
+        </Button>
 
-                <Button>
+        <Button>
 
-                    <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+          <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
 
-                </Button>
+        </Button>
 
-            </ToolBar>
+      </ToolBar>
 
-            <ToolBar Band="1" BandIndex="3">
+      <ToolBar Band="1" BandIndex="3">
 
-                <Button>
+        <Button>
 
-                    <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+          <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
 
-                </Button>
+        </Button>
 
-                <Button ToolTip="Help">
+        <Button ToolTip="Help">
 
-                    <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+          <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
 
-                </Button>
+        </Button>
 
-                <Separator/>
+        <Separator/>
 
-            </ToolBar>
+      </ToolBar>
 
-        </ToolBarTray>
+    </ToolBarTray>
 
-        <!--<DockPanel Grid.Row="1" Background="LightBlue" >
+    <!--<DockPanel Grid.Row="1" Background="LightBlue" >
 
-            <TextBlock DockPanel.Dock="Top" Text="Hello!"/>
+      <TextBlock DockPanel.Dock="Top" Text="Hello!"/>
 
-        </DockPanel>-->
+    </DockPanel>-->
 
-        <Grid Grid.Row="2" Background="LightBlue" >
+    <Grid Grid.Row="2" Background="LightBlue" >
 
-            <Grid.RowDefinitions>
+      <Grid.RowDefinitions>
 
-                <RowDefinition Height="0"/>
+        <RowDefinition Height="0"/>
 
-                <RowDefinition Height="*"/>
+        <RowDefinition Height="*"/>
 
-                <RowDefinition Height="24"/>
+        <RowDefinition Height="24"/>
 
-            </Grid.RowDefinitions>
+      </Grid.RowDefinitions>
 
-            <!--<Menu>
+      <!--<Menu>
 
-                <MenuItem Header="File">
+        <MenuItem Header="File">
 
-                    <MenuItem Header="New Document" Click="NewDocument_Click"  Name="NewDocument"/>
+          <MenuItem Header="New Document" Click="NewDocument_Click" Name="NewDocument"/>
 
-                    <MenuItem Header="Exit"/>
+          <MenuItem Header="Exit"/>
 
-                </MenuItem>
+        </MenuItem>
 
-            </Menu>-->
+      </Menu>-->
 
-            <DockingManager x:Name="dockManager"
+      <DockingManager x:Name="dockManager"
 
-            Grid.Row="1"
+      Grid.Row="1"
 
-            AllowMixedOrientation="True"
+      AllowMixedOrientation="True"
 
-            AutoWindowSizeWhenOpened="True"
+      AutoWindowSizeWhenOpened="True"
 
-            IsVirtualizingAnchorable="True"
+      IsVirtualizingAnchorable="True"
 
-            IsVirtualizingDocument="True">
+      IsVirtualizingDocument="True">
 
-                <DockingManager.DocumentHeaderTemplate>
+        <DockingManager.DocumentHeaderTemplate>
 
-                    <DataTemplate>
+          <DataTemplate>
 
-                        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
 
-                            <Image Margin="0,0,4,0" Source="{Binding IconSource}" />
+              <Image Margin="0,0,4,0" Source="{Binding IconSource}" />
 
-                            <TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" />
+              <TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" />
 
-                        </StackPanel>
+            </StackPanel>
 
-                    </DataTemplate>
+          </DataTemplate>
 
-                </DockingManager.DocumentHeaderTemplate>
+        </DockingManager.DocumentHeaderTemplate>
 
-                <LayoutRoot>
+        <LayoutRoot>
 
-                    <LayoutPanel Orientation="Horizontal">
+          <LayoutPanel Orientation="Horizontal">
 
-                        <LayoutAnchorablePane DockWidth="150">
+            <LayoutAnchorablePane DockWidth="150">
 
-                            <LayoutAnchorable x:Name="WinFormsWindow"
+              <LayoutAnchorable x:Name="WinFormsWindow"
 
-                            Title="项目树"
+              Title="项目树"
 
-                            CanClose="False"
+              CanClose="False"
 
-                            CanHide="False"
+              CanHide="False"
 
-                            ContentId="WinFormsWindow"
+              ContentId="WinFormsWindow"
 
-                            ToolTip="My WinForms Tool">
+              ToolTip="My WinForms Tool">
 
-                                <TreeView>
+                <TreeView>
 
-                                    <TreeViewItem Header="{Binding Project.Name}" ToolTip="{Binding Project.Description}" Visibility="{Binding Project,Converter={StaticResource ProjectVisableConverter},Mode=OneWay}"/>
+                  <TreeViewItem Header="{Binding Project.Name}" ToolTip="{Binding Project.Description}" Visibility="{Binding Project,Converter={StaticResource ProjectVisableConverter},Mode=OneWay}"/>
 
-                                    <TreeViewItem Header="在线访问"/>
+                  <TreeViewItem Header="在线访问"/>
 
-                                    <TreeViewItem Header="读卡器/本地USB存储器"/>
+                  <TreeViewItem Header="读卡器/本地USB存储器"/>
 
-                                </TreeView>
+                </TreeView>
 
-                            </LayoutAnchorable>
+              </LayoutAnchorable>
 
-                        </LayoutAnchorablePane>
+            </LayoutAnchorablePane>
 
-                        <LayoutDocumentPaneGroup>
+            <LayoutDocumentPaneGroup>
 
-                            <LayoutDocumentPane
+              <LayoutDocumentPane
 
-                                x:Name="LayoutDocumentPane">
+                x:Name="LayoutDocumentPane">
 
-                                <!--ContentId="document1"-->
+                <!--ContentId="document1"-->
 
-                                <LayoutDocument
+                <LayoutDocument
 
-                                CanClose="False"
+                CanClose="False"
 
-                                Title="欢迎页面"
+                Title="欢迎页面"
 
-                                >
+                >
 
-                                    <Grid>
+                  <Grid>
 
-                                        <Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
 
-                                            <ColumnDefinition Width="10"/>
+                      <ColumnDefinition Width="10"/>
 
-                                            <ColumnDefinition Width="120"/>
+                      <ColumnDefinition Width="120"/>
 
-                                            <ColumnDefinition Width="*"/>
+                      <ColumnDefinition Width="*"/>
 
-                                        </Grid.ColumnDefinitions>
+                    </Grid.ColumnDefinitions>
 
-                                        <Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
 
-                                            <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
 
-                                            <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
 
-                                            <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
 
-                                            <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
 
-                                            <RowDefinition Height="Auto" />
+                      <RowDefinition Height="Auto" />
 
-                                        </Grid.RowDefinitions>
+                    </Grid.RowDefinitions>
 
-                                        <Button
+                    <Button
 
-                                            Grid.Row="0"
+                      Grid.Row="0"
 
-                                            Grid.Column="1"
+                      Grid.Column="1"
 
-                                            Height="28"
+                      Height="28"
 
-                                            VerticalAlignment="Top"
+                      VerticalAlignment="Top"
 
-                                            Command="{Binding TestCommand}" 
+                      Command="{Binding TestCommand}" 
 
-                                            CommandParameter="Hai" 
+                      CommandParameter="Hai" 
 
-                                            Content="Test Button 1" />
+                      Content="Test Button 1" />
 
-                                        <Button
+                    <Button
 
-                                            Grid.Row="1"
+                      Grid.Row="1"
 
-                                            Grid.Column="1"
+                      Grid.Column="1"
 
-                                            Height="28"
+                      Height="28"
 
-                                            VerticalAlignment="Top"
+                      VerticalAlignment="Top"
 
-                                            Command="{Binding TestCommand}" 
+                      Command="{Binding TestCommand}" 
 
-                                            Content="Test Button 2" />
+                      Content="Test Button 2" />
 
-                                        <Button
+                    <Button
 
-                                            Grid.Row="2"
+                      Grid.Row="2"
 
-                                            Grid.Column="1"
+                      Grid.Column="1"
 
-                                            Height="28"
+                      Height="28"
 
-                                            VerticalAlignment="Top"
+                      VerticalAlignment="Top"
 
-                                            Command="{Binding TestCommand}" 
+                      Command="{Binding TestCommand}" 
 
-                                            CommandParameter="{Binding ElementName=tbValue,Path=Text}"
+                      CommandParameter="{Binding ElementName=tbValue,Path=Text}"
 
-                                            Content="Test Button 3" />
+                      Content="Test Button 3" />
 
-                                        <TextBox 
+                    <TextBox 
 
-                                            x:Name="tbValue" 
+                      x:Name="tbValue" 
 
-                                            Grid.Row="5" 
+                      Grid.Row="5" 
 
-                                            Grid.Column="1"
+                      Grid.Column="1"
 
-                                            Text="Document 1 Content" />
+                      Text="Document 1 Content" />
 
-                                    </Grid>
+                  </Grid>
 
-                                </LayoutDocument>
+                </LayoutDocument>
 
-                                <LayoutDocument Title="文档2" ContentId="document2">
+                <LayoutDocument Title="文档2" ContentId="document2">
 
-                                    <TextBox
+                  <TextBox
 
-                                    Background="Transparent"
+                  Background="Transparent"
 
-                                    BorderThickness="0"
+                  BorderThickness="0"
 
-                                    Foreground="White"
+                  Foreground="White"
 
-                                    Text="{Binding TestTimer, Mode=OneWay, StringFormat='Document 2 Attached to Timer ->\{0\}'}" />
+                  Text="{Binding TestTimer, Mode=OneWay, StringFormat='Document 2 Attached to Timer ->\{0\}'}" />
 
-                                </LayoutDocument>
+                </LayoutDocument>
 
-                                <LayoutDocument Title="依赖注入测试" ContentId="document2">
+                <LayoutDocument Title="依赖注入测试" ContentId="document2">
 
-                                    <Grid>
+                  <Grid>
 
-                                        <Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
 
-                                            <RowDefinition Height="*"/>
+                      <RowDefinition Height="*"/>
 
-                                            <RowDefinition Height="30"/>
+                      <RowDefinition Height="30"/>
 
-                                            <RowDefinition Height="30"/>
+                      <RowDefinition Height="30"/>
 
-                                            <RowDefinition Height="30"/>
+                      <RowDefinition Height="30"/>
 
-                                            <RowDefinition Height="*"/>
+                      <RowDefinition Height="*"/>
 
-                                        </Grid.RowDefinitions>
+                    </Grid.RowDefinitions>
 
-                                        <Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
 
-                                            <ColumnDefinition Width="*"/>
+                      <ColumnDefinition Width="*"/>
 
-                                            <ColumnDefinition Width="200"/>
+                      <ColumnDefinition Width="200"/>
 
-                                            <ColumnDefinition Width="200"/>
+                      <ColumnDefinition Width="200"/>
 
-                                            <ColumnDefinition Width="200"/>
+                      <ColumnDefinition Width="200"/>
 
-                                            <ColumnDefinition Width="200"/>
+                      <ColumnDefinition Width="200"/>
 
-                                            <ColumnDefinition Width="*"/>
+                      <ColumnDefinition Width="*"/>
 
-                                        </Grid.ColumnDefinitions>
+                    </Grid.ColumnDefinitions>
 
-                                        <Label  Grid.Row="1" Grid.Column="1" Content="数值1"/>
+                    <Label Grid.Row="1" Grid.Column="1" Content="数值1"/>
 
-                                        <TextBox  Grid.Row="1" Grid.Column="2" />
+                    <TextBox Grid.Row="1" Grid.Column="2" />
 
-                                        <Label  Grid.Row="1" Grid.Column="3" Content="数值2"/>
+                    <Label Grid.Row="1" Grid.Column="3" Content="数值2"/>
 
-                                        <TextBox  Grid.Row="1" Grid.Column="4" />
+                    <TextBox Grid.Row="1" Grid.Column="4" />
 
-                                        <Button Margin="3"  Grid.Row="2" Grid.Column="1"  Content="{x:Static lanrs:Resource.Button1}" />
+                    <Button Margin="3" Grid.Row="2" Grid.Column="1" Content="{x:Static lanrs:Resource.Button1}" />
 
-                                        <Button Padding="5"  Grid.Row="2" Grid.Column="2" Content="{x:Static lanrs:Resource.Button2}"/>
+                    <Button Padding="5" Grid.Row="2" Grid.Column="2" Content="{x:Static lanrs:Resource.Button2}"/>
 
-                                        <Button  Grid.Row="2" Grid.Column="3" Content="{x:Static lanrs:Resource.Button3}"/>
+                    <Button Grid.Row="2" Grid.Column="3" Content="{x:Static lanrs:Resource.Button3}"/>
 
-                                        <Button  Grid.Row="2" Grid.Column="4" Content="{x:Static lanrs:Resource.Button4}"/>
+                    <Button Grid.Row="2" Grid.Column="4" Content="{x:Static lanrs:Resource.Button4}"/>
 
-                                        <Button Margin="3"  Grid.Row="3" Grid.Column="1"  Content="测试"/>
+                    <Button Margin="3" Grid.Row="3" Grid.Column="1" Content="测试"/>
 
-                                        <Button Padding="5"  Grid.Row="3" Grid.Column="2" Content=""/>
+                    <Button Padding="5" Grid.Row="3" Grid.Column="2" Content=""/>
 
-                                        <Button  Grid.Row="3" Grid.Column="3" Content=""/>
+                    <Button Grid.Row="3" Grid.Column="3" Content=""/>
 
-                                        <Button  Grid.Row="3" Grid.Column="4" Content=""/>
+                    <Button Grid.Row="3" Grid.Column="4" Content=""/>
 
-                                    </Grid>
+                  </Grid>
 
-                                </LayoutDocument>
+                </LayoutDocument>
 
-                            </LayoutDocumentPane>
+              </LayoutDocumentPane>
 
-                        </LayoutDocumentPaneGroup>
+            </LayoutDocumentPaneGroup>
 
-                        <LayoutAnchorablePaneGroup DockWidth="150">
+            <LayoutAnchorablePaneGroup DockWidth="150">
 
-                            <LayoutAnchorablePane>
+              <LayoutAnchorablePane>
 
-                                <LayoutAnchorable
+                <LayoutAnchorable
 
-                                Title="属性"
+                Title="属性"
 
-                                ContentId="toolWindow1"
+                ContentId="toolWindow1"
 
-                                CanHide="False">
+                CanHide="False">
 
-                                    <StackPanel MinHeight="450">
+                  <StackPanel MinHeight="450">
 
-                                        <TextBox Text="{Binding TestTimer, Mode=OneWay, StringFormat='Tool Window 1 Attached to Timer ->\{0\}'}" />
+                    <TextBox Text="{Binding TestTimer, Mode=OneWay, StringFormat='Tool Window 1 Attached to Timer ->\{0\}'}" />
 
-                                    </StackPanel>
+                  </StackPanel>
 
-                                </LayoutAnchorable>
+                </LayoutAnchorable>
 
-                                <LayoutAnchorable
+                <LayoutAnchorable
 
-                                    Title="查找替换" 
+                  Title="查找替换" 
 
-                                    CanClose="False"
+                  CanClose="False"
 
-                                    CanHide="False"
+                  CanHide="False"
 
-                                    ContentId="toolWindow2">
+                  ContentId="toolWindow2">
 
-                                    <TextBlock Text="{Binding FocusedElement}" />
+                  <TextBlock Text="{Binding FocusedElement}" />
 
-                                </LayoutAnchorable>
+                </LayoutAnchorable>
 
-                            </LayoutAnchorablePane>
+              </LayoutAnchorablePane>
 
-                        </LayoutAnchorablePaneGroup>
+            </LayoutAnchorablePaneGroup>
 
-                    </LayoutPanel>
+          </LayoutPanel>
 
-                    <LayoutRoot.LeftSide>
+          <LayoutRoot.LeftSide>
 
-                        <LayoutAnchorSide >
+            <LayoutAnchorSide >
 
-                            <LayoutAnchorGroup >
+              <LayoutAnchorGroup >
 
-                                <LayoutAnchorable
+                <LayoutAnchorable
 
-                                Title="设备"
+                Title="设备"
 
-                                ContentId="AutoHide1Content"
+                ContentId="AutoHide1Content"
 
-                                IconSource="/FAViews;Component/Images/Blue.png" AutoHideWidth="150">
+                IconSource="/FAViews;Component/Images/Blue.png" AutoHideWidth="150">
 
-                                    <TextBox Text="{Binding TestTimer, Mode=OneWay, StringFormat='AutoHide Attached to Timer ->\{0\}'}" />
+                  <TextBox Text="{Binding TestTimer, Mode=OneWay, StringFormat='AutoHide Attached to Timer ->\{0\}'}" />
 
-                                </LayoutAnchorable>
+                </LayoutAnchorable>
 
-                                <LayoutAnchorable Title="文件" ContentId="AutoHide2Content" AutoHideWidth="150">
+                <LayoutAnchorable Title="文件" ContentId="AutoHide2Content" AutoHideWidth="150">
 
-                                    <StackPanel Orientation="Vertical">
+                  <StackPanel Orientation="Vertical">
 
-                                        <TextBox />
+                    <TextBox />
 
-                                        <TextBox />
+                    <TextBox />
 
-                                    </StackPanel>
+                  </StackPanel>
 
-                                </LayoutAnchorable>
+                </LayoutAnchorable>
 
-                            </LayoutAnchorGroup>
+              </LayoutAnchorGroup>
 
-                        </LayoutAnchorSide>
+            </LayoutAnchorSide>
 
-                    </LayoutRoot.LeftSide>
+          </LayoutRoot.LeftSide>
 
-                    <LayoutRoot.BottomSide>
+          <LayoutRoot.BottomSide>
 
-                        <LayoutAnchorSide>
+            <LayoutAnchorSide>
 
-                            <LayoutAnchorGroup>
+              <LayoutAnchorGroup>
 
-                                <LayoutAnchorable
+                <LayoutAnchorable
 
 								FloatingHeight="200"
 
-                                Title="调试"
+                Title="调试"
 
-                                CanClose="False"
+                CanClose="False"
 
-                                CanHide="False"
+                CanHide="False"
 
-                                ContentId="AutoHide1Content"
+                ContentId="AutoHide1Content"
 
-                                IconSource="/FAViews;Component/Images/Blue.png">
+                IconSource="/FAViews;Component/Images/Blue.png">
 
-                                    <TextBox Text="{Binding TestTimer, Mode=OneWay, StringFormat='AutoHide Attached to Timer ->\{0\}'}" />
+                  <TextBox Text="{Binding TestTimer, Mode=OneWay, StringFormat='AutoHide Attached to Timer ->\{0\}'}" />
 
-                                </LayoutAnchorable>
+                </LayoutAnchorable>
 
-                                <LayoutAnchorable 
+                <LayoutAnchorable 
 
-                                    Title="输出" 
+                  Title="输出" 
 
-                                    FloatingHeight="200" 
+                  FloatingHeight="200" 
 
-                                    ContentId="AutoHide2Content"
+                  ContentId="AutoHide2Content"
 
-                                    CanClose="False"
+                  CanClose="False"
 
-                                    CanHide="False">
+                  CanHide="False">
 
-                                    <ContentControl Content="{Binding DebugPanel, Source={StaticResource InViewLocator}}"/>
+                  <ContentControl Content="{Binding DebugPanel, Source={StaticResource InViewLocator}}"/>
 
-                                </LayoutAnchorable>
+                </LayoutAnchorable>
 
-                            </LayoutAnchorGroup>
+              </LayoutAnchorGroup>
 
-                        </LayoutAnchorSide>
+            </LayoutAnchorSide>
 
-                    </LayoutRoot.BottomSide>
+          </LayoutRoot.BottomSide>
 
-                </LayoutRoot>
+        </LayoutRoot>
 
-            </DockingManager>
+      </DockingManager>
 
-            <StatusBar Grid.Row="2">
+      <StatusBar Grid.Row="2">
 
-                <StatusBarItem Content="Inovance FA"/>
+        <StatusBarItem Content="Inovance FA"/>
 
-            </StatusBar>
-
-        </Grid>
+      </StatusBar>
 
     </Grid>
+
+  </Grid>
 
 </facontrols:FAWindow>
 
@@ -22741,115 +23100,115 @@ namespace Inovance.FA.Views.ViewModels
 
 {
 
-    public class MainWindowViewModel : FAViewModel
+  public class MainWindowViewModel : FAViewModel
+
+  {
+
+    //[Import]
+
+    //public static ViewLocator Locator;
+
+    public FACommand TestCommand
 
     {
 
-        //[Import]
+      get;
 
-        //public static ViewLocator Locator;
-
-        public FACommand TestCommand
-
-        {
-
-            get;
-
-            set;
-
-        }
-
-        public FACommand SelectDevicesCommand
-
-        {
-
-            get;
-
-            set;
-
-        }
-
-        public FACommand CreateProjectCommand
-
-        {
-
-            get;
-
-            set;
-
-        }
-
-        public MainWindowViewModel()
-
-        {
-
-            
-
-            TestCommand = new FACommand(ShowMessage);
-
-            SelectDevicesCommand = new FACommand(SelectDevices);
-
-            CreateProjectCommand = new FACommand((o) => {
-
-                
-
-                //Project = new FAProject(o.ToString());
-
-                CreateProject CreateProjectWindow = new CreateProject();
-
-                if (CreateProjectWindow.ShowDialog() == true)
-
-                {
-
-                    Project = (CreateProjectWindow.DataContext as CreateProjectViewModel).Project;
-
-                    FAStaticData.Container.GetExportedValue<IDebugOut>().Debug($"{Project.Author}创建了项目：{Project.Name} ！");
-
-                }
-
-            });
-
-           
-
-        }
-
-        public void ShowMessage(object obj)       //消息 方法
-
-        {
-
-            if (obj != null)
-
-            {
-
-                MessageBox.Show(obj.ToString());
-
-            }
-
-            else
-
-            {
-
-                MessageBox.Show("obj is null");
-
-            }
-
-        }
-
-        public void SelectDevices(object obj)       //消息 方法
-
-        {
-
-            SelectDevices selectDevices = new SelectDevices();
-
-            var items = new ObservableCollection<string>((from p in FABuilder.Plugins select p.Name).ToList());
-
-            (selectDevices.DataContext as SelectDevicesViewModel).FACategorys = items;
-
-            selectDevices.ShowDialog();
-
-        }
+      set;
 
     }
+
+    public FACommand SelectDevicesCommand
+
+    {
+
+      get;
+
+      set;
+
+    }
+
+    public FACommand CreateProjectCommand
+
+    {
+
+      get;
+
+      set;
+
+    }
+
+    public MainWindowViewModel()
+
+    {
+
+      
+
+      TestCommand = new FACommand(ShowMessage);
+
+      SelectDevicesCommand = new FACommand(SelectDevices);
+
+      CreateProjectCommand = new FACommand((o) => {
+
+        
+
+        //Project = new FAProject(o.ToString());
+
+        CreateProject CreateProjectWindow = new CreateProject();
+
+        if (CreateProjectWindow.ShowDialog() == true)
+
+        {
+
+          Project = (CreateProjectWindow.DataContext as CreateProjectViewModel).Project;
+
+          FAStaticData.Container.GetExportedValue<IDebugOut>().Debug($"{Project.Author}创建了项目：{Project.Name} ！");
+
+        }
+
+      });
+
+      
+
+    }
+
+    public void ShowMessage(object obj)    //消息 方法
+
+    {
+
+      if (obj != null)
+
+      {
+
+        MessageBox.Show(obj.ToString());
+
+      }
+
+      else
+
+      {
+
+        MessageBox.Show("obj is null");
+
+      }
+
+    }
+
+    public void SelectDevices(object obj)    //消息 方法
+
+    {
+
+      SelectDevices selectDevices = new SelectDevices();
+
+      var items = new ObservableCollection<string>((from p in FABuilder.Plugins select p.Name).ToList());
+
+      (selectDevices.DataContext as SelectDevicesViewModel).FACategorys = items;
+
+      selectDevices.ShowDialog();
+
+    }
+
+  }
 
 }
 
@@ -22859,45 +23218,45 @@ namespace Inovance.FA.Views.ViewModels
 
 <facontrols:FAWindow x:Class="Inovance.FA.Views.Views.SelectDevices"
 
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 
-             xmlns:local="clr-namespace:Inovance.FA.Views.Views"
+       xmlns:local="clr-namespace:Inovance.FA.Views.Views"
 
-             xmlns:facontrols="clr-namespace:Inovance.FA.Controls;assembly=FAControls"
+       xmlns:facontrols="clr-namespace:Inovance.FA.Controls;assembly=FAControls"
 
-             xmlns:localvm="clr-namespace:Inovance.FA.Views.ViewModels"
+       xmlns:localvm="clr-namespace:Inovance.FA.Views.ViewModels"
 
-             mc:Ignorable="d" 
+       mc:Ignorable="d" 
 
-             d:DesignHeight="450" d:DesignWidth="800">
+       d:DesignHeight="450" d:DesignWidth="800">
 
-    <Window.DataContext>
+  <Window.DataContext>
 
-        <localvm:SelectDevicesViewModel/>
+    <localvm:SelectDevicesViewModel/>
 
-    </Window.DataContext>
+  </Window.DataContext>
 
-    <Grid>
+  <Grid>
 
-        <Grid.RowDefinitions>
+    <Grid.RowDefinitions>
 
-            <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
 
-            <RowDefinition Height="30" />
+      <RowDefinition Height="30" />
 
-        </Grid.RowDefinitions>
+    </Grid.RowDefinitions>
 
-        <ListView Name="lst" Grid.Row="0"  ItemsSource ="{Binding FACategorys}"/>
+    <ListView Name="lst" Grid.Row="0" ItemsSource ="{Binding FACategorys}"/>
 
-        <Button Grid.Row="1" Click="Button_Click"/>
+    <Button Grid.Row="1" Click="Button_Click"/>
 
-    </Grid>
+  </Grid>
 
 </facontrols:FAWindow>
 
@@ -22921,29 +23280,29 @@ namespace Inovance.FA.Views.ViewModels
 
 {
 
-    public class SelectDevicesViewModel:FAViewModel
+  public class SelectDevicesViewModel:FAViewModel
 
-    {
+  {
 
-        public ObservableCollection<string> faCategorys = null;
+    public ObservableCollection<string> faCategorys = null;
 
-        public ObservableCollection<string> FACategorys {
+    public ObservableCollection<string> FACategorys {
 
-            get {
+      get {
 
-                return faCategorys;
+        return faCategorys;
 
-            }
+      }
 
-            set {
+      set {
 
-                faCategorys = value;
+        faCategorys = value;
 
-                RaisePropertyChanged("FACategorys");
+        RaisePropertyChanged("FACategorys");
 
-            }
+      }
 
-        }
+    }
 
 	}
 
@@ -22973,65 +23332,65 @@ namespace Inovance.FA.Views
 
 {
 
-    //[Export(typeof(ViewLocator))]
+  //[Export(typeof(ViewLocator))]
 
-    public class ViewLocator : DynamicObject, IPartImportsSatisfiedNotification
+  public class ViewLocator : DynamicObject, IPartImportsSatisfiedNotification
+
+  {
+
+    //[ImportMany(typeof(FAView))]
+
+    ////private IEnumerable<Lazy<View, IViewMetadata>> views { get; set; }
+
+    //public static IEnumerable<FAView> Views { get; set; }
+
+    public IFALogger FALogger { get {
+
+        return FAStaticData.Container.GetExportedValue<IFALogger>();
+
+      } }
+
+    public override bool TryGetMember(GetMemberBinder binder, out object result)
 
     {
 
-        //[ImportMany(typeof(FAView))]
+      string name = binder.Name;
 
-        ////private IEnumerable<Lazy<View, IViewMetadata>> views { get; set; }
+      var views = FAStaticData.Container.GetExportedValues<FAView>();
 
-        //public static IEnumerable<FAView> Views { get; set; }
+      if (views == null)
 
-        public IFALogger FALogger { get {
+      {
 
-                return FAStaticData.Container.GetExportedValue<IFALogger>();
+        result = null;
 
-            } }
+        return false;
 
-        public override bool TryGetMember(GetMemberBinder binder, out object result)
+      }
 
-        {
+      var view = views.FirstOrDefault(v => v.GetType().Name.Equals(name));
 
-            string name = binder.Name;
+      // Error handling
 
-            var views = FAStaticData.Container.GetExportedValues<FAView>();
+      if (null == view)
 
-            if (views == null)
+        FALogger.Error("views is null at TryGetMember");
 
-            {
+      result = view;
 
-                result = null;
-
-                return false;
-
-            }
-
-            var view = views.FirstOrDefault(v => v.GetType().Name.Equals(name));
-
-            // Error handling
-
-            if (null == view)
-
-                FALogger.Error("views is null at TryGetMember");
-
-            result = view;
-
-            return null != result;
-
-        }
-
-        public void OnImportsSatisfied()
-
-        {
-
-            FALogger.Info($"{this.GetType()} Composition complete");
-
-        }
+      return null != result;
 
     }
+
+    public void OnImportsSatisfied()
+
+    {
+
+      FALogger.Info($"{this.GetType()} Composition complete");
+
+    }
+
+  }
 
 }
 
@@ -23707,9 +24066,9 @@ namespace Inovance.FA.Views
 
 > 平衡树
 
-   > AVL树
+  > AVL树
 
-   > 红黑树
+  > 红黑树
 
 ####### 多叉树结构
 
