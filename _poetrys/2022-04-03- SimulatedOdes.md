@@ -2,6 +2,8 @@
 layout: post
 title: 仿诗
 date: 2023-04-03 08:10:00
+updatedate: 2023-04-03 08:10:00
+description: 仿诗经所创作的一些诗歌
 ---
 
 > > 读《诗》越多越觉其美，因模仿之。
