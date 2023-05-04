@@ -1,8 +1,8 @@
 ---
 layout: page
 permalink: /writes/
-title: 读书
-description: 余喜读书，每读必有札记，集合以待观之。
+title: 创作
+description: 创作一些文章，读书笔记，杂文，感想之类的东西。
 ---
 
 <ul class="post-list">
