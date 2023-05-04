@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 permalink: /writes/
 title: 创作
 description: 创作一些文章，读书笔记，杂文，感想之类的东西。

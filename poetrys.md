@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 permalink: /poetrys/
 title: 诗歌
 description: 平常写作的一些小诗，聚集起来供大家欣赏。
