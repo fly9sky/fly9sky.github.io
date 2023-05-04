@@ -27,5 +27,7 @@ collections:
   notes:
     output: true
     permalink: /notes/:path/
-
+  writes:
+    output: true
+    permalink: /writes/:path/
 
