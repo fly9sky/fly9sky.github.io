@@ -8,7 +8,7 @@ description: 平常写作的一些小诗，聚集起来供大家欣赏。
 <ul class="post-list">
 {% for poem in site.poetrys reversed %}
     <li>
-        <h2><a class="poem-title" href="{{ poem.url | prepend: site.baseurl }}">{{ poem.title }}</a></h2>
+        <h2><a class="post-title" href="{{ poem.url | prepend: site.baseurl }}">{{ poem.title }}</a></h2>
         <p class="post-meta">{{ poem.date | date: '%B %-d, %Y — %H:%M' }}</p>
       </li>
 {% endfor %}
