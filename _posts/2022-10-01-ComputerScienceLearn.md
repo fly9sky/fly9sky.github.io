@@ -269,7 +269,7 @@ date: 2022-10-01 09:01:01
   - [契约](#契约)
   - [序列化](#序列化)
   - [消息](#消息)
-  - [服务寄宿](#服务寄宿)
+  - [服务寄宿 SelfHost](#服务寄宿-selfhost)
   - [客户端](#客户端)
   - [实例化与会话](#实例化与会话)
   - [REST服务](#rest服务)
@@ -281,8 +281,8 @@ date: 2022-10-01 09:01:01
   - [队列服务](#队列服务)
   - [传输安全](#传输安全)
   - [授权与审核](#授权与审核)
+  - [认证](#认证)
   - [扩展](#扩展)
-  - [SelfHost](#selfhost)
 - [HTML 5](#html-5)
 - [JQuery](#jquery)
 - [Angular](#angular)
@@ -14470,15 +14470,166 @@ storyboard.Begin(this);
 
 ### 绑定
 
+> 绑定是预先配置好的信道栈，它代表了服务器与客户端之间的通信约定，每个绑定都会指定了通信所应用到的传输协调、编码等属性。在Framework3.5中已经包含basicHttpBinding、wsHttpBinding、wsDualHttpBinding、webHttpBinding、netTcpBinding、netNamedPipeBinding、netMsmqBinding、netPeerTcpBinding、msmqIntegrationBinding、wsFedrationHttpBinding、ws2007HttpBinding、ws2007FederationHttpBinding等多种绑定。
+
+> > 绑定类名称	传输	编码	消息版本	安全模式	可靠性会话	事务流
+
+> > BasicHttpBinding	HTTP	文本	SOAP 1.1	无	不支持	不支持
+
+> > WSHttpBinding	HTTP	文本	SOAP 1.2 WS-Addressing 1.0	消息	禁用	WS-AtomicTransactions
+
+> > WSDualHttpBinding	HTTP	文本	SOAP 1.2 WS-Addressing 1.0	消息	启用	WS-AtomicTransactions
+
+> > WSFederationHttpBinding	HTTP	文本	SOAP 1.2 WS-Addressing 1.0	消息	禁用	WS-AtomicTransactions
+
+> > NetTcpBinding	TCP	二进制	SOAP 1.2	传输	禁用	OleTransactions
+
+> > NetPeerTcpBinding	P2P	二进制	SOAP 1.2	传输	不支持	不支持
+
+> > NetNamedPipesBinding	命名管道	二进制	SOAP 1.2	传输	不支持	OleTransactions
+
+> > NetMsmqBinding	MSMQ	二进制	SOAP 1.2	消息	不支持	不支持
+
+> > MsmqIntegrationBinding	MSMQ	不支持	不支持	传输	不支持	不支持
+
+> > CustomBinding	自定义　	自定义　	自定义	自定义　　	自定义	自定义
+
+>WCF内置的绑定。g功能简介
+
+> > 绑定 描述
+
+> > BasicHttpBinding 适用于与符合 WS-Basic Profile 的 Web 服务（例如基于 ASP.NET Web 服务 (ASMX) 的服务）进行的通信。此绑定使用 HTTP/HTTPS 作为传输协议，并使用文本/XML 作为默认的消息编码
+
+> > BasicHttpContextBinding BasicHttpBinding的扩展，支持并使用HTTP Cookies来存储和传输上下文消息。
+
+> > WS2007HttpBinding 一个安全且可互操作的绑定，可为 Security, ReliableSession 的正确版本和 TransactionFlow 绑定元素提供支持。关于细节，将在第七章中介绍。
+
+> > WSHttpBinding 一个安全且可互操作的绑定，适合于非双工服务约
+
+> > WSHttpContextBinding WSHttpBinding的扩展，实现了通过SOAP消息的头部信息来收发上下文消息。
+
+> > WSDualHttpBinding 一个安全且可互操作的绑定，适用于双工服务协定或通过 SOAP 媒介进行的通信
+
+> > WebHttpBinding 可用于为通过 HTTP 请求（而不是 SOAP 消息）公开的 WCF Web 服务配置终结点
+
+> > WS2007FederationHttpBinding 一个安全且可互操作的绑定，它派生自 WS2007HttpBinding 并支持联合安全性。
+
+> > WSFederationHttpBinding 一个安全且可互操作的绑定，支持 WS 联合协议并使联合中的组织可以高效地对用户进行身份验证和授权。
+
+> > NetTcpBinding 一个安全且经过优化的绑定，适用于 WCF 应用程序之间跨计算机的通信
+
+> > NetTcpContextBinding NetTcpBinding的扩展，实现了通过SOAP消息的头部信息来收发上下文消息。
+
+> > NetNamePipeBinding 一个安全、可靠且经过优化的绑定，适用于 WCF 应用程序之间计算机上的通信
+
+> > NetMsmqBinding 一个排队绑定，适用于 WCF 应用程序之间的跨计算机的通信
+
+> > MsmqIntegrationBinding 适用于 WCF 应用程序和现有消息队列（也称为 MSMQ）应用程序之间跨计算机的通信
+
+> 自定义绑定元素
+
+> > 当预定义的绑定无法满足用户需求时，可以使用CustomBinding类开发自定义绑定，该类存在于System.ServiceModel.Channels命名空间。用户可以根据需要绑定以下属性： 事务（TransactionFlowBindingElement类）、可靠性会话（ReliableSessionBindingElement 类）、安全（ SecurityBindingElement 类）、流安全、单工双工工作模式、信息编码、传输绑定等，其中信息编码和传输绑定元素是自定义绑定的必要属性，其他属性用户可根据需求制定。
+
+> > 传输绑定元素(必要），用户可选其中一种传输绑定模式。
+
+> > 传输信道	传输绑定元素	绑定扩展	配置元素
+
+> > TCP传输信道	TcpTransportBindingElement	TcpTransportElement	<tcpTransport>
+
+> > HTTP传输信道	HttpTransportionBindingElement　　	HttpTransportElement　　	<httpTransport>
+
+> > HTTPS传输信道	HttpTransportationBindingElement	HttpTransportElement	<httpTransport>
+
+> > MSMQ传输信道	MSMQTransportBindingElement	MSMQTransportElement	<msmqTransport>
+
+> > MSMQ集成传输信道	MSMQIntegrationBindingElement　　	MSMQIntegrationBindingElement	<msmqIntegration>
+
+> > 命名管道传输信道	NamedPipeTransportBindingElement	NamedPipeTransportElement　　	<namedPipeTransport>
+
+> > P2P传输信道　	PeerTransportBindingElement	PeerTransportElement	<peerTransport>
+
+> > UDP传输信道	UdpTransportBindingElement	UdpTransportElement	<udpTransport>
+
+
+> 信息编码（必要），用户可以选择其中一种信息编码形式
+
+> > 1.TextMessageEncodingBindingElement，文本编码
+
+> > 2.BinaryMessageEncodingBindingElement，二进制编码
+
+> > 3.MtomMessageEncodingBindingElement，MOTM编码
+
+> 流安全绑定元素（可选），用户可以选择其中一种安全绑定形式
+
+> > 1.SslStreamSecurityBindingElement，SSL安全模式
+
+> > 2.WindowsStreamSecurityBindingElement，Window安全模式
+
+> 通信传输（可选），用户可以选择单工或双工其中一种模式
+
+> > 1.CompositeDuplexBindingElement，双工传输模式
+
+> > 2.OneWayBindingElement，单工传输模式
+
 ### 契约
+
+> 一个正常的服务调用要求客户端和服务端对服务操作有一致的理解，WCF通过服务契约对服务操作进行抽象，以一种与平台无关的，能够被不同的厂商理解的方式对服务进行描述。同理，客户端和服务端进行有效的数据交换，同样要求交换双方对交换数据的结构达成共识，WCF通过数据契约来对交换的数据进行描述。与数据契约的定义相匹配，WCF采用新的序列化器——数据契约序列化器（DataContractSerializer）进行基于数据契约的序列化于反序列化操作。
+
+> 服务契约
+
+> 数据契约
+
+> 序列化器
 
 ### 序列化
 
 ### 消息
 
-### 服务寄宿
+> 消息交换是WCF进行通信的唯一手段，通过方法调用（Method Call）形式体现的服务访问需要转化成具体的消息，并通过相应的编码（Encoding）才能通过传输通道发送到服务端；服务操作执行的结果也只能以消息的形式才能被正常地返回到客户端。所以，消息在整个WCF体系结构中处于一个核心的地位，WCF可以看成是一个消息处理的管道。
+
+### 服务寄宿 SelfHost
+
+> 使用WAS寄宿WCF服务
+
+> 在应用程序中寄宿WCF服务 ServiceHost ServiceHost对象的初始化过程：
+
+> > ServieHost(Type serviceTpye, Uri[]baseAddresses) 实例化 ServiceHost
+
+> > --> InitializeDescription(serviceType, new UriSchemekeyedCollection(baseaddressessed))Initializes a description of the service hosted based on its type and specified base addresses根据服务的类型和基本地址，实例化Servicehost
+
+> > ---->base.InitializeDescription(baseAddresses); Creates and initializes the service host with the contract and service descriptions 创建和实例化ServieHost，并指定服务契约和服务描述
+
+> >  ------>CreateDescription(out dictionary);创建Servicehost的描述
+
+> > ------>ApplyConfiguration();从配置文件中加载服务描述信息，并应用到在WCF运行时已经创建的ServiceHost对象
+
+
+> ServiceHost提供了一些事件，以供追踪ServieHost对象的状态。下表列出了这些事件：
+
+> > 事件 描述
+
+> > Opening当通信对象转换到正在打开状态时发生
+
+> > Opened当通信对象转换到已打开状态时发生
+
+> > Closing当通信对象转换到正在关闭状态时发生
+
+> > Closed当通信对象转换到已关闭状态时发生
+
+> > Faulted在通信对象转换到出错状态时发生
+
+> > UnknownMessageReceived 接收未知消息时发生
 
 ### 客户端
+
+
+> WCF通信机制由它自身复杂的体系结构所决定，但WCF服务给我们提供了两种不同的机制来创建客户端程序调用，一种是ClientBase<TChannel>类，另一种ChannelFactory<TChannel> 类。
+
+> > ClientBase<TChannel>：创建客户端代理类的基类，客户端代理类通过继承该基类，调用WCF的内部通信机制来实现WCF客户端与服务端的通信。代理类是一个公开单个CLR接口来表示服务契约的CLR类，代理类和服务契约很相似，但是他有着附加的方法来管理代理的生命周期和连接服务。通过visual studio 右键添加服务引用和通过svcutil.exe命令行工具生成的客户端都属于这种方式。(如果不熟悉svcutil.exe，请参照WCF初探-1：认识WCF)
+
+> > ChannelFactory<TChannel>：使用通道工厂类取决于你是否拥有描述服务契约的本地接口。最大的好处是你可以已扩展的方式更容易的修改通道的通信机制，如果你需要共享服务和客户端之间的契约组件，那么使用ChannelFactory<TChannel>可以更有效的节省时间，但客户端必须完成对服务契约组件的引用。
+
+> > ClientBase<TChannel>和ChannelFactory<TChannel>的差异：
 
 ### 实例化与会话
 
@@ -14490,6 +14641,14 @@ storyboard.Begin(this);
 
 ### 事务
 
+> 通过服务契约决定事物流转（Transaction Flow）的策略；
+
+> 通过绑定实施事务的流转；
+
+> 通过服务行为控制事务的相关行为。
+
+> 分布式事务
+
 ### 并发与限流
 
 ### 可靠会话
@@ -14500,9 +14659,21 @@ storyboard.Begin(this);
 
 ### 授权与审核
 
+### 认证
+
+
+> 安全主体具有两个基本的要素：身份与权限。身份在客户端经过认证之后已经确立下来，现在需要解决的问题就是如何获取被认证用户的权限。为了解决这个问题，WCF为我们提供了不同的方案，我们把这些方案成为不同的“安全主体权限模式（Principal Permission Mode）”。具体来说，WCF支持如下三种安全主体权限模式。
+
+> 三种授权模式
+
+> > 采用Windows用户组：将经过认证的用户映射为同名的Windows帐号，将该帐号所在的用户组作为权限集；
+
+> > 采用ASP.NET Roles提供程序：通过ASP.NET角色管理机制借助于某个RoleProvider获取基于当前认证用户的角色列表，并将其作为权限集；
+
+> > 自定义权限模式：自定义权限解析和安全主体创建机制。
+
 ### 扩展
 
-### SelfHost
 
 ## HTML 5
 
