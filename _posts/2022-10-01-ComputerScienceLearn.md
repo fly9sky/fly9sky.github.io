@@ -262,6 +262,27 @@ date: 2022-10-01 09:01:01
       - [SplineDoubleKeyFrame](#splinedoublekeyframe)
       - [EasingDoubleKeyFrame](#easingdoublekeyframe)
     - [场景（Storyborad）](#场景storyborad)
+- [WCF](#wcf)
+  - [WCF简介](#wcf简介)
+  - [地址](#地址)
+  - [绑定](#绑定)
+  - [契约](#契约)
+  - [序列化](#序列化)
+  - [消息](#消息)
+  - [服务寄宿](#服务寄宿)
+  - [客户端](#客户端)
+  - [实例化与会话](#实例化与会话)
+  - [REST服务](#rest服务)
+  - [异常处理](#异常处理)
+  - [元数据](#元数据)
+  - [事务](#事务)
+  - [并发与限流](#并发与限流)
+  - [可靠会话](#可靠会话)
+  - [队列服务](#队列服务)
+  - [传输安全](#传输安全)
+  - [授权与审核](#授权与审核)
+  - [扩展](#扩展)
+  - [SelfHost](#selfhost)
 - [HTML 5](#html-5)
 - [JQuery](#jquery)
 - [Angular](#angular)
@@ -14404,6 +14425,84 @@ storyboard.Begin(this);
 33.3.4 发布选项 931
 
 33.4 小结 932
+
+## WCF 
+
+### WCF简介
+
+> WCF顾明思义，就是在Windows平台下解决通信（C,Communication）的基础框架（F,Foundation）问题。 
+
+> SOA 面向服务（Service Orientation，SO）。服务的自治原则要求单个服务在底层逻辑控制方面尽可能是独立和自包含的，服务尽可能不依赖于访问它的客户端和其他服务。服务可以独立地进行部署及实施版本策略和安全策略。
+
+> SOA采用基于消息的通信方式。SOA采用XML，XSD及WSDL作为服务描述的“语言”。
+
+> SOA支持跨平台
+
+> SOA鼓励创建可组合的服务
+
+> SOA鼓励服务的复用
+
+> SOA强调松耦合
+
+### 地址
+
+> 终结点是WCF最为核心的对象，因为它承载了所有通信功能。服务通过相应的终结点发布出来，客户端通过与之匹配的终结点对服务进行调用。终结点由代表地址、绑定和契约的ABC三要素构成。 作为终结点的三要素之一的地址（Address）、在基于WCF的通信中不仅仅用于定位服务，还提供额外的寻址信息。除此之外，终结点还和安全有关系，因为它包含着用于进行服务认证的服务身份信息。
+
+> 统一资源（URI）:Uniform Resource Identifier结构：传输协议://[主机名称|域名|IP地址]:[可选端口]/[资源路径]
+
+> > HTTP/HTTPS
+
+> > > HTTP全称为HyperText Transfer Protocol（超文本传输协议）,是建立在TCP/IP簇上的应用层协议。
+
+> > > HTTPS全称为HyperText Transfer Protocol over Secure Socket Layer(安全超文本传输协议)，它是采用了SSL（Secure Socket Layer）的HTTP，而SSL是一个进行数据加密的协议，很多安全性要求较高的网站都采用HTTPS。
+
+> > Net.TCP
+
+> > > TCP全称为Transport Control Protocol（传输控制协议）,在整个TCP/IP簇中处于核心地位。
+
+> > Net.Pipe
+
+> > > 命名管道（Named Pipes）是Windows平台及UNIX系统下实现跨进程通信（Inter Process Communication，IPC）的标准实现方式。
+
+> > Net.Msmq
+
+> > > 消息队列（Message Queuing，也称MSMQ），是微软对消息服务领域的开创性尝试。
+
+### 绑定
+
+### 契约
+
+### 序列化
+
+### 消息
+
+### 服务寄宿
+
+### 客户端
+
+### 实例化与会话
+
+### REST服务
+
+### 异常处理
+
+### 元数据
+
+### 事务
+
+### 并发与限流
+
+### 可靠会话
+
+### 队列服务
+
+### 传输安全
+
+### 授权与审核
+
+### 扩展
+
+### SelfHost
 
 ## HTML 5
 
