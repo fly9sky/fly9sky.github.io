@@ -17,7 +17,6 @@ description: 创作一些文章，读书笔记，杂文，感想之类的东西�
       </li>
 {% endfor %}
 </ul>
-
 <nav class="pagination" role="navigation">
   {% if paginator.previous_page %}
   <a class="previous pagination__newer btn btn-small btn-tertiary" href="{{ paginator.previous_page_path }}">&larr; 上一页</a>
