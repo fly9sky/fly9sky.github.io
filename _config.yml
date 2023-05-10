@@ -23,10 +23,10 @@ collections:
     permalink: /pictures/:path/
   poetrys:
     output: true
-    permalink: /poetrys/:path/
+    permalink: /poetrys/:path+".html"
   notes:
     output: true
-    permalink: /notes/:path/
+    permalink: /notes/:path
   writes:
     output: true
     permalink: /writes/:path/
