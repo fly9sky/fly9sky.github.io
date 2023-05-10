@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /poetry/
-title: 诗歌
+title: 诗集
 description: 平常写作的一些小诗，聚集起来供大家欣赏。
 ---
 
@@ -10,6 +10,7 @@ description: 平常写作的一些小诗，聚集起来供大家欣赏。
     <li>
         <h2><a class="post-title" href="{{ poem.url | prepend: site.baseurl }}">{{ poem.title }}</a></h2>
         <p class="post-meta">{{ poem.date | date: '%B %-d, %Y — %H:%M' }}</p>
+        <p class="post-meta">{{ poem.updatedate | date: '%B %-d, %Y — %H:%M' }}</p>
         <p>{{ poem.description }}</p>
         <br/>
         <hr/>
