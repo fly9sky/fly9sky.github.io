@@ -23,7 +23,7 @@ collections:
     permalink: /pictures/:path
   poetrys:
     output: true
-    permalink: /poetrys/:path
+    permalink: /poetrys/:path:output_ext
   notes:
     output: true
     permalink: /notes/:path
