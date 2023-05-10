@@ -14,20 +14,20 @@ highlighter: rouge
 
 # Pagination
 paginate: 20
-paginate_path: "/page:num/"
+paginate_path: "/page:num"
 
 
 collections:
   pictures:
     output: true
-    permalink: /pictures/:path/
+    permalink: /pictures/:path
   poetrys:
     output: true
-    permalink: /poetrys/:path+".html"
+    permalink: /poetrys/:path
   notes:
     output: true
     permalink: /notes/:path
   writes:
     output: true
-    permalink: /writes/:path/
+    permalink: /writes/:path
 
