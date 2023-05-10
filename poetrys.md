@@ -9,8 +9,7 @@ description: 平常写作的一些小诗，聚集起来供大家欣赏。
 {% for poem in site.poetrys reversed %}
     <li>
         <h2><a class="post-title" href="{{ poem.url | prepend: site.baseurl }}">{{ poem.title }}</a></h2>
-        <p class="post-meta">{{ "创建时间：" | poem.date | date: '%B %-d, %Y — %H:%M' }}</p>
-        <p class="post-meta">{{ "最后更新时间：" | poem.updatedate | date: '%B %-d, %Y — %H:%M' }}</p>
+        <p class="post-meta">{{ poem.date | date: '%B %-d, %Y — %H:%M' }}</p>
         <p>{{ poem.description }}</p>
         <br/>
         <hr/>

@@ -20,14 +20,14 @@ paginate_path: "/page:num"
 collections:
   pictures:
     output: true
-    permalink: /pictures/:path
+    permalink: /pictures/:path:output_ext
   poetrys:
     output: true
     permalink: /poetrys/:path:output_ext
   notes:
     output: true
-    permalink: /notes/:path
+    permalink: /notes/:path:output_ext
   writes:
     output: true
-    permalink: /writes/:path
+    permalink: /writes/:path:output_ext
 
