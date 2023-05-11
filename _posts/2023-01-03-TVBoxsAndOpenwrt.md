@@ -3,7 +3,7 @@ layout: post
 title: 玩转各种电视盒子
 description: Amlogic设备等电视盒子的研究包括Arm架构的Armbian，Openwrt，Cloreelec等刷机研究
 date: 2023-01-02 15:43:01
-updatedate: 2023-03-15 14:45
+updatedate: 2023-05-11 10:33
 ---
 
 - [常见的Amlogic设备](#常见的amlogic设备)
@@ -175,6 +175,8 @@ src/gz openwrt_telephony https://downloads.openwrt.org/releases/22.03.3/packages
 > opkg install block-mount 官方的Openwrt默认不带这个
 
 #### cfdisk 划分空间
+
+> 执行运行 cfdisk 进行磁盘花粉，把剩余磁盘化分完整 比如我直接划分剩余空间为/dev/sda3 ，类型为Primary
 
 > fdisk -l 可以检查是否划分成功
 
