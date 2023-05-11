@@ -8,7 +8,6 @@ layout: default
         <h2><a class="post-title" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
         <p class="post-meta">创作时间：{{ post.date | date: '%B %-d, %Y - %H:%M' }} 最后更新：{{ post.updatedate | date: '%B %-d, %Y - %H:%M' }}</p>
         <p>{{ post.description }}</p>
-        <br/>
         <hr/>
       </li>
     {% endfor %}
