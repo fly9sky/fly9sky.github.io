@@ -3,7 +3,7 @@ layout: post
 title: 玩转各种电视盒子
 description: Amlogic设备等电视盒子的研究包括Arm架构的Armbian，Openwrt，Cloreelec等刷机研究
 date: 2023-01-02 15:43:01
-updatedate: 2023-05-11 10:33
+updatedate: 2023-05-11 10:33:01
 ---
 
 - [常见的Amlogic设备](#常见的amlogic设备)
