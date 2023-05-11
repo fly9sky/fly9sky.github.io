@@ -3,6 +3,7 @@ layout: post
 title: 玩转各种电视盒子
 description: Amlogic设备等电视盒子的研究包括Arm架构的Armbian，Openwrt，Cloreelec等刷机研究
 date: 2023-01-02 15:43:01
+updatedate: 2023-03-15 14:45
 ---
 
 - [常见的Amlogic设备](#常见的amlogic设备)
@@ -82,7 +83,6 @@ date: 2023-01-02 15:43:01
   - [外网有人解决 不知道适用不](#外网有人解决-不知道适用不)
   - [maskrom xrock](#maskrom-xrock)
   - [【官方开发文档】RK3399 Efuse 操作指南](#官方开发文档rk3399-efuse-操作指南)
-- [备注](#备注)
 
 ## 常见的Amlogic设备
 
@@ -1819,7 +1819,3 @@ xrock-windows-v1.0.0.7z
 > http://www.nnewn.com/page238?article_id=338
 
 > https://blog.csdn.net/qq_30624591/article/details/100175478
-
-## 备注
-
-> 最后更新时间：2023-03-15 14:45
