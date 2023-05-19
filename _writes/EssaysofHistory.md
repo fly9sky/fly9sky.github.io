@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 杂文合集 
-description: 平常写作的一些杂文等汇总到这里
+title: 历史杂文集 
+description: 读史过程中的一些想法汇总而成的一些文章
 date: 2021-05-01 05:01:01
-updatedate: 2023-05-09 09:35:01
+updatedate: 2023-05-19 13:25:01
 ---
 
 - [先秦](#先秦)
