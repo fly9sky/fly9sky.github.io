@@ -484,7 +484,7 @@ updatedate: 2022-05-05 13:50:01
         - [横向扩展和纵向扩展](#横向扩展和纵向扩展)
     - [对数据的访同效率要求高](#对数据的访同效率要求高)
   - [NoSQL数据库的分类](#nosql数据库的分类)
-    - [键值数抿库](#键值数抿库)
+    - [键值数据库](#键值数据库)
       - [产品](#产品)
         - [Redis](#redis)
         - [BerkeleyDB](#berkeleydb)
@@ -715,7 +715,6 @@ updatedate: 2022-05-05 13:50:01
     - [已提交读模式](#已提交读模式)
     - [串行模式](#串行模式)
     - [只读模式](#只读模式)
-  - [](#-6)
 - [SQL Server](#sql-server)
   - [DDL](#ddl-1)
   - [DML](#dml-1)
@@ -747,29 +746,10 @@ updatedate: 2022-05-05 13:50:01
   - [LiteDB的技术细节](#litedb的技术细节)
     - [LiteDB的工作原理](#litedb的工作原理)
     - [LiteDB的查询](#litedb的查询)
-      - [Query.All 返回所有的数据，可以使用指定的索引字段进行排序](#queryall-返回所有的数据可以使用指定的索引字段进行排序)
-      - [Query.EQ 查找返回和指定字段值相等的数据](#queryeq-查找返回和指定字段值相等的数据)
-      - [Query.LT/LTE 查找\< 或 \<= 某个值的数据](#queryltlte-查找-或--某个值的数据)
-      - [Query.GT/GTE 查找\> 或 \>= 某个值的数据](#querygtgte-查找-或--某个值的数据)
-      - [Query.Between 查找在指定区间范围内的数据](#querybetween-查找在指定区间范围内的数据)
-      - [Query.In - 和SQL的in类似吧，查找和列表中值相等的数据](#queryin---和sql的in类似吧查找和列表中值相等的数据)
-      - [Query.Not - 和EQ相反，是不等于某个值的数据](#querynot---和eq相反是不等于某个值的数据)
-      - [Query.StartsWith 查找以某个字符串开头的数据](#querystartswith-查找以某个字符串开头的数据)
-      - [Query.Contains 查找保护某个字符串的数据，这个查询只扫描索引](#querycontains-查找保护某个字符串的数据这个查询只扫描索引)
-      - [Query.And 2个查询的交集](#queryand-2个查询的交集)
-      - [Query.Or 2个查询结果的并集](#queryor-2个查询结果的并集)
-    - [LiteDB的查询](#litedb的查询-1)
-      - [LiteDB的技术细节](#litedb的技术细节-1)
-  - [C## 示例](#c-示例)
-    - [基本示例](#基本示例)
-      - [namespace Inovance.FA.FAOutTest.Views](#namespace-inovancefafaouttestviews)
+    - [LiteDB的查询示例](#litedb的查询示例)
 - [LabView](#labview)
   - [工程](#工程)
-  - [VI](#vi)
   - [第1章LabⅥEW基础知识](#第1章labⅵew基础知识)
-    - [1.1LabⅥEW简介](#11labⅵew简介)
-      - [1.1.1LabⅥEW概述](#111labⅵew概述)
-      - [1.1.2LabⅥEW 2018的新功能](#112labⅵew-2018的新功能)
     - [1.2LabⅥEW编程环境](#12labⅵew编程环境)
       - [1.2.1前面板](#121前面板)
       - [1.2.2程序框图](#122程序框图)
@@ -18249,7 +18229,7 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 
 ### NoSQL数据库的分类
 
-#### 键值数抿库
+#### 键值数据库
 
 ##### 产品
 
@@ -19055,7 +19035,6 @@ gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期
 
 > 只读事务只能看到事务执行前就已经提交的数据，且事务中不能执行 INSERT ， UPDATE ，及 DELETE 语句。
 
-### 
 
 ## SQL Server
 
@@ -19337,9 +19316,9 @@ ISO 标准定义了下列隔离级别，SQL Server 数据库引擎支持所有�
 
 ## LiteDB：本地化NOSQL
 
- LiteDB是一个小型的.NET平台开源的NoSQL类型的轻量级文件数据库。特点是小和快，dll文件只有200K大小，而且支持LINQ和命令行操作，数据库是一个单一文件，类似Sqlite。
+> LiteDB是一个小型的.NET平台开源的NoSQL类型的轻量级文件数据库。特点是小和快，dll文件只有200K大小，而且支持LINQ和命令行操作，数据库是一个单一文件，类似Sqlite。
 
-　 官方网站：http://www.litedb.org/
+> > 官方网站：http://www.litedb.org/
 
 ### 特点
 
@@ -19399,8 +19378,8 @@ ISO 标准定义了下列隔离级别，SQL Server 数据库引擎支持所有�
 
 #### 创建实体类
 
+```
 public class Customer
-
 {
 
   public int Id { get; set; }
@@ -19412,17 +19391,19 @@ public class Customer
   public bool IsActive { get; set; }
 
 }
+```
 
 #### 使用Demo
 
-使用过程首先要添加dll应用，以及引入命名空间：
+> 使用过程首先要添加dll应用，以及引入命名空间：
 
-using LiteDB;
+> using LiteDB;
 
-  下面是测试代码，会在当前目录下创建一个sample.db的数据库文件：
+> 下面是测试代码，会在当前目录下创建一个sample.db的数据库文件：
 
 //打开或者创建新的数据库
 
+```
 using (var db = new LiteDatabase("sample.db"))
 
 {
@@ -19467,7 +19448,9 @@ using (var db = new LiteDatabase("sample.db"))
 
 }
 
-  上述过程很清楚，根据注释理解几乎不用费神。
+```
+
+> 上述过程很清楚，根据注释理解几乎不用费神。
 
 ### 使用场景
 
@@ -19483,74 +19466,57 @@ using (var db = new LiteDatabase("sample.db"))
 
 #### LiteDB的工作原理
 
-> LiteDB是虽然单个文件类型的数据库，但是数据库有很多信息，
+> LiteDB是虽然单个文件类型的数据库，但是数据库有很多信息，例如索引，集合，文件等。为了管理这些信息，LiteDB实现了数据库页的概念。
 
-例如索引，集合，文件等。为了管理这些信息，LiteDB实现了数据库页的概念。
+> > 页 是一个拥有4096 字节的 存储相同信息的地址块。也是操作磁盘文件(读写)的最小单元。LiteDB有6种页类型。其作用也不一样，分布是：Header Page，Collection Page，Index Page， Data Page，Extend Page，Empty Page。
 
-页 是一个拥有4096 字节的 存储相同信息的地址块。
+> > Data Page的作用是存储核心的数据，是以序列化后的BSON格式来存储。
 
-页 也是操作磁盘文件(读写)的最小单元。LiteDB有6种页类型。
+> > 值得注意的是，如果存储的数据太大，超过page大小，数据块就会使用一个指针指向Extend Page。
 
-其作用也不一样，分布是：Header Page，Collection Page，Index Page， Data Page，Extend Page，Empty Page。
+> 在上面的代码中，我们初始化数据库是这样的：
 
-鉴于篇幅较大，这里只介绍重要的Data Page。
+> > var db = new LiteDatabase("MyData.db");
 
-其他几个页面的作用看文件也很容易。Data Page的作用是存储核心的数据，是以序列化后的BSON格式来存储。
+> 这种情况比较好用，可以打开或者创建新的数据库，同样也可以使用连接名称来获取，例如：
 
-值得注意的是，如果存储的数据太大，超过page大小，数据块就会使用一个指针指向Extend Page。
+> > var db = new LiteDatabase("userdb");
 
-　　在上面的代码中，我们初始化数据库是这样的：
-
-1
-
-var db = new LiteDatabase("MyData.db");
-
-　　这种情况比较好用，可以打开或者创建新的数据库，同样也可以使用连接名称来获取，例如：
-
-1
-
-var db = new LiteDatabase("userdb");
-
-　　这样会直接从connectionStrings找到这个名称的连接。包括了文件名称，使用模式，以及版本信息。一般情况下直接使用第一种即可。
-
-　　LiteDB的数据库连接完整形式是：filename=C:\Path\mydb.db; journal=false; version=5　　
+> > 这样会直接从connectionStrings找到这个名称的连接。包括了文件名称，使用模式，以及版本信息。一般情况下直接使用第一种即可。LiteDB的数据库连接完整形式是：filename=C:\Path\mydb.db; journal=false; version=5　　
 
 #### LiteDB的查询
 
-本节翻译自：https://github.com/mbdavid/LiteDB/wiki/Queries
+> LiteDB的查询必须在相关的查询字段上使用索引，如果没有索引，会默认去创建索引。上面例子中就是创建字段的索引，并查询。LiteDB中查询有2种方法：
 
-　　LiteDB的查询必须在相关的查询字段上使用索引，如果没有索引，会默认去创建索引。上面例子中就是创建字段的索引，并查询。LiteDB中查询有2种方法：
+> > 1.使用静态的帮助类Query;
 
-1.使用静态的帮助类Query;
+> > 2.使用Linq方式，就是类似Demo的方法;
 
-2.使用Linq方式，就是类似Demo的方法;
+> LiteDB使用Query的查询方式有以下一些方法，详细讲解几个重要的，其他几个大家理解一下，也应该不难，如果有不准确的地方，还请指正： 
 
-　　LiteDB使用Query的查询方式有以下一些方法，详细讲解几个重要的，其他几个大家理解一下，也应该不难，如果有不准确的地方，还请指正： 
+> > Query.All 返回所有的数据，可以使用指定的索引字段进行排序
 
-Query.All 返回所有的数据，可以使用指定的索引字段进行排序
+> > Query.EQ 查找返回和指定字段值相等的数据
 
-Query.EQ 查找返回和指定字段值相等的数据
+> > Query.LT/LTE 查找< 或 <= 某个值的数据
 
-Query.LT/LTE 查找< 或 <= 某个值的数据
+> > Query.GT/GTE 查找> 或 >= 某个值的数据
 
-Query.GT/GTE 查找> 或 >= 某个值的数据
+> > Query.Between 查找在指定区间范围内的数据
 
-Query.Between 查找在指定区间范围内的数据
+> > Query.In - 和SQL的in类似吧，查找和列表中值相等的数据
 
-Query.In - 和SQL的in类似吧，查找和列表中值相等的数据
+> > Query.Not - 和EQ相反，是不等于某个值的数据
 
-Query.Not - 和EQ相反，是不等于某个值的数据
+> > Query.StartsWith 查找以某个字符串开头的数据
 
-Query.StartsWith 查找以某个字符串开头的数据
+> > Query.Contains 查找保护某个字符串的数据，这个查询只扫描索引
 
-Query.Contains 查找保护某个字符串的数据，这个查询只扫描索引
+> > Query.And 2个查询的交集
 
-Query.And 2个查询的交集
+> > Query.Or 2个查询结果的并集
 
-Query.Or 2个查询结果的并集
-
-看看实际代码：
-
+```
 var results = collection.Find(Query.EQ("Name", "John Doe"));
 
 var results = collection.Find(Query.GTE("Age", 25));
@@ -19562,22 +19528,21 @@ var results = collection.Find(Query.And(
 ));
 
 var results = collection.Find(Query.StartsWith("Name", "Jo"));
+```
 
-　　如图，语法是左边是字段，右边是值。注意LiteDB不支持这种表达式：CreationDate == DueDate。
+> > 注意LiteDB不支持这种表达式：CreationDate == DueDate。
 
-　　下面介绍使用Linq的查询的几个主要方法：
+> 下面介绍使用Linq的查询的几个主要方法：
 
-FindAll: 查找表或者集合中所有的结果记录
+> > FindAll: 查找表或者集合中所有的结果记录
 
-FindOne:返回第一个或者默认的结果
+> > FindOne:返回第一个或者默认的结果
 
-FindById: 通过索引返回单个结果
+> > FindById: 通过索引返回单个结果
 
-Find: 使用查询表达式或者linq表达式查询返回结果
+> > Find: 使用查询表达式或者linq表达式查询返回结果
 
- 看看几个例子：
-
-
+```
 collection.EnsureIndex(x => x.Name);
 
 var result = collection
@@ -19597,9 +19562,11 @@ var result = collection
     DueDays = x.DueDate - x.CreationDate 
 
   });
+```
 
- 当然还有一些方法如：Count() , Exists(),Min() , Max()等方法。。比较好理解。看看linq表达式的查询案例：
+> 当然还有一些方法如：Count() , Exists(),Min() , Max()等方法。。比较好理解。看看linq表达式的查询案例：
 
+```
 var collection = db.GetCollection<Customer>("customer");
 
 var results = collection.Find(x => x.Name == "John Doe");
@@ -19607,38 +19574,13 @@ var results = collection.Find(x => x.Name == "John Doe");
 var results = collection.Find(x => x.Age > 30);
 
 var results = collection.Find(x => x.Name.StartsWith("John") && x.Age > 30);
+```
 
-##### Query.All 返回所有的数据，可以使用指定的索引字段进行排序
 
-##### Query.EQ 查找返回和指定字段值相等的数据
+#### LiteDB的查询示例
 
-##### Query.LT/LTE 查找< 或 <= 某个值的数据
-
-##### Query.GT/GTE 查找> 或 >= 某个值的数据
-
-##### Query.Between 查找在指定区间范围内的数据
-
-##### Query.In - 和SQL的in类似吧，查找和列表中值相等的数据
-
-##### Query.Not - 和EQ相反，是不等于某个值的数据
-
-##### Query.StartsWith 查找以某个字符串开头的数据
-
-##### Query.Contains 查找保护某个字符串的数据，这个查询只扫描索引
-
-##### Query.And 2个查询的交集
-
-##### Query.Or 2个查询结果的并集
-
-#### LiteDB的查询
-
-##### LiteDB的技术细节
-
-### C## 示例
-
-#### 基本示例
-
-##### namespace Inovance.FA.FAOutTest.Views
+```
+namespace Inovance.FA.FAOutTest.Views
 
 {
 
@@ -19727,20 +19669,13 @@ var results = collection.Find(x => x.Name.StartsWith("John") && x.Age > 30);
   }
 
 }
+```
 
 ## LabView
 
 ### 工程
 
-### VI
-
 ### 第1章LabⅥEW基础知识
-
-#### 1.1LabⅥEW简介
-
-##### 1.1.1LabⅥEW概述
-
-##### 1.1.2LabⅥEW 2018的新功能
 
 #### 1.2LabⅥEW编程环境
 
