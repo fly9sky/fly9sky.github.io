@@ -3,7 +3,7 @@ layout: post
 title: 计算机编程
 description: 计算机科学相关学习内容总结,各种编程语言以及计算机数据结构等总结梳理
 date: 2022-10-01 09:01:01
-updatedate: 2022-05-24 13:51:01
+updatedate: 2022-05-24 14:13:01
 ---
 
 - [计算机史话](#计算机史话)
@@ -511,7 +511,6 @@ updatedate: 2022-05-24 13:51:01
 > 香农定律是关于信道容量的计算的一个经典定律，可以说是信息论的基础。
 
 > Bug 一次是女程序员葛蕾丝霍普引入。
-
 
 ## 数据结构与算法
 
@@ -5421,11 +5420,21 @@ public string Text
 
 #### 附加事件
 
+> Microsoft官方：附加事件可用于在非元素类中定义新的 路由事件 ，并在树中的任何元素上引发该事件。 为此，必须将附加事件注册为路由事件，并提供支持附加事件功能的特定 支持代码 。 由于附加事件注册为路由事件，因此在元素树中引发时，它们会传播到元素树中。
+
 > 附加事件是路由事件的一种用法。路由事件的宿主都是拥有可视化实体的界面元素，而附加事件的宿主则不具备显示再用户界面上的能力。
 
-> > public static readonly RoutedEvent NameChangedEvent = EventManager.RegisterRoutedEvent("NameChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Student));
+> 定义 WPF 附加事件
+
+> > public static readonly RoutedEvent CleanEvent = EventManager.RegisterRoutedEvent("Clean", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(AquariumFilter));
 
 > 如果在一个非UIElement派生类中注册了路由事件，那么这个类的实例既不能自己激发此路由事件，也不能自己侦听此路由事件，只能把事件的激发附加在具备RaiseEvent方法的对象上，把事件的侦听也交给别的对象去做。
+
+> 引发 WPF 附加事件
+
+> > 使用 UIElement.RaiseEvent 方法在任何 或 ContentElement上UIElement引发附加事件。 引发路由事件时，无论是否附加，都需要将元素树中的元素指定为事件源。 然后，该源将报告为调用方 RaiseEvent 。 例如，若要在 AquariumFilter.Clean 上 aquarium1引发附加的路由事件，
+
+> > aquarium1.RaiseEvent(new RoutedEventArgs(AquariumFilter.CleanEvent));
 
 > 拥有附加事件的类有：
 
@@ -10252,7 +10261,6 @@ storyboard.Begin(this);
 
 > > UDP传输信道	UdpTransportBindingElement	UdpTransportElement	<udpTransport>
 
-
 > 信息编码（必要），用户可以选择其中一种信息编码形式
 
 > > 1.TextMessageEncodingBindingElement，文本编码
@@ -10305,7 +10313,6 @@ storyboard.Begin(this);
 
 > > ------>ApplyConfiguration();从配置文件中加载服务描述信息，并应用到在WCF运行时已经创建的ServiceHost对象
 
-
 > ServiceHost提供了一些事件，以供追踪ServieHost对象的状态。下表列出了这些事件：
 
 > > 事件 描述
@@ -10323,7 +10330,6 @@ storyboard.Begin(this);
 > > UnknownMessageReceived 接收未知消息时发生
 
 ### 客户端
-
 
 > WCF通信机制由它自身复杂的体系结构所决定，但WCF服务给我们提供了两种不同的机制来创建客户端程序调用，一种是ClientBase<TChannel>类，另一种ChannelFactory<TChannel> 类。
 
@@ -10363,7 +10369,6 @@ storyboard.Begin(this);
 
 ### 认证
 
-
 > 安全主体具有两个基本的要素：身份与权限。身份在客户端经过认证之后已经确立下来，现在需要解决的问题就是如何获取被认证用户的权限。为了解决这个问题，WCF为我们提供了不同的方案，我们把这些方案成为不同的“安全主体权限模式（Principal Permission Mode）”。具体来说，WCF支持如下三种安全主体权限模式。
 
 > 三种授权模式
@@ -10375,7 +10380,6 @@ storyboard.Begin(this);
 > > 自定义权限模式：自定义权限解析和安全主体创建机制。
 
 ### 扩展
-
 
 ## HTML 5
 
@@ -11607,7 +11611,6 @@ namespace SportsStore.Models
 
 > > 直接设置 HttpContext.User。
 
-
 ```
 
 using System.Threading.Tasks;
@@ -11774,7 +11777,6 @@ public class AccountController : Controller {
 
 > 构建 Register、Login、LogOut 和 RegisterConfirmation 的基架
 
-
 ##### 多重身份验证
 
 > 多重身份验证 (MFA) 是在登录事件期间请求用户进行其他形式的身份验证的过程。 此提示可以是输入手机中的代码、使用 FIDO2 密钥或提供指纹扫描。 需要进行另一种形式的身份验证时，安全性便得到了增强。 攻击者无法轻松获取或复制额外的因素。
@@ -11823,11 +11825,9 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("RequireAdministratorRole",
          policy => policy.RequireRole("Administrator"));
 
-
     options.AddPolicy("ElevatedRights", policy =>
         policy.RequireRole("Administrator", "PowerUser", "BackupAdministrator"));
 });
-
 
 [Authorize(Policy = "RequireAdministratorRole")]
 ```
@@ -11868,7 +11868,6 @@ builder.Services.AddAuthorization(options =>
 
 > 授权策略提供程序
 
-
 > > 通常在使用基于策略的授权时，通过在授权服务配置中调用 AuthorizationOptions.AddPolicy 来注册策略。 在某些情况下，可能无法（或不可取）采用此方式注册所有授权策略。 在这些情况下，可以使用自定义 IAuthorizationPolicyProvider 来控制如何提供授权策略。
 
 > > 自定义 IAuthorizationPolicyProvider 可能很有用的方案示例包括：
@@ -11900,7 +11899,6 @@ public class DocumentController : Controller
         _documentRepository = documentRepository;
     }
 IAuthorizationService 有两个 AuthorizeAsync 方法重载：一个接受资源和策略名称，另一个接受资源和要评估的要求列表。
-
 
 Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user,
                           object resource,
