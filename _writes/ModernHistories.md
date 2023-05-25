@@ -3,7 +3,7 @@ layout: post
 title: 世界历史简表
 description: 中国世界历史简表。
 date: 2022-12-28 13:58:01
-updatedate: 2023-05-13 10:25:01
+updatedate: 2023-05-25 13:11:01
 ---
 
 - [世界大事年表](#世界大事年表)
