@@ -31,6 +31,7 @@ updatedate: 2022-05-26 12:13:01
   - [事件](#事件)
   - [泛型](#泛型)
   - [接口](#接口)
+  - [多线程](#多线程)
   - [基本类型](#基本类型)
   - [字符、字符串和文本处理](#字符字符串和文本处理)
   - [枚举类型和位标志](#枚举类型和位标志)
@@ -202,6 +203,7 @@ updatedate: 2022-05-26 12:13:01
       - [SplineDoubleKeyFrame](#splinedoublekeyframe)
       - [EasingDoubleKeyFrame](#easingdoublekeyframe)
     - [场景（Storyborad）](#场景storyborad)
+  - [WPF 需要学习](#wpf-需要学习)
 - [WCF](#wcf)
   - [WCF简介](#wcf简介)
   - [地址](#地址)
@@ -1072,6 +1074,8 @@ updatedate: 2022-05-26 12:13:01
 ### 泛型
 
 ### 接口
+
+### 多线程
 
 ### 基本类型
 
@@ -8473,6 +8477,8 @@ storyboard.Children.Add(dakBx);
 storyboard.Begin(this);
 
 ```
+
+### WPF 需要学习
 
 第Ⅰ部分 基础知识
 
