@@ -3,7 +3,7 @@ layout: post
 title: 计算机编程
 description: 计算机科学相关学习内容总结,各种编程语言以及计算机数据结构等总结梳理
 date: 2022-10-01 09:01:01
-updatedate: 2022-05-24 14:13:01
+updatedate: 2022-05-26 12:13:01
 ---
 
 - [计算机史话](#计算机史话)
@@ -119,8 +119,7 @@ updatedate: 2022-05-24 14:13:01
   - [Application類](#application類)
     - [应用程序事件](#应用程序事件)
   - [Prism](#prism)
-    - [Prism框架 如何在主程序中合理的弹出子窗体](#prism框架-如何在主程序中合理的弹出子窗体)
-    - [Prism框架中一些非常重要的概念](#prism框架中一些非常重要的概念)
+    - [重要的概念](#重要的概念)
       - [Modules](#modules)
       - [Module Catalog：](#module-catalog)
       - [Shell](#shell)
@@ -135,19 +134,17 @@ updatedate: 2022-05-24 14:13:01
       - [Services：](#services)
       - [Controllers](#controllers)
       - [Bootstrapper：](#bootstrapper)
-    - [Prism 简介#](#prism-简介)
     - [Prism.Core、Prism.Wpf 和 Prism.Unity#](#prismcoreprismwpf-和-prismunity)
     - [Prism.Core#](#prismcore)
     - [BindableBase 和 ErrorsContainer#](#bindablebase-和-errorscontainer)
     - [Commanding](#commanding)
     - [Event Aggregator](#event-aggregator)
-    - [Productivity Tools](#productivity-tools)
-    - [Prism.Wpf 和 Prism.Unity](#prismwpf-和-prismunity)
     - [PrismApplication#](#prismapplication)
     - [RegisterTypes](#registertypes)
     - [XAML ContainerProvider#](#xaml-containerprovider)
     - [ViewModelLocator](#viewmodellocator)
     - [Dialog Service](#dialog-service)
+    - [Prism框架 如何在主程序中合理的弹出子窗体](#prism框架-如何在主程序中合理的弹出子窗体)
   - [拖拽](#拖拽)
   - [WPF的类层次结构](#wpf的类层次结构)
   - [XAML](#xaml)
@@ -6411,261 +6408,9 @@ public List<DataNode> projectNodes;
 
 ### Prism
 
-Prism框架 如何在主程序中合理的弹出子窗体
+> Prism 是一个用于构建松耦合、可维护和可测试的 XAML 应用的框架，它支持所有还活着的基于 XAML 的平台，包括 WPF、Xamarin Forms、WinUI 和 Uwp Uno。Prism 提供了一组设计模式的实现，这些模式有助于编写结构良好且可维护的 XAML 应用程序，包括 MVVM、依赖项注入、命令、事件聚合器等。
 
-说起子窗体，大家都会想到ChildWindow，多熟悉的一个控件。不错，Sliverlight中已经提供了子窗体的具体实现，而在WPF中却没有这么好的事情（有的第三方控件商已经提供此控件）。最常见的实现方法就是在ViewModel中，直接New ChildWindow，然后直接Show。这样的方法也达到的要求。但是它不符合MVVM分层思想，再就是代码不美观，难以维护，今天我就给大家介绍一种美观又实用的方法。
-
-通过Prism中提供的InteractionRequestTrigger事件触发器，实现点击按钮或者用户的某种操作弹出对话框的效果。另外，不要忘了引用此命名空间：
-
-```
-
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
-
-<Window x:Class="ChildWindowDemo.ChildWindow.ChildWindow"
-
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
-
-    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-
-    Width="300" Height="150" 
-
-    Title="{Binding Title}"
-
-    x:Name="confirmationWindow" Topmost="True" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
-
-  <Grid x:Name="LayoutRoot" Margin="2">
-
-    <Grid.RowDefinitions>
-
-      <RowDefinition />
-
-      <RowDefinition Height="Auto" />
-
-    </Grid.RowDefinitions>
-
-    <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Content="{Binding Content}"/>
-
-    <Button Content="Cancel" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0" Grid.Row="1">
-
-      <i:Interaction.Triggers>
-
-        <i:EventTrigger EventName="Click">
-
-          <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
-
-        </i:EventTrigger>
-
-      </i:Interaction.Triggers>
-
-    </Button>
-
-    <Button Content="OK" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,79,0" Grid.Row="1">
-
-      <i:Interaction.Triggers>
-
-        <i:EventTrigger EventName="Click">
-
-          <ei:ChangePropertyAction PropertyName="Confirmed" TargetObject="{Binding}" Value="True"/>
-
-          <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
-
-        </i:EventTrigger>
-
-      </i:Interaction.Triggers>
-
-    </Button>
-
-  </Grid>
-
-</Window>
-
-```
-
-创建ChildWindow的基类
-
-新建类：ChildWindowActionBase 并从TriggerAction<T>派生，代码如下：
-
- 
-
-```
-
-public class ChildWindowActionBase : TriggerAction<FrameworkElement>
-
-  {
-
-    protected override void Invoke(object parameter)
-
-    {
-
-      var arg = parameter as InteractionRequestedEventArgs;
-
-      if (arg == null)
-
-        return;
-
-      var windows = this.GetChildWindow(arg.Context);
-
-      var callback = arg.Callback;
-
-      EventHandler handler = null;
-
-      handler =
-
-        (o, e) =>
-
-        {
-
-          windows.Closed -= handler;
-
-          callback();
-
-        };
-
-      windows.Closed += handler;
-
-      windows.ShowDialog();
-
-    }
-
-    Window GetChildWindow(Notification notification)
-
-    {
-
-      var childWindow = this.CreateDefaultWindow(notification);
-
-      childWindow.DataContext = notification;
-
-      return childWindow;
-
-    }
-
-    Window CreateDefaultWindow(Notification notification)
-
-    {
-
-      return (Window)new ChildWindow.ChildWindow();
-
-    }
-
-  }
-
-```
-
-到此子窗体已经完成
-
-```
-
-<Window x:Class="ChildWindowDemo.MainWindow"
-
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-
-    xmlns:prism="http://www.codeplex.com/prism"
-
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-
-    xmlns:local="clr-namespace:ChildWindowDemo"
-
-    Title="MainWindow" Height="200" Width="300">
-
-  <i:Interaction.Triggers>
-
-    <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest, Mode=OneWay}">
-
-      <local:ChildWindowActionBase/>
-
-    </prism:InteractionRequestTrigger>
-
-  </i:Interaction.Triggers>
-
-  <Grid>
-
-    <Button Command="{Binding RaiseConfirmation}" Content="Click Me !" HorizontalAlignment="Left" Margin="29,31,0,0" VerticalAlignment="Top" Width="217" Height="55"/>
-
-    <TextBlock HorizontalAlignment="Left" Margin="29,106,0,0" TextWrapping="Wrap" Text="{Binding ConfirmationResult}" VerticalAlignment="Top"/>
-
-  </Grid>
-
-</Window>
-
-```
-
-对之对应的ViewModel：
-
-```
-
-public class MainWindowViewModel : NotificationObject
-
-  {
-
-    public MainWindowViewModel()
-
-    {
-
-      this.RaiseConfirmation = new DelegateCommand(this.OnRaiseConfirmation);
-
-      this.ConfirmationRequest = new InteractionRequest<Confirmation>();
-
-    }
-
-    public InteractionRequest<Confirmation> ConfirmationRequest { get; private set; }
-
-    public DelegateCommand RaiseConfirmation { get; private set; }
-
-    private string result;
-
-    public string ConfirmationResult
-
-    {
-
-      get { return result; }
-
-      set
-
-      {
-
-        result = value;
-
-        this.RaisePropertyChanged(() => this.ConfirmationResult);
-
-      }
-
-    }
-
-    private void OnRaiseConfirmation()
-
-    {
-
-      this.ConfirmationRequest.Raise(
-
-        new Confirmation { Content = "是否确认", Title = "子窗体" },
-
-        (cb) => { ConfirmationResult = cb.Confirmed ? "确认" : "取消"; });
-
-    }   
-
-  }
-
-```
-
-这样的写法比较符合MVVM的分层思想，子窗体可以随心定制，而不需要去改逻辑层的代码。
-
-http://www.cnblogs.com/sunthx/p/3539900.html
-
-#### Prism框架 如何在主程序中合理的弹出子窗体
-
-￿﻿[{"data":{"id":"cf4vho08ndk0","created":1634797901390,"text":"https://www.cnblogs.com/tianciliangen/p/4961045.html","richText":{"ops":[{"attributes":{},"insert":"https://www.cnblogs.com/tianciliangen/p/4961045.html"},{"insert":"\n","attributes":{}}]},"background":"transparent"},"children":[]}]
-
-#### Prism框架中一些非常重要的概念
+#### 重要的概念
 
 ##### Modules
 
@@ -6727,51 +6472,13 @@ http://www.cnblogs.com/sunthx/p/3539900.html
 
 > Bootstrapper用来初始化应用程序级别的组件和服务， 它也被用来配置和初始化module catalog和Shell 的View和View Model。
 
-#### Prism 简介#
-
-> Prism 是一个用于构建松耦合、可维护和可测试的 XAML 应用的框架，它支持所有还活着的基于 XAML 的平台，包括 WPF、Xamarin Forms、WinUI 和 Uwp Uno。Prism 提供了一组设计模式的实现，这些模式有助于编写结构良好且可维护的 XAML 应用程序，包括 MVVM、依赖项注入、命令、事件聚合器等。
-
-> Prism 是一个有10年以上历史的框架，而上个月才刚发布了它的 8.0 版本，这意味着现在网上能找到的大部分 Prism 的资料都已经有点过时，连 官方文档 也不例外。如果你需要详细的文档，除了官方文档，我会推荐 RyzenAdorer 的 Prism 系列文章：
-
-> NET Core 3 WPF MVVM框架 Prism系列文章索引 - RyzenAdorer -
-
-> 如果你不需要那么详细的文档，只需要一个入门的教程，那么我希望我写的这两篇文章可以帮到你。
-
 #### Prism.Core、Prism.Wpf 和 Prism.Unity#
 
-> 从很久以前开始，臃肿 就是 Prism 被提起最多的标签。毕竟比起 MVVMLight，Prism 实现的功能更多；对于初学者来说，刚打开 Prism 的文档很可能会马上选择放弃。Prism 的文档详细到让人望而却步，例如多年前的旧版官方文档的 其中一篇：
-
-> 不是 6 分钟，不是 16 分账，是整整 60 分钟，Prism 的旧文档随便打开一篇都吓死人。而 Prism 的各种包更是多到离谱。例如几年前的 Prism 6.3，其中 WPF 平台的项目有这么多个：
-
-> Prism.Wpf
-
-> Prism.Autofac
-
-> Prism.DryIoc
-
-> Prism.Mef
-
-> Prism.Ninject
-
-> Prism.StructureMap
-
-> Prism.Unity
-
-> 所以臃肿是很多人对 Prism 的印象。
-
-> 减肥是一个永恒的受欢迎的话题，对 Prism 也是一样。相比 Prism 6.3，刚刚发布的 8.0 已经好很多了（虽然还是有很多个项目），例如 WPF 平台的项目已经大幅删减，只保留了 Prism.Wpf、Prism.DryIoc 和 Prism.Unity，也就是说现在 Prism 只支持 DryIoc 和 Unity 两种 IOC 容器。这样一来 Prism 项目的结构就很清晰了。
+> 现在 Prism 只支持 DryIoc 和 Unity 两种 IOC 容器。
 
 > 以 WPF 为例，核心的项目是 Prism.Core，它提供实现 MVVM 模式的核心功能以及部分各平台公用的类。然后是 Prism.Wpf，它提供针对 Wpf 平台的功能，包括导航、弹框等。最后由 Prism.Unity 指定 Unity 作为 IOC 容器。
 
-> 即使已精简了这么多，Prism 还是有很多功能，两篇文章也不足以讲解全部内容，所以我只会介绍最常用到的入门知识。这篇文章首先介绍 Prism.Core 的主要功能。
-
 #### Prism.Core#
-
-> Prism.Core 可以单独安装，目前最新的版本是 8.0.0.1909：
-
-> Install-Package Prism.Core -Version 8.0.0.1909
-
-> 除了一些各个平台都用到的零零碎碎的公用类，作为一个 MVVM 库 Prism.Core 主要提供了下面三方面的功能：
 
 > BindableBase 和 ErrorsContainer
 
@@ -6779,7 +6486,7 @@ http://www.cnblogs.com/sunthx/p/3539900.html
 
 > Event Aggregator
 
-> 这些功能已经覆盖了 MVVM 的核心功能，如果只需要与具体平台无关的 MVVM 功能，可以只安装 Prism.Core。
+> 这些功能已经覆盖了 MVVM 的核心功能。
 
 #### BindableBase 和 ErrorsContainer#
 
@@ -6790,19 +6497,12 @@ http://www.cnblogs.com/sunthx/p/3539900.html
 public class MockViewModel : BindableBase
 
 {
-
   private string _myProperty;
-
   public string MyProperty
-
   {
-
     get { return _myProperty; }
-
     set { SetProperty(ref _myProperty, value); }
-
   }
-
 }
 
 ```
@@ -6812,57 +6512,34 @@ public class MockViewModel : BindableBase
 > 除了 INotifyPropertyChanged，绑定机制中另一个十分有用的接口是 INotifyDataErrorInfo，它用于公开数据验证的结果。Prism 提供了 ErrorsContainer 以便管理及通知数据验证的错误信息。要使用 ErrorsContainer，可以先写一个类似这样的基类：
 
 ```
-
 public class DomainObject : BindableBase, INotifyDataErrorInfo
-
 {
-
   public ErrorsContainer<string> _errorsContainer;
-
   protected ErrorsContainer<string> ErrorsContainer
-
   {
-
     get
-
     {
-
       if (_errorsContainer == null)
-
         _errorsContainer = new ErrorsContainer<string>(s => OnErrorsChanged(s));
-
       return _errorsContainer;
-
     }
-
   }
 
   public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-
   public void OnErrorsChanged(string propertyName)
-
   {
-
     ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-
   }
 
   public IEnumerable GetErrors(string propertyName)
-
   {
-
     return ErrorsContainer.GetErrors(propertyName);
-
   }
 
   public bool HasErrors
-
   {
-
     get { return ErrorsContainer.HasErrors; }
-
   }
-
 }
 
 ```
@@ -6870,45 +6547,26 @@ public class DomainObject : BindableBase, INotifyDataErrorInfo
 > 然后就可以在派生类中通过 ErrorsContainer.SetErrors 和 ErrorsContainer.ClearErrors 管理数据验证的错误信息：
 
 ```
-
 public class MockValidatingViewModel : DomainObject
-
 {
-
   private int mockProperty;
-
   public int MockProperty
-
   {
-
     get
-
     {
-
       return mockProperty;
-
     }
 
     set
-
     {
-
       SetProperty(ref mockProperty, value);
-
       if (mockProperty < 0)
-
         ErrorsContainer.SetErrors(() => MockProperty, new string[] { "value cannot be less than 0" });
-
       else
-
         ErrorsContainer.ClearErrors(() => MockProperty);
-
     }
-
   }
-
 }
-
 ```
 
 #### Commanding
@@ -7143,54 +6801,11 @@ public class MainPageViewModel
 
 ```
 
-#### Productivity Tools
-
-#### Prism.Wpf 和 Prism.Unity
-
-这篇是 Prism 8.0 入门的第二篇文章，上一篇介绍了 Prism.Core，这篇文章主要介绍 Prism.Wpf 和 Prism.Unity。
-
-以前做 WPF 和 Silverlight/Xamarin 项目的时候，我有时会把 ViewModel 和 View 放在不同的项目，ViewModel 使用 可移植类库项目，这样 ViewModel 就与 UI 平台无关，实现了代码复用。这样做还可以强制 View 和 ViewModel 解耦。
-
-现在，即使在只写 WPF 项目的情况下，但为了强制 ViewModel 和 View 假装是陌生人，做到不留后路，我也倾向于把 View 和 ViewModel 放到不同项目，并且 ViewModel 使用 .Net Standard 作为目标框架。我还会假装下个月 UWP 就要崛起了，我手头的 WPF 项目中的 ViewModel 要做到平台无关，方便我下个月把项目移植到 UWP 项目中。
-
-但如果要使用 Prism 构建 MVVM 程序的话，上面这些根本不现实。首先，Prism 做不到平台无关，它针对不同的平台提供了不同的包，分别是：
-
-针对 WPF 的 Prism.Wpf
-
-针对 Xamarin Forms 的 Prism.Forms
-
-针对 Uno 平台的 Prism.Uno
-
-其次，根本就没有针对 UWP 的 Prism.Windows（UWP 还有未来，忍住别哭）。
-
-所以，除非只使用 Prism.Core，否则要将 ViewModel 项目共享给多个平台有点困难，毕竟用在 WPF 项目的 Prism.Wpf 本身就是个 Wpf 类库。
-
-现在“编写平台无关的 ViewModel 项目”这个话题就与 Prism 无关了，再把 Prism.Unity 和 Prism.Wpf 选为代表（毕竟这个组合比其它组合下载量多些），这篇文章就只用它们作为 Prism 入门的学习对象。
-
-Prism.Core、Prism.Wpf 和 Prism.Unity 的依赖关系如上所示。其中 Prism.Core 实现了 MVVM 的核心功能，它是一个与平台无关的项目。Prism.Wpf 里包含了 Dialog Service、Region、Module 和导航等几个模块，都是些用在 WPF 的功能。Prism.Unity 本身没几行代码，它表示为 Prism.Wpf 选择了 UnityContainer 作为 IOC 容器。（另外还有 Prism.DryIoc 可以选择，但从下载量看 Prism.Unity 是主流。）
-
-就算只学习 Prism.Wpf，可它的模块很多，一篇文章实在塞不下。我选择了 Dialog Service 作为代表，因为它的实现思想和其它的差不多，而且弹窗还是 WPF 最常见的操作。这篇文章将通过以下内容讲解如何使用 Prism.Wpf 构建一个 WPF 程序：
-
-PrismApplication
-
-RegisterTypes
-
-XAML ContainerProvider
-
-ViewModelLocator
-
-Dialog Service
-
-Prism 的最新版本是 8.0.0.1909。由于 Prism.Unity 依赖 Prism.Wpf，所以只需安装 Prism.Unity：
-
-Install-Package Prism.Unity -Version 8.0.0.1909
-
 #### PrismApplication#
 
-安装好 Prism.Wpf 和 Prism.Unity 后，下一步要做的是将 App.xaml 的类型替换为 PrismApplication。
+> 安装好 Prism.Wpf 和 Prism.Unity 后，下一步要做的是将 App.xaml 的类型替换为 PrismApplication。
 
-Copy
-
+```
 <prism:PrismApplication x:Class="PrismTest.App"
 
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -7204,62 +6819,46 @@ Copy
   </Application.Resources>
 
 </prism:PrismApplication>
+```
 
-上面是修改过的 App.xaml，将 Application 改为 prism:PrismApplication，并且移除了 StartupUri="MainWindow.xaml"。
+> 上面是修改过的 App.xaml，将 Application 改为 prism:PrismApplication，并且移除了 StartupUri="MainWindow.xaml"。
 
-接下来不要忘记修改 App.xaml.cs：
+> 修改 App.xaml.cs：
 
-Copy
-
+```
 public partial class App : PrismApplication
-
 {
-
   public App()
-
   {
-
   }
 
   protected override Window CreateShell()
-
     => Container.Resolve<ShellWindow>();
 
 }
+```
 
-PrismApplication 不使用 StartupUri ，而是使用 CreateShell 方法创建主窗口。CreateShell 是必须实现的抽象函数。PrismApplication 提供了 Container 属性，CreateShell 函数里通常使用 Container 创建主窗口。
+> PrismApplication 不使用 StartupUri ，而是使用 CreateShell 方法创建主窗口。
 
 #### RegisterTypes
 
-其实在使用 CreateShell 函数前，首先必须实现另一个抽象函数 RegisterTypes。由于 Prism.Wpf 相当依赖于 IOC，所以要现在 PrismApplication 里注册必须的类型或依赖。PrismApplication 里已经预先注册了 DialogService、EventAggregator、RegionManager 等必须的类型（在 RegisterRequiredTypes 函数里），其它类型可以在 RegisterTypes 里注册。它看起来像这样：
+> 向IOC容器中注册类型
 
-Copy
-
+```
 protected override void RegisterTypes(IContainerRegistry containerRegistry)
-
 {
-
-  // Core Services
-
-  // App Services
-
-  // Views
-
   containerRegistry.RegisterForNavigation<BlankPage, BlankViewModel>(PageKeys.Blank);
-
   containerRegistry.RegisterForNavigation<MainPage, MainViewModel>(PageKeys.Main);
-
   containerRegistry.RegisterForNavigation<ShellWindow, ShellViewModel>();
 
   // Configuration
-
   var configuration = BuildConfiguration();
 
   // Register configurations to IoC
-
   containerRegistry.RegisterInstance<IConfiguration>(configuration);
 
 }
+```
 
 #### XAML ContainerProvider#
 
@@ -7616,6 +7215,176 @@ protected override void RegisterTypes(IContainerRegistry containerRegistry)
 }
 
 这样 DialogService 将会使用这个自定义的 Window 类型作为 View 的窗口。
+
+
+#### Prism框架 如何在主程序中合理的弹出子窗体
+
+> 最常见的实现方法就是在ViewModel中，直接New ChildWindow，然后直接Show。这样的方法也达到的要求。但是它不符合MVVM分层思想，再就是代码不美观，难以维护，今天我就给大家介绍一种美观又实用的方法。通过Prism中提供的InteractionRequestTrigger事件触发器，实现点击按钮或者用户的某种操作弹出对话框的效果。另外，不要忘了引用此命名空间：
+
+```
+using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+<Window x:Class="ChildWindowDemo.ChildWindow.ChildWindow"
+
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+
+    Width="300" Height="150" 
+
+    Title="{Binding Title}"
+
+    x:Name="confirmationWindow" Topmost="True" WindowStyle="ToolWindow" WindowStartupLocation="CenterScreen">
+
+  <Grid x:Name="LayoutRoot" Margin="2">
+
+    <Grid.RowDefinitions>
+
+      <RowDefinition />
+
+      <RowDefinition Height="Auto" />
+
+    </Grid.RowDefinitions>
+
+    <ContentControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Content="{Binding Content}"/>
+
+    <Button Content="Cancel" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0" Grid.Row="1">
+
+      <i:Interaction.Triggers>
+
+        <i:EventTrigger EventName="Click">
+
+          <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
+
+        </i:EventTrigger>
+
+      </i:Interaction.Triggers>
+
+    </Button>
+
+    <Button Content="OK" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,79,0" Grid.Row="1">
+
+      <i:Interaction.Triggers>
+
+        <i:EventTrigger EventName="Click">
+
+          <ei:ChangePropertyAction PropertyName="Confirmed" TargetObject="{Binding}" Value="True"/>
+
+          <ei:CallMethodAction TargetObject="{Binding ElementName=confirmationWindow}" MethodName="Close"/>
+
+        </i:EventTrigger>
+
+      </i:Interaction.Triggers>
+
+    </Button>
+
+  </Grid>
+
+</Window>
+
+```
+
+> 创建ChildWindow的基类：ChildWindowActionBase 并从TriggerAction<T>派生，代码如下：
+
+
+```
+public class ChildWindowActionBase : TriggerAction<FrameworkElement>
+  {
+    protected override void Invoke(object parameter)
+    {
+      var arg = parameter as InteractionRequestedEventArgs;
+      if (arg == null)
+        return;
+      var windows = this.GetChildWindow(arg.Context);
+      var callback = arg.Callback;
+      EventHandler handler = null;
+      handler =
+        (o, e) =>
+        {
+          windows.Closed -= handler;
+          callback();
+        };
+      windows.Closed += handler;
+      windows.ShowDialog();
+    }
+
+    Window GetChildWindow(Notification notification)
+    {
+      var childWindow = this.CreateDefaultWindow(notification);
+      childWindow.DataContext = notification;
+      return childWindow;
+    }
+
+    Window CreateDefaultWindow(Notification notification)
+    {
+      return (Window)new ChildWindow.ChildWindow();
+    }
+  }
+```
+
+> 到此子窗体已经完成
+
+```
+<Window x:Class="ChildWindowDemo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://www.codeplex.com/prism"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:ChildWindowDemo"
+    Title="MainWindow" Height="200" Width="300">
+  <i:Interaction.Triggers>
+    <prism:InteractionRequestTrigger SourceObject="{Binding ConfirmationRequest, Mode=OneWay}">
+      <local:ChildWindowActionBase/>
+    </prism:InteractionRequestTrigger>
+  </i:Interaction.Triggers>
+  <Grid>
+    <Button Command="{Binding RaiseConfirmation}" Content="Click Me !" HorizontalAlignment="Left" Margin="29,31,0,0" VerticalAlignment="Top" Width="217" Height="55"/>
+    <TextBlock HorizontalAlignment="Left" Margin="29,106,0,0" TextWrapping="Wrap" Text="{Binding ConfirmationResult}" VerticalAlignment="Top"/>
+  </Grid>
+</Window>
+
+```
+
+> 对之对应的ViewModel：
+
+```
+public class MainWindowViewModel : NotificationObject
+  {
+    public MainWindowViewModel()
+    {
+      this.RaiseConfirmation = new DelegateCommand(this.OnRaiseConfirmation);
+      this.ConfirmationRequest = new InteractionRequest<Confirmation>();
+    }
+
+    public InteractionRequest<Confirmation> ConfirmationRequest { get; private set; }
+    public DelegateCommand RaiseConfirmation { get; private set; }
+    private string result;
+    public string ConfirmationResult
+    {
+      get { return result; }
+
+      set
+      {
+        result = value;
+        this.RaisePropertyChanged(() => this.ConfirmationResult);
+      }
+    }
+
+    private void OnRaiseConfirmation()
+    {
+      this.ConfirmationRequest.Raise(
+        new Confirmation { Content = "是否确认", Title = "子窗体" },
+        (cb) => { ConfirmationResult = cb.Confirmed ? "确认" : "取消"; });
+    }   
+
+  }
+
+```
 
 ### 拖拽
 
