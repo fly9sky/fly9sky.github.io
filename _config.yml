@@ -21,9 +21,9 @@ collections:
   pictures:
     output: true
     permalink: /pictures/:path
-  poetry:
+  poetrys:
     output: true
-    permalink: /poetry/:path
+    permalink: /poetrys/:path
   notes:
     output: true
     permalink: /notes/:path
