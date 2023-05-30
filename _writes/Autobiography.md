@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 家族史
-description: 本家族的历史
+title: 自传
+description: 记录一下自己经历的往事。
 date: 1985-01-01 01:01:01
-updatedate: 2023-05-04 13:40:01
+updatedate: 2023-05-30 13:58:01
 ---
 
 - [旧事](#旧事)

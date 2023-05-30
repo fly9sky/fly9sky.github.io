@@ -3,7 +3,7 @@ layout: post
 title: 计算机编程
 description: 计算机科学相关学习内容总结,各种编程语言以及计算机数据结构等总结梳理
 date: 2022-10-01 09:01:01
-updatedate: 2022-05-26 12:13:01
+updatedate: 2022-05-30 13:54:01
 ---
 
 - [计算机史话](#计算机史话)
@@ -1086,6 +1086,80 @@ updatedate: 2022-05-26 12:13:01
 ### 数组
 
 ### 委托
+
+> 委托的定义
+
+> > 委托是C#中的一种引用类型,委托的本质是一个类,定义了方法的类型,是将方法作为参数传递到另一个方法的特殊类。
+
+> 匿名函数
+
+> > 匿名函数是一个“内联”语句或表达式，可在需要委托类型的任何地方使用。 可以使用匿名函数来初始化命名委托，或传递命名委托（而不是命名委托类型）作为方法参数。
+
+> > C#中有两种匿名函数：Lambda 表达式 和 匿名方法。
+
+> 委托的使用
+
+> > 声明委托 private delegate void Delegate1(string parm1);
+
+> > 实例化委托 Delegate1 d1 = new Delegate1(OnDelegate1); 
+
+> > 调用委托 d("teststr");
+
+> > C#内置了许多泛型委托，可以直接使用
+
+> Action
+
+> > Action是无返回值的泛型委托。Action 表示无参，无返回值的委托
+
+> > Action<int,string> 表示有传入参数int,string无返回值的委托
+
+> > Action<int,string,bool> 表示有传入参数int,string,bool无返回值的委托
+
+> > Action<int,int,int,int> 表示有传入4个int型参数，无返回值的委托
+
+> > Action至少0个参数，至多16个参数，无返回值。
+
+> > 使用比较简单 Action<string> action1 = new Action<string>(OnAction1);直接 action1("action1")就可以调用。
+
+> Func委托
+
+> > Func是有返回值的泛型委托，<>中，最后一个类型为返回值类型。
+
+> > Func<int> 表示无参，返回值为int的委托
+
+> > Func<object,string,int> 表示传入参数为object, string 返回值为int的委托
+
+> > Func至少0个参数，至多16个参数，根据返回值泛型返回。必须有返回值，不可void
+
+> > 实例化 Func<string, string, int> func2 = new Func<string, string, int>(OnFunc2); 调用 func2("name1", "name2")。
+
+> Predicate委托
+
+> > 表示一种方法，该方法定义一组条件并确定指定对象是否符合这些条件。
+
+> > public delegate bool Predicate<in T>(T obj);
+
+> > Predicate 是返回bool型的泛型委托
+
+> > Predicate有且只有一个参数，返回值固定为bool
+
+> 关于委托的总结
+
+> > 委托类似于 C++ 函数指针，但它们是类型安全的。
+
+> > 委托允许将方法作为参数进行传递。
+
+> > 委托可用于定义回调方法。
+
+> > 委托可以链接在一起；例如，可以对一个事件调用多个方法。
+
+> > Delegate至少0个参数，至多32个参数，可以无返回值，也可以指定返回值类型
+
+> > Func可以接受0个至16个传入参数，必须具有返回值
+
+> > Action可以接受0个至16个传入参数，无返回值
+
+> > Predicate只能接受一个传入参数，返回值为bool类型
 
 ### 定制特性
 
