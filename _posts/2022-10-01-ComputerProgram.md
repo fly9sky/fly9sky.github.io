@@ -1137,6 +1137,8 @@ updatedate: 2022-05-30 13:54:01
 
 > > 表示一种方法，该方法定义一组条件并确定指定对象是否符合这些条件。
 
+> > 其实就是类似t=>t.GameID==gameInfo.GameID
+
 > > public delegate bool Predicate<in T>(T obj);
 
 > > Predicate 是返回bool型的泛型委托
