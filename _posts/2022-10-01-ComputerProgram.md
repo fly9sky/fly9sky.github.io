@@ -3,7 +3,7 @@ layout: post
 title: 计算机编程
 description: 计算机科学相关学习内容总结,各种编程语言以及计算机数据结构等总结梳理
 date: 2022-10-01 09:01:01
-updatedate: 2022-05-30 13:54:01
+updatedate: 2022-06-01 11:22:01
 ---
 
 - [计算机史话](#计算机史话)
@@ -51,6 +51,8 @@ updatedate: 2022-05-30 13:54:01
   - [基元线程同步构造](#基元线程同步构造)
   - [混合线程同步构造](#混合线程同步构造)
   - [ML.NET](#mlnet)
+- [ASP.NET](#aspnet)
+  - [ASHX 处理请求](#ashx-处理请求)
 - [WPF](#wpf)
   - [WPF控件继承](#wpf控件继承)
     - [UIElement](#uielement)
@@ -227,6 +229,9 @@ updatedate: 2022-05-30 13:54:01
   - [扩展](#扩展)
 - [HTML 5](#html-5)
 - [JQuery](#jquery)
+  - [GET](#get)
+  - [POST](#post)
+  - [AJAX](#ajax)
 - [Angular](#angular)
 - [React](#react)
 - [Vue.js](#vuejs)
@@ -1192,6 +1197,58 @@ updatedate: 2022-05-30 13:54:01
 ### ML.NET
 
 > 微软人工智能学习
+
+## ASP.NET
+
+### ASHX 处理请求
+
+> > 以下方法包含了处理各种请求，如POST,GET ,并且有获取url参数，和content内容等方法
+
+```
+//读取url参数获取参数内容，并分派请求进行处理
+public void ProcessRequest(HttpContext context)
+{
+    context.Response.ContentType = "text/json";
+    string querytype = context.Request.QueryString["type"];
+    switch (querytype)
+    {
+        case "add":
+            //var addline =JsonConvert.DeserializeObject<Line>(context.Server.UrlDecode(context.Request.Form.ToString()));
+            context.Response.Write(JsonConvert.SerializeObject(Add(ProcessRequest<Line>(context))));
+            break;
+
+        case "update":
+            var updateline = JsonConvert.DeserializeObject<Line>(context.Server.UrlDecode(context.Request.Form.ToString()));
+            context.Response.Write(JsonConvert.SerializeObject(Update(updateline)));
+            break;
+        case "delete":
+            string id = context.Request.QueryString["id"];
+            context.Response.Write(JsonConvert.SerializeObject(Delete(id)));
+            break;
+        case "all":
+        default:
+            context.Response.Write(JsonConvert.SerializeObject(GetLines()));
+            break;
+    }
+
+}
+
+// 从请求body 种获取json 字符串内容
+private T ProcessRequest<T>(HttpContext context) where T : class
+{
+    context.Response.ContentType = "text/json";
+    HttpRequest request = context.Request;
+    Stream stream = request.InputStream;
+    string json = string.Empty;
+    if (stream.Length != 0)
+    {
+        StreamReader streamReader = new StreamReader(stream);
+        json = streamReader.ReadToEnd();
+        return JsonConvert.DeserializeObject<T>(json);
+    }
+    return null;
+}
+```
 
 ## WPF
 
@@ -10235,6 +10292,48 @@ storyboard.Begin(this);
 ## HTML 5
 
 ## JQuery
+
+### GET
+
+> $.get('/data.ashx?type=all', '', function (data) {
+
+>             //alert(JSON.stringify(data));
+
+>             //将获得得数据原路发回进行测试
+
+> })      
+
+### POST
+
+> $.post("/data.ashx?type=add", JSON.stringify(data[0]), function (rs, textStatus) {
+
+>                 alert(JSON.stringify(rs));
+
+>             }, "json");
+
+### AJAX
+
+> > 此方式比较详细可以调用POST，也可以GET ,以上GET POST 则非常简单。
+
+> $.ajax({
+
+>     url: "/data.ashx?type=add",
+
+>     type: "POST",
+
+>     data: JSON.stringify(data[0]),
+
+>     contentType: "application/json; charset=utf-8",
+
+>     dataType: "json",
+
+>     success: function (rs) {
+
+>         alert(JSON.stringify(rs));
+
+>     }
+
+> });
 
 ## Angular
 
