@@ -1082,6 +1082,30 @@ updatedate: 2022-06-01 11:22:01
 
 ### 多线程
 
+### Task 
+
+
+### CancellationTokenSource  取消线程任务
+
+···
+static CancellationTokenSource source = new CancellationTokenSource();
+static void Main(string[] args)
+{
+    Task.Run(() =>
+    {
+        Thread.Sleep(3000);
+        Console.WriteLine("oh my god");
+        source.Token.ThrowIfCancellationRequested();
+    }, source.Token);
+
+    Thread.Sleep(1000);
+    Console.WriteLine("取消任务");
+    source.Cancel();
+
+    Console.ReadKey();
+}
+···
+
 ### 基本类型
 
 ### 字符、字符串和文本处理
