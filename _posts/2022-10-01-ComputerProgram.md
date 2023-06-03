@@ -1082,12 +1082,417 @@ updatedate: 2022-06-03 17:15:01
 
 ### 多线程
 
-### Task 
+### Task  Task<T>
 
+> public class Task : IAsyncResult, IDisposable
+
+```
+属性
+AsyncState	
+获取在创建 Task 时提供的状态对象，如果未提供，则为 null。
+
+CompletedTask	
+获取一个已成功完成的任务。
+
+CreationOptions	
+获取用于创建此任务的 TaskCreationOptions。
+
+CurrentId	
+返回当前正在执行 Task 的 ID。
+
+Exception	
+获取导致 AggregateException 提前结束的 Task。 如果 Task 成功完成或尚未引发任何异常，这将返回 null。
+
+Factory	
+提供对用于创建和配置 Task 和 Task<TResult> 实例的工厂方法的访问。
+
+Id	
+获取此 Task 实例的 ID。
+
+IsCanceled	
+获取此 Task 实例是否由于被取消的原因而已完成执行。
+
+IsCompleted	
+获取一个值，它表示是否已完成任务。
+
+IsCompletedSuccessfully	
+了解任务是否运行到完成。
+
+IsFaulted	
+获取 Task 是否由于未经处理异常的原因而完成。
+
+Status	
+获取此任务的 TaskStatus。
+
+方法
+ConfigureAwait(Boolean)	
+配置用于等待此 Task的 awaiter。
+
+ContinueWith(Action<Task,Object>, Object)	
+创建一个在目标 Task 完成时接收调用方提供的状态信息并执行的延续任务。
+
+ContinueWith(Action<Task,Object>, Object, CancellationToken)	
+创建一个在目标 Task 完成时接收调用方提供的状态信息和取消标记，并以异步方式执行的延续任务。
+
+ContinueWith(Action<Task,Object>, Object, CancellationToken, TaskContinuationOptions, TaskScheduler)	
+创建一个在目标 Task 完成时接收调用方提供的状态信息和取消标记并执行的延续任务。 延续任务根据一组指定的条件执行，并使用指定的计划程序。
+
+ContinueWith(Action<Task,Object>, Object, TaskContinuationOptions)	
+创建一个在目标 Task 完成时接收调用方提供的状态信息并执行的延续任务。 延续任务根据一组指定的条件执行。
+
+ContinueWith(Action<Task,Object>, Object, TaskScheduler)	
+创建一个在目标 Task 完成时接收调用方提供的状态信息并以异步方式执行的延续任务。 延续任务使用指定计划程序。
+
+ContinueWith(Action<Task>)	
+创建一个在目标 Task 完成时异步执行的延续任务。
+
+ContinueWith(Action<Task>, CancellationToken)	
+创建一个在目标 Task 完成时可接收取消标记并以异步方式执行的延续任务。
+
+ContinueWith(Action<Task>, CancellationToken, TaskContinuationOptions, TaskScheduler)	
+创建一个在目标任务完成时按照指定的 TaskContinuationOptions 执行的延续任务。 延续任务会收到一个取消标记，并使用指定的计划程序。
+
+ContinueWith(Action<Task>, TaskContinuationOptions)	
+创建一个在目标任务完成时按照指定的 TaskContinuationOptions 执行的延续任务。
+
+ContinueWith(Action<Task>, TaskScheduler)	
+创建一个在目标 Task 完成时异步执行的延续任务。 延续任务使用指定计划程序。
+
+ContinueWith<TResult>(Func<Task,Object,TResult>, Object)	
+创建一个在目标 Task 完成并返回一个值时接收调用方提供的状态信息并以异步方式执行的延续任务。
+
+ContinueWith<TResult>(Func<Task,Object,TResult>, Object, CancellationToken)	
+创建一个在目标 Task 完成时异步执行并返回一个值的延续任务。 延续任务接收调用方提供的状态信息和取消标记。
+
+ContinueWith<TResult>(Func<Task,Object,TResult>, Object, CancellationToken, TaskContinuationOptions, TaskScheduler)	
+创建一个在目标 Task 完成并返回一个值时根据指定的任务延续选项执行的延续任务。 延续任务接收调用方提供的状态信息和取消标记，并使用指定的计划程序。
+
+ContinueWith<TResult>(Func<Task,Object,TResult>, Object, TaskContinuationOptions)	
+创建一个在目标 Task 完成时根据指定的任务延续选项执行的延续任务。 延续任务接收调用方提供的状态信息。
+
+ContinueWith<TResult>(Func<Task,Object,TResult>, Object, TaskScheduler)	
+创建一个在目标 Task 完成时异步执行的延续任务。 延续任务接收调用方提供的状态信息，并使用指定的计划程序。
+
+ContinueWith<TResult>(Func<Task,TResult>)	
+创建一个在目标 Task<TResult> 完成时异步执行并返回一个值的延续任务。
+
+ContinueWith<TResult>(Func<Task,TResult>, CancellationToken)	
+创建一个在目标 Task 完成时异步执行并返回一个值的延续任务。 延续任务收到取消标记。
+
+ContinueWith<TResult>(Func<Task,TResult>, CancellationToken, TaskContinuationOptions, TaskScheduler)	
+创建一个按照指定延续任务选项执行并返回一个值的延续任务。 延续任务被传入一个取消标记，并使用指定的计划程序。
+
+ContinueWith<TResult>(Func<Task,TResult>, TaskContinuationOptions)	
+创建一个按照指定延续任务选项执行并返回一个值的延续任务。
+
+ContinueWith<TResult>(Func<Task,TResult>, TaskScheduler)	
+创建一个在目标 Task 完成时异步执行并返回一个值的延续任务。 延续任务使用指定计划程序。
+
+Delay(Int32)	
+创建一个在指定的毫秒数后完成的任务。
+
+Delay(Int32, CancellationToken)	
+创建一个在指定的毫秒数后完成的可取消任务。
+
+Delay(TimeSpan)	
+创建一个在指定的时间间隔后完成的任务。
+
+Delay(TimeSpan, CancellationToken)	
+创建一个在指定的时间间隔后完成的可取消任务。
+
+Delay(TimeSpan, TimeProvider)	
+表示一个异步操作。
+
+Delay(TimeSpan, TimeProvider, CancellationToken)	
+表示一个异步操作。
+
+Dispose()	
+释放 Task 类的当前实例所使用的所有资源。
+
+Dispose(Boolean)	
+释放 Task，同时释放其所有非托管资源。
+
+Equals(Object)	
+确定指定对象是否等于当前对象。
+
+(继承自 Object)
+FromCanceled(CancellationToken)	
+创建 Task，它因指定的取消标记进行的取消操作而完成。
+
+FromCanceled<TResult>(CancellationToken)	
+创建 Task<TResult>，它因指定的取消标记进行的取消操作而完成。
+
+FromException(Exception)	
+创建 Task，它在完成后出现指定的异常。
+
+FromException<TResult>(Exception)	
+创建 Task<TResult>，它在完成后出现指定的异常。
+
+FromResult<TResult>(TResult)	
+创建指定结果的、成功完成的 Task<TResult>。
+
+GetAwaiter()	
+获取用于等待此 Task 的 awaiter。
+
+GetHashCode()	
+作为默认哈希函数。
+
+(继承自 Object)
+GetType()	
+获取当前实例的 Type。
+
+(继承自 Object)
+MemberwiseClone()	
+创建当前 Object 的浅表副本。
+
+(继承自 Object)
+Run(Action)	
+将在线程池上运行的指定工作排队，并返回代表该工作的 Task 对象。
+
+Run(Action, CancellationToken)	
+将在线程池上运行的指定工作排队，并返回代表该工作的 Task 对象。 可使用取消标记来取消工作（如果尚未启动）。
+
+Run(Func<Task>)	
+将在线程池上运行的指定工作排队，并返回 function 所返回的任务的代理项。
+
+Run(Func<Task>, CancellationToken)	
+将在线程池上运行的指定工作排队，并返回 function 所返回的任务的代理项。 可使用取消标记来取消工作（如果尚未启动）。
+
+Run<TResult>(Func<Task<TResult>>)	
+将指定的工作排成队列在线程池上运行，并返回由 function 返回的 Task(TResult) 的代理。 可使用取消标记来取消工作（如果尚未启动）。
+
+Run<TResult>(Func<Task<TResult>>, CancellationToken)	
+将指定的工作排成队列在线程池上运行，并返回由 function 返回的 Task(TResult) 的代理。
+
+Run<TResult>(Func<TResult>)	
+将在线程池上运行的指定工作排队，并返回代表该工作的 Task<TResult> 对象。 可使用取消标记来取消工作（如果尚未启动）。
+
+Run<TResult>(Func<TResult>, CancellationToken)	
+将在线程池上运行的指定工作排队，并返回代表该工作的 Task(TResult) 对象。
+
+RunSynchronously()	
+对当前的 Task 同步运行 TaskScheduler。
+
+RunSynchronously(TaskScheduler)	
+对提供的 Task 同步运行 TaskScheduler。
+
+Start()	
+启动 Task，并将它安排到当前的 TaskScheduler 中执行。
+
+Start(TaskScheduler)	
+启动 Task，并将它安排到指定的 TaskScheduler 中执行。
+
+ToString()	
+返回表示当前对象的字符串。
+
+(继承自 Object)
+Wait()	
+等待 Task 完成执行过程。
+
+Wait(CancellationToken)	
+等待 Task 完成执行过程。 如果在任务完成之前取消标记已取消，等待将终止。
+
+Wait(Int32)	
+等待 Task 在指定的毫秒数内完成执行。
+
+Wait(Int32, CancellationToken)	
+等待 Task 完成执行过程。 如果在任务完成之前超时间隔结束或取消标记已取消，等待将终止。
+
+Wait(TimeSpan)	
+等待 Task 在指定的时间间隔内完成执行。
+
+Wait(TimeSpan, CancellationToken)	
+等待 Task 完成执行过程。
+
+WaitAll(Task[])	
+等待提供的所有 Task 对象完成执行过程。
+
+WaitAll(Task[], CancellationToken)	
+等待提供的所有 Task 对象完成执行过程（除非取消等待）。
+
+WaitAll(Task[], Int32)	
+等待所有提供的 Task 在指定的毫秒数内完成执行。
+
+WaitAll(Task[], Int32, CancellationToken)	
+等待提供的所有 Task 对象在指定的毫秒数内完成执行，或等到取消等待。
+
+WaitAll(Task[], TimeSpan)	
+等待所有提供的可取消 Task 对象在指定的时间间隔内完成执行。
+
+WaitAny(Task[])	
+等待提供的任一 Task 对象完成执行过程。
+
+WaitAny(Task[], CancellationToken)	
+等待提供的任何 Task 对象完成执行过程（除非取消等待）。
+
+WaitAny(Task[], Int32)	
+等待任何提供的 Task 对象在指定的毫秒数内完成执行。
+
+WaitAny(Task[], Int32, CancellationToken)	
+等待提供的任何 Task 对象在指定的毫秒数内完成执行，或等到取消标记取消。
+
+WaitAny(Task[], TimeSpan)	
+等待任何提供的 Task 对象在指定的时间间隔内完成执行。
+
+WaitAsync(CancellationToken)	
+获取一个 ， Task 它将在完成此操作 Task 或指定的 CancellationToken 请求取消时完成。
+
+WaitAsync(TimeSpan)	
+获取一个 Task ，该值将在完成此操作 Task 或指定的超时到期时完成。
+
+WaitAsync(TimeSpan, CancellationToken)	
+获取在 Task 完成此操作 Task 时、指定的超时到期或指定 CancellationToken 请求取消时完成的 。
+
+WaitAsync(TimeSpan, TimeProvider)	
+表示一个异步操作。
+
+WaitAsync(TimeSpan, TimeProvider, CancellationToken)	
+表示一个异步操作。
+
+WhenAll(IEnumerable<Task>)	
+创建一个任务，该任务将在可枚举集合中的所有 Task 对象都已完成时完成。
+
+WhenAll(Task[])	
+创建一个任务，该任务将在数组中的所有 Task 对象都已完成时完成。
+
+WhenAll<TResult>(IEnumerable<Task<TResult>>)	
+创建一个任务，该任务将在可枚举集合中的所有 Task<TResult> 对象都已完成时完成。
+
+WhenAll<TResult>(Task<TResult>[])	
+创建一个任务，该任务将在数组中的所有 Task<TResult> 对象都已完成时完成。
+
+WhenAny(IEnumerable<Task>)	
+任何提供的任务已完成时，创建将完成的任务。
+
+WhenAny(Task, Task)	
+提供的任一任务完成时，创建将完成的任务。
+
+WhenAny(Task[])	
+任何提供的任务已完成时，创建将完成的任务。
+
+WhenAny<TResult>(IEnumerable<Task<TResult>>)	
+任何提供的任务已完成时，创建将完成的任务。
+
+WhenAny<TResult>(Task<TResult>, Task<TResult>)	
+提供的任一任务完成时，创建将完成的任务。
+
+WhenAny<TResult>(Task<TResult>[])	
+任何提供的任务已完成时，创建将完成的任务。
+
+Yield()	
+创建异步产生当前上下文的等待任务。
+```
+
+```
+Task.Run(() =>
+    {
+        Thread.Sleep(3000);
+        Console.WriteLine("oh my god");
+        source.Token.ThrowIfCancellationRequested();
+    }, source.Token);
+
+```
+
+### ThreadPool
+
+> QueueUserWorkItem(WaitCallback)	 将方法排入队列以便执行。 此方法在有线程池线程变得可用时执行。
+
+> > WaitCallback的原型是public delegate void WaitCallback(object? state);
+
+> QueueUserWorkItem(WaitCallback, Object)	 将方法排入队列以便执行，并指定包含该方法所用数据的对象。 此方法在有线程池线程变得可用时执行。
+
+> QueueUserWorkItem<TState>(Action<TState>, TState, Boolean) 将 Action<T> 委托指定的方法排入队列以便执行，并提供该方法使用的数据。 此方法在有线程池线程变得可用时执行。
+
+```
+属性
+CompletedWorkItemCount	
+获取迄今为止已处理的工作项数。
+
+PendingWorkItemCount	
+获取当前已加入处理队列的工作项数。
+
+ThreadCount	
+获取当前存在的线程池线程数。
+
+方法
+BindHandle(IntPtr)	
+已过时。
+将操作系统句柄绑定到 ThreadPool。
+
+BindHandle(SafeHandle)	
+将操作系统句柄绑定到 ThreadPool。
+
+GetAvailableThreads(Int32, Int32)	
+检索由 GetMaxThreads(Int32, Int32) 方法返回的最大线程池线程数和当前活动线程数之间的差值。
+
+GetMaxThreads(Int32, Int32)	
+检索可以同时处于活动状态的线程池请求的数目。 所有大于此数目的请求将保持排队状态，直到线程池线程变为可用。
+
+GetMinThreads(Int32, Int32)	
+发出新的请求时，在切换到管理线程创建和销毁的算法之前检索线程池按需创建的线程的最小数量。
+
+QueueUserWorkItem(WaitCallback)	
+将方法排入队列以便执行。 此方法在有线程池线程变得可用时执行。
+
+QueueUserWorkItem(WaitCallback, Object)	
+将方法排入队列以便执行，并指定包含该方法所用数据的对象。 此方法在有线程池线程变得可用时执行。
+
+QueueUserWorkItem<TState>(Action<TState>, TState, Boolean)	
+将 Action<T> 委托指定的方法排入队列以便执行，并提供该方法使用的数据。 此方法在有线程池线程变得可用时执行。
+
+RegisterWaitForSingleObject(WaitHandle, WaitOrTimerCallback, Object, Int32, Boolean)	
+注册一个等待 WaitHandle 的委托，并指定一个 32 位有符号整数来表示超时值（以毫秒为单位）。
+
+RegisterWaitForSingleObject(WaitHandle, WaitOrTimerCallback, Object, Int64, Boolean)	
+注册一个等待 WaitHandle 的委托，并指定一个 64 位有符号整数来表示超时值（以毫秒为单位）。
+
+RegisterWaitForSingleObject(WaitHandle, WaitOrTimerCallback, Object, TimeSpan, Boolean)	
+注册一个等待 WaitHandle 的委托，并指定一个 TimeSpan 值来表示超时时间。
+
+RegisterWaitForSingleObject(WaitHandle, WaitOrTimerCallback, Object, UInt32, Boolean)	
+指定表示超时（以毫秒为单位）的 32 位无符号整数，注册一个委托等待 WaitHandle。
+
+SetMaxThreads(Int32, Int32)	
+设置可以同时处于活动状态的线程池的请求数目。 所有大于此数目的请求将保持排队状态，直到线程池线程变为可用。
+
+SetMinThreads(Int32, Int32)	
+发出新的请求时，在切换到管理线程创建和销毁的算法之前设置线程池按需创建的线程的最小数量。
+
+UnsafeQueueNativeOverlapped(NativeOverlapped*)	
+将重叠的 I/O 操作排队以便执行。
+
+UnsafeQueueUserWorkItem(IThreadPoolWorkItem, Boolean)	
+将指定的工作项对象排队到线程池。
+
+UnsafeQueueUserWorkItem(WaitCallback, Object)	
+将指定的委托排队到线程池，但不会将调用堆栈传播到辅助线程。
+
+UnsafeQueueUserWorkItem<TState>(Action<TState>, TState, Boolean)	
+将 Action<T> 委托指定的方法排入队列以便执行，并指定包含该方法使用的数据的对象。 此方法在有线程池线程变得可用时执行。
+
+UnsafeRegisterWaitForSingleObject(WaitHandle, WaitOrTimerCallback, Object, Int32, Boolean)	
+注册一个等待 WaitHandle 的委托，并使用一个 32 位带符号整数来表示超时时间（以毫秒为单位）。 此方法不将调用堆栈传播到辅助线程。
+
+UnsafeRegisterWaitForSingleObject(WaitHandle, WaitOrTimerCallback, Object, Int64, Boolean)	
+注册一个等待 WaitHandle 的委托，并指定一个 64 位有符号整数来表示超时值（以毫秒为单位）。 此方法不将调用堆栈传播到辅助线程。
+
+UnsafeRegisterWaitForSingleObject(WaitHandle, WaitOrTimerCallback, Object, TimeSpan, Boolean)	
+注册一个等待 WaitHandle 的委托，并指定一个 TimeSpan 值来表示超时时间。此方法不将调用堆栈传播到辅助线程。
+
+UnsafeRegisterWaitForSingleObject(WaitHandle, WaitOrTimerCallback, Object, UInt32, Boolean)	
+指定表示超时（以毫秒为单位）的 32 位无符号整数，注册一个委托等待 WaitHandle。 此方法不将调用堆栈传播到辅助
+```
+
+```
+ThreadPool.QueueUserWorkItem(o =>
+{
+
+}, source);
+```
 
 ### CancellationTokenSource  取消线程任务
 
-···
+```
 static CancellationTokenSource source = new CancellationTokenSource();
 static void Main(string[] args)
 {
@@ -1104,7 +1509,28 @@ static void Main(string[] args)
 
     Console.ReadKey();
 }
-···
+```
+
+> TaskPool 也和其他任务也可以采用类似方法，但是涉及判断，其实并不智能，并且设计打断流水。
+
+```
+ThreadPool.QueueUserWorkItem(o =>
+{
+    for (int i = 0; i < 10000; i++)
+    {
+        if (!source.Token.IsCancellationRequested)
+        {
+            Thread.Sleep(100);
+            Console.WriteLine(i);
+        }
+        else
+        {
+            Console.WriteLine("要求退出");
+            break;
+        }
+    }
+}, source);
+```
 
 ### 基本类型
 
