@@ -3,7 +3,7 @@ layout: post
 title: 计算机编程
 description: 计算机科学相关学习内容总结,各种编程语言以及计算机数据结构等总结梳理
 date: 2022-10-01 09:01:01
-updatedate: 2022-06-03 17:15:01
+updatedate: 2022-07-06 09:32:01
 ---
 
 - [计算机史话](#计算机史话)
@@ -24,7 +24,9 @@ updatedate: 2022-06-03 17:15:01
   - [共享程序集和强命名程序集](#共享程序集和强命名程序集)
   - [类型基础](#类型基础)
   - [基元类型、引用类型和值类型](#基元类型引用类型和值类型)
+  - [元组](#元组)
   - [常量和字段](#常量和字段)
+  - [集合类型](#集合类型)
   - [方法](#方法)
   - [参数](#参数)
   - [属性](#属性)
@@ -32,6 +34,9 @@ updatedate: 2022-06-03 17:15:01
   - [泛型](#泛型)
   - [接口](#接口)
   - [多线程](#多线程)
+  - [Task  Task](#task--task)
+  - [ThreadPool](#threadpool)
+  - [CancellationTokenSource  取消线程任务](#cancellationtokensource--取消线程任务)
   - [基本类型](#基本类型)
   - [字符、字符串和文本处理](#字符字符串和文本处理)
   - [枚举类型和位标志](#枚举类型和位标志)
@@ -1066,7 +1071,104 @@ updatedate: 2022-06-03 17:15:01
 
 ### 基元类型、引用类型和值类型
 
+### 元组
+
+>  C# 7.0 及更高版本中可用，它提供了简洁的语法，用于将多个数据元素分组成一个轻型数据结构。
+
+> > (double, int) t1 = (4.5, 3);
+
+> > (string, bool, int) t1 = ("test",true, 3);
+
 ### 常量和字段
+
+### 集合类型
+
+> ArrayList
+
+> > ArrayList是List接口的可变数组非同步实现，并允许包括null在内的所有元素，相当于List < object>
+
+> List < T >
+
+> > 泛型的List 类是一个不限长度的集合类型，它内部实际就是一个数组，初始长度是4，每次数组到达限制，就会把现有容量翻倍，它提供用于对集合进行搜索、排序和操作等方法
+List是数组链表，数组链表访问快,复杂度O(1),但是添加删除复杂度O(n)
+
+> LinkedList
+
+> > LinkedList是List接口的双向链表非同步实现，并允许包括null在内的所有元素。底层的数据结构是基于双向链表的，LinkedList是指针链表，指针链表访问复杂度是O(n),但是添加删除很快O(1),如果对这个集合在中间的添加删除操作非常频繁的话，就建议使用LinkedList。
+
+> Dictionary < K, V>
+
+> > 存储键值对的关联性集合，查询等操作速度很快,因为它的时间复杂度是O(1)，单线程中推荐使用Dictionary,有泛型优势,且读取速度较快,容量利用更充分.
+
+> Hashtable
+
+> > Hashtable是System.Collections命名空间提供的一个容器，用于处理和表现类似key/value的键值对
+
+> > Hashtable使用了闭散列法来解决冲突，它通过一个结构体bucket来表示哈希表中的单个元素，这个结构体中有三个成员：
+
+> > （1） key ：表示键，即哈希表中的关键字。
+
+> > （2） val ：表示值，即跟关键字所对应值。
+
+> > （3） hash_coll ：它是一个int类型，用于表示键所对应的哈希码。
+
+> > 哈希表的所有元素存放于一个名称为buckets（又称为数据桶） 的bucket数组之中
+
+> > 优点：
+
+> > （1）在使用哈希表保存集合元素（一种键/值对）时，首先要根据键自动计算哈希代码，以确定该元素的保存位置，再把元素的值放入相应位置所指向的存储桶中。在查找时，再次通过键所对应的哈希代码到特定存储桶中搜索，这样将大大减少为查找一个元素进行比较的次数
+
+> > （2）多线程程序中推荐使用Hashtable，对Hashtable进一步调用Synchronized()方法可以获得完全线程安全的类型
+
+> Dictionary< TKey, TValue> 是 Hashtable 的泛型版本，它们之间实现上区别不大，运行效率上有一些差别
+
+> > Hashtable由于键值类型都object，所以涉及装箱拆箱操作，在添加数据的效率上要差一些，但是频繁使用数据时效率更高，HashTable的优点就在于其索引的方式，速度非常快。如果以任意类型键值访问其中元素会快于其他集合，特别是当数据量特别大的时候，效率差别尤其大。
+
+> SortedList
+
+> > 表示基于相关的 IComparer 实现按键进行排序的键/值对的集合,与哈希表类似，区别在于SortedList中的Key数组排好序的
+
+> > 堆栈（Stack）
+
+> > 表示对象的简单的后进先出非泛型集合。Push方法入栈，Pop方法出栈
+
+> > 队列（Queue）
+
+> > 队列先进先出,enqueue方法入队列，dequeue方法出队列
+
+> > SortedList< TKey,TValue>
+
+> > SortedList< TKey,TValue>是支持排序的关联性集合，将数据存储在数组中的。也就是说添加和移除操作都是线性的，时间复杂度是O(n)，因为操作其中的元素可能导致所有的数据移动。但是因为在查找的时候利用了二分搜索，所以查找的性能会好一些，时间复杂度是O(log n)。所以推荐使用场景是这样地：如果你想要快速查找，又想集合按照key的顺序排列，最后这个集合的操作（添加和移除）比较少的话，就是SortedList了。集合中的数据是有序的。可以通过key来匹配数据，也可以通过int下标来获取数据。
+
+> > 添加操作比ArrayList，Hashtable略慢；查找、删除操作比ArrayList快，比Hashtable慢
+
+> > 10）SortedDictioanry< TKey,TValue>
+
+> > SortedDictionary< TKey,TValue>和Dictionary< TKey,TValue>大致上是类似的，但是在实现方式上有一点点区别SortedDictionary< TKey,TValue>用二叉树作为存储结构的。并且按key的顺序排列　　SortedDictionary< TKey,TValue>相比于SortedList< TKey,TValue>其性能优化了 SortedList< TKey,TValue>其内部维护的是数组而SortedDictionary< TKey,TValue>内部维护的是**红黑树(平衡二叉树)**的一种，因此其占用的内存，性能都好于SortedDictionary< TKey,TValue>　唯一差在不能用下标取值。
+
+> > HashSet< T>
+
+> > HashSet是一个无序的能够保持唯一性的集合,不支持下标访问。
+
+> > SortedSet< T>
+
+> > SortedSet内部也是一个二叉树，用来支持按顺序的排列元素。算法，存储结构都与哈希表相同，主要是设计用来做高性能集运算的，例如对两个集合求交集、并集、差集等。集合中包含一组不重复出现且无特定顺序的元素。
+
+> BitArray 
+
+> > BitArray用于二进制运算，“或”、“非”、“与”、"异或非"等这种操作，只能存true或false；
+
+> ListDictionary
+
+> > 单向链表，每次添加数据时都要遍历链表，数据量大时效率较低，数据量较大且插入频繁的情况下，不宜选用
+
+> HybridDictionary
+
+> > HybridDictionary的类，充分利用了Hashtable查询效率高和ListDictionary占用内存空间少的优点，内置了Hashtable和ListDictionary两个容器，添加数据时内部逻辑如下：
+
+> > 当数据量小于8时，Hashtable为null，用ListDictionary保存数据。
+
+> > 当数据量大于8时，实例化Hashtable，数据转移到Hashtable中，然后将　　ListDictionary置为null。
 
 ### 方法
 
