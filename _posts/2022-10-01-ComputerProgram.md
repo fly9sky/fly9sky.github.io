@@ -3,7 +3,7 @@ layout: post
 title: 计算机编程
 description: 计算机科学相关学习内容总结,各种编程语言以及计算机数据结构等总结梳理
 date: 2022-10-01 09:01:01
-updatedate: 2022-07-06 09:32:01
+updatedate: 2023-07-18 13:09:01
 ---
 
 - [计算机史话](#计算机史话)
@@ -504,6 +504,14 @@ updatedate: 2022-07-06 09:32:01
     - [Dirkster.AvalonDock](#dirksteravalondock-1)
     - [log4net](#log4net-1)
   - [LanguageResource实现多语言支持](#languageresource实现多语言支持)
+- [认证授权](#认证授权)
+  - [认证](#认证-1)
+  - [Token](#token)
+    - [SAML](#saml)
+    - [JWT](#jwt)
+    - [SSO 与CAS](#sso-与cas)
+  - [授权](#授权)
+    - [OAuth 授权](#oauth-授权)
 
 ## 计算机史话
 
@@ -17803,3 +17811,125 @@ namespace DEVGIS.FA.Views
 #### log4net
 
 ### LanguageResource实现多语言支持
+
+
+## 认证授权
+
+### 认证
+
+> Session-Cookie
+
+Session-Cookie 的认证流程如下：用户先使用用户名和密码登录，登录完成后后端将用户信息存在session 中，把sessionId 写到前端的cookie 中，后面每次操作带着cookie 去后端，只要后端判断sessionId 没问题且没过期就不需要再次登录。
+
+使用这种方式进行认证，开发者可能面临的主要问题如下：
+
+cookie 安全性问题，攻击者可以通过xss 获取cookie 中的sessinId，使用 httpOnly 在一定程度上提高安全性
+
+cookie 不能跨域传输
+
+session 存储在服务器中，所以session 过多会耗费较大服务器资源
+
+### Token
+
+与上面的Session-Cookie 机制不同的地方在于，基于token 的用户认证是一种服务端无状态的认证方式，服务端可以不用存放token 数据，但是服务器可以验证token 的合法性和有效性。
+
+使用token 进行认证的方式这里主要介绍两种：
+
+#### SAML
+
+> SAML (Security Assertion Markup Language) 
+
+未登录的用户通过浏览器访问资源网站（Service Provider，简称SP）
+
+SP 发现用户未登录，将页面重定向至IdP（Identity Provider）
+
+IdP 验证请求无误后，提供表单让用户进行登录
+
+用户登录成功后，IdP 生成并发送SAML token (一个很大的XML对象) 给SP
+
+SP 对token 进行验证，解析获取用户信息，允许用户访问相关资源
+
+#### JWT
+
+JSON Web Token 入门教程（预计阅读时间：2mins）
+
+简言之，JWT 就是一种在用户登录后生成token 并把token 放在前端，后端不需要维护用户的状态信息但是可以验证token 有效性的认证及状态管理方式。 
+
+
+#### SSO 与CAS
+接下来我们探讨一个企业应一定绕不过的课题：单点登录。
+
+举例来说，华为云下有若干云服务。包含项目管理、代码托管、代码检查、流水线、编译构建、部署、自动化测试等众多微服务的DevCloud（软件开发云） 正是其中之一，用户如果在使用任意一个服务没有登录的时候都可以去同一个地方进行登录认证，登录之后的一段时间内可以无需登录访问所有其他服务。
+
+在单点登录领域，CAS（Central Authentication Service，中文名是中央认证服务） 是一个被高频使用的解决方案。因此，这里介绍一下利用CAS 实现SSO。而CAS 的具体实现又可以依赖很多种协议，比如OpenID、OAuth、SAML 等，这里重点介绍一下CAS 协议。
+
+CAS 协议中的几个重要概念
+简单介绍一下CAS 协议中的几个重要概念，一开始看概念可能很模糊，可以先过一遍，再结合下面的流程图来理解。
+
+CAS Server：用于认证的中心服务器
+
+CAS Clients：保护CAS 应用，一旦有未认证的用户访问，重定向至CAS Server 进行认证
+
+TGT & TGC：用户认证之后，CAS Server 回生成一个包含用户信息的TGT (Ticket Granting Ticket) 并向浏览器写一个cookie（TGC，Ticket Granting Cookie），有啥用后面流程会讲到
+
+ST：在url 上作为参数传输的ticket，受保护应用可以凭借这个ticket 去CAS Server 确认用户的认证是否合法 
+
+### 授权
+
+
+#### OAuth 授权
+
+OAuth 的设计本意更倾向于授权而不是认证，所以这一小节的标题写的是授权，但是其实在授权的同时也已经完成了认证。
+
+
+OAuth 2 是一个授权框架，或称授权标准，它可以使第三方应用程序或客户端获得对HTTP服务上（例如 Google，GitHub ）用户帐户信息的有限访问权限。OAuth 2 通过将用户身份验证委派给托管用户帐户的服务以及授权客户端访问用户帐户进行工作。综上，OAuth 2 可以为 Web 应用 和桌面应用以及移动应用提供授权流程。
+
+本文将从OAuth 2 角色，授权许可类型，授权流程等几方面进行讲解。
+
+在正式讲解之前，这里先引入一段应用场景，用以与后文的角色讲解对应。
+
+开发者A注册某IT论坛后，发现可以在信息栏中填写自己的 Github 个人信息和仓库项目，但是他又觉得手工填写十分麻烦，直接提供 Github 账户和密码给论坛管理员帮忙处理更是十分智障。
+不过该论坛似乎和 Github 有不可告人的秘密，开发者A可以点击“导入”按钮，授权该论坛访问自己的 Github 账户并限制其只具备读权限。这样一来， Github 中的所有仓库和相关信息就可以很方便地被导入到信息栏中，账户隐私信息也不会泄露。
+这背后，便是 OAuth 2 在大显神威。
+
+2. OAuth2 角色
+OAuth 2 标准中定义了以下几种角色：
+
+资源所有者（Resource Owner）
+资源服务器（Resource Server）
+授权服务器（Authorization Server）
+客户端（Client）
+2.1 资源所有者（Resource Owner）
+资源所有者是 OAuth 2 四大基本角色之一，在 OAuth 2 标准中，资源所有者即代表授权客户端访问本身资源信息的用户（User），也就是应用场景中的“开发者A”。客户端访问用户帐户的权限仅限于用户授权的“范围”（aka. scope，例如读取或写入权限）。
+
+如果没有特别说明，下文中出现的"用户"将统一代表资源所有者。
+
+2.2 资源/授权服务器（Resource/Authorization Server）
+资源服务器托管了受保护的用户账号信息，而授权服务器验证用户身份然后为客户端派发资源访问令牌。
+
+在上述应用场景中，Github 既是授权服务器也是资源服务器，个人信息和仓库信息即为资源（Resource）。而在实际工程中，不同的服务器应用往往独立部署，协同保护用户账户信息资源。
+
+2.3 客户端（Client）
+在 OAuth 2 中，客户端即代表意图访问受限资源的第三方应用。在访问实现之前，它必须先经过用户者授权，并且获得的授权凭证将进一步由授权服务器进行验证。
+
+如果没有特别说明，下文中将不对"应用"，“第三方应用”，“客户端”做出区分。
+
+3. OAuth 2 的授权流程
+目前为止你应该对 OAuth 2 的角色有了些概念，接下来让我们来看看这几个角色之间的抽象授权流程图和相关解释。
+
+请注意，实际的授权流程图会因为用户返回授权许可类型的不同而不同。但是下图大体上能反映一次完整抽象的授权流程。
+
+
+
+Authrization Request
+客户端向用户请求对资源服务器的authorization grant。
+Authorization Grant（Get）
+如果用户授权该次请求，客户端将收到一个authorization grant。
+Authorization Grant（Post）
+客户端向授权服务器发送它自己的客户端身份标识和上一步中的authorization grant，请求访问令牌。
+Access Token（Get）
+如果客户端身份被认证，并且authorization grant也被验证通过，授权服务器将为客户端派发access token。授权阶段至此全部结束。
+Access Token（Post && Validate）
+客户端向资源服务器发送access token用于验证并请求资源信息。
+Protected Resource（Get）
+如果access token验证通过，资源服务器将向客户端返回资源信息。
