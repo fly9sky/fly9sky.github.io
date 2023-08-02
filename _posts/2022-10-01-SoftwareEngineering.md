@@ -8233,29 +8233,41 @@ OPC服务器在底层控制系统中采用统一的标准，实现了应用程�
 
 ### Java语言相关微服务框架
 
-1.Spring Boot
+> 1.Spring Boot
 
 Spring Boot的设计目的是简化新Spring应用初始搭建以及开发过程，2017年有64.4%的受访者决定使用Spring Boot，可以说是最受欢迎的微服务开发框架。利用Spring Boot开发的便捷度简化分布式系统基础设施的开发，比如像配置中心、注册、负载均衡等方面都可以做到一键启动和一键部署。
 
-2.Spring Cloud
+> 2.Spring Cloud
 
 Spring Cloud是一个系列框架的合计，基于HTTP（s）的RETS服务构建服务体系，Spring Cloud能够帮助架构师构建一整套完整的微服务架构技术生态链。
 
-3.Dubbo
+> 3.Dubbo
 
 Dubbo是由阿里巴巴开源的分布式服务化治理框架，通过RPC请求方式访问。Dubbo是在阿里巴巴的电商平台中逐渐探索演进所形成的，经历过复杂业务的高并发挑战，比Spring Cloud的开源时间还要早。目前阿里、京东、当当、携程、去哪等一些企业都在使用Dubbo。
 
-4.Dropwizard
+> 4.Dropwizard
 
 Dropwizard将Java生态系统中各个问题域里最好的组建集成于一身，能够快速打造一个Rest风格的后台，还可以整合Dropwizard核心以外的项目。国内现在使用Dropwizard还很少，资源也不多，但是与SpringBoot相比，Dropwizard在轻量化上更有优势，同时如果用过Spring，那么基本也会使用SpringBoot。
 
-5.Akka
+> 5.Akka
 
 Akka是一个用Scala编写的库，可以用在有简化编写容错、高可伸缩性的Java和Scala的Actor模型，使用Akka能够实现微服务集群。
 
-6.Vert.x/ Lagom/ ReactiveX/Spring 5
+> 6.Vert.x/ Lagom/ ReactiveX/Spring 5
 
 这四种框架主要用于响应式微服务开发，响应式本身和微服务没有关系，更多用于提升性能上，但是可以和微服务相结合，也可以提升性能。
+
+> Spring Cloud Sleuth 主要功能就是在分布式系统中提供追踪解决方案，并且兼容支持了 zipkin，你只需要在pom文件中引入相应的依赖即可。
+
+> Zipkin的概述
+
+Zipkin 是 Twitter 的一个开源项目，它基于 Google Dapper 实现，它致力于收集服务的定时数据，以
+解决微服务架构中的延迟问题，包括数据的收集、存储、查找和展现。 我们可以使用它来收集各个服务
+器上请求链路的跟踪数据，并通过它提供的 REST API 接口来辅助我们查询跟踪数据以实现对分布式系
+统的监控程序，从而及时地发现系统中出现的延迟升高问题并找出系统性能瓶颈的根源。除了面向开发
+的 API 接口之外，它也提供了方便的 UI 组件来帮助我们直观的搜索跟踪信息和分析请求链路明细，比
+如：可以查询某段时间内各用户请求的处理时间等。 Zipkin 提供了可插拔数据存储方式：In-
+Memory、MySql、Cassandra 以及 Elasticsearch。
 
 
 ### .Net相关微服务框架
