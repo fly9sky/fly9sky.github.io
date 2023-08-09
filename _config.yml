@@ -23,14 +23,14 @@ collections:
     permalink: /pictures/:path
   poetrys:
     output: true
-    permalink: /poetry/:path
+    permalink: /poetrys/:path
   notes:
     output: true
-    permalink: /note/:path
+    permalink: /notes/:path
   writes:
     output: true
-    permalink: /write/:path
+    permalink: /writes/:path
   homes:
     output: true
-    permalink: /home/:path
+    permalink: /homes/:path
 
