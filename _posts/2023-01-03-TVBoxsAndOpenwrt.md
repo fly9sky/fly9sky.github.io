@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 ---
 layout: post
 title: 玩转各种电视盒子

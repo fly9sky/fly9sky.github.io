@@ -30,4 +30,7 @@ collections:
   writes:
     output: true
     permalink: /writes/:path
+  indexs:
+    output: true
+    permalink: /indexs/:path
 
