@@ -3,7 +3,7 @@ layout: post
 title: Java编程技术
 description: JAVA相关技术基础SpringBoot,Spring Cloud等相关技术总结
 date: 2022-10-01 09:01:01
-updatedate: 2023-07-28 09:32:01
+updatedate: 2023-08-23 10:24:01
 ---
 
 - [Java 基础](#java-基础)
@@ -26,6 +26,7 @@ updatedate: 2023-07-28 09:32:01
 - [JavaEE](#javaee)
 - [Spring \& SpringBoot](#spring--springboot)
 - [Spring Cloud](#spring-cloud)
+- [Maven](#maven)
 
 ## Java 基础
 
@@ -466,3 +467,22 @@ if(obj instanceof User) {
 > 消息总线(Cloud Bus)。
 
 > > 修改配置文件时，可以在不停止服务运行的情况下重新加载配置。
+
+## Maven
+
+> ubuntu 使用 sudo apt install maven 安装
+
+> 默认路径为/usr/share/maven 可以使用 whereis maven 查看
+
+> vscode 中 maven路径为 /usr/share/maven/bin
+
+> 配置文件为/usr/share/maven/conf/settings.xml
+
+> 使用阿里源，找到mirrors块，添加阿里云源。
+
+<mirror>
+    <id>alimaven</id>
+    <mirrorOf>central</mirrorOf>
+    <name>aliyun maven</name>
+    <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
+</mirror>

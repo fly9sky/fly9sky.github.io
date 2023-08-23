@@ -3,10 +3,11 @@ layout: post
 title: Docker容器技术
 description: Docker 研究学习
 date: 2022-10-01 09:01:01
-updatedate: 2023-07-18 10:36:01
+updatedate: 2023-08-23 10:43:01
 ---
 
 - [Docker](#docker)
+  - [ubuntu 下安装](#ubuntu-下安装)
   - [Docker 安装 \& 配置镜像加速器](#docker-安装--配置镜像加速器)
   - [container容器](#container容器)
     - [共享数据](#共享数据)
@@ -44,6 +45,9 @@ updatedate: 2023-07-18 10:36:01
     - [kubernetes 集群 YAML 文件详解](#kubernetes-集群-yaml-文件详解)
 - [容器编排](#容器编排)
   - [Docker Compose](#docker-compose-1)
+    - [Ubuntu 安装使用](#ubuntu-安装使用)
+    - [命令说明](#命令说明)
+    - [Compose clouddrive2](#compose-clouddrive2)
   - [Kubernetes（K8s）](#kubernetesk8s)
 - [OP Armbian 中的docker](#op-armbian-中的docker)
   - [Armbina安装Docker](#armbina安装docker)
@@ -57,6 +61,37 @@ updatedate: 2023-07-18 10:36:01
 
 
 ## Docker  
+
+### ubuntu 下安装
+
+> sudo apt update
+
+> sudo apt install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+
+> > 使用下面的 curl 导入源仓库的 GPG key：
+
+> curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+> > 将 Docker APT 软件源添加到你的系统：
+
+> sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+> > 01.想要安装 Docker 最新版本，运行下面的命令。如果你想安装指定版本，跳过这个步骤，并且跳到下一步。
+
+> sudo apt update
+
+> sudo apt install docker-ce docker-ce-cli containerd.io
+
+> > 想要以非 root 用户执行 Docker 命令，你需要将你的用户添加到 Docker 用户组，该用户组在 Docker CE 软件包安装过程中被创建。想要这么做，输入：
+
+> sudo usermod -aG docker $USER
+
+> > $USER是一个环境变量，代表当前用户名。
+
+> > 验证 安装 docker container run hello-world
+
+> > 可以参考 https://zhuanlan.zhihu.com/p/143156163
+
 
 ### Docker 安装 & 配置镜像加速器
 
@@ -2941,6 +2976,101 @@ spec.containers[].image	String	这里定义要用到的镜像名称，如果镜�
 ## 容器编排
 
 ### Docker Compose
+
+#### Ubuntu 安装使用 
+
+> sudo apt install docker-compose 
+
+> docker-compose -v
+
+#### 命令说明
+
+一、docker-compose命令对象与格式
+
+二、命令选项
+
+三、命令使用说明
+
+> build 构建（重新构建）项目中的服务容器
+
+> config 检测compose文件的错误
+
+> up 启动服务
+
+> > docker-compose up 本质是docker-compose logs -f，它会收集所有容器的日志输出直到退出命令，或者容器都停止运行。
+
+> > docker-compose up -d 以后台的方式运行容器。不会在终端上打印运行日志
+
+> down 停止容器
+
+> images 列出项目中所包含的镜像
+
+> logs 查看服务容器的日志
+
+> kill 发送 SIGKILL 信号来强制停止服务容器
+
+> port 查看某个容器端口所映射的公共端口
+
+> ps 列出项目中目前的所有容器
+
+> restart 重启项目中的服务
+
+> rm 删除所有停止状态的服务容器
+
+> run 在指定服务上运行一个命令
+
+> scale 设置指定服务运行的容器个数
+
+> stop 停止处于运行状态的容器
+
+> start 启动被stop的服务容器
+
+> top 查看各个服务容器内运行的进程
+
+> pause 暂停一个服务容器
+
+> unpause 恢复处于暂停状态中的服务
+
+> docker-compose术语：
+
+> 服务（service）：一个应用容器，实际上可以运行多个相同镜像的实例。
+
+> 项目（project）：由一组关联的应用容器组成的一个完整业务单元。
+
+一个项目可以由多个服务（容器）关联而成，Compose面向项目进行管理。
+
+#### Compose clouddrive2
+
+> mkdir /mnt/cloudnas
+
+> sudo mount --make-shared $(df -P /mnt/cloudnas | tail -1 | awk '{ print $6 }')
+
+> sudo docker-compose up -d
+
+>  docker-compose.yml
+
+```
+version: "2.1"
+services:
+  cloudnas:
+    image: cloudnas/clouddrive2
+    container_name: clouddrive2
+    environment:
+      - TZ=Asia/Shanghai
+      - CLOUDDRIVE_HOME=/Config
+    volumes:
+      - /mnt/cloudnas:/CloudNAS:shared
+      - /mnt/cloudnas:/Config
+      - /mnt/cloudnas:/media:shared #optional media path of host
+    devices:
+      - /dev/fuse:/dev/fuse
+    restart: unless-stopped
+    pid: "host"
+    privileged: true
+    network_mode: "host"
+```
+
+> vist http://localhost:19798/
 
 ### Kubernetes（K8s）
 

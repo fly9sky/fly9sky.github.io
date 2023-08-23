@@ -3,9 +3,10 @@ layout: post
 title: 微软Dotnet技术
 description: Dotnet相关技术WPF,AS.net，Winform等相关技术总结
 date: 2022-10-01 09:01:01
-updatedate: 2023-07-21 12:22:01
+updatedate: 2023-08-23 10:18:01
 ---
 
+- [Donet6 ubuntu下的安装](#donet6-ubuntu下的安装)
 - [C# .Net Base](#c-net-base)
   - [CLR基础 CLR的执行模型](#clr基础-clr的执行模型)
   - [生成、打包、部署和管理应用程序及类型](#生成打包部署和管理应用程序及类型)
@@ -323,6 +324,44 @@ updatedate: 2023-07-21 12:22:01
     - [log4net](#log4net-1)
   - [LanguageResource实现多语言支持](#languageresource实现多语言支持)
 
+
+## Donet6 ubuntu下的安装
+
+> > 完整卸载，如果未安装可以不用执行
+
+> sudo apt remove dotnet*
+
+> sudo apt remove netstandard*
+
+> > using gedit 生成99microsoft-dotnet.pref
+
+> sudo gedit /etc/apt/preferences.d/99microsoft-dotnet.pref
+
+> > /etc/apt/preferences.d/99microsoft-dotnet.pref
+
+```
+Package: *
+Pin: origin "packages.microsoft.com"
+Pin-Priority: 1001
+```
+
+> > API transport for downloading via HTTPS
+
+> sudo apt install apt-transport-https
+
+> > Download package information
+
+> sudo apt update
+
+> > Install the .NET Core SDK
+
+> sudo apt install dotnet-sdk-6.0
+
+> > 查看是否安装成功
+
+> dotnet --version
+
+> dotnet --help
 
 ## C# .Net Base 
 
