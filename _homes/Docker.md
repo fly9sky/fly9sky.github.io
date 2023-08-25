@@ -3,7 +3,7 @@ layout: post
 title: Docker容器技术
 description: Docker 研究学习
 date: 2022-10-01 09:01:01
-updatedate: 2023-08-23 10:43:01
+updatedate: 2023-08-25 09:23:01
 ---
 
 - [Docker](#docker)
@@ -17,6 +17,7 @@ updatedate: 2023-08-23 10:43:01
   - [daemon D](#daemond)
   - [Docker Server ](#docker-server)
     - [Job](#job)
+  - [Docker 镜像 \& 加速](#docker-镜像--加速)
   - [client](#client)
   - [Swarm](#swarm)
   - [Machine](#machine)
@@ -49,6 +50,8 @@ updatedate: 2023-08-23 10:43:01
     - [命令说明](#命令说明)
     - [Compose clouddrive2](#compose-clouddrive2)
   - [Kubernetes（K8s）](#kubernetesk8s)
+    - [Kubernetes的基本概念](#kubernetes的基本概念)
+    - [Kuberntes本地部署](#kuberntes本地部署)
 - [OP Armbian 中的docker](#op-armbian-中的docker)
   - [Armbina安装Docker](#armbina安装docker)
   - [OP安装Docker](#op安装docker)
@@ -162,6 +165,40 @@ updatedate: 2023-08-23 10:43:01
 > 向Docker Registry获取镜像，通过graphdriver执行容器镜像的本地化操作，通过networkdriver执行容器网络环境的配置，通过execdriver执行容器内部运行的执行工作等。
 
 #### Job
+
+### Docker 镜像 & 加速
+
+> 默认情况，将从docker hub（https://hub.docker.com/）下载docker镜像太慢，一般都会配置镜像加速器；
+
+> 中国科学技术大学(ustc)是老牌的linux镜像服务提供者了，还在遥远的ubuntu 5.04版本的时候就在用。ustc的docker镜像加速器速度很快。ustc docker mirror的优势之一就是不需要注册，是真正的公共服务。
+
+> 编辑该文件：
+
+> vim /etc/docker/daemon.json
+
+> 在该文件中输入如下内容：
+
+```
+{
+"registry-mirrors": ["https://docker.mirrors.ustc.edu.cn"]
+}
+```
+
+> 方案二：阿里云
+
+```
+{
+"registry-mirrors": ["https://3ad96kxd.mirror.aliyuncs.com"]
+}
+```
+
+> 必须要注册，每个人分配一个免费的docker镜像加速地址，速度极快
+
+> 配置完成记得刷新配置
+
+> sudo systemctl daemon-reload
+
+> sudo systemctl restart docker
 
 ### client
 
@@ -3073,6 +3110,38 @@ services:
 > vist http://localhost:19798/
 
 ### Kubernetes（K8s）
+
+> > Kubernetes是Google开发的开源项目，是一个容器编排系统，可以自动化部署、扩展和管理容器化的应用程序。Kubernetes可以跨多个主机管理容器，并提供自动化负载均衡、弹性伸缩、自我修复和滚动更新等功能。
+
+> > Kubernetes的基本架构由Master和Node组成。Master是集群控制中心，负责管理集群状态、控制应用程序部署和监控应用程序状态。Node是集群的工作节点，运行应用程序容器并将它们与Master通信。
+
+#### Kubernetes的基本概念
+
+> > Pod：是Kubernetes的最小部署单元，通常包含一个或多个容器。Pod中的容器共享网络和存储，并在同一个主机上运行。
+
+> > Deployment：是一种Kubernetes资源对象，用于管理Pod的副本数，并支持滚动更新。
+
+> > Service：是一种Kubernetes资源对象，用于将一组Pod公开为一个网络服务，并提供负载均衡。
+
+> > Namespace：是一种Kubernetes资源对象，用于隔离不同应用程序或团队的资源。
+
+> > ConfigMap：是一种Kubernetes资源对象，用于将应用程序配置信息与容器分离。
+
+> > Secret：是一种Kubernetes资源对象，用于存储敏感信息，如密码和API密钥。
+
+#### Kuberntes本地部署
+
+> Kubernetes有多种安装方式：minikube、kubeadm和二进制包。
+
+> > minikube：是一种在本地环境中部署Kubernetes的工具，它可以在单个虚拟机中运行一个Kubernetes集群，一般用于开发、测试环境搭建。
+
+> > microk8s：MicroK8s 是 CNCF 认证的 Kubernetes 发行版，由 Ubuntu 背后的商业公司 Canonical 开发和维护。它和完整版的 Kubernetes 一样支持高可用特性（HA），支持快速组建 K8s 集群。适合用于边缘计算、IoT、以及使用 KubeFlow 的 MLOps 机器学习场景。
+
+当然，也适合用于开发者本地环境，以轻量的资源消耗、简单的运维成本获得几乎完整的 Kubernetes 生态体验。本篇文章，我们来聊聊如何通过它来快速组建一个本地集群。
+
+> > kubeadm：是一种在物理机或虚拟机中快速部署Kubernetes集群的工具，已被证明可以应用于生成环境的集群搭建。
+
+> > 二进制包：手工安装，流程复杂，容易出错，不建议。
 
 ## OP Armbian 中的docker
 
