@@ -3,7 +3,7 @@ layout: post
 title: 计算机操作系统
 description: 计算机科学相关学习内容总结,包括各种操作系统安装配置，Windows Linux,以及Docker等虚拟化技术。
 date: 2022-10-01 09:01:01
-updatedate: 2023-08-25 09:23:01
+updatedate: 2023-09-15 09:35:01
 ---
 
 - [计算机史话](#计算机史话)
@@ -47,6 +47,9 @@ updatedate: 2023-08-25 09:23:01
   - [Q\&A](#qa)
   - [Ubuntu](#ubuntu)
 - [ubuntu](#ubuntu-1)
+  - [安装指定版本nodejs](#安装指定版本nodejs)
+  - [yarn](#yarn)
+  - [安装 npmp](#安装-npmp)
 - [Docker](#docker)
   - [Docker 安装 \& 配置镜像加速器](#docker-安装--配置镜像加速器)
   - [container容器](#container容器)
@@ -1219,6 +1222,36 @@ global.json file:
 ## ubuntu 
 
 > 配置源： /etc/apt/sources.list
+
+### 安装指定版本nodejs
+
+> curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - 
+
+> > 更新此段时，最新应该已经是20.x了
+
+> > 完成后再执行 ： 
+
+> sudo apt-get install -y nodejs
+
+### yarn
+
+> npm install -g yarn 
+
+> yarn*
+
+### 安装 npmp 
+
+> >  bash
+
+> wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.bashrc" SHELL="$(which bash)" bash -
+
+> >  sh
+
+> wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
+
+> >  dash
+
+> wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.dashrc" SHELL="$(which dash)" dash -
 
 ## Docker 
 

@@ -4867,8 +4867,6 @@ namespace DEVGIS.FA.Views
 #### log4net
 
 ### LanguageResource实现多语言支持
->>>>>>> Stashed changes
-
 
 ## 认证授权
 
