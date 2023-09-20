@@ -3,7 +3,7 @@ layout: post
 title: 玩转各种电视盒子
 description: Amlogic设备等电视盒子的研究包括Arm架构的Armbian，Openwrt，Cloreelec等刷机研究
 date: 2023-01-02 15:43:01
-updatedate: 2023-09-19 10:41:01
+updatedate: 2023-09-20 10:14:01
 ---
 
 - [常见的Amlogic设备](#常见的amlogic设备)
@@ -76,6 +76,7 @@ updatedate: 2023-09-19 10:41:01
   - [【官方开发文档】RK3399 Efuse 操作指南](#官方开发文档rk3399-efuse-操作指南)
 - [ZN-M2 IPQ60xx系列路由器](#zn-m2-ipq60xx系列路由器)
   - [09-18](#09-18)
+  - [09-18](#09-18-1)
 
 ## 常见的Amlogic设备
 
@@ -1431,96 +1432,6 @@ So that's all! Not an easy project, but at the end you'll have your unit back an
 
 ###  maskrom xrock
 
-全志有fel模式，瑞芯微有maskrom模式，为了给裸机开发舔砖加瓦，fel模式有了xfel工具，那么maskrom模式就需要xrock工具了
-XBOOT
-XBOOT
-一次开发，到处运行
-​关注他
-3 人赞同了该文章
-仔细分析了瑞芯微的maskrom模式，跟全志的fel模式，基本类似，但又有不同，maskrom模式功能有限，除了加载ddr，另外一个重要的功能就是运行usbloader了，这个程序，扩展了usb口通讯功能，什么烧写FLASH，EFUSE, 序列号，读写DDR内存等都是载这里实现的。
-
-经过几天的调研，觉得还是有必要开发一个裸奔工具，名叫xrock
-
-GitHub - xboot/xrock: The low level tools for rockchip SOC with maskrom and loader mode support.
-​github.com/xboot/xrock
-
-当前支持的命令：
-
-xrock(v1.0.0) - https://github.com/xboot/xrock
-usage:
-    xrock maskrom <ddr> <usbplug>        - Initial chip using ddr and usbplug in maskrom mode
-    xrock version                        - Show chip version
-    xrock reset [maskrom]                - Reset device to normal or maskrom mode
-    xrock hexdump <address> <length>     - Dumps memory region in hex
-    xrock dump <address> <length>        - Binary memory dump to stdout
-    xrock read <address> <length> <file> - Read memory to file
-    xrock write <address> <file>         - Write file to memory
-    xrock exec <address>                 - Call function address
-支持的芯片：
-
-static struct chip_t chips[] = {
-	{ 0x180a, "RK1808" },
-	{ 0x281a, "RK2818" },
-	{ 0x290a, "RK2918" },
-	{ 0x292a, "RK2928" },
-	{ 0x292c, "RK3026" },
-	{ 0x300a, "RK3066" },
-	{ 0x300b, "RK3168" },
-	{ 0x301a, "RK3036" },
-	{ 0x310a, "RK3066" },
-	{ 0x310b, "RK3188" },
-	{ 0x310c, "RK3128" },
-	{ 0x320a, "RK3288" },
-	{ 0x320b, "RK3228" },
-	{ 0x320c, "RK3328" },
-	{ 0x330a, "RK3368" },
-	{ 0x330c, "RK3399" },
-	{ 0x330d, "PX30" },
-	{ 0x350a, "RK3568" },
-};
-RK1808
-
-sudo xrock maskrom rk1808_ddr_933MHz_v1.05.bin rk1808_usbplug_v1.05.bin
-sudo xrock version
-RK3128
-
-sudo xrock maskrom rk3128_ddr_300MHz_v2.12.bin rk3128_usbplug_v2.63.bin
-sudo xrock version
-RK3288
-
-sudo xrock maskrom rk3288_ddr_400MHz_v1.09.bin rk3288_usbplug_v2.58.bin
-sudo xrock version
-RK3399
-
-sudo xrock maskrom rk3399_ddr_800MHz_v1.25.bin rk3399_usbplug_v1.26.bin
-sudo xrock version
-RK3399PRO
-
-sudo xrock maskrom rk3399pro_ddr_666MHz_v1.25.bin rk3399pro_usbplug_v1.26.bin
-sudo xrock version
-PX30
-
-sudo xrock maskrom px30_ddr_333MHz_v1.16.bin px30_usbplug_v1.31.bin
-sudo xrock version
-xrock工具不仅linux可以运行，windows平台也是可以的，但不能采用瑞芯微官方提供的驱动，需要用winusb驱动，这个跟全志操作类似，需要用zadig来安装。
-
-1，首先，移除默认驱动，直接点击驱动卸载就可以了
-
-
-2，安装winusb驱动，点击reinstall，注意选择0x2207这个UID
-
-
-一些截图，用xrock读写DRAM，在linux平台基本能达到25MB/S左右，比全志读写速度高不是一点点，windows平台弱了些，但也能达到5MB/S
-
-
-
-这个windows版本的程序，欢迎体验。
-
-xrock-windows-v1.0.0.7z
-​whycan.com/files/members/2137/xrock-windows-v1.0.0.7z
-这里有两个比较关键的注意点，芯片运行在maskrom模式时，其实只能干两件事，加载并运行ddr bin 以及usbloader bin，其他啥也干不了，所以第一步都是需要执行maskrom指令，注意loader模式，跟maskrom模式有较大差异，在这个模式时，是不能执行maskrom指令的。
-
-还有一个，就是SDRAM内存读写地址，是从0开始的，不是传递实际物理地址空间，也就是说，关于地址空间的访问，瑞芯微限制了，只能访问SDRAM空间，其他地址是无法访问的，所以，读写寄存器之类的骚操作，就无能为力了。
 
 ### 【官方开发文档】RK3399 Efuse 操作指南
 
@@ -1539,3 +1450,33 @@ xrock-windows-v1.0.0.7z
 > 长按reset 启动uboot也正常，向用uboot 刷入比较新的版本Openwrt 但是悲剧了，一直转圈，重启后发现系统已经不能正常进入，但是uboot可以进入。在uboot中试了好多固件依然是只转圈圈。
 
 > 拆机 ttl 连电脑开机也没反映，不指导是不是这台电脑的问题。准备下次更换win10的电脑试验一下。
+
+### 09-18
+
+> 拆机更换了个pl2303的usb转ttl就可以连接了。
+
+> 然后用ttl 连接路由器 刷入mtd17
+
+```
+setenv ipaddr 192.168.1.1
+setenv serverip 192.168.1.100  # tftp服务器地址
+tftpboot mtd16
+flash rootfs
+saveenv
+```
+
+> 刷完后重启就可以进入官方原版系统。 然后重新用升级的方式刷入过渡固件uboot-cmiot-ax18-mod-partition.bin。
+
+```
+#刷uboot合并分区：rootfs 分区达 96m
+mtd write /tmp/ax18-mibib.bin /dev/mtd1
+mtd write /tmp/uboot-cmiot-ax18-mod.bin /dev/mtd13
+```
+
+> 然后长按reset 开机 十秒左右进入uboot
+
+> 这个大分区uboot 可以刷网络上的系统，并且剩余空间很多。
+
+> 切记不要再刷入小分区的uboot了，没有什么用，根本不能刷入任何版本的固件。网上说的znm2需要使用340的usbttl也未必正确，我这个用pl2303的才可以。
+
+
