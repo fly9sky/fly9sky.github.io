@@ -3,7 +3,7 @@ layout: post
 title: 玩转各种电视盒子
 description: Amlogic设备等电视盒子的研究包括Arm架构的Armbian，Openwrt，Cloreelec等刷机研究
 date: 2023-01-02 15:43:01
-updatedate: 2023-09-20 10:14:01
+updatedate: 2023-09-21 13:26:01
 ---
 
 - [常见的Amlogic设备](#常见的amlogic设备)
@@ -1441,6 +1441,16 @@ So that's all! Not an easy project, but at the end you'll have your unit back an
 
 ### 09-18
 
+> 原来家里用的主路由（Wifi）+ 旁路由 + 千兆交换机，交换机位于电视柜主要给电视机附近的设备供网。发现最近网络性能下降，于是做了整改。
+
+> 现在发现50块钱的ZN-M2路由器使用IPQ6000性能不错，可以刷成Openwrt ,连旁路由都可以去掉了，于是就买了个。网络上多对这款路由器修改内存，扩大到1G，但是对于我256M足够了，于是我就买的未改版。同时又买了个RAX 3000Q路由器作为AP使用。这个RAX 3000Q配置也很简单，Wan口连M2 Lan后上网方式设置为桥接既可。
+
+> 整改前网络拓扑如下：
+
+> 整改后网络拓扑如下：
+
+> 后续是ZN-M2刷机教程。
+
 > 按照网上教程 直接在官方后台升级openwrt-ipq60xx-generic-cmiot_ax18-squashfs-nand-factory.bin，启动后没问题，然后没问题，系统可以正常启动，不过是openwrt 19.07的版本有点老。
 
 > 于是 ssh 进入备份 并刷入uboot uboot uboot-cmiot-ax18.bin，这一部也没什么问题。
@@ -1453,7 +1463,7 @@ So that's all! Not an easy project, but at the end you'll have your unit back an
 
 ### 09-18
 
-> 拆机更换了个pl2303的usb转ttl就可以连接了。
+> 于是我又更换了个pl2303的usb转ttl就可以连接了。
 
 > 然后用ttl 连接路由器 刷入mtd17
 
@@ -1479,4 +1489,6 @@ mtd write /tmp/uboot-cmiot-ax18-mod.bin /dev/mtd13
 
 > 切记不要再刷入小分区的uboot了，没有什么用，根本不能刷入任何版本的固件。网上说的znm2需要使用340的usbttl也未必正确，我这个用pl2303的才可以。
 
+> 网上销售的运营商路由器真是不错，自己很便宜，自己买来改造改造还是很不错的设备。
 
+> > 附所有的固件软件等：链接: https://pan.baidu.com/s/1aACgMgZuR0XH8AGbquLElQ?pwd=veab 提取码: veab 复制这段内容后打开百度网盘手机App，操作更方便哦
