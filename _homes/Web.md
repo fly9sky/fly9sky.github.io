@@ -3,7 +3,7 @@ layout: post
 title: Web技术
 description: Html,JS,CSS相关技术
 date: 2022-10-01 09:01:01
-updatedate: 2023-08-30 12:58:01
+updatedate: 2023-09-22 11:06:01
 ---
 
 - [HTML 5](#html-5)
@@ -14,6 +14,7 @@ updatedate: 2023-08-30 12:58:01
 - [Angular](#angular)
 - [React](#react)
 - [Vue.js](#vuejs)
+  - [命令式编程\&声明式编程](#命令式编程声明式编程)
 - [Bootstrap学习总结](#bootstrap学习总结)
   - [Bootstrap 基础](#bootstrap-基础)
     - [媒体查询（css3特性）](#媒体查询css3特性)
@@ -108,6 +109,87 @@ updatedate: 2023-08-30 12:58:01
 ## React
 
 ## Vue.js
+
+> > 生命周期的不同
+
+> vue2 --------------- vue3
+
+> beforeCreate -> setup()
+
+> Created -> setup()
+
+> beforeMount -> onBeforeMount
+
+> mounted -> onMounted
+
+> beforeUpdate -> onBeforeUpdate
+
+> updated -> onUpdated
+
+> beforeDestroyed -> onBeforeUnmount
+
+> destroyed -> onUnmounted
+
+> activated -> onActivated
+
+> deactivated -> onDeactivated
+
+### 命令式编程&声明式编程
+
+> > 命令式编程,原生js做法（命令式编程）
+
+1. 创建div元素，设置id属性
+2. 定义一个变量叫message
+3. 将message变量放在div元素中显示
+4. 修改message数据
+5. 将修改的元素替换到div
+
+> > 声明式编程,vue写法（声明式）
+
+1. 创建一个div元素，设置id属性
+2. 定义一个vue对象，将div挂载在vue对象上
+3. 在vue对象内定义变量message，并绑定数据
+4. 将message变量放在div元素上显示
+5. 修改vue对象中的变量message，div元素数据自动改变
+
+> Vue3 教程
+> Vue3 安装
+> Vue3 打包
+> Vue3 创建项目
+> Vue3 目录结构
+
+> Vue3 起步
+
+> > 指令	描述
+
+> > v-bind	用于将 Vue 实例的数据绑定到 HTML 元素的属性上。
+
+> > v-if	用于根据表达式的值来条件性地渲染元素或组件。
+
+> > v-show	v-show 是 Vue.js 提供的一种指令，用于根据表达式的值来条件性地显示或隐藏元素。
+
+> > v-for	用于根据数组或对象的属性值来循环渲染元素或组件。
+
+> > v-on	用于在 HTML 元素上绑定事件监听器，使其能够触发 Vue 实例中的方法或函数。
+
+> > v-model	用于在表单控件和 Vue 实例的数据之间创建双向数据绑定。
+
+> Vue3 指令
+> Vue3 模板语法
+> Vue3 条件语句
+> Vue3 循环语句
+> Vue3 组件
+> Vue3 计算属性
+> Vue3 监听属性
+> Vue3 样式绑定
+> Vue3 事件处理
+> Vue3 表单
+> Vue3 自定义指令
+> Vue3 路由
+> Vue3 混入
+> Vue3 Ajax(axios)
+> Vue3 组合式 API
+> Vue3 创建单文件组件(SFC)
 
 ## Bootstrap学习总结
 
