@@ -3,7 +3,7 @@ layout: post
 title: 计算机操作系统
 description: 计算机科学相关学习内容总结,包括各种操作系统安装配置，Windows Linux,以及Docker等虚拟化技术。
 date: 2022-10-01 09:01:01
-updatedate: 2023-09-15 09:35:01
+updatedate: 2023-09-26 10:24:01
 ---
 
 - [计算机史话](#计算机史话)
@@ -32,6 +32,7 @@ updatedate: 2023-09-15 09:35:01
     - [备份](#备份)
     - [光盘](#光盘)
     - [网络 - （以太网和WIFI无线）](#网络---以太网和wifi无线)
+    - [DD 命令](#dd-命令)
   - [OpenSource主流开源协议](#opensource主流开源协议)
     - [GPL](#gpl)
     - [LGPL](#lgpl)
@@ -45,8 +46,8 @@ updatedate: 2023-09-15 09:35:01
     - [Git helper](#git-helper)
   - [systemctl](#systemctl)
   - [Q\&A](#qa)
-  - [Ubuntu](#ubuntu)
-- [ubuntu](#ubuntu-1)
+  - [Ubuntu 相关](#ubuntu-相关)
+- [ubuntu](#ubuntu)
   - [安装指定版本nodejs](#安装指定版本nodejs)
   - [yarn](#yarn)
   - [安装 npmp](#安装-npmp)
@@ -848,6 +849,76 @@ updatedate: 2023-09-15 09:35:01
 
 > whois www.example.com lookup on Whois database 
 
+#### DD 命令
+
+> > Linux dd 命令用于读取、转换并输出数据。
+
+> > dd 可从标准输入或文件中读取数据，根据指定的格式来转换数据，再输出到文件、设备或标准输出。
+ 
+> > dd的相关解释
+
+> if 代表输入文件。如果不指定 if，默认就会从 stdin 中读取输入。
+
+> of 代表输出文件。如果不指定 of，默认就会将 stdout 作为默认输出。
+
+> bs 代表字节为单位的块大小。
+
+> > 对于较小的文件，可以选择较小的块大小，如 512 字节或 1KB，这样可以提高复制速度。对于较大的文件，可以选择较大的块大小，如 4KB 或 8KB，这样可以减少 I/O 操作的次数，提高复制效率。对于使用 USB 设备进行复制的情况，可以选择较小的块大小，因为 USB 设备通常具有较慢的传输速度。对于使用网络设备进行复制的情况，可以选择较大的块大小，以利用网络带宽。
+
+> count 代表被复制的块数。
+
+> /dev/zero 是一个字符设备，会不断返回 0 值字节（\0）。
+
+> 创建指定大小的文件
+
+> >  dd if=/dev/zero of=/tmp/1G.txt bs=1M count=1024
+ 
+> 给磁盘的分区做备份 
+
+> 磁盘分区备份
+
+> > dd if=/dev/sda1 of=/root/sda1.bak
+
+> 磁盘分区还原
+
+> > dd if=/root/sda1.bak of=/dev/sda1 
+
+> 清空磁盘
+
+> > dd if=/dev/zero of=/dev/sdb 
+
+> 备份磁盘
+
+> >  dd if=/dev/sda  of=/dev/sdb
+
+> 还原磁盘
+
+> > dd if=/dev/sdb  of=/dev/sda
+
+> 备份分区表
+> >  dd  if=/dev/sda of=/root/mbr.bak bs=512 count=1
+
+> 还原分区表
+> > dd  if=/root/mbr.bak of=/dev/sda
+
+> 为虚拟机创建一个空磁盘文件
+
+> 制作空磁盘文件
+
+> >  dd if=/dev/zero of=aabb.img  bs=1M count=256
+
+> 制作qcow2格式磁盘文件
+
+> > qemu-img create -f qcow2 -o preallocation=metadata server1.qcow2 1G
+
+> 在Linux下制作启动盘
+
+> > dd if=boot.img of=/dev/fd0 bs=1440k 
+
+> 转换文件所有字母为大写
+
+> > dd if=test1 of=test2 conv=ucase
+
 ### OpenSource主流开源协议
 
 #### GPL
@@ -1213,7 +1284,7 @@ global.json file:
 
 ```
 
-### Ubuntu 
+### Ubuntu 相关
 
 > > 彻底卸载火狐 firefox
 

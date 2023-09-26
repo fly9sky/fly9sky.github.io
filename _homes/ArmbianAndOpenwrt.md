@@ -1,12 +1,13 @@
 ---
 layout: post
-title: 玩转各种电视盒子
-description: Amlogic设备等电视盒子的研究包括Arm架构的Armbian，Openwrt，Cloreelec等刷机研究
+title: Armbian与Openwrt等嵌入式系统
+description: Arm架构的Armbian，Openwrt，Cloreelec等刷机研究
 date: 2023-01-02 15:43:01
-updatedate: 2023-09-21 13:26:01
+updatedate: 2023-09-26 09:18:01
 ---
 
-- [常见的Amlogic设备](#常见的amlogic设备)
+- [嵌入式操作系统基础](#嵌入式操作系统基础)
+  - [Uboot](#uboot)
 - [Openwrt相关](#openwrt相关)
   - [软件源](#软件源)
     - [阿里](#阿里)
@@ -77,32 +78,104 @@ updatedate: 2023-09-21 13:26:01
 - [ZN-M2 IPQ60xx系列路由器](#zn-m2-ipq60xx系列路由器)
   - [09-18](#09-18)
   - [09-18](#09-18-1)
+- [SQUASHFS镜像直接扩容的方案](#squashfs镜像直接扩容的方案)
 
-## 常见的Amlogic设备
+## 嵌入式操作系统基础
 
-<hr/>
+### Uboot
 
-| 芯片  | 设备 | [可选内核](https://github.com/ophub/kernel/tree/main/pub/stable) | OpenWrt 固件 |
-| ---- | ---- | ---- | ---- |
-| a311d | [Khadas-VIM3](https://www.gearbest.com/boards---shields/pp_3008145189226460.html) | 全部 | *_a311d_k*.img |
-| s922x | [Beelink-GT-King](https://tokopedia.link/RAgZmOM41db), [Beelink-GT-King-Pro](https://www.gearbest.com/tv-box/pp_3008857542462482.html), [Ugoos-AM6-Plus](https://www.gearbest.com/tv-box/pp_3002820788090799.html), [ODROID-N2](https://www.hardkernel.com/shop/odroid-n2-with-4gbyte-ram-2/) | 全部 | *_s922x_k*.img |
-| s905x3 | [X96-Max+](https://www.gearbest.com/tv-box/pp_3001768790621051.html), [HK1-Box](https://tokopedia.link/xhWeQgTuwfb), [H96-Max-X3](https://tokopedia.link/KuWvwoYuwfb), [Ugoos-X3](https://github.com/ophub/amlogic-s9xxx-armbian/issues/782), [TX3](https://www.aliexpress.com/item/1005003772717802.html), [X96-Air](https://www.gearbest.com/tv-box/pp_3002885621272175.html), [X96-Max+_A100](https://github.com/ophub/amlogic-s9xxx-armbian/issues/779), [A95XF3-Air](https://tokopedia.link/ByBL45jdGgb), [Tencent-Aurora-3Pro(s905x3-b)](https://item.jd.com/100009131339.html), [X96-Max+Q1](https://github.com/ophub/amlogic-s9xxx-armbian/issues/788) | 全部 | *_s905x3_k*.img |
-| s905x2 | [X96Max-4G](https://www.ebay.com/itm/164895650425), [X96Max-2G](https://www.alibaba.com/product-detail/Amlogic-S905X2-Android-TV-Box-X96_62210191636.html), [MECOOL-KM3-4G](https://www.gearbest.com/tv-box/pp_3008133484979616.html), [Tanix-Tx5-Max](https://github.com/ophub/amlogic-s9xxx-openwrt/issues/351), [A95X-F2](https://github.com/ophub/amlogic-s9xxx-armbian/issues/851) | 全部 | *_s905x2_k*.img |
-| s912 | [Tanix-TX8-Max](https://www.tanix-box.com/project-view/tanix-tx8-max-android-tv-box/), [Tanix-TX9-Pro(3G)](https://github.com/ophub/amlogic-s9xxx-armbian/issues/315), [Tanix-TX9-Pro(2G)](https://github.com/ophub/amlogic-s9xxx-armbian/issues/740), [Tanix-TX92](http://www.tanix-box.com/project-view/tanix-tx92-android-tv-box-powered-amlogic-s912/), [Nexbox-A1](https://www.gearbest.com/tv-box-mini-pc/pp_424843.html), [Nexbox-A95X-A2](https://www.cafago.com/en/p-v2979eu-2g.html),  [A95X](https://tokopedia.link/zQVlmUfgqqb), [H96-Pro-Plus](https://www.gearbest.com/tv-box-mini-pc/pp_503486.html), [VORKE-Z6-Plus](http://www.vorke.com/project/vorke-z6-2/), [Mecool-M8S-PRO-L](https://www.gearbest.com/tv-box/pp_3005746210753315.html), [Vontar-X92](https://nl.aliexpress.com/i/32734559342.html), [T95Z-Plus](https://www.ebay.com/itm/253466003975), [Octopus-Planet](https://post.smzdm.com/p/a07oer59/), [Phicomm-T1](https://github.com/ophub/amlogic-s9xxx-armbian/issues/522) | 全部 | *_s912_k*.img |
-| s905d | [MECOOL-KI-Pro](https://www.gearbest.com/tv-box-mini-pc/pp_629409.html), [Phicomm-N1](https://www.cnx-software.com/2019/03/11/phicomm-n1-tv-box-linux-distributions/) | 全部 | *_s905d_k*.img |
-| s905x | [HG680P](https://tokopedia.link/HbrIbqQcGgb), [B860H](https://www.zte.com.cn/global/products/cocloud/201707261551/IP-STB/ZXV10-B860H), [TBee-Box](https://www.tbee.com/product/tbee-box/), [T95](https://www.gearbest.com/tv-box-mini-pc/pp_268277.html), [TX9](https://github.com/ophub/amlogic-s9xxx-armbian/issues/645), [Q96-mini(s905l-b)](https://github.com/ophub/amlogic-s9xxx-armbian/issues/734) | 全部 | *_s905x_k*.img |
-| s905w | [X96-Mini](https://www.gearbest.com/tv-box/pp_3008306149708795.html), [TX3-Mini](https://www.gearbest.com/tv-box/pp_009748238474.html), [W95](https://www.gearbest.com/tv-box/pp_736121.html) | 5.4.y/5.15.y | *_s905w_k*.img |
-| s905 | [Beelink-Mini-MX-2G](https://www.gearbest.com/tv-box-mini-pc/pp_321409.html), [Sunvell-T95M](https://github.com/ophub/amlogic-s9xxx-openwrt/issues/337), [MXQ-PRO+4K](https://www.gearbest.com/tv-box-mini-pc/pp_354313.html) | 全部 | *_s905_k*.img |
-| s905l3a | [E900V22C/D](https://github.com/Calmact/e900v22c), [CM311-1a-YST](https://github.com/ophub/amlogic-s9xxx-armbian/issues/517), [M401A](https://github.com/ophub/amlogic-s9xxx-armbian/issues/732), [M411A](https://blog.csdn.net/fatiaozhang9527/article/details/126388479), [UNT403A](https://blog.csdn.net/wjf149575296/article/details/123947681), [UNT413A](https://blog.csdn.net/fatiaozhang9527/article/details/122232733), [ZTE-B863AV3.2-M](https://github.com/ophub/amlogic-s9xxx-armbian/issues/741) | 全部 | *_s905l3a_k*.img |
-| s905l3b | [M302A/M304A](https://blog.csdn.net/fatiaozhang9527/article/details/122006745) | 全部 | *_s905l2_k*.img |
-| s905l2/3 | [MGV2000](https://github.com/ophub/amlogic-s9xxx-armbian/issues/648), [Wojia-TV-IPBS9505](https://github.com/ophub/amlogic-s9xxx-armbian/issues/648), [CM311-1(s905l3)](https://github.com/ophub/amlogic-s9xxx-armbian/issues/763) | 全部 | *_s905l2_k*.img |
-| rk3588 | [Radxa-Rock5B](https://wiki.radxa.com/Rock5/install), [HinLink-H88K](http://www.hinlink.com/index.php?id=151) | [rk3588](https://github.com/ophub/kernel/tree/main/pub/rk3588) | *_box-name.img |
-| rk3568 | [R66S](https://r68s.cn/), [R68S](https://r68s.cn/), [e25](https://wiki.radxa.com/Rock3/CM/CM3I/E25), [h68k](http://www.hinlink.com/index.php?id=145) | [6.0.y](https://github.com/ophub/kernel/tree/main/pub/stable) | *_box-name.img |
-| rk3328 | [beikeyun](https://www.cnblogs.com/milton/p/15391525.html), [l1pro](https://post.smzdm.com/p/a4wkdo7l/) | 全部 | *_box-name.img |
-| allwinner | [vplus(h6)](https://www.allwinnertech.com/index.php?c=product&a=index&id=66) | 全部 | *_vplus_*.img |
-| KVM | [qemu](https://github.com/unifreq/*_packit/blob/master/files/qemu-aarch64/qemu-aarch64-readme.md) | 全部 | *_qemu_*.img |
+> 嵌入式系统上电后先执行uboot、然后uboot负责初始化DDR，初始化Flash，然后将OS从Flash中读取到DDR中，然后启动OS(OS启动后uboot就无用了) 总结：嵌入式系统和PC机的启动过程几乎没有两样，只是BIOS成了uboot，硬盘成了Flash。
 
-<hr/>
+> Uboot支持的命令
+
+```
+复制代码
+?       - alias for 'help'
+base    - print or set address offset
+bdinfo  - print Board Info structure
+bmode   - sd1|sd2|qspi1|normal|usb|sata|ecspi1:0|ecspi1:1|ecspi1:2|ecspi1:3|esdhc1|esdhc2|esdhc3|esdhc4 [noreset]
+bmp     - manipulate BMP image data
+boot    - boot default, i.e., run 'bootcmd'
+bootd   - boot default, i.e., run 'bootcmd'
+bootelf - Boot from an ELF image in memory
+bootm   - boot application image from memory
+bootp   - boot image via network using BOOTP/TFTP protocol
+bootvx  - Boot vxWorks from an ELF image
+bootz   - boot Linux zImage image from memory
+clocks  - display clocks
+clrlogo - fill the boot logo area with black
+cmp     - memory compare
+coninfo - print console devices and information
+cp      - memory copy
+crc32   - checksum calculation
+dcache  - enable or disable data cache
+dhcp    - boot image via network using DHCP/TFTP protocol
+dm      - Driver model low level access
+echo    - echo args to console
+editenv - edit environment variable
+env     - environment handling commands
+erase   - erase FLASH memory
+exit    - exit script
+ext2load- load binary file from a Ext2 filesystem
+ext2ls  - list files in a directory (default /)
+ext4load- load binary file from a Ext4 filesystem
+ext4ls  - list files in a directory (default /)
+ext4size- determine a file's size
+ext4write- create a file in the root directory
+false   - do nothing, unsuccessfully
+fatinfo - print information about filesystem
+fatload - load binary file from a dos filesystem
+fatls   - list files in a directory (default /)
+fatsize - determine a file's size
+fdt     - flattened device tree utility commands
+flinfo  - print FLASH memory information
+fstype  - Look up a filesystem type
+fuse    - Fuse sub-system
+go      - start application at address 'addr'
+gpio    - query and control gpio pins
+help    - print command description/usage
+i2c     - I2C sub-system
+icache  - enable or disable instruction cache
+iminfo  - print header information for application image
+imxtract- extract a part of a multi-image
+itest   - return true/false on integer compare
+load    - load binary file from a filesystem
+loadb   - load binary file over serial line (kermit mode)
+loads   - load S-Record file over serial line
+loadx   - load binary file over serial line (xmodem mode)
+loady   - load binary file over serial line (ymodem mode)
+loop    - infinite loop on address range
+ls      - list files in a directory (default /)
+md      - memory display
+mm      - memory modify (auto-incrementing address)
+mmc     - MMC sub system
+mmcinfo - display MMC info
+mw      - memory write (fill)
+nand    - NAND sub-system
+nboot   - boot from NAND device
+nfs     - boot image via network using NFS protocol
+nm      - memory modify (constant address)
+ping    - send ICMP ECHO_REQUEST to network host
+pmic    - PMIC
+printenv- print environment variables
+protect - enable or disable FLASH write protection
+reset   - Perform RESET of the CPU
+run     - run commands in an environment variable
+save    - save file to a filesystem
+saveenv - save environment variables to persistent storage
+setenv  - set environment variables
+setexpr - set environment variable as the result of eval expression
+showvar - print local hushshell variables
+size    - determine a file's size
+sleep   - delay execution for some time
+source  - run script from memory
+test    - minimal test like /bin/sh
+tftpboot- boot image via network using TFTP protocol
+true    - do nothing, successfully
+usb     - USB sub-system
+usbboot - boot from USB device
+version - print monitor, compiler and linker version
+```
 
 ## Openwrt相关
 
@@ -1492,3 +1565,36 @@ mtd write /tmp/uboot-cmiot-ax18-mod.bin /dev/mtd13
 > 网上销售的运营商路由器真是不错，自己很便宜，自己买来改造改造还是很不错的设备。
 
 > > 附所有的固件软件等：链接: https://pan.baidu.com/s/1aACgMgZuR0XH8AGbquLElQ?pwd=veab 提取码: veab 复制这段内容后打开百度网盘手机App，操作更方便哦
+
+## SQUASHFS镜像直接扩容的方案
+
+> 下载OpenWRT的gz镜像之后，解压
+
+> > gzip -d openwrt-22.03.2-x86-64-generic-squashfs-combined.img.gz
+
+> 解压这后，给这个img镜像增加空间
+
+> > dd if=/dev/zero bs=1M count=5000 >> openwrt-22.03.2-x86-64-generic-squashfs-combined.img
+
+> 用dd命令，2M即一次增加2M的空间，增加1024次，也就是2G的空间
+
+> 用parted命令进入img镜像，把刚才增加的空间扩展进去
+
+> > parted openwrt-22.03.2-x86-64-generic-squashfs-combined.img
+
+> 用print查看一下分区
+
+> > print
+
+> 发现有两个区，第二个分区还是原始的空间，下面把增加的空间扩展给第二个分区
+
+> > resizepart 2 100%
+
+> 完成，退出
+
+> > quit
+
+> OPENWRT squashfs镜像扩容完成。
+
+
+dd if=/dev/zero bs=2M count=3096 >> openwrt-09.24.2023-x86-64-generic-squashfs-combined.img
