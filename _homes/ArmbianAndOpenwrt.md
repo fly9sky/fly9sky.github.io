@@ -3,11 +3,14 @@ layout: post
 title: Armbian与Openwrt等嵌入式系统
 description: Arm架构的Armbian，Openwrt，Cloreelec等刷机研究
 date: 2023-01-02 15:43:01
-updatedate: 2023-09-26 09:18:01
+updatedate: 2023-09-28 15:33:01
 ---
 
 - [嵌入式操作系统基础](#嵌入式操作系统基础)
   - [Uboot](#uboot)
+  - [rootfs](#rootfs)
+  - [kernel](#kernel)
+  - [Busybox](#busybox)
 - [Openwrt相关](#openwrt相关)
   - [软件源](#软件源)
     - [阿里](#阿里)
@@ -176,6 +179,12 @@ usb     - USB sub-system
 usbboot - boot from USB device
 version - print monitor, compiler and linker version
 ```
+
+### rootfs 
+
+### kernel
+
+### Busybox
 
 ## Openwrt相关
 
