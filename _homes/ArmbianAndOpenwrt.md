@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Armbian与Openwrt等嵌入式系统
-description: Arm架构的Armbian，Openwrt，Cloreelec等刷机研究
+description: Arm架构的Armbian，Openwrt，Cloreelec等机顶盒路由器刷机研究
 date: 2023-01-02 15:43:01
-updatedate: 2023-10-19 13:49:01
+updatedate: 2023-10-26 10:45:01
 ---
 
 - [嵌入式操作系统基础](#嵌入式操作系统基础)
@@ -82,7 +82,16 @@ updatedate: 2023-10-19 13:49:01
   - [09-18](#09-18)
   - [09-18](#09-18-1)
 - [SQUASHFS镜像直接扩容的方案](#squashfs镜像直接扩容的方案)
-- [陕西西安联通手动更换升级光猫](#陕西西安联通手动更换升级光猫)
+- [中兴F4610U 光猫](#中兴f4610u-光猫)
+  - [Telnet命令](#telnet命令)
+  - [中兴光猫隐藏URL](#中兴光猫隐藏url)
+  - [全部是个人尝试切换地区后读取转载请备注出处](#全部是个人尝试切换地区后读取转载请备注出处)
+  - [陕西西安联通手动更换升级光猫](#陕西西安联通手动更换升级光猫)
+- [LINKSYS EA8500 TTL 降级](#linksys-ea8500-ttl-降级)
+  - [备份系统信息](#备份系统信息)
+- [OneCloud](#onecloud)
+  - [DD](#dd)
+  - [Packrepack](#packrepack)
 
 ## 嵌入式操作系统基础
 
@@ -1608,7 +1617,161 @@ mtd write /tmp/uboot-cmiot-ax18-mod.bin /dev/mtd13
 
 > > dd if=/dev/zero bs=2M count=3096 >> openwrt-09.24.2023-x86-64-generic-squashfs-combined.img
 
-## 陕西西安联通手动更换升级光猫
+## 中兴F4610U 光猫
+
+### Telnet命令
+
+> telnet下命令修改模式和地区
+
+> > setmac 1 40960 6 改为xgpon
+
+> cat /etc/init.d/regioncode #显示地区
+
+> upgradetest sdefconf 328#修改地区为西安咸阳
+
+> 再次登录光猫，上传配置文件至电脑。tftp -p -l userconfig/cfg/db_user_cfg.xml -r db_user_cfg.xml 192.168.1.2
+
+> 修改user用户权限为管理员
+
+> > sendcmd 1 DB set DevAuthInfo 1 Level 1（user用户提权为管理员）
+
+> > sendcmd 1 DB set WLANCfg 0 ESSIDPrefix ""（设置2.4G的ssid前缀为空）
+
+> > sendcmd 1 DB set WLANCfg 4 ESSIDPrefix ""（设置5G的ssid前缀为空）
+
+> > sendcmd 1 DB save （手工保存配置文件）
+
+> > 重新启动光猫后，user用户登录后可看到并修改全部菜单，并且ssid可以随便修改了，没有了缺省的前缀”CMCC-“
+
+> 打开任意网页自动跳转LOID注册页面—
+
+> > sendcmd 1 DB set PDTCTUSERINFO 0 Status 0
+
+> > sendcmd 1 DB set PDTCTUSERINFO 0 Result 1
+
+> > sendcmd 1 DB save
+
+> 更改telnet用户密码sendcmd 1 DB set TelnetCfg 0 TS_UPwd 
+
+> > ooxxsendcmd 1 DB set TelnetCfg 0 TSLan_UPwd 
+
+> 说明几点：
+
+> > tr69远程控制必须去掉，因为限制会被重新加上使破解失效。最简明的方法是把 服务器 URL 改掉：比如http://devacs.edatahome.../那个，改成 http://127.0.0.1
+
+### 中兴光猫隐藏URL
+
+> 恢复出厂：http://192.168.1.1/return2factory.html
+
+> 切换地域：http://192.168.1.1/hidden_version_switch.gch
+
+> 固件升级：http://192.168.1.1/getpage.gch?pid=1001&logout=1&hidden=upgrade
+
+> 网页恢复出场设置
+
+> > http://192.168.1.1/return2factory.html 
+
+> > 管理员用户名：CMCCAdmin，口令：aDm8H%MdA
+
+> 打开浏览器http://192.168.1.1/web_shell_cmd.gch
+
+
+> > 输入 sendcmd 1 DB p UserInfo #查看用户名密码，默认为telecomadmin/telecomadmin+数字
+
+> > 输入 sendcmd 1 DB set UserInfo 0 Username admin #修改用户名为admin
+
+> > 输入 sendcmd 1 DB set UserInfo 0 Password admin #修改密码为admin
+
+> > 输入 sendcmd 1 DB save #修改保存
+
+> 修改远程控制，防止远程修改你的超级账号，对一些功能做出限制
+
+> > 打开浏览器http://192.168.1.1/web_shell_cmd.gch
+
+> > 输入 sendcmd 1 DB p MgtServer  #查看一下当前的电信远程控制
+
+> > 输入 sendcmd 1 DB set MgtServer 0 URL http://123.0.0.1 （ #简明的方法是把服务器 URL 改掉
+
+> > 输入 sendcmd 1 DB set MgtServer 0 Tr069Enable 0  #禁用TR069远程控制
+
+> > 输入 sendcmd 1 DB save  #修改保存
+
+> 开启光猫自动拨号
+
+> > 新建WAN连接，勾上LAN1、3、4和SSID1，LAN2和SSID2由于绑定ITV，所以不能勾上，否则ITV看不了。在用户名和密码框填上家里
+上网账号和密码，然后点创建或保存，搞定。
+
+> > sendcmd 1 DB set FTPServerCfg  0 FtpEnable 0
+
+> > sendcmd 1 DB set DHCPSHostCfg 0 DNSServers1 #你想改的DNS地址1 电信DNS 61.128.128.68 61.128.192.68
+
+> > *注意空格和大小写
+
+### 全部是个人尝试切换地区后读取转载请备注出处
+
+> 北京 无 192.168.1.1
+
+> 上海 CUAdmin CUAdmin 192.168.1.1
+
+> 天津 CUAdmin CUAdmin 192.168.18.1
+
+> 征订 cqunicom cqunicom 192.168.1.1
+
+> 安徽 CUAdmin CUAdmin 192.168.1.1
+
+> 福建 CUAdmin CUAdmin 192.168.1.1
+
+> 甘肃 CUAdmin CUAdmin 192.168.1.1
+
+> 广东 CUAdmin CUAdmin 192.168.1.1
+
+> 广西 CUAdmin CUAdmin 192.168.1.1
+
+> 贵州 CUAdmin CUAdmin 192.168.1.1
+
+> 海南 cuadmin cu@HNunicom 192.168.1.1
+
+> 河北 cuadmin cuadmin 192.168.1.1
+
+> 河南 CUAdmin CUAdmin 192.168.1.1
+
+> 湖北 CUAdmin CUAdmin 192.168.1.1
+
+> 湖南 CUAdmin CUAdmin#HGU 192.168.1.1
+
+> 吉林 CUAdin CUAdmin 192.168.1.1
+
+> 江苏 CUAdin CUAdmin 192.168.1.1
+
+> 江西 CUAdin CUAdmin 192.168.1.1
+
+> 辽宁 lnadmin lnadmin 192.168.2.1
+
+> 宁夏 CUAdmin CUAdmin 192.168.1.1
+
+> 青海 CUAdmin CUAdmin 192.168.1.1
+
+> 山东 CUAdmin CUAdmin 192.168.1.1
+
+> 山西 CUAdmin CUAdmin 192.168.1.1
+
+> 陕西 CUAdmin CUAdmin 192.168.1.1
+
+> 四川 CUAdmin CUAdmin 192.168.1.1
+
+> 西藏 CUAdmin CUAdmin 192.168.1.1
+
+> 新疆 CUAdmin CUAdmin 192.168.1.1
+
+> 云南 CUAdmin CUAdmin 192.168.1.1
+
+> 浙江 CUAdmin CUAdmin 192.168.1.1
+
+> 黑龙江 hljcuadmin 8MCU@HLJ 192.168.1.1
+
+> 内蒙古 CUAdmin CUAdmin 192.168.1.1
+
+### 陕西西安联通手动更换升级光猫
 
 > 其实目前所用光猫是华为的千兆光猫，性能目前来说也是足够用的。但是为什么要更换呢，这是因为这个光猫实际有两个LAN口，其中一个千兆，另一个只有百兆。而实际我现在在弱电箱中放了一个无线路由器，还有一个旁路路由。当然为什么要这么复杂呢，这里就不解释了。
 
@@ -1655,3 +1818,420 @@ mtd write /tmp/uboot-cmiot-ax18-mod.bin /dev/mtd13
 > > set sn snid xxx #xxx为旧猫的sn
 
 > > SU_WAP>load pack by tftp svrip 192.168.1.2 remotefile allshell2.bin 华为广袤刷机补全
+
+## LINKSYS EA8500 TTL 降级
+
+> setenv flashimg 'tftp $loadaddr $image;nand erase $prikern $imgsize;nand write $loadaddr $prikern $filesize'  
+ 
+> setenv flashimg2 'tftp $loadaddr $image;nand erase $altkern $imgsize;nand write $loadaddr $altkern $filesize'
+ 
+> saveenv
+ 
+> setenv image FW_EA8500_1.1.3.166845_prod.img
+
+> setenv ipaddr 192.168.1.1
+
+> setenv serverip 192.168.1.2
+ 
+> setenv autostart no
+
+> run flashimg
+ 
+> run flashimg2
+ 
+> reset
+
+### 备份系统信息
+
+> printenv
+
+```
+altkern=3780000
+auto_recovery=yes
+baudrate=115200
+boot_part=1
+boot_part_ready=3
+boot_ver=1.0.12
+bootargs=console=ttyHSL1,115200n8
+bootcmd=bootipq
+bootdelay=2
+ethact=eth0
+ethaddr=00:06:3b:01:41:00
+flashimg=tftp $loadaddr $image;nand erase $prikern $imgsize;nand write $loadaddr                                                                                                  $prikern $filesize
+flashimg2=tftp $loadaddr $image;nand erase $altkern $imgsize;nand write $loadadd                                                                                                 r $altkern $filesize
+image=wraith.bin
+imgsize=2800000
+ipaddr=192.168.1.1
+loadaddr=42000000
+machid=1260
+netmask=255.255.255.0
+partbootargs=console=ttyHSL1,115200n8 init=/sbin/init rootfstype=squashfs root=3                                                                                                 1:14
+partbootargs2=console=ttyHSL1,115200n8 init=/sbin/init rootfstype=squashfs root=                                                                                                 31:16
+prikern=f80000
+serverip=192.168.1.254
+stderr=serial
+stdin=serial
+stdout=serial
+```
+
+> Environment size: 804/262140 bytes
+
+## OneCloud 
+
+> > Make a img
+
+### DD
+
+```
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ fdisk openwrt-10.13.2023-meson-meson8b-thunder-onecloud-ext4-sdcard.img
+ 
+Welcome to fdisk (util-linux 2.37.2).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+ 
+ 
+Command (m for help): p
+Disk openwrt-10.13.2023-meson-meson8b-thunder-onecloud-ext4-sdcard.img: 1 GiB, 1077936128 bytes, 2105344 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: dos
+Disk identifier: 0x5452574f
+ 
+Device                                                             Boot Start     End Sectors  Size Id Type
+openwrt-10.13.2023-meson-meson8b-thunder-onecloud-ext4-sdcard.img1 *     8192   40959   32768   16M  c W95 
+openwrt-10.13.2023-meson-meson8b-thunder-onecloud-ext4-sdcard.img2      49152 2105343 2056192 1004M 83 Linu
+ 
+Command (m for help): q
+ 
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ ls /dev/loop*
+/dev/loop0   /dev/loop13  /dev/loop18  /dev/loop4  /dev/loop9
+/dev/loop1   /dev/loop14  /dev/loop19  /dev/loop5  /dev/loop-control
+/dev/loop10  /dev/loop15  /dev/loop2   /dev/loop6
+/dev/loop11  /dev/loop16  /dev/loop20  /dev/loop7
+/dev/loop12  /dev/loop17  /dev/loop3   /dev/loop8
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ losetup /dev/loop26 openwrt-10.13.2023-meson-meson8b-thunder-onecloud-ext4-sdcard.img
+losetup: /dev/loop26: failed to set up loop device: No such file or directory
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ sudo losetup -fP openwrt-10.13.2023-meson-meson8b-thunder-onecloud-ext4-sdcard.img
+[sudo] password for usernam: 
+Sorry, try again.
+[sudo] password for usernam: 
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ lsblk
+NAME       MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0        7:0    0     4K  1 loop /snap/bare/5
+loop1        7:1    0  55.7M  1 loop /snap/core18/2790
+loop2        7:2    0  61.9M  1 loop /snap/core20/1405
+loop3        7:3    0  63.5M  1 loop /snap/core20/2015
+loop4        7:4    0  73.9M  1 loop /snap/core22/858
+loop5        7:5    0  73.9M  1 loop /snap/core22/864
+loop6        7:6    0 233.5M  1 loop /snap/glaxnimate/719
+loop7        7:7    0 349.7M  1 loop /snap/gnome-3-38-2004/143
+loop8        7:8    0 248.8M  1 loop /snap/gnome-3-38-2004/99
+loop9        7:9    0  91.7M  1 loop /snap/gtk-common-themes/1535
+loop10       7:10   0  81.3M  1 loop /snap/gtk-common-themes/1534
+loop11       7:11   0 289.8M  1 loop /snap/kde-frameworks-5-core18/35
+loop12       7:12   0  45.9M  1 loop /snap/snap-store/575
+loop13       7:13   0  12.3M  1 loop /snap/snap-store/959
+loop14       7:14   0  40.8M  1 loop /snap/snapd/20092
+loop15       7:15   0  40.9M  1 loop /snap/snapd/20290
+loop16       7:16   0   284K  1 loop /snap/snapd-desktop-integration/10
+loop17       7:17   0   452K  1 loop /snap/snapd-desktop-integration/83
+loop18       7:18   0 320.4M  1 loop /snap/vlc/3078
+loop19       7:19   0 321.1M  1 loop /snap/vlc/3721
+loop20       7:20   0     1G  0 loop 
+├─loop20p1 259:0    0    16M  0 part 
+└─loop20p2 259:1    0  1004M  0 part 
+sda          8:0    0 465.8G  0 disk 
+├─sda1       8:1    0   260M  0 part 
+├─sda2       8:2    0    16M  0 part 
+├─sda3       8:3    0   196G  0 part 
+├─sda4       8:4    0 260.5G  0 part /media/usernam/新加卷
+└─sda5       8:5    0    99M  0 part 
+sdb          8:16   0 223.6G  0 disk 
+├─sdb1       8:17   0   513M  0 part /boot/efi
+├─sdb2       8:18   0    16M  0 part 
+├─sdb3       8:19   0 133.1G  0 part /media/usernam/Win10
+├─sdb4       8:20   0   7.5G  0 part 
+└─sdb5       8:21   0  82.5G  0 part /
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ dd if=/dev/loop20p2 of=/media/usernam/新加卷/OneCloud/rootfs.img
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ ls /dev/loop*
+/dev/loop0  /dev/loop10  /dev/loop12  /dev/loop14  /dev/loop16  /dev/loop18  /dev/loop2   /dev/loop20p1  /dev/loop3  /dev/loop5  /dev/loop7  /dev/loop9
+/dev/loop1  /dev/loop11  /dev/loop13  /dev/loop15  /dev/loop17  /dev/loop19  /dev/loop20  /dev/loop20p2  /dev/loop4  /dev/loop6  /dev/loop8  /dev/loop-control
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ sudo losetup -fP openwrt-10.13.2023-meson-meson8b-thunder-onecloud-ext4-sdcard.img
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ lsblk
+NAME       MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0        7:0    0     4K  1 loop /snap/bare/5
+loop1        7:1    0  55.7M  1 loop /snap/core18/2790
+loop2        7:2    0  61.9M  1 loop /snap/core20/1405
+loop3        7:3    0  63.5M  1 loop /snap/core20/2015
+loop4        7:4    0  73.9M  1 loop /snap/core22/858
+loop5        7:5    0  73.9M  1 loop /snap/core22/864
+loop6        7:6    0 233.5M  1 loop /snap/glaxnimate/719
+loop7        7:7    0 349.7M  1 loop /snap/gnome-3-38-2004/143
+loop8        7:8    0 248.8M  1 loop /snap/gnome-3-38-2004/99
+loop9        7:9    0  91.7M  1 loop /snap/gtk-common-themes/1535
+loop10       7:10   0  81.3M  1 loop /snap/gtk-common-themes/1534
+loop11       7:11   0 289.8M  1 loop /snap/kde-frameworks-5-core18/35
+loop12       7:12   0  45.9M  1 loop /snap/snap-store/575
+loop13       7:13   0  12.3M  1 loop /snap/snap-store/959
+loop14       7:14   0  40.8M  1 loop /snap/snapd/20092
+loop15       7:15   0  40.9M  1 loop /snap/snapd/20290
+loop16       7:16   0   284K  1 loop /snap/snapd-desktop-integration/10
+loop17       7:17   0   452K  1 loop /snap/snapd-desktop-integration/83
+loop18       7:18   0 320.4M  1 loop /snap/vlc/3078
+loop19       7:19   0 321.1M  1 loop /snap/vlc/3721
+loop20       7:20   0     1G  0 loop 
+├─loop20p1 259:0    0    16M  0 part 
+└─loop20p2 259:1    0  1004M  0 part 
+loop21       7:21   0     1G  0 loop 
+├─loop21p1 259:2    0    16M  0 part 
+└─loop21p2 259:3    0  1004M  0 part 
+sda          8:0    0 465.8G  0 disk 
+├─sda1       8:1    0   260M  0 part 
+├─sda2       8:2    0    16M  0 part 
+├─sda3       8:3    0   196G  0 part 
+├─sda4       8:4    0 260.5G  0 part /media/usernam/新加卷
+└─sda5       8:5    0    99M  0 part 
+sdb          8:16   0 223.6G  0 disk 
+├─sdb1       8:17   0   513M  0 part /boot/efi
+├─sdb2       8:18   0    16M  0 part 
+├─sdb3       8:19   0 133.1G  0 part /media/usernam/Win10
+├─sdb4       8:20   0   7.5G  0 part 
+└─sdb5       8:21   0  82.5G  0 part /
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ losetup -d /dev/loop20
+losetup: /dev/loop20: detach failed: Permission denied
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ sudo losetup -d /dev/loop20
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ sudo losetup -d /dev/loop21
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ lsblk
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0    7:0    0     4K  1 loop /snap/bare/5
+loop1    7:1    0  55.7M  1 loop /snap/core18/2790
+loop2    7:2    0  61.9M  1 loop /snap/core20/1405
+loop3    7:3    0  63.5M  1 loop /snap/core20/2015
+loop4    7:4    0  73.9M  1 loop /snap/core22/858
+loop5    7:5    0  73.9M  1 loop /snap/core22/864
+loop6    7:6    0 233.5M  1 loop /snap/glaxnimate/719
+loop7    7:7    0 349.7M  1 loop /snap/gnome-3-38-2004/143
+loop8    7:8    0 248.8M  1 loop /snap/gnome-3-38-2004/99
+loop9    7:9    0  91.7M  1 loop /snap/gtk-common-themes/1535
+loop10   7:10   0  81.3M  1 loop /snap/gtk-common-themes/1534
+loop11   7:11   0 289.8M  1 loop /snap/kde-frameworks-5-core18/35
+loop12   7:12   0  45.9M  1 loop /snap/snap-store/575
+loop13   7:13   0  12.3M  1 loop /snap/snap-store/959
+loop14   7:14   0  40.8M  1 loop /snap/snapd/20092
+loop15   7:15   0  40.9M  1 loop /snap/snapd/20290
+loop16   7:16   0   284K  1 loop /snap/snapd-desktop-integration/10
+loop17   7:17   0   452K  1 loop /snap/snapd-desktop-integration/83
+loop18   7:18   0 320.4M  1 loop /snap/vlc/3078
+loop19   7:19   0 321.1M  1 loop /snap/vlc/3721
+sda      8:0    0 465.8G  0 disk 
+├─sda1   8:1    0   260M  0 part 
+├─sda2   8:2    0    16M  0 part 
+├─sda3   8:3    0   196G  0 part 
+├─sda4   8:4    0 260.5G  0 part /media/usernam/新加卷
+└─sda5   8:5    0    99M  0 part 
+sdb      8:16   0 223.6G  0 disk 
+├─sdb1   8:17   0   513M  0 part /boot/efi
+├─sdb2   8:18   0    16M  0 part 
+├─sdb3   8:19   0 133.1G  0 part /media/usernam/Win10
+├─sdb4   8:20   0   7.5G  0 part 
+└─sdb5   8:21   0  82.5G  0 part /
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$  sudo losetup -o 4194304  openwrt-10.13.2023-meson-meson8b-thunder-onecloud-ext4-sdcard.img
+losetup: openwrt-10.13.2023-meson-meson8b-thunder-onecloud-ext4-sdcard.img: failed to use device: No such device
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ sudo losetup -fP -o 4194304  openwrt-10.13.2023-meson-meson8b-thunder-onecloud-ext4-sdcard.img
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ lsblk
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0    7:0    0     4K  1 loop /snap/bare/5
+loop1    7:1    0  55.7M  1 loop /snap/core18/2790
+loop2    7:2    0  61.9M  1 loop /snap/core20/1405
+loop3    7:3    0  63.5M  1 loop /snap/core20/2015
+loop4    7:4    0  73.9M  1 loop /snap/core22/858
+loop5    7:5    0  73.9M  1 loop /snap/core22/864
+loop6    7:6    0 233.5M  1 loop /snap/glaxnimate/719
+loop7    7:7    0 349.7M  1 loop /snap/gnome-3-38-2004/143
+loop8    7:8    0 248.8M  1 loop /snap/gnome-3-38-2004/99
+loop9    7:9    0  91.7M  1 loop /snap/gtk-common-themes/1535
+loop10   7:10   0  81.3M  1 loop /snap/gtk-common-themes/1534
+loop11   7:11   0 289.8M  1 loop /snap/kde-frameworks-5-core18/35
+loop12   7:12   0  45.9M  1 loop /snap/snap-store/575
+loop13   7:13   0  12.3M  1 loop /snap/snap-store/959
+loop14   7:14   0  40.8M  1 loop /snap/snapd/20092
+loop15   7:15   0  40.9M  1 loop /snap/snapd/20290
+loop16   7:16   0   284K  1 loop /snap/snapd-desktop-integration/10
+loop17   7:17   0   452K  1 loop /snap/snapd-desktop-integration/83
+loop18   7:18   0 320.4M  1 loop /snap/vlc/3078
+loop19   7:19   0 321.1M  1 loop /snap/vlc/3721
+loop20   7:20   0     1G  0 loop 
+sda      8:0    0 465.8G  0 disk 
+├─sda1   8:1    0   260M  0 part 
+├─sda2   8:2    0    16M  0 part 
+├─sda3   8:3    0   196G  0 part 
+├─sda4   8:4    0 260.5G  0 part /media/usernam/新加卷
+└─sda5   8:5    0    99M  0 part 
+sdb      8:16   0 223.6G  0 disk 
+├─sdb1   8:17   0   513M  0 part /boot/efi
+├─sdb2   8:18   0    16M  0 part 
+├─sdb3   8:19   0 133.1G  0 part /media/usernam/Win10
+├─sdb4   8:20   0   7.5G  0 part 
+└─sdb5   8:21   0  82.5G  0 part /
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ sudo losetup -d /dev/loop20
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ sudo losetup -fP -o 25165824 openwrt-10.13.2023-meson-meson8b-thunder-onecloud-ext4-sdcard.img
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ lsblk
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0    7:0    0     4K  1 loop /snap/bare/5
+loop1    7:1    0  55.7M  1 loop /snap/core18/2790
+loop2    7:2    0  61.9M  1 loop /snap/core20/1405
+loop3    7:3    0  63.5M  1 loop /snap/core20/2015
+loop4    7:4    0  73.9M  1 loop /snap/core22/858
+loop5    7:5    0  73.9M  1 loop /snap/core22/864
+loop6    7:6    0 233.5M  1 loop /snap/glaxnimate/719
+loop7    7:7    0 349.7M  1 loop /snap/gnome-3-38-2004/143
+loop8    7:8    0 248.8M  1 loop /snap/gnome-3-38-2004/99
+loop9    7:9    0  91.7M  1 loop /snap/gtk-common-themes/1535
+loop10   7:10   0  81.3M  1 loop /snap/gtk-common-themes/1534
+loop11   7:11   0 289.8M  1 loop /snap/kde-frameworks-5-core18/35
+loop12   7:12   0  45.9M  1 loop /snap/snap-store/575
+loop13   7:13   0  12.3M  1 loop /snap/snap-store/959
+loop14   7:14   0  40.8M  1 loop /snap/snapd/20092
+loop15   7:15   0  40.9M  1 loop /snap/snapd/20290
+loop16   7:16   0   284K  1 loop /snap/snapd-desktop-integration/10
+loop17   7:17   0   452K  1 loop /snap/snapd-desktop-integration/83
+loop18   7:18   0 320.4M  1 loop /snap/vlc/3078
+loop19   7:19   0 321.1M  1 loop /snap/vlc/3721
+loop20   7:20   0  1004M  0 loop 
+sda      8:0    0 465.8G  0 disk 
+├─sda1   8:1    0   260M  0 part 
+├─sda2   8:2    0    16M  0 part 
+├─sda3   8:3    0   196G  0 part 
+├─sda4   8:4    0 260.5G  0 part /media/usernam/新加卷
+└─sda5   8:5    0    99M  0 part 
+sdb      8:16   0 223.6G  0 disk 
+├─sdb1   8:17   0   513M  0 part /boot/efi
+├─sdb2   8:18   0    16M  0 part 
+├─sdb3   8:19   0 133.1G  0 part /media/usernam/Win10
+├─sdb4   8:20   0   7.5G  0 part 
+└─sdb5   8:21   0  82.5G  0 part /
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ dd if=/dev/loop20 of=/media/usernam/新加卷/OneCloud/rootfs.img
+dd: failed to open '/dev/loop20': Permission denied
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ sudodd if=/dev/loop20 of=/media/usernam/新加卷/OneCloud/rootfs.img
+sudodd: command not found
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ sudo dd if=/dev/loop20 of=/media/usernam/新加卷/OneCloud/rootfs.img
+2056192+0 records in
+2056192+0 records out
+1052770304 bytes (1.1 GB, 1004 MiB) copied, 25.5339 s, 41.2 MB/s
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ sudo dd if=/dev/loop20 of=/media/usernam/新加卷/OneCloud/rootfs.PARTITION
+2056192+0 records in
+2056192+0 records out
+1052770304 bytes (1.1 GB, 1004 MiB) copied, 20.0554 s, 52.5 MB/s
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/New$ 
+```
+
+### Packrepack
+
+```
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/linux-amlogic-toolkit$ ./bin/build
+[sudo] password for usernam: 
+umount: output/system: no mount point specified.
+make: Entering directory '/media/usernam/新加卷/OneCloud/linux-amlogic-toolkit/bin/src/simg2img'
+rm -f -f *.o *.a simg2img simg2simg img2simg append2simg .depend
+make: Leaving directory '/media/usernam/新加卷/OneCloud/linux-amlogic-toolkit/bin/src/simg2img'
+make: Entering directory '/media/usernam/新加卷/OneCloud/linux-amlogic-toolkit/bin/src/abootimg'
+rm -f abootimg *.o version.h
+make: Leaving directory '/media/usernam/新加卷/OneCloud/linux-amlogic-toolkit/bin/src/abootimg'
+Cleanup done
+make: Entering directory '/media/usernam/新加卷/OneCloud/linux-amlogic-toolkit/bin/src/simg2img'
+cc -c -O2 -Wall -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -Iinclude backed_block.c -o backed_block.o
+cc -c -O2 -Wall -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -Iinclude output_file.c -o output_file.o
+cc -c -O2 -Wall -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -Iinclude sparse.c -o sparse.o
+cc -c -O2 -Wall -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -Iinclude sparse_crc32.c -o sparse_crc32.o
+cc -c -O2 -Wall -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -Iinclude sparse_err.c -o sparse_err.o
+cc -c -O2 -Wall -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -Iinclude sparse_read.c -o sparse_read.o
+ar rc libsparse.a backed_block.o output_file.o sparse.o sparse_crc32.o sparse_err.o sparse_read.o
+ranlib libsparse.a
+cc -O2 -Wall -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -Iinclude -o simg2img simg2img.c -L. -lsparse -lm -lz
+cc -O2 -Wall -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -Iinclude -o simg2simg simg2simg.c -L. -lsparse -lm -lz
+cc -O2 -Wall -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -Iinclude -o img2simg img2simg.c -L. -lsparse -lm -lz
+cc -O2 -Wall -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE=1 -Iinclude -o append2simg append2simg.c -L. -lsparse -lm -lz
+make: Leaving directory '/media/usernam/新加卷/OneCloud/linux-amlogic-toolkit/bin/src/simg2img'
+make: Entering directory '/media/usernam/新加卷/OneCloud/linux-amlogic-toolkit/bin/src/abootimg'
+fatal: No names found, cannot describe anything.
+if [ ! -f version.h ]; then \
+if [ -d .git ]; then \
+echo '#define VERSION_STR ""' > version.h; \
+else \
+echo '#define VERSION_STR ""' > version.h; \
+fi \
+fi
+cc -O3 -Wall -DHAS_BLKID  -c -o abootimg.o abootimg.c
+abootimg.c: In function ‘write_bootimg’:
+abootimg.c:696:3: warning: ignoring return value of ‘ftruncate’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+  696 |   ftruncate (fileno(img->stream), img->size);
+      |   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cc   abootimg.o  -lblkid -o abootimg
+make: Leaving directory '/media/usernam/新加卷/OneCloud/linux-amlogic-toolkit/bin/src/abootimg'
+Build done
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/linux-amlogic-toolkit$ ./bin/unpack openwrt-07.29.2023-diy-for-cheng-burn-by-cheng.img
+Cleaning up...
+umount: output/system: not mounted.
+Unpacking image openwrt-07.29.2023-diy-for-cheng-burn-by-cheng.img...
+[Msg]Image package version 0x2
+[Msg]Unpack item [USB         ,              DDR] to (output/image/DDR.USB) size:11824 bytes
+[Msg]Unpack item [USB         ,       UBOOT_COMP] to (output/image/UBOOT_COMP.USB) size:313240 bytes
+[Msg]Unpack item [ini         ,     aml_sdc_burn] to (output/image/aml_sdc_burn.ini) size:190 bytes
+[Msg]Unpack item [conf        ,         platform] to (output/image/platform.conf) size:116 bytes
+[Msg]Unpack item [PARTITION   ,       bootloader] to (output/image/bootloader.PARTITION) size:346008 bytes
+[Msg]Unpack item [PARTITION   ,         resource] to (output/image/resource.PARTITION) size:691392 bytes
+[Msg]Unpack item [PARTITION   ,             boot] to (output/image/boot.PARTITION) size:48533728 bytes
+[Msg]Unpack item [PARTITION   ,           rootfs] to (output/image/rootfs.PARTITION) size:1157552628 bytes
+[Msg]Write config file "output/image/image.cfg" OK!
+Image unpack OK!
+Converting system.PARTITION to system.img...
+Cannot open input file output/image/system.PARTITION
+Mounting system image...
+mount: /media/usernam/新加卷/OneCloud/linux-amlogic-toolkit/output/system: wrong fs type, bad option, bad superblock on /dev/loop20, missing codepage or helper program, or other error.
+Unpacking logo...
+./bin/unpack: 27: bin/logo_img_packer: not found
+Unpacking boot...
+boot.img: no Android Magic Value
+boot.img: not a valid Android Boot Image.
+ 
+Done
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/linux-amlogic-toolkit$ ./bin/repack myop.img
+./bin/repack: 9: bin/recreate: Permission denied
+Packing image to myop.img...
+[Msg]Pack Item[USB         ,              DDR] from (output/image/DDR.USB),sz[0x2e30]B,
+[Msg]Pack Item[USB         ,       UBOOT_COMP] from (output/image/UBOOT_COMP.USB),sz[0x4c798]B,ft[normal]   
+[Msg]Pack Item[ini         ,     aml_sdc_burn] from (output/image/aml_sdc_burn.ini),sz[0xbe]B,
+[Msg]Pack Item[PARTITION   ,             boot] from (output/image/boot.PARTITION),sz[0x2e490e0]B,ft[sparse] 
+[Msg]Pack Item[VERIFY      ,             boot] from (output/image/boot.PARTITION),vry[sha1sum 73c432e6efc6c0412c256be31bf83d8c0cd7677c] 
+[Msg]Pack Item[PARTITION   ,       bootloader] from (output/image/bootloader.PARTITION),sz[0x54798]B,ft[normal] 
+[Msg]Pack Item[VERIFY      ,       bootloader] from (output/image/bootloader.PARTITION),vry[sha1sum e770dd884adf759e56fef21ca8401583c04e9fe6]   
+[Msg]Pack Item[conf        ,         platform] from (output/image/platform.conf),sz[0x74]B,
+[Msg]Pack Item[PARTITION   ,         resource] from (output/image/resource.PARTITION),sz[0xa8cc0]B,ft[normal]   
+[Msg]Pack Item[VERIFY      ,         resource] from (output/image/resource.PARTITION),vry[sha1sum 26a0e54485d7d2d46b203c6c71afade3406e96ae] 
+[Msg]Pack Item[PARTITION   ,           rootfs] from (output/image/rootfs.PARTITION),sz[0x44fed9f4]B,ft[sparse]  
+[Msg]Pack Item[VERIFY      ,           rootfs] from (output/image/rootfs.PARTITION),vry[sha1sum 955b01921d1c2520e3129249dae12e31ebc31d35]   
+[Msg]version:0x2 crc:0x714cd7f4 size:1207456296 bytes[1151MB]
+Pack image[myop.img] OK
+Done
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/linux-amlogic-toolkit$ sudo ./bin/repack myop_noreplaceboot.img
+[sudo] password for usernam: 
+./bin/repack: 9: bin/recreate: Permission denied
+Packing image to myop_noreplaceboot.img...
+[Msg]Pack Item[USB         ,              DDR] from (output/image/DDR.USB),sz[0x2e30]B,
+[Msg]Pack Item[USB         ,       UBOOT_COMP] from (output/image/UBOOT_COMP.USB),sz[0x4c798]B,ft[normal]   
+[Msg]Pack Item[ini         ,     aml_sdc_burn] from (output/image/aml_sdc_burn.ini),sz[0xbe]B,
+[Msg]Pack Item[PARTITION   ,             boot] from (output/image/boot.PARTITION),sz[0x2e490e0]B,ft[sparse] 
+[Msg]Pack Item[VERIFY      ,             boot] from (output/image/boot.PARTITION),vry[sha1sum 73c432e6efc6c0412c256be31bf83d8c0cd7677c] 
+[Msg]Pack Item[PARTITION   ,       bootloader] from (output/image/bootloader.PARTITION),sz[0x54798]B,ft[normal] 
+[Msg]Pack Item[VERIFY      ,       bootloader] from (output/image/bootloader.PARTITION),vry[sha1sum e770dd884adf759e56fef21ca8401583c04e9fe6]   
+[Msg]Pack Item[conf        ,         platform] from (output/image/platform.conf),sz[0x74]B,
+[Msg]Pack Item[PARTITION   ,         resource] from (output/image/resource.PARTITION),sz[0xa8cc0]B,ft[normal]   
+[Msg]Pack Item[VERIFY      ,         resource] from (output/image/resource.PARTITION),vry[sha1sum 26a0e54485d7d2d46b203c6c71afade3406e96ae] 
+[Msg]Pack Item[PARTITION   ,           rootfs] from (output/image/rootfs.PARTITION),sz[0x44fed9f4]B,ft[sparse]  
+[Msg]Pack Item[VERIFY      ,           rootfs] from (output/image/rootfs.PARTITION),vry[sha1sum 955b01921d1c2520e3129249dae12e31ebc31d35]   
+[Msg]version:0x2 crc:0x714cd7f4 size:1207456296 bytes[1151MB]
+Pack image[myop_noreplaceboot.img] OK
+Done
+usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/linux-amlogic-toolkit$ 
+```

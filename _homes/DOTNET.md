@@ -3,7 +3,7 @@ layout: post
 title: 微软Dotnet技术
 description: Dotnet相关技术WPF,AS.net，Winform等相关技术总结
 date: 2022-10-01 09:01:01
-updatedate: 2023-09-20 09:19:01
+updatedate: 2023-10-26 10:45:01
 ---
 
 - [认证授权](#认证授权)
@@ -150,9 +150,6 @@ updatedate: 2023-09-20 09:19:01
         - [GetParent(DependencyObject)](#getparentdependencyobject)
     - [合并XAMLS命名空间](#合并xamls命名空间)
       - [注意看程序集的信息，里面有一堆这样的代码：](#注意看程序集的信息里面有一堆这样的代码)
-  - [资源](#资源-1)
-    - [样式](#样式-1)
-    - [模板](#模板-1)
   - [布局](#布局)
       - [控制位置](#控制位置)
         - [1. Alignment](#1-alignment)
@@ -6023,12 +6020,6 @@ public class MainWindowViewModel : NotificationObject
 ```
 
 > 这些代码的作用就是把那些命名空间合并到一个统一的命名空间里，方便调用。我们在自己的程序集里也可以这样用，只要修改AssemblyInfo.cs就可以了。然后我们在XAML里添加命名空间，就会看到自己定义的命名空间了。
-
-### 资源
-
-#### 样式
-
-#### 模板
 
 ### 布局
 
