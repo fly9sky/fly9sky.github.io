@@ -3,7 +3,7 @@ layout: post
 title: 微软Dotnet技术
 description: Dotnet相关技术WPF,AS.net，Winform等相关技术总结
 date: 2022-10-01 09:01:01
-updatedate: 2023-10-26 10:45:01
+updatedate: 2023-10-26 12:07:01
 ---
 
 - [认证授权](#认证授权)
@@ -24,7 +24,9 @@ updatedate: 2023-10-26 10:45:01
   - [元组](#元组)
   - [常量和字段](#常量和字段)
   - [集合类型](#集合类型)
+  - [Lambda表达式](#lambda表达式)
   - [方法](#方法)
+  - [Fluent API(流式接口)](#fluent-api流式接口)
   - [参数](#参数)
   - [属性](#属性)
   - [事件](#事件)
@@ -250,6 +252,8 @@ updatedate: 2023-10-26 10:45:01
     - [SSO 与CAS](#sso-与cas-1)
   - [授权](#授权-1)
     - [OAuth 授权](#oauth-授权-1)
+- [Entity Framework](#entity-framework)
+  - [EDM](#edm)
 - [插件式框架](#插件式框架)
   - [Main](#main)
     - [Log4Net配置](#log4net配置)
@@ -589,7 +593,45 @@ List是数组链表，数组链表访问快,复杂度O(1),但是添加删除复�
 
 > > 当数据量大于8时，实例化Hashtable，数据转移到Hashtable中，然后将　　ListDictionary置为null。
 
+### Lambda表达式
+
+> Lambda表达式是对.NET2.0中匿名方法在语法形式上的进一步改进，仍然以代码说明：
+
+> > var inString = list.FindAll(delegate(string s) { return s.Indexof("YJingLee") >= 0; }); 
+
+> 使用Lambda表达式代码将更自然易懂。
+
+> > var inString = list.FindAll(s => s.Indexof("YJingLee") >= 0); 
+
 ### 方法
+
+> 扩展方法是C#中新增的很重要的特性之一。为了在不破坏这个类现有封装的前提下又可以为其添加LINQ的支持就需要用到扩展方法。
+
+```
+ public static class Extensions
+ {
+     public static bool IsValidEmailAddress(this string s)
+     {
+         Regex regex = new Regex(@"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+         return regex.IsMatch(s);
+     }
+ }
+```
+
+### Fluent API(流式接口)
+
+>是软件工程中面向对象API的一种实现方式,以提供更为可读的源码。从表现上来看,接口调用呈现链式调用(瀑布式调用),看起来非常流畅,荡气回肠
+
+```
+StringBuilder sb = new StringBuilder()
+        .append(1)
+        .append("2")
+        .append(1.1);
+
+modelBuilder.Entity<Person>().Property(p => p.RowVersion).IsRowVersion();
+```
+
+
 
 ### 参数
 
@@ -10613,7 +10655,11 @@ Access Token（Post && Validate）
 Protected Resource（Get）
 如果access token验证通过，资源服务器将向客户端返回资源信息。
 
+## Entity Framework
 
+### EDM
+
+> 实体数据模型，简称EDM，由三个概念组成。概念模型由概念架构定义语言文件 (.csdl)来定义，映射由映射规范语言文件 (.msl)，存储模型（又称逻辑模型）由存储架构定义语言文件 (.ssdl)来定义。这三者合在一起就是EDM模式。EDM模式在项目中的表现形式就是扩展名为.edmx的文件。这个包含EDM的文件可以使用Visual Studio中的EDM设计器来设计。由于这个文件本质是一个xml文件，可以手工编辑此文件来自定义CSDL、MSL与SSDL这三部分。
 
 ## 插件式框架
 

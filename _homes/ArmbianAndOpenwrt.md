@@ -3,7 +3,7 @@ layout: post
 title: Armbian与Openwrt等嵌入式系统
 description: Arm架构的Armbian，Openwrt，Cloreelec等机顶盒路由器刷机研究
 date: 2023-01-02 15:43:01
-updatedate: 2023-10-26 10:45:01
+updatedate: 2023-10-26 12:17:01
 ---
 
 - [嵌入式操作系统基础](#嵌入式操作系统基础)
@@ -92,6 +92,8 @@ updatedate: 2023-10-26 10:45:01
 - [OneCloud](#onecloud)
   - [DD](#dd)
   - [Packrepack](#packrepack)
+  - [portainer](#portainer)
+  - [clouddriver](#clouddriver)
 
 ## 嵌入式操作系统基础
 
@@ -2234,4 +2236,152 @@ Packing image to myop_noreplaceboot.img...
 Pack image[myop_noreplaceboot.img] OK
 Done
 usernam@usernam-ubuntu:/media/usernam/新加卷/OneCloud/linux-amlogic-toolkit$ 
+```
+
+### portainer
+
+```
+portainer http://192.168.0.110:9000/#!/2/docker/images
+
+root@aml-s812:~# docker pull portainer/portainer
+Using default tag: latest
+latest: Pulling from portainer/portainer
+772227786281: Pull complete
+96fd13befc87: Pull complete
+a38f639c9d7e: Pull complete
+40d27ec7417c: Pull complete
+Digest: sha256:47b064434edf437badf7337e516e07f64477485c8ecc663ddabbe824b20c672d
+Status: Downloaded newer image for portainer/portainer:latest
+root@aml-s812:~# docker run -d --name myPortainer -p 9000:9000 --restart=always -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+764e3e39044889be2c6801820bac1d03e6bcf5cbc7e8a09a3722a2033adc6f38
+root@aml-s812:~# sudo mkdir -p /etc/systemd/system/docker.service.d/
+root@aml-s812:~# sudo cat <<EOF > /etc/systemd/system/docker.service.d/clear_mount_propagation_flags.conf
+
+[Service]
+MountFlags=shared
+EOF
+root@aml-s812:~# sudo systemctl restart docker.service
+Warning: The unit file, source configuration file or drop-ins of docker.service changed on disk. Run 'systemctl daemon-reload' to reload units.
+root@aml-s812:~# 'systemctl daemon-reload
+exit
+^C
+root@aml-s812:~# sudo systemctl daemon-reload
+
+```
+
+### clouddriver 
+
+```
+clouddriver http://192.168.0.110:19798/
+
+docker run -d 
+--name clouddrive 
+--restart unless-stopped 
+--env CLOUDDRIVE_HOME=/Config 
+-v /mnt/clouddrive:/CloudNAS:shared 
+-v /mnt/clouddrive:/Config 
+-v /mnt/clouddrive:/media:shared 
+--network host 
+--pid host 
+--privileged 
+--device /dev/fuse:/dev/fuse 
+cloudnas/clouddrive2
+login as: root
+root@192.168.0.110's password:
+Access denied
+root@192.168.0.110's password:
+
+Welcome to Armbian 20.12 Buster with Linux 5.9.0-rc7-aml-s812
+No end-user support: built from trunk
+System load:   3%               Up time:       13 min
+Memory usage:  11% of 989M      IP:            192.168.0.110
+CPU temp:      39°C             Usage of /:    22% of 6.5G
+[ 0 security updates available, 147 updates total: apt upgrade ]
+Last check: 2023-09-02 11:16
+[ General system configuration (beta): armbian-config ]
+Last login: Sat Sep  2 09:28:36 2023 from 192.168.0.109
+
+root@aml-s812:~# cd mnt
+-bash: cd: mnt: No such file or directory
+root@aml-s812:~# cd /mnt
+root@aml-s812:/mnt# ls
+root@aml-s812:/mnt# mkdir clouddrive
+root@aml-s812:/mnt# sudo mount --make-shared $(df -P /mnt/clouddrive | tail -1 | awk '{ print $6 }')
+root@aml-s812:/mnt# docker run -d 
+--name clouddrive 
+--restart unless-stopped 
+-v /mnt/clouddrive:/Config 
+-v /mnt/clouddrive:/media:shared 
+--network host 
+--pid host 
+--env CLOUDDRIVE_HOME=/Config 
+-v /mnt/clouddrive:/CloudNAS:shared 
+-v /mnt/clouddrive:/Config 
+-v /mnt/clouddrive:/media:shared 
+--network host 
+--pid host 
+--privileged 
+--device /dev/fuse:/dev/fuse 
+cloudnas/clouddrive2
+Unable to find image 'cloudnas/clouddrive2:latest' locally
+latest: Pulling from cloudnas/clouddrive2
+f8dec92eec42: Pull complete
+15e408f70265: Pull complete
+21312d4b79f9: Extracting  2.556MB/6.824MB
+646e50c09835: Downloading  180.8kB/8.879MB
+bfe795606f12: Download complete
+9a5279ce3328: Waiting
+^C
+root@aml-s812:/mnt# docker run -d     --name clouddrive     --restart unless-stopped     --env CLOUDDRIVE_HOME=/Config     -v /mnt/clouddrive:/CloudNAS:shared     -v /mnt/clouddrive:/Config     -v /mnt/clouddrive:/media:shared     --network host     --pid host     --privileged     --device /dev/fuse:/dev/fuse     cloudnas/clouddrive2
+Unable to find image 'cloudnas/clouddrive2:latest' locally
+latest: Pulling from cloudnas/clouddrive2
+f8dec92eec42: Pull complete
+15e408f70265: Pull complete
+21312d4b79f9: Pull complete
+646e50c09835: Pull complete
+bfe795606f12: Pull complete
+9a5279ce3328: Pull complete
+Digest: sha256:8cc940f539ac4260b4d3efded82726a3d16923de1d5ab073fc8af9916ba4d2de
+Status: Downloaded newer image for cloudnas/clouddrive2:latest
+6da3532a218eae42e61ad91835da8685387f1de3e50a5ccef4465c5a02390d75
+root@aml-s812:/mnt# docker run -d 
+--name clouddrive 
+--restart unless-stopped 
+--name clouddrive 
+--env CLOUDDRIVE_HOME=/Config 
+--restart unless-stopped 
+--env CLOUDDRIVE_HOME=/Config 
+-v /mnt/clouddrive:/CloudNAS:shared 
+-v /mnt/clouddrive:/Config 
+-v /mnt/clouddrive:/media:shared 
+--network host 
+--pid host 
+--privileged 
+--device /dev/fuse:/dev/fuse 
+docker run -d \    cloudnas/clouddrive2
+--name clouddrive 
+--restart unless-stopped 
+--env CLOUDDRIVE_HOME=/Config 
+-v /mnt/clouddrive:/CloudNAS:shared 
+-v /mnt/clouddrive:/Config 
+-v /mnt/clouddrive:/media:shared 
+--network host 
+--pid host 
+--privileged 
+--device /dev/fuse:/dev/fuse 
+cloudnas/clouddrive2Unable to find image 'docker:latest' locally
+latest: Pulling from library/docker
+docker: no matching manifest for unknown in the manifest list entries.
+See 'docker run --help'.
+root@aml-s812:/mnt#     --name clouddrive 
+--restart unless-stopped 
+--env CLOUDDRIVE_HOME=/Config 
+-v /mnt/clouddrive:/CloudNAS:shared 
+-v /mnt/clouddrive:/Config 
+-v /mnt/clouddrive:/media:shared 
+--network host 
+--pid host 
+--privileged 
+--device /dev/fuse:/dev/fuse 
+cloudnas/clouddrive2
 ```
