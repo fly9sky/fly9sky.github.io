@@ -6,14 +6,6 @@ date: 2022-10-01 09:01:01
 updatedate: 2023-10-26 12:07:01
 ---
 
-- [认证授权](#认证授权)
-  - [认证](#认证)
-  - [Token](#token)
-    - [SAML](#saml)
-    - [JWT](#jwt)
-    - [SSO 与CAS](#sso-与cas)
-  - [授权](#授权)
-    - [OAuth 授权](#oauth-授权)
 - [Donet6 ubuntu下的安装](#donet6-ubuntu下的安装)
 - [C# .Net Base](#c-net-base)
   - [CLR基础 CLR的执行模型](#clr基础-clr的执行模型)
@@ -164,7 +156,7 @@ updatedate: 2023-10-26 12:07:01
     - [代码创建绑定](#代码创建绑定)
   - [第三方控件库](#第三方控件库)
     - [工具](#工具)
-        - [自动化测试的协助工具](#自动化测试的协助工具)
+    - [自动化测试的协助工具](#自动化测试的协助工具)
   - [VisualStateManager](#visualstatemanager-1)
     - [VisualState](#visualstate)
     - [VisualStateGroup](#visualstategroup)
@@ -205,8 +197,6 @@ updatedate: 2023-10-26 12:07:01
   - [可靠会话](#可靠会话)
   - [队列服务](#队列服务)
   - [传输安全](#传输安全)
-  - [授权与审核](#授权与审核)
-  - [认证](#认证-1)
   - [扩展](#扩展)
 - [.Net Core](#net-core)
   - [Ubuntu Linux下Dotnet 安装](#ubuntu-linux下dotnet-安装)
@@ -216,11 +206,6 @@ updatedate: 2023-10-26 12:07:01
     - [多路由](#多路由)
     - [高级路由](#高级路由)
   - [Session](#session)
-  - [授权认证管理](#授权认证管理)
-    - [认证 Authentication](#认证-authentication)
-      - [Identity](#identity)
-      - [多重身份验证](#多重身份验证)
-    - [授权  Authorize](#授权--authorize)
   - [DI](#di)
   - [Filters](#filters)
     - [授权过滤器 AuthorizeAttribute](#授权过滤器-authorizeattribute)
@@ -238,22 +223,27 @@ updatedate: 2023-10-26 12:07:01
   - [Taghelper](#taghelper)
   - [SignalR](#signalr)
   - [consul](#consul)
-  - [认证](#认证-2)
-  - [Token](#token-1)
-    - [SAML](#saml-1)
-    - [JWT](#jwt-1)
-    - [SSO 与CAS](#sso-与cas-1)
-  - [授权](#授权-1)
-    - [OAuth 授权](#oauth-授权-1)
 - [Entity Framework](#entity-framework)
   - [EDM](#edm)
+- [认证授权](#认证授权)
+  - [认证 Authentication](#认证-authentication)
+    - [Session-Cookie认证](#session-cookie认证)
+    - [Token认证](#token认证)
+      - [SAML](#saml)
+      - [JWT](#jwt)
+    - [SSO 与CAS 单点登录。](#sso-与cas-单点登录)
+    - [多重身份验证](#多重身份验证)
+    - [.NET CORE身份验证方案](#net-core身份验证方案)
+      - [Identity](#identity)
+  - [授权](#授权)
+    - [授权  Authorize](#授权--authorize)
+    - [WCF三种授权模式](#wcf三种授权模式)
+    - [OAuth 授权](#oauth-授权)
 - [插件式框架](#插件式框架)
   - [Main](#main)
     - [Log4Net配置](#log4net配置)
-      - [log4net.Config.XmlConfigurator.Configure();](#log4netconfigxmlconfiguratorconfigure)
     - [Log4Net初始化](#log4net初始化)
     - [MEF初始化](#mef初始化)
-      - [new Builder().Load();](#new-builderload)
   - [Plugin实现层](#plugin实现层)
     - [服务实现层](#服务实现层)
       - [CommonService](#commonservice)
@@ -294,147 +284,13 @@ updatedate: 2023-10-26 12:07:01
       - [ViewModel](#viewmodel-2)
     - [MainWindow](#mainwindow)
       - [Xaml](#xaml-2)
-  - [概述](#概述)
-    - [网格计算](#网格计算)
-    - [Oracle 11g新特性](#oracle-11g新特性)
       - [ViewModel](#viewmodel-3)
     - [SelectDevices](#selectdevices)
       - [Xaml](#xaml-3)
       - [ViewModel](#viewmodel-4)
     - [ViewLocator](#viewlocator)
   - [外部包依赖](#外部包依赖)
-    - [Dirkster.AvalonDock](#dirksteravalondock)
-      - [Dirkster.AvalonDock.Themes.VS2013](#dirksteravalondockthemesvs2013)
-    - [Fluent.Ribbon](#fluentribbon)
-    - [log4net](#log4net)
-    - [MEF](#mef)
-      - [System.ComponentModel.Composition](#systemcomponentmodelcomposition)
-    - [Dirkster.AvalonDock](#dirksteravalondock-1)
-    - [log4net](#log4net-1)
   - [LanguageResource实现多语言支持](#languageresource实现多语言支持)
-
-
-## 认证授权
-
-### 认证
-
-> Session-Cookie
-
-Session-Cookie 的认证流程如下：用户先使用用户名和密码登录，登录完成后后端将用户信息存在session 中，把sessionId 写到前端的cookie 中，后面每次操作带着cookie 去后端，只要后端判断sessionId 没问题且没过期就不需要再次登录。
-
-使用这种方式进行认证，开发者可能面临的主要问题如下：
-
-cookie 安全性问题，攻击者可以通过xss 获取cookie 中的sessinId，使用 httpOnly 在一定程度上提高安全性
-
-cookie 不能跨域传输
-
-session 存储在服务器中，所以session 过多会耗费较大服务器资源
-
-### Token
-
-与上面的Session-Cookie 机制不同的地方在于，基于token 的用户认证是一种服务端无状态的认证方式，服务端可以不用存放token 数据，但是服务器可以验证token 的合法性和有效性。
-
-使用token 进行认证的方式这里主要介绍两种：
-
-#### SAML
-
-> SAML (Security Assertion Markup Language) 
-
-未登录的用户通过浏览器访问资源网站（Service Provider，简称SP）
-
-SP 发现用户未登录，将页面重定向至IdP（Identity Provider）
-
-IdP 验证请求无误后，提供表单让用户进行登录
-
-用户登录成功后，IdP 生成并发送SAML token (一个很大的XML对象) 给SP
-
-SP 对token 进行验证，解析获取用户信息，允许用户访问相关资源
-
-#### JWT
-
-JSON Web Token 入门教程（预计阅读时间：2mins）
-
-简言之，JWT 就是一种在用户登录后生成token 并把token 放在前端，后端不需要维护用户的状态信息但是可以验证token 有效性的认证及状态管理方式。 
-
-
-#### SSO 与CAS
-接下来我们探讨一个企业应一定绕不过的课题：单点登录。
-
-举例来说，华为云下有若干云服务。包含项目管理、代码托管、代码检查、流水线、编译构建、部署、自动化测试等众多微服务的DevCloud（软件开发云） 正是其中之一，用户如果在使用任意一个服务没有登录的时候都可以去同一个地方进行登录认证，登录之后的一段时间内可以无需登录访问所有其他服务。
-
-在单点登录领域，CAS（Central Authentication Service，中文名是中央认证服务） 是一个被高频使用的解决方案。因此，这里介绍一下利用CAS 实现SSO。而CAS 的具体实现又可以依赖很多种协议，比如OpenID、OAuth、SAML 等，这里重点介绍一下CAS 协议。
-
-CAS 协议中的几个重要概念
-简单介绍一下CAS 协议中的几个重要概念，一开始看概念可能很模糊，可以先过一遍，再结合下面的流程图来理解。
-
-CAS Server：用于认证的中心服务器
-
-CAS Clients：保护CAS 应用，一旦有未认证的用户访问，重定向至CAS Server 进行认证
-
-TGT & TGC：用户认证之后，CAS Server 回生成一个包含用户信息的TGT (Ticket Granting Ticket) 并向浏览器写一个cookie（TGC，Ticket Granting Cookie），有啥用后面流程会讲到
-
-ST：在url 上作为参数传输的ticket，受保护应用可以凭借这个ticket 去CAS Server 确认用户的认证是否合法 
-
-### 授权
-
-
-#### OAuth 授权
-
-OAuth 的设计本意更倾向于授权而不是认证，所以这一小节的标题写的是授权，但是其实在授权的同时也已经完成了认证。
-
-
-OAuth 2 是一个授权框架，或称授权标准，它可以使第三方应用程序或客户端获得对HTTP服务上（例如 Google，GitHub ）用户帐户信息的有限访问权限。OAuth 2 通过将用户身份验证委派给托管用户帐户的服务以及授权客户端访问用户帐户进行工作。综上，OAuth 2 可以为 Web 应用 和桌面应用以及移动应用提供授权流程。
-
-本文将从OAuth 2 角色，授权许可类型，授权流程等几方面进行讲解。
-
-在正式讲解之前，这里先引入一段应用场景，用以与后文的角色讲解对应。
-
-开发者A注册某IT论坛后，发现可以在信息栏中填写自己的 Github 个人信息和仓库项目，但是他又觉得手工填写十分麻烦，直接提供 Github 账户和密码给论坛管理员帮忙处理更是十分智障。
-不过该论坛似乎和 Github 有不可告人的秘密，开发者A可以点击“导入”按钮，授权该论坛访问自己的 Github 账户并限制其只具备读权限。这样一来， Github 中的所有仓库和相关信息就可以很方便地被导入到信息栏中，账户隐私信息也不会泄露。
-这背后，便是 OAuth 2 在大显神威。
-
-2. OAuth2 角色
-OAuth 2 标准中定义了以下几种角色：
-
-资源所有者（Resource Owner）
-资源服务器（Resource Server）
-授权服务器（Authorization Server）
-客户端（Client）
-2.1 资源所有者（Resource Owner）
-资源所有者是 OAuth 2 四大基本角色之一，在 OAuth 2 标准中，资源所有者即代表授权客户端访问本身资源信息的用户（User），也就是应用场景中的“开发者A”。客户端访问用户帐户的权限仅限于用户授权的“范围”（aka. scope，例如读取或写入权限）。
-
-如果没有特别说明，下文中出现的"用户"将统一代表资源所有者。
-
-2.2 资源/授权服务器（Resource/Authorization Server）
-资源服务器托管了受保护的用户账号信息，而授权服务器验证用户身份然后为客户端派发资源访问令牌。
-
-在上述应用场景中，Github 既是授权服务器也是资源服务器，个人信息和仓库信息即为资源（Resource）。而在实际工程中，不同的服务器应用往往独立部署，协同保护用户账户信息资源。
-
-2.3 客户端（Client）
-在 OAuth 2 中，客户端即代表意图访问受限资源的第三方应用。在访问实现之前，它必须先经过用户者授权，并且获得的授权凭证将进一步由授权服务器进行验证。
-
-如果没有特别说明，下文中将不对"应用"，“第三方应用”，“客户端”做出区分。
-
-3. OAuth 2 的授权流程
-目前为止你应该对 OAuth 2 的角色有了些概念，接下来让我们来看看这几个角色之间的抽象授权流程图和相关解释。
-
-请注意，实际的授权流程图会因为用户返回授权许可类型的不同而不同。但是下图大体上能反映一次完整抽象的授权流程。
-
-
-
-Authrization Request
-客户端向用户请求对资源服务器的authorization grant。
-Authorization Grant（Get）
-如果用户授权该次请求，客户端将收到一个authorization grant。
-Authorization Grant（Post）
-客户端向授权服务器发送它自己的客户端身份标识和上一步中的authorization grant，请求访问令牌。
-Access Token（Get）
-如果客户端身份被认证，并且authorization grant也被验证通过，授权服务器将为客户端派发access token。授权阶段至此全部结束。
-Access Token（Post && Validate）
-客户端向资源服务器发送access token用于验证并请求资源信息。
-Protected Resource（Get）
-
-如果access token验证通过，资源服务器将向客户端返回资源信息。
 
 
 ## Donet6 ubuntu下的安装
@@ -624,8 +480,6 @@ StringBuilder sb = new StringBuilder()
 modelBuilder.Entity<Person>().Property(p => p.RowVersion).IsRowVersion();
 ```
 
-
-
 ### 参数
 
 ### 属性
@@ -684,89 +538,14 @@ Status
 ConfigureAwait(Boolean)	
 配置用于等待此 Task的 awaiter。
 
-ContinueWith(Action<Task,Object>, Object)	
+ContinueWith	 
 创建一个在目标 Task 完成时接收调用方提供的状态信息并执行的延续任务。
 
-ContinueWith(Action<Task,Object>, Object, CancellationToken)	
-创建一个在目标 Task 完成时接收调用方提供的状态信息和取消标记，并以异步方式执行的延续任务。
-
-ContinueWith(Action<Task,Object>, Object, CancellationToken, TaskContinuationOptions, TaskScheduler)	
-创建一个在目标 Task 完成时接收调用方提供的状态信息和取消标记并执行的延续任务。 延续任务根据一组指定的条件执行，并使用指定的计划程序。
-
-ContinueWith(Action<Task,Object>, Object, TaskContinuationOptions)	
-创建一个在目标 Task 完成时接收调用方提供的状态信息并执行的延续任务。 延续任务根据一组指定的条件执行。
-
-ContinueWith(Action<Task,Object>, Object, TaskScheduler)	
-创建一个在目标 Task 完成时接收调用方提供的状态信息并以异步方式执行的延续任务。 延续任务使用指定计划程序。
-
-ContinueWith(Action<Task>)	
-创建一个在目标 Task 完成时异步执行的延续任务。
-
-ContinueWith(Action<Task>, CancellationToken)	
-创建一个在目标 Task 完成时可接收取消标记并以异步方式执行的延续任务。
-
-ContinueWith(Action<Task>, CancellationToken, TaskContinuationOptions, TaskScheduler)	
-创建一个在目标任务完成时按照指定的 TaskContinuationOptions 执行的延续任务。 延续任务会收到一个取消标记，并使用指定的计划程序。
-
-ContinueWith(Action<Task>, TaskContinuationOptions)	
-创建一个在目标任务完成时按照指定的 TaskContinuationOptions 执行的延续任务。
-
-ContinueWith(Action<Task>, TaskScheduler)	
-创建一个在目标 Task 完成时异步执行的延续任务。 延续任务使用指定计划程序。
-
-ContinueWith<TResult>(Func<Task,Object,TResult>, Object)	
-创建一个在目标 Task 完成并返回一个值时接收调用方提供的状态信息并以异步方式执行的延续任务。
-
-ContinueWith<TResult>(Func<Task,Object,TResult>, Object, CancellationToken)	
-创建一个在目标 Task 完成时异步执行并返回一个值的延续任务。 延续任务接收调用方提供的状态信息和取消标记。
-
-ContinueWith<TResult>(Func<Task,Object,TResult>, Object, CancellationToken, TaskContinuationOptions, TaskScheduler)	
-创建一个在目标 Task 完成并返回一个值时根据指定的任务延续选项执行的延续任务。 延续任务接收调用方提供的状态信息和取消标记，并使用指定的计划程序。
-
-ContinueWith<TResult>(Func<Task,Object,TResult>, Object, TaskContinuationOptions)	
-创建一个在目标 Task 完成时根据指定的任务延续选项执行的延续任务。 延续任务接收调用方提供的状态信息。
-
-ContinueWith<TResult>(Func<Task,Object,TResult>, Object, TaskScheduler)	
-创建一个在目标 Task 完成时异步执行的延续任务。 延续任务接收调用方提供的状态信息，并使用指定的计划程序。
-
-ContinueWith<TResult>(Func<Task,TResult>)	
-创建一个在目标 Task<TResult> 完成时异步执行并返回一个值的延续任务。
-
-ContinueWith<TResult>(Func<Task,TResult>, CancellationToken)	
-创建一个在目标 Task 完成时异步执行并返回一个值的延续任务。 延续任务收到取消标记。
-
-ContinueWith<TResult>(Func<Task,TResult>, CancellationToken, TaskContinuationOptions, TaskScheduler)	
-创建一个按照指定延续任务选项执行并返回一个值的延续任务。 延续任务被传入一个取消标记，并使用指定的计划程序。
-
-ContinueWith<TResult>(Func<Task,TResult>, TaskContinuationOptions)	
-创建一个按照指定延续任务选项执行并返回一个值的延续任务。
-
-ContinueWith<TResult>(Func<Task,TResult>, TaskScheduler)	
-创建一个在目标 Task 完成时异步执行并返回一个值的延续任务。 延续任务使用指定计划程序。
-
-Delay(Int32)	
+Delay
 创建一个在指定的毫秒数后完成的任务。
 
-Delay(Int32, CancellationToken)	
-创建一个在指定的毫秒数后完成的可取消任务。
-
-Delay(TimeSpan)	
-创建一个在指定的时间间隔后完成的任务。
-
-Delay(TimeSpan, CancellationToken)	
-创建一个在指定的时间间隔后完成的可取消任务。
-
-Delay(TimeSpan, TimeProvider)	
-表示一个异步操作。
-
-Delay(TimeSpan, TimeProvider, CancellationToken)	
-表示一个异步操作。
-
-Dispose()	
+Dispose
 释放 Task 类的当前实例所使用的所有资源。
-
-Dispose(Boolean)	
-释放 Task，同时释放其所有非托管资源。
 
 FromCanceled<TResult>(CancellationToken)	
 创建 Task<TResult>，它因指定的取消标记进行的取消操作而完成。
@@ -783,127 +562,31 @@ FromResult<TResult>(TResult)
 GetAwaiter()	
 获取用于等待此 Task 的 awaiter。
 
-Run(Action, CancellationToken)	
+Run
 将在线程池上运行的指定工作排队，并返回代表该工作的 Task 对象。 可使用取消标记来取消工作（如果尚未启动）。
 
-Run(Func<Task>)	
-将在线程池上运行的指定工作排队，并返回 function 所返回的任务的代理项。
-
-Run(Func<Task>, CancellationToken)	
-将在线程池上运行的指定工作排队，并返回 function 所返回的任务的代理项。 可使用取消标记来取消工作（如果尚未启动）。
-
-Run<TResult>(Func<Task<TResult>>)	
-将指定的工作排成队列在线程池上运行，并返回由 function 返回的 Task(TResult) 的代理。 可使用取消标记来取消工作（如果尚未启动）。
-
-Run<TResult>(Func<Task<TResult>>, CancellationToken)	
-将指定的工作排成队列在线程池上运行，并返回由 function 返回的 Task(TResult) 的代理。
-
-Run<TResult>(Func<TResult>)	
-将在线程池上运行的指定工作排队，并返回代表该工作的 Task<TResult> 对象。 可使用取消标记来取消工作（如果尚未启动）。
-
-Run<TResult>(Func<TResult>, CancellationToken)	
-将在线程池上运行的指定工作排队，并返回代表该工作的 Task(TResult) 对象。
-
-RunSynchronously()	
+RunSynchronously
 对当前的 Task 同步运行 TaskScheduler。
 
-RunSynchronously(TaskScheduler)	
-对提供的 Task 同步运行 TaskScheduler。
-
-Start()	
+Start
 启动 Task，并将它安排到当前的 TaskScheduler 中执行。
 
-Start(TaskScheduler)	
-启动 Task，并将它安排到指定的 TaskScheduler 中执行。
-
-Wait(CancellationToken)	
+Wait
 等待 Task 完成执行过程。 如果在任务完成之前取消标记已取消，等待将终止。
 
-Wait(Int32)	
-等待 Task 在指定的毫秒数内完成执行。
-
-Wait(Int32, CancellationToken)	
-等待 Task 完成执行过程。 如果在任务完成之前超时间隔结束或取消标记已取消，等待将终止。
-
-Wait(TimeSpan)	
-等待 Task 在指定的时间间隔内完成执行。
-
-Wait(TimeSpan, CancellationToken)	
-等待 Task 完成执行过程。
-
-WaitAll(Task[])	
+WaitAll
 等待提供的所有 Task 对象完成执行过程。
 
-WaitAll(Task[], CancellationToken)	
-等待提供的所有 Task 对象完成执行过程（除非取消等待）。
-
-WaitAll(Task[], Int32)	
-等待所有提供的 Task 在指定的毫秒数内完成执行。
-
-WaitAll(Task[], Int32, CancellationToken)	
-等待提供的所有 Task 对象在指定的毫秒数内完成执行，或等到取消等待。
-
-WaitAll(Task[], TimeSpan)	
-等待所有提供的可取消 Task 对象在指定的时间间隔内完成执行。
-
-WaitAny(Task[])	
+WaitAny
 等待提供的任一 Task 对象完成执行过程。
 
-WaitAny(Task[], CancellationToken)	
-等待提供的任何 Task 对象完成执行过程（除非取消等待）。
-
-WaitAny(Task[], Int32)	
-等待任何提供的 Task 对象在指定的毫秒数内完成执行。
-
-WaitAny(Task[], Int32, CancellationToken)	
-等待提供的任何 Task 对象在指定的毫秒数内完成执行，或等到取消标记取消。
-
-WaitAny(Task[], TimeSpan)	
-等待任何提供的 Task 对象在指定的时间间隔内完成执行。
-
-WaitAsync(CancellationToken)	
+WaitAsync
 获取一个 ， Task 它将在完成此操作 Task 或指定的 CancellationToken 请求取消时完成。
 
-WaitAsync(TimeSpan)	
-获取一个 Task ，该值将在完成此操作 Task 或指定的超时到期时完成。
-
-WaitAsync(TimeSpan, CancellationToken)	
-获取在 Task 完成此操作 Task 时、指定的超时到期或指定 CancellationToken 请求取消时完成的 。
-
-WaitAsync(TimeSpan, TimeProvider)	
-表示一个异步操作。
-
-WaitAsync(TimeSpan, TimeProvider, CancellationToken)	
-表示一个异步操作。
-
-WhenAll(IEnumerable<Task>)	
+WhenAll
 创建一个任务，该任务将在可枚举集合中的所有 Task 对象都已完成时完成。
 
-WhenAll(Task[])	
-创建一个任务，该任务将在数组中的所有 Task 对象都已完成时完成。
-
-WhenAll<TResult>(IEnumerable<Task<TResult>>)	
-创建一个任务，该任务将在可枚举集合中的所有 Task<TResult> 对象都已完成时完成。
-
-WhenAll<TResult>(Task<TResult>[])	
-创建一个任务，该任务将在数组中的所有 Task<TResult> 对象都已完成时完成。
-
-WhenAny(IEnumerable<Task>)	
-任何提供的任务已完成时，创建将完成的任务。
-
-WhenAny(Task, Task)	
-提供的任一任务完成时，创建将完成的任务。
-
-WhenAny(Task[])	
-任何提供的任务已完成时，创建将完成的任务。
-
-WhenAny<TResult>(IEnumerable<Task<TResult>>)	
-任何提供的任务已完成时，创建将完成的任务。
-
-WhenAny<TResult>(Task<TResult>, Task<TResult>)	
-提供的任一任务完成时，创建将完成的任务。
-
-WhenAny<TResult>(Task<TResult>[])	
+WhenAny
 任何提供的任务已完成时，创建将完成的任务。
 
 Yield()	
@@ -1280,8 +963,6 @@ private T ProcessRequest<T>(HttpContext context) where T : class
 
 > > 程序集:WindowsBase.dll
 
-> > System.Windows.Threading
-
 > > 属性
 
 > CurrentDispatcher	
@@ -1306,19 +987,11 @@ private T ProcessRequest<T>(HttpContext context) where T : class
 
 > >  方法
 
-> BeginInvoke(Delegate, DispatcherPriority, Object[])	
-
-> BeginInvoke(Delegate, Object[])	
-
-> BeginInvoke(DispatcherPriority, Delegate)	
-
-> BeginInvoke(DispatcherPriority, Delegate, Object)	
-
-> BeginInvoke(DispatcherPriority, Delegate, Object, Object[])	
+> BeginInvoke
 
 > > 用在其上创建了 Dispatcher 的线程上的指定参数，按指定优先级异步执行指定委托。
 
-> BeginInvokeShutdown(DispatcherPriority)	
+> BeginInvokeShutdown
 
 > > 异步启动 Dispatcher 的关闭。
 
@@ -1330,95 +1003,31 @@ private T ProcessRequest<T>(HttpContext context) where T : class
 
 > > 禁用对 Dispatcher 队列的处理。
 
-> ExitAllFrames()	
+> ExitAllFrames()	 请求退出所有帧，包括嵌套的帧。
 
-> > 请求退出所有帧，包括嵌套的帧。
+> FromThread(Thread)	 获取指定线程的 Dispatcher。
 
-> FromThread(Thread)	
+> Invoke 在与 Action 关联的线程上同步执行指定的 Dispatcher。
 
-> > 获取指定线程的 Dispatcher。
+> Invoke<TResult> 在与 Func<TResult> 关联的线程上同步执行指定的 Dispatcher。
 
-> Invoke(Action)	
+> InvokeAsync 在与 Action 关联的线程上异步执行指定的 Dispatcher。
 
-> Invoke(Action, DispatcherPriority)	
+> InvokeAsync<TResult> 在与 Func<TResult> 关联的线程上异步执行指定的 Dispatcher。
 
-> Invoke(Action, DispatcherPriority, CancellationToken)	
+> InvokeShutdown()	 同步启动 Dispatcher 的关闭过程。
 
-> Invoke(Action, DispatcherPriority, CancellationToken, TimeSpan)	
+> PushFrame(DispatcherFrame)	 进入执行循环。
 
-> Invoke(Delegate, DispatcherPriority, Object[])	
+> Run()	 将主执行帧推送到 Dispatcher 的事件队列中。
 
-> Invoke(Delegate, Object[])	
+> ValidatePriority(DispatcherPriority, String)	 确定指定的 DispatcherPriority 是否为有效的优先级。
 
-> Invoke(Delegate, TimeSpan, DispatcherPriority, Object[])	
-
-> Invoke(Delegate, TimeSpan, Object[])	
-
-> Invoke(DispatcherPriority, Delegate)	
-
-> Invoke(DispatcherPriority, Delegate, Object)	
-
-> Invoke(DispatcherPriority, Delegate, Object, Object[])	
-
-> Invoke(DispatcherPriority, TimeSpan, Delegate)	
-
-> Invoke(DispatcherPriority, TimeSpan, Delegate, Object)	
-
-> Invoke(DispatcherPriority, TimeSpan, Delegate, Object, Object[])	
-
-> > 在与 Action 关联的线程上同步执行指定的 Dispatcher。
-
-> Invoke<TResult>(Func<TResult>)	
-
-> Invoke<TResult>(Func<TResult>, DispatcherPriority)	
-
-> Invoke<TResult>(Func<TResult>, DispatcherPriority, CancellationToken)	
-
-> Invoke<TResult>(Func<TResult>, DispatcherPriority, CancellationToken, TimeSpan)	
-
-> > 在与 Func<TResult> 关联的线程上同步执行指定的 Dispatcher。
-
-> InvokeAsync(Action)	
-
-> InvokeAsync(Action, DispatcherPriority)	
-
-> InvokeAsync(Action, DispatcherPriority, CancellationToken)	
-
-> > 在与 Action 关联的线程上异步执行指定的 Dispatcher。
-
-> InvokeAsync<TResult>(Func<TResult>)	
-
-> InvokeAsync<TResult>(Func<TResult>, DispatcherPriority)	
-
-> InvokeAsync<TResult>(Func<TResult>, DispatcherPriority, CancellationToken)	
-
-> > 在与 Func<TResult> 关联的线程上异步执行指定的 Dispatcher。
-
-> InvokeShutdown()	
-
-> > 同步启动 Dispatcher 的关闭过程。
-
-> PushFrame(DispatcherFrame)	
-
-> > 进入执行循环。
-
-> Run()	
-
-> > 将主执行帧推送到 Dispatcher 的事件队列中。
-
-> ValidatePriority(DispatcherPriority, String)	
-
-> > 确定指定的 DispatcherPriority 是否为有效的优先级。
-
-> VerifyAccess()	
-
-> > 确定调用线程是否可以访问此 Dispatcher。
+> VerifyAccess()	 确定调用线程是否可以访问此 Dispatcher。
 
 > Yield()	
 
-> Yield(DispatcherPriority)	
-
-> > 创建异步产生控制权交还给当前计划程序并为该计划程序提供机会处理其他事件的可等待对象。
+> Yield(DispatcherPriority)	 创建异步产生控制权交还给当前计划程序并为该计划程序提供机会处理其他事件的可等待对象。
 
 > > 事件
 
@@ -1436,23 +1045,11 @@ UnhandledExceptionFilter
 
 > > 扩展方法
 
-BeginInvoke(Dispatcher, Action)	
+BeginInvoke
 用正常优先级在依据其创建指定 Dispatcher 的线程上异步执行指定的委托。
 
-BeginInvoke(Dispatcher, Action, DispatcherPriority)	
-用指定的优先级在依据其创建指定 Dispatcher 的线程上异步执行指定的委托。
-
-Invoke(Dispatcher, Action)	
+Invoke
 用正常优先级在依据其创建指定 Dispatcher 的线程上同步执行指定的委托。
-
-Invoke(Dispatcher, Action, TimeSpan)	
-在依据其创建指定 Dispatcher 的线程上同步执行指定的委托，并在指定的超时期限后停止执行。
-
-Invoke(Dispatcher, Action, TimeSpan, DispatcherPriority)	
-用指定的优先级在依据其创建指定 Dispatcher 的线程上同步执行指定的委托，并在指定的超时期限后停止执行。
-
-Invoke(Dispatcher, Action, DispatcherPriority)	
-用指定的优先级在依据其创建指定 Dispatcher 的线程上同步执行指定的委托。
 
 #### DispatcherObject
 
@@ -1466,9 +1063,7 @@ Invoke(Dispatcher, Action, DispatcherPriority)
 
 > > 属性:
 
-> Dispatcher	Gets the Dispatcher this DispatcherObject is associated with.
-
-> > 方法:
+> Dispatcher	Gets the Dispatcher this DispatcherObject is associated with. 方法:
 
 > CheckAccess()	Determines whether the calling thread has access to this DispatcherObject.
 
@@ -1488,13 +1083,9 @@ Enforces that the calling thread has access to this DispatcherObject.
 
 > > 方法:METHODS
 
-> ClearValue(DependencyProperty)	
+> ClearValu
 
 Clears the local value of a property. The property to be cleared is specified by a DependencyProperty identifier.
-
-> ClearValue(DependencyPropertyKey)	
-
-Clears the local value of a read-only property. The property to be cleared is specified by a DependencyPropertyKey.
 
 > CoerceValue(DependencyProperty)	
 
@@ -1524,13 +1115,9 @@ Returns the local value of a dependency property, if it exists.
 
 Sets the value of a dependency property without changing its value source.
 
-> SetValue(DependencyProperty, Object)	
+> SetValue
 
 Sets the local value of a dependency property, specified by its dependency property identifier.
-
-> SetValue(DependencyPropertyKey, Object)	
-
-Sets the local value of a read-only dependency property, specified by the DependencyPropertyKey identifier of the dependency property.
 
 > ShouldSerializeProperty(DependencyProperty)	
 
@@ -1898,53 +1485,25 @@ Reapplies the default style to the current FrameworkElement.
 
 > > Events
 
-ContextMenuClosing	
+> ContextMenuClosing	ContextMenuOpening	
 
-Occurs just before any context menu on the element is closed.
+> DataContextChanged	
 
-ContextMenuOpening	
+> Initialized	 FrameworkElement is initialized. 
 
-Occurs when any context menu on the element is opened.
+> Loaded	 element is laid out, rendered, and ready for interaction.
 
-DataContextChanged	
+> RequestBringIntoView	Occurs when BringIntoView(Rect) is called on this element.
 
-Occurs when the data context for this element changes.
+> SizeChanged when either the ActualHeight or the ActualWidth properties change value on this element.
 
-> Initialized	
+> SourceUpdated	Occurs when the source value changes for any existing property binding on this element.
 
-Occurs when this FrameworkElement is initialized. This event coincides with cases where the value of the IsInitialized property changes from false (or undefined) to true.
+> TargetUpdated	Occurs when the target value changes for any property binding on this element.
 
-> Loaded	
+> ToolTipClosing/ToolTipOpening	 when any tooltip on the element is closed or opened.
 
-Occurs when the element is laid out, rendered, and ready for interaction.
-
-> RequestBringIntoView	
-
-Occurs when BringIntoView(Rect) is called on this element.
-
-SizeChanged	
-
-Occurs when either the ActualHeight or the ActualWidth properties change value on this element.
-
-SourceUpdated	
-
-Occurs when the source value changes for any existing property binding on this element.
-
-> TargetUpdated	
-
-Occurs when the target value changes for any property binding on this element.
-
-> ToolTipClosing	
-
-Occurs just before any tooltip on the element is closed.
-
-> ToolTipOpening	
-
-Occurs when any tooltip on the element is opened.
-
-> Unloaded	
-
-Occurs when the element is removed from within an element tree of loaded elements.
+> Unloaded	when the element is removed from within an element tree of loaded elements.
 
 #### UIElement
 
@@ -1958,13 +1517,9 @@ Occurs when the element is removed from within an element tree of loaded element
 
 > > 方法: METHODS
 
-> AddHandler(RoutedEvent, Delegate)	
+> AddHandler
 
 Adds a routed event handler for a specified routed event, adding the handler to the handler collection on the current element.
-
-> AddHandler(RoutedEvent, Delegate, Boolean)	
-
-Adds a routed event handler for a specified routed event, adding the handler to the handler collection on the current element. Specify handledEventsToo as true to have the provided handler be invoked for routed event that had already been marked as handled by another element along the event route.
 
 > AddToEventRoute(EventRoute, RoutedEventArgs)	
 
@@ -1986,11 +1541,7 @@ Positions child elements and determines a size for a UIElement. Parent elements 
 
 Defines the template for WPF core-level arrange layout definition.
 
-> BeginAnimation(DependencyProperty, AnimationTimeline)	
-
-Starts an animation for a specified animated property on this element.
-
-> BeginAnimation(DependencyProperty, AnimationTimeline, HandoffBehavior)	
+> BeginAnimation
 
 Starts a specific animation for a specified animated property on this element, with the option of specifying what happens if the property already has a running animation.
 
@@ -2196,169 +1747,31 @@ Called when the ManipulationStarted event occurs.
 
 Provides class handling for the ManipulationStarting routed event that occurs when the manipulation processor is first created.
 
-> OnMouseDown(MouseButtonEventArgs)	
+> OnMouseDown/OnMouseEnter/OnMouseLeave/OnMouseLeftButtonDown/OnMouseLeftButtonUp/OnMouseMove/OnMouseRightButtonDown/OnMouseRightButtonUp/OnMouseUp/OnMouseWheel(MouseWheelEventArgs)	 鼠标相关事件
 
-Invoked when an unhandled MouseDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnMouseEnter(MouseEventArgs)	
-
-Invoked when an unhandled MouseEnter attached event is raised on this element. Implement this method to add class handling for this event.
-
-> OnMouseLeave(MouseEventArgs)	
-
-Invoked when an unhandled MouseLeave attached event is raised on this element. Implement this method to add class handling for this event.
-
-> OnMouseLeftButtonDown(MouseButtonEventArgs)	
-
-Invoked when an unhandled MouseLeftButtonDown routed event is raised on this element. Implement this method to add class handling for this event.
-
-> OnMouseLeftButtonUp(MouseButtonEventArgs)	
-
-Invoked when an unhandled MouseLeftButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnMouseMove(MouseEventArgs)	
-
-Invoked when an unhandled MouseMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnMouseRightButtonDown(MouseButtonEventArgs)	
-
-Invoked when an unhandled MouseRightButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnMouseRightButtonUp(MouseButtonEventArgs)	
-
-Invoked when an unhandled MouseRightButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnMouseUp(MouseButtonEventArgs)	
-
-Invoked when an unhandled MouseUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnMouseWheel(MouseWheelEventArgs)	
-
-Invoked when an unhandled MouseWheel attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewDragEnter(DragEventArgs)	
-
-Invoked when an unhandled PreviewDragEnter attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewDragLeave(DragEventArgs)	
-
-Invoked when an unhandled PreviewDragLeave attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewDragOver(DragEventArgs)	
-
-Invoked when an unhandled PreviewDragOver attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewDrop(DragEventArgs)	
-
-Invoked when an unhandled PreviewDrop attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+> OnPreviewDragEnter/OnPreviewDragLeave/OnPreviewDragOver/OnPreviewDrop 路由中进入派生自此类的拖拽事件
 
 > OnPreviewGiveFeedback(GiveFeedbackEventArgs)	
 
 Invoked when an unhandled PreviewGiveFeedback attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
-> OnPreviewGotKeyboardFocus(KeyboardFocusChangedEventArgs)	
-
-Invoked when an unhandled PreviewGotKeyboardFocus attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewKeyDown(KeyEventArgs)	
+> OnPreviewGotKeyboardFocus/OnPreviewKeyDown/OnPreviewKeyUp/OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs)	
 
 Invoked when an unhandled PreviewKeyDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
-> OnPreviewKeyUp(KeyEventArgs)	
-
-Invoked when an unhandled PreviewKeyUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewLostKeyboardFocus(KeyboardFocusChangedEventArgs)	
-
-Invoked when an unhandled PreviewKeyDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewMouseDown(MouseButtonEventArgs)	
-
-Invoked when an unhandled PreviewMouseDown attached routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewMouseLeftButtonDown(MouseButtonEventArgs)	
-
-Invoked when an unhandled PreviewMouseLeftButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewMouseLeftButtonUp(MouseButtonEventArgs)	
-
-Invoked when an unhandled PreviewMouseLeftButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewMouseMove(MouseEventArgs)	
-
-Invoked when an unhandled PreviewMouseMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewMouseRightButtonDown(MouseButtonEventArgs)	
-
-Invoked when an unhandled PreviewMouseRightButtonDown routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewMouseRightButtonUp(MouseButtonEventArgs)	
-
-Invoked when an unhandled PreviewMouseRightButtonUp routed event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewMouseUp(MouseButtonEventArgs)	
-
-Invoked when an unhandled PreviewMouseUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewMouseWheel(MouseWheelEventArgs)	
-
-Invoked when an unhandled PreviewMouseWheel attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+> OnPreviewMouseDown/OnPreviewMouseLeftButtonDown/OnPreviewMouseLeftButtonUp/OnPreviewMouseMove/OnPreviewMouseRightButtonDown/OnPreviewMouseRightButtonUp/OnPreviewMouseUp/OnPreviewMouseWheel 路由鼠标事件
 
 > OnPreviewQueryContinueDrag(QueryContinueDragEventArgs)	
 
 Invoked when an unhandled PreviewQueryContinueDrag attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
-> OnPreviewStylusButtonDown(StylusButtonEventArgs)	
-
-Invoked when an unhandled PreviewStylusButtonDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewStylusButtonUp(StylusButtonEventArgs)	
-
-Invoked when an unhandled PreviewStylusButtonUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewStylusDown(StylusDownEventArgs)	
-
-Invoked when an unhandled PreviewStylusDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewStylusInAirMove(StylusEventArgs)	
-
-Invoked when an unhandled PreviewStylusInAirMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewStylusInRange(StylusEventArgs)	
-
-Invoked when an unhandled PreviewStylusInRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewStylusMove(StylusEventArgs)	
-
-Invoked when an unhandled PreviewStylusMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewStylusOutOfRange(StylusEventArgs)	
-
-Invoked when an unhandled PreviewStylusOutOfRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewStylusSystemGesture(StylusSystemGestureEventArgs)	
-
-Invoked when an unhandled PreviewStylusSystemGesture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnPreviewStylusUp(StylusEventArgs)	
-
-Invoked when an unhandled PreviewStylusUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+> OnPreviewStylusButtonDown/OnPreviewStylusButtonUp/OnPreviewStylusDown/OnPreviewStylusInAirMove/OnPreviewStylusInRange/OnPreviewStylusMove/OnPreviewStylusOutOfRange/OnPreviewStylusSystemGesture/OnPreviewStylusUp 路由触控笔事件
 
 > OnPreviewTextInput(TextCompositionEventArgs)	
 
 Invoked when an unhandled PreviewTextInput attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
-> OnPreviewTouchDown(TouchEventArgs)	
-
-Provides class handling for the PreviewTouchDown routed event that occurs when a touch presses this element.
-
-> OnPreviewTouchMove(TouchEventArgs)	
-
-Provides class handling for the PreviewTouchMove routed event that occurs when a touch moves while inside this element.
-
-> OnPreviewTouchUp(TouchEventArgs)	
-
-Provides class handling for the PreviewTouchUp routed event that occurs when a touch is released inside this element.
+> OnPreviewTouchDown/OnPreviewTouchMove/OnPreviewTouchUp 路由触控事件
 
 > OnPropertyChanged(DependencyPropertyChangedEventArgs)	
 
@@ -2376,73 +1789,13 @@ When overridden in a derived class, participates in rendering operations that ar
 
 When overridden in a derived class, participates in rendering operations that are directed by the layout system. This method is invoked after layout update, and before rendering, if the element's RenderSize has changed as a result of layout update.
 
-> OnStylusButtonDown(StylusButtonEventArgs)	
-
-Invoked when an unhandled StylusButtonDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnStylusButtonUp(StylusButtonEventArgs)	
-
-Invoked when an unhandled StylusButtonUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnStylusDown(StylusDownEventArgs)	
-
-Invoked when an unhandled StylusDown attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnStylusEnter(StylusEventArgs)	
-
-Invoked when an unhandled StylusEnter attached event is raised by this element. Implement this method to add class handling for this event.
-
-> OnStylusInAirMove(StylusEventArgs)	
-
-Invoked when an unhandled StylusInAirMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnStylusInRange(StylusEventArgs)	
-
-Invoked when an unhandled StylusInRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnStylusLeave(StylusEventArgs)	
-
-Invoked when an unhandled StylusLeave attached event is raised by this element. Implement this method to add class handling for this event.
-
-> OnStylusMove(StylusEventArgs)	
-
-Invoked when an unhandled StylusMove attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnStylusOutOfRange(StylusEventArgs)	
-
-Invoked when an unhandled StylusOutOfRange attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnStylusSystemGesture(StylusSystemGestureEventArgs)	
-
-Invoked when an unhandled StylusSystemGesture attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
-
-> OnStylusUp(StylusEventArgs)	
-
-Invoked when an unhandled StylusUp attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
+> OnStylusButtonDown/OnStylusButtonUp/OnStylusDown/OnStylusEnter/OnStylusInAirMove/OnStylusInRange/OnStylusLeave/OnStylusMove/OnStylusOutOfRange/OnStylusSystemGesture/OnStylusUp 触控笔事件
 
 > OnTextInput(TextCompositionEventArgs)	
 
 Invoked when an unhandled TextInput attached event reaches an element in its route that is derived from this class. Implement this method to add class handling for this event.
 
-> OnTouchDown(TouchEventArgs)	
-
-Provides class handling for the TouchDown routed event that occurs when a touch presses inside this element.
-
-> OnTouchEnter(TouchEventArgs)	
-
-Provides class handling for the TouchEnter routed event that occurs when a touch moves from outside to inside the bounds of this element.
-
-> OnTouchLeave(TouchEventArgs)	
-
-Provides class handling for the TouchLeave routed event that occurs when a touch moves from inside to outside the bounds of this UIElement.
-
-> OnTouchMove(TouchEventArgs)	
-
-Provides class handling for the TouchMove routed event that occurs when a touch moves while inside this element.
-
-> OnTouchUp(TouchEventArgs)	
-
-Provides class handling for the TouchUp routed event that occurs when a touch is released inside this element.
+> OnTouchDown/OnTouchEnter/OnTouchLeave/OnTouchMove/OnTouchUp 触摸屏输入事件
 
 > OnVisualChildrenChanged(DependencyObject, DependencyObject)	
 
@@ -2498,21 +1851,7 @@ Ensures that all visual child elements of this element are properly updated for 
 
 > > Events
 
-> DragEnter	
-
-Occurs when the input system reports an underlying drag event with this element as the drag target.
-
-> DragLeave	
-
-Occurs when the input system reports an underlying drag event with this element as the drag origin.
-
-> DragOver	
-
-Occurs when the input system reports an underlying drag event with this element as the potential drop target.
-
-> Drop	
-
-Occurs when the input system reports an underlying drop event with this element as the drop target.
+> DragEnter/DragLeave	/DragOver	/Drop	拖拽事件
 
 > FocusableChanged	
 
@@ -2586,13 +1925,7 @@ Occurs when the value of the IsStylusDirectlyOver property changes on this eleme
 
 Occurs when the value of the IsVisible property changes on this element.
 
-> KeyDown	
-
-Occurs when a key is pressed while focus is on this element.
-
-> KeyUp	
-
-Occurs when a key is released while focus is on this element.
+> KeyDown/KeyUp 键盘按键事件
 
 > LayoutUpdated	
 
@@ -2642,61 +1975,11 @@ Occurs when an input device begins a manipulation on the UIElement object.
 
 Occurs when the manipulation processor is first created.
 
-> MouseDown	
-
-Occurs when any mouse button is pressed while the pointer is over this element.
-
-> MouseEnter	
-
-Occurs when the mouse pointer enters the bounds of this element.
-
-> MouseLeave	
-
-Occurs when the mouse pointer leaves the bounds of this element.
-
-> MouseLeftButtonDown	
-
-Occurs when the left mouse button is pressed while the mouse pointer is over this element.
-
-> MouseLeftButtonUp	
-
-Occurs when the left mouse button is released while the mouse pointer is over this element.
-
-> MouseMove	
-
-Occurs when the mouse pointer moves while over this element.
-
-> MouseRightButtonDown	
-
-Occurs when the right mouse button is pressed while the mouse pointer is over this element.
-
-> MouseRightButtonUp	
-
-Occurs when the right mouse button is released while the mouse pointer is over this element.
-
-> MouseUp	
-
-Occurs when any mouse button is released over this element.
-
-> MouseWheel	
+> MouseDown/MouseEnter/MouseLeave/MouseLeftButtonDown/MouseLeftButtonUp/MouseMove/MouseRightButtonDown/MouseRightButtonUp/MouseUp/MouseWheel	鼠标事件
 
 Occurs when the user rotates the mouse wheel while the mouse pointer is over this element.
 
-> PreviewDragEnter	
-
-Occurs when the input system reports an underlying drag event with this element as the drag target.
-
-> PreviewDragLeave	
-
-Occurs when the input system reports an underlying drag event with this element as the drag origin.
-
-> PreviewDragOver	
-
-Occurs when the input system reports an underlying drag event with this element as the potential drop target.
-
-> PreviewDrop	
-
-Occurs when the input system reports an underlying drop event with this element as the drop target.
+> PreviewDragEnter/PreviewDragLeave/PreviewDragOver/PreviewDrop	路由拖拽事件
 
 > PreviewGiveFeedback	
 
@@ -2706,105 +1989,21 @@ Occurs when a drag-and-drop operation is started.
 
 Occurs when the keyboard is focused on this element.
 
-> PreviewKeyDown	
-
-Occurs when a key is pressed while focus is on this element.
-
-> PreviewKeyUp	
-
-Occurs when a key is released while focus is on this element.
+> PreviewKeyDown/PreviewKeyUp	路由键盘按键事件
 
 > PreviewLostKeyboardFocus	
 
 Occurs when the keyboard is no longer focused on this element.
 
-> PreviewMouseDown	
+> PreviewMouseDown/PreviewMouseLeftButtonDown/PreviewMouseLeftButtonUp/PreviewMouseMove/PreviewMouseRightButtonDown/PreviewMouseRightButtonUp/PreviewMouseUp/PreviewMouseWheel/PreviewQueryContinueDrag 路由鼠标事件
 
-Occurs when any mouse button is pressed while the pointer is over this element.
-
-> PreviewMouseLeftButtonDown	
-
-Occurs when the left mouse button is pressed while the mouse pointer is over this element.
-
-> PreviewMouseLeftButtonUp	
-
-Occurs when the left mouse button is released while the mouse pointer is over this element.
-
-> PreviewMouseMove	
-
-Occurs when the mouse pointer moves while the mouse pointer is over this element.
-
-> PreviewMouseRightButtonDown	
-
-Occurs when the right mouse button is pressed while the mouse pointer is over this element.
-
-> PreviewMouseRightButtonUp	
-
-Occurs when the right mouse button is released while the mouse pointer is over this element.
-
-> PreviewMouseUp	
-
-Occurs when any mouse button is released while the mouse pointer is over this element.
-
-> PreviewMouseWheel	
-
-Occurs when the user rotates the mouse wheel while the mouse pointer is over this element.
-
-> PreviewQueryContinueDrag	
-
-Occurs when there is a change in the keyboard or mouse button state during a drag-and-drop operation.
-
-> PreviewStylusButtonDown	
-
-Occurs when the stylus button is pressed while the pointer is over this element.
-
-> PreviewStylusButtonUp	
-
-Occurs when the stylus button is released while the pointer is over this element.
-
-> PreviewStylusDown	
-
-Occurs when the stylus touches the digitizer while it is over this element.
-
-> PreviewStylusInAirMove	
-
-Occurs when the stylus moves over an element without actually touching the digitizer.
-
-> PreviewStylusInRange	
-
-Occurs when the stylus is close enough to the digitizer to be detected, while over this element.
-
-> PreviewStylusMove	
-
-Occurs when the stylus moves while over the element. The stylus must move while being detected by the digitizer to raise this event, otherwise, PreviewStylusInAirMove is raised instead.
-
-> PreviewStylusOutOfRange	
-
-Occurs when the stylus is too far from the digitizer to be detected.
-
-> PreviewStylusSystemGesture	
-
-Occurs when a user performs one of several stylus gestures.
-
-> PreviewStylusUp	
-
-Occurs when the user raises the stylus off the digitizer while the stylus is over this element.
+> PreviewStylusButtonDown/PreviewStylusButtonUp/PreviewStylusDown/PreviewStylusInAirMove/PreviewStylusInRange/PreviewStylusMove/PreviewStylusOutOfRange	/PreviewStylusSystemGesture	/PreviewStylusUp	路由触控笔事件
 
 > PreviewTextInput	
 
 Occurs when this element gets text in a device-independent manner.
 
-> PreviewTouchDown	
-
-Occurs when a finger touches the screen while the finger is over this element.
-
-> PreviewTouchMove	
-
-Occurs when a finger moves on the screen while the finger is over this element.
-
-> PreviewTouchUp	
-
-Occurs when a finger is raised off of the screen while the finger is over this element.
+> PreviewTouchDown/PreviewTouchMove	/PreviewTouchUp 路由屏幕触控事件
 
 > QueryContinueDrag	
 
@@ -2814,73 +2013,13 @@ Occurs when there is a change in the keyboard or mouse button state during a dra
 
 Occurs when the cursor is requested to display. This event is raised on an element each time that the mouse pointer moves to a new location, which means the cursor object might need to be changed based on its new position.
 
-> StylusButtonDown	
-
-Occurs when the stylus button is pressed while the pointer is over this element.
-
-> StylusButtonUp	
-
-Occurs when the stylus button is released while the pointer is over this element.
-
-> StylusDown	
-
-Occurs when the stylus touches the digitizer while the stylus is over this element.
-
-> StylusEnter	
-
-Occurs when the stylus enters the bounds of this element.
-
-> StylusInAirMove	
-
-Occurs when the stylus moves over an element without actually touching the digitizer.
-
-> StylusInRange	
-
-Occurs when the stylus is close enough to the digitizer to be detected, while over this element.
-
-> StylusLeave	
-
-Occurs when the stylus leaves the bounds of the element.
-
-> StylusMove	
-
-Occurs when the stylus moves over this element. The stylus must move while on the digitizer to raise this event. Otherwise, StylusInAirMove is raised instead.
-
-> StylusOutOfRange	
-
-Occurs when the stylus is too far from the digitizer to be detected, while over this element.
-
-> StylusSystemGesture	
-
-Occurs when a user performs one of several stylus gestures.
-
-> StylusUp	
-
-Occurs when the user raises the stylus off the digitizer while it is over this element.
+> StylusButtonDown/StylusButtonUp	/StylusDown	/StylusEnter/StylusInAirMove/StylusInRange	/StylusLeave/StylusMove	/StylusOutOfRange/StylusSystemGesture/StylusUp	触控笔事件
 
 > TextInput	
 
 Occurs when this element gets text in a device-independent manner.
 
-> TouchDown	
-
-Occurs when a finger touches the screen while the finger is over this element.
-
-> TouchEnter	
-
-Occurs when a touch moves from outside to inside the bounds of this element.
-
-> TouchLeave	
-
-Occurs when a touch moves from inside to outside the bounds of this element.
-
-> TouchMove	
-
-Occurs when a finger moves on the screen while the finger is over this element.
-
-> TouchUp	
-
-Occurs when a finger is raised off of the screen while the finger is over this element.
+> TouchDown/TouchEnter/TouchLeave/TouchMove/TouchUp	屏幕触控事件
 
 > > 属性:
 
@@ -3582,13 +2721,7 @@ For a description of this member, see the IsAmbientPropertyAvailable(String) met
 
 > > 属性:
 
-> ActualHeight	
-
-Gets the rendered height of this element.
-
-> ActualWidth	
-
-Gets the rendered width of this element.
+> ActualHeight	ActualWidth	实际渲染的高和宽
 
 > AllowDrop	
 
@@ -3642,21 +2775,9 @@ Gets an enumerator for logical child elements of this element.
 
 Gets or sets the outer margin of an element.
 
-> MaxHeight	
+> MaxHeight	 MaxWidth	最大高宽
 
-Gets or sets the maximum height constraint of the element.
-
-> MaxWidth	
-
-Gets or sets the maximum width constraint of the element.
-
-> MinHeight	
-
-Gets or sets the minimum height constraint of the element.
-
-> MinWidth	
-
-Gets or sets the minimum width constraint of the element.
+> MinHeight	MinWidth	最小高宽
 
 > Name	
 
@@ -6265,7 +5386,7 @@ public class MainWindowViewModel : NotificationObject
 
 > Visual UI Automation Verify
 
-###### 自动化测试的协助工具
+#### 自动化测试的协助工具
 
 > 1、ResXManager
 
@@ -8649,20 +7770,6 @@ storyboard.Begin(this);
 
 ### 传输安全
 
-### 授权与审核
-
-### 认证
-
-> 安全主体具有两个基本的要素：身份与权限。身份在客户端经过认证之后已经确立下来，现在需要解决的问题就是如何获取被认证用户的权限。为了解决这个问题，WCF为我们提供了不同的方案，我们把这些方案成为不同的“安全主体权限模式（Principal Permission Mode）”。具体来说，WCF支持如下三种安全主体权限模式。
-
-> 三种授权模式
-
-> > 采用Windows用户组：将经过认证的用户映射为同名的Windows帐号，将该帐号所在的用户组作为权限集；
-
-> > 采用ASP.NET Roles提供程序：通过ASP.NET角色管理机制借助于某个RoleProvider获取基于当前认证用户的角色列表，并将其作为权限集；
-
-> > 自定义权限模式：自定义权限解析和安全主体创建机制。
-
 ### 扩展
 
 ## .Net Core
@@ -8865,500 +7972,6 @@ namespace SportsStore.Models
 
 }
 
-```
-
-### 授权认证管理
-
-#### 认证 Authentication 
-
-> 身份验证是确定用户身份的过程。 授权是确定用户是否有权访问资源的过程。 在 ASP.NET Core 中，身份验证由身份验证服务 IAuthenticationService 负责，而它供身份验证中间件使用。 身份验证服务会使用已注册的身份验证处理程序来完成与身份验证相关的操作。 与身份验证相关的操作示例包括：
-
-> > 对用户进行身份验证。
-
-> > 在未经身份验证的用户试图访问受限资源时作出响应。
-
-> 身份验证负责提供 ClaimsPrincipal 进行授权，以针对其进行权限决策。 可通过多种身份验证方案方法来选择使用哪种身份验证处理程序负责生成正确的声明集：
-
-> > 身份验证方案
-
-> > > 身份验证方案的身份验证操作负责根据请求上下文构造用户的身份。 它会返回一个 AuthenticateResult指示身份验证是否成功；若成功，则还在身份验证票证中指示用户的身份。 请参阅 AuthenticateAsync。 身份验证示例包括：
-
-> > > > 根据 cookie 构造用户身份的 cookie 身份验证方案。
-
-> > > > 对 JWT 持有者令牌进行反序列化和验证以构造用户身份的 JWT 持有者方案。
-
-> > > 当未经身份验证的用户请求要求身份验证的终结点时，授权会发起身份验证挑战。 例如，当匿名用户请求受限资源或访问登录链接时，会引发身份验证挑战。 授权会使用指定的身份验证方案发起挑战；如果未指定任何方案，则使用默认方案。 请参阅 ChallengeAsync。 身份验证挑战示例包括：
-
-> > > > 将用户重定向到登录页面的 cookie 身份验证方案。
-
-> > > > 返回具有 www-authenticate: bearer 标头的 401 结果的 JWT 持有者方案。
-
-> > > 身份验证处理程序：
-
-> > > > 是一种实现方案行为的类型。
-
-> > > > 派生自 IAuthenticationHandler 或 AuthenticationHandler<TOptions>。
-
-> > > > 具有对用户进行身份验证的主要责任。
-
-> > 默认身份验证方案。
-
-> > 直接设置 HttpContext.User。
-
-```
-
-using System.Threading.Tasks;
-
-using Microsoft.AspNetCore.Authorization;
-
-using Microsoft.AspNetCore.Identity;
-
-using Microsoft.AspNetCore.Mvc;
-
-using SportsStore.Models.ViewModels;
-
-using SportsStore.Models;
-
-[Authorize]
-
-public class AccountController : Controller {
-
-  private UserManager<IdentityUser> userManager;
-
-  private SignInManager<IdentityUser> signInManager;
-
-  public AccountController(UserManager<IdentityUser> userMgr,
-
-      SignInManager<IdentityUser> signInMgr) {
-
-    userManager = userMgr;
-
-    signInManager = signInMgr;
-
-    IdentitySeedData.EnsurePopulated(userMgr).Wait();
-
-  }
-
-  [AllowAnonymous]
-
-  public ViewResult Login(string returnUrl) {
-
-    return View(new LoginModel {
-
-      ReturnUrl = returnUrl
-
-    });
-
-  }
-
-  [HttpPost]
-
-  [AllowAnonymous]
-
-  [ValidateAntiForgeryToken]
-
-  public async Task<IActionResult> Login(LoginModel loginModel) {
-
-    if (ModelState.IsValid) {
-
-      IdentityUser user =
-
-        await userManager.FindByNameAsync(loginModel.Name);
-
-      if (user != null) {
-
-        await signInManager.SignOutAsync();
-
-        if ((await signInManager.PasswordSignInAsync(user,
-
-            loginModel.Password, false, false)).Succeeded) {
-
-          return Redirect(loginModel?.ReturnUrl ?? "/Admin/Index");
-
-        }
-
-      }
-
-    }
-
-    ModelState.AddModelError("", "Invalid name or password");
-
-    return View(loginModel);
-
-  }
-
-  public async Task<RedirectResult> Logout(string returnUrl = "/") {
-
-    await signInManager.SignOutAsync();
-
-    return Redirect(returnUrl);
-
-  }
-
-}
-
-```
-
-> rezor
-
-```
-
-@model LoginModel
-
-@{
-
-  ViewBag.Title = "Log In";
-
-  Layout = "_AdminLayout";
-
-}
-
-<div class="text-danger" asp-validation-summary="All"></div>
-
-<form asp-action="Login" asp-controller="Account" method="post">
-
-  <input type="hidden" asp-for="ReturnUrl" />
-
-  <div class="form-group">
-
-    <label asp-for="Name"></label>
-
-    <div><span asp-validation-for="Name" class="text-danger"></span></div>
-
-    <input asp-for="Name" class="form-control" />
-
-  </div>
-
-  <div class="form-group">
-
-    <label asp-for="Password"></label>
-
-    <div><span asp-validation-for="Password" class="text-danger"></span></div>
-
-    <input asp-for="Password" class="form-control" />
-
-  </div>
-
-  <button class="btn btn-primary" type="submit">Log In</button>
-
-</form>
-
-```
-
-##### Identity
-
-> Identity是一个一个 API，它支持用户界面 (UI) 登录功能。
-
-> 管理用户、密码、配置文件数据、角色、声明、令牌、电子邮件确认等等。
-
-> > 可以理解为.net core提供的一套用户管理系统，经过简单的配置就可以使用，当然也是可以自定义界面（需要添加基架标识(Scaffold Identity )） 
-
-> > 使用Scaffold Identity 授权到MVC 项目
-
-> > > 1.从解决方案资源管理器，右键单击该项目 >添加 > 新基架项。
-
-> > > 2.从左窗格添加基架对话框中，选择标识 > 添加。
-
-> > > 3.在中ADD 标识添加对话框中，选择所需的选项。
-
-> 使用Identity主要步骤：
-
-> 配置 Identity 服务 这些服务添加在 Program.cs 中。 包括配置数据库链接，典型模式是按以下顺序调用方法：
-
-> > Add{Service}
-
-> > builder.Services.Configure{Service}
-
-> 构建 Register、Login、LogOut 和 RegisterConfirmation 的基架
-
-##### 多重身份验证
-
-> 多重身份验证 (MFA) 是在登录事件期间请求用户进行其他形式的身份验证的过程。 此提示可以是输入手机中的代码、使用 FIDO2 密钥或提供指纹扫描。 需要进行另一种形式的身份验证时，安全性便得到了增强。 攻击者无法轻松获取或复制额外的因素。
-
-> MFA TOTP（基于时间的一次性密码算法）
-
-> > 使用 ASP.NET Core Identity时，默认支持使用 TOTP 的 MFA。 此方法可与任何合规的验证器应用一起使用，包括：
-
-> > > Microsoft Authenticator
-
-> > > Google Authenticator
-
-> > 若要禁用对 MFA TOTP 的支持，请使用 AddIdentity 而不是 AddDefaultIdentity配置身份验证。 AddDefaultIdentity 在内部调用 AddDefaultTokenProviders ，这将注册多个令牌提供程序，包括一个用于 MFA TOTP 的令牌提供程序。 若要仅注册特定的令牌提供程序，请为每个所需的提供程序调用 AddTokenProvider 。 有关可用令牌提供程序的详细信息，请参阅 GitHub 上的 AddDefaultTokenProviders 源。
-
-> > > MFA FIDO2 或无密码
-
-> > > FIDO2 目前是：
-
-> > > 实现 MFA 的最安全方法。唯一可防止钓鱼攻击的 MFA 流。
-
-> > > 目前，ASP.NET Core 不能直接支持 FIDO2。 FIDO2 可用于 MFA 或无密码流。
-
-> > > Azure Active Directory 提供对 FIDO2 和无密码流的支持。
-
-> MFA 短信
-
-> > 与密码身份验证（单因素）相比，使用短信的 MFA 大大提高了安全性。 但是，不再建议使用短信作为第二个因素。 此类型的实现存在太多已知攻击媒介。
-
-#### 授权  Authorize
-
-> 简单授权
-
-> > ASP.NET Core 中的授权由 AuthorizeAttribute 及其各种参数控制。 在其最基本的形式中，将 [Authorize] 属性应用于控制器、操作或 Razor 页面，将对该组件的访问权限限制为经过身份验证的用户。
-
-> 基于角色的授权
-
-> > 角色服务添加到 Identity 通过调用应用配置中的角色类型来AddRoles注册Program.cs基于角色的Identity授权服务。 以下示例中的角色类型为 IdentityRole：builder.Services.AddDefaultIdentity<IdentityUser>( ... ).AddRoles<IdentityRole>()
-
-> > [Authorize(Roles = "HRManager,Finance")]
-
-> > 基于 Policy 的角色检查
-
-```
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("RequireAdministratorRole",
-         policy => policy.RequireRole("Administrator"));
-
-    options.AddPolicy("ElevatedRights", policy =>
-        policy.RequireRole("Administrator", "PowerUser", "BackupAdministrator"));
-});
-
-[Authorize(Policy = "RequireAdministratorRole")]
-```
-
-> 基于声明的授权
-
-> > 添加声明检查
-
-```
-builder.Services.AddAuthorization(options =>
-{
-   options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
-});
-```
-
-> > 使用 [Authorize] 属性上的 Policy 属性应用策略，以指定策略名称；[Authorize(Policy = "EmployeeOnly")]
-
-> 基于策略的授权
-
-> > IAuthorizationService
-
-> > 典型的授权服务配置：
-
-```
-// Add all of your handlers to DI.
-builder.Services.AddSingleton<IAuthorizationHandler, MyHandler1>();
-// MyHandler2, ...
-
-builder.Services.AddSingleton<IAuthorizationHandler, MyHandlerN>();
-
-// Configure your policies
-builder.Services.AddAuthorization(options =>
-      options.AddPolicy("Something",
-      policy => policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")));
-```
-
-> > > 将策略应用于 MVC 控制器 [Authorize(Policy = "AtLeast21")]
-
-> 授权策略提供程序
-
-> > 通常在使用基于策略的授权时，通过在授权服务配置中调用 AuthorizationOptions.AddPolicy 来注册策略。 在某些情况下，可能无法（或不可取）采用此方式注册所有授权策略。 在这些情况下，可以使用自定义 IAuthorizationPolicyProvider 来控制如何提供授权策略。
-
-> > 自定义 IAuthorizationPolicyProvider 可能很有用的方案示例包括：
-
-> > > 使用外部服务提供策略评估。
-
-> > > 使用大范围的策略（例如对于不同房间号或年龄），因此使用 AuthorizationOptions.AddPolicy 调用添加每个单独授权策略没有意义。
-
-> > > 在运行时基于外部数据源（如数据库）中的信息创建策略，或通过其他机制动态确定授权要求。
-
-> 自定义 AuthorizationMiddleware 的行为
-
-> 基于资源的授权
-
-> > 使用命令性授权
-
-授权作为服务 IAuthorizationService 实现，并在类中的服务集合 Startup 中注册。 该服务通过依赖项注入提供给页面处理程序或操作。
-
-```
-public class DocumentController : Controller
-{
-    private readonly IAuthorizationService _authorizationService;
-    private readonly IDocumentRepository _documentRepository;
-
-    public DocumentController(IAuthorizationService authorizationService,
-                              IDocumentRepository documentRepository)
-    {
-        _authorizationService = authorizationService;
-        _documentRepository = documentRepository;
-    }
-IAuthorizationService 有两个 AuthorizeAsync 方法重载：一个接受资源和策略名称，另一个接受资源和要评估的要求列表。
-
-Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user,
-                          object resource,
-                          IEnumerable<IAuthorizationRequirement> requirements);
-Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user,
-                          object resource,
-                          string policyName);
-
-在以下示例中，要保护的资源将加载到自定义 Document 对象中。 系统调用 AuthorizeAsync 重载以确定是否允许当前用户编辑提供的文档。 自定义“EditPolicy”授权策略已纳入决策中。 有关创建授权策略的详细信息，请参阅基于自定义策略的授权。
-
-以下代码示例假定身份验证已运行并设置了 User 属性。
-
-public async Task<IActionResult> OnGetAsync(Guid documentId)
-{
-    Document = _documentRepository.Find(documentId);
-
-    if (Document == null)
-    {
-        return new NotFoundResult();
-    }
-
-    var authorizationResult = await _authorizationService
-            .AuthorizeAsync(User, Document, "EditPolicy");
-
-    if (authorizationResult.Succeeded)
-    {
-        return Page();
-    }
-    else if (User.Identity.IsAuthenticated)
-    {
-        return new ForbidResult();
-    }
-    else
-    {
-        return new ChallengeResult();
-    }
-}
-```
-
-> > 编写基于资源的处理程序为基于资源的授权编写处理程序与编写普通的要求处理程序没有太大区别。 创建自定义要求类并实现要求处理程序类。 有关创建要求类的详细信息，请参阅要求。处理程序类指定要求和资源类型。 例如，使用 SameAuthorRequirement 和 Document 资源的处理程序如下所示：
-
-```
-public class DocumentAuthorizationHandler : 
-    AuthorizationHandler<SameAuthorRequirement, Document>
-{
-    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
-                                                   SameAuthorRequirement requirement,
-                                                   Document resource)
-    {
-        if (context.User.Identity?.Name == resource.Author)
-        {
-            context.Succeed(requirement);
-        }
-
-        return Task.CompletedTask;
-    }
-}
-
-public class SameAuthorRequirement : IAuthorizationRequirement { }
-在前面的示例中，假设 SameAuthorRequirement 是更泛型的 SpecificAuthorRequirement 类的特例。 SpecificAuthorRequirement 类（未显示）包含一个表示作者姓名的 Name 属性。 Name 属性可以设置为当前用户。
-
-在 Program.cs 中注册要求和处理程序：
-
-builder.Services.AddRazorPages();
-builder.Services.AddControllersWithViews();
-
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("EditPolicy", policy =>
-        policy.Requirements.Add(new SameAuthorRequirement()));
-});
-
-builder.Services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationHandler>();
-builder.Services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationCrudHandler>();
-builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
-```
-
-> > 如果要根据 CRUD 的结果做出决策， (创建、读取、更新、删除) 操作，请使用 OperationAuthorizationRequirement 帮助程序类。 借助此类，你可以编写单个处理程序，而不是为每种操作类型编写一个类。 若要使用它，请提供一些操作名称：
-
-```
-public static class Operations
-{
-    public static OperationAuthorizationRequirement Create =
-        new OperationAuthorizationRequirement { Name = nameof(Create) };
-    public static OperationAuthorizationRequirement Read =
-        new OperationAuthorizationRequirement { Name = nameof(Read) };
-    public static OperationAuthorizationRequirement Update =
-        new OperationAuthorizationRequirement { Name = nameof(Update) };
-    public static OperationAuthorizationRequirement Delete =
-        new OperationAuthorizationRequirement { Name = nameof(Delete) };
-}
-```
-
-> 基于视图的授权
-
-> > 开发人员通常希望根据当前用户标识显示、隐藏或以其他方式修改 UI。 可以通过依赖项注入在 MVC 视图中访问授权服务。 若要将授权服务注入 Razor 视图，请使用 @inject 指令：
-
-```
-@using Microsoft.AspNetCore.Authorization
-@inject IAuthorizationService AuthorizationService
-如果要在每个视图中使用授权服务，请将 @inject 指令 _ViewImports.cshtml 放入 Views 目录的文件。 有关详细信息，请参阅视图中的依赖关系注入。
-
-使用注入的授权服务调用 AuthorizeAsync，其方式与在基于资源的授权过程中检查的方式完全相同：
-
-@if ((await AuthorizationService.AuthorizeAsync(User, "PolicyName")).Succeeded)
-{
-    <p>This paragraph is displayed because you fulfilled PolicyName.</p>
-}
-有时资源是视图模型。 调用 AuthorizeAsync 的方式与在基于资源的授权过程中检查的方式完全相同：
-
-@if ((await AuthorizationService.AuthorizeAsync(User, Model, Operations.Edit)).Succeeded)
-{
-    <p><a class="btn btn-default" role="button"
-        href="@Url.Action("Edit", "Document", new { id = Model.Id })">Edit</a></p>
-}
-```
-
-> > 在前面的代码中，模型作为策略评估应考虑的资源传递。
-
-> 按方案限制标识
-
-> > 在某些情况下，例如单页应用程序 (SPA)，通常会使用多种身份验证方法。 例如，应用可能会针对登录使用基于 cookie 的身份验证，并使用 JWT 持有者身份验证来处理 JavaScript 请求。 在某些情况下，应用可能会有一个身份验证处理程序的多个实例。 例如，有两个 cookie 处理程序，一个包含基本标识，另一个是在多重身份验证 (MFA) 触发后创建的。 可能会触发 MFA，因为用户请求了需要额外安全性的操作。 有关当用户请求需要 MFA 的资源时强制执行 MFA 的详细信息，请参阅使用 MFA 保护部分这一 GitHub 问题。身份验证方案是在身份验证期间配置身份验证服务时命名的。 
-
-```
-// Authentication
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = "B2C_OR_AAD";
-    options.DefaultChallengeScheme = "B2C_OR_AAD";
-})
-.AddJwtBearer("B2C", jwtOptions =>
-{
-    jwtOptions.MetadataAddress = "B2C-MetadataAddress";
-    jwtOptions.Authority = "B2C-Authority";
-    jwtOptions.Audience = "B2C-Audience";
-})
-.AddJwtBearer("AAD", jwtOptions =>
-{
-    jwtOptions.MetadataAddress = "AAD-MetadataAddress";
-    jwtOptions.Authority = "AAD-Authority";
-    jwtOptions.Audience = "AAD-Audience";
-    jwtOptions.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateIssuerSigningKey = true,
-        ValidAudiences = builder.Configuration.GetSection("ValidAudiences").Get<string[]>(),
-        ValidIssuers = builder.Configuration.GetSection("ValidIssuers").Get<string[]>()
-    };
-})
-.AddPolicyScheme("B2C_OR_AAD", "B2C_OR_AAD", options =>
-{
-    options.ForwardDefaultSelector = context =>
-    {
-        string authorization = context.Request.Headers[HeaderNames.Authorization];
-        if (!string.IsNullOrEmpty(authorization) && authorization.StartsWith("Bearer "))
-        {
-            var token = authorization.Substring("Bearer ".Length).Trim();
-            var jwtHandler = new JwtSecurityTokenHandler();
-
-            return (jwtHandler.CanReadToken(token) && jwtHandler.ReadJwtToken(token).Issuer.Equals("B2C-Authority"))
-                ? "B2C" : "AAD";
-        }
-        return "AAD";
-    };
-});
 ```
 
 ### DI
@@ -10501,10 +9114,21 @@ document.getElementById("sendButton").addEventListener("click", function (event)
 
 ### consul
 
+## Entity Framework
 
-### 认证
+### EDM
 
-> Session-Cookie
+> 实体数据模型，简称EDM，由三个概念组成。概念模型由概念架构定义语言文件 (.csdl)来定义，映射由映射规范语言文件 (.msl)，存储模型（又称逻辑模型）由存储架构定义语言文件 (.ssdl)来定义。这三者合在一起就是EDM模式。EDM模式在项目中的表现形式就是扩展名为.edmx的文件。这个包含EDM的文件可以使用Visual Studio中的EDM设计器来设计。由于这个文件本质是一个xml文件，可以手工编辑此文件来自定义CSDL、MSL与SSDL这三部分。
+
+## 认证授权
+
+### 认证 Authentication 
+
+> 身份验证是确定用户身份的过程。 授权是确定用户是否有权访问资源的过程。 在 ASP.NET Core 中，身份验证由身份验证服务 IAuthenticationService 负责，而它供身份验证中间件使用。 身份验证服务会使用已注册的身份验证处理程序来完成与身份验证相关的操作。 与身份验证相关的操作示例包括：对用户进行身份验证。在未经身份验证的用户试图访问受限资源时作出响应。
+
+> 身份验证负责提供 ClaimsPrincipal 进行授权，以针对其进行权限决策。 可通过多种身份验证方案方法来选择使用哪种身份验证处理程序负责生成正确的声明集：
+
+#### Session-Cookie认证
 
 Session-Cookie 的认证流程如下：用户先使用用户名和密码登录，登录完成后后端将用户信息存在session 中，把sessionId 写到前端的cookie 中，后面每次操作带着cookie 去后端，只要后端判断sessionId 没问题且没过期就不需要再次登录。
 
@@ -10516,114 +9140,502 @@ cookie 不能跨域传输
 
 session 存储在服务器中，所以session 过多会耗费较大服务器资源
 
-### Token
+#### Token认证
 
-与上面的Session-Cookie 机制不同的地方在于，基于token 的用户认证是一种服务端无状态的认证方式，服务端可以不用存放token 数据，但是服务器可以验证token 的合法性和有效性。
+> 与上面的Session-Cookie 机制不同的地方在于，基于token 的用户认证是一种服务端无状态的认证方式，服务端可以不用存放token 数据，但是服务器可以验证token 的合法性和有效性。进行认证的方式这里主要介绍两种：SAML,JWT
 
-使用token 进行认证的方式这里主要介绍两种：
-
-#### SAML
+##### SAML
 
 > SAML (Security Assertion Markup Language) 
 
-未登录的用户通过浏览器访问资源网站（Service Provider，简称SP）
+> > 未登录的用户通过浏览器访问资源网站（Service Provider，简称SP）
 
-SP 发现用户未登录，将页面重定向至IdP（Identity Provider）
+> > SP 发现用户未登录，将页面重定向至IdP（Identity Provider）
 
-IdP 验证请求无误后，提供表单让用户进行登录
+> > IdP 验证请求无误后，提供表单让用户进行登录
 
-用户登录成功后，IdP 生成并发送SAML token (一个很大的XML对象) 给SP
+> > 用户登录成功后，IdP 生成并发送SAML token (一个很大的XML对象) 给SP
 
-SP 对token 进行验证，解析获取用户信息，允许用户访问相关资源
+> > SP 对token 进行验证，解析获取用户信息，允许用户访问相关资源
 
-#### JWT
+##### JWT
 
-JSON Web Token 入门教程（预计阅读时间：2mins）
+> JWT 就是一种在用户登录后生成token 并把token 放在前端，后端不需要维护用户的状态信息但是可以验证token 有效性的认证及状态管理方式。 
 
-简言之，JWT 就是一种在用户登录后生成token 并把token 放在前端，后端不需要维护用户的状态信息但是可以验证token 有效性的认证及状态管理方式。 
+#### SSO 与CAS 单点登录。
+
+> 有若干云服务。包含项目管理、代码托管、代码检查、流水线、编译构建、部署、自动化测试等众多微服务的DevCloud（软件开发云） 正是其中之一，用户如果在使用任意一个服务没有登录的时候都可以去同一个地方进行登录认证，登录之后的一段时间内可以无需登录访问所有其他服务。
+
+> CAS（Central Authentication Service，中文名是中央认证服务） 是一个被高频使用的解决方案。因此，这里介绍一下利用CAS 实现SSO。而CAS 的具体实现又可以依赖很多种协议，比如OpenID、OAuth、SAML 等，这里重点介绍一下CAS 协议。CAS 协议中的几个重要概念
+
+> > CAS Server：用于认证的中心服务器
+
+> > CAS Clients：保护CAS 应用，一旦有未认证的用户访问，重定向至CAS Server 进行认证
+
+> > TGT & TGC：用户认证之后，CAS Server 回生成一个包含用户信息的TGT (Ticket Granting Ticket) 并向浏览器写一个cookie（TGC，Ticket Granting Cookie），有啥用后面流程会讲到
+
+> > ST：在url 上作为参数传输的ticket，受保护应用可以凭借这个ticket 去CAS Server 确认用户的认证是否合法 
+
+#### 多重身份验证
+
+> 多重身份验证 (MFA) 是在登录事件期间请求用户进行其他形式的身份验证的过程。 此提示可以是输入手机中的代码、使用 FIDO2 密钥或提供指纹扫描。 需要进行另一种形式的身份验证时，安全性便得到了增强。 攻击者无法轻松获取或复制额外的因素。
+
+> MFA TOTP（基于时间的一次性密码算法）
+
+> > 使用 ASP.NET Core Identity时，默认支持使用 TOTP 的 MFA。 此方法可与任何合规的验证器应用一起使用，包括：
+
+> > > Microsoft Authenticator
+
+> > > Google Authenticator
+
+> > 若要禁用对 MFA TOTP 的支持，请使用 AddIdentity 而不是 AddDefaultIdentity配置身份验证。 AddDefaultIdentity 在内部调用 AddDefaultTokenProviders ，这将注册多个令牌提供程序，包括一个用于 MFA TOTP 的令牌提供程序。 若要仅注册特定的令牌提供程序，请为每个所需的提供程序调用 AddTokenProvider 。 有关可用令牌提供程序的详细信息，请参阅 GitHub 上的 AddDefaultTokenProviders 源。
+
+> > > MFA FIDO2 或无密码
+
+> > > FIDO2 目前是：
+
+> > > 实现 MFA 的最安全方法。唯一可防止钓鱼攻击的 MFA 流。
+
+> > > 目前，ASP.NET Core 不能直接支持 FIDO2。 FIDO2 可用于 MFA 或无密码流。
+
+> > > Azure Active Directory 提供对 FIDO2 和无密码流的支持。
+
+> MFA 短信
+
+> > 与密码身份验证（单因素）相比，使用短信的 MFA 大大提高了安全性。 但是，不再建议使用短信作为第二个因素。 此类型的实现存在太多已知攻击媒介。
+
+#### .NET CORE身份验证方案
+
+> > > 身份验证方案的身份验证操作负责根据请求上下文构造用户的身份。 它会返回一个 AuthenticateResult指示身份验证是否成功；若成功，则还在身份验证票证中指示用户的身份。 请参阅 AuthenticateAsync。 身份验证示例包括：
+
+> > > > 根据 cookie 构造用户身份的 cookie 身份验证方案。
+
+> > > > 对 JWT 持有者令牌进行反序列化和验证以构造用户身份的 JWT 持有者方案。
+
+> > > 当未经身份验证的用户请求要求身份验证的终结点时，授权会发起身份验证挑战。 例如，当匿名用户请求受限资源或访问登录链接时，会引发身份验证挑战。 授权会使用指定的身份验证方案发起挑战；如果未指定任何方案，则使用默认方案。 请参阅 ChallengeAsync。 身份验证挑战示例包括：
+
+> > > > 将用户重定向到登录页面的 cookie 身份验证方案。
+
+> > > > 返回具有 www-authenticate: bearer 标头的 401 结果的 JWT 持有者方案。
+
+> > > 身份验证处理程序：
+
+> > > > 是一种实现方案行为的类型。
+
+> > > > 派生自 IAuthenticationHandler 或 AuthenticationHandler<TOptions>。
+
+> > > > 具有对用户进行身份验证的主要责任。
+
+> > 默认身份验证方案。
+
+> > 直接设置 HttpContext.User。
+
+```
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 
-#### SSO 与CAS
-接下来我们探讨一个企业应一定绕不过的课题：单点登录。
+[Authorize]
 
-举例来说，华为云下有若干云服务。包含项目管理、代码托管、代码检查、流水线、编译构建、部署、自动化测试等众多微服务的DevCloud（软件开发云） 正是其中之一，用户如果在使用任意一个服务没有登录的时候都可以去同一个地方进行登录认证，登录之后的一段时间内可以无需登录访问所有其他服务。
+public class AccountController : Controller {
 
-在单点登录领域，CAS（Central Authentication Service，中文名是中央认证服务） 是一个被高频使用的解决方案。因此，这里介绍一下利用CAS 实现SSO。而CAS 的具体实现又可以依赖很多种协议，比如OpenID、OAuth、SAML 等，这里重点介绍一下CAS 协议。
+  private UserManager<IdentityUser> userManager;
 
-CAS 协议中的几个重要概念
-简单介绍一下CAS 协议中的几个重要概念，一开始看概念可能很模糊，可以先过一遍，再结合下面的流程图来理解。
+  private SignInManager<IdentityUser> signInManager;
 
-CAS Server：用于认证的中心服务器
+  public AccountController(UserManager<IdentityUser> userMgr,
 
-CAS Clients：保护CAS 应用，一旦有未认证的用户访问，重定向至CAS Server 进行认证
+    SignInManager<IdentityUser> signInMgr) {
+    userManager = userMgr;
+    signInManager = signInMgr;
+    IdentitySeedData.EnsurePopulated(userMgr).Wait();
 
-TGT & TGC：用户认证之后，CAS Server 回生成一个包含用户信息的TGT (Ticket Granting Ticket) 并向浏览器写一个cookie（TGC，Ticket Granting Cookie），有啥用后面流程会讲到
+  }
 
-ST：在url 上作为参数传输的ticket，受保护应用可以凭借这个ticket 去CAS Server 确认用户的认证是否合法 
+  [AllowAnonymous]
+  public ViewResult Login(string returnUrl) {
+    return View(new LoginModel {
+      ReturnUrl = returnUrl
+    });
+
+  }
+
+  [HttpPost]
+
+  [AllowAnonymous]
+
+  [ValidateAntiForgeryToken]
+
+  public async Task<IActionResult> Login(LoginModel loginModel) {
+
+    if (ModelState.IsValid) {
+
+      IdentityUser user =
+
+        await userManager.FindByNameAsync(loginModel.Name);
+
+      if (user != null) {
+
+        await signInManager.SignOutAsync();
+
+        if ((await signInManager.PasswordSignInAsync(user,
+
+            loginModel.Password, false, false)).Succeeded) {
+
+          return Redirect(loginModel?.ReturnUrl ?? "/Admin/Index");
+
+        }
+
+      }
+
+    }
+
+    ModelState.AddModelError("", "Invalid name or password");
+
+    return View(loginModel);
+
+  }
+
+  public async Task<RedirectResult> Logout(string returnUrl = "/") {
+
+    await signInManager.SignOutAsync();
+
+    return Redirect(returnUrl);
+
+  }
+
+}
+
+```
+
+##### Identity
+
+> Identity是一个一个 API，它支持用户界面 (UI) 登录功能。
+
+> 管理用户、密码、配置文件数据、角色、声明、令牌、电子邮件确认等等。
+
+> > 可以理解为.net core提供的一套用户管理系统，经过简单的配置就可以使用，当然也是可以自定义界面（需要添加基架标识(Scaffold Identity )） 
+
+> > 使用Scaffold Identity 授权到MVC 项目
+
+> > > 1.从解决方案资源管理器，右键单击该项目 >添加 > 新基架项。
+
+> > > 2.从左窗格添加基架对话框中，选择标识 > 添加。
+
+> > > 3.在中ADD 标识添加对话框中，选择所需的选项。
+
+> 使用Identity主要步骤：
+
+> 配置 Identity 服务 这些服务添加在 Program.cs 中。 包括配置数据库链接，典型模式是按以下顺序调用方法：
+
+> > Add{Service}
+
+> > builder.Services.Configure{Service}
+
+> 构建 Register、Login、LogOut 和 RegisterConfirmation 的基架
 
 ### 授权
 
+#### 授权  Authorize
+
+> 简单授权
+
+> > ASP.NET Core 中的授权由 AuthorizeAttribute 及其各种参数控制。 在其最基本的形式中，将 [Authorize] 属性应用于控制器、操作或 Razor 页面，将对该组件的访问权限限制为经过身份验证的用户。
+
+> 基于角色的授权
+
+> > 角色服务添加到 Identity 通过调用应用配置中的角色类型来AddRoles注册Program.cs基于角色的Identity授权服务。 以下示例中的角色类型为 IdentityRole：builder.Services.AddDefaultIdentity<IdentityUser>( ... ).AddRoles<IdentityRole>()
+
+> > [Authorize(Roles = "HRManager,Finance")]
+
+> > 基于 Policy 的角色检查
+
+```
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdministratorRole",
+         policy => policy.RequireRole("Administrator"));
+
+    options.AddPolicy("ElevatedRights", policy =>
+        policy.RequireRole("Administrator", "PowerUser", "BackupAdministrator"));
+});
+
+[Authorize(Policy = "RequireAdministratorRole")]
+```
+
+> 基于声明的授权
+
+> > 添加声明检查
+
+```
+builder.Services.AddAuthorization(options =>
+{
+   options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("EmployeeNumber"));
+});
+```
+
+> > 使用 [Authorize] 属性上的 Policy 属性应用策略，以指定策略名称；[Authorize(Policy = "EmployeeOnly")]
+
+> 基于策略的授权
+
+> > IAuthorizationService
+
+> > 典型的授权服务配置：
+
+```
+// Add all of your handlers to DI.
+builder.Services.AddSingleton<IAuthorizationHandler, MyHandler1>();
+// MyHandler2, ...
+
+builder.Services.AddSingleton<IAuthorizationHandler, MyHandlerN>();
+
+// Configure your policies
+builder.Services.AddAuthorization(options =>
+      options.AddPolicy("Something",
+      policy => policy.RequireClaim("Permission", "CanViewPage", "CanViewAnything")));
+```
+
+> > > 将策略应用于 MVC 控制器 [Authorize(Policy = "AtLeast21")]
+
+> 授权策略提供程序
+
+> > 通常在使用基于策略的授权时，通过在授权服务配置中调用 AuthorizationOptions.AddPolicy 来注册策略。 在某些情况下，可能无法（或不可取）采用此方式注册所有授权策略。 在这些情况下，可以使用自定义 IAuthorizationPolicyProvider 来控制如何提供授权策略。
+
+> > 自定义 IAuthorizationPolicyProvider 可能很有用的方案示例包括：
+
+> > > 使用外部服务提供策略评估。
+
+> > > 使用大范围的策略（例如对于不同房间号或年龄），因此使用 AuthorizationOptions.AddPolicy 调用添加每个单独授权策略没有意义。
+
+> > > 在运行时基于外部数据源（如数据库）中的信息创建策略，或通过其他机制动态确定授权要求。
+
+> 自定义 AuthorizationMiddleware 的行为
+
+> 基于资源的授权
+
+> > 使用命令性授权
+
+授权作为服务 IAuthorizationService 实现，并在类中的服务集合 Startup 中注册。 该服务通过依赖项注入提供给页面处理程序或操作。
+
+```
+public class DocumentController : Controller
+{
+    private readonly IAuthorizationService _authorizationService;
+    private readonly IDocumentRepository _documentRepository;
+
+    public DocumentController(IAuthorizationService authorizationService,
+                              IDocumentRepository documentRepository)
+    {
+        _authorizationService = authorizationService;
+        _documentRepository = documentRepository;
+    }
+IAuthorizationService 有两个 AuthorizeAsync 方法重载：一个接受资源和策略名称，另一个接受资源和要评估的要求列表。
+
+Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user,
+                          object resource,
+                          IEnumerable<IAuthorizationRequirement> requirements);
+Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user,
+                          object resource,
+                          string policyName);
+
+在以下示例中，要保护的资源将加载到自定义 Document 对象中。 系统调用 AuthorizeAsync 重载以确定是否允许当前用户编辑提供的文档。 自定义“EditPolicy”授权策略已纳入决策中。 有关创建授权策略的详细信息，请参阅基于自定义策略的授权。
+
+以下代码示例假定身份验证已运行并设置了 User 属性。
+
+public async Task<IActionResult> OnGetAsync(Guid documentId)
+{
+    Document = _documentRepository.Find(documentId);
+
+    if (Document == null)
+    {
+        return new NotFoundResult();
+    }
+
+    var authorizationResult = await _authorizationService
+            .AuthorizeAsync(User, Document, "EditPolicy");
+
+    if (authorizationResult.Succeeded)
+    {
+        return Page();
+    }
+    else if (User.Identity.IsAuthenticated)
+    {
+        return new ForbidResult();
+    }
+    else
+    {
+        return new ChallengeResult();
+    }
+}
+```
+
+> > 编写基于资源的处理程序为基于资源的授权编写处理程序与编写普通的要求处理程序没有太大区别。 创建自定义要求类并实现要求处理程序类。 有关创建要求类的详细信息，请参阅要求。处理程序类指定要求和资源类型。 例如，使用 SameAuthorRequirement 和 Document 资源的处理程序如下所示：
+
+```
+public class DocumentAuthorizationHandler : 
+    AuthorizationHandler<SameAuthorRequirement, Document>
+{
+    protected override Task HandleRequirementAsync(AuthorizationHandlerContext context,
+                                                   SameAuthorRequirement requirement,
+                                                   Document resource)
+    {
+        if (context.User.Identity?.Name == resource.Author)
+        {
+            context.Succeed(requirement);
+        }
+
+        return Task.CompletedTask;
+    }
+}
+
+public class SameAuthorRequirement : IAuthorizationRequirement { }
+在前面的示例中，假设 SameAuthorRequirement 是更泛型的 SpecificAuthorRequirement 类的特例。 SpecificAuthorRequirement 类（未显示）包含一个表示作者姓名的 Name 属性。 Name 属性可以设置为当前用户。
+
+在 Program.cs 中注册要求和处理程序：
+
+builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("EditPolicy", policy =>
+        policy.Requirements.Add(new SameAuthorRequirement()));
+});
+
+builder.Services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationHandler>();
+builder.Services.AddSingleton<IAuthorizationHandler, DocumentAuthorizationCrudHandler>();
+builder.Services.AddScoped<IDocumentRepository, DocumentRepository>();
+```
+
+> > 如果要根据 CRUD 的结果做出决策， (创建、读取、更新、删除) 操作，请使用 OperationAuthorizationRequirement 帮助程序类。 借助此类，你可以编写单个处理程序，而不是为每种操作类型编写一个类。 若要使用它，请提供一些操作名称：
+
+```
+public static class Operations
+{
+    public static OperationAuthorizationRequirement Create =
+        new OperationAuthorizationRequirement { Name = nameof(Create) };
+    public static OperationAuthorizationRequirement Read =
+        new OperationAuthorizationRequirement { Name = nameof(Read) };
+    public static OperationAuthorizationRequirement Update =
+        new OperationAuthorizationRequirement { Name = nameof(Update) };
+    public static OperationAuthorizationRequirement Delete =
+        new OperationAuthorizationRequirement { Name = nameof(Delete) };
+}
+```
+
+> 基于视图的授权
+
+> > 开发人员通常希望根据当前用户标识显示、隐藏或以其他方式修改 UI。 可以通过依赖项注入在 MVC 视图中访问授权服务。 若要将授权服务注入 Razor 视图，请使用 @inject 指令：
+
+```
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+如果要在每个视图中使用授权服务，请将 @inject 指令 _ViewImports.cshtml 放入 Views 目录的文件。 有关详细信息，请参阅视图中的依赖关系注入。
+
+使用注入的授权服务调用 AuthorizeAsync，其方式与在基于资源的授权过程中检查的方式完全相同：
+
+@if ((await AuthorizationService.AuthorizeAsync(User, "PolicyName")).Succeeded)
+{
+    <p>This paragraph is displayed because you fulfilled PolicyName.</p>
+}
+有时资源是视图模型。 调用 AuthorizeAsync 的方式与在基于资源的授权过程中检查的方式完全相同：
+
+@if ((await AuthorizationService.AuthorizeAsync(User, Model, Operations.Edit)).Succeeded)
+{
+    <p><a class="btn btn-default" role="button"
+        href="@Url.Action("Edit", "Document", new { id = Model.Id })">Edit</a></p>
+}
+```
+
+> > 在前面的代码中，模型作为策略评估应考虑的资源传递。
+
+> 按方案限制标识
+
+> > 在某些情况下，例如单页应用程序 (SPA)，通常会使用多种身份验证方法。 例如，应用可能会针对登录使用基于 cookie 的身份验证，并使用 JWT 持有者身份验证来处理 JavaScript 请求。 在某些情况下，应用可能会有一个身份验证处理程序的多个实例。 例如，有两个 cookie 处理程序，一个包含基本标识，另一个是在多重身份验证 (MFA) 触发后创建的。 可能会触发 MFA，因为用户请求了需要额外安全性的操作。 有关当用户请求需要 MFA 的资源时强制执行 MFA 的详细信息，请参阅使用 MFA 保护部分这一 GitHub 问题。身份验证方案是在身份验证期间配置身份验证服务时命名的。 
+
+```
+// Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = "B2C_OR_AAD";
+    options.DefaultChallengeScheme = "B2C_OR_AAD";
+})
+.AddJwtBearer("B2C", jwtOptions =>
+{
+    jwtOptions.MetadataAddress = "B2C-MetadataAddress";
+    jwtOptions.Authority = "B2C-Authority";
+    jwtOptions.Audience = "B2C-Audience";
+})
+.AddJwtBearer("AAD", jwtOptions =>
+{
+    jwtOptions.MetadataAddress = "AAD-MetadataAddress";
+    jwtOptions.Authority = "AAD-Authority";
+    jwtOptions.Audience = "AAD-Audience";
+    jwtOptions.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateIssuerSigningKey = true,
+        ValidAudiences = builder.Configuration.GetSection("ValidAudiences").Get<string[]>(),
+        ValidIssuers = builder.Configuration.GetSection("ValidIssuers").Get<string[]>()
+    };
+})
+.AddPolicyScheme("B2C_OR_AAD", "B2C_OR_AAD", options =>
+{
+    options.ForwardDefaultSelector = context =>
+    {
+        string authorization = context.Request.Headers[HeaderNames.Authorization];
+        if (!string.IsNullOrEmpty(authorization) && authorization.StartsWith("Bearer "))
+        {
+            var token = authorization.Substring("Bearer ".Length).Trim();
+            var jwtHandler = new JwtSecurityTokenHandler();
+
+            return (jwtHandler.CanReadToken(token) && jwtHandler.ReadJwtToken(token).Issuer.Equals("B2C-Authority"))
+                ? "B2C" : "AAD";
+        }
+        return "AAD";
+    };
+});
+```
+
+
+#### WCF三种授权模式
+
+> 安全主体具有两个基本的要素：身份与权限。身份在客户端经过认证之后已经确立下来，现在需要解决的问题就是如何获取被认证用户的权限。为了解决这个问题，WCF为我们提供了不同的方案，我们把这些方案成为不同的“安全主体权限模式（Principal Permission Mode）”。具体来说，WCF支持如下三种安全主体权限模式。
+
+> > 采用Windows用户组：将经过认证的用户映射为同名的Windows帐号，将该帐号所在的用户组作为权限集；
+
+> > 采用ASP.NET Roles提供程序：通过ASP.NET角色管理机制借助于某个RoleProvider获取基于当前认证用户的角色列表，并将其作为权限集；
+
+> > 自定义权限模式：自定义权限解析和安全主体创建机制。
 
 #### OAuth 授权
 
-OAuth 的设计本意更倾向于授权而不是认证，所以这一小节的标题写的是授权，但是其实在授权的同时也已经完成了认证。
+> OAuth 2 是一个授权框架，或称授权标准，它可以使第三方应用程序或客户端获得对HTTP服务上（例如 Google，GitHub ）用户帐户信息的有限访问权限。OAuth 2 通过将用户身份验证委派给托管用户帐户的服务以及授权客户端访问用户帐户进行工作。
 
+> OAuth2 角色
 
-OAuth 2 是一个授权框架，或称授权标准，它可以使第三方应用程序或客户端获得对HTTP服务上（例如 Google，GitHub ）用户帐户信息的有限访问权限。OAuth 2 通过将用户身份验证委派给托管用户帐户的服务以及授权客户端访问用户帐户进行工作。综上，OAuth 2 可以为 Web 应用 和桌面应用以及移动应用提供授权流程。
+> > 资源所有者（Resource Owner）在 OAuth 2 标准中，资源所有者即代表授权客户端访问本身资源信息的用户（User），也就是应用场景中的“开发者A”。
 
-本文将从OAuth 2 角色，授权许可类型，授权流程等几方面进行讲解。
+> > 资源服务器（Resource Server）资源服务器托管了受保护的用户账号信息。
 
-在正式讲解之前，这里先引入一段应用场景，用以与后文的角色讲解对应。
+> > 授权服务器（Authorization Server） 而授权服务器验证用户身份然后为客户端派发资源访问令牌。
 
-开发者A注册某IT论坛后，发现可以在信息栏中填写自己的 Github 个人信息和仓库项目，但是他又觉得手工填写十分麻烦，直接提供 Github 账户和密码给论坛管理员帮忙处理更是十分智障。
-不过该论坛似乎和 Github 有不可告人的秘密，开发者A可以点击“导入”按钮，授权该论坛访问自己的 Github 账户并限制其只具备读权限。这样一来， Github 中的所有仓库和相关信息就可以很方便地被导入到信息栏中，账户隐私信息也不会泄露。
-这背后，便是 OAuth 2 在大显神威。
+> > 客户端（Client）客户端即代表意图访问受限资源的第三方应用
 
-2. OAuth2 角色
-OAuth 2 标准中定义了以下几种角色：
+>  OAuth 2 的授权流程
 
-资源所有者（Resource Owner）
-资源服务器（Resource Server）
-授权服务器（Authorization Server）
-客户端（Client）
-2.1 资源所有者（Resource Owner）
-资源所有者是 OAuth 2 四大基本角色之一，在 OAuth 2 标准中，资源所有者即代表授权客户端访问本身资源信息的用户（User），也就是应用场景中的“开发者A”。客户端访问用户帐户的权限仅限于用户授权的“范围”（aka. scope，例如读取或写入权限）。
+> > Authrization Request 客户端向用户请求对资源服务器的authorization grant。
 
-如果没有特别说明，下文中出现的"用户"将统一代表资源所有者。
+> > Authorization Grant（Get）如果用户授权该次请求，客户端将收到一个authorization grant。
 
-2.2 资源/授权服务器（Resource/Authorization Server）
-资源服务器托管了受保护的用户账号信息，而授权服务器验证用户身份然后为客户端派发资源访问令牌。
+> > Authorization Grant（Post）客户端向授权服务器发送它自己的客户端身份标识和上一步中的authorization grant，请求访问令牌。
 
-在上述应用场景中，Github 既是授权服务器也是资源服务器，个人信息和仓库信息即为资源（Resource）。而在实际工程中，不同的服务器应用往往独立部署，协同保护用户账户信息资源。
+> > Access Token（Get）如果客户端身份被认证，并且authorization grant也被验证通过，授权服务器将为客户端派发access token。授权阶段至此全部结束。
 
-2.3 客户端（Client）
-在 OAuth 2 中，客户端即代表意图访问受限资源的第三方应用。在访问实现之前，它必须先经过用户者授权，并且获得的授权凭证将进一步由授权服务器进行验证。
+> > Access Token（Post && Validate）客户端向资源服务器发送access token用于验证并请求资源信息。
 
-如果没有特别说明，下文中将不对"应用"，“第三方应用”，“客户端”做出区分。
-
-3. OAuth 2 的授权流程
-目前为止你应该对 OAuth 2 的角色有了些概念，接下来让我们来看看这几个角色之间的抽象授权流程图和相关解释。
-
-请注意，实际的授权流程图会因为用户返回授权许可类型的不同而不同。但是下图大体上能反映一次完整抽象的授权流程。
-
-Authrization Request
-客户端向用户请求对资源服务器的authorization grant。
-Authorization Grant（Get）
-如果用户授权该次请求，客户端将收到一个authorization grant。
-Authorization Grant（Post）
-客户端向授权服务器发送它自己的客户端身份标识和上一步中的authorization grant，请求访问令牌。
-Access Token（Get）
-如果客户端身份被认证，并且authorization grant也被验证通过，授权服务器将为客户端派发access token。授权阶段至此全部结束。
-Access Token（Post && Validate）
-客户端向资源服务器发送access token用于验证并请求资源信息。
-Protected Resource（Get）
-如果access token验证通过，资源服务器将向客户端返回资源信息。
-
-## Entity Framework
-
-### EDM
-
-> 实体数据模型，简称EDM，由三个概念组成。概念模型由概念架构定义语言文件 (.csdl)来定义，映射由映射规范语言文件 (.msl)，存储模型（又称逻辑模型）由存储架构定义语言文件 (.ssdl)来定义。这三者合在一起就是EDM模式。EDM模式在项目中的表现形式就是扩展名为.edmx的文件。这个包含EDM的文件可以使用Visual Studio中的EDM设计器来设计。由于这个文件本质是一个xml文件，可以手工编辑此文件来自定义CSDL、MSL与SSDL这三部分。
+> > Protected Resource（Get）如果access token验证通过，资源服务器将向客户端返回资源信息。
 
 ## 插件式框架
 
@@ -10631,13 +9643,13 @@ Protected Resource（Get）
 
 #### Log4Net配置
 
-##### log4net.Config.XmlConfigurator.Configure();
+> log4net.Config.XmlConfigurator.Configure();
 
 #### Log4Net初始化
 
 #### MEF初始化
 
-##### new Builder().Load();
+> new Builder().Load();
 
 ### Plugin实现层
 
@@ -11179,7 +10191,7 @@ namespace DEVGIS.WPFAPP.MyPlugin1
 
       this.MessageReceived += MyPlugin1_MessageReceived;
 
-      //FAMessageBox.ShowInfo("MyPlugin1.Init()-MyPlugin1 inited!");
+      //MessageBox.ShowInfo("MyPlugin1.Init()-MyPlugin1 inited!");
 
       this.PluginInited += MyPlugin1_PluginInited;
 
@@ -11207,9 +10219,9 @@ namespace DEVGIS.WPFAPP.MyPlugin1
 
       });
 
-      Logger.Info("MyPlugin1 inited! This message is from MYFAPlugin1.dll");
+      Logger.Info("MyPlugin1 inited! This message is from MYPlugin1.dll");
 
-      //FADebugOut.Debug("MyPlugin1 inited! This message is from MYFAPlugin1.dll");
+      //DebugOut.Debug("MyPlugin1 inited! This message is from MYPlugin1.dll");
 
     }
 
@@ -11219,9 +10231,9 @@ namespace DEVGIS.WPFAPP.MyPlugin1
 
       Logger.Info($"MyPlugin1.MyPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
 
-      //FAMessageBox.ShowInfo($"MyPlugin1.MyPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{e.Data.ToString()}");
+      //MessageBox.ShowInfo($"MyPlugin1.MyPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{e.Data.ToString()}");
 
-      //FADebugOut.Debug($"MyPlugin1.MyPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
+      //DebugOut.Debug($"MyPlugin1.MyPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
 
     }
 
@@ -11291,7 +10303,7 @@ namespace DEVGIS.WPFAPP.MyPlugin2
 
         Logger.Error("MyPlugin2.Init()-There is an error", ex);
 
-        //FADebugOut.Debug("MyPlugin2.Init()-There is an error:"+ex.Message);
+        //DebugOut.Debug("MyPlugin2.Init()-There is an error:"+ex.Message);
 
       }
 
@@ -11329,9 +10341,9 @@ namespace DEVGIS.WPFAPP.MyPlugin2
 
       Logger.Info($"MyPlugin2.MyPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
 
-      //FAMessageBox.ShowInfo($"MyPlugin2.MyPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{e.Data.ToString()}");
+      //MessageBox.ShowInfo($"MyPlugin2.MyPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{e.Data.ToString()}");
 
-      //FADebugOut.Debug($"MyPlugin2.MyPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
+      //DebugOut.Debug($"MyPlugin2.MyPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
 
     }
 
@@ -11403,7 +10415,7 @@ namespace DEVGIS.WPFAPP.Controls.Conveter
 
 {
 
-  [ValueConversion(typeof(FAProject), typeof(Visibility))]
+  [ValueConversion(typeof(Project), typeof(Visibility))]
 
   public class ProjectVisableConverter : IValueConverter
 
@@ -11413,7 +10425,7 @@ namespace DEVGIS.WPFAPP.Controls.Conveter
 
     {
 
-      if (value!=null&&value is FAProject)
+      if (value!=null&&value is Project)
 
       {
 
@@ -11631,11 +10643,11 @@ namespace DEVGIS.WPFAPP.Plugin
 
     [Import]
 
-    public IMessageBox FAMessageBox { get; set; }
+    public IMessageBox MessageBox { get; set; }
 
     //[Import]
 
-    //public IDebugOut FADebugOut { get; set; }
+    //public IDebugOut DebugOut { get; set; }
 
     public virtual void Init()
 
@@ -11653,7 +10665,7 @@ namespace DEVGIS.WPFAPP.Plugin
 
         Logger.Info($"PluginBase.Init()-{this.ToString()} Inited!");
 
-        //FADebugOut.Debug($"PluginBase.Init()-{this.ToString()} Inited!");
+        //DebugOut.Debug($"PluginBase.Init()-{this.ToString()} Inited!");
 
         if (PluginInited != null)
 
@@ -11777,7 +10789,7 @@ namespace DEVGIS.WPFAPP.Plugin
 
     public ILogger Logger { get; set; }
 
-    public IMessageBox FAMessageBox { get; set; }
+    public IMessageBox MessageBox { get; set; }
 
     public ViewModel()
 
@@ -11785,7 +10797,7 @@ namespace DEVGIS.WPFAPP.Plugin
 
       Logger = StaticData.Container.GetExportedValue<ILogger>();
 
-      FAMessageBox = StaticData.Container.GetExportedValue<IMessageBox>();
+      MessageBox = StaticData.Container.GetExportedValue<IMessageBox>();
 
     }
 
@@ -11803,9 +10815,9 @@ namespace DEVGIS.WPFAPP.Plugin
 
     }
 
-    private FAProject project = null;
+    private Project project = null;
 
-    public FAProject Project
+    public Project Project
 
     {
 
@@ -12291,7 +11303,7 @@ namespace DEVGIS.WPFAPP.Views.ViewModels
 
   {
 
-    public FACommand CreateProjectCommand
+    public Command CreateProjectCommand
 
     {
 
@@ -12305,21 +11317,21 @@ namespace DEVGIS.WPFAPP.Views.ViewModels
 
     {
 
-      Project = new FAProject(LanguageResource.Resource.DefaultProjectName);
+      Project = new Project(LanguageResource.Resource.DefaultProjectName);
 
-      Project.BasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"FAProject", Project.Name);
+      Project.BasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),"Project", Project.Name);
 
       Project.Author = Environment.UserName;
 
       Project.Description = LanguageResource.Resource.DefaultProjectDescrption;
 
-      CreateProjectCommand = new FACommand(o => {
+      CreateProjectCommand = new Command(o => {
 
         RaisePropertyChanged("Project");
 
         this.DialogResult = true;
 
-        FAMessageBox.ShowInfo($"[{Project.Author}]创建项目[{Project.Name}]成功！");
+        MessageBox.ShowInfo($"[{Project.Author}]创建项目[{Project.Name}]成功！");
 
         Logger.Info($"创建项目[{Project.Name}]成功！");
 
@@ -13353,33 +12365,6 @@ namespace DEVGIS.WPFAPP.Views.ViewModels
 
                   </StackPanel>
 
-### 概述
-
-#### 网格计算
-
-> 虚拟化
-
-> 动态供应
-
-> 资源集中
-
-> 自适应软件
-
-> 统一管理
-
-#### Oracle 11g新特性
-
-> 企业网格管理的高可用性
-
-> 更加优化的性能
-
-> 简化的信息管理
-
-> 集成的信息
-
-> 内置的商业智能
-
-> 丰富的开发平台
                 </LayoutAnchorable>
 
               </LayoutAnchorGroup>
@@ -13490,7 +12475,7 @@ namespace DEVGIS.WPFAPP.Views.ViewModels
 
     //public static ViewLocator Locator;
 
-    public FACommand TestCommand
+    public Command TestCommand
 
     {
 
@@ -13500,7 +12485,7 @@ namespace DEVGIS.WPFAPP.Views.ViewModels
 
     }
 
-    public FACommand SelectDevicesCommand
+    public Command SelectDevicesCommand
 
     {
 
@@ -13510,7 +12495,7 @@ namespace DEVGIS.WPFAPP.Views.ViewModels
 
     }
 
-    public FACommand CreateProjectCommand
+    public Command CreateProjectCommand
 
     {
 
@@ -13526,15 +12511,15 @@ namespace DEVGIS.WPFAPP.Views.ViewModels
 
       
 
-      TestCommand = new FACommand(ShowMessage);
+      TestCommand = new Command(ShowMessage);
 
-      SelectDevicesCommand = new FACommand(SelectDevices);
+      SelectDevicesCommand = new Command(SelectDevices);
 
-      CreateProjectCommand = new FACommand((o) => {
+      CreateProjectCommand = new Command((o) => {
 
         
 
-        //Project = new FAProject(o.ToString());
+        //Project = new Project(o.ToString());
 
         CreateProject CreateProjectWindow = new CreateProject();
 
@@ -13778,21 +12763,20 @@ namespace DEVGIS.WPFAPP.Views
 
 ### 外部包依赖
 
-#### Dirkster.AvalonDock
+> Dirkster.AvalonDock
 
-##### Dirkster.AvalonDock.Themes.VS2013
+> Dirkster.AvalonDock.Themes.VS2013
 
-#### Fluent.Ribbon
+> Fluent.Ribbon
 
-#### log4net
+> log4net
 
-#### MEF
+> System.ComponentModel.Composition //MEF
 
-##### System.ComponentModel.Composition
+> Dirkster.AvalonDock
 
-#### Dirkster.AvalonDock
-
-#### log4net
+> log4net
 
 ### LanguageResource实现多语言支持
+
 
