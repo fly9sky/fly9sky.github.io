@@ -58,6 +58,11 @@ updatedate: 2023-10-26 12:07:01
 - [ASP.NET](#aspnet)
   - [ASHX 处理请求](#ashx-处理请求)
 - [WPF](#wpf)
+  - [WPF 体系结构](#wpf-体系结构)
+    - [milcore](#milcore)
+    - [WindowsCodes.dll](#windowscodesdll)
+    - [Direct3D是图形渲染](#direct3d是图形渲染)
+    - [User32](#user32)
   - [WPF控件主要基类](#wpf控件主要基类)
     - [System.Object](#systemobject)
     - [Dispatcher](#dispatcher)
@@ -90,11 +95,6 @@ updatedate: 2023-10-26 12:07:01
     - [模板](#模板)
     - [使用资源的优势：](#使用资源的优势)
     - [资源的范围（层级）：](#资源的范围层级)
-  - [WPF 体系结构](#wpf-体系结构)
-    - [milcore](#milcore)
-    - [WindowsCodes.dll](#windowscodesdll)
-    - [Direct3D是图形渲染](#direct3d是图形渲染)
-    - [User32](#user32)
   - [CopyPaste(WPF)](#copypastewpf)
     - [ICopyAble](#icopyable)
     - [IPasteAble](#ipasteable)
@@ -144,14 +144,7 @@ updatedate: 2023-10-26 12:07:01
   - [XAML](#xaml)
       - [VisualTreeHelper](#visualtreehelper)
       - [LogicalTreeHelper](#logicaltreehelper)
-        - [BringIntoView(DependencyObject)](#bringintoviewdependencyobject)
-        - [FindLogicalNode(DependencyObject, String)](#findlogicalnodedependencyobject-string)
-        - [GetChildren(DependencyObject)](#getchildrendependencyobject)
-        - [GetChildren(FrameworkContentElement)](#getchildrenframeworkcontentelement)
-        - [GetChildren(FrameworkElement)](#getchildrenframeworkelement)
-        - [GetParent(DependencyObject)](#getparentdependencyobject)
-    - [合并XAMLS命名空间](#合并xamls命名空间)
-      - [注意看程序集的信息，里面有一堆这样的代码：](#注意看程序集的信息里面有一堆这样的代码)
+    - [合并XAMLS命名空间 到 http://url](#合并xamls命名空间-到-httpurl)
   - [布局](#布局)
       - [控制位置](#控制位置)
         - [1. Alignment](#1-alignment)
@@ -260,54 +253,54 @@ updatedate: 2023-10-26 12:07:01
       - [log4net.Config.XmlConfigurator.Configure();](#log4netconfigxmlconfiguratorconfigure)
     - [Log4Net初始化](#log4net初始化)
     - [MEF初始化](#mef初始化)
-      - [new FABuilder().Load();](#new-fabuilderload)
+      - [new Builder().Load();](#new-builderload)
   - [Plugin实现层](#plugin实现层)
     - [服务实现层](#服务实现层)
-      - [FACommonService](#facommonservice)
-        - [FALoggerService](#faloggerservice)
-        - [FAMessageService](#famessageservice)
-      - [FACommonViews](#facommonviews)
+      - [CommonService](#commonservice)
+        - [LoggerService](#loggerservice)
+        - [MessageService](#messageservice)
+      - [CommonViews](#commonviews)
         - [DebugPanel.xaml](#debugpanelxaml)
         - [DebugPanelViewModel](#debugpanelviewmodel)
         - [DebugPanel.Xaml.cs](#debugpanelxamlcs)
     - [插件实现层](#插件实现层)
-      - [MyFAPlugin1](#myfaplugin1)
-        - [MyFAPlugin1](#myfaplugin1-1)
-      - [MyFAPlugin2](#myfaplugin2)
-        - [MyFAPlugin2](#myfaplugin2-1)
-    - [FAStaticData](#fastaticdata)
+      - [MyPlugin1](#myplugin1)
+        - [MyPlugin1](#myplugin1-1)
+      - [MyPlugin2](#myplugin2)
+        - [MyPlugin2](#myplugin2-1)
+    - [StaticData](#staticdata)
   - [Controls](#controls)
     - [Conveter](#conveter)
       - [ProjectVisableConverter](#projectvisableconverter)
     - [DialogCloser](#dialogcloser)
-    - [FADialog](#fadialog)
-    - [FAWindow](#fawindow)
+    - [Dialog](#dialog)
+    - [Window](#window)
   - [Plugin接口层](#plugin接口层)
     - [Plugin插件模型接口层](#plugin插件模型接口层)
-      - [FAPluginBase](#fapluginbase)
-      - [FAView](#faview)
-      - [FAViewModel](#faviewmodel)
+      - [PluginBase](#pluginbase)
+      - [View](#view-1)
+      - [ViewModel](#viewmodel-1)
     - [服务接口层](#服务接口层)
       - [IDebugOut](#idebugout)
-      - [IFALogger](#ifalogger)
-      - [IFAMessageBox](#ifamessagebox)
+      - [ILogger](#ilogger)
+      - [IMessageBox](#imessagebox)
     - [Plugin插件模型接口层](#plugin插件模型接口层-1)
       - [MessageReceivedEventArgs](#messagereceivedeventargs)
   - [Core](#core)
-    - [FABuilder](#fabuilder)
+    - [Builder](#builder)
   - [Viwes](#viwes)
     - [CreateProject](#createproject)
       - [Xaml](#xaml-1)
-      - [ViewModel](#viewmodel-1)
+      - [ViewModel](#viewmodel-2)
     - [MainWindow](#mainwindow)
       - [Xaml](#xaml-2)
   - [概述](#概述)
     - [网格计算](#网格计算)
     - [Oracle 11g新特性](#oracle-11g新特性)
-      - [ViewModel](#viewmodel-2)
+      - [ViewModel](#viewmodel-3)
     - [SelectDevices](#selectdevices)
       - [Xaml](#xaml-3)
-      - [ViewModel](#viewmodel-3)
+      - [ViewModel](#viewmodel-4)
     - [ViewLocator](#viewlocator)
   - [外部包依赖](#外部包依赖)
     - [Dirkster.AvalonDock](#dirksteravalondock)
@@ -1235,6 +1228,27 @@ private T ProcessRequest<T>(HttpContext context) where T : class
 ```
 
 ## WPF
+
+### WPF 体系结构
+
+#### milcore 
+
+> 是以非托管代码编写的，实现与 DirectX 的紧密集成。性能敏感
+
+> milcore.dll是WPF渲染系统的核心，也是媒体集成层的基础。
+
+#### WindowsCodes.dll
+
+> 提供图像支持的低级API(处理、显示以及缩放位图与JPEG图像)
+
+#### Direct3D是图形渲染
+
+#### User32
+
+> 决定实际占有桌面部分。
+
+> 注意：不管拖动，缩放，milcore负责绘制程序恰当部分。
+
 
 ### WPF控件主要基类
 
@@ -4115,6 +4129,23 @@ public string Text
 
 #### 样式
 
+> WPF样式的优先级： 标签内样式(最高) > Windows/UserControl/Page  >  Application.xaml(最低)
+
+```
+ <Window>
+     <Grid>
+         <Grid.Resources>
+             <Style TargetType="{x:Type Button}" x:Key="ButtonStyle">
+                 <Setter Property="Height" Value="22"/>
+                 <Setter Property="Width" Value="60"/>
+             </Style>
+         </Grid.Resources>
+         <Button Content="Button" Style="{StaticResource ButtonStyle}"/>
+         <Button Content="Button" Style="{StaticResource ButtonStyle}" Margin="156,144,286,145" />
+     </Grid>
+ </Window>
+```
+
 > 样式基础
 
 > > 样式(Style)是组织和重用格式化选项的重要工具。不是使用重复的标记填充XAML,以便设置外边距、内边距、颜色以及字体等细节，而是创建一系列封装所有这些细节的样式，然后再需要之处通过属性来应用样式。样式是可应用于元素的属性值集合。使用资源的最常见原因之一就是保存样式。使按钮具有统一格式的实现方式一：资源
@@ -4388,26 +4419,6 @@ public string Text
 > (3)应用程序级：如果我们将资源定义在App.xaml 中，那么，就可以将资源套用到应用程序内的任何地方。
 
 > (4)字典级：当我们把资源封装成一个资源字典, 定义到一个ResourceDictionary的XAML文件时,就可以在另一个应用程序中重复使用。
-
-### WPF 体系结构
-
-#### milcore 
-
-> 是以非托管代码编写的，实现与 DirectX 的紧密集成。性能敏感
-
-> milcore.dll是WPF渲染系统的核心，也是媒体集成层的基础。
-
-#### WindowsCodes.dll
-
-> 提供图像支持的低级API(处理、显示以及缩放位图与JPEG图像)
-
-#### Direct3D是图形渲染
-
-#### User32
-
-> 决定实际占有桌面部分。
-
-> 注意：不管拖动，缩放，milcore负责绘制程序恰当部分。
 
 ### CopyPaste(WPF)
 
@@ -4707,7 +4718,7 @@ using System.Windows.Media;
 
 using System.Windows.Media.Effects;
 
-namespace DEVGIS.FA.FAOutTest.Behaviors
+namespace DEVGIS.WPFAPP.OutTest.Behaviors
 
 {
 
@@ -5997,68 +6008,33 @@ public class MainWindowViewModel : NotificationObject
 
 ##### LogicalTreeHelper 
 
-> 借助逻辑树，内容模型可以方便地循环访问其可能的子对象，
+> 借助逻辑树，内容模型可以方便地循环访问其可能的子对象。 此外，逻辑树还为某些通知提供框架，
 
-> 从而实现扩展。 此外，逻辑树还为某些通知提供框架，
+> > BringIntoView(DependencyObject)	尝试使所请求的 UI 元素可见，并在目标上引发 RequestBringIntoView 事件以报告结果。
 
-> 例如在加载逻辑树中的所有对象时。
+> > FindLogicalNode(DependencyObject, String)	尝试查找并返回具有指定名称的对象。 搜索从指定对象开始，并持续到逻辑树的子节点中。
 
-> 基本上，逻辑树是框架级别的近似运行时对象图（排除了视觉对象），
+> > GetChildren(DependencyObject)	通过处理逻辑树返回指定的对象的即时子对象集合。
 
-> 但其足以用于对你自己的运行时应用程序组合执行多种查询操作。
+> > GetChildren(FrameworkContentElement) 通过处理逻辑树，返回指定 FrameworkContentElement 的直接子对象的集合。
 
-###### BringIntoView(DependencyObject)	
+> > GetChildren(FrameworkElement)	通过处理逻辑树，返回指定 FrameworkElement 的直接子对象的集合。
 
-####### 尝试使所请求的 UI 元素可见，并在目标上引发 RequestBringIntoView 事件以报告结果。
+> > GetParent(DependencyObject)	通过处理逻辑树，返回指定对象的父对象。
 
-###### FindLogicalNode(DependencyObject, String)	
+#### 合并XAMLS命名空间 到 http://url
 
-####### 尝试查找并返回具有指定名称的对象。 搜索从指定对象开始，并持续到逻辑树的子节点中。
-
-###### GetChildren(DependencyObject)	
-
-####### 通过处理逻辑树返回指定的对象的即时子对象集合。
-
-###### GetChildren(FrameworkContentElement)	
-
-####### 通过处理逻辑树，返回指定 FrameworkContentElement 的直接子对象的集合。
-
-###### GetChildren(FrameworkElement)	
-
-####### 通过处理逻辑树，返回指定 FrameworkElement 的直接子对象的集合。
-
-###### GetParent(DependencyObject)	
-
-####### 通过处理逻辑树，返回指定对象的父对象。
-
-#### 合并XAMLS命名空间
-
-##### 注意看程序集的信息，里面有一堆这样的代码：
+> 注意看程序集的信息，里面有一堆这样的代码：
 
 ```
-
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Controls")]
-
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Documents")]
-
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Shapes")]
-
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Shell")]
-
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Navigation")]
-
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Data")]
-
 [assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows")]
-
-[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Controls.Primitives")]
-
-[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Media.Animation")]
-
-[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Input")]
-
-[assembly: XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "System.Windows.Media")]
-
+************
 ```
 
 > 这些代码的作用就是把那些命名空间合并到一个统一的命名空间里，方便调用。我们在自己的程序集里也可以这样用，只要修改AssemblyInfo.cs就可以了。然后我们在XAML里添加命名空间，就会看到自己定义的命名空间了。
@@ -6301,15 +6277,11 @@ public class MainWindowViewModel : NotificationObject
 
 > > 该工具的外观和感觉类似于Visual Studio。当你开始调试没有符号或者源代码的.NET进程时，dnSpy将向你显示反编译的代码。现在，这里有个魔术：你可以在反编译的代码本上中放置断点。遇到这些断点时，你将看到局部变量，线程，调用堆栈，并具有完整的调试经验。这使dnSpy成为调试第三方代码和调试生产环境的首选工具。
 
-> > 它轻巧，无需安装。只需将文件夹复制到任何生产机器上，然后开始调试。
-
-> > 这个工具有个小窍门。如果你使用dnSpy启动进程，那么一切将正常运行。但是，如果你附加到正在运行的进程时，则已加载的模块将保持优化状态。也就是说它们是在Release模式下构建的。优化代码后，将不会遇到某些断点，也不会显示某些局部变量。这几乎破坏了调试体验。解决方案是使用dsSpy启动进程，而不是附加到进程中。
+> > 如果你使用dnSpy启动进程，那么一切将正常运行。但是，如果你附加到正在运行的进程时，则已加载的模块将保持优化状态。优化代码后，将不会遇到某些断点，也不会显示某些局部变量。
 
 > 3、dotPeek
 
 > > dotPeek是JetBrains的免费.NET反编译器。它们的许多工具实际上进入了该列表。与两个反编译器（如ILSpy或JustDecompile）相比，我更喜欢dotPeek，这有两个原因：
-
-> > dotPeek提供了更好的用户体验。或至少我感到自在。它看起来和感觉都像Resharper。所以这可能是原因。
 
 > > dotPeek可以从任何程序集中创建符号服务区，即使没有符号或源代码也是如此。它像dnSpy一样，它或反编译代码并从中创建符号。借助dotPeek，Visual Studio就像dnSpy一样调试任何第三方代码。要查看准确程度，请参阅我的文章：在Visual Studio中调试没有符号的第三方.NET代码，后续会进行翻译。
 
@@ -6319,23 +6291,17 @@ public class MainWindowViewModel : NotificationObject
 
 > > 上图显示了对Visual Studio的简短记录分析。你可以看到ShowWindow花费了155毫秒，其中包括HwndSourceHook（42ms），Convert（16ms）等方法用时。此方法的执行包括42%的WPF调用，20%的用户代码，12%的GC等待，10%的Collections代码，10%的反射和5%的系统代码。太好了吧？
 
-> > 首先，这是一个学习曲线，但是一旦习惯了，它会变得非常直观。
-
 > 5、SciTech's .NET Memory Profiler
 
 > > 内存分析器是解决内存问题必不可少的另一类工具。这些可能是由于GC（GC压力）引起的内存泄露或性能影响。如果你有足够大的应用程序，那么迟早会遇到内存问题。我希望为你以后着想，因为这些类型的问题可能是毁灭性的。
 
 > > 内存探查器可以拍摄“内存快照”，并让你对器进行调查。你将看到哪些对象占用最多的内存，谁引用了它们，以及为什么未进行垃圾回收。通过比较两个快照，可以发现内存泄露。
 
-> > 有几种可用的内存分析器，但是SciTech's .NET Memory Profiler是我的最爱。我发现它是功能最强大的产品，问题最少。
-
 > 6、OzCode
 
 > > OzCode是独特的Visual Studio扩展。其唯一目的是帮助你在Visual Studio中进行交互式调试。OzCode具有很多功能，可以分为4部分：
 
-> > 1.上方显示 - OzCode在调试期间添加了一些有用的可视化功能。这包括红色/绿色突出显示并显示对象的选定属性：
-
-> > 还有其他内容，例如将表达式分解成各个部分:
+> > 1.上方显示 - OzCode在调试期间添加了一些有用的可视化功能。这包括红色/绿色突出显示并显示对象的选定属性：还有其他内容，例如将表达式分解成各个部分:
 
 > > 2.LINQ调试 - LINQ在编写代码时很棒，但是很难调试。OzCode允许在调试过程中以几乎完美的方式研究LINQ表达式。
 
@@ -10640,8 +10606,6 @@ OAuth 2 标准中定义了以下几种角色：
 
 请注意，实际的授权流程图会因为用户返回授权许可类型的不同而不同。但是下图大体上能反映一次完整抽象的授权流程。
 
-
-
 Authrization Request
 客户端向用户请求对资源服务器的authorization grant。
 Authorization Grant（Get）
@@ -10673,19 +10637,19 @@ Protected Resource（Get）
 
 #### MEF初始化
 
-##### new FABuilder().Load();
+##### new Builder().Load();
 
 ### Plugin实现层
 
 #### 服务实现层
 
-##### FACommonService
+##### CommonService
 
-###### FALoggerService
+###### LoggerService
 
-using DEVGIS.FA.Plugin.Interfaces;
+using DEVGIS.WPFAPP.Plugin.Interfaces;
 
-using DEVGIS.FA.Plugin.Services;
+using DEVGIS.WPFAPP.Plugin.Services;
 
 using log4net;
 
@@ -10703,19 +10667,19 @@ using System.Text;
 
 using System.Threading.Tasks;
 
-namespace DEVGIS.FA.FACommonService
+namespace DEVGIS.WPFAPP.CommonService
 
 {
 
-  [Export(typeof(IFALogger))]
+  [Export(typeof(ILogger))]
 
-  public class FALoggerService : IFALogger
+  public class LoggerService : ILogger
 
   {
 
     ILog logger;
 
-    public FALoggerService()
+    public LoggerService()
 
     {
 
@@ -10857,9 +10821,9 @@ namespace DEVGIS.FA.FACommonService
 
 }
 
-###### FAMessageService
+###### MessageService
 
-using DEVGIS.FA.Plugin.Services;
+using DEVGIS.WPFAPP.Plugin.Services;
 
 using System;
 
@@ -10875,17 +10839,17 @@ using System.Threading.Tasks;
 
 using System.Windows;
 
-namespace DEVGIS.FA.FACommonService
+namespace DEVGIS.WPFAPP.CommonService
 
 {
 
-  [Export(typeof(IFAMessageBox))]
+  [Export(typeof(IMessageBox))]
 
-  public class FAMessageService : IFAMessageBox
+  public class MessageService : IMessageBox
 
   {
 
-    public string Title = "FA";
+    public string Title = "DEVGIS";
 
     public void ShowDebug(string message)
 
@@ -10961,11 +10925,11 @@ namespace DEVGIS.FA.FACommonService
 
 }
 
-##### FACommonViews
+##### CommonViews
 
 ###### DebugPanel.xaml
 
-<inplug:FAView x:Class="DEVGIS.FA.FACommonViews.Views.DebugPanel"
+<inplug:View x:Class="DEVGIS.WPFAPP.CommonViews.Views.DebugPanel"
 
        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
@@ -10975,23 +10939,23 @@ namespace DEVGIS.FA.FACommonService
 
        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 
-       xmlns:local="clr-namespace:DEVGIS.FA.FACommonViews.Views"
+       xmlns:local="clr-namespace:DEVGIS.WPFAPP.CommonViews.Views"
 
-       xmlns:facontrols="clr-namespace:DEVGIS.FA.Controls;assembly=FAControls"
+       xmlns:facontrols="clr-namespace:DEVGIS.WPFAPP.Controls;assembly=Controls"
 
-       xmlns:localvm="clr-namespace:DEVGIS.FA.FACommonViews.ViewModels"
+       xmlns:localvm="clr-namespace:DEVGIS.WPFAPP.CommonViews.ViewModels"
 
-       xmlns:inplug="clr-namespace:DEVGIS.FA.Plugin;assembly=FAPlugin"
+       xmlns:inplug="clr-namespace:DEVGIS.WPFAPP.Plugin;assembly=FAPlugin"
 
        mc:Ignorable="d" 
 
        d:DesignHeight="300" d:DesignWidth="600" Width="600" Height="300" >
 
-  <!--<inplug:FAView.DataContext>
+  <!--<inplug:View.DataContext>
 
     <localvm:DebugPanelViewModel/>
 
-  </inplug:FAView.DataContext>-->
+  </inplug:View.DataContext>-->
 
   <Grid>
 
@@ -11017,13 +10981,13 @@ namespace DEVGIS.FA.FACommonService
 
   </Grid>
 
-</inplug:FAView>
+</inplug:View>
 
 ###### DebugPanelViewModel
 
-using DEVGIS.FA.Plugin;
+using DEVGIS.WPFAPP.Plugin;
 
-using DEVGIS.FA.Plugin.Services;
+using DEVGIS.WPFAPP.Plugin.Services;
 
 using System;
 
@@ -11039,15 +11003,15 @@ using System.Text;
 
 using System.Threading.Tasks;
 
-namespace DEVGIS.FA.FACommonViews.ViewModels
+namespace DEVGIS.WPFAPP.CommonViews.ViewModels
 
 {
 
   [Export(typeof(IDebugOut))]
 
-  [Export(typeof(FAViewModel))]
+  [Export(typeof(ViewModel))]
 
-  public class DebugPanelViewModel : FAViewModel, IDebugOut
+  public class DebugPanelViewModel : ViewModel, IDebugOut
 
   {
 
@@ -11091,9 +11055,9 @@ namespace DEVGIS.FA.FACommonViews.ViewModels
 
 ###### DebugPanel.Xaml.cs
 
-using DEVGIS.FA.Controls;
+using DEVGIS.WPFAPP.Controls;
 
-using DEVGIS.FA.Plugin;
+using DEVGIS.WPFAPP.Plugin;
 
 using System;
 
@@ -11125,11 +11089,11 @@ using System.Windows.Navigation;
 
 using System.Windows.Shapes;
 
-namespace DEVGIS.FA.FACommonViews.Views
+namespace DEVGIS.WPFAPP.CommonViews.Views
 
 {
 
-  [Export(typeof(FAView))]
+  [Export(typeof(View))]
 
   /// <summary>
 
@@ -11137,7 +11101,7 @@ namespace DEVGIS.FA.FACommonViews.Views
 
   /// </summary>
 
-  public partial class DebugPanel:FAView
+  public partial class DebugPanel:View
 
   {
 
@@ -11155,13 +11119,13 @@ namespace DEVGIS.FA.FACommonViews.Views
 
 #### 插件实现层
 
-##### MyFAPlugin1
+##### MyPlugin1
 
-###### MyFAPlugin1
+###### MyPlugin1
 
-using DEVGIS.FA.Plugin;
+using DEVGIS.WPFAPP.Plugin;
 
-using DEVGIS.FA.Plugin.Services;
+using DEVGIS.WPFAPP.Plugin.Services;
 
 using System;
 
@@ -11177,31 +11141,31 @@ using System.Threading;
 
 using System.Threading.Tasks;
 
-namespace DEVGIS.FA.MyFAPlugin1
+namespace DEVGIS.WPFAPP.MyPlugin1
 
 {
 
-  [Export(typeof(FAPluginBase))]
+  [Export(typeof(PluginBase))]
 
-  public class MyFAPlugin1 : FAPluginBase
+  public class MyPlugin1 : PluginBase
 
   {
 
-    //IFALogger FALogger { get; set; }
+    //ILogger Logger { get; set; }
 
     [ImportingConstructor]
 
-    public MyFAPlugin1() //IFALogger logger
+    public MyPlugin1() //ILogger logger
 
     {
 
-      this.ID = "MyFAPlugin1";
+      this.ID = "MyPlugin1";
 
-      this.Name = "MyFAPlugin1";
+      this.Name = "MyPlugin1";
 
-      this.Categorys = new List<FACategory>();
+      this.Categorys = new List<Category>();
 
-      ///FALogger = logger;
+      ///Logger = logger;
 
     }
 
@@ -11213,15 +11177,15 @@ namespace DEVGIS.FA.MyFAPlugin1
 
       
 
-      this.MessageReceived += MyFAPlugin1_MessageReceived;
+      this.MessageReceived += MyPlugin1_MessageReceived;
 
-      //FAMessageBox.ShowInfo("MyFAPlugin1.Init()-MyFAPlugin1 inited!");
+      //FAMessageBox.ShowInfo("MyPlugin1.Init()-MyPlugin1 inited!");
 
-      this.PluginInited += MyFAPlugin1_PluginInited;
+      this.PluginInited += MyPlugin1_PluginInited;
 
     }
 
-    private void MyFAPlugin1_PluginInited(object sender, EventArgs e)
+    private void MyPlugin1_PluginInited(object sender, EventArgs e)
 
     {
 
@@ -11235,7 +11199,7 @@ namespace DEVGIS.FA.MyFAPlugin1
 
         {
 
-          SendMessage("MyFAPlugin2", "string", Encoding.UTF8.GetBytes("This is a test message from MyFAPlugin1 !"));
+          SendMessage("MyPlugin2", "string", Encoding.UTF8.GetBytes("This is a test message from MyPlugin1 !"));
 
           Thread.Sleep(100);
 
@@ -11243,21 +11207,21 @@ namespace DEVGIS.FA.MyFAPlugin1
 
       });
 
-      FALogger.Info("MyFAPlugin1 inited! This message is from MYFAPlugin1.dll");
+      Logger.Info("MyPlugin1 inited! This message is from MYFAPlugin1.dll");
 
-      //FADebugOut.Debug("MyFAPlugin1 inited! This message is from MYFAPlugin1.dll");
+      //FADebugOut.Debug("MyPlugin1 inited! This message is from MYFAPlugin1.dll");
 
     }
 
-    private void MyFAPlugin1_MessageReceived(object sender, Plugin.Args.MessageReceivedEventArgs e)
+    private void MyPlugin1_MessageReceived(object sender, Plugin.Args.MessageReceivedEventArgs e)
 
     {
 
-      FALogger.Info($"MyFAPlugin1.MyFAPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
+      Logger.Info($"MyPlugin1.MyPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
 
-      //FAMessageBox.ShowInfo($"MyFAPlugin1.MyFAPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{e.Data.ToString()}");
+      //FAMessageBox.ShowInfo($"MyPlugin1.MyPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{e.Data.ToString()}");
 
-      //FADebugOut.Debug($"MyFAPlugin1.MyFAPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
+      //FADebugOut.Debug($"MyPlugin1.MyPlugin1_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
 
     }
 
@@ -11265,11 +11229,11 @@ namespace DEVGIS.FA.MyFAPlugin1
 
 }
 
-##### MyFAPlugin2
+##### MyPlugin2
 
-###### MyFAPlugin2
+###### MyPlugin2
 
-using DEVGIS.FA.Plugin;
+using DEVGIS.WPFAPP.Plugin;
 
 using System;
 
@@ -11285,23 +11249,23 @@ using System.Threading;
 
 using System.Threading.Tasks;
 
-namespace DEVGIS.FA.MyFAPlugin2
+namespace DEVGIS.WPFAPP.MyPlugin2
 
 {
 
-  [Export(typeof(FAPluginBase))]
+  [Export(typeof(PluginBase))]
 
-  public class MyFAPlugin2 : FAPluginBase
+  public class MyPlugin2 : PluginBase
 
   {
 
-    public MyFAPlugin2()
+    public MyPlugin2()
 
     {
 
-      this.ID = "MyFAPlugin2";
+      this.ID = "MyPlugin2";
 
-      this.Name = "MyFAPlugin2";
+      this.Name = "MyPlugin2";
 
     }
 
@@ -11311,7 +11275,7 @@ namespace DEVGIS.FA.MyFAPlugin2
 
       base.Init();
 
-      this.MessageReceived += MyFAPlugin2_MessageReceived;
+      this.MessageReceived += MyPlugin2_MessageReceived;
 
       try
 
@@ -11325,17 +11289,17 @@ namespace DEVGIS.FA.MyFAPlugin2
 
       {
 
-        FALogger.Error("MyFAPlugin2.Init()-There is an error", ex);
+        Logger.Error("MyPlugin2.Init()-There is an error", ex);
 
-        //FADebugOut.Debug("MyFAPlugin2.Init()-There is an error:"+ex.Message);
+        //FADebugOut.Debug("MyPlugin2.Init()-There is an error:"+ex.Message);
 
       }
 
-      this.PluginInited += MyFAPlugin2_PluginInited;
+      this.PluginInited += MyPlugin2_PluginInited;
 
     }
 
-    private void MyFAPlugin2_PluginInited(object sender, EventArgs e)
+    private void MyPlugin2_PluginInited(object sender, EventArgs e)
 
     {
 
@@ -11349,7 +11313,7 @@ namespace DEVGIS.FA.MyFAPlugin2
 
         {
 
-          SendMessage("MyFAPlugin1", "string", Encoding.UTF8.GetBytes("This is a test message from MyFAPlugin2 !"));
+          SendMessage("MyPlugin1", "string", Encoding.UTF8.GetBytes("This is a test message from MyPlugin2 !"));
 
           Thread.Sleep(100);
 
@@ -11359,15 +11323,15 @@ namespace DEVGIS.FA.MyFAPlugin2
 
     }
 
-    private void MyFAPlugin2_MessageReceived(object sender, Plugin.Args.MessageReceivedEventArgs e)
+    private void MyPlugin2_MessageReceived(object sender, Plugin.Args.MessageReceivedEventArgs e)
 
     {
 
-      FALogger.Info($"MyFAPlugin2.MyFAPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
+      Logger.Info($"MyPlugin2.MyPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
 
-      //FAMessageBox.ShowInfo($"MyFAPlugin2.MyFAPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{e.Data.ToString()}");
+      //FAMessageBox.ShowInfo($"MyPlugin2.MyPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{e.Data.ToString()}");
 
-      //FADebugOut.Debug($"MyFAPlugin2.MyFAPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
+      //FADebugOut.Debug($"MyPlugin2.MyPlugin2_MessageReceived()-Message from【{e.SenderID}】 type:{e.DataType} content:{Encoding.Default.GetString(e.Data)}");
 
     }
 
@@ -11375,7 +11339,7 @@ namespace DEVGIS.FA.MyFAPlugin2
 
 }
 
-#### FAStaticData
+#### StaticData
 
 using System;
 
@@ -11391,21 +11355,21 @@ using System.Text;
 
 using System.Threading.Tasks;
 
-namespace DEVGIS.FA.Plugin
+namespace DEVGIS.WPFAPP.Plugin
 
 {
 
-  public class FAStaticData
+  public class StaticData
 
   {
 
     public static CompositionContainer Container = null;
 
-    //[ImportMany(typeof(FAView))]
+    //[ImportMany(typeof(View))]
 
     ////private IEnumerable<Lazy<View, IViewMetadata>> views { get; set; }
 
-    //public static IEnumerable<FAView> Views { get; set; }
+    //public static IEnumerable<View> Views { get; set; }
 
   }
 
@@ -11417,7 +11381,7 @@ namespace DEVGIS.FA.Plugin
 
 ##### ProjectVisableConverter
 
-using DEVGIS.FA.Plugin;
+using DEVGIS.WPFAPP.Plugin;
 
 using System;
 
@@ -11435,7 +11399,7 @@ using System.Windows;
 
 using System.Windows.Data;
 
-namespace DEVGIS.FA.Controls.Conveter
+namespace DEVGIS.WPFAPP.Controls.Conveter
 
 {
 
@@ -11493,7 +11457,7 @@ using System.Threading.Tasks;
 
 using System.Windows;
 
-namespace DEVGIS.FA.Controls
+namespace DEVGIS.WPFAPP.Controls
 
 {
 
@@ -11539,7 +11503,7 @@ namespace DEVGIS.FA.Controls
 
 }
 
-#### FADialog
+#### Dialog
 
 using System;
 
@@ -11555,15 +11519,15 @@ using System.Windows;
 
 using System.Windows.Data;
 
-namespace DEVGIS.FA.Controls
+namespace DEVGIS.WPFAPP.Controls
 
 {
 
-  public class FADialog : FAWindow
+  public class Dialog : Window
 
   {
 
-    public FADialog()
+    public Dialog()
 
     {
 
@@ -11577,7 +11541,7 @@ namespace DEVGIS.FA.Controls
 
 }
 
-#### FAWindow
+#### Window
 
 using System;
 
@@ -11593,15 +11557,15 @@ using System.Windows;
 
 using System.Windows.Data;
 
-namespace DEVGIS.FA.Controls
+namespace DEVGIS.WPFAPP.Controls
 
 {
 
-  public class FAWindow:Window
+  public class Window:Window
 
   {
 
-    public FAWindow()
+    public Window()
 
     {
 
@@ -11625,11 +11589,11 @@ namespace DEVGIS.FA.Controls
 
 #### Plugin插件模型接口层
 
-##### FAPluginBase
+##### PluginBase
 
-using DEVGIS.FA.Plugin.Args;
+using DEVGIS.WPFAPP.Plugin.Args;
 
-using DEVGIS.FA.Plugin.Services;
+using DEVGIS.WPFAPP.Plugin.Services;
 
 using System;
 
@@ -11639,15 +11603,15 @@ using System.ComponentModel.Composition;
 
 using System.Threading;
 
-namespace DEVGIS.FA.Plugin
+namespace DEVGIS.WPFAPP.Plugin
 
 {
 
-  public class FAPluginBase:FAObject
+  public class PluginBase:FAObject
 
   {
 
-    public FAPluginBase()
+    public PluginBase()
 
     {
 
@@ -11657,17 +11621,17 @@ namespace DEVGIS.FA.Plugin
 
     public bool Inited { get; set; } = false;
 
-    public List<FACategory> Categorys { get; set; }
+    public List<Category> Categorys { get; set; }
 
     public FAEquipmentType EquipmentType { get; set; }
 
     [Import]
 
-    public IFALogger FALogger { get; set; }
+    public ILogger Logger { get; set; }
 
     [Import]
 
-    public IFAMessageBox FAMessageBox { get; set; }
+    public IMessageBox FAMessageBox { get; set; }
 
     //[Import]
 
@@ -11687,9 +11651,9 @@ namespace DEVGIS.FA.Plugin
 
         }
 
-        FALogger.Info($"FAPluginBase.Init()-{this.ToString()} Inited!");
+        Logger.Info($"PluginBase.Init()-{this.ToString()} Inited!");
 
-        //FADebugOut.Debug($"FAPluginBase.Init()-{this.ToString()} Inited!");
+        //FADebugOut.Debug($"PluginBase.Init()-{this.ToString()} Inited!");
 
         if (PluginInited != null)
 
@@ -11741,7 +11705,7 @@ namespace DEVGIS.FA.Plugin
 
 }
 
-##### FAView
+##### View
 
 using System;
 
@@ -11757,15 +11721,15 @@ using System.Windows;
 
 using System.Windows.Controls;
 
-namespace DEVGIS.FA.Plugin
+namespace DEVGIS.WPFAPP.Plugin
 
 {
 
-  public class FAView:UserControl
+  public class View:UserControl
 
   {
 
-    public FAView(string ViewModelName)
+    public View(string ViewModelName)
 
     {
 
@@ -11773,7 +11737,7 @@ namespace DEVGIS.FA.Plugin
 
       {
 
-        DataContext = FAStaticData.Container.GetExportedValues<FAViewModel>().FirstOrDefault(v => v.Name.Equals(ViewModelName));
+        DataContext = StaticData.Container.GetExportedValues<ViewModel>().FirstOrDefault(v => v.Name.Equals(ViewModelName));
 
       }
 
@@ -11785,9 +11749,9 @@ namespace DEVGIS.FA.Plugin
 
 }
 
-##### FAViewModel
+##### ViewModel
 
-using DEVGIS.FA.Plugin.Services;
+using DEVGIS.WPFAPP.Plugin.Services;
 
 using System;
 
@@ -11803,25 +11767,25 @@ using System.Text;
 
 using System.Threading.Tasks;
 
-namespace DEVGIS.FA.Plugin
+namespace DEVGIS.WPFAPP.Plugin
 
 {
 
-  public abstract class FAViewModel:INotifyPropertyChanged
+  public abstract class ViewModel:INotifyPropertyChanged
 
   {
 
-    public IFALogger FALogger { get; set; }
+    public ILogger Logger { get; set; }
 
-    public IFAMessageBox FAMessageBox { get; set; }
+    public IMessageBox FAMessageBox { get; set; }
 
-    public FAViewModel()
+    public ViewModel()
 
     {
 
-      FALogger = FAStaticData.Container.GetExportedValue<IFALogger>();
+      Logger = StaticData.Container.GetExportedValue<ILogger>();
 
-      FAMessageBox = FAStaticData.Container.GetExportedValue<IFAMessageBox>();
+      FAMessageBox = StaticData.Container.GetExportedValue<IMessageBox>();
 
     }
 
@@ -11921,7 +11885,7 @@ using System.Text;
 
 using System.Threading.Tasks;
 
-namespace DEVGIS.FA.Plugin.Services
+namespace DEVGIS.WPFAPP.Plugin.Services
 
 {
 
@@ -11935,9 +11899,9 @@ namespace DEVGIS.FA.Plugin.Services
 
 }
 
-##### IFALogger
+##### ILogger
 
-using DEVGIS.FA.Plugin.Interfaces;
+using DEVGIS.WPFAPP.Plugin.Interfaces;
 
 using System;
 
@@ -11949,11 +11913,11 @@ using System.Text;
 
 using System.Threading.Tasks;
 
-namespace DEVGIS.FA.Plugin.Services
+namespace DEVGIS.WPFAPP.Plugin.Services
 
 {
 
-  public interface IFALogger: IFAService
+  public interface ILogger: IFAService
 
 	{
 
@@ -12001,15 +11965,15 @@ namespace DEVGIS.FA.Plugin.Services
 
 }
 
-##### IFAMessageBox
+##### IMessageBox
 
 using System;
 
-namespace DEVGIS.FA.Plugin.Services
+namespace DEVGIS.WPFAPP.Plugin.Services
 
 {
 
-  public interface IFAMessageBox 
+  public interface IMessageBox 
 
   {
 
@@ -12041,7 +12005,7 @@ using System.Text;
 
 using System.Threading.Tasks;
 
-namespace DEVGIS.FA.Plugin.Args
+namespace DEVGIS.WPFAPP.Plugin.Args
 
 {
 
@@ -12069,11 +12033,11 @@ namespace DEVGIS.FA.Plugin.Args
 
 ### Core
 
-#### FABuilder
+#### Builder
 
-using DEVGIS.FA.Plugin;
+using DEVGIS.WPFAPP.Plugin;
 
-using DEVGIS.FA.Plugin.Services;
+using DEVGIS.WPFAPP.Plugin.Services;
 
 using System;
 
@@ -12093,29 +12057,29 @@ using System.Threading;
 
 using System.Threading.Tasks;
 
-namespace DEVGIS.FA.Core
+namespace DEVGIS.WPFAPP.Core
 
 {
 
   
 
-  public class FABuilder
+  public class Builder
 
   {
 
-    [ImportMany(typeof(FAPluginBase))]
+    [ImportMany(typeof(PluginBase))]
 
-    public static IEnumerable<FAPluginBase> Plugins { get; private set; }
+    public static IEnumerable<PluginBase> Plugins { get; private set; }
 
-    //[ImportMany(typeof(FAView))]
+    //[ImportMany(typeof(View))]
 
     ////private IEnumerable<Lazy<View, IViewMetadata>> views { get; set; }
 
-    //public static IEnumerable<FAView> Views { get; private set; }
+    //public static IEnumerable<View> Views { get; private set; }
 
-    [Import(typeof(IFALogger))]
+    [Import(typeof(ILogger))]
 
-    public IFALogger logger { get; set; }
+    public ILogger logger { get; set; }
 
     //private CompositionContainer container = null;
 
@@ -12125,13 +12089,13 @@ namespace DEVGIS.FA.Core
 
       var catalog = new DirectoryCatalog(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins"), "*");
 
-      FAStaticData.Container = new CompositionContainer(catalog);
+      StaticData.Container = new CompositionContainer(catalog);
 
       try
 
       {
 
-        Plugins = FAStaticData.Container.GetExportedValues<FAPluginBase>();
+        Plugins = StaticData.Container.GetExportedValues<PluginBase>();
 
         foreach (var plugin in Plugins)
 
@@ -12151,7 +12115,7 @@ namespace DEVGIS.FA.Core
 
       {
 
-        logger.Error("FABuilder.Load Plugins Failed!", compositionEx);
+        logger.Error("Builder.Load Plugins Failed!", compositionEx);
 
       }
 
@@ -12159,7 +12123,7 @@ namespace DEVGIS.FA.Core
 
       //{
 
-      //  FAStaticData.Views = FAStaticData.Container.GetExportedValues<FAView>();
+      //  StaticData.Views = StaticData.Container.GetExportedValues<View>();
 
       //}
 
@@ -12167,7 +12131,7 @@ namespace DEVGIS.FA.Core
 
       //{
 
-      //  logger.Error("FABuilder.Load Views Failed!", compositionEx);
+      //  logger.Error("Builder.Load Views Failed!", compositionEx);
 
       //}
 
@@ -12221,7 +12185,7 @@ namespace DEVGIS.FA.Core
 
 ##### Xaml
 
-<facontrols:FADialog x:Class="DEVGIS.FA.Views.Views.CreateProject"
+<facontrols:Dialog x:Class="DEVGIS.WPFAPP.Views.Views.CreateProject"
 
        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
@@ -12231,11 +12195,11 @@ namespace DEVGIS.FA.Core
 
        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 
-       xmlns:local="clr-namespace:DEVGIS.FA.Views.Views"
+       xmlns:local="clr-namespace:DEVGIS.WPFAPP.Views.Views"
 
-       xmlns:facontrols="clr-namespace:DEVGIS.FA.Controls;assembly=FAControls"
+       xmlns:facontrols="clr-namespace:DEVGIS.WPFAPP.Controls;assembly=Controls"
 
-       xmlns:localvm="clr-namespace:DEVGIS.FA.Views.ViewModels"
+       xmlns:localvm="clr-namespace:DEVGIS.WPFAPP.Views.ViewModels"
 
        mc:Ignorable="d" 
 
@@ -12299,11 +12263,11 @@ namespace DEVGIS.FA.Core
 
   </Grid>
 
-</facontrols:FADialog>
+</facontrols:Dialog>
 
 ##### ViewModel
 
-using DEVGIS.FA.Plugin;
+using DEVGIS.WPFAPP.Plugin;
 
 using System;
 
@@ -12319,11 +12283,11 @@ using System.Text;
 
 using System.Threading.Tasks;
 
-namespace DEVGIS.FA.Views.ViewModels
+namespace DEVGIS.WPFAPP.Views.ViewModels
 
 {
 
-  public class CreateProjectViewModel : FAViewModel
+  public class CreateProjectViewModel : ViewModel
 
   {
 
@@ -12357,7 +12321,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
         FAMessageBox.ShowInfo($"[{Project.Author}]创建项目[{Project.Name}]成功！");
 
-        FALogger.Info($"创建项目[{Project.Name}]成功！");
+        Logger.Info($"创建项目[{Project.Name}]成功！");
 
       });
 
@@ -12371,7 +12335,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
 ##### Xaml
 
-<facontrols:FAWindow x:Class="DEVGIS.FA.Views.Views.MainWindow"
+<facontrols:Window x:Class="DEVGIS.WPFAPP.Views.Views.MainWindow"
 
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
@@ -12381,17 +12345,17 @@ namespace DEVGIS.FA.Views.ViewModels
 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 
-    xmlns:local="clr-namespace:DEVGIS.FA.Views"
+    xmlns:local="clr-namespace:DEVGIS.WPFAPP.Views"
 
-    xmlns:inplug="clr-namespace:DEVGIS.FA.Plugin;assembly=FAPlugin"
+    xmlns:inplug="clr-namespace:DEVGIS.WPFAPP.Plugin;assembly=FAPlugin"
 
-    xmlns:facontrols="clr-namespace:DEVGIS.FA.Controls;assembly=FAControls"
+    xmlns:facontrols="clr-namespace:DEVGIS.WPFAPP.Controls;assembly=Controls"
 
-    xmlns:lanrs="clr-namespace:DEVGIS.FA.LanguageResource;assembly=LanguageResource"
+    xmlns:lanrs="clr-namespace:DEVGIS.WPFAPP.LanguageResource;assembly=LanguageResource"
 
-    xmlns:localvm="clr-namespace:DEVGIS.FA.Views.ViewModels"
+    xmlns:localvm="clr-namespace:DEVGIS.WPFAPP.Views.ViewModels"
 
-    xmlns:facvt="clr-namespace:DEVGIS.FA.Controls.Conveter;assembly=FAControls"
+    xmlns:facvt="clr-namespace:DEVGIS.WPFAPP.Controls.Conveter;assembly=Controls"
 
     xmlns:avalon="https://github.com/Dirkster99/AvalonDock"
 
@@ -12435,7 +12399,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12445,7 +12409,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12455,7 +12419,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12465,7 +12429,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12475,7 +12439,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12487,7 +12451,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12497,7 +12461,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12507,7 +12471,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12519,7 +12483,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12531,7 +12495,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
             <MenuItem.Icon>
 
-              <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+              <Image Source="/Views;Component/Images/Menu/Box.png" />
 
             </MenuItem.Icon>
 
@@ -12545,7 +12509,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12555,7 +12519,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12567,7 +12531,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12579,7 +12543,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12593,7 +12557,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12603,7 +12567,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12613,7 +12577,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12623,7 +12587,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12633,7 +12597,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12647,7 +12611,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12657,7 +12621,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12667,7 +12631,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12677,7 +12641,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12687,7 +12651,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12701,7 +12665,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12711,7 +12675,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12721,7 +12685,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12731,7 +12695,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12741,7 +12705,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12755,7 +12719,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12765,7 +12729,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12775,7 +12739,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12785,7 +12749,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12795,7 +12759,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12809,7 +12773,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12819,7 +12783,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12829,7 +12793,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12839,7 +12803,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12849,7 +12813,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12863,7 +12827,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12873,7 +12837,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12883,7 +12847,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12893,7 +12857,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12903,7 +12867,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12917,7 +12881,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12927,7 +12891,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12937,7 +12901,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12947,7 +12911,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12957,7 +12921,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12971,7 +12935,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           <MenuItem.Icon>
 
-            <Image Source="/FAViews;Component/Images/Menu/Box.png" />
+            <Image Source="/Views;Component/Images/Menu/Box.png" />
 
           </MenuItem.Icon>
 
@@ -12995,19 +12959,19 @@ namespace DEVGIS.FA.Views.ViewModels
 
         <Button >
 
-          <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+          <Image Source="/Views;Component/Images/ToolBar/BlueLarge.png" />
 
         </Button>
 
         <Button>
 
-          <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+          <Image Source="/Views;Component/Images/ToolBar/BlueLarge.png" />
 
         </Button>
 
         <Button>
 
-          <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+          <Image Source="/Views;Component/Images/ToolBar/BlueLarge.png" />
 
         </Button>
 
@@ -13017,13 +12981,13 @@ namespace DEVGIS.FA.Views.ViewModels
 
         <Button>
 
-          <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+          <Image Source="/Views;Component/Images/ToolBar/BlueLarge.png" />
 
         </Button>
 
         <Button>
 
-          <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+          <Image Source="/Views;Component/Images/ToolBar/BlueLarge.png" />
 
         </Button>
 
@@ -13033,13 +12997,13 @@ namespace DEVGIS.FA.Views.ViewModels
 
         <Button>
 
-          <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+          <Image Source="/Views;Component/Images/ToolBar/BlueLarge.png" />
 
         </Button>
 
         <Button ToolTip="Help">
 
-          <Image Source="/FAViews;Component/Images/ToolBar/BlueLarge.png" />
+          <Image Source="/Views;Component/Images/ToolBar/BlueLarge.png" />
 
         </Button>
 
@@ -13373,7 +13337,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
                 ContentId="AutoHide1Content"
 
-                IconSource="/FAViews;Component/Images/Blue.png" AutoHideWidth="150">
+                IconSource="/Views;Component/Images/Blue.png" AutoHideWidth="150">
 
                   <TextBox Text="{Binding TestTimer, Mode=OneWay, StringFormat='AutoHide Attached to Timer ->\{0\}'}" />
 
@@ -13442,7 +13406,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
                 ContentId="AutoHide1Content"
 
-                IconSource="/FAViews;Component/Images/Blue.png">
+                IconSource="/Views;Component/Images/Blue.png">
 
                   <TextBox Text="{Binding TestTimer, Mode=OneWay, StringFormat='AutoHide Attached to Timer ->\{0\}'}" />
 
@@ -13484,17 +13448,17 @@ namespace DEVGIS.FA.Views.ViewModels
 
   </Grid>
 
-</facontrols:FAWindow>
+</facontrols:Window>
 
 ##### ViewModel
 
-using DEVGIS.FA.Core;
+using DEVGIS.WPFAPP.Core;
 
-using DEVGIS.FA.Plugin;
+using DEVGIS.WPFAPP.Plugin;
 
-using DEVGIS.FA.Plugin.Services;
+using DEVGIS.WPFAPP.Plugin.Services;
 
-using DEVGIS.FA.Views.Views;
+using DEVGIS.WPFAPP.Views.Views;
 
 using System;
 
@@ -13514,11 +13478,11 @@ using System.Windows;
 
 using System.Windows.Input;
 
-namespace DEVGIS.FA.Views.ViewModels
+namespace DEVGIS.WPFAPP.Views.ViewModels
 
 {
 
-  public class MainWindowViewModel : FAViewModel
+  public class MainWindowViewModel : ViewModel
 
   {
 
@@ -13580,7 +13544,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
           Project = (CreateProjectWindow.DataContext as CreateProjectViewModel).Project;
 
-          FAStaticData.Container.GetExportedValue<IDebugOut>().Debug($"{Project.Author}创建了项目：{Project.Name} ！");
+          StaticData.Container.GetExportedValue<IDebugOut>().Debug($"{Project.Author}创建了项目：{Project.Name} ！");
 
         }
 
@@ -13618,9 +13582,9 @@ namespace DEVGIS.FA.Views.ViewModels
 
       SelectDevices selectDevices = new SelectDevices();
 
-      var items = new ObservableCollection<string>((from p in FABuilder.Plugins select p.Name).ToList());
+      var items = new ObservableCollection<string>((from p in Builder.Plugins select p.Name).ToList());
 
-      (selectDevices.DataContext as SelectDevicesViewModel).FACategorys = items;
+      (selectDevices.DataContext as SelectDevicesViewModel).Categorys = items;
 
       selectDevices.ShowDialog();
 
@@ -13634,7 +13598,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
 ##### Xaml
 
-<facontrols:FAWindow x:Class="DEVGIS.FA.Views.Views.SelectDevices"
+<facontrols:Window x:Class="DEVGIS.WPFAPP.Views.Views.SelectDevices"
 
        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
@@ -13644,11 +13608,11 @@ namespace DEVGIS.FA.Views.ViewModels
 
        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 
-       xmlns:local="clr-namespace:DEVGIS.FA.Views.Views"
+       xmlns:local="clr-namespace:DEVGIS.WPFAPP.Views.Views"
 
-       xmlns:facontrols="clr-namespace:DEVGIS.FA.Controls;assembly=FAControls"
+       xmlns:facontrols="clr-namespace:DEVGIS.WPFAPP.Controls;assembly=Controls"
 
-       xmlns:localvm="clr-namespace:DEVGIS.FA.Views.ViewModels"
+       xmlns:localvm="clr-namespace:DEVGIS.WPFAPP.Views.ViewModels"
 
        mc:Ignorable="d" 
 
@@ -13670,17 +13634,17 @@ namespace DEVGIS.FA.Views.ViewModels
 
     </Grid.RowDefinitions>
 
-    <ListView Name="lst" Grid.Row="0" ItemsSource ="{Binding FACategorys}"/>
+    <ListView Name="lst" Grid.Row="0" ItemsSource ="{Binding Categorys}"/>
 
     <Button Grid.Row="1" Click="Button_Click"/>
 
   </Grid>
 
-</facontrols:FAWindow>
+</facontrols:Window>
 
 ##### ViewModel
 
-using DEVGIS.FA.Plugin;
+using DEVGIS.WPFAPP.Plugin;
 
 using System;
 
@@ -13694,17 +13658,17 @@ using System.Text;
 
 using System.Threading.Tasks;
 
-namespace DEVGIS.FA.Views.ViewModels
+namespace DEVGIS.WPFAPP.Views.ViewModels
 
 {
 
-  public class SelectDevicesViewModel:FAViewModel
+  public class SelectDevicesViewModel:ViewModel
 
   {
 
     public ObservableCollection<string> faCategorys = null;
 
-    public ObservableCollection<string> FACategorys {
+    public ObservableCollection<string> Categorys {
 
       get {
 
@@ -13716,7 +13680,7 @@ namespace DEVGIS.FA.Views.ViewModels
 
         faCategorys = value;
 
-        RaisePropertyChanged("FACategorys");
+        RaisePropertyChanged("Categorys");
 
       }
 
@@ -13728,9 +13692,9 @@ namespace DEVGIS.FA.Views.ViewModels
 
 #### ViewLocator
 
-using DEVGIS.FA.Plugin;
+using DEVGIS.WPFAPP.Plugin;
 
-using DEVGIS.FA.Plugin.Services;
+using DEVGIS.WPFAPP.Plugin.Services;
 
 using System;
 
@@ -13746,7 +13710,7 @@ using System.Text;
 
 using System.Threading.Tasks;
 
-namespace DEVGIS.FA.Views
+namespace DEVGIS.WPFAPP.Views
 
 {
 
@@ -13756,15 +13720,15 @@ namespace DEVGIS.FA.Views
 
   {
 
-    //[ImportMany(typeof(FAView))]
+    //[ImportMany(typeof(View))]
 
     ////private IEnumerable<Lazy<View, IViewMetadata>> views { get; set; }
 
-    //public static IEnumerable<FAView> Views { get; set; }
+    //public static IEnumerable<View> Views { get; set; }
 
-    public IFALogger FALogger { get {
+    public ILogger Logger { get {
 
-        return FAStaticData.Container.GetExportedValue<IFALogger>();
+        return StaticData.Container.GetExportedValue<ILogger>();
 
       } }
 
@@ -13774,7 +13738,7 @@ namespace DEVGIS.FA.Views
 
       string name = binder.Name;
 
-      var views = FAStaticData.Container.GetExportedValues<FAView>();
+      var views = StaticData.Container.GetExportedValues<View>();
 
       if (views == null)
 
@@ -13792,7 +13756,7 @@ namespace DEVGIS.FA.Views
 
       if (null == view)
 
-        FALogger.Error("views is null at TryGetMember");
+        Logger.Error("views is null at TryGetMember");
 
       result = view;
 
@@ -13804,7 +13768,7 @@ namespace DEVGIS.FA.Views
 
     {
 
-      FALogger.Info($"{this.GetType()} Composition complete");
+      Logger.Info($"{this.GetType()} Composition complete");
 
     }
 
