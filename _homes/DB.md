@@ -3,13 +3,13 @@ layout: post
 title: 数据库
 description: 各种数据库Oracle、Sql Server相关知识学习梳理
 date: 2022-10-01 09:01:01
-updatedate: 2023-08-31 09:31:01
+updatedate: 2023-10-31 14:34:01
 ---
 
 - [数据库基础](#数据库基础)
   - [锁](#锁)
     - [数据库角度](#数据库角度)
-      - [\* 独占锁（Exclusive Lock）](#-独占锁exclusive-lock)
+      - [独占锁（Exclusive Lock）](#独占锁exclusive-lock)
       - [共享锁（Shared Lock）](#共享锁shared-lock)
       - [更新锁（Update Lock）](#更新锁update-lock)
     - [程序员角度](#程序员角度)
@@ -21,11 +21,12 @@ updatedate: 2023-08-31 09:31:01
       - [一致性 (Consistency)：](#一致性-consistency)
       - [隔离性(Isolation)：](#隔离性isolation)
       - [持久性(Durability)：](#持久性durability)
-- [NoSQL](#nosql)
-  - [键值数据库](#键值数据库)
-  - [文档数据库](#文档数据库)
-  - [列族数据库](#列族数据库)
-  - [图数据库](#图数据库)
+  - [事务隔离级别:](#事务隔离级别)
+    - [read uncommited（读取未提交数据），](#read-uncommited读取未提交数据)
+    - [read commited（读取已提交数据）读取的默认方式，](#read-commited读取已提交数据读取的默认方式)
+    - [repeatable read（可重复读），](#repeatable-read可重复读)
+    - [serializable（可序列化），](#serializable可序列化)
+    - [SNAPSHOT ISOLATION（快照，MSSQL独有），](#snapshot-isolation快照mssql独有)
 - [Oracle](#oracle)
   - [数据库结构](#数据库结构)
     - [体系结构](#体系结构)
@@ -56,37 +57,6 @@ updatedate: 2023-08-31 09:31:01
         - [V$\_](#v_)
         - [GV\_](#gv_)
       - [常用数据字典](#常用数据字典)
-  - [SQL语言](#sql语言)
-    - [DDL](#ddl)
-      - [create](#create)
-        - [常用数据类型](#常用数据类型)
-        - [表](#表)
-        - [主键](#主键)
-        - [外键](#外键)
-        - [约束](#约束)
-        - [索引](#索引)
-        - [视图](#视图)
-        - [序列](#序列)
-        - [同义词](#同义词)
-      - [drop](#drop)
-      - [alter](#alter)
-    - [DML](#dml)
-      - [insert](#insert)
-        - [插入数据](#插入数据)
-        - [复制表数据](#复制表数据)
-      - [update](#update)
-      - [merge](#merge)
-      - [delete](#delete)
-      - [truncate](#truncate)
-    - [DQL](#dql)
-      - [select](#select)
-        - [from子句](#from子句)
-        - [投影](#投影)
-        - [where子句](#where子句)
-        - [基本函数](#基本函数)
-        - [集合操作](#集合操作)
-        - [子查询](#子查询)
-    - [DCL](#dcl)
     - [TCL](#tcl)
   - [PL/SQL](#plsql)
     - [概述](#概述)
@@ -131,7 +101,7 @@ updatedate: 2023-08-31 09:31:01
         - [可变数组](#可变数组)
       - [属性和方法](#属性和方法)
         - [COUNT](#count)
-        - [DELETE](#delete-1)
+        - [DELETE](#delete)
         - [EXISTS](#exists)
         - [EXTEND](#extend)
         - [FIRST/LAST](#firstlast)
@@ -189,15 +159,10 @@ updatedate: 2023-08-31 09:31:01
   - [商业智能与数据仓库](#商业智能与数据仓库)
     - [多维数据库](#多维数据库)
     - [数据挖掘](#数据挖掘)
-  - [数据库事务隔离级别](#数据库事务隔离级别)
-    - [已提交读模式](#已提交读模式)
-    - [串行模式](#串行模式)
-    - [只读模式](#只读模式)
-- [SQL Server](#sql-server)
-  - [DDL](#ddl-1)
-  - [DML](#dml-1)
+  - [Oracle事务隔离级别](#oracle事务隔离级别)
+- [MSSQL](#mssql)
   - [存储过程](#存储过程)
-  - [索引](#索引-1)
+  - [索引](#索引)
     - [聚集索引](#聚集索引)
     - [非聚集索引](#非聚集索引)
   - [数据优化](#数据优化)
@@ -207,16 +172,49 @@ updatedate: 2023-08-31 09:31:01
   - [行列转换](#行列转换)
     - [行转列PIVOT](#行转列pivot)
     - [列转行UNPIVOT](#列转行unpivot)
-  - [SQL 事务隔离级别:](#sql-事务隔离级别)
-    - [read uncommited（读取未提交数据），](#read-uncommited读取未提交数据)
-    - [read commited（读取已提交数据）读取的默认方式，](#read-commited读取已提交数据读取的默认方式)
-    - [repeatable read（可重复读），](#repeatable-read可重复读)
-    - [serializable（可序列化），](#serializable可序列化)
-    - [snapshot（快照），](#snapshot快照)
-    - [read commited snapshot（已经提交读隔离）](#read-commitedsnapshot已经提交读隔离)
-    - [Sql Server 事务隔离级别的查看及更改](#sql-server-事务隔离级别的查看及更改)
+  - [Sql Server事务隔离级别](#sql-server事务隔离级别)
 - [MySQL](#mysql)
   - [Ubuntu Docker部署mysql](#ubuntu-docker部署mysql)
+  - [MySQL事务隔离级别](#mysql事务隔离级别)
+- [SQL语言](#sql语言)
+  - [DDL](#ddl)
+    - [create](#create)
+      - [常用数据类型](#常用数据类型)
+      - [表](#表)
+      - [主键](#主键)
+      - [外键](#外键)
+      - [约束](#约束)
+      - [索引](#索引-1)
+      - [视图](#视图)
+      - [序列](#序列)
+      - [同义词](#同义词)
+    - [drop](#drop)
+    - [alter](#alter)
+  - [DML（DML：Data Manipulation Language）](#dmldmldata-manipulation-language)
+    - [insert](#insert)
+      - [插入数据](#插入数据)
+      - [复制表数据](#复制表数据)
+    - [update](#update)
+    - [merge](#merge)
+    - [delete](#delete-1)
+    - [truncate](#truncate)
+  - [DQL（DQL: Data Query Language）](#dqldql-data-query-language)
+    - [select](#select)
+      - [from子句](#from子句)
+      - [投影](#投影)
+      - [where子句](#where子句)
+      - [比较运算符](#比较运算符)
+    - [基本函数](#基本函数)
+    - [集合操作](#集合操作)
+    - [子查询](#子查询)
+  - [DCL(数据控制语言 Data Control Language )](#dcl数据控制语言-data-control-language-)
+  - [TCL（事务控制语言）](#tcl事务控制语言)
+  - [CCL（指针控制语言）](#ccl指针控制语言)
+- [NoSQL](#nosql)
+  - [键值数据库](#键值数据库)
+  - [文档数据库](#文档数据库)
+  - [列族数据库](#列族数据库)
+  - [图数据库](#图数据库)
 - [LiteDB：本地化NOSQL](#litedb本地化nosql)
   - [特点](#特点)
   - [LiteDB使用基本案例](#litedb使用基本案例)
@@ -234,7 +232,7 @@ updatedate: 2023-08-31 09:31:01
 
 #### 数据库角度
 
-##### * 独占锁（Exclusive Lock）
+##### 独占锁（Exclusive Lock）
 
 > 独占锁锁定的资源只允许进行锁定操作的程序使用，其它任何对它的操作均不会被接受。
 
@@ -288,57 +286,121 @@ updatedate: 2023-08-31 09:31:01
 
 > 数据持久化，事务一旦对数据的操作完成并提交后，数据修改就已经完成，即使服务重启这些数据也不会改变。相反，如果在事务的执行过程中，系统服务崩溃或者重启，那么事务所有的操作就会被回滚，即回到事务操作之前的状态。
 
-## NoSQL
+### 事务隔离级别:
 
-### 键值数据库
+> > 1、用于控制并发用户如何读写数据的操做。
 
-> Redis
+> > 2、读操作默认使用共享锁；写操作需要使用排它锁。
 
-> BerkeleyDB
+> > 3、读操作能够控制他的处理的方式，写操作不能控制它的处理方式
 
-> Memcached
+> read uncommited（读取未提交数据），
 
-> Project Voldemort
+> read commited（读取已提交数据）读取的默认方式，（ORACLE 默认）
 
-> Riak
+> repeatable read（可重复读），（MySQL,MSSQL 默认）
 
-> LevelDB
+> serializable（可序列化），
 
-### 文档数据库
+> snapshot（快照），
 
-> MongoDB
+> read commited 
 
-> CouchDB
+> snapshot（已经提交读隔离）（后两个是sql server 2005 里面 引入的）。
 
-> RavenDB
+> > 隔离的强度依次递增。
 
-> Terrastore
+> > 隔离级别越高,读操作的请求锁定就越严格,
 
-> OrientDB
+> > 锁的持有时间久越长;所以隔离级别越高,
 
-### 列族数据库
+> > 一致性就越高,并发性就越低,同时性能也相对影响越大.
 
-> HBase
+#### read uncommited（读取未提交数据），
 
-> Amazon SimpleDB
+> > read uncommitted：最低的隔离级别：查询的时候不会请求共享锁，
 
-> Cassdndra
+> 所以不会和排它锁产生冲突（不会等待排它锁执行完），
 
-> Hypertable
+> 查询效率非常高，速度飞快。但是缺点：会查到“脏数据”
 
-> BigTable(google)
+> （排它锁的事务已经将数据修改，还没提交，这个时候查询到的数据 是已经更改过的。如果事务回滚，就是“脏数据”）
 
-### 图数据库
+> 优点：查询效率非常高，速度非常快。
 
-> FlockDB
+> 缺点：会产生“脏数据”
 
-> HyperGraphDB
+> 适用性：
 
-> Infinite Graph
+> 适用于 像聊天软件的 聊天记录，会是软件的运行速度非常快。 但是不适用于 商务软件。尤其是银行
 
-> Neo4J
+set transaction isolation level read uncommitted;
 
-> OrientDB
+#### read commited（读取已提交数据）读取的默认方式，
+
+> > 读取的默认隔离级别就是read committed 和上面正好相反。
+
+> 如果上面情况，采用read committed 隔离级别查询的话查到的就是还没有更改之前的数据。
+
+> set transaction isolation level read committed;
+
+#### repeatable read（可重复读），
+
+> > 查询的时候会加上共享锁，但是查询完成之后，共享锁就会被撤销。
+
+> 比如一些购票系统，如果查到票了，当买的时候就没有，这是不行的。
+
+> 所以要在查询到数据之后做一些延迟共享锁，进而阻塞排它锁来修改。
+
+> （如果查询的事务没有提交，不会释放共享锁，这个时候独占锁就不能访问这条数据）
+
+> 注意：
+
+> 1、repeatable 只会锁定查询的数据 ，而 其他行数据还可以进行 修改（更新、删除）（下面那条语句共享锁只会锁定 shipperid为4 的行）
+
+> 2、其他进行插入数据，并且插入的数据满足第一次开始事务时的 查询的筛选条件的时候；
+
+> 第二次查询的时候就会将新插入的数据 查询出来。这就叫做“幻读”（解决幻读，需要更高级别的隔离，就是下面的serializable）
+
+> set transaction isolation level repeatable read;
+
+#### serializable（可序列化），
+
+> > 更高级的 隔离。用户解决“幻读”（上面提到的）。
+
+> 就是使用上面的（repeatable read） 加上共享锁 并不撤销，如果锁定的 一行数据，
+
+> 那么 其他的进程 还可以对 其他的数据进行操作，也可以 进行新增和删除的操作。
+
+> 所以如果想要在查询的时候，不能对整张表进行任何操作，
+
+> 那么就要 将表的结构也 锁定  （就需要使用 更强的 锁定）
+
+> set transaction isolation level serializable;
+
+> > ISO只规定以上四级
+
+#### SNAPSHOT ISOLATION（快照，MSSQL独有），
+
+> > 为数据产生一个临时数据库，当sql server 数据更新之前将当前数据库复制到 tempdb数据库里面，
+
+> 查询就是从tempdb数据库中查询，但是不能再 使用 snapshot 线程的事务内执行 修改操作，
+
+> 因为不能修改 旧版本数据库（tempdb），会报错。
+
+> snapshot隔离级别，读操作 不适用 共享锁，使用的是“行版本控制”，
+
+> 所以读数据的性能效率很高，但是修改操作性能就降低的很多。
+
+> 因为是将 数据库 中的数据 复制到 tempdb 数据库中，所以不会产生 幻读。
+
+> set transaction isolation level snapshot;
+
+> >带来两个问题：
+
+> > 1、当 另外一个事务 已经提交，但是这边的查询到数据还是没有修改。因为 每次查询到的快照是针对于 本次回话对应的那个 transaction 的，因为在这个事务里面是没有修改的，所以查询到的数据是没有修改的。
+
+> > 2、（更新问题）因为 那边的数据已经是 飞凤公司了，但是这里还是  联邦,所以,在这个事务里面是不能对表进行修改,因为访问的是临时数据库,想要对 数据库修改是不可能的（sql server 就会报错，阻止修改） 
 
 ## Oracle
 
@@ -467,252 +529,6 @@ updatedate: 2023-08-31 09:31:01
 > DBA_EXTENTS
 
 > DBA_OBJECTS
-
-### SQL语言
-
-#### DDL
-
-##### create
-
-###### 常用数据类型
-
-> varchar2(n)：变长字符串n<=4000
-
-> char(n)：定长字符串n<=2000
-
-> number(p,s)：p表示精度，s表示小数位数，最大位数是38位
-
-> date：时问日期（7字节）
-
-> binary_float：浮点型，32位
-
-> binary_double：双精度型，64位
-
-> blob：大二进制对象，<=4G
-
-> clob：大字符串对象，<=4G
-
-> bfile：外部的二进制文件
-
-###### 表
-
-###### 主键
-
-> 在创建表时定义主键
-
-> 使用alter table语句定义主键
-
-> 使用alter table修改主键状态
-
-###### 外键
-
-> 在创建表时定义外键
-
-> 使用alter table语句定义外键
-
-> 使用alter table修改外键状态
-
-###### 约束
-
-> check约束
-
-> not null约束
-
-> unique约束
-
-###### 索引
-
-###### 视图
-
-###### 序列
-
-###### 同义词
-
-##### drop
-
-##### alter
-
-#### DML
-
-##### insert
-
-###### 插入数据
-
-###### 复制表数据
-
-> create table…as select…
-
-> insert into…select
-
-##### update
-
-##### merge
-
-##### delete
-
-##### truncate
-
-#### DQL
-
-##### select
-
-###### from子句
-
-###### 投影
-
-###### where子句
-
-####### 比较运算符
-
-> =
-
-> <>
-
-> <
-
-> <=
-
-> >=
-
-> LIKE
-
-> %
-
-> _
-
-> 布尔操作
-
-> OR
-
-> AND
-
-> NOT
-
-> BETWEEN…AND…IN
-
-> order by子句
-
-> asc
-
-> desc
-
-> distinct
-
-> 算数运算：
-
-> +
-
-> -
-
-> *
-
-> /
-
-###### 基本函数
-
-> 字符函数
-
-> concat(c1,c2)
-
-> length(c)
-
-> lower(c)/upper(c)
-
-> ltrim(c)/rtrim(c)/trim(c)
-
-> replace(c1,c2,c3)
-
-> substr(c1,i,j)
-
-> 数字函数
-
-> abs(n)
-
-> acos(n)/asin(n)/atan(n)/cos(n)/sin(n)/tan(n)
-
-> ceil(n)/floor(n)
-
-> exp(n)/ln(n)
-
-> power(n1,n2)
-
-> round(n1,n2)
-
-> sign(n)
-
-> sqrt(n)
-
-> 日期函数
-
-> add_months(d,i)
-
-> last_day(d)
-
-> month_between(d1,d2)
-
-> new_time(d,tz1,tz2)
-
-> sysdate
-
-> 转换函数
-
-> convert(c,dset,sset)
-
-> to_char(x,fmt)
-
-> to_date(c,fmt)
-
-> 分组函数/聚合函数
-
-> AVG
-
-> MAX
-
-> MIN
-
-> SUM
-
-> COUNT
-
-> STDDEV
-
-> VARIANCE
-
-> group by
-
-> having子句
-
-###### 集合操作
-
-> UNION
-
-> INTERSECT
-
-> MINUS
-
-###### 子查询
-
-> 表连接
-
-> 内连接 inner join
-
-> 外连接
-
-> 左外连接
-
-> 右外连接
-
-> 全外连接
-
-> case语句
-
-> decode函数
-
-#### DCL
-
-> grant
-
-> revoke
 
 #### TCL
 
@@ -950,34 +766,39 @@ updatedate: 2023-08-31 09:31:01
 
 #### 数据挖掘
 
-### 数据库事务隔离级别
+### Oracle事务隔离级别
 
-#### 已提交读模式
+> 设置事务隔离级别
 
-> > SET TRANSACTION ISOLATION LEVEL＝READ COMMITTED;
+> > 设置一个事务的隔离级别：
 
-> Oracle 默认使用的事务隔离级别。事务内执行的查询只能看到查询执行前（而非事务开始前）就已经提交的数据。Oracle 的查询永远不会读取脏数据（未提交的数据）。
+> SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 
-> Oracle 不会阻止一个事务修改另一事务中的查询正在访问的数据，因此在一个事务内的两个查询的执行间歇期间，数据有可能被其他事务修改。举例来说，如果一个事务内同一查询执行两次，可能会遇到不可重复读取或不存在读取的现象。 
+> SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
 
-#### 串行模式
+> SET TRANSACTION READ ONLY;
 
-> > SET TRANSACTION ISOLATION LEVEL＝ SERIALIZABLE;
+> SET TRANSACTION READ WRITE;
 
-> 串行化隔离的事务只能看到事务执行前就已经提交的数据，以及事务内 INSERT ， UPDATE ，及 DELETE 语句对数据的修改。串行化隔离的事务不会出现不可重复读取或不存在读取的现象。 
+> > 注意：这些语句是互斥的，不能同时设置两个或两个以上的选项。
 
-#### 只读模式
+> > 设置单个会话的隔离级别：
 
-> > SET TRANSACTION＝ READ ONLY;
+> ALTER SESSION SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 
-> 只读事务只能看到事务执行前就已经提交的数据，且事务中不能执行 INSERT ， UPDATE ，及 DELETE 语句。
+> ALTER SESSION SET TRANSACTION ISOLATION SERIALIZABLE;
 
+> 隔离级别	脏读	不可重复读	幻读
 
-## SQL Server
+> Read Uncommited	Y	Y	Y
 
-### DDL
+> Read Commited	N	Y	Y
 
-### DML
+> Repeatable read	N	N	Y
+
+> Serialized	N	N	N
+
+## MSSQL
 
 ### 存储过程
 
@@ -1001,145 +822,13 @@ updatedate: 2023-08-31 09:31:01
 
 #### 列转行UNPIVOT
 
-### SQL 事务隔离级别:
+### Sql Server事务隔离级别
 
-> > 1、用于控制并发用户如何读写数据的操做。
+> > 设置Sql Server事务隔离级别
 
-> > 2、读操作默认使用共享锁；写操作需要使用排它锁。
+> 查看 当前 Sql Server 事务隔离级别 的设置： DBCC Useroptions -> isolation level 这一项的 Value 既是当前的设置值
 
-> > 3、读操作能够控制他的处理的方式，写操作不能控制它的处理方式
-
-> read uncommited（读取未提交数据），
-
-> read commited（读取已提交数据）读取的默认方式，
-
-> repeatable read（可重复读），
-
-> serializable（可序列化），
-
-> snapshot（快照），
-
-> read commited 
-
-> snapshot（已经提交读隔离）（后两个是sql server 2005 里面 引入的）。
-
-> > 隔离的强度依次递增。
-
-> > 隔离级别越高,读操作的请求锁定就越严格,
-
-> > 锁的持有时间久越长;所以隔离级别越高,
-
-> > 一致性就越高,并发性就越低,同时性能也相对影响越大.
-
-#### read uncommited（读取未提交数据），
-
-> > read uncommitted：最低的隔离级别：查询的时候不会请求共享锁，
-
-> 所以不会和排它锁产生冲突（不会等待排它锁执行完），
-
-> 查询效率非常高，速度飞快。但是缺点：会查到“脏数据”
-
-> （排它锁的事务已经将数据修改，还没提交，这个时候查询到的数据 是已经更改过的。如果事务回滚，就是“脏数据”）
-
-> 优点：查询效率非常高，速度非常快。
-
-> 缺点：会产生“脏数据”
-
-> 适用性：
-
-> 适用于 像聊天软件的 聊天记录，会是软件的运行速度非常快。 但是不适用于 商务软件。尤其是银行
-
-set transaction isolation level read uncommitted;
-
-#### read commited（读取已提交数据）读取的默认方式，
-
-> > 读取的默认隔离级别就是read committed 和上面正好相反。
-
-> 如果上面情况，采用read committed 隔离级别查询的话查到的就是还没有更改之前的数据。
-
-> set transaction isolation level read committed;
-
-#### repeatable read（可重复读），
-
-> > 查询的时候会加上共享锁，但是查询完成之后，共享锁就会被撤销。
-
-> 比如一些购票系统，如果查到票了，当买的时候就没有，这是不行的。
-
-> 所以要在查询到数据之后做一些延迟共享锁，进而阻塞排它锁来修改。
-
-> （如果查询的事务没有提交，不会释放共享锁，这个时候独占锁就不能访问这条数据）
-
-> 注意：
-
-> 1、repeatable 只会锁定查询的数据 ，而 其他行数据还可以进行 修改（更新、删除）（下面那条语句共享锁只会锁定 shipperid为4 的行）
-
-> 2、其他进行插入数据，并且插入的数据满足第一次开始事务时的 查询的筛选条件的时候；
-
-> 第二次查询的时候就会将新插入的数据 查询出来。这就叫做“幻读”（解决幻读，需要更高级别的隔离，就是下面的serializable）
-
-> set transaction isolation level repeatable read;
-
-#### serializable（可序列化），
-
-> > 更高级的 隔离。用户解决“幻读”（上面提到的）。
-
-> 就是使用上面的（repeatable read） 加上共享锁 并不撤销，如果锁定的 一行数据，
-
-> 那么 其他的进程 还可以对 其他的数据进行操作，也可以 进行新增和删除的操作。
-
-> 所以如果想要在查询的时候，不能对整张表进行任何操作，
-
-> 那么就要 将表的结构也 锁定  （就需要使用 更强的 锁定）
-
-> set transaction isolation level serializable;
-
-#### snapshot（快照），
-
-> > 为数据产生一个临时数据库，当sql server 数据更新之前将当前数据库复制到 tempdb数据库里面，
-
-> 查询就是从tempdb数据库中查询，但是不能再 使用 snapshot 线程的事务内执行 修改操作，
-
-> 因为不能修改 旧版本数据库（tempdb），会报错。
-
-> snapshot隔离级别，读操作 不适用 共享锁，使用的是“行版本控制”，
-
-> 所以读数据的性能效率很高，但是修改操作性能就降低的很多。
-
-> 因为是将 数据库 中的数据 复制到 tempdb 数据库中，所以不会产生 幻读。
-
-> set transaction isolation level snapshot;
-
-> >带来两个问题：
-
-> > 1、当 另外一个事务 已经提交，但是这边的查询到数据还是没有修改。因为 每次查询到的快照是针对于 本次回话对应的那个 transaction 的，因为在这个事务里面是没有修改的，所以查询到的数据是没有修改的。
-
-> > 2、（更新问题）因为 那边的数据已经是 飞凤公司了，但是这里还是  联邦,所以,在这个事务里面是不能对表进行修改,因为访问的是临时数据库,想要对 数据库修改是不可能的（sql server 就会报错，阻止修改） 
-
-#### read commited snapshot（已经提交读隔离）
-
-> > 读取的默认隔离级别就是read committed 和上面正好相反。
-
-> 如果上面情况，采用read committed 隔离级别查询的话查到的就是还没有更改之前的数据。
-
-> alter database ssdemo set read_committed_snapshot on;
-
-#### Sql Server 事务隔离级别的查看及更改
-
-> 根据自身 Sql Server 的情况来自定义 事务隔离级别，将会更加的满足需求，或提升性能。例如，对于逻辑简单的 Sql Server,完全可以使用 read uncommitted 模式，来减少死锁，减少堵塞， 提升性能和响应。对于此种应用场景应该是蛮多的，但是却没有一个全局设置，你妹呀！
-
-> 这个功能真的很强大，但是不知道微软为什么把它的最大作用域定义为 当前链接，蛋疼，真的很蛋疼，没法全局设置，下面也尽可能详细的解释如何少设置，多舒服的使用吧
-
-> 查看 当前 Sql Server 事务隔离级别 的设置：
-
-> DBCC Useroptions -> isolation level 这一项的 Value 既是当前的设置值
-
-> 但是我不得不说，这个命令几乎是废物，为什么呢，因为 事务隔离级别 的作用域是 当前链接，也就是，你查看的是当前链接的 级别，但是sql server 同时 150+ 个链接是很正常的，其他链接呢，你说蛋疼不，我X
-
-> 设置Sql Server 事务隔离级别
-
-> Sql Server 事务隔离级别 的设置也同样很蛋疼，很纠结，很恶心。但是稍微好一点的是，其设置可以在多个场合，多种方式设置，稍微弥补了一点点.
-
-1. Transact-SQL 语句中的设置
+> Transact-SQL 语句中的设置
 
 > 就是在当前 SQL 语句中，设置的事务隔离级别只影响当前 sql 语句, 有两种方式：
 
@@ -1155,101 +844,23 @@ set transaction isolation level read uncommitted;
 
 > > 这种方式比较灵活，可以重点语句重点对待，缺点就是 要设置的实在是太多了，因为这种方式的作用域实在是太小了啊啊啊啊
 
-1. ADO.NET 中的设置
+> ADO.NET 中的设置
 
-> 使用 System.Data.SqlClient 托管命名空间的 ADO.NET 应用程序可以调用 SqlConnection.BeginTransaction 方法并将 IsolationLevel 选项设置为 Unspecified、Chaos、ReadUncommitted、ReadCommitted、RepeatableRead、Serializable 或 Snapshot。
+> > System.Data.SqlClient.SqlConnection con = new SqlConnection();
 
-就是 SqlConnection 中设置了，代码如下：
+> > con.BeginTransaction(IsolationLevel.ReadUncommitted);
 
-System.Data.SqlClient.SqlConnection con = new SqlConnection();
+> 隔离级别	支持	遵守
 
-con.BeginTransaction(IsolationLevel.ReadUncommitted);
+> READ UNCOMMITTED	否	不保证
 
-这种方式有点就是作用域范围变大了；缺点就是要在 C## 设置，最要命的是，如果用了ORM，如何让我设置！！！！！！！！！！！！！
+> READ COMMITTED	是	是
 
-当然，还有其他的设置，详情请参考：调整事务隔离级别
+> REPEATABLE READ	否	否
 
-这就是蛋疼的功能，如此好的功能，却如此蛋疼的设置，没有一个全局的设置，强烈建议 微软 把 事务隔离级别 的设置放到 sp_configure 里面去
+> SNAPSHOT ISOLATION	否	否
 
-Sql Server 事务隔离级别的解释：
-
-事务指定一个隔离级别，该隔离级别定义一个事务必须与其他事务所进行的资源或数据更改相隔离的程度。隔离级别从允许的并发副作用（例如，脏读或幻读）的角度进行描述。
-
-事务隔离级别控制：
-
-读取数据时是否占用锁以及所请求的锁类型。
-
-占用读取锁的时间。
-
-引用其他事务修改的行的读取操作是否：
-
-在该行上的排他锁被释放之前阻塞其他事务。
-
-检索在启动语句或事务时存在的行的已提交版本。
-
-读取未提交的数据修改。
-
-选择事务隔离级别不影响为保护数据修改而获取的锁。事务总是在其修改的任何数据上获取排他锁并在事务完成之前持有该锁，不管为该事务设置了什么样的隔离级别。对于读取操作，事务隔离级别主要定义保护级别，以防受到其他事务所做更改的影响。
-
-较低的隔离级别可以增强许多用户同时访问数据的能力，但也增加了用户可能遇到的并发副作用（例如脏读或丢失更新）的数量。相反，较高的隔离级别减少了用户可能遇到的并发副作用的类型，但需要更多的系统资源，并增加了一个事务阻塞其他事务的可能性。应平衡应用程序的数据完整性要求与每个隔离级别的开销，在此基础上选择相应的隔离级别。最高隔离级别（可序列化）保证事务在每次重复读取操作时都能准确检索到相同的数据，但需要通过执行某种级别的锁定来完成此操作，而锁定可能会影响多用户系统中的其他用户。最低隔离级别（未提交读）可以检索其他事务已经修改、但未提交的数据。在未提交读中，所有并发副作用都可能发生，但因为没有读取锁定或版本控制，所以开销最少。
-
-ISO 标准定义了下列隔离级别，SQL Server 数据库引擎支持所有这些隔离级别：
-
-未提交读（隔离事务的最低级别，只能保证不读取物理上损坏的数据）
-
-已提交读（数据库引擎的默认级别）
-
-可重复读
-
-可序列化（隔离事务的最高级别，事务之间完全隔离）
-
-隔离级别
-
-脏读
-
-不可重复读
-
-幻读
-
-未提交读
-
-是
-
-是
-
-是
-
-已提交读
-
-否
-
-是
-
-是
-
-可重复读
-
-否
-
-否
-
-是
-
-快照
-
-否
-
-否
-
-否
-
-可序列化
-
-否
-
-否
-
-否
+> SERIALIZABLE	否	否
 
 ## MySQL
 
@@ -1482,6 +1093,354 @@ innodb_flush_log_at_timeout：写入或刷新日志的时间间隔。这个参�
 innodb_lock_wait_timeout：InnDB事务等待行锁的时间长度。默认值是50秒。当一个事务锁定了一行，这时另外一个事务想访问并修改这一行，当等待时间达到innodb_lock_wait_timeout参数设置的值时，MySQL会报错"ERROR 1205 (HY000): Lock wait timeout exceeded; try restarting transaction"，同时会回滚语句（不是回滚整个事务）。如果想回滚整个事务，需要使用--innodb_rollback_on_timeout参数启动MySQL。在高交互性的应用系统或OLTP系统上，可以减小这个参数来快速显示用户的反馈或把更新放入队列稍后处理。在数据仓库中，为了更好的处理运行时间长的操作，可以增大这个参数。这个参数只应用在InnoDB行锁上，这个参数对表级锁无效。这个参数不适用于死锁，因为发生死锁时，InnoDB会立刻检测到死锁并将发生死锁的一个事务回退。
 
 innodb_fast_shutdown：InnoDB关库模式。如果这个参数为0，InnoDB会做一个缓慢关机，在关机前会做完整的刷新操作，这个级别的关库操作会持续数分钟，当缓存中的数据量很大时，甚至会持续几个小时；如果数据库要执行版本升级或降级，需要执行这个级别的关库操作，以保证所有的数据变更都写入到数据文件。如果这个参数的值是1（默认值），为了节省关库时间，InnoDB会跳过新操作，而是在下一次开机的时候通过crash recovery方式执行刷新操作。如果这个参数的值是2，InnoDB会刷新日志并以冷方式关库，就像MySQL宕机一样，没有提交的事务会丢失，在下一次开启数据库时，crash recovery所需要的时间更长；在紧急或排错情形下，需要立刻关闭数据库时，会使用这种方式停库。
+
+
+### MySQL事务隔离级别
+
+> > 查看事物隔离级别
+
+> SELECT @@tx_isolation;
+
+> > 设置mysql的隔离级别：
+
+> set session transaction isolation level 设置事务隔离级别
+
+> > 设置read uncommitted级别：
+
+> set session transaction isolation level read uncommitted;
+
+> > 设置read committed级别：
+
+> set session transaction isolation level read committed;
+
+> > 设置repeatable read级别：
+
+> set session transaction isolation level repeatable read;
+
+> > 设置serializable级别：
+
+> set session transaction isolation level serializable;
+
+> 事务隔离级别	脏读	不可重复读	幻读
+
+> 读未提交（READ UNCOMMITTED）	√	√	√
+
+> 读已提交（READ COMMITTED）	×	√	√
+
+> 可重复读（REPEATABLE READ）	×	×	√
+
+> 串行化（SERIALIZABLE）	×	×	×
+
+## SQL语言
+
+### DDL
+
+> > 其语句包括动词CREATE,ALTER和DROP。在数据库中创建新表或修改、删除表（CREATE TABLE 或 DROP TABLE）；为表加入索引等。
+
+#### create
+
+##### 常用数据类型
+
+> varchar2(n)：变长字符串n<=4000
+
+> char(n)：定长字符串n<=2000
+
+> number(p,s)：p表示精度，s表示小数位数，最大位数是38位
+
+> date：时问日期（7字节）
+
+> binary_float：浮点型，32位
+
+> binary_double：双精度型，64位
+
+> blob：大二进制对象，<=4G
+
+> clob：大字符串对象，<=4G
+
+> bfile：外部的二进制文件
+
+##### 表
+
+##### 主键
+
+> 在创建表时定义主键
+
+> 使用alter table语句定义主键
+
+> 使用alter table修改主键状态
+
+##### 外键
+
+> 在创建表时定义外键
+
+> 使用alter table语句定义外键
+
+> 使用alter table修改外键状态
+
+##### 约束
+
+> check约束
+
+> not null约束
+
+> unique约束
+
+##### 索引
+
+##### 视图
+
+##### 序列
+
+##### 同义词
+
+#### drop
+
+#### alter
+
+### DML（DML：Data Manipulation Language）
+
+#### insert
+
+##### 插入数据
+
+##### 复制表数据
+
+> create table…as select…
+
+> insert into…select
+
+#### update
+
+#### merge
+
+#### delete
+
+#### truncate
+
+### DQL（DQL: Data Query Language）
+
+#### select
+
+##### from子句
+
+##### 投影
+
+##### where子句
+
+##### 比较运算符
+
+> =
+
+> <>
+
+> <
+
+> <=
+
+> >=
+
+> LIKE
+
+> %
+
+> _
+
+> 布尔操作
+
+> OR
+
+> AND
+
+> NOT
+
+> BETWEEN…AND…IN
+
+> order by子句
+
+> asc
+
+> desc
+
+> distinct
+
+> 算数运算：
+
+> +
+
+> -
+
+> *
+
+> /
+
+#### 基本函数
+
+> 字符函数
+
+> concat(c1,c2)
+
+> length(c)
+
+> lower(c)/upper(c)
+
+> ltrim(c)/rtrim(c)/trim(c)
+
+> replace(c1,c2,c3)
+
+> substr(c1,i,j)
+
+> 数字函数
+
+> abs(n)
+
+> acos(n)/asin(n)/atan(n)/cos(n)/sin(n)/tan(n)
+
+> ceil(n)/floor(n)
+
+> exp(n)/ln(n)
+
+> power(n1,n2)
+
+> round(n1,n2)
+
+> sign(n)
+
+> sqrt(n)
+
+> 日期函数
+
+> add_months(d,i)
+
+> last_day(d)
+
+> month_between(d1,d2)
+
+> new_time(d,tz1,tz2)
+
+> sysdate
+
+> 转换函数
+
+> convert(c,dset,sset)
+
+> to_char(x,fmt)
+
+> to_date(c,fmt)
+
+> 分组函数/聚合函数
+
+> AVG
+
+> MAX
+
+> MIN
+
+> SUM
+
+> COUNT
+
+> STDDEV
+
+> VARIANCE
+
+> group by
+
+> having子句
+
+#### 集合操作
+
+> UNION
+
+> INTERSECT
+
+> MINUS
+
+#### 子查询
+
+> 表连接
+
+> 内连接 inner join
+
+> 外连接
+
+> 左外连接
+
+> 右外连接
+
+> 全外连接
+
+> case语句
+
+> decode函数
+
+### DCL(数据控制语言 Data Control Language )
+
+> > 它的语句通过GRANT或REVOKE实现权限控制，确定单个用户和用户组对数据库对象的访问。某些RDBMS可用GRANT或REVOKE控制对表单个列的访问。
+
+> grant
+
+> revoke
+
+### TCL（事务控制语言）
+
+> > 它的语句能确保被DML语句影响的表的所有行及时得以更新。包括COMMIT（提交）命令、SAVEPOINT（保存点）命令、ROLLBACK（回滚）命令。
+
+### CCL（指针控制语言）
+
+> > 它的语句，像DECLARE CURSOR，FETCH INTO和UPDATE WHERE CURRENT用于对一个或多个表单独行的操作。
+
+## NoSQL
+
+### 键值数据库
+
+> Redis
+
+> BerkeleyDB
+
+> Memcached
+
+> Project Voldemort
+
+> Riak
+
+> LevelDB
+
+### 文档数据库
+
+> MongoDB
+
+> CouchDB
+
+> RavenDB
+
+> Terrastore
+
+> OrientDB
+
+### 列族数据库
+
+> HBase
+
+> Amazon SimpleDB
+
+> Cassdndra
+
+> Hypertable
+
+> BigTable(google)
+
+### 图数据库
+
+> FlockDB
+
+> HyperGraphDB
+
+> Infinite Graph
+
+> Neo4J
+
+> OrientDB
+
 
 ## LiteDB：本地化NOSQL
 

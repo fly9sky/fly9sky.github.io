@@ -3,7 +3,7 @@ layout: post
 title: 微软Dotnet技术
 description: Dotnet相关技术WPF,AS.net，Winform等相关技术总结
 date: 2022-10-01 09:01:01
-updatedate: 2023-10-26 12:07:01
+updatedate: 2023-10-31 13:54:01
 ---
 
 - [Donet6 ubuntu下的安装](#donet6-ubuntu下的安装)
@@ -25,6 +25,15 @@ updatedate: 2023-10-26 12:07:01
   - [泛型](#泛型)
   - [接口](#接口)
   - [多线程](#多线程)
+    - [volatile](#volatile)
+    - [阻塞](#阻塞)
+    - [临界值](#临界值)
+    - [锁](#锁)
+    - [互斥锁（Mutex）](#互斥锁mutex)
+  - [信号量 (Semaphore)](#信号量-semaphore)
+    - [信号和句柄（EventWaitHandle,ManualResetEvent，AutoResetEvent）](#信号和句柄eventwaithandlemanualreseteventautoresetevent)
+    - [Interlocked](#interlocked)
+    - [ReaderWriterLock](#readerwriterlock)
   - [Task  Task](#task--task)
   - [ThreadPool](#threadpool)
   - [CancellationTokenSource  取消线程任务](#cancellationtokensource--取消线程任务)
@@ -44,8 +53,6 @@ updatedate: 2023-10-26 12:07:01
   - [线程基础](#线程基础)
   - [计算的异步操作 Task](#计算的异步操作-task)
   - [I/O的异步操作](#io的异步操作)
-  - [基元线程同步构造](#基元线程同步构造)
-  - [混合线程同步构造](#混合线程同步构造)
   - [ML.NET](#mlnet)
 - [ASP.NET](#aspnet)
   - [ASHX 处理请求](#ashx-处理请求)
@@ -492,6 +499,57 @@ modelBuilder.Entity<Person>().Property(p => p.RowVersion).IsRowVersion();
 
 ### 多线程
 
+> 线程同步
+
+#### volatile 
+
+> volatile关键字指示一个字段可以由多个同时执行的线程修改。出于性能原因，编译器，运行时系统甚至硬件都可能重新排列对存储器位置的读取和写入。声明为 volatile 的字段将从某些类型的优化中排除。不确保从所有执行线程整体来看时所有易失性写入操作均按执行顺序排序。”
+
+> volatile并不能用来做线程同步，它的主要作用时为了让多个线程之间能看到被修改过后最新的值。
+
+#### 阻塞
+
+> 当线程调用Sleep，Join，EndInvoke，线程就处于阻塞状态（Sleep使调用线程阻塞，Join、EndInvoke使另外一个线程阻塞），会立即从cpu退出。（阻塞状态的线程不消耗cpu）
+
+#### 临界值
+
+> 加锁（lock）使用引用类型，值类型加锁时会装箱，产生一个新的对象。使用private修饰，使用public时易产生死锁。（使用lock（this），lock(typeof(实例))时，该类也应该是private）。string不能作为锁对象。不能在lock中使用await关键字
+
+> Monitors lock本质上就是 Monitors.Enter/Monitors.Exit();
+
+#### 锁
+
+> 自旋锁 SpinLock因为自旋锁本质上不会让线程休眠，而是一直循环尝试对资源访问，直到可用。所以自旋锁线程被阻塞时，不进行线程上下文切换，而是空转等待。对于多核CPU而言，减少了切换线程上下文的开销，从而提高了性能。
+
+#### 互斥锁（Mutex）
+
+> > Mutex可以实现进程同步，互斥锁的带有三个参数的构造函数
+
+> > > initiallyOwned: 如果initiallyOwned为true，互斥锁的初始状态就是被所实例化的线程所获取，否则实例化的线程处于未获取状态。name:该互斥锁的名字，在操作系统中只有一个命名为name的互斥锁mutex，如果一个线程得到这个name的互斥锁，其他线程就无法得到这个互斥锁了，必须等待那个线程对这个线程释放。createNew:如果指定名称的互斥体已经存在就返回false，否则返回true。
+
+> Thread test = new Thread(MutexMethod); 
+
+### 信号量 (Semaphore)
+
+> Semaphore,Semaphore,是负责协调各个线程, 以保证它们能够正确、合理的使用公共资源。也是操作系统中用于控制进程同步互斥的量。Semaphore常用的方法有两个WaitOne()和Release()，Release()的作用是退出信号量并返回前一个计数，而WaitOne()则是阻止当前线程，直到当前线程的WaitHandle 收到信号。这里我举一个例子让大家更容易理解：当我们这样实例化Semaphore时候
+
+#### 信号和句柄（EventWaitHandle,ManualResetEvent，AutoResetEvent）
+
+> CountdownEvent,CountdownEvent的使用和ManualEvent正好相反，是多个线程共同唤醒一个线程。
+ 
+> EventWaitHandle的构造方法允许创建一个命名的EventWaitHandle，来实现跨进程的信号量操作。名字只是一个简单的字符串，只要保证不会跟其它进程的锁冲突即可。
+
+#### Interlocked
+
+> 提供对数的原子操作
+
+#### ReaderWriterLock
+
+> 该锁确保在对资源获取赋值或更新时，只有它自己可以访问这些资源，其他线程都不可以访问。即排它锁。
+
+> > readerwritelock.AcquireWriterLock(t); readerwritelock.ReleaseWriterLock();
+
+
 ### Task  Task<T>
 
 > public class Task : IAsyncResult, IDisposable
@@ -849,10 +907,6 @@ ThreadPool.QueueUserWorkItem(o =>
 ### 计算的异步操作 Task
 
 ### I/O的异步操作
-
-### 基元线程同步构造
-
-### 混合线程同步构造
 
 ### ML.NET
 
