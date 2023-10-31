@@ -3,7 +3,7 @@ layout: post
 title: Armbian与Openwrt等嵌入式系统
 description: Arm架构的Armbian，Openwrt，Cloreelec等机顶盒路由器刷机研究
 date: 2023-01-02 15:43:01
-updatedate: 2023-10-26 12:17:01
+updatedate: 2023-10-31 16:26:01
 ---
 
 - [嵌入式操作系统基础](#嵌入式操作系统基础)
@@ -89,6 +89,7 @@ updatedate: 2023-10-26 12:17:01
   - [陕西西安联通手动更换升级光猫](#陕西西安联通手动更换升级光猫)
 - [LINKSYS EA8500 TTL 降级](#linksys-ea8500-ttl-降级)
   - [备份系统信息](#备份系统信息)
+- [IPQ5018 Openwrt TTL NOTEST](#ipq5018-openwrt-ttl-notest)
 - [OneCloud](#onecloud)
   - [DD](#dd)
   - [Packrepack](#packrepack)
@@ -1877,6 +1878,50 @@ stdout=serial
 ```
 
 > Environment size: 804/262140 bytes
+
+## IPQ5018 Openwrt TTL NOTEST
+
+> TTL 打开PuTTY 选择串口 串行口选刚才的COM端口号速度固定115200
+
+> 然后插电  开始跑码  开始跑码的时候快速按ESC中断会显示IPQ5018# 来不及的话重新拔电插电ESC中断
+
+> 网线插入路由器WAN口手动配置IP确定保存
+
+> 打开tftp64 设置服务器IP为刚才配置的IP  如图
+
+> setenv serverip 192.168.1.100
+
+> setenv ipaddr 192.168.1.1
+
+> tftpboot 1.img
+
+> 1.bin  1是固件名，bin是拓展名，按需更改，如我放在包里的集客固件就是 1.img
+
+> 写入闪存
+
+> flash rootfs
+
+> flash rootfs_1
+
+> 两个分区都写，防止重启还原
+
+> 显示写入完成就OK了
+
+> 拔电 插电 回到网络配置
+
+> 改成自动获取IP地址(集客固件改成6.6.6.7)
+
+
+> > 以下教程是OpenWrt
+
+> 等启动成功 浏览器登录192.168.1.1
+
+> 密码是admin
+
+> 刷机完成 固件没有可玩性，不过能用有160MHZ频宽，但是改不了80
+
+> 固件来自slienna/about-AX300M-WiFi6-ROUTER: about-AX300M-WiFi6-ROUTER (github.com)
+
 
 ## OneCloud 
 
