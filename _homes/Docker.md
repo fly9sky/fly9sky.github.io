@@ -3,7 +3,7 @@ layout: post
 title: Docker容器技术
 description: Docker 研究学习
 date: 2022-10-01 09:01:01
-updatedate: 2023-08-25 09:23:01
+updatedate: 2023-10-31 16:12:01
 ---
 
 - [Docker](#docker)
@@ -46,6 +46,7 @@ updatedate: 2023-08-25 09:23:01
     - [安装方法二](#安装方法二)
     - [kubernetes 集群搭建（二进制）](#kubernetes-集群搭建二进制)
     - [kubernetes 集群 YAML 文件详解](#kubernetes-集群-yaml-文件详解)
+  - [查看docker镜像](#查看docker镜像)
 - [容器编排](#容器编排)
   - [Docker Compose](#docker-compose-1)
     - [Ubuntu 安装使用](#ubuntu-安装使用)
@@ -3788,6 +3789,66 @@ spec.containers[].name	String	这里定义容器的名字
 
 spec.containers[].image	String	这里定义要用到的镜像名称，如果镜像的标签是 latest，每次使用该镜像都会从远程下载	
 
+### 查看docker镜像
+
+> 方法一：使用Docker命令行工具
+
+> > 你可以使用Docker命令行工具来查看Docker镜像文件的内容。这需要先在本地文件系统中提取镜像文件的所有内容，然后您可以查看这些文件的内容。
+
+> > 首先，使用以下命令列出所有镜像：
+
+> > docker images
+
+> > 使用inspect命令可以获取镜像的详细信息，包括制作者、适应架构、各层的数字摘要等。
+
+> > docker inspect image_name
+
+> > 然后，使用以下命令将镜像文件导出到本地文件系统中：
+
+> > docker save -o image.tar image_name
+
+> > 接下来，使用以下命令来提取镜像文件的所有内容：
+
+> > tar -xvf image.tar
+
+> > 接着，您可以使用less命令查看文件的内容。例如，使用以下命令查看/etc/passwd文件的内容：
+
+> > less image.tar/etc/passwd
+
+> > less 命令是 Unix 和 Linux 系统中的一个用于查看文件内容的命令。它可以显示文件的全部内容，并且可以进行搜索、滚动、翻页等操作，比 cat 命令更加强大和灵活。
+
+> 方法二：使用Dive工具
+
+> > Dive是一个开源工具，可以帮助用户浏览和查看Docker镜像的内容。它类似于查看Git代码的工具，可以帮助您快速检查Docker镜像的层，文件以及其他资源。
+
+> > 首先，使用以下命令安装Dive工具：
+
+> > brew install dive
+
+> > 安装完成后，使用以下命令查看Docker镜像的内容：
+
+> > dive image_name
+
+> > Dive将会显示您要查看的镜像的内容。您可以使用箭头键浏览不同的图层，查看其所包含的内容。
+
+> 方法三：使用Ct工具
+
+> > Ct是另一个开源工具，它可以帮助您查看Docker镜像的内容和结构。与Dive不同，Ct并不需要您在本地提取镜像文件内容。它可以直接在镜像文件中查看内容。
+
+> > 首先，使用以下命令安装Ct工具：
+
+> > curl -L0 https://github.com/coreos/container-linuxpconfig-transpiler/release/download/v0.9.0/ct-v0.9.0-x86_64-unknown-linux-gnu
+
+> > chmod +x ct-v0.9.0-x86_64-unknown-linux-gnu
+
+> > sudo mv ct-v0.9.0-x86_64-unknown-linux-gnu /usr/local/bin/ct
+
+> > 安装完成后，使用以下命令查看Docker镜像的内容：
+
+> > ct config_content image_name | less
+
+> > 这将会显示Docker镜像的所有配置内容，您可以使用箭头键浏览不同的配置项。
+
 ## 容器编排
 
 ### Docker Compose
@@ -3887,6 +3948,21 @@ services:
     network_mode: "host"
 ```
 
+> Docker CLI
+```
+docker run -d \
+    --name clouddrive \
+    --restart unless-stopped \
+    --env CLOUDDRIVE_HOME=/Config \
+    -v <path to accept cloud mounts>:/CloudNAS:shared \
+    -v <path to app data>:/Config \
+    -v <other local shared path>:/media:shared \
+    --network host \
+    --pid host \
+    --privileged \
+    --device /dev/fuse:/dev/fuse \
+    cloudnas/clouddrive2
+```
 > vist http://localhost:19798/
 
 ### Kubernetes（K8s）
