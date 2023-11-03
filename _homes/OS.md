@@ -3,10 +3,9 @@ layout: post
 title: 计算机操作系统
 description: 计算机科学相关学习内容总结,包括各种操作系统安装配置，Windows Linux,以及Docker等虚拟化技术。
 date: 2022-10-01 09:01:01
-updatedate: 2023-09-26 10:24:01
+updatedate: 2023-11-03 09:19:01
 ---
 
-- [计算机史话](#计算机史话)
 - [操作系统理论](#操作系统理论)
   - [计算机系统概述](#计算机系统概述)
   - [操作系统引论](#操作系统引论)
@@ -24,6 +23,11 @@ updatedate: 2023-09-26 10:24:01
   - [legacy+MBR](#legacymbr)
   - [UEFI](#uefi)
   - [CSM](#csm)
+- [嵌入式操作系统基础](#嵌入式操作系统基础)
+  - [Uboot](#uboot)
+  - [rootfs](#rootfs)
+  - [kernel](#kernel)
+  - [Busybox](#busybox)
 - [Windows](#windows)
 - [LinuxAndOpenSource](#linuxandopensource)
   - [Linux 命令大全](#linux-命令大全)
@@ -100,7 +104,6 @@ updatedate: 2023-09-26 10:24:01
     - [安装方法二](#安装方法二)
     - [kubernetes 集群搭建（二进制）](#kubernetes-集群搭建二进制)
     - [kubernetes 集群 YAML 文件详解](#kubernetes-集群-yaml-文件详解)
-- [LabView](#labview)
   - [LabⅥEW基础知识](#labⅵew基础知识)
   - [前面板设计](#前面板设计)
   - [程序框图与程序结构](#程序框图与程序结构)
@@ -134,23 +137,6 @@ updatedate: 2023-09-26 10:24:01
   - [文件管理](#文件管理-1)
   - [数据采集](#数据采集)
   - [通信技术](#通信技术)
-
-
-## 计算机史话
-
-> 阿兰图灵是通用计算机的提出者，但是在有些问题上效率十分低下。
-
-> 图灵机，又称图灵计算机指一个抽象的机器，是，英国数学家艾伦・麦席森・图灵(1912―-1954年)于1936年提出的一种抽象的计算模型，即将人们使用纸笔进行数学运算的过程进行抽象，由一个虚拟的机器替代人类进行数学运算。它有一条无限长的纸带，纸带分成了一个一个的小方格，每个方格有不同的颜色。有一个机器头在纸带上移来移去。机器头有一组内部状态，还有一些固定的程序。在每个时刻，机器头都要从当前纸带上读入一个方格信息，然后结合自己的内部状态查找程序表，根据程序输出信息到纸带方格上，并转换自己的内部状态，然后进行移动
-
-> 最早的存储指令结构计算机模型实际是由ENIAC创建者埃可特和莫奇利，冯诺依曼与以上二位共同商议，1944年9月起草了《EDVAC报告书一号草案》，并署名，且为埃可特和莫奇利留了署名位置，但戈德斯塔提前发表了这份报告导致埃可特和莫奇利没有书名，所以现在存储程序计算机的逻辑结构成了广为人知的“冯诺依曼体系结构”。明确提出了，存储程序，顺序执行指令，使用二进制开关电路。并且这个体系产生了两个新的工程学科，计计算机体系结构和软件工程。冯诺依曼把计算机硬件划分为：CA（中央运算单元）CC（中央控制单元）M（内存）I（输入设备）O（输出设备。）
-
-> 第一台冯诺依曼体系计算机1948年6月研制出原型机"Baby"由英国团队研制出来。
-
-> 二战期间英国的计算机水平非常厉害，但是英国政府隐瞒了计算机方面研究的成就，包括阿兰图林一度不为人所知，因此导致美国冯诺依曼体系结构成了以后计算机的主要设计思想。
-
-> 香农定律是关于信道容量的计算的一个经典定律，可以说是信息论的基础。
-
-> Bug 一次是女程序员葛蕾丝霍普引入。
 
 ## 操作系统理论
 
@@ -1199,10 +1185,6 @@ updatedate: 2023-09-26 10:24:01
 
 11.8.2Google Chrome OS
 
-
-
-
-
 ## 操作系统安装
 
 ### legacy+MBR
@@ -1212,6 +1194,110 @@ updatedate: 2023-09-26 10:24:01
 ### CSM
 
 > CSM是一个兼容支持模块，可以让新的UEFI BIOS兼容老的legacy+MBR启动模式。在品牌机的BIOS里，CSM因为安全启动选项打开的原因，默认都是关闭的，而想打开CSM就得关闭安全启动，而有些激进的品牌机则干脆直接抛弃了对CSM的支持，BIOS内没有CSM支持模块。
+
+
+## 嵌入式操作系统基础
+
+### Uboot
+
+> 嵌入式系统上电后先执行uboot、然后uboot负责初始化DDR，初始化Flash，然后将OS从Flash中读取到DDR中，然后启动OS(OS启动后uboot就无用了) 总结：嵌入式系统和PC机的启动过程几乎没有两样，只是BIOS成了uboot，硬盘成了Flash。
+
+> Uboot支持的命令
+
+```
+复制代码
+?       - alias for 'help'
+base    - print or set address offset
+bdinfo  - print Board Info structure
+bmode   - sd1|sd2|qspi1|normal|usb|sata|ecspi1:0|ecspi1:1|ecspi1:2|ecspi1:3|esdhc1|esdhc2|esdhc3|esdhc4 [noreset]
+bmp     - manipulate BMP image data
+boot    - boot default, i.e., run 'bootcmd'
+bootd   - boot default, i.e., run 'bootcmd'
+bootelf - Boot from an ELF image in memory
+bootm   - boot application image from memory
+bootp   - boot image via network using BOOTP/TFTP protocol
+bootvx  - Boot vxWorks from an ELF image
+bootz   - boot Linux zImage image from memory
+clocks  - display clocks
+clrlogo - fill the boot logo area with black
+cmp     - memory compare
+coninfo - print console devices and information
+cp      - memory copy
+crc32   - checksum calculation
+dcache  - enable or disable data cache
+dhcp    - boot image via network using DHCP/TFTP protocol
+dm      - Driver model low level access
+echo    - echo args to console
+editenv - edit environment variable
+env     - environment handling commands
+erase   - erase FLASH memory
+exit    - exit script
+ext2load- load binary file from a Ext2 filesystem
+ext2ls  - list files in a directory (default /)
+ext4load- load binary file from a Ext4 filesystem
+ext4ls  - list files in a directory (default /)
+ext4size- determine a file's size
+ext4write- create a file in the root directory
+false   - do nothing, unsuccessfully
+fatinfo - print information about filesystem
+fatload - load binary file from a dos filesystem
+fatls   - list files in a directory (default /)
+fatsize - determine a file's size
+fdt     - flattened device tree utility commands
+flinfo  - print FLASH memory information
+fstype  - Look up a filesystem type
+fuse    - Fuse sub-system
+go      - start application at address 'addr'
+gpio    - query and control gpio pins
+help    - print command description/usage
+i2c     - I2C sub-system
+icache  - enable or disable instruction cache
+iminfo  - print header information for application image
+imxtract- extract a part of a multi-image
+itest   - return true/false on integer compare
+load    - load binary file from a filesystem
+loadb   - load binary file over serial line (kermit mode)
+loads   - load S-Record file over serial line
+loadx   - load binary file over serial line (xmodem mode)
+loady   - load binary file over serial line (ymodem mode)
+loop    - infinite loop on address range
+ls      - list files in a directory (default /)
+md      - memory display
+mm      - memory modify (auto-incrementing address)
+mmc     - MMC sub system
+mmcinfo - display MMC info
+mw      - memory write (fill)
+nand    - NAND sub-system
+nboot   - boot from NAND device
+nfs     - boot image via network using NFS protocol
+nm      - memory modify (constant address)
+ping    - send ICMP ECHO_REQUEST to network host
+pmic    - PMIC
+printenv- print environment variables
+protect - enable or disable FLASH write protection
+reset   - Perform RESET of the CPU
+run     - run commands in an environment variable
+save    - save file to a filesystem
+saveenv - save environment variables to persistent storage
+setenv  - set environment variables
+setexpr - set environment variable as the result of eval expression
+showvar - print local hushshell variables
+size    - determine a file's size
+sleep   - delay execution for some time
+source  - run script from memory
+test    - minimal test like /bin/sh
+tftpboot- boot image via network using TFTP protocol
+true    - do nothing, successfully
+usb     - USB sub-system
+usbboot - boot from USB device
+version - print monitor, compiler and linker version
+```
+
+### rootfs 
+
+### kernel
+
+### Busybox
 
 ## Windows
 
@@ -5270,7 +5356,6 @@ spec.containers[].name	String	这里定义容器的名字
 
 spec.containers[].image	String	这里定义要用到的镜像名称，如果镜像的标签是 latest，每次使用该镜像都会从远程下载	
 
-## LabView
 
 ### LabⅥEW基础知识
 

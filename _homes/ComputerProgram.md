@@ -3,26 +3,20 @@ layout: post
 title: 计算机编程
 description: 计算机科学相关学习内容总结,各种编程语言以及计算机数据结构等总结梳理
 date: 2022-10-01 09:01:01
-updatedate: 2023-09-26 12:58:01
+updatedate: 2023-11-03 09:19:01
 ---
 
-- [计算机史话](#计算机史话)
-- [数据结构与算法](#数据结构与算法)
-  - [数据结构](#数据结构)
+- [数据结构](#数据结构)
+  - [数据结构分类](#数据结构分类)
     - [逻辑结构](#逻辑结构)
     - [线性结构](#线性结构)
-  - [算法](#算法)
   - [指针与数组](#指针与数组)
-  - [字符串与模式匹配](#字符串与模式匹配)
   - [链表](#链表)
-  - [递归](#递归)
   - [集合与字典](#集合与字典)
+- [算法](#算法)
+  - [递归](#递归)
   - [排序](#排序)
-- [gRPC](#grpc)
-  - [gRPC 概述](#grpc-概述)
-  - [gRPC 服务项目模板](#grpc-服务项目模板)
-  - [ASP.NET Core gRPC 服务项目模板提供了一个入门版服务：](#aspnet-core-grpc-服务项目模板提供了一个入门版服务)
-  - [使用 .NET 客户端调用 gRPC 服务](#使用-net-客户端调用-grpc-服务)
+  - [字符串与模式匹配](#字符串与模式匹配)
 - [Php](#php)
   - [Pyplot，画出各种你想要的图](#pyplot画出各种你想要的图)
 - [Python](#python)
@@ -220,27 +214,16 @@ updatedate: 2023-09-26 12:58:01
     - [SSO 与CAS](#sso-与cas)
   - [授权](#授权)
     - [OAuth 授权](#oauth-授权)
+- [gRPC](#grpc)
+  - [gRPC 概述](#grpc-概述)
+  - [gRPC 服务项目模板](#grpc-服务项目模板)
+  - [ASP.NET Core gRPC 服务项目模板提供了一个入门版服务：](#aspnet-core-grpc-服务项目模板提供了一个入门版服务)
+  - [使用 .NET 客户端调用 gRPC 服务](#使用-net-客户端调用-grpc-服务)
 
 
-## 计算机史话
+## 数据结构
 
-> 阿兰图灵是通用计算机的提出者，但是在有些问题上效率十分低下。
-
-> 图灵机，又称图灵计算机指一个抽象的机器，是，英国数学家艾伦・麦席森・图灵(1912―-1954年)于1936年提出的一种抽象的计算模型，即将人们使用纸笔进行数学运算的过程进行抽象，由一个虚拟的机器替代人类进行数学运算。它有一条无限长的纸带，纸带分成了一个一个的小方格，每个方格有不同的颜色。有一个机器头在纸带上移来移去。机器头有一组内部状态，还有一些固定的程序。在每个时刻，机器头都要从当前纸带上读入一个方格信息，然后结合自己的内部状态查找程序表，根据程序输出信息到纸带方格上，并转换自己的内部状态，然后进行移动
-
-> 最早的存储指令结构计算机模型实际是由ENIAC创建者埃可特和莫奇利，冯诺依曼与以上二位共同商议，1944年9月起草了《EDVAC报告书一号草案》，并署名，且为埃可特和莫奇利留了署名位置，但戈德斯塔提前发表了这份报告导致埃可特和莫奇利没有书名，所以现在存储程序计算机的逻辑结构成了广为人知的“冯诺依曼体系结构”。明确提出了，存储程序，顺序执行指令，使用二进制开关电路。并且这个体系产生了两个新的工程学科，计计算机体系结构和软件工程。冯诺依曼把计算机硬件划分为：CA（中央运算单元）CC（中央控制单元）M（内存）I（输入设备）O（输出设备。）
-
-> 第一台冯诺依曼体系计算机1948年6月研制出原型机"Baby"由英国团队研制出来。
-
-> 二战期间英国的计算机水平非常厉害，但是英国政府隐瞒了计算机方面研究的成就，包括阿兰图林一度不为人所知，因此导致美国冯诺依曼体系结构成了以后计算机的主要设计思想。
-
-> 香农定律是关于信道容量的计算的一个经典定律，可以说是信息论的基础。
-
-> Bug 一次是女程序员葛蕾丝霍普引入。
-
-## 数据结构与算法
-
-### 数据结构
+### 数据结构分类
 
 #### 逻辑结构
 
@@ -257,16 +240,6 @@ updatedate: 2023-09-26 12:58:01
 > 顺序存储结构
 
 > 链式存储结构
-
-### 算法
-
-> 算法复杂度
-
-> >（O(n)渐进表示法）
-
-> > 时间复杂度
-
-> > 空间复杂度
 
 ### 指针与数组
 
@@ -295,28 +268,6 @@ updatedate: 2023-09-26 12:58:01
 > > 关键词new 和delete
 
 > > 避免内存错误
-
-### 字符串与模式匹配
-
-> 文本的匹配
-
-> > BF 算法
-
-> > MP 算法
-
-> > KMP 算法
-
-> > BM 算法
-
-> > BMH 算法
-
-> 文本的模糊匹配
-
-> > 全局编辑距离
-
-> > 局部***佳对准
-
-> > N 元距离模型
 
 ### 链表
 
@@ -363,6 +314,52 @@ updatedate: 2023-09-26 12:58:01
 > 排队的智慧
 
 > 优先级队列--兼谈页面置换算法
+
+### 集合与字典
+
+> 集合的概念，运算，实现
+
+> > 位向量集合
+
+> > 单链表集合
+
+> 字典
+
+> > 字典的概念
+
+> > 搜索运算
+
+> 散列
+
+> > 散列的概念
+
+> > 散列函数
+
+> > 字符串散列
+
+> > 处理散列冲突
+
+> 不相交集
+
+> > 不相交集的概念
+
+> > 不相交集的实现
+
+> > 犯罪团伙的问题
+
+> > 路径压缩的实现
+
+> STL 中的set
+
+## 算法
+
+> 算法复杂度
+
+> >（O(n)渐进表示法）
+
+> > 时间复杂度
+
+> > 空间复杂度
 
 ### 递归
 
@@ -495,42 +492,6 @@ updatedate: 2023-09-26 12:58:01
 > > > Trie 树的表示
 
 > > > Trie 树的实现
-
-### 集合与字典
-
-> 集合的概念，运算，实现
-
-> > 位向量集合
-
-> > 单链表集合
-
-> 字典
-
-> > 字典的概念
-
-> > 搜索运算
-
-> 散列
-
-> > 散列的概念
-
-> > 散列函数
-
-> > 字符串散列
-
-> > 处理散列冲突
-
-> 不相交集
-
-> > 不相交集的概念
-
-> > 不相交集的实现
-
-> > 犯罪团伙的问题
-
-> > 路径压缩的实现
-
-> STL 中的set
 
 ### 排序
 
@@ -776,179 +737,27 @@ updatedate: 2023-09-26 12:58:01
 
 > > 归并排序
 
-## gRPC 
+### 字符串与模式匹配
 
-### gRPC 概述
+> 文本的匹配
 
-```
+> > BF 算法
 
-gRPC 是一种与语言无关的高性能远程过程调用 (RPC) 框架。
+> > MP 算法
 
-gRPC 的主要优点是：
+> > KMP 算法
 
-现代高性能轻量级 RPC 框架。
+> > BM 算法
 
-协定优先 API 开发，默认使用协议缓冲区，允许与语言无关的实现。
+> > BMH 算法
 
-可用于多种语言的工具，以生成强类型服务器和客户端。
+> 文本的模糊匹配
 
-支持客户端、服务器和双向流式处理调用。
+> > 全局编辑距离
 
-使用 Protobuf 二进制序列化减少对网络的使用。
+> > 局部***佳对准
 
-这些优点使 gRPC 适用于：
-
-效率至关重要的轻量级微服务。
-
-需要多种语言用于开发的 Polyglot 系统。
-
-需要处理流式处理请求或响应的点对点实时服务。
-
- GRPC是google开源的一个高性能、跨语言的RPC框架，基于HTTP2协议，基于protobuf 3.x，基于Netty 4.x +。GRPC与thrift、avro-rpc等其实在总体原理上并没有太大的区别，简而言之GRPC并没有太多突破性的创新。（如下描述，均基于JAVA语言的实现）
-
-  对于开发者而言：
-
-  1）需要使用protobuf定义接口，即.proto文件
-
-  2）然后使用compile工具生成特定语言的执行代码，比如JAVA、C/C++、Python等。类似于thrift，为了解决跨语言问题。
-
-  3）启动一个Server端，server端通过侦听指定的port，来等待Client链接请求，通常使用Netty来构建，GRPC内置了Netty的支持。
-
-  4）启动一个或者多个Client端，Client也是基于Netty，Client通过与Server建立TCP长链接，并发送请求；Request与Response均被封装成HTTP2的stream Frame，通过Netty Channel进行交互。
-
-```
-
-### gRPC 服务项目模板
-
-```
-
-对 .proto 文件的 C# 工具支持
-
-gRPC 使用协定优先方法进行 API 开发。 在 .proto 文件中定义服务和消息：
-
-ProtoBuf
-
-```
-
-syntax = "proto3";
-
-service Greeter {
-
- rpc SayHello (HelloRequest) returns (HelloReply);
-
-}
-
-message HelloRequest {
-
- string name = 1;
-
-}
-
-message HelloReply {
-
- string message = 1;
-
-}
-
-通过在项目中包含 .proto 文件，可自动生成用于服务、客户端和消息的 .NET 类型：
-
-将包引用添加到 Grpc.Tools 包。
-
-将 .proto 文件添加到 <Protobuf> 项目组。
-
-```
-
-XML
-
-```
-
-<ItemGroup>
-
- <Protobuf Include="Protos\greet.proto" />
-
-</ItemGroup>
-
-```
-
-有关 gRPC 工具支持的详细信息，请参阅使用 C# 的 gRPC 服务。
-
-ASP.NET Core 上的 gRPC 服务
-
-gRPC 服务可以托管在 ASP.NET Core 上。 这些服务与日志记录、依赖关系注入 (DI)、身份验证和授权等 ASP.NET Core 功能完全集成。
-
-将 gRPC 服务添加到 ASP.NET Core 应用
-
-gRPC 需要 Grpc.AspNetCore 包。 若要了解如何在 .NET 应用中配置 gRPC，请查看配置 gRPC。
-
-```
-
-### ASP.NET Core gRPC 服务项目模板提供了一个入门版服务：
-
-```
-
-public class GreeterService : Greeter.GreeterBase
-
-{
-
-  private readonly ILogger<GreeterService> _logger;
-
-  public GreeterService(ILogger<GreeterService> logger)
-
-  {
-
-    _logger = logger;
-
-  }
-
-  public override Task<HelloReply> SayHello(HelloRequest request,
-
-    ServerCallContext context)
-
-  {
-
-    _logger.LogInformation("Saying hello to {Name}", request.Name);
-
-    return Task.FromResult(new HelloReply 
-
-    {
-
-      Message = "Hello " + request.Name
-
-    });
-
-  }
-
-}
-
-GreeterService 继承自 GreeterBase 类型，后者是从 .proto 文件的 Greeter 服务生成的。 Startup.csProgram.cs 中的客户端可以访问该服务：
-
-app.MapGrpcService<GreeterService>();
-
-若要详细了解 ASP.NET Core 上的 gRPC 服务，请参阅使用 ASP.NET Core 的 gRPC 服务。
-
-```
-
-### 使用 .NET 客户端调用 gRPC 服务
-
-```
-
-gRPC 客户端是从 .proto 文件生成的具体客户端类型。 具体 gRPC 客户端具有转换为 .proto 文件中 gRPC 服务的方法。
-
-var channel = GrpcChannel.ForAddress("https://localhost:5001");
-
-var client = new Greeter.GreeterClient(channel);
-
-var response = await client.SayHelloAsync(
-
-  new HelloRequest { Name = "World" });
-
-Console.WriteLine(response.Message);
-
-gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期连接。 可以使用 GrpcChannel.ForAddress 创建通道。
-
-有关创建客户端、调用不同服务方法的详细信息，请参阅使用 .NET 客户端调用 gRPC 服务。
-
-```
+> > N 元距离模型
 
 ## Php
 
@@ -5010,3 +4819,178 @@ Access Token（Post && Validate）
 Protected Resource（Get）
 
 如果access token验证通过，资源服务器将向客户端返回资源信息。
+
+
+## gRPC 
+
+### gRPC 概述
+
+```
+
+gRPC 是一种与语言无关的高性能远程过程调用 (RPC) 框架。
+
+gRPC 的主要优点是：
+
+现代高性能轻量级 RPC 框架。
+
+协定优先 API 开发，默认使用协议缓冲区，允许与语言无关的实现。
+
+可用于多种语言的工具，以生成强类型服务器和客户端。
+
+支持客户端、服务器和双向流式处理调用。
+
+使用 Protobuf 二进制序列化减少对网络的使用。
+
+这些优点使 gRPC 适用于：
+
+效率至关重要的轻量级微服务。
+
+需要多种语言用于开发的 Polyglot 系统。
+
+需要处理流式处理请求或响应的点对点实时服务。
+
+ GRPC是google开源的一个高性能、跨语言的RPC框架，基于HTTP2协议，基于protobuf 3.x，基于Netty 4.x +。GRPC与thrift、avro-rpc等其实在总体原理上并没有太大的区别，简而言之GRPC并没有太多突破性的创新。（如下描述，均基于JAVA语言的实现）
+
+  对于开发者而言：
+
+  1）需要使用protobuf定义接口，即.proto文件
+
+  2）然后使用compile工具生成特定语言的执行代码，比如JAVA、C/C++、Python等。类似于thrift，为了解决跨语言问题。
+
+  3）启动一个Server端，server端通过侦听指定的port，来等待Client链接请求，通常使用Netty来构建，GRPC内置了Netty的支持。
+
+  4）启动一个或者多个Client端，Client也是基于Netty，Client通过与Server建立TCP长链接，并发送请求；Request与Response均被封装成HTTP2的stream Frame，通过Netty Channel进行交互。
+
+```
+
+### gRPC 服务项目模板
+
+```
+
+对 .proto 文件的 C# 工具支持
+
+gRPC 使用协定优先方法进行 API 开发。 在 .proto 文件中定义服务和消息：
+
+ProtoBuf
+
+```
+
+syntax = "proto3";
+
+service Greeter {
+
+ rpc SayHello (HelloRequest) returns (HelloReply);
+
+}
+
+message HelloRequest {
+
+ string name = 1;
+
+}
+
+message HelloReply {
+
+ string message = 1;
+
+}
+
+通过在项目中包含 .proto 文件，可自动生成用于服务、客户端和消息的 .NET 类型：
+
+将包引用添加到 Grpc.Tools 包。
+
+将 .proto 文件添加到 <Protobuf> 项目组。
+
+```
+
+XML
+
+```
+
+<ItemGroup>
+
+ <Protobuf Include="Protos\greet.proto" />
+
+</ItemGroup>
+
+```
+
+有关 gRPC 工具支持的详细信息，请参阅使用 C# 的 gRPC 服务。
+
+ASP.NET Core 上的 gRPC 服务
+
+gRPC 服务可以托管在 ASP.NET Core 上。 这些服务与日志记录、依赖关系注入 (DI)、身份验证和授权等 ASP.NET Core 功能完全集成。
+
+将 gRPC 服务添加到 ASP.NET Core 应用
+
+gRPC 需要 Grpc.AspNetCore 包。 若要了解如何在 .NET 应用中配置 gRPC，请查看配置 gRPC。
+
+```
+
+### ASP.NET Core gRPC 服务项目模板提供了一个入门版服务：
+
+```
+
+public class GreeterService : Greeter.GreeterBase
+
+{
+
+  private readonly ILogger<GreeterService> _logger;
+
+  public GreeterService(ILogger<GreeterService> logger)
+
+  {
+
+    _logger = logger;
+
+  }
+
+  public override Task<HelloReply> SayHello(HelloRequest request,
+
+    ServerCallContext context)
+
+  {
+
+    _logger.LogInformation("Saying hello to {Name}", request.Name);
+
+    return Task.FromResult(new HelloReply 
+
+    {
+
+      Message = "Hello " + request.Name
+
+    });
+
+  }
+
+}
+
+GreeterService 继承自 GreeterBase 类型，后者是从 .proto 文件的 Greeter 服务生成的。 Startup.csProgram.cs 中的客户端可以访问该服务：
+
+app.MapGrpcService<GreeterService>();
+
+若要详细了解 ASP.NET Core 上的 gRPC 服务，请参阅使用 ASP.NET Core 的 gRPC 服务。
+
+```
+
+### 使用 .NET 客户端调用 gRPC 服务
+
+```
+
+gRPC 客户端是从 .proto 文件生成的具体客户端类型。 具体 gRPC 客户端具有转换为 .proto 文件中 gRPC 服务的方法。
+
+var channel = GrpcChannel.ForAddress("https://localhost:5001");
+
+var client = new Greeter.GreeterClient(channel);
+
+var response = await client.SayHelloAsync(
+
+  new HelloRequest { Name = "World" });
+
+Console.WriteLine(response.Message);
+
+gRPC 客户端是使用通道创建的，该通道表示与 gRPC 服务的长期连接。 可以使用 GrpcChannel.ForAddress 创建通道。
+
+有关创建客户端、调用不同服务方法的详细信息，请参阅使用 .NET 客户端调用 gRPC 服务。
+
+```
