@@ -3,7 +3,7 @@ layout: post
 title: 微软Dotnet技术
 description: Dotnet相关技术WPF,AS.net，Winform等相关技术总结
 date: 2022-10-01 09:01:01
-updatedate: 2023-12-01 09:54:01
+updatedate: 2023-11-16 13:09:01
 ---
 
 - [Donet6 ubuntu下的安装](#donet6-ubuntu下的安装)
@@ -74,15 +74,15 @@ updatedate: 2023-12-01 09:54:01
     - [VisualStateManager](#visualstatemanager)
   - [WPF属性](#wpf属性)
     - [普通属性](#普通属性)
+    - [依赖项属性Dependency property](#依赖项属性dependency-property)
     - [附加属性](#附加属性)
-    - [依赖项属性dependency property](#依赖项属性dependency-property)
   - [WPF事件](#wpf事件)
     - [普通事件](#普通事件)
       - [生命周期事件](#生命周期事件)
       - [鼠标事件](#鼠标事件)
       - [键盘事件](#键盘事件)
       - [手写笔事件](#手写笔事件)
-      - [多点触控事件](#多点触控事件)
+      - [多点触控事件，继承自UIElement。](#多点触控事件继承自uielement)
     - [路由事件](#路由事件)
     - [附加事件](#附加事件)
   - [资源](#资源)
@@ -229,6 +229,13 @@ updatedate: 2023-12-01 09:54:01
   - [consul](#consul)
 - [Entity Framework](#entity-framework)
   - [EDM](#edm)
+- [DI（IoC）](#diioc)
+  - [Unity](#unity)
+  - [MEF](#mef)
+  - [Spring.NET](#springnet)
+  - [Autofac](#autofac)
+  - [Ninject](#ninject)
+- [AOP框架](#aop框架)
 - [认证授权](#认证授权)
   - [认证 Authentication](#认证-authentication)
     - [Session-Cookie认证](#session-cookie认证)
@@ -1113,9 +1120,7 @@ private T ProcessRequest<T>(HttpContext context) where T : class
 
 #### milcore 
 
-> 是以非托管代码编写的，实现与 DirectX 的紧密集成。性能敏感
-
-> milcore.dll是WPF渲染系统的核心，也是媒体集成层的基础。
+> 是以非托管代码编写的，实现与 DirectX 的紧密集成。milcore.dll是WPF渲染系统的核心，也是媒体集成层的基础。
 
 #### WindowsCodes.dll
 
@@ -1125,10 +1130,7 @@ private T ProcessRequest<T>(HttpContext context) where T : class
 
 #### User32
 
-> 决定实际占有桌面部分。
-
-> 注意：不管拖动，缩放，milcore负责绘制程序恰当部分。
-
+> 决定实际占有桌面部分。不管拖动，缩放，milcore负责绘制程序恰当部分。
 
 ### WPF控件主要基类
 
@@ -3224,47 +3226,9 @@ Identifies the Width dependency property.
 
 #### 普通属性
 
-#### 附加属性
+> Get Set封装的Field
 
-> 与依赖项属性区别
-
-> > 一。附加属性使用的RegisterAttached方法，而依赖属性使用的是Register方法
-
-> > 二。附加属性使用两个方法进行包装，依赖属性使用CLR属性对GetValue和SetValue两个方法进行包装
-
-> 主要用途，附加项属性值修改时可以获取到被修改对象，
-
-> > 然后去修改该对象的属性，
-
-> > 例如可以绑定附加项属性去修改被附加对象的非依赖项属性等
-
-```
-
-    public static readonly DependencyProperty AngleProperty =
-
-      DependencyProperty.RegisterAttached("Angle", typeof(double), typeof(RotationManager), new PropertyMetadata(0.0,OnAngleChanged));
-
-    private static void OnAngleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-
-    {
-
-      var element = obj as UIElement;
-
-      if (element != null)
-
-      {
-
-        element.RenderTransformOrigin = new Point(0.5, 0.5);
-
-        element.RenderTransform = new RotateTransform((double)e.NewValue);
-
-      }
-
-    }
-
-```
-
-#### 依赖项属性dependency property
+#### 依赖项属性Dependency property
 
 > > wpf中的动态绑定就必须依赖依赖项属性来实现，除此之外wpf中最重要的动画Animation也必须基于依赖项属性。
 
@@ -3296,7 +3260,7 @@ Identifies the Width dependency property.
 
 > > 元数据重写
 
-> > 在从最初注册依赖属性的类派生时，可以通过重写依赖属性的元数据来更改该属性的某些行为。 重写元数据依赖于 DependencyProperty 标识符。 重写元数据不需要重新实现 属性。 元数据的更改由属性系统在本机处理；对于所有从基类继承的属性，每个类都有可能基于每个类型保留元数据。以下示例重写依赖属性 DefaultStyleKey 的元数据。 重写此特定依赖属性的元数据是某个实现模式的一部分，该模式创建可以使用主题中的默认样式的控件。
+> > 在从最初注册依赖属性的类派生时，可以通过重写依赖属性的元数据来更改该属性的某些行为。 重写元数据依赖于 DependencyProperty 标识符。 重写元数据不需要重新实现属性。 元数据的更改由属性系统在本机处理；对于所有从基类继承的属性，每个类都有可能基于每个类型保留元数据。以下示例重写依赖属性 DefaultStyleKey 的元数据。 重写此特定依赖属性的元数据是某个实现模式的一部分，该模式创建可以使用主题中的默认样式的控件。
 
 ```
 public class SpinnerControl : ItemsControl
@@ -3323,13 +3287,14 @@ public class SpinnerControl : ItemsControl
 
 > 如何自定义依赖属性
 
-> > 1、声明依赖属性变量。依赖属性的声明都是通过public static来公开一个静态变量，变量的类型必须是DependencyProperty
-> > 2、在属性系统中进行注册。使用DependencyProperty.Register方法来注册依赖属性，或者是使用DependencyProperty.RegisterReadOnly方法来注册
+> > 1、声明依赖属性变量。
+
+> > 2、在属性系统中进行注册。
+ 
 > > 3、使用.NET属性包装依赖属性
 
 ```
- public static DependencyProperty TextProperty;
-    TextProperty =
+public static DependencyProperty  =
     DependencyProperty.Register("Text", //属性名称
     typeof(string), //属性类型
     typeof(TestDependencyPropertyWindow), //该属性所有者，即将该属性注册到那个类上
@@ -3357,9 +3322,40 @@ public string Text
 
 > 共享依赖项属性
 
+#### 附加属性
+
+> 与依赖项属性区别
+
+> > 一。附加属性使用的RegisterAttached方法，而依赖属性使用的是Register方法
+
+> > 二。附加属性使用两个方法进行包装，依赖属性使用CLR属性对GetValue和SetValue两个方法进行包装
+
+> 主要用途，附加项属性值修改时可以获取到被修改对象，
+
+> > 然后去修改该对象的属性，
+
+> > 例如可以绑定附加项属性去修改被附加对象的非依赖项属性等
+
+```
+public static readonly DependencyProperty AngleProperty =
+  DependencyProperty.RegisterAttached("Angle", typeof(double), typeof(RotationManager), new PropertyMetadata(0.0,OnAngleChanged));
+
+private static void OnAngleChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+{
+  var element = obj as UIElement; //可以获取到被修改对象
+  if (element != null)
+  {
+    element.RenderTransformOrigin = new Point(0.5, 0.5);
+    element.RenderTransform = new RotateTransform((double)e.NewValue);
+  }
+}
+```
+
 ### WPF事件
 
 #### 普通事件
+
+> > 以下事件也有路由事件实现。
 
 ##### 生命周期事件
 
@@ -3379,9 +3375,9 @@ public string Text
 
 > > 鼠标动作的结果。
 
-##### 键盘事件
+##### 键盘事件 
 
-> > 键盘动作的结果。
+> > 键盘动作的结果，继承自UIElement。
 
 > PreviewKeyDown事件：隧道事件，按键触发
 
@@ -3397,9 +3393,13 @@ public string Text
 
 ##### 手写笔事件
 
-> > 类似铅笔的手写笔的结果
+> > 类似铅笔的手写笔的结果，继承自UIElement。
 
-##### 多点触控事件
+> StylusButtonDown/StylusButtonUp	/StylusDown	/StylusEnter/StylusInAirMove/StylusInRange	/StylusLeave/StylusMove	/StylusOutOfRange/StylusSystemGesture/StylusUp	触控笔事件
+
+##### 多点触控事件，继承自UIElement。
+
+> TouchDown/TouchEnter/TouchLeave/TouchMove/TouchUp	屏幕触控事件
 
 #### 路由事件
 
@@ -9198,113 +9198,62 @@ app.Run();
 @page
 
 <div class="container">
-
   <div class="row p-1">
-
     <div class="col-1">User</div>
-
     <div class="col-5"><input type="text" id="userInput" /></div>
-
   </div>
-
   <div class="row p-1">
-
     <div class="col-1">Message</div>
-
     <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
-
   </div>
-
   <div class="row p-1">
-
     <div class="col-6 text-end">
-
       <input type="button" id="sendButton" value="Send Message" />
-
     </div>
-
   </div>
-
   <div class="row p-1">
-
     <div class="col-6">
-
       <hr />
-
     </div>
-
   </div>
-
   <div class="row p-1">
-
     <div class="col-6">
-
       <ul id="messagesList"></ul>
-
     </div>
-
   </div>
-
 </div>
-
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
-
 <script src="~/js/chat.js"></script>
-
 ```
-
 > > > JavaScript
 
 ```
-
 "use strict";
-
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
-
 //Disable the send button until connection is established.
-
 document.getElementById("sendButton").disabled = true;
-
 connection.on("ReceiveMessage", function (user, message) {
-
   var li = document.createElement("li");
-
   document.getElementById("messagesList").appendChild(li);
-
   // We can assign user-supplied strings to an element's textContent because it
-
   // is not interpreted as markup. If you're assigning in any other way, you 
-
   // should be aware of possible script injection concerns.
-
   li.textContent = `${user} says ${message}`;
-
 });
 
 connection.start().then(function () {
-
   document.getElementById("sendButton").disabled = false;
-
 }).catch(function (err) {
-
   return console.error(err.toString());
-
 });
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
-
   var user = document.getElementById("userInput").value;
-
   var message = document.getElementById("messageInput").value;
-
   connection.invoke("SendMessage", user, message).catch(function (err) {
-
     return console.error(err.toString());
-
   });
-
   event.preventDefault();
-
 });
 
 ```
@@ -9316,6 +9265,235 @@ document.getElementById("sendButton").addEventListener("click", function (event)
 ### EDM
 
 > 实体数据模型，简称EDM，由三个概念组成。概念模型由概念架构定义语言文件 (.csdl)来定义，映射由映射规范语言文件 (.msl)，存储模型（又称逻辑模型）由存储架构定义语言文件 (.ssdl)来定义。这三者合在一起就是EDM模式。EDM模式在项目中的表现形式就是扩展名为.edmx的文件。这个包含EDM的文件可以使用Visual Studio中的EDM设计器来设计。由于这个文件本质是一个xml文件，可以手工编辑此文件来自定义CSDL、MSL与SSDL这三部分。
+
+## DI（IoC）
+
+> > DI(Dependency Injection)
+
+> > IoC(Inverse of Control)
+
+### Unity
+
+> > 微软patterns&practicest团队开发的IOC依赖注入框架，支持AOP横切关注点。
+
+```
+static void Main(string[] args)
+{
+    UnityContainer container = new UnityContainer();//创建容器
+    container.RegisterType<Test01.IWaterTool, Test01.PressWater>();//注册依赖对象
+    Test01.IPeople people = container.Resolve<Test01.VillagePeople>();//返回调用者
+    people.DrinkWater();//喝水
+}
+```
+
+### MEF
+
+> > （Managed Extensibility Framework）：是一个用来扩展.NET应用程序的框架，可开发插件系统。
+
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Reflection;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+
+
+   [Export(typeof(IBookService))]
+   public class MusicBook : IBookService
+   {
+      public string BookName { get; set; }
+
+      public string GetBookName()
+      {
+         return "MusicBook";
+      }
+   }
+
+
+
+   class Program
+   {
+      [Import]
+      public IBookService Service { get; set; }
+
+      static void Main(string[] args)
+      {
+         Program pro = new Program();
+         pro.Compose();
+         if (pro.Service != null)
+         {
+            Console.WriteLine(pro.Service.GetBookName());
+         }
+         Console.Read();
+      }
+
+      private void Compose()
+      {
+         var catalog = new AssemblyCatalog(Assembly.GetExecutingAssembly());
+         CompositionContainer container = new CompositionContainer(catalog);
+         container.ComposeParts(this);
+      }
+   }
+
+
+```
+
+### Spring.NET
+
+> 依赖注入、面向方面编程(AOP)、数据访问抽象,、以及ASP.NET集成。
+
+```
+class Program
+{
+    static void Main(string[] args)
+    {
+        // 创建容器
+        Spring.Context.Support.StaticApplicationContext context
+            = new Spring.Context.Support.StaticApplicationContext();
+             
+        // 注册
+        context.RegisterPrototype("Person", typeof(Student), null);
+         
+        // 注册一个单例类型
+        context.RegisterSingleton("Alice", typeof(Person), null);
+ 
+        Person person = context.GetObject("Person") as Person;
+ 
+        Console.WriteLine(person);
+    }
+}
+```
+
+### Autofac
+
+> 最流行的依赖注入和IOC框架，轻量且高性能，对项目代码几乎无任何侵入性。
+
+```
+//注册Autofac组件
+ContainerBuilder builder = new ContainerBuilder();
+//注册实现类Student，当我们请求IStudent接口的时候，返回的是类Student的对象。
+builder.RegisterType<Student>().As<IStudent>();
+//上面这句也可改成下面这句，这样请求Student实现了的任何接口的时候，都会返回Student对象。
+//builder.RegisterType<Student>().AsImplementedInterfaces();
+IContainer container = builder.Build();
+//请求IStudent接口
+IStudent student = container.Resolve<IStudent>();
+student.Add("1001", "Hello");
+```
+
+### Ninject
+
+> Ninject是一个快如闪电、超轻量级的基于.Net平台的开源依赖注入框架。
+
+```
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Ninject; //引入命名空间
+namespace RegisterNinject
+{
+    public class Register
+    {
+        private StandardKernel _kernel = new StandardKernel();
+        // 在这里注册
+        public Register()
+        {
+            _kernel.Bind<IDataAccess>().To<MySqlDataOrder>();
+            //_kernel.Bind<IDataAccess>().To<SqlServerDataOrder>();
+            //_kernel.Bind<IDataProduct>().To<SqlServerDataProduct>();
+        }
+
+        //获取
+        public TInterface Get<TInterface>()
+        {
+            return _kernel.Get<TInterface>();
+        }
+
+        public void Dispose()
+        {
+            _kernel.Dispose();
+        }
+    }
+}
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace RegisterNinject
+{
+    public class Order
+    {
+        private Register reg = new Register();
+        public string QueryOrder()
+        {
+            return reg.Get<IDataAccess>().QueryOrder();
+        }
+
+    }
+}
+
+使用Xml文件（热插拔）
+
+Register.xml
+
+<?xml version="1.0" encoding="utf-8" ?> 
+<module name="register">
+  <bind service="XmlNinject.IDataAccess,XmlNinject" to="XmlNinject.SqlServerDataOrder,XmlNinject"/>
+</module>
+ 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Ninject; //引入命名空间
+using Ninject.Extensions.Xml;//引入命名空间
+namespace XmlNinject
+{
+    public class Register
+    {
+        private StandardKernel _kernel = new StandardKernel();
+
+        // 以后这里就不用更改这里了，只需要该xml文件就可以了
+        public Register()
+        {
+            var settings = new NinjectSettings() { LoadExtensions = false };
+            _kernel = new StandardKernel(settings, new XmlExtensionModule());
+            _kernel.Load("Xml/Register.xml");
+        }
+
+        //获取
+        public TInterface Get<TInterface>()
+        {
+            return _kernel.Get<TInterface>();
+        }
+
+        public void Dispose()
+        {
+            _kernel.Dispose();
+        }
+    }
+}
+```
+
+## AOP框架
+
+> AOP（Aspect-Oriented Programming，面向切面的编程），它是可以通过预编译方式和运行期动态代理实现在不修改源代码的情况下给程序动态统一添加功能的一种技术。它是一种新的方法论，它是对传统OOP编程的一种补充。OOP是关注将需求功能划分为不同的并且相对独立，封装良好的类，并让它们有着属于自己的行为，依靠继承和多态等来定义彼此的关系；AOP是希望能够将通用需求功能从不相关的类当中分离出来，能够使得很多类共享一个行为，一旦发生变化，不必修改很多类，而只需要修改这个行为即可。AOP是使用切面（aspect）将横切关注点模块化，OOP是使用类将状态和行为模块化。在OOP的世界中，程序都是通过类和接口组织的，使用它们实现程序的核心业务逻辑是十分合适。但是对于实现横切关注点（跨越应用程序多个模块的功能需求）则十分吃力，比如日志记录，权限验证，异常拦截等。
+
+Castle
+Encase 是C#编写开发的为.NET平台提供的AOP框架。Encase 独特的提供了把方面(aspects)部署到运行时代码，而其它AOP框架依赖配置文件的方式。这种部署方面(aspects)的方法帮助缺少经验的开发人员提高开发效率。
+NKalore 是一款编程语言，它扩展了C#允许在.net平台使用AOP。NKalore的语法简单、直观，它的编译器是基于Mono C#编译器(MCS)。NKalore目前只能在命令行或#Develop内部使用。NKalore兼容公共语言规范CLS(Common Language Specification)，它可以在任何.NET开发环境中使用，包括微软的Visual Studio .NET。
+PostSharp 读取.NET字节模块，转换成对象模型。让插件分析和转换这个模型并写回到MSIL。PostSharp使开发程序分析应用程序容易得像分析代码规则和设计模式，它使程序开发的思想变革为面向方面软件开发(AOSD/AOD)思想。
+AspectDNG 的目标是为.NET开发人员提供简单而功能强大的AOP-GAOP实现。它效仿Java下的开源工具AspectJ 和 Spoon，成熟程度也很接近它们。
+RAIL(Runtime Assembly Instrumentation Library) 开源项目可以在C#程序集加载和运行前进行处理控制调整和重新构建。C#在CLR中，我们已经能够动态加载程序集并且获得程序集中的类和方法，RAIL(Runtime Assembly Instrumentation Library)的出现填补了CLR处理过程中的一些空白。
+SetPoint是一款.NET框架下的全功能(full-featured)AOP引擎.它着重为称为语义切点(semantic pointcuts)的定义依赖RDF/OWL的使用.它的功能为一个IL-level，highly dynamic weaver&LENDL,一个引人注目的定义语言、、、、、、
+DotNetAOP为 CLR language提供AOP 框架基础属性。
+NAop是一个DotNet下的AOP框架。
+AspectSharp是DotNet下的免费AOP框架，它以Dynamic Proxies和XML作为配置文件。
 
 ## 认证授权
 
