@@ -324,6 +324,7 @@ updatedate: 2023-11-07 19:22:01
       - [随机测试](#随机测试)
       - [探索性测试](#探索性测试)
       - [安全测试](#安全测试-1)
+  - [自动化测试](#自动化测试-1)
 - [敏捷开发](#敏捷开发)
   - [敏捷软件开发宣言](#敏捷软件开发宣言)
     - [个人与交互 高于 流程和工具](#个人与交互-高于-流程和工具)
@@ -2285,6 +2286,28 @@ updatedate: 2023-11-07 19:22:01
 ##### 安全测试
 
 > 安全测试是在IT软件产品的生命周期中，特别是产品开发基本完成到发布阶段，对产品进行检验以验证产品符合安全需求定义和产品质量标准的过程。 
+
+### 自动化测试
+
+四、常见的自动化测试框架
+
+1、接口自动化框架：
+
+①、java+testNG/Junit+Maven/Ant/Gradle+Jenkins+MySQL+testlink/redmine
+
+②、python+unittest/pytest+Git+Jenkins+MySQL+testlink/redmine
+
+③、python+rebot framework+unittest/pytest+Git+Jenkins+MySQL+testlink/redmine
+
+④、jmeter+Maven/Ant+Jenkins+MySQL+testlink/redmine
+
+2、UI自动化测试框架
+
+①、java+selenium/appium+testNG/Junit+Maven/Ant/Gradle+Jenkins+MySQL+testlink/redmine
+
+②、python+selenium/appium+unittest/pytest+Git+Jenkins+MySQL+testlink/redmine
+
+③、python+rebot framework+unittest/pytest+Git+Jenkins+MySQL+testlink/redmine
 
 ## 敏捷开发
 
