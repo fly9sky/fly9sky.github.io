@@ -3,7 +3,7 @@ layout: post
 title: 计算机操作系统
 description: 计算机科学相关学习内容总结,包括各种操作系统安装配置，Windows Linux,以及Docker等虚拟化技术。
 date: 2022-10-01 09:01:01
-updatedate: 2023-11-03 09:19:01
+updatedate: 2023-11-22 09:30:01
 ---
 
 - [操作系统理论](#操作系统理论)
@@ -65,6 +65,7 @@ updatedate: 2023-11-03 09:19:01
   - [Q\&A](#qa)
   - [Ubuntu 相关](#ubuntu-相关)
 - [ubuntu](#ubuntu)
+  - [文件管理器中不显示图片视频缩略图](#文件管理器中不显示图片视频缩略图)
   - [安装指定版本nodejs](#安装指定版本nodejs)
   - [yarn](#yarn)
   - [安装 npmp](#安装-npmp)
@@ -2443,6 +2444,12 @@ global.json file:
 ## ubuntu 
 
 > 配置源： /etc/apt/sources.list
+
+### 文件管理器中不显示图片视频缩略图
+
+> 安装 FFMPEG 缩略图
+
+> > sudo apt install ffmpegthumbnailer
 
 ### 安装指定版本nodejs
 
