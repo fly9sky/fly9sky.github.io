@@ -3,7 +3,7 @@ layout: post
 title: 微软Dotnet技术
 description: Dotnet相关技术WPF,AS.net，Winform等相关技术总结
 date: 2022-10-01 09:01:01
-updatedate: 2023-11-16 13:09:01
+updatedate: 2023-11-28 13:46:01
 ---
 
 - [Donet6 ubuntu下的安装](#donet6-ubuntu下的安装)
@@ -183,7 +183,7 @@ updatedate: 2023-11-16 13:09:01
       - [EasingDoubleKeyFrame](#easingdoublekeyframe)
     - [场景（Storyborad）](#场景storyborad)
   - [WPF 需要学习](#wpf-需要学习)
-- [WCF](#wcf)
+- [WCF WebService](#wcf-webservice)
   - [WCF简介](#wcf简介)
   - [地址](#地址)
   - [绑定](#绑定)
@@ -1231,25 +1231,19 @@ private T ProcessRequest<T>(HttpContext context) where T : class
 
 > > 事件
 
-ShutdownFinished	
-当 Dispatcher 完成关闭时发生。
+> ShutdownFinished	当 Dispatcher 完成关闭时发生。
 
-ShutdownStarted	
-当 Dispatcher 开始关闭时发生。
+> ShutdownStarted	当 Dispatcher 开始关闭时发生。
 
-UnhandledException	
-在通过 Invoke 或 BeginInvoke 执行委托的过程中，如果引发线程异常且未能捕获该异常，则发生此事件。
+> UnhandledException	在通过 Invoke 或 BeginInvoke 执行委托的过程中，如果引发线程异常且未能捕获该异常，则发生此事件。
 
-UnhandledExceptionFilter	
-当在筛选阶段通过 Invoke 或 BeginInvoke 执行委托的过程中，如果引发线程异常且未能捕获该异常，则发生此事件。
+> UnhandledExceptionFilter	当在筛选阶段通过 Invoke 或 BeginInvoke 执行委托的过程中，如果引发线程异常且未能捕获该异常，则发生此事件。
 
 > > 扩展方法
 
-BeginInvoke
-用正常优先级在依据其创建指定 Dispatcher 的线程上异步执行指定的委托。
+> BeginInvoke 用正常优先级在依据其创建指定 Dispatcher 的线程上异步执行指定的委托。
 
-Invoke
-用正常优先级在依据其创建指定 Dispatcher 的线程上同步执行指定的委托。
+> Invoke 用正常优先级在依据其创建指定 Dispatcher 的线程上同步执行指定的委托。
 
 #### DispatcherObject
 
@@ -1507,7 +1501,7 @@ Builds the current template's visual tree if necessary, and returns a value that
 
 Implements ArrangeCore(Rect) (defined as virtual in UIElement) and seals the implementation.
 
-ArrangeOverride(Size)	
+> ArrangeOverride(Size)	
 
 When overridden in a derived class, positions child elements and determines a size for a FrameworkElement derived class.
 
@@ -7740,7 +7734,7 @@ storyboard.Begin(this);
 
 33.4 小结 932
 
-## WCF 
+## WCF WebService
 
 ### WCF简介
 
