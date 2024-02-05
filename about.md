@@ -18,13 +18,11 @@ permalink: /about/
 <hr/>
 <br/>
 <span class="contacticon center">
-	<a href="mailto:devgis@163.com">网易邮箱<i class="fa fa-envelope-square"></i></a>
-	<a href="mailto:devgis@qq.com">QQ邮箱<i class="fa fa-envelope-square"></i></a>
-	<a href="https://space.bilibili.com/3493090008500934?spm_id_from=333.1007.0.0" target="_blank"><i class="fa fa-bomb"></i></a>
-	<a href="https://www.xiaohongshu.com/user/profile/602287b400000000010059a5" target="_blank"><i class="fa fa-book"></i></a>
-	<a href="https://www.zhihu.com/people/49-90-20-97" target="_blank"><i class="fa fa-bullhorn"></i></a>
-	<a href="https://baijiahao.baidu.com/u?app_id=1751072091151028" target="_blank"><i class="fa fa-bandcamp"></i></a>
-	<a href="https://feijiutian.lofter.com" target="_blank"><i class="fa fa-superpowers"></i></a>
+	<a href="mailto:devgis@163.com" title="发送邮件倒我的网易邮箱">网易邮箱<i class="fa fa-envelope-square"></i></a>
+	<a href="mailto:devgis@qq.com" title="发送邮件倒我的QQ邮箱">QQ邮箱<i class="fa fa-envelope-square"></i></a>
+	<a href="https://author.baidu.com/home/1751072091151028" title="查看百家号@飞上九天揽日" target="_blank"><i class="fa fa-bomb"></i></a>
+	<a href="https://www.xiaohongshu.com/user/profile/602287b400000000010059a5" title="小红书@飛上九天攬日" target="_blank"><i class="fa fa-book"></i></a>
+	<a href="https://www.zhihu.com/people/fly9sky" title="查看知乎@飛上九天攬日" target="_blank"><i class="fa fa-bullhorn"></i></a>
 </span>
 
 <div class="col three caption">
