@@ -18,18 +18,12 @@ paginate_path: "/page:num"
 
 
 collections:
-  pictures:
+  anthologies:
     output: true
-    permalink: /pictures/:path
-  poetrys:
-    output: true
-    permalink: /poetrys/:path
+    permalink: /anthologies/:path
   notes:
     output: true
     permalink: /notes/:path
-  writes:
-    output: true
-    permalink: /writes/:path
   homes:
     output: true
     permalink: /homes/:path
