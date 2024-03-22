@@ -24,7 +24,4 @@ collections:
   notes:
     output: true
     permalink: /notes/:path
-  homes:
-    output: true
-    permalink: /homes/:path
 
