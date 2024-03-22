@@ -2,7 +2,7 @@
 title: 飛上九天攬日
 email: devgis@163.com
 description: 天行健 君子以自强不息 地势坤 君子以厚德载物
-baseurl: / # the subpath of your site, e.g. /blog/
+baseurl: /anthologies/ # the subpath of your site, e.g. /blog/
 url:  # the base hostname & protocol for your site
 twitter_username: fly9sky
 github_username:  fly9sky
@@ -15,7 +15,6 @@ highlighter: rouge
 # Pagination
 paginate: 20
 paginate_path: "/page:num"
-
 
 collections:
   anthologies:
