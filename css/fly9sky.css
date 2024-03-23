@@ -13,6 +13,7 @@ ol ol{
 }
 
 
+
 .circle-list li{
     padding: 2.5em;
     border-bottom: 1px dashed #ccc;
@@ -78,10 +79,9 @@ ul, ol {
 }
 
 .page-content {
-    padding-bottom:0px;
+    padding-bottom:30px;
     padding-top: 70px;
 }
-
 
 .site-nav {
     position: static;
