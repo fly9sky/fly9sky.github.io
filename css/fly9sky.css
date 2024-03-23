@@ -12,6 +12,7 @@ ol ol{
     margin: 0 0 0 2em;
 }
 
+
 .circle-list li{
     padding: 2.5em;
     border-bottom: 1px dashed #ccc;
@@ -77,5 +78,5 @@ ul, ol {
 }
 
 .page-content {
-    padding: 0px 0;
+    padding-bottom:0px;
 }
