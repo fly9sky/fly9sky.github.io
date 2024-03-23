@@ -40,7 +40,7 @@ permalink: /about
 
 <style>
 	img{
-		padding:0px 50px 0px 50px;
+		margin:0px 50px 0px 50px;
 		border-radius: 8px;
 	}
 </style>
