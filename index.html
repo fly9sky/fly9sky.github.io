@@ -2,13 +2,12 @@
 layout: default
 ---
 
-<ul class="post-list">
-{% for anthology in site.anthologies reversed %}
+<ol class="circle-list">
+    {% for post in site.anthologies reversed %}
     <li>
-        <h2><a class="post-title" href="{{ anthology.url | prepend: site.baseurl }}">{{ anthology.title }}</a></h2>
-        <p class="post-meta">创作时间：{{ anthology.date | date: '%B %-d, %Y - %H:%M' }} 最后更新：{{ anthology.updatedate | date: '%B %-d, %Y - %H:%M' }}</p>
-        <p>{{ anthology.description }}</p>
-        <hr/>
+        <h2><a class="post-title" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+        <p>{{ post.description }}</p>
+        <p class="post-meta">创作时间：{{ post.date | date: '%B %-d, %Y - %H:%M' }} 最后更新：{{ post.updatedate | date: '%B %-d, %Y - %H:%M' }}</p>
     </li>
-{% endfor %}
-</ul>
+    {% endfor %}
+</ol>
