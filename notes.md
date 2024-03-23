@@ -1,6 +1,6 @@
 ---
 layout: default
-permalink: /note
+permalink: /notes
 title: 读书
 description: 余喜读书，每读必有札记，集合以待观之。
 ---
