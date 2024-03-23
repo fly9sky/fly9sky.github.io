@@ -81,3 +81,8 @@ ul, ol {
     padding-bottom:0px;
     padding-top: 70px;
 }
+
+
+.site-nav {
+    position: static;
+}
