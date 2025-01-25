@@ -14,15 +14,11 @@ permalink: /about
 
 <hr/>
 <br/>
-
-
 <span class="contacticon center">
 	[![知乎](img/qrcode/zhh.png){:height="205px" width="205px"}](https://www.zhihu.com/people/fly9sky)
 	[![百家号](img/qrcode/bj.png){:height="205px" width="205px"}](https://author.baidu.com/home/1751072091151028)
 	[![小红书](img/qrcode/xhs.png){:height="205px" width="205px"}](https://www.xiaohongshu.com/user/profile/602287b400000000010059a5)
 </span>
-
-
 <hr/>
 <br/>
 <span class="contacticon center">
