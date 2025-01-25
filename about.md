@@ -23,7 +23,6 @@ permalink: /about
 <br/>
 <span class="contacticon center">
 	<a href="https://author.baidu.com/home/1751072091151028" title="查看百家号@飞上九天揽日" target="_blank"><i class="fa fa-bomb"></i></a>
-	<a href="https://www.xiaohongshu.com/user/profile/602287b400000000010059a5" title="小红书@飛上九天攬日" target="_blank"><i class="fa fa-book"></i></a>
 	<a href="https://www.zhihu.com/people/fly9sky" title="查看知乎@飛上九天攬日" target="_blank"><i class="fa fa-bullhorn"></i></a>
 </span>
 
