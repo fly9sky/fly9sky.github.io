@@ -10,24 +10,19 @@ permalink: /about
 
 <br/>
 
-我是一名文学历史爱好者，平常也喜欢写作，并且喜欢摄影，整理了许多照片和文章。因为各大平台的审核机制太过严格，导致许多文件无意中触碰到了某些平台的关键词审核机制导致不能发表。之前在国内某平台因为几句涉及疫情的言论结果导致帐号被永久封禁，可恶的是连里边写的许多镐子都无法下载下来。其实我所创作的内容都不存在违法内容，但是却不能通过审核。鉴于此，创作本平台，将我创作的一些文章和想法发表出来。当然了，大家也可以关注我的一些博客平台。当然了因为一些原因，这个网站为了性能页面以简洁为主。但是图片部分显示依然比较缓慢，我也在不断寻找新的方案。欢迎各位能够提供一些好的建议和意见！
+于甚爱文学经史，平常也亦偶书诗词以抒心怀，又喜摄影旅游，整理了许多照片和文章。因为各大平台的审核机制太过严格，导致许多文件无意中触碰到了某些平台的关键词审核机制导致不能发表。之前在国内某平台因为几句涉及疫情的言论结果导致帐号被永久封禁，可恶的是连里边写的许多镐子都无法下载下来。其实我所创作的内容都不存在违法内容，但是却不能通过审核。鉴于此，创作本平台，将我创作的一些文章和想法发表出来。当然了，大家也可以关注我的一些博客平台。当然了因为一些原因，这个网站为了性能页面以简洁为主。但是图片部分显示依然比较缓慢，我也在不断寻找新的方案。欢迎各位能够提供一些好的建议和意见！
 
 <hr/>
 <br/>
-
-
 <span class="contacticon center">
 	[![知乎](img/qrcode/zhh.png){:height="205px" width="205px"}](https://www.zhihu.com/people/fly9sky)
 	[![百家号](img/qrcode/bj.png){:height="205px" width="205px"}](https://author.baidu.com/home/1751072091151028)
 	[![小红书](img/qrcode/xhs.png){:height="205px" width="205px"}](https://www.xiaohongshu.com/user/profile/602287b400000000010059a5)
 </span>
-
-
 <hr/>
 <br/>
 <span class="contacticon center">
 	<a href="https://author.baidu.com/home/1751072091151028" title="查看百家号@飞上九天揽日" target="_blank"><i class="fa fa-bomb"></i></a>
-	<a href="https://www.xiaohongshu.com/user/profile/602287b400000000010059a5" title="小红书@飛上九天攬日" target="_blank"><i class="fa fa-book"></i></a>
 	<a href="https://www.zhihu.com/people/fly9sky" title="查看知乎@飛上九天攬日" target="_blank"><i class="fa fa-bullhorn"></i></a>
 </span>
 

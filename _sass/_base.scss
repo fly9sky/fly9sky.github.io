@@ -8,8 +8,6 @@ dl, dd, ol, ul, figure {
     padding: 0;
 }
 
-
-
 /** Variables **********************************************/
 $base-font-family:              Helvetica, sans-serif;
 $base-line-height:              1.5em;
@@ -30,16 +28,12 @@ $blue: #2698BA;
 $green: #11D68B;
 $lime_green: #B7D12A;
 $purple: #B509AC;
-
-
 $grey-color-dark: #eee;   /* footer */
 $grey-color-light: #ddd;  /* navigation bar border */
 $text-color:     #666;
 
 /* Set theme color *************************/
 $theme-color:   $red;
-
-
 /************************************************************/
 
 /**
@@ -55,8 +49,6 @@ body {
     -webkit-text-size-adjust: 100%;
 }
 
-
-
 /**
  * Set `margin-bottom` to maintain vertical rhythm
  */
@@ -69,8 +61,6 @@ ul, ol, dl, figure,
 .alignright {
     float: right;
 }
-
-
 hr{
     /* Inset, by Dan Eden */
     border: 0;
@@ -79,8 +69,6 @@ hr{
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 
 }
-
-
 /**
  * Figures
  */
@@ -91,8 +79,6 @@ figure > img {
 figcaption {
     font-size: $small-font-size;
 }
-
-
 
 /**
  * Lists
@@ -108,16 +94,12 @@ li {
     }
 }
 
-
-
 /**
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 100;
 }
-
-
 /**
  * Links
  */
@@ -144,8 +126,6 @@ article a {
     }
 }
 
-
-
 /**
  * Blockquotes
  */
@@ -160,8 +140,6 @@ blockquote {
         margin-bottom: 0;
     }
 }
-
-
 
 /**
  * Code formatting
@@ -188,8 +166,6 @@ pre {
     }
 }
 
-
-
 /**
  * Wrapper
  */ 
@@ -211,8 +187,6 @@ pre {
         //padding-left: $spacing-unit / 2;
     }
 }
-
-
 /**
  * Clearfix
  */
@@ -224,6 +198,4 @@ pre {
         clear: both;
     }
 }
-
-
 
